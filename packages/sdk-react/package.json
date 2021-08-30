@@ -1,0 +1,38 @@
+{
+  "name": "@desmos-labs/sdk-react",
+  "description": "Utilities to use the desmos dapp sdk on react projects",
+  "author": "Manuel Turetta <manuel@forbole.com>",
+  "license": "Apache-2.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/",
+    "*.md",
+    "!*.spec.*",
+    "!**/testdata/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/desmos-labs/dapp-sdk"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "rm -R ./build || tsc"
+  },
+  "dependencies": {
+    "@cosmjs/proto-signing": "0.26.0",
+    "@cosmjs/stargate": "0.26.0",
+    "@desmos-labs/sdk-core": "workspace:packages/sdk-core",
+    "@walletconnect/client": "2.0.0-beta.17",
+    "@walletconnect/types": "2.0.0-beta.17",
+    "react": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.6",
+    "@types/react": "^17.0.19",
+    "typescript": "~4.3"
+  }
+}
