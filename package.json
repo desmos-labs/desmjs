@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@cosmjs/crypto": "0.26.0",
+    "@desmos-labs/proto": "workspace:packages/proto",
     "@desmos-labs/sdk-core": "workspace:packages/sdk-core",
     "@desmos-labs/sdk-react": "workspace:packages/sdk-react",
     "@types/long": "4.0.1",

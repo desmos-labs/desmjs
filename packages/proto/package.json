@@ -1,0 +1,29 @@
+{
+  "name": "@desmos-labs/proto",
+  "description": "JS and TS types relating to Protocol Buffers used by Desmos",
+  "version": "0.0.0",
+  "author": "Manuel Turetta <manuel@forbole.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/desmos-labs/dapp-sdk"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "get-proto": "./script/get-proto.sh",
+    "generate-code": "./script/generate-code.sh",
+    "build": "rm -rf ./build && tsc"
+  },
+  "dependencies": {
+    "protobufjs": "~6.11.2"
+  },
+  "devDependencies": {
+    "@types/long": "4.0.1",
+    "@types/node": "16.7.6",
+    "ts-proto": "~1.82.5",
+    "typescript": "4.3"
+  }
+}

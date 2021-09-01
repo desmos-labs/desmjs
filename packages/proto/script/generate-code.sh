@@ -1,17 +1,28 @@
-OUT_DIR="./src"
+#!/bin/bash
 
-PLUGIN_PATH="$(realpath ./bin)/protoc-gen-ts_proto_yarn_2"
+# Force stop the execution at the first error
+set -e
 
-mkdir -p "$OUT_DIR"
+# Absolute path of this script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+BIN_DIR="$SCRIPT_DIR/../../../bin"
+
+# Directory where will be placed the proto files
+PROTO_DIR="$SCRIPT_DIR/../proto-files"
+# Directory where will be placed the file generated from ts-proto
+SRC_DIR="$SCRIPT_DIR/../src"
+DESMOS_DIR="$PROTO_DIR/proto"
+THIRD_PARTY_DIR="$PROTO_DIR/third_party/proto"
+
+PLUGIN_PATH="$(realpath $BIN_DIR)/protoc-gen-ts_proto_yarn_2"
+echo $PLUGIN_PATH
 
 echo "Processing desmos proto files ..."
-DESMOS_DIR="./proto"
-DESMOS_THIRD_PARTY_DIR="./proto/third_party/proto"
 protoc \
   --plugin="$PLUGIN_PATH" \
-  --ts_proto_yarn_2_out="$OUT_DIR" \
+  --ts_proto_yarn_2_out="$SRC_DIR" \
   --proto_path="$DESMOS_DIR" \
-  --proto_path="$DESMOS_THIRD_PARTY_DIR" \
+  --proto_path="$THIRD_PARTY_DIR" \
   --ts_proto_yarn_2_opt="esModuleInterop=true,forceLong=long,useOptionals=true" \
   "$DESMOS_DIR/desmos/fees/v1beta1/genesis.proto" \
   "$DESMOS_DIR/desmos/fees/v1beta1/min_fee.proto" \

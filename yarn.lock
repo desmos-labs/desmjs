@@ -229,6 +229,7 @@ __metadata:
   resolution: "@desmos-labs/dapp-sdk@workspace:."
   dependencies:
     "@cosmjs/crypto": 0.26.0
+    "@desmos-labs/proto": "workspace:packages/proto"
     "@desmos-labs/sdk-core": "workspace:packages/sdk-core"
     "@desmos-labs/sdk-react": "workspace:packages/sdk-react"
     "@types/long": 4.0.1
@@ -236,6 +237,18 @@ __metadata:
     "@walletconnect/jsonrpc-types": 1.0.0
     ts-proto: ~1.82.5
     typescript: ~4.3
+  languageName: unknown
+  linkType: soft
+
+"@desmos-labs/proto@workspace:packages/proto":
+  version: 0.0.0-use.local
+  resolution: "@desmos-labs/proto@workspace:packages/proto"
+  dependencies:
+    "@types/long": 4.0.1
+    "@types/node": 16.7.6
+    protobufjs: ~6.11.2
+    ts-proto: ~1.82.5
+    typescript: 4.3
   languageName: unknown
   linkType: soft
 
