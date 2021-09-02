@@ -1,0 +1,1 @@
+export const TESTNET_CHAIN_RPC = "https://rpc.morpheus.desmos.network";
