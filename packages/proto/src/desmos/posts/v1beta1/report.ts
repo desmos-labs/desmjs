@@ -2,8 +2,6 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "desmos.posts.v1beta1";
-
 /** Report is the struct of a post's reports */
 export interface Report {
   /** ID of the post for which the report has been created */
@@ -206,7 +204,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

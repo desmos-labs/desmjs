@@ -10,8 +10,6 @@ import {
 } from "../../../desmos/posts/v1beta1/reactions";
 import { Report } from "../../../desmos/posts/v1beta1/report";
 
-export const protobufPackage = "desmos.posts.v1beta1";
-
 /** GenesisState contains the data of the genesis state for the posts module */
 export interface GenesisState {
   posts: Post[];
@@ -236,7 +234,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

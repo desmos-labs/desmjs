@@ -3,8 +3,6 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
-export const protobufPackage = "desmos.fees.v1beta1";
-
 /**
  * MinFee contains the minimum amount of coins that should be paid as a fee for
  * each message of the specific type sent
@@ -106,7 +104,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

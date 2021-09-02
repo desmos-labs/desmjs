@@ -40,8 +40,6 @@ import {
   MsgUnlinkApplication,
 } from "../../../desmos/profiles/v1beta1/msgs_app_links";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /** Msg defines the relationships Msg service. */
 export interface Msg {
   /** SaveProfile defines the method to save a profile */

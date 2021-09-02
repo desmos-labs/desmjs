@@ -7,8 +7,6 @@ import {
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /**
  * QueryUserChainLinkRequest represents the request that should be used in order
  * to retrieve the link associated with the provided user, for the given chain
@@ -421,7 +419,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

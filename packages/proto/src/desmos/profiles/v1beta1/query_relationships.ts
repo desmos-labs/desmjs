@@ -10,8 +10,6 @@ import {
   UserBlock,
 } from "../../../desmos/profiles/v1beta1/models_relationships";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /**
  * QueryRelationshipsRequest is the request type for the
  * Query/Relationships RPC method.
@@ -458,7 +456,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

@@ -2,8 +2,6 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /** MsgSaveProfile represents a message to save a profile. */
 export interface MsgSaveProfile {
   dtag: string;
@@ -340,7 +338,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

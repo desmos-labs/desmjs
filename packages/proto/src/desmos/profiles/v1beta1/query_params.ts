@@ -3,8 +3,6 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Params } from "../../../desmos/profiles/v1beta1/models_params";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /** QueryParamsRequest is the request type for the Query/Params RPC endpoint */
 export interface QueryParamsRequest {}
 
@@ -122,7 +120,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

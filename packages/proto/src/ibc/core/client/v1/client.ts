@@ -3,8 +3,6 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Any } from "../../../../google/protobuf/any";
 
-export const protobufPackage = "ibc.core.client.v1";
-
 /**
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
@@ -617,7 +615,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

@@ -4,8 +4,6 @@ import _m0 from "protobufjs/minimal";
 import { Poll } from "../../../desmos/posts/v1beta1/polls";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
-export const protobufPackage = "desmos.posts.v1beta1";
-
 /** CommentsState contains all the possible comments states */
 export enum CommentsState {
   /** COMMENTS_STATE_UNSPECIFIED - COMMENTS_STATE_UNSPECIFIED */
@@ -538,7 +536,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

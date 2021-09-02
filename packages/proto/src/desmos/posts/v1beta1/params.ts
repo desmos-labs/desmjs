@@ -2,8 +2,6 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 
-export const protobufPackage = "desmos.posts.v1beta1";
-
 /** Params contains the parameters for the posts module */
 export interface Params {
   maxPostMessageLength: Uint8Array;
@@ -218,7 +216,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

@@ -14,8 +14,6 @@ import {
 } from "../../../desmos/posts/v1beta1/reactions";
 import { Report } from "../../../desmos/posts/v1beta1/report";
 
-export const protobufPackage = "desmos.posts.v1beta1";
-
 /** QueryPostsRequest is the request type for the Query/Posts RPC method. */
 export interface QueryPostsRequest {
   /**
@@ -1598,7 +1596,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

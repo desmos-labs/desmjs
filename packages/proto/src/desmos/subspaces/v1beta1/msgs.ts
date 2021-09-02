@@ -7,8 +7,6 @@ import {
   subspaceTypeToJSON,
 } from "../../../desmos/subspaces/v1beta1/subspace";
 
-export const protobufPackage = "desmos.subspaces.v1beta1";
-
 /** MsgCreateSubspace represents the message used to create a subspace */
 export interface MsgCreateSubspace {
   id: string;
@@ -1446,7 +1444,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

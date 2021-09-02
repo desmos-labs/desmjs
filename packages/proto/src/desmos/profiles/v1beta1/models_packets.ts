@@ -7,8 +7,6 @@ import {
   ChainConfig,
 } from "../../../desmos/profiles/v1beta1/models_chain_links";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /**
  * LinkChainAccountPacketData defines the object that should be sent inside a
  * MsgSendPacket when wanting to link an external chain to a Desmos profile
@@ -296,7 +294,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

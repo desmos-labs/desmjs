@@ -10,8 +10,6 @@ import {
 import { ChainLink } from "../../../desmos/profiles/v1beta1/models_chain_links";
 import { ApplicationLink } from "../../../desmos/profiles/v1beta1/models_app_links";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /** GenesisState defines the profiles module's genesis state. */
 export interface GenesisState {
   dtagTransferRequests: DTagTransferRequest[];
@@ -256,7 +254,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

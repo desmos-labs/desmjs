@@ -7,8 +7,6 @@ import {
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
 
-export const protobufPackage = "desmos.subspaces.v1beta1";
-
 /** QuerySubspace is the request type for the Query/Subspace RPC method */
 export interface QuerySubspaceRequest {
   subspaceId: string;
@@ -1037,7 +1035,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

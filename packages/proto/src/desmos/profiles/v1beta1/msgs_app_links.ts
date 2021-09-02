@@ -4,8 +4,6 @@ import _m0 from "protobufjs/minimal";
 import { Data } from "../../../desmos/profiles/v1beta1/models_app_links";
 import { Height } from "../../../ibc/core/client/v1/client";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /**
  * MsgLinkApplication defines a msg to connect a profile with a
  * centralized application account (eg. Twitter, GitHub, etc).
@@ -459,7 +457,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

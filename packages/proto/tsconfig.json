@@ -1,13 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "lib": ["ES2017", "dom"],
+    "lib": ["ES2017"],
     "baseUrl": ".",
     "outDir": "build",
     "experimentalDecorators": true,
     "rootDir": "src",
-    "jsx": "react-jsx",
-    "noEmit": false
+    "declaration": true,
   },
   "include": [
     "src/**/*"

@@ -3,8 +3,6 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { MinFee } from "../../../desmos/fees/v1beta1/min_fee";
 
-export const protobufPackage = "desmos.fees.v1beta1";
-
 /** Params contains the parameters for the fees module */
 export interface Params {
   minFees: MinFee[];
@@ -86,7 +84,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

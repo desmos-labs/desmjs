@@ -7,8 +7,6 @@ import {
 } from "../../../cosmos/base/query/v1beta1/pagination";
 import { DTagTransferRequest } from "../../../desmos/profiles/v1beta1/models_dtag_requests";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /**
  * QueryIncomingDTagTransferRequestsRequest is the request type for the
  * Query/IncomingDTagTransferRequests RPC endpoint
@@ -238,7 +236,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

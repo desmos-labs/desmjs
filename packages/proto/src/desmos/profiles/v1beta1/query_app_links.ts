@@ -7,8 +7,6 @@ import {
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /**
  * QueryUserApplicationLinkRequest represents the request used when querying an
  * application link using an application name and username for a given user
@@ -594,7 +592,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

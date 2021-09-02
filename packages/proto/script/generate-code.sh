@@ -23,7 +23,7 @@ protoc \
   --ts_proto_yarn_2_out="$SRC_DIR" \
   --proto_path="$DESMOS_DIR" \
   --proto_path="$THIRD_PARTY_DIR" \
-  --ts_proto_yarn_2_opt="esModuleInterop=true,forceLong=long,useOptionals=true" \
+  --ts_proto_yarn_2_opt="esModuleInterop=true,forceLong=long,useOptionals=true,exportCommonSymbols=false" \
   "$DESMOS_DIR/desmos/fees/v1beta1/genesis.proto" \
   "$DESMOS_DIR/desmos/fees/v1beta1/min_fee.proto" \
   "$DESMOS_DIR/desmos/fees/v1beta1/params.proto" \

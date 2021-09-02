@@ -3,8 +3,6 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Subspace } from "../../../desmos/subspaces/v1beta1/subspace";
 
-export const protobufPackage = "desmos.subspaces.v1beta1";
-
 /** GenesisState contains the data of the genesis state for the subspaces module */
 export interface GenesisState {
   subspaces: Subspace[];
@@ -266,7 +264,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>

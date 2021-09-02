@@ -34,8 +34,6 @@ import {
   QueryApplicationLinkByClientIDRequest,
 } from "../../../desmos/profiles/v1beta1/query_app_links";
 
-export const protobufPackage = "desmos.profiles.v1beta1";
-
 /** Query defines the gRPC querier service. */
 export interface Query {
   /**

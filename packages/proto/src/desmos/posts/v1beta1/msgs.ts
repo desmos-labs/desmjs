@@ -10,8 +10,6 @@ import {
 } from "../../../desmos/posts/v1beta1/posts";
 import { Poll } from "../../../desmos/posts/v1beta1/polls";
 
-export const protobufPackage = "desmos.posts.v1beta1";
-
 /** MsgCreatePost represents the message to be used to create a post. */
 export interface MsgCreatePost {
   parentId: string;
@@ -1467,7 +1465,7 @@ type Builtin =
   | boolean
   | undefined
   | Long;
-export type DeepPartial<T> = T extends Builtin
+type DeepPartial<T> = T extends Builtin
   ? T
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
