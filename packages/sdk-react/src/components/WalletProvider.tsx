@@ -1,9 +1,9 @@
 import {ReactNode, useMemo} from "react";
-import {DesmosWallet, WalletConnect, Wallet} from "@desmos-labs/sdk-core";
+import {DesmosWallet, DirectSigner} from "@desmos-labs/sdk-core";
 import {WalletContext} from "../hooks";
 
 export type Props = {
-    walletConnect: WalletConnect
+    signer: DirectSigner
     children: ReactNode | undefined
 }
 
@@ -13,8 +13,8 @@ export type Props = {
 export function WalletProvider(props: Props): JSX.Element {
 
     const wallet = useMemo<DesmosWallet>(() => {
-        return new Wallet(props.walletConnect);
-    }, [props.walletConnect]);
+        return new DesmosWallet(props.signer);
+    }, [props.signer]);
 
     return <WalletContext.Provider value={wallet}>
         {props.children}

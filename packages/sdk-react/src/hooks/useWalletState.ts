@@ -1,4 +1,4 @@
-import {DesmosWallet, WalletStatus} from "@desmos-labs/sdk-core";
+import {DesmosWallet, WalletStatus, WalletEvent} from "@desmos-labs/sdk-core";
 import {useEffect, useState} from "react";
 
 /**
@@ -10,9 +10,9 @@ export function useWalletState(wallet: DesmosWallet): WalletStatus {
     const [status, setWalletStatus] = useState(wallet.status);
 
     useEffect(() => {
-        wallet.on("on_status_change", setWalletStatus);
+        wallet.on(WalletEvent.ON_STATUS_CHANGE, setWalletStatus);
         return () => {
-            wallet.removeListener("on_status_change", setWalletStatus);
+            wallet.removeListener(WalletEvent.ON_STATUS_CHANGE, setWalletStatus);
         }
     }, [])
 

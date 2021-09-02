@@ -25,6 +25,7 @@
   "dependencies": {
     "@cosmjs/proto-signing": "0.26.0",
     "@cosmjs/stargate": "0.26.0",
+    "@desmos-labs/proto": "workspace:packages/proto",
     "@desmos-labs/sdk-core": "workspace:packages/sdk-core",
     "@walletconnect/client": "2.0.0-beta.17",
     "@walletconnect/types": "2.0.0-beta.17",
