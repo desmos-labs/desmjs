@@ -1,6 +1,7 @@
 import {AccountData, EncodeObject} from "@cosmjs/proto-signing";
 import {
-    BroadcastTxResponse,
+    BroadcastTxFailure,
+    BroadcastTxResponse, isBroadcastTxFailure,
     SigningStargateClient,
     StdFee
 } from "@cosmjs/stargate";
@@ -10,6 +11,8 @@ import {DirectSigner, SignerStatus} from "../signers";
 import {SigningDesmosClient} from "./chain-client";
 import {OfflineSignerAdapter} from "./cosmjs-adapter";
 import {WalletNotConnected} from "./errors";
+import {DesmosProfile} from "../types/desmos";
+import {MsgSaveProfileEncodeObject} from "../types/encodeobjects";
 
 /**
  * Events that can be fired from a DesmosWallet
@@ -183,5 +186,25 @@ export class DesmosWallet {
 
         const bytes = TxRaw.encode(tx).finish();
         return this.client!.broadcastTx(bytes, timeoutMs, pollIntervalMs);
+    }
+
+    /**
+     * Updates the user profile.
+     * @param profile - The new user profile.
+     * @param fee - Fee to pay the transaction.
+     */
+    async saveProfile(profile: Partial<DesmosProfile>, fee: StdFee): Promise<void> {
+        const saveProfile: MsgSaveProfileEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgSaveProfile",
+            value: {
+                ...profile,
+                creator: this.accountData!.address,
+            }
+        }
+        const signedTx = await this.signDirect([saveProfile], fee);
+        const txResponse = await this.broadcastTx(signedTx);
+        if (isBroadcastTxFailure(txResponse)) {
+            throw new Error((txResponse as BroadcastTxFailure).rawLog)
+        }
     }
 }
