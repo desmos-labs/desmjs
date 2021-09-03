@@ -9,18 +9,24 @@ import {ERROR} from "@walletconnect/utils";
 import {DirectSigner, SignerStatus, SignerNotConnected} from "./DirectSigner";
 import {WalletConnect} from "../types";
 
+export interface QrCodeController {
+    open(uri: string, onClose: () => void): void;
+    close(): void
+}
 
 export class WalletConnectSigner extends DirectSigner {
 
     private readonly client: WalletConnectClient
+    private readonly qrCodeController: QrCodeController
     private session: SessionTypes.Created | undefined
     private bech32Address: string | undefined
     private chainAndNamespace: string | undefined
     private accountData: AccountData | undefined;
 
-    constructor({client, session}: WalletConnect) {
+    constructor({client, session}: WalletConnect, qrCodeController?: QrCodeController) {
         super(session === undefined ? SignerStatus.NOT_CONNECTED : SignerStatus.CONNECTED);
         this.client = client;
+        this.qrCodeController = qrCodeController ?? QRCodeModal;
 
         this.session = session;
         if (session !== undefined) {
@@ -68,7 +74,7 @@ export class WalletConnectSigner extends DirectSigner {
 
             const onProposal = async (proposal: PairingTypes.Proposal) => {
                 const {uri} = proposal.signal.params;
-                QRCodeModal.open(uri, () => {
+                this.qrCodeController.open(uri, () => {
                     rejected = true;
                     this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
                     this.updateStatus(SignerStatus.NOT_CONNECTED);
@@ -89,7 +95,7 @@ export class WalletConnectSigner extends DirectSigner {
                 },
             }).catch((e: any) => {
                 this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
-                QRCodeModal.close();
+                this.qrCodeController.close();
                 reject(e);
                 this.updateStatus(SignerStatus.NOT_CONNECTED);
                 throw e;
@@ -97,7 +103,7 @@ export class WalletConnectSigner extends DirectSigner {
 
             if (!rejected) {
                 this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
-                QRCodeModal.close();
+                this.qrCodeController.close();
                 this.session = session;
                 this.populateSessionDependedFields(session);
                 this.client.on(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
