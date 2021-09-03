@@ -1,0 +1,192 @@
+import {
+    Account,
+    accountFromAny,
+    AuthExtension,
+    BankExtension, BroadcastTxFailure,
+    defaultRegistryTypes,
+    isBroadcastTxFailure,
+    QueryClient,
+    setupAuthExtension,
+    setupBankExtension,
+    setupStakingExtension,
+    SigningStargateClient,
+    StakingExtension,
+    StdFee
+} from "@cosmjs/stargate";
+import {Any} from "cosmjs-types/google/protobuf/any";
+import {
+    GeneratedType,
+    OfflineSigner,
+    Registry
+} from "@cosmjs/proto-signing";
+import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
+import {
+    Profile,
+    MsgLinkApplication, MsgUnlinkApplication,
+    MsgLinkChainAccount, MsgUnlinkChainAccount,
+    MsgRequestDTagTransfer, MsgCancelDTagTransferRequest,
+    MsgAcceptDTagTransferRequest, MsgRefuseDTagTransferRequest,
+    MsgSaveProfile, MsgDeleteProfile,
+    MsgCreateRelationship, MsgDeleteRelationship,
+    MsgBlockUser, MsgUnblockUser,
+    QueryApplicationLinkByClientIDRequest,
+    QueryApplicationLinksRequest,
+    QueryUserApplicationLinkRequest,
+    QueryUserChainLinkRequest,
+    QueryChainLinksRequest,
+    QueryIncomingDTagTransferRequestsRequest,
+    QueryParamsRequest,
+    QueryBlocksRequest,
+    QueryProfileRequest,
+    QueryRelationshipsRequest
+} from "@desmos-labs/proto";
+import {DesmosProfile} from "./types/desmos";
+import {MsgSaveProfileEncodeObject} from "./types/encodeobjects";
+
+
+const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
+    ...defaultRegistryTypes,
+    // Profile Messages
+    ["/desmos.profiles.v1beta1.MsgLinkApplication", MsgLinkApplication],
+    ["/desmos.profiles.v1beta1.MsgUnlinkApplication", MsgUnlinkApplication],
+    ["/desmos.profiles.v1beta1.MsgLinkChainAccount", MsgLinkChainAccount],
+    ["/desmos.profiles.v1beta1.MsgUnlinkChainAccount", MsgUnlinkChainAccount],
+    ["/desmos.profiles.v1beta1.MsgRequestDTagTransfer", MsgRequestDTagTransfer],
+    ["/desmos.profiles.v1beta1.MsgCancelDTagTransferRequest", MsgCancelDTagTransferRequest],
+    ["/desmos.profiles.v1beta1.MsgAcceptDTagTransferRequest", MsgAcceptDTagTransferRequest],
+    ["/desmos.profiles.v1beta1.MsgRefuseDTagTransferRequest", MsgRefuseDTagTransferRequest],
+    ["/desmos.profiles.v1beta1.MsgSaveProfile", MsgSaveProfile],
+    ["/desmos.profiles.v1beta1.MsgDeleteProfile", MsgDeleteProfile],
+    ["/desmos.profiles.v1beta1.MsgCreateRelationship", MsgCreateRelationship],
+    ["/desmos.profiles.v1beta1.MsgDeleteRelationship", MsgDeleteRelationship],
+    ["/desmos.profiles.v1beta1.MsgBlockUser", MsgBlockUser],
+    ["/desmos.profiles.v1beta1.MsgUnblockUser", MsgUnblockUser],
+    ["/desmos.profiles.v1beta1.QueryUserApplicationLinkRequest", QueryUserApplicationLinkRequest],
+    ["/desmos.profiles.v1beta1.QueryApplicationLinksRequest", QueryApplicationLinksRequest],
+    ["/desmos.profiles.v1beta1.QueryApplicationLinkByClientIDRequest", QueryApplicationLinkByClientIDRequest],
+    ["/desmos.profiles.v1beta1.QueryUserChainLinkRequest", QueryUserChainLinkRequest],
+    ["/desmos.profiles.v1beta1.QueryChainLinksRequest", QueryChainLinksRequest],
+    ["/desmos.profiles.v1beta1.QueryIncomingDTagTransferRequestsRequest", QueryIncomingDTagTransferRequestsRequest],
+    ["/desmos.profiles.v1beta1.QueryParamsRequest", QueryParamsRequest],
+    ["/desmos.profiles.v1beta1.QueryProfileRequest", QueryProfileRequest],
+    ["/desmos.profiles.v1beta1.QueryRelationshipsRequest", QueryRelationshipsRequest],
+    ["/desmos.profiles.v1beta1.QueryBlocksRequest", QueryBlocksRequest],
+]
+
+export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension;
+
+export function desmosAccountFromAny(input: Any): Account {
+    const {typeUrl, value} = input;
+
+    switch (typeUrl) {
+        case "/desmos.profiles.v1beta1.Profile":
+            const profile = Profile.decode(value);
+            if (profile.account === undefined) {
+                throw new Error("Profile is null");
+            }
+            return accountFromAny(profile.account);
+
+        default:
+            return accountFromAny(input);
+    }
+}
+
+/**
+ * Custom Stargate client to override the getAccount function with our
+ * custom account parsing logic.
+ */
+export class SigningDesmosClient extends SigningStargateClient {
+
+    private readonly url: string
+    private _tmClient: Tendermint34Client | undefined;
+    private _queryClient: DesmosQueryClient | undefined;
+    private _signer: OfflineSigner;
+
+    constructor(url: string, signer: OfflineSigner) {
+        super(undefined, signer, {
+            registry: new Registry(registryTypes)
+        });
+        this._signer = signer;
+        this.url = url;
+    }
+
+    async connect(): Promise<void> {
+        if (this._tmClient === undefined) {
+            this._tmClient = await Tendermint34Client.connect(this.url);
+            this._queryClient = QueryClient.withExtensions(this._tmClient,
+                setupAuthExtension,
+                setupBankExtension,
+                setupStakingExtension
+            )
+        }
+    }
+
+    override disconnect() {
+        if (this._tmClient !== undefined) {
+            this._tmClient.disconnect();
+            this._queryClient = undefined;
+        }
+    }
+
+    /**
+     * Gets the address of the first account provided from the signer.
+     */
+    async getSignerAddress(): Promise<string> {
+        const accounts = await this._signer.getAccounts();
+        return accounts[0].address;
+    }
+
+    /**
+     * Gets the account associated to the provided address.
+     * This function has been overridden to correctly parse the desmos account.
+     */
+    override async getAccount(searchAddress: string): Promise<Account | null> {
+        try {
+            const account = await this.forceGetQueryClient().auth.account(searchAddress);
+            return account ? desmosAccountFromAny(account) : null;
+        } catch (error) {
+            if (/rpc error: code = NotFound/i.test(error)) {
+                return null;
+            }
+            throw error;
+        }
+    }
+
+    protected override forceGetTmClient(): Tendermint34Client {
+        if (this._tmClient === undefined) {
+            throw new Error("DesmoClient Not connected");
+        }
+
+        return this._tmClient;
+    }
+
+    protected override forceGetQueryClient(): DesmosQueryClient {
+        if (this._queryClient === undefined) {
+            throw new Error("DesmoClient Not connected");
+        }
+
+        return this._queryClient;
+    }
+
+    /**
+     * Updates the user profile.
+     * @param creator - The user address.
+     * @param profile - The user profile information.
+     * @param fee - Fee used to perform the transaction.
+     */
+    async saveProfile(creator: string, profile: Partial<Omit<DesmosProfile, "address">>, fee: StdFee): Promise<void> {
+
+        const saveProfile: MsgSaveProfileEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgSaveProfile",
+            value: {
+                ...profile,
+                creator,
+            }
+        }
+
+        const txResponse = await this.signAndBroadcast(creator, [saveProfile], fee);
+        if (isBroadcastTxFailure(txResponse)) {
+            throw new Error((txResponse as BroadcastTxFailure).rawLog)
+        }
+    }
+}

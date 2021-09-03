@@ -1,4 +1,6 @@
 export interface DesmosProfile {
+    /** The user's address */
+    address: string,
     /** User dtag */
     dtag: string;
     /** The user nick name */

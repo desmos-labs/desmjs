@@ -1,6 +1,7 @@
-import {MnemonicSigner} from "../signers";
-import {DesmosWallet} from "./wallet";
 import {coin, StdFee } from "@cosmjs/stargate";
+import {SigningDesmosClient} from "./signingdesmosclient";
+import {stringToPath} from "@cosmjs/crypto";
+import {DirectSecp256k1HdWallet} from "@cosmjs/proto-signing";
 
 describe("Wallet Test", () => {
 
@@ -10,17 +11,22 @@ describe("Wallet Test", () => {
     const CHAIN_RPC = "https://rpc.morpheus.desmos.network";
 
     it("Test profile update", async () => {
-        const signer = await MnemonicSigner.fromMnemonic(TEST_MNEMONIC);
-        const wallet = new DesmosWallet(signer);
+        const signer = await DirectSecp256k1HdWallet.fromMnemonic(TEST_MNEMONIC, {
+            hdPaths: [stringToPath("m/44'/852'/0'/0/0")],
+            prefix: "desmos"
+        });
 
-        await wallet.connect(CHAIN_RPC);
+        const client = new SigningDesmosClient(CHAIN_RPC, signer);
+        await client.connect();
+
+        const creator = await client.getSignerAddress();
 
         const fee: StdFee = {
             gas: '200000',
             amount: [coin(500, 'udaric')],
         }
 
-        await wallet.saveProfile({
+        await client.saveProfile(creator, {
             dtag: "ares_1"
         }, fee)
     })
