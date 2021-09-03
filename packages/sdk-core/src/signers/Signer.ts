@@ -1,5 +1,7 @@
 import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import {AccountData, DirectSignResponse} from "@cosmjs/proto-signing";
+import {AccountData, DirectSignResponse, OfflineDirectSigner} from "@cosmjs/proto-signing";
+import {SignMode} from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
+import {AminoSignResponse, OfflineAminoSigner, StdSignDoc} from "@cosmjs/amino";
 
 export enum SignerStatus {
     NOT_CONNECTED = "not_connected",
@@ -11,9 +13,9 @@ export enum SignerStatus {
 export type SignerStatusObserver = (status: SignerStatus) => void;
 
 /**
- * Class that represents a signer capable that sign the transaction using the Cosmos SIGN_MODE_DIRECT.
+ * Class that represents a signer that can be local or remote.
  */
-export abstract class DirectSigner {
+export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner {
 
     private _status: SignerStatus
     private observers: SignerStatusObserver[] = [];
@@ -79,13 +81,29 @@ export abstract class DirectSigner {
      * Sign the provided document.
      * If the signer is not connect will be raised `SignerNotConnected` exception.
      * @param signDoc - The document to sign.
+     * @param mode - The signature mode.
      */
-    abstract signDirect(signDoc: SignDoc): Promise<DirectSignResponse>;
+    abstract signDoc(signDoc: SignDoc | StdSignDoc, mode: SignMode): Promise<DirectSignResponse | AminoSignResponse>;
 
     /**
      * Gets the informations regarding the us
      */
     abstract getAccountData(): Promise<AccountData>;
+
+    async getAccounts(): Promise<readonly AccountData[]> {
+        const account = await this.getAccountData();
+        return [account];
+    }
+
+    async signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
+        const signature = await this.signDoc(signDoc, SignMode.SIGN_MODE_DIRECT);
+        return signature as DirectSignResponse;
+    }
+
+    async signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse> {
+        const signature = await this.signDoc(signDoc, SignMode.SIGN_MODE_LEGACY_AMINO_JSON);
+        return signature as AminoSignResponse;
+    }
 }
 
 export class SignerNotConnected extends Error {

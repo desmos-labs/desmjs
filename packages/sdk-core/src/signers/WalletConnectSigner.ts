@@ -6,15 +6,17 @@ import {Buffer} from "buffer";
 import {AuthInfo, SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 import {ERROR} from "@walletconnect/utils";
-import {DirectSigner, SignerStatus, SignerNotConnected} from "./DirectSigner";
+import {Signer, SignerNotConnected, SignerStatus} from "./Signer";
 import {WalletConnect} from "../types";
+import {SignMode} from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
+import {StdSignDoc} from "@cosmjs/amino";
 
 export interface QrCodeController {
     open(uri: string, onClose: () => void): void;
     close(): void
 }
 
-export class WalletConnectSigner extends DirectSigner {
+export class WalletConnectSigner extends Signer {
 
     private readonly client: WalletConnectClient
     private readonly qrCodeController: QrCodeController
@@ -151,9 +153,13 @@ export class WalletConnectSigner extends DirectSigner {
         return this.accountData!;
     }
 
-    async signDirect(signDoc: SignDoc): Promise<DirectSignResponse> {
+    async signDoc(signDoc: SignDoc, mode: SignMode): Promise<DirectSignResponse> {
         if (this.status !== SignerStatus.CONNECTED) {
             throw new SignerNotConnected()
+        }
+
+        if (mode !== SignMode.SIGN_MODE_DIRECT) {
+            throw new Error("The WalletConnect signer supports only SIGN_MODE_DIRECT");
         }
 
         const params = {

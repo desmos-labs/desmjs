@@ -1529,6 +1529,7 @@ __metadata:
     "@babel/core": 7.15.0
     "@babel/preset-env": 7.15.0
     "@babel/preset-typescript": 7.15.0
+    "@cosmjs/amino": 0.26.0
     "@cosmjs/crypto": 0.26.0
     "@cosmjs/encoding": 0.26.0
     "@cosmjs/proto-signing": 0.26.0

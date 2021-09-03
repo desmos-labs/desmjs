@@ -1,3 +1,2 @@
-export * from "./DirectSigner"
+export * from "./Signer"
 export * from "./WalletConnectSigner"
-export * from "./MnemonicSigner"

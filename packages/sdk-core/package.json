@@ -23,6 +23,7 @@
     "build": "rm -rf ./build && tsc"
   },
   "dependencies": {
+    "@cosmjs/amino": "0.26.0",
     "@cosmjs/crypto": "0.26.0",
     "@cosmjs/encoding": "0.26.0",
     "@cosmjs/proto-signing": "0.26.0",
