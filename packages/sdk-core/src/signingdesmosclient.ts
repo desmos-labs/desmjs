@@ -20,28 +20,16 @@ import {
     Registry
 } from "@cosmjs/proto-signing";
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
-import {
-    Profile,
-    MsgLinkApplication, MsgUnlinkApplication,
-    MsgLinkChainAccount, MsgUnlinkChainAccount,
-    MsgRequestDTagTransfer, MsgCancelDTagTransferRequest,
-    MsgAcceptDTagTransferRequest, MsgRefuseDTagTransferRequest,
-    MsgSaveProfile, MsgDeleteProfile,
-    MsgCreateRelationship, MsgDeleteRelationship,
-    MsgBlockUser, MsgUnblockUser,
-    QueryApplicationLinkByClientIDRequest,
-    QueryApplicationLinksRequest,
-    QueryUserApplicationLinkRequest,
-    QueryUserChainLinkRequest,
-    QueryChainLinksRequest,
-    QueryIncomingDTagTransferRequestsRequest,
-    QueryParamsRequest,
-    QueryBlocksRequest,
-    QueryProfileRequest,
-    QueryRelationshipsRequest
-} from "@desmos-labs/proto";
 import {DesmosProfile} from "./types/desmos";
 import {MsgSaveProfileEncodeObject} from "./types/encodeobjects";
+import {ProfileExtension, setupProfileExtension} from "./queries/profile";
+import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
+import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
+import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
+import {MsgDeleteProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
+import {Profile} from "@desmos-labs/proto/desmos/profiles/v1beta1/models_profile";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -61,16 +49,6 @@ const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
     ["/desmos.profiles.v1beta1.MsgDeleteRelationship", MsgDeleteRelationship],
     ["/desmos.profiles.v1beta1.MsgBlockUser", MsgBlockUser],
     ["/desmos.profiles.v1beta1.MsgUnblockUser", MsgUnblockUser],
-    ["/desmos.profiles.v1beta1.QueryUserApplicationLinkRequest", QueryUserApplicationLinkRequest],
-    ["/desmos.profiles.v1beta1.QueryApplicationLinksRequest", QueryApplicationLinksRequest],
-    ["/desmos.profiles.v1beta1.QueryApplicationLinkByClientIDRequest", QueryApplicationLinkByClientIDRequest],
-    ["/desmos.profiles.v1beta1.QueryUserChainLinkRequest", QueryUserChainLinkRequest],
-    ["/desmos.profiles.v1beta1.QueryChainLinksRequest", QueryChainLinksRequest],
-    ["/desmos.profiles.v1beta1.QueryIncomingDTagTransferRequestsRequest", QueryIncomingDTagTransferRequestsRequest],
-    ["/desmos.profiles.v1beta1.QueryParamsRequest", QueryParamsRequest],
-    ["/desmos.profiles.v1beta1.QueryProfileRequest", QueryProfileRequest],
-    ["/desmos.profiles.v1beta1.QueryRelationshipsRequest", QueryRelationshipsRequest],
-    ["/desmos.profiles.v1beta1.QueryBlocksRequest", QueryBlocksRequest],
 ]
 
 export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension;

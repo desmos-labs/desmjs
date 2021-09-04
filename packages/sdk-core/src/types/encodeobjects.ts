@@ -1,30 +1,9 @@
 import {EncodeObject} from "@cosmjs/proto-signing";
-import {
-    MsgLinkApplication,
-    MsgUnlinkApplication,
-    MsgLinkChainAccount,
-    MsgUnlinkChainAccount,
-    MsgRequestDTagTransfer,
-    MsgCancelDTagTransferRequest,
-    MsgAcceptDTagTransferRequest,
-    MsgRefuseDTagTransferRequest,
-    MsgSaveProfile,
-    MsgDeleteProfile,
-    MsgCreateRelationship,
-    MsgDeleteRelationship,
-    MsgBlockUser,
-    MsgUnblockUser,
-    QueryApplicationLinkByClientIDRequest,
-    QueryApplicationLinksRequest,
-    QueryUserApplicationLinkRequest,
-    QueryUserChainLinkRequest,
-    QueryChainLinksRequest,
-    QueryIncomingDTagTransferRequestsRequest,
-    QueryParamsRequest,
-    QueryBlocksRequest,
-    QueryProfileRequest,
-    QueryRelationshipsRequest
-} from "@desmos-labs/proto";
+import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
+import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
+import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
+import {MsgDeleteProfile, MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
 
 export interface MsgLinkApplicationEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgLinkApplication",
@@ -94,54 +73,4 @@ export interface MsgBlockUserEncodeObject extends EncodeObject {
 export interface MsgUnblockUserEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgUnblockUser",
     readonly value: Partial<MsgUnblockUser>,
-}
-
-export interface QueryApplicationLinkByClientIDRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryApplicationLinkByClientIDRequest",
-    readonly value: Partial<QueryApplicationLinkByClientIDRequest>,
-}
-
-export interface QueryApplicationLinksRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryApplicationLinksRequest",
-    readonly value: Partial<QueryApplicationLinksRequest>,
-}
-
-export interface QueryUserApplicationLinkRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryUserApplicationLinkRequest",
-    readonly value: Partial<QueryUserApplicationLinkRequest>,
-}
-
-export interface QueryUserChainLinkRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryUserChainLinkRequest",
-    readonly value: Partial<QueryUserChainLinkRequest>,
-}
-
-export interface QueryChainLinksRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryChainLinksRequest",
-    readonly value: Partial<QueryChainLinksRequest>,
-}
-
-export interface QueryIncomingDTagTransferRequestsRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryIncomingDTagTransferRequestsRequest",
-    readonly value: Partial<QueryIncomingDTagTransferRequestsRequest>,
-}
-
-export interface QueryParamsRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryParamsRequest",
-    readonly value: Partial<QueryParamsRequest>,
-}
-
-export interface QueryBlocksRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryBlocksRequest",
-    readonly value: Partial<QueryBlocksRequest>,
-}
-
-export interface QueryProfileRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryProfileRequest",
-    readonly value: Partial<QueryProfileRequest>,
-}
-
-export interface QueryRelationshipsRequestEncodeObject extends EncodeObject {
-    typeUrl: "/desmos.profiles.v1beta1.QueryRelationshipsRequest",
-    readonly value: Partial<QueryRelationshipsRequest>,
 }
