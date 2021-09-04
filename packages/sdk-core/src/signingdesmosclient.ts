@@ -22,7 +22,6 @@ import {
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
 import {DesmosProfile} from "./types/desmos";
 import {MsgSaveProfileEncodeObject} from "./types/encodeobjects";
-import {ProfileExtension, setupProfileExtension} from "./queries/profile";
 import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
 import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
 import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
@@ -30,6 +29,9 @@ import {MsgDeleteProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_
 import {MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
 import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
 import {Profile} from "@desmos-labs/proto/desmos/profiles/v1beta1/models_profile";
+import {ProfilesExtension, setupProfilesExtension} from "./queries/profiles";
+import {PostsExtension, setupPostsExtension} from "./queries/posts";
+import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -51,7 +53,8 @@ const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
     ["/desmos.profiles.v1beta1.MsgUnblockUser", MsgUnblockUser],
 ]
 
-export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension;
+export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension & ProfilesExtension
+    & PostsExtension & SubspacesExtension;
 
 export function desmosProfileFromAny({typeUrl, value}: Any): Profile {
 
@@ -86,7 +89,10 @@ export class SigningDesmosClient extends SigningStargateClient {
             this._queryClient = QueryClient.withExtensions(this._tmClient,
                 setupAuthExtension,
                 setupBankExtension,
-                setupStakingExtension
+                setupStakingExtension,
+                setupProfilesExtension,
+                setupPostsExtension,
+                setupSubspacesExtension
             )
         }
     }
