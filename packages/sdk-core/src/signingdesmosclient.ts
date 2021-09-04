@@ -63,8 +63,7 @@ export function desmosProfileFromAny({typeUrl, value}: Any): Profile {
 }
 
 /**
- * Custom Stargate client to override the getAccount function with our
- * custom account parsing logic.
+ * Client to interact with the Desmos chain.
  */
 export class SigningDesmosClient extends SigningStargateClient {
 
@@ -131,6 +130,12 @@ export class SigningDesmosClient extends SigningStargateClient {
         }
     }
 
+    /**
+     * Gets the tendermint client to interact with the chain.
+     * This method has been overrun to provide our client
+     * to the parent class.
+     * @protected
+     */
     protected override forceGetTmClient(): Tendermint34Client {
         if (this._tmClient === undefined) {
             throw new Error("DesmoClient Not connected");
@@ -139,6 +144,12 @@ export class SigningDesmosClient extends SigningStargateClient {
         return this._tmClient;
     }
 
+    /**
+     * Gets the gRPC client to interact with the chain.
+     * This method has been overrun to provide our client
+     * to the parent class.
+     * @protected
+     */
     protected override forceGetQueryClient(): DesmosQueryClient {
         if (this._queryClient === undefined) {
             throw new Error("DesmoClient Not connected");
@@ -150,8 +161,8 @@ export class SigningDesmosClient extends SigningStargateClient {
     /**
      * Updates the user profile.
      * @param creator - The user address.
-     * @param profile - The user profile information.
-     * @param fee - Fee used to perform the transaction.
+     * @param profile - The user profile informations.
+     * @param fee - Fee to perform the transaction.
      */
     async saveProfile(creator: string, profile: Partial<Omit<DesmosProfile, "address">>, fee: StdFee): Promise<void> {
 
