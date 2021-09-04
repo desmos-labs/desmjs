@@ -53,20 +53,13 @@ const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
 
 export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension;
 
-export function desmosAccountFromAny(input: Any): Account {
-    const {typeUrl, value} = input;
+export function desmosProfileFromAny({typeUrl, value}: Any): Profile {
 
-    switch (typeUrl) {
-        case "/desmos.profiles.v1beta1.Profile":
-            const profile = Profile.decode(value);
-            if (profile.account === undefined) {
-                throw new Error("Profile is null");
-            }
-            return accountFromAny(profile.account);
-
-        default:
-            return accountFromAny(input);
+    if (typeUrl !== "/desmos.profiles.v1beta1.Profile") {
+        throw new Error("Can't parse desmos account from value with type: " + typeUrl);
     }
+
+    return Profile.decode(value);
 }
 
 /**
@@ -121,7 +114,15 @@ export class SigningDesmosClient extends SigningStargateClient {
     override async getAccount(searchAddress: string): Promise<Account | null> {
         try {
             const account = await this.forceGetQueryClient().auth.account(searchAddress);
-            return account ? desmosAccountFromAny(account) : null;
+            if (account === null) {
+                return null;
+            }
+            if (account.typeUrl.indexOf("desmos") >= 0) {
+                const profile = desmosProfileFromAny(account);
+                return profile.account ? accountFromAny(profile.account) : null;
+            } else {
+                return accountFromAny(account);
+            }
         } catch (error) {
             if (/rpc error: code = NotFound/i.test(error)) {
                 return null;
