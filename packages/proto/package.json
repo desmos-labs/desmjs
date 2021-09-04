@@ -4,8 +4,13 @@
   "version": "0.0.0",
   "author": "Manuel Turetta <manuel@forbole.com>",
   "license": "Apache-2.0",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "build/*"
+      ]
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/desmos-labs/dapp-sdk"
