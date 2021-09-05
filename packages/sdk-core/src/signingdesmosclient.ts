@@ -2,9 +2,9 @@ import {
     Account,
     accountFromAny,
     AuthExtension,
-    BankExtension, BroadcastTxFailure,
+    BankExtension,
     defaultRegistryTypes,
-    isBroadcastTxFailure,
+    assertIsBroadcastTxSuccess,
     QueryClient,
     setupAuthExtension,
     setupBankExtension,
@@ -23,15 +23,24 @@ import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
 import {DesmosProfile} from "./types/desmos";
 import {
     MsgDeleteProfileEncodeObject,
-    MsgRequestDTagTransferEncodeObject,
     MsgSaveProfileEncodeObject
 } from "./encodeobjects";
 import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
 import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
-import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
+import {
+    MsgAcceptDTagTransferRequest,
+    MsgCancelDTagTransferRequest,
+    MsgRefuseDTagTransferRequest,
+    MsgRequestDTagTransfer
+} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
 import {MsgDeleteProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
 import {MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
-import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
+import {
+    MsgBlockUser,
+    MsgCreateRelationship,
+    MsgDeleteRelationship,
+    MsgUnblockUser
+} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
 import {Profile} from "@desmos-labs/proto/desmos/profiles/v1beta1/models_profile";
 import {
     MsgCreatePost,
@@ -145,11 +154,11 @@ export class SigningDesmosClient extends SigningStargateClient {
     }
 
     /**
-     * Gets the address of the first account provided from the signer.
+     * Gets the addresses from the signer.
      */
-    async getSignerAddress(): Promise<string> {
+    async getSignerAddresses(): Promise<string []> {
         const accounts = await this._signer.getAccounts();
-        return accounts[0].address;
+        return accounts.map(a => a.address);
     }
 
     /**
@@ -205,13 +214,12 @@ export class SigningDesmosClient extends SigningStargateClient {
     }
 
     /**
-     * Updates the user profile.
-     * @param creator - The user address.
-     * @param profile - The user profile informations.
+     * Save a new profile or edit an existent one.
+     * @param creator - Address of the user that is editing the profile.
+     * @param profile - User profile informations.
      * @param fee - Fee to perform the transaction.
      */
     async saveProfile(creator: string, profile: Partial<Omit<DesmosProfile, "address">>, fee: StdFee): Promise<void> {
-
         const saveProfile: MsgSaveProfileEncodeObject = {
             typeUrl: "/desmos.profiles.v1beta1.MsgSaveProfile",
             value: {
@@ -221,8 +229,50 @@ export class SigningDesmosClient extends SigningStargateClient {
         }
 
         const txResponse = await this.signAndBroadcast(creator, [saveProfile], fee);
-        if (isBroadcastTxFailure(txResponse)) {
-            throw new Error((txResponse as BroadcastTxFailure).rawLog)
+        assertIsBroadcastTxSuccess(txResponse);
+    }
+
+    /**
+     * Retrieve the details of a single profile having its DTag or address.
+     * @param user - The user DTag or address.
+     */
+    async getProfile(user: string): Promise<DesmosProfile | null> {
+        const profile = await this.forceGetQueryClient().profiles.profile(user);
+        if (profile === null) {
+            return null;
         }
+
+        const desmosProfile = desmosProfileFromAny(profile);
+        if (desmosProfile.account === undefined) {
+            return null;
+        }
+
+        const cosmosAccount = accountFromAny(desmosProfile.account);
+
+        return {
+            address: cosmosAccount.address,
+            dtag: desmosProfile.dtag,
+            nickname: desmosProfile.nickname,
+            bio: desmosProfile.bio,
+            profilePicture: desmosProfile.pictures?.profile,
+            coverPicture: desmosProfile.pictures?.cover,
+        }
+    }
+
+    /**
+     * Deletes a previously created profile
+     * @param creator - Address of the user that is deleting the profile.
+     * @param fee - Fee to perform the transaction.
+     */
+    async deleteProfile(creator: string, fee: StdFee): Promise<void> {
+        const msg: MsgDeleteProfileEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgDeleteProfile",
+            value: {
+                creator
+            }
+        }
+
+        await this.signAndBroadcast(creator, [msg], fee)
+            .then(assertIsBroadcastTxSuccess);
     }
 }
