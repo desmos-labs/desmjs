@@ -27,22 +27,22 @@ export interface MsgUnlinkChainAccountEncodeObject extends EncodeObject {
 
 export interface MsgRequestDTagTransferEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgRequestDTagTransfer",
-    readonly value: Partial<MsgRequestDTagTransfer>,
+    readonly value: MsgRequestDTagTransfer,
 }
 
 export interface MsgCancelDTagTransferRequestEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgCancelDTagTransferRequest",
-    readonly value: Partial<MsgCancelDTagTransferRequest>,
+    readonly value: MsgCancelDTagTransferRequest,
 }
 
 export interface MsgAcceptDTagTransferRequestEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgAcceptDTagTransferRequest",
-    readonly value: Partial<MsgAcceptDTagTransferRequest>,
+    readonly value: MsgAcceptDTagTransferRequest,
 }
 
 export interface MsgRefuseDTagTransferRequestEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgRefuseDTagTransferRequest",
-    readonly value: Partial<MsgRefuseDTagTransferRequest>,
+    readonly value: MsgRefuseDTagTransferRequest,
 }
 
 export interface MsgSaveProfileEncodeObject extends EncodeObject {

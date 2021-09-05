@@ -35,7 +35,8 @@
     "@walletconnect/types": "2.0.0-beta.17",
     "@walletconnect/utils": "2.0.0-beta.17",
     "cosmjs-types": "0.2.0",
-    "cosmos-wallet": "1.1.0"
+    "cosmos-wallet": "1.1.0",
+    "long": "4.0.0"
   },
   "devDependencies": {
     "@babel/core": "7.15.0",

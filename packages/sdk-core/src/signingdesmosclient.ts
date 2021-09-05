@@ -22,7 +22,8 @@ import {
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
 import {DesmosProfile} from "./types/desmos";
 import {
-    MsgDeleteProfileEncodeObject,
+    MsgAcceptDTagTransferRequestEncodeObject, MsgCancelDTagTransferRequestEncodeObject,
+    MsgDeleteProfileEncodeObject, MsgRefuseDTagTransferRequestEncodeObject, MsgRequestDTagTransferEncodeObject,
     MsgSaveProfileEncodeObject
 } from "./encodeobjects";
 import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
@@ -64,6 +65,8 @@ import {
 import {ProfilesExtension, setupProfilesExtension} from "./queries/profiles";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
+import {Pagination, paginationToPageRequest} from "./types/pagination";
+import {QueryIncomingDTagTransferRequestsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_dtag_requests";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -274,5 +277,88 @@ export class SigningDesmosClient extends SigningStargateClient {
 
         await this.signAndBroadcast(creator, [msg], fee)
             .then(assertIsBroadcastTxSuccess);
+    }
+
+    /**
+     * Allows to request a transfer to your profile for a DTag owned by another user.
+     * @param sender - Address of the user that request the DTag.
+     * @param receiver - Address of the user that is the owner of the requested DTag.
+     * @param fee - Fee to perform the transaction.
+     */
+    async requestDtagTransfer(sender: string, receiver: string, fee: StdFee): Promise<void> {
+        const msg: MsgRequestDTagTransferEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgRequestDTagTransfer",
+            value: {
+                sender,
+                receiver
+            }
+        }
+
+        await this.signAndBroadcast(sender, [msg], fee).then(assertIsBroadcastTxSuccess);
+    }
+
+    /**
+     * Queries all the DTag transfers requests that have been made towards the user with the given address.
+     * @param address - Address of the user of interest.
+     * @param pagination - Pagination informations.
+     */
+    async queryDtagTransferRequests(address: string, pagination?: Pagination): Promise<QueryIncomingDTagTransferRequestsResponse> {
+        return this.forceGetQueryClient().profiles.incomingDTagTransferRequests(address, paginationToPageRequest(pagination));
+    }
+
+    /**
+     * Accept a DTag transfer request.
+     * @param newDtag - The new DTag that receives who is accepting the request.
+     * @param sender - Address of the user that is accepting the request.
+     * @param receiver - Address of the user that is the owner of the requested DTag.
+     * @param fee - Fee to perform the transaction.
+     */
+    async acceptDtagTransferRequest(newDtag: string, sender: string, receiver: string, fee: StdFee): Promise<void> {
+        const msg: MsgAcceptDTagTransferRequestEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgAcceptDTagTransferRequest",
+            value: {
+                newDtag,
+                sender,
+                receiver
+            }
+        }
+
+        await this.signAndBroadcast(receiver, [msg], fee).then(assertIsBroadcastTxSuccess);
+    }
+
+    /**
+     * Refuse a DTag transfer request made by a user.
+     * @param sender - Address of the user that request the DTag.
+     * @param receiver - Address of the user that is the owner of the requested DTag.
+     * @param fee - Fee to perform the transaction.
+     */
+    async refuseDtagTransferRequest(sender: string, receiver: string, fee: StdFee): Promise<void> {
+        const msg: MsgRefuseDTagTransferRequestEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgRefuseDTagTransferRequest",
+            value: {
+                sender,
+                receiver
+            }
+        }
+
+        await this.signAndBroadcast(sender, [msg], fee).then(assertIsBroadcastTxSuccess);
+    }
+
+    /**
+     * Cancel a DTag transfer request made by yourself.
+     * @param sender - Address of the user that request the DTag.
+     * @param receiver - Address of the user that is the owner of the requested DTag.
+     * @param fee - Fee to perform the transaction.
+     */
+    async cancelDtagTransferRequest(sender: string, receiver: string, fee: StdFee): Promise<void> {
+        const msg: MsgCancelDTagTransferRequestEncodeObject = {
+            typeUrl: "/desmos.profiles.v1beta1.MsgCancelDTagTransferRequest",
+            value: {
+                sender,
+                receiver
+            }
+        }
+
+        await this.signAndBroadcast(sender, [msg], fee).then(assertIsBroadcastTxSuccess);
     }
 }
