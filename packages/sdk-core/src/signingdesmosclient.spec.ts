@@ -1,34 +1,108 @@
-import {coin, StdFee } from "@cosmjs/stargate";
-import {SigningDesmosClient} from "./signingdesmosclient";
-import {stringToPath} from "@cosmjs/crypto";
-import {DirectSecp256k1HdWallet} from "@cosmjs/proto-signing";
+import {
+    DefaultFees,
+    desmosClientFromMnemonic,
+    testUser1, testUser2,
+} from "./testutils.spec";
 
-describe("Wallet Test", () => {
+describe("SigningDesmosClient", () => {
 
-    jest.setTimeout(20000);
+    jest.setTimeout(30000);
 
-    const TEST_MNEMONIC = "hour harbor fame unaware bunker junk garment decrease federal vicious island smile warrior fame right suit portion skate analyst multiply magnet medal fresh sweet";
-    const CHAIN_RPC = "https://rpc.morpheus.desmos.network";
+    describe("Profiles operations", () => {
+        it("Save", async () => {
+            const testUser1Client = await desmosClientFromMnemonic(testUser1.mnemonic);
 
-    it("Test profile update", async () => {
-        const signer = await DirectSecp256k1HdWallet.fromMnemonic(TEST_MNEMONIC, {
-            hdPaths: [stringToPath("m/44'/852'/0'/0/0")],
-            prefix: "desmos"
+            await testUser1Client.saveProfile(testUser1.address0, {
+                dtag: testUser1.dtag
+            }, DefaultFees.SaveProfile);
+        })
+
+        it("Delete", async () => {
+            const testUser1Client = await desmosClientFromMnemonic(testUser1.mnemonic);
+
+            await testUser1Client.saveProfile(testUser1.address0, {
+                dtag: testUser1.dtag,
+                nickname: "user1"
+            }, DefaultFees.SaveProfile);
+
+            await testUser1Client.deleteProfile(testUser1.address0, DefaultFees.DeleteProfile);
+
+            let profile = await testUser1Client.getProfile(testUser1.address0);
+            expect(profile).toBe(null);
+            profile = await testUser1Client.getProfile(testUser1.dtag);
+            expect(profile).toBe(null);
+        })
+    })
+
+    describe("DTag operations", () => {
+        it("Transfer", async () => {
+            const testUser1Client = await desmosClientFromMnemonic(testUser1.mnemonic);
+            const testUser2Client = await desmosClientFromMnemonic(testUser2.mnemonic);
+
+            await testUser1Client.saveProfile(testUser1.address0, {
+                dtag: testUser1.dtag,
+                nickname: "user1"
+            }, DefaultFees.SaveProfile);
+
+            await testUser2Client.saveProfile(testUser2.address0, {
+                dtag: testUser2.dtag,
+                nickname: "user2"
+            }, DefaultFees.SaveProfile);
+
+            await testUser1Client.requestDtagTransfer(testUser1.address0, testUser2.address0, DefaultFees.DTagTransfer);
+            let requests = await testUser1Client.queryDtagTransferRequests(testUser2.address0).then(r => r.requests);
+            expect(requests.length).toBe(1);
+            expect(requests[0].sender).toBe(testUser1.address0);
+            expect(requests[0].receiver).toBe(testUser2.address0);
+
+            await testUser2Client.acceptDtagTransferRequest("new_dtag", testUser2.address0,
+                testUser1.address0, DefaultFees.AcceptDTag);
+
+            const profile = await testUser1Client.getProfile(testUser1.address0);
+            expect(profile?.dtag).toBe(testUser2.dtag);
         });
 
-        const client = new SigningDesmosClient(CHAIN_RPC, signer);
-        await client.connect();
+        it("Refuse", async () => {
+            const testUser1Client = await desmosClientFromMnemonic(testUser1.mnemonic);
+            const testUser2Client = await desmosClientFromMnemonic(testUser2.mnemonic);
 
-        const creator = await client.getSignerAddress();
+            await testUser1Client.saveProfile(testUser1.address0, {
+                dtag: testUser1.dtag,
+                nickname: "user1"
+            }, DefaultFees.SaveProfile);
 
-        const fee: StdFee = {
-            gas: '200000',
-            amount: [coin(500, 'udaric')],
-        }
+            await testUser2Client.saveProfile(testUser2.address0, {
+                dtag: testUser2.dtag,
+                nickname: "user2"
+            }, DefaultFees.SaveProfile);
 
-        await client.saveProfile(creator, {
-            dtag: "ares_1"
-        }, fee)
+            await testUser1Client.requestDtagTransfer(testUser1.address0, testUser2.address0, DefaultFees.DTagTransfer);
+            await testUser2Client.refuseDtagTransferRequest(testUser2.address0, testUser1.address0, DefaultFees.RefuseDTagTransfer);
+
+            let requests = await testUser1Client.queryDtagTransferRequests(testUser2.address0).then(r => r.requests);
+            expect(requests.length).toBe(0);
+        });
+
+        it("Cancel", async () => {
+            const testUser1Client = await desmosClientFromMnemonic(testUser1.mnemonic);
+            const testUser2Client = await desmosClientFromMnemonic(testUser2.mnemonic);
+
+            await testUser1Client.saveProfile(testUser1.address0, {
+                dtag: testUser1.dtag,
+                nickname: "user1"
+            }, DefaultFees.SaveProfile);
+
+            await testUser2Client.saveProfile(testUser2.address0, {
+                dtag: testUser2.dtag,
+                nickname: "user2"
+            }, DefaultFees.SaveProfile);
+
+            await testUser1Client.requestDtagTransfer(testUser1.address0, testUser2.address0, DefaultFees.DTagTransfer);
+            await testUser1Client.cancelDtagTransferRequest(testUser1.address0, testUser2.address0, DefaultFees.CancelDTagTransfer);
+
+            let requests = await testUser1Client.queryDtagTransferRequests(testUser2.address0).then(r => r.requests);
+            expect(requests.length).toBe(0);
+        });
     })
 
 })
