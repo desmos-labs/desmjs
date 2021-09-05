@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Force stop the execution at the first error
 set -e
@@ -14,10 +14,13 @@ ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
 # Directory where will be placed the file generated from ts-proto
 SRC_DIR="$SCRIPT_DIR/../src"
+# Url from where will be downloaded the desmos proto files
+DESMOS_VERSION="1.0.2"
+SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"
 
 
 # Download the proto files
-wget https://github.com/desmos-labs/desmos/archive/refs/heads/master.zip -O "$ZIP_FILE"
+wget $SRC_URL -O "$ZIP_FILE"
 # Create a temp dir where will be extracted the proto files
 mkdir -p "$TMP_DIR"
 # Get the proto from the zip
@@ -31,8 +34,8 @@ fi
 mkdir $PROTO_DIR
 
 # Mv the proto file into the proto dir
-mv "$TMP_DIR/desmos-master/proto" $PROTO_DIR
-mv "$TMP_DIR/desmos-master/third_party" $PROTO_DIR
+mv "$TMP_DIR/desmos-$DESMOS_VERSION/proto" $PROTO_DIR
+mv "$TMP_DIR/desmos-$DESMOS_VERSION/third_party" $PROTO_DIR
 
 # Clean up tmp dir
 rm -Rf $TMP_DIR
