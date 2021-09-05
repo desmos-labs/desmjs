@@ -2,11 +2,11 @@ import {Any} from "cosmjs-types/google/protobuf/any";
 import {createProtobufRpcClient, QueryClient} from "@cosmjs/stargate";
 import {PageRequest} from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
 import {QueryIncomingDTagTransferRequestsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_dtag_requests";
-import {QueryBlocksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_relationships";
-import {QueryRelationshipsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_relationships";
-import {QueryChainLinksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_chain_links";
+import {QueryUserBlocksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_relationships";
+import {QueryUserRelationshipsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_relationships";
+import {QueryUserChainLinksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_chain_links";
 import {QueryUserChainLinkResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_chain_links";
-import {QueryApplicationLinksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
+import {QueryUserApplicationLinksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
 import {QueryUserApplicationLinkResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
 import {QueryApplicationLinkByClientIDResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
 import {QueryClientImpl} from "@desmos-labs/proto/desmos/profiles/v1beta1/query";
@@ -25,30 +25,28 @@ export interface ProfilesExtension {
          */
         readonly incomingDTagTransferRequests: (address: string, pagination?: PageRequest) => Promise<QueryIncomingDTagTransferRequestsResponse>,
         /**
-         * Queries all relationships for the given user, if provided.
-         * Otherwise, it queries all the relationships stored.
+         * Queries the relationships for the user having the given
+         * address.
          */
-        readonly relationships: (subspaceId: string, user?: string, pagination?: PageRequest) => Promise<QueryRelationshipsResponse>,
+        readonly userRelationships: (subspaceId: string, user: string, pagination?: PageRequest) => Promise<QueryUserRelationshipsResponse>,
         /**
-         * Queries the blocks for the given user, if provided.
-         * Otherwise, it queries all the stored blocks.
+         * Queries the user blocks for the user having the given address.
          */
-        readonly blocks: (subspaceId: string, user?: string, pagination?: PageRequest) => Promise<QueryBlocksResponse>,
+        readonly userBlocks: (subspaceId: string, user: string, pagination?: PageRequest) => Promise<QueryUserBlocksResponse>,
         /**
-         * Queries the chain links associated to the given user, if provided.
-         * Otherwise it queries all the chain links stored.
+         * Queries chain links for the given user.
          */
-        readonly chainLinks: (user?: string, pagination?: PageRequest) => Promise<QueryChainLinksResponse>,
+        readonly userChainLinks: (user: string, pagination?: PageRequest) => Promise<QueryUserChainLinksResponse>,
         /**
          * Queries the chain link for the given user, chain name and
          * target address
          */
         readonly userChainLink: (user: string, chainName: string, target: string) => Promise<QueryUserChainLinkResponse>,
         /**
-         * Queries the applications links associated to the given user, if provided.
-         * Otherwise, it queries all the application links stored.
+         * Queries a single application link for a given user,
+         * searching via the application name and username.
          */
-        readonly applicationLinks: (user?: string, pagination?: PageRequest) => Promise<QueryApplicationLinksResponse>,
+        readonly userApplicationLinks: (user: string, pagination?: PageRequest) => Promise<QueryUserApplicationLinksResponse>,
         /**
          * Queries a single application link for a given user,
          * searching via the application name and username
@@ -77,23 +75,23 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
             incomingDTagTransferRequests: async (receiver: string, pagination?: PageRequest) => {
                 return queryService.IncomingDTagTransferRequests({receiver, pagination})
             },
-            relationships: async (subspaceId: string, user?: string, pagination?: PageRequest) => {
-                return queryService.Relationships({
-                    user: user ?? "",
+            userRelationships: async (subspaceId: string, user: string, pagination?: PageRequest) => {
+                return queryService.UserRelationships({
+                    user,
                     subspaceId,
                     pagination
                 });
             },
-            blocks: async (subspaceId: string, user?: string, pagination?: PageRequest) => {
-                return queryService.Blocks({
-                    user: user ?? "",
+            userBlocks: async (subspaceId: string, user: string, pagination?: PageRequest) => {
+                return queryService.UserBlocks({
+                    user: user,
                     subspaceId,
                     pagination
                 });
             },
-            chainLinks: async (user?: string, pagination?: PageRequest) => {
-                return queryService.ChainLinks({
-                    user: user ?? "",
+            userChainLinks: async (user: string, pagination?: PageRequest) => {
+                return queryService.UserChainLinks({
+                    user,
                     pagination
                 });
             },
@@ -104,9 +102,9 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
                     target
                 });
             },
-            applicationLinks: async (user?: string, pagination?: PageRequest) => {
-                return queryService.ApplicationLinks({
-                    user: user ?? "",
+            userApplicationLinks: async (user: string, pagination?: PageRequest) => {
+                return queryService.UserApplicationLinks({
+                    user,
                     pagination
                 });
             },
