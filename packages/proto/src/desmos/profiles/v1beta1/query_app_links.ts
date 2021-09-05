@@ -36,20 +36,20 @@ export interface QueryUserApplicationLinkResponse {
 }
 
 /**
- * QueryApplicationLinksRequest represents the request used when querying
+ * QueryUserApplicationLinksRequest represents the request used when querying
  * the application links of a specific user
  */
-export interface QueryApplicationLinksRequest {
+export interface QueryUserApplicationLinksRequest {
   user: string;
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
 
 /**
- * QueryApplicationLinksResponse represents the response to the query used
+ * QueryUserApplicationLinksResponse represents the response to the query used
  * to get the application links for a specific user
  */
-export interface QueryApplicationLinksResponse {
+export interface QueryUserApplicationLinksResponse {
   links: ApplicationLink[];
   /** Pagination defines the pagination response */
   pagination?: PageResponse;
@@ -252,11 +252,11 @@ export const QueryUserApplicationLinkResponse = {
   },
 };
 
-const baseQueryApplicationLinksRequest: object = { user: "" };
+const baseQueryUserApplicationLinksRequest: object = { user: "" };
 
-export const QueryApplicationLinksRequest = {
+export const QueryUserApplicationLinksRequest = {
   encode(
-    message: QueryApplicationLinksRequest,
+    message: QueryUserApplicationLinksRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.user !== "") {
@@ -271,12 +271,12 @@ export const QueryApplicationLinksRequest = {
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
-  ): QueryApplicationLinksRequest {
+  ): QueryUserApplicationLinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = {
-      ...baseQueryApplicationLinksRequest,
-    } as QueryApplicationLinksRequest;
+      ...baseQueryUserApplicationLinksRequest,
+    } as QueryUserApplicationLinksRequest;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -294,10 +294,10 @@ export const QueryApplicationLinksRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryApplicationLinksRequest {
+  fromJSON(object: any): QueryUserApplicationLinksRequest {
     const message = {
-      ...baseQueryApplicationLinksRequest,
-    } as QueryApplicationLinksRequest;
+      ...baseQueryUserApplicationLinksRequest,
+    } as QueryUserApplicationLinksRequest;
     if (object.user !== undefined && object.user !== null) {
       message.user = String(object.user);
     } else {
@@ -311,7 +311,7 @@ export const QueryApplicationLinksRequest = {
     return message;
   },
 
-  toJSON(message: QueryApplicationLinksRequest): unknown {
+  toJSON(message: QueryUserApplicationLinksRequest): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
     message.pagination !== undefined &&
@@ -322,11 +322,11 @@ export const QueryApplicationLinksRequest = {
   },
 
   fromPartial(
-    object: DeepPartial<QueryApplicationLinksRequest>
-  ): QueryApplicationLinksRequest {
+    object: DeepPartial<QueryUserApplicationLinksRequest>
+  ): QueryUserApplicationLinksRequest {
     const message = {
-      ...baseQueryApplicationLinksRequest,
-    } as QueryApplicationLinksRequest;
+      ...baseQueryUserApplicationLinksRequest,
+    } as QueryUserApplicationLinksRequest;
     if (object.user !== undefined && object.user !== null) {
       message.user = object.user;
     } else {
@@ -341,11 +341,11 @@ export const QueryApplicationLinksRequest = {
   },
 };
 
-const baseQueryApplicationLinksResponse: object = {};
+const baseQueryUserApplicationLinksResponse: object = {};
 
-export const QueryApplicationLinksResponse = {
+export const QueryUserApplicationLinksResponse = {
   encode(
-    message: QueryApplicationLinksResponse,
+    message: QueryUserApplicationLinksResponse,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     for (const v of message.links) {
@@ -363,12 +363,12 @@ export const QueryApplicationLinksResponse = {
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
-  ): QueryApplicationLinksResponse {
+  ): QueryUserApplicationLinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = {
-      ...baseQueryApplicationLinksResponse,
-    } as QueryApplicationLinksResponse;
+      ...baseQueryUserApplicationLinksResponse,
+    } as QueryUserApplicationLinksResponse;
     message.links = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -387,10 +387,10 @@ export const QueryApplicationLinksResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryApplicationLinksResponse {
+  fromJSON(object: any): QueryUserApplicationLinksResponse {
     const message = {
-      ...baseQueryApplicationLinksResponse,
-    } as QueryApplicationLinksResponse;
+      ...baseQueryUserApplicationLinksResponse,
+    } as QueryUserApplicationLinksResponse;
     message.links = [];
     if (object.links !== undefined && object.links !== null) {
       for (const e of object.links) {
@@ -405,7 +405,7 @@ export const QueryApplicationLinksResponse = {
     return message;
   },
 
-  toJSON(message: QueryApplicationLinksResponse): unknown {
+  toJSON(message: QueryUserApplicationLinksResponse): unknown {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
@@ -422,11 +422,11 @@ export const QueryApplicationLinksResponse = {
   },
 
   fromPartial(
-    object: DeepPartial<QueryApplicationLinksResponse>
-  ): QueryApplicationLinksResponse {
+    object: DeepPartial<QueryUserApplicationLinksResponse>
+  ): QueryUserApplicationLinksResponse {
     const message = {
-      ...baseQueryApplicationLinksResponse,
-    } as QueryApplicationLinksResponse;
+      ...baseQueryUserApplicationLinksResponse,
+    } as QueryUserApplicationLinksResponse;
     message.links = [];
     if (object.links !== undefined && object.links !== null) {
       for (const e of object.links) {

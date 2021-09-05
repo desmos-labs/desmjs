@@ -3,19 +3,19 @@ import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
-/**
- * ProvidedAnswer contains the data of a single poll answer inserted by the
- * creator
- */
-export interface ProvidedAnswer {
-  id: string;
+/** PollAnswer contains the data of a single poll answer inserted by the creator */
+export interface PollAnswer {
+  answerId: string;
   text: string;
 }
 
-/** Poll contains all the data of a desmos post's poll */
-export interface Poll {
+/**
+ * PollAnswer contains the data of a single poll answer inserted by the creator
+ * inside a PollData object
+ */
+export interface PollData {
   question: string;
-  providedAnswers: ProvidedAnswer[];
+  providedAnswers: PollAnswer[];
   endDate?: Date;
   allowsMultipleAnswers: boolean;
   allowsAnswerEdits: boolean;
@@ -28,15 +28,15 @@ export interface UserAnswer {
   answers: string[];
 }
 
-const baseProvidedAnswer: object = { id: "", text: "" };
+const basePollAnswer: object = { answerId: "", text: "" };
 
-export const ProvidedAnswer = {
+export const PollAnswer = {
   encode(
-    message: ProvidedAnswer,
+    message: PollAnswer,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.id !== "") {
-      writer.uint32(10).string(message.id);
+    if (message.answerId !== "") {
+      writer.uint32(10).string(message.answerId);
     }
     if (message.text !== "") {
       writer.uint32(18).string(message.text);
@@ -44,15 +44,15 @@ export const ProvidedAnswer = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProvidedAnswer {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PollAnswer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseProvidedAnswer } as ProvidedAnswer;
+    const message = { ...basePollAnswer } as PollAnswer;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = reader.string();
+          message.answerId = reader.string();
           break;
         case 2:
           message.text = reader.string();
@@ -65,12 +65,12 @@ export const ProvidedAnswer = {
     return message;
   },
 
-  fromJSON(object: any): ProvidedAnswer {
-    const message = { ...baseProvidedAnswer } as ProvidedAnswer;
-    if (object.id !== undefined && object.id !== null) {
-      message.id = String(object.id);
+  fromJSON(object: any): PollAnswer {
+    const message = { ...basePollAnswer } as PollAnswer;
+    if (object.answerId !== undefined && object.answerId !== null) {
+      message.answerId = String(object.answerId);
     } else {
-      message.id = "";
+      message.answerId = "";
     }
     if (object.text !== undefined && object.text !== null) {
       message.text = String(object.text);
@@ -80,19 +80,19 @@ export const ProvidedAnswer = {
     return message;
   },
 
-  toJSON(message: ProvidedAnswer): unknown {
+  toJSON(message: PollAnswer): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
+    message.answerId !== undefined && (obj.answerId = message.answerId);
     message.text !== undefined && (obj.text = message.text);
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ProvidedAnswer>): ProvidedAnswer {
-    const message = { ...baseProvidedAnswer } as ProvidedAnswer;
-    if (object.id !== undefined && object.id !== null) {
-      message.id = object.id;
+  fromPartial(object: DeepPartial<PollAnswer>): PollAnswer {
+    const message = { ...basePollAnswer } as PollAnswer;
+    if (object.answerId !== undefined && object.answerId !== null) {
+      message.answerId = object.answerId;
     } else {
-      message.id = "";
+      message.answerId = "";
     }
     if (object.text !== undefined && object.text !== null) {
       message.text = object.text;
@@ -103,19 +103,22 @@ export const ProvidedAnswer = {
   },
 };
 
-const basePoll: object = {
+const basePollData: object = {
   question: "",
   allowsMultipleAnswers: false,
   allowsAnswerEdits: false,
 };
 
-export const Poll = {
-  encode(message: Poll, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const PollData = {
+  encode(
+    message: PollData,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (message.question !== "") {
       writer.uint32(10).string(message.question);
     }
     for (const v of message.providedAnswers) {
-      ProvidedAnswer.encode(v!, writer.uint32(18).fork()).ldelim();
+      PollAnswer.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.endDate !== undefined) {
       Timestamp.encode(
@@ -132,10 +135,10 @@ export const Poll = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Poll {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PollData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePoll } as Poll;
+    const message = { ...basePollData } as PollData;
     message.providedAnswers = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -145,7 +148,7 @@ export const Poll = {
           break;
         case 2:
           message.providedAnswers.push(
-            ProvidedAnswer.decode(reader, reader.uint32())
+            PollAnswer.decode(reader, reader.uint32())
           );
           break;
         case 3:
@@ -167,8 +170,8 @@ export const Poll = {
     return message;
   },
 
-  fromJSON(object: any): Poll {
-    const message = { ...basePoll } as Poll;
+  fromJSON(object: any): PollData {
+    const message = { ...basePollData } as PollData;
     message.providedAnswers = [];
     if (object.question !== undefined && object.question !== null) {
       message.question = String(object.question);
@@ -180,7 +183,7 @@ export const Poll = {
       object.providedAnswers !== null
     ) {
       for (const e of object.providedAnswers) {
-        message.providedAnswers.push(ProvidedAnswer.fromJSON(e));
+        message.providedAnswers.push(PollAnswer.fromJSON(e));
       }
     }
     if (object.endDate !== undefined && object.endDate !== null) {
@@ -207,12 +210,12 @@ export const Poll = {
     return message;
   },
 
-  toJSON(message: Poll): unknown {
+  toJSON(message: PollData): unknown {
     const obj: any = {};
     message.question !== undefined && (obj.question = message.question);
     if (message.providedAnswers) {
       obj.providedAnswers = message.providedAnswers.map((e) =>
-        e ? ProvidedAnswer.toJSON(e) : undefined
+        e ? PollAnswer.toJSON(e) : undefined
       );
     } else {
       obj.providedAnswers = [];
@@ -226,8 +229,8 @@ export const Poll = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Poll>): Poll {
-    const message = { ...basePoll } as Poll;
+  fromPartial(object: DeepPartial<PollData>): PollData {
+    const message = { ...basePollData } as PollData;
     message.providedAnswers = [];
     if (object.question !== undefined && object.question !== null) {
       message.question = object.question;
@@ -239,7 +242,7 @@ export const Poll = {
       object.providedAnswers !== null
     ) {
       for (const e of object.providedAnswers) {
-        message.providedAnswers.push(ProvidedAnswer.fromPartial(e));
+        message.providedAnswers.push(PollAnswer.fromPartial(e));
       }
     }
     if (object.endDate !== undefined && object.endDate !== null) {

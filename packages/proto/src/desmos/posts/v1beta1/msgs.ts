@@ -8,7 +8,7 @@ import {
   commentsStateFromJSON,
   commentsStateToJSON,
 } from "../../../desmos/posts/v1beta1/posts";
-import { Poll } from "../../../desmos/posts/v1beta1/polls";
+import { PollData } from "../../../desmos/posts/v1beta1/polls";
 
 /** MsgCreatePost represents the message to be used to create a post. */
 export interface MsgCreatePost {
@@ -19,7 +19,7 @@ export interface MsgCreatePost {
   additionalAttributes: Attribute[];
   creator: string;
   attachments: Attachment[];
-  poll?: Poll;
+  pollData?: PollData;
 }
 
 /** MsgCreatePostResponse defines the Msg/CreatePost response type. */
@@ -31,7 +31,7 @@ export interface MsgEditPost {
   message: string;
   commentsState: CommentsState;
   attachments: Attachment[];
-  poll?: Poll;
+  pollData?: PollData;
   editor: string;
 }
 
@@ -136,8 +136,8 @@ export const MsgCreatePost = {
     for (const v of message.attachments) {
       Attachment.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.poll !== undefined) {
-      Poll.encode(message.poll, writer.uint32(66).fork()).ldelim();
+    if (message.pollData !== undefined) {
+      PollData.encode(message.pollData, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -175,7 +175,7 @@ export const MsgCreatePost = {
           message.attachments.push(Attachment.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.poll = Poll.decode(reader, reader.uint32());
+          message.pollData = PollData.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -227,10 +227,10 @@ export const MsgCreatePost = {
         message.attachments.push(Attachment.fromJSON(e));
       }
     }
-    if (object.poll !== undefined && object.poll !== null) {
-      message.poll = Poll.fromJSON(object.poll);
+    if (object.pollData !== undefined && object.pollData !== null) {
+      message.pollData = PollData.fromJSON(object.pollData);
     } else {
-      message.poll = undefined;
+      message.pollData = undefined;
     }
     return message;
   },
@@ -257,8 +257,10 @@ export const MsgCreatePost = {
     } else {
       obj.attachments = [];
     }
-    message.poll !== undefined &&
-      (obj.poll = message.poll ? Poll.toJSON(message.poll) : undefined);
+    message.pollData !== undefined &&
+      (obj.pollData = message.pollData
+        ? PollData.toJSON(message.pollData)
+        : undefined);
     return obj;
   },
 
@@ -304,10 +306,10 @@ export const MsgCreatePost = {
         message.attachments.push(Attachment.fromPartial(e));
       }
     }
-    if (object.poll !== undefined && object.poll !== null) {
-      message.poll = Poll.fromPartial(object.poll);
+    if (object.pollData !== undefined && object.pollData !== null) {
+      message.pollData = PollData.fromPartial(object.pollData);
     } else {
-      message.poll = undefined;
+      message.pollData = undefined;
     }
     return message;
   },
@@ -381,8 +383,8 @@ export const MsgEditPost = {
     for (const v of message.attachments) {
       Attachment.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.poll !== undefined) {
-      Poll.encode(message.poll, writer.uint32(42).fork()).ldelim();
+    if (message.pollData !== undefined) {
+      PollData.encode(message.pollData, writer.uint32(42).fork()).ldelim();
     }
     if (message.editor !== "") {
       writer.uint32(50).string(message.editor);
@@ -411,7 +413,7 @@ export const MsgEditPost = {
           message.attachments.push(Attachment.decode(reader, reader.uint32()));
           break;
         case 5:
-          message.poll = Poll.decode(reader, reader.uint32());
+          message.pollData = PollData.decode(reader, reader.uint32());
           break;
         case 6:
           message.editor = reader.string();
@@ -447,10 +449,10 @@ export const MsgEditPost = {
         message.attachments.push(Attachment.fromJSON(e));
       }
     }
-    if (object.poll !== undefined && object.poll !== null) {
-      message.poll = Poll.fromJSON(object.poll);
+    if (object.pollData !== undefined && object.pollData !== null) {
+      message.pollData = PollData.fromJSON(object.pollData);
     } else {
-      message.poll = undefined;
+      message.pollData = undefined;
     }
     if (object.editor !== undefined && object.editor !== null) {
       message.editor = String(object.editor);
@@ -473,8 +475,10 @@ export const MsgEditPost = {
     } else {
       obj.attachments = [];
     }
-    message.poll !== undefined &&
-      (obj.poll = message.poll ? Poll.toJSON(message.poll) : undefined);
+    message.pollData !== undefined &&
+      (obj.pollData = message.pollData
+        ? PollData.toJSON(message.pollData)
+        : undefined);
     message.editor !== undefined && (obj.editor = message.editor);
     return obj;
   },
@@ -502,10 +506,10 @@ export const MsgEditPost = {
         message.attachments.push(Attachment.fromPartial(e));
       }
     }
-    if (object.poll !== undefined && object.poll !== null) {
-      message.poll = Poll.fromPartial(object.poll);
+    if (object.pollData !== undefined && object.pollData !== null) {
+      message.pollData = PollData.fromPartial(object.pollData);
     } else {
-      message.poll = undefined;
+      message.pollData = undefined;
     }
     if (object.editor !== undefined && object.editor !== null) {
       message.editor = object.editor;
