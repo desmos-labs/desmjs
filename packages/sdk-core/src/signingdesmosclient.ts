@@ -21,7 +21,11 @@ import {
 } from "@cosmjs/proto-signing";
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
 import {DesmosProfile} from "./types/desmos";
-import {MsgSaveProfileEncodeObject} from "./types/encodeobjects";
+import {
+    MsgDeleteProfileEncodeObject,
+    MsgRequestDTagTransferEncodeObject,
+    MsgSaveProfileEncodeObject
+} from "./encodeobjects";
 import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
 import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
 import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
@@ -29,6 +33,25 @@ import {MsgDeleteProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_
 import {MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
 import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser } from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
 import {Profile} from "@desmos-labs/proto/desmos/profiles/v1beta1/models_profile";
+import {
+    MsgCreatePost,
+    MsgEditPost,
+    MsgAddPostReaction,
+    MsgRemovePostReaction,
+    MsgAnswerPoll,
+    MsgRegisterReaction,
+    MsgReportPost,
+} from "@desmos-labs/proto/desmos/posts/v1beta1/msgs"
+import {
+    MsgCreateSubspace,
+    MsgEditSubspace,
+    MsgAddAdmin,
+    MsgRemoveAdmin,
+    MsgRegisterUser,
+    MsgUnregisterUser,
+    MsgBanUser,
+    MsgUnbanUser,
+} from "@desmos-labs/proto/desmos/subspaces/v1beta1/msgs";
 import {ProfilesExtension, setupProfilesExtension} from "./queries/profiles";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
@@ -36,7 +59,7 @@ import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
     ...defaultRegistryTypes,
-    // Profile Messages
+    // Profiles module
     ["/desmos.profiles.v1beta1.MsgLinkApplication", MsgLinkApplication],
     ["/desmos.profiles.v1beta1.MsgUnlinkApplication", MsgUnlinkApplication],
     ["/desmos.profiles.v1beta1.MsgLinkChainAccount", MsgLinkChainAccount],
@@ -51,6 +74,23 @@ const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
     ["/desmos.profiles.v1beta1.MsgDeleteRelationship", MsgDeleteRelationship],
     ["/desmos.profiles.v1beta1.MsgBlockUser", MsgBlockUser],
     ["/desmos.profiles.v1beta1.MsgUnblockUser", MsgUnblockUser],
+    // Posts module
+    ["/desmos.posts.v1beta1.MsgCreatePost", MsgCreatePost],
+    ["/desmos.posts.v1beta1.MsgEditPost", MsgEditPost],
+    ["/desmos.posts.v1beta1.MsgAddPostReaction", MsgAddPostReaction],
+    ["/desmos.posts.v1beta1.MsgRemovePostReaction", MsgRemovePostReaction],
+    ["/desmos.posts.v1beta1.MsgAnswerPoll", MsgAnswerPoll],
+    ["/desmos.posts.v1beta1.MsgRegisterReaction", MsgRegisterReaction],
+    ["/desmos.posts.v1beta1.MsgReportPost", MsgReportPost],
+    // Subspaces module
+    ["/desmos.subspaces.v1beta1.MsgCreateSubspace", MsgCreateSubspace],
+    ["/desmos.subspaces.v1beta1.MsgEditSubspace", MsgEditSubspace],
+    ["/desmos.subspaces.v1beta1.MsgAddAdmin", MsgAddAdmin],
+    ["/desmos.subspaces.v1beta1.MsgRemoveAdmin", MsgRemoveAdmin],
+    ["/desmos.subspaces.v1beta1.MsgRegisterUser", MsgRegisterUser],
+    ["/desmos.subspaces.v1beta1.MsgUnregisterUser", MsgUnregisterUser],
+    ["/desmos.subspaces.v1beta1.MsgBanUser", MsgBanUser],
+    ["/desmos.subspaces.v1beta1.MsgUnbanUser", MsgUnbanUser],
 ]
 
 export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension & ProfilesExtension

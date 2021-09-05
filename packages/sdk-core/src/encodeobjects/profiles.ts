@@ -74,3 +74,4 @@ export interface MsgUnblockUserEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgUnblockUser",
     readonly value: Partial<MsgUnblockUser>,
 }
+
