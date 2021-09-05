@@ -240,12 +240,18 @@ export class SigningDesmosClient extends SigningStargateClient {
      * @param user - The user DTag or address.
      */
     async getProfile(user: string): Promise<DesmosProfile | null> {
-        const profile = await this.forceGetQueryClient().profiles.profile(user);
-        if (profile === null) {
+        let rawProfile: Any | null = null;
+
+        try {
+            rawProfile = await this.forceGetQueryClient().profiles.profile(user);
+        } catch (e) {
+
+        }
+        if (rawProfile === null) {
             return null;
         }
 
-        const desmosProfile = desmosProfileFromAny(profile);
+        const desmosProfile = desmosProfileFromAny(rawProfile);
         if (desmosProfile.account === undefined) {
             return null;
         }
@@ -309,11 +315,11 @@ export class SigningDesmosClient extends SigningStargateClient {
     /**
      * Accept a DTag transfer request.
      * @param newDtag - The new DTag that receives who is accepting the request.
-     * @param sender - Address of the user that is accepting the request.
      * @param receiver - Address of the user that is the owner of the requested DTag.
+     * @param sender - Address of the user that will receive the DTag.
      * @param fee - Fee to perform the transaction.
      */
-    async acceptDtagTransferRequest(newDtag: string, sender: string, receiver: string, fee: StdFee): Promise<void> {
+    async acceptDtagTransferRequest(newDtag: string, receiver: string, sender: string, fee: StdFee): Promise<void> {
         const msg: MsgAcceptDTagTransferRequestEncodeObject = {
             typeUrl: "/desmos.profiles.v1beta1.MsgAcceptDTagTransferRequest",
             value: {
@@ -328,11 +334,11 @@ export class SigningDesmosClient extends SigningStargateClient {
 
     /**
      * Refuse a DTag transfer request made by a user.
-     * @param sender - Address of the user that request the DTag.
      * @param receiver - Address of the user that is the owner of the requested DTag.
+     * @param sender - Address of the user that request the DTag.
      * @param fee - Fee to perform the transaction.
      */
-    async refuseDtagTransferRequest(sender: string, receiver: string, fee: StdFee): Promise<void> {
+    async refuseDtagTransferRequest(receiver: string, sender: string, fee: StdFee): Promise<void> {
         const msg: MsgRefuseDTagTransferRequestEncodeObject = {
             typeUrl: "/desmos.profiles.v1beta1.MsgRefuseDTagTransferRequest",
             value: {
@@ -341,7 +347,7 @@ export class SigningDesmosClient extends SigningStargateClient {
             }
         }
 
-        await this.signAndBroadcast(sender, [msg], fee).then(assertIsBroadcastTxSuccess);
+        await this.signAndBroadcast(receiver, [msg], fee).then(assertIsBroadcastTxSuccess);
     }
 
     /**
