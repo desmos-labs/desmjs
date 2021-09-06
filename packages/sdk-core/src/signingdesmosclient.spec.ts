@@ -1,12 +1,36 @@
 import {
+    aminoSignerFromMnemonic,
     DefaultFees,
-    desmosClientFromMnemonic,
+    desmosClientFromMnemonic, signerFromMnemonic, TEST_CHAIN_URL,
     testUser1, testUser2,
 } from "./testutils.spec";
+import {SigningDesmosClient} from "./signingdesmosclient";
 
 describe("SigningDesmosClient", () => {
 
     jest.setTimeout(30000);
+
+    describe("Signer update", () => {
+        it("set direct signer", async () => {
+            const client = SigningDesmosClient.withoutSigner(TEST_CHAIN_URL);
+            await client.connect();
+            client.setSigner(await signerFromMnemonic(testUser1.mnemonic));
+
+            await client.saveProfile(testUser1.address0, {
+                dtag: "direct"
+            }, DefaultFees.SaveProfile);
+        });
+
+        it("set amino signer", async () => {
+            const client = SigningDesmosClient.withoutSigner(TEST_CHAIN_URL);
+            await client.connect();
+            client.setSigner(await aminoSignerFromMnemonic(testUser1.mnemonic));
+
+            await client.saveProfile(testUser1.address0, {
+                dtag: "amino"
+            }, DefaultFees.SaveProfile);
+        });
+    })
 
     describe("Profiles operations", () => {
         it("Save", async () => {

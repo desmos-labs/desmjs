@@ -15,7 +15,10 @@ import {
 } from "@cosmjs/stargate";
 import {Any} from "cosmjs-types/google/protobuf/any";
 import {
+    DirectSignResponse,
     GeneratedType,
+    isOfflineDirectSigner,
+    OfflineDirectSigner,
     OfflineSigner,
     Registry
 } from "@cosmjs/proto-signing";
@@ -68,6 +71,8 @@ import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 import {Pagination, paginationToPageRequest} from "./types/pagination";
 import {QueryIncomingDTagTransferRequestsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_dtag_requests";
 import {desmosTypes} from "./aminotypes";
+import {AccountData, AminoSignResponse, OfflineAminoSigner, StdSignDoc} from "@cosmjs/amino";
+import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -106,6 +111,64 @@ const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
     ["/desmos.subspaces.v1beta1.MsgUnbanUser", MsgUnbanUser],
 ]
 
+/**
+ * Wrapper class to allows on the fly signer update.
+ */
+class SignerWrapper implements OfflineDirectSigner, OfflineAminoSigner {
+
+    private signer: OfflineSigner | undefined;
+
+    private readonly _throwError = (address: string, doc: SignDoc) => {
+        throw new Error("Can't sign, the singer is undefined");
+    }
+
+    constructor(signer?: OfflineSigner) {
+        this.signer = signer;
+        this.patchMethods(signer);
+    }
+
+    /**
+     * Function that patches this object so that cosmjs detects the correct signer type.
+     * @param signer - The new signer.
+     * @private
+     */
+    private patchMethods(signer: OfflineSigner | undefined) {
+        const raw = this as any;
+        if (signer === undefined) {
+            raw["signAmino"] = this._throwError;
+            raw["signDirect"] = this._throwError;
+        }
+        else if (isOfflineDirectSigner(signer)) {
+            raw["signAmino"] = undefined;
+            raw["signDirect"] = (this.signer as OfflineDirectSigner).signDirect.bind(this.signer);
+        } else {
+            raw["signAmino"] = (this.signer as OfflineAminoSigner).signAmino.bind(this.signer);
+            raw["signDirect"] = undefined;
+        }
+    }
+
+    signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
+        throw new Error("Method not patched");
+    }
+
+    signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse> {
+        throw new Error("Method not patched");
+    }
+
+    updateSigner(signer: OfflineSigner | undefined) {
+        this.signer = signer;
+        this.patchMethods(signer);
+    }
+
+    async getAccounts(): Promise<readonly AccountData[]> {
+        if (this.signer === undefined) {
+            throw new Error("Can't sign, the singer is undefined");
+        }
+
+        return this.signer.getAccounts();
+    };
+}
+
 export type DesmosQueryClient = QueryClient & AuthExtension & BankExtension & StakingExtension & ProfilesExtension
     & PostsExtension & SubspacesExtension;
 
@@ -126,9 +189,9 @@ export class SigningDesmosClient extends SigningStargateClient {
     private readonly url: string
     private _tmClient: Tendermint34Client | undefined;
     private _queryClient: DesmosQueryClient | undefined;
-    private _signer: OfflineSigner;
+    protected readonly signerWrapper: SignerWrapper;
 
-    constructor(url: string, signer: OfflineSigner) {
+    protected constructor(url: string, signer: SignerWrapper = new SignerWrapper()) {
         super(undefined, signer, {
             registry: new Registry(registryTypes),
             aminoTypes: new AminoTypes({
@@ -136,8 +199,16 @@ export class SigningDesmosClient extends SigningStargateClient {
                 prefix: "desmos"
             })
         });
-        this._signer = signer;
+        this.signerWrapper = signer;
         this.url = url;
+    }
+
+    static withoutSigner(url: string): SigningDesmosClient {
+        return new SigningDesmosClient(url, new SignerWrapper());
+    }
+
+    static withCosmJsSigner(url: string, signer: OfflineSigner): SigningDesmosClient {
+        return new SigningDesmosClient(url, new SignerWrapper(signer));
     }
 
     async connect(): Promise<void> {
@@ -162,10 +233,18 @@ export class SigningDesmosClient extends SigningStargateClient {
     }
 
     /**
+     * Updates the signer used to sign the transaction.
+     * @param signer - The new signer that will be used.
+     */
+    setSigner(signer: OfflineSigner | undefined) {
+        this.signerWrapper.updateSigner(signer)
+    }
+
+    /**
      * Gets the addresses from the signer.
      */
     async getSignerAddresses(): Promise<string []> {
-        const accounts = await this._signer.getAccounts();
+        const accounts = await this.signerWrapper.getAccounts();
         return accounts.map(a => a.address);
     }
 

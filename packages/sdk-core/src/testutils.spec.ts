@@ -69,7 +69,7 @@ export function aminoSignerFromMnemonic(mnemonic: string, indexes: number[] = [0
  */
 export async function desmosClientFromMnemonic(mnemonic: string, indexes: number[] = [0]): Promise<SigningDesmosClient> {
     const signer = await signerFromMnemonic(mnemonic, indexes);
-    const client = new SigningDesmosClient(TEST_CHAIN_URL, signer);
+    const client = SigningDesmosClient.withCosmJsSigner(TEST_CHAIN_URL, signer);
     await client.connect();
 
     return client;
