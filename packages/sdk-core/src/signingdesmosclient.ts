@@ -11,7 +11,7 @@ import {
     setupStakingExtension,
     SigningStargateClient,
     StakingExtension,
-    StdFee
+    StdFee, AminoTypes
 } from "@cosmjs/stargate";
 import {Any} from "cosmjs-types/google/protobuf/any";
 import {
@@ -67,6 +67,7 @@ import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 import {Pagination, paginationToPageRequest} from "./types/pagination";
 import {QueryIncomingDTagTransferRequestsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_dtag_requests";
+import {desmosTypes} from "./aminotypes";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -129,7 +130,11 @@ export class SigningDesmosClient extends SigningStargateClient {
 
     constructor(url: string, signer: OfflineSigner) {
         super(undefined, signer, {
-            registry: new Registry(registryTypes)
+            registry: new Registry(registryTypes),
+            aminoTypes: new AminoTypes({
+                additions: desmosTypes,
+                prefix: "desmos"
+            })
         });
         this._signer = signer;
         this.url = url;
@@ -223,10 +228,16 @@ export class SigningDesmosClient extends SigningStargateClient {
      * @param fee - Fee to perform the transaction.
      */
     async saveProfile(creator: string, profile: Partial<Omit<DesmosProfile, "address">>, fee: StdFee): Promise<void> {
+        const currentProfile = await this.getProfile(creator);
+
         const saveProfile: MsgSaveProfileEncodeObject = {
             typeUrl: "/desmos.profiles.v1beta1.MsgSaveProfile",
             value: {
-                ...profile,
+                dtag: profile.dtag ?? currentProfile?.dtag,
+                nickname: profile.nickname ?? currentProfile?.nickname,
+                bio: profile.bio ?? currentProfile?.bio,
+                profilePicture: profile.profilePicture ?? currentProfile?.profilePicture,
+                coverPicture: profile.coverPicture ?? currentProfile?.coverPicture,
                 creator,
             }
         }
