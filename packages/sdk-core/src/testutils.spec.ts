@@ -6,6 +6,7 @@ import {stringToPath} from "@cosmjs/crypto";
 import {SigningDesmosClient} from "./signingdesmosclient";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
+import {Secp256k1HdWallet} from "@cosmjs/amino";
 
 export const TEST_CHAIN_URL = "http://localhost:26657";
 
@@ -42,6 +43,20 @@ export async function signerFromMnemonic(mnemonic: string, indexes: number[] = [
     const hdPaths = indexes.map(i => `m/44'/852'/0'/${i}/0`).map(stringToPath);
 
     return  DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+        hdPaths: hdPaths,
+        prefix: "desmos"
+    });
+}
+
+/**
+ * Creates a signer from the provided mnemonic.
+ * @param mnemonic - The mnemonic passphrase used to derive the keys.
+ * @param indexes - Derivation path indexes used to derive the keys.
+ */
+export function aminoSignerFromMnemonic(mnemonic: string, indexes: number[] = [0]): Promise<OfflineSigner> {
+    const hdPaths = indexes.map(i => `m/44'/852'/0'/${i}/0`).map(stringToPath);
+
+    return Secp256k1HdWallet.fromMnemonic(mnemonic, {
         hdPaths: hdPaths,
         prefix: "desmos"
     });
