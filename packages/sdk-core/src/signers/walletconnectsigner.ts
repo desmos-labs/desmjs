@@ -45,6 +45,7 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
         this.session = session;
         if (session !== undefined) {
             this.populateSessionDependedFields(session);
+            this.client.on(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
         }
     }
 
