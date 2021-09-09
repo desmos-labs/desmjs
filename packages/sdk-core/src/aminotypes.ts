@@ -44,10 +44,10 @@ export const desmosTypes: Record<string, AminoConverter> = {
             return{
                 creator: value.creator,
                 dtag: value.dtag,
-                nickname: value.nickname,
-                bio: value.bio,
-                profile_picture: value.profilePicture,
-                cover_picture: value.coverPicture,
+                nickname: value.nickname ?? "[do-not-modify]",
+                bio: value.bio ?? "[do-not-modify]",
+                profile_picture: value.profilePicture ?? "[do-not-modify]",
+                cover_picture: value.coverPicture ?? "[do-not-modify]",
             }
         },
         fromAmino: (msg: AminoMsgSaveProfile["value"]): MsgSaveProfile => {
