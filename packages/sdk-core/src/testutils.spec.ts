@@ -3,7 +3,7 @@ import {calculateFee, GasPrice, QueryClient} from "@cosmjs/stargate";
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
 import {DirectSecp256k1HdWallet, OfflineSigner} from "@cosmjs/proto-signing";
 import {stringToPath} from "@cosmjs/crypto";
-import {Desmosclient} from "./desmosclient";
+import {DesmosClient} from "./desmosclient";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 import {Secp256k1HdWallet} from "@cosmjs/amino";
@@ -67,9 +67,9 @@ export function aminoSignerFromMnemonic(mnemonic: string, indexes: number[] = [0
  * @param mnemonic - The mnemonic passphrase used to derive the keys.
  * @param indexes - Derivation path indexes used to derive the keys.
  */
-export async function desmosClientFromMnemonic(mnemonic: string, indexes: number[] = [0]): Promise<Desmosclient> {
+export async function desmosClientFromMnemonic(mnemonic: string, indexes: number[] = [0]): Promise<DesmosClient> {
     const signer = await signerFromMnemonic(mnemonic, indexes);
-    const client = Desmosclient.withSigner(TEST_CHAIN_URL, signer);
+    const client = DesmosClient.withSigner(TEST_CHAIN_URL, signer);
     await client.connect();
 
     return client;
