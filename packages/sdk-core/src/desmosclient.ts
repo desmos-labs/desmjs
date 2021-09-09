@@ -328,13 +328,7 @@ export class Desmosclient extends SigningStargateClient {
      * @param user - The user DTag or address.
      */
     async getProfile(user: string): Promise<DesmosProfile | null> {
-        let rawProfile: Any | null = null;
-
-        try {
-            rawProfile = await this.forceGetQueryClient().profiles.profile(user);
-        } catch (e) {
-
-        }
+        const rawProfile = await this.forceGetQueryClient().profiles.profile(user);
         if (rawProfile === null) {
             return null;
         }
