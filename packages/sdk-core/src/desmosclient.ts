@@ -307,16 +307,14 @@ export class Desmosclient extends SigningStargateClient {
      * @param fee - Fee to perform the transaction.
      */
     async saveProfile(creator: string, profile: Partial<Omit<DesmosProfile, "address">>, fee: StdFee): Promise<void> {
-        const currentProfile = await this.getProfile(creator);
-
         const saveProfile: MsgSaveProfileEncodeObject = {
             typeUrl: "/desmos.profiles.v1beta1.MsgSaveProfile",
             value: {
-                dtag: profile.dtag ?? currentProfile?.dtag,
-                nickname: profile.nickname ?? currentProfile?.nickname,
-                bio: profile.bio ?? currentProfile?.bio,
-                profilePicture: profile.profilePicture ?? currentProfile?.profilePicture,
-                coverPicture: profile.coverPicture ?? currentProfile?.coverPicture,
+                dtag: profile.dtag,
+                nickname: profile.nickname,
+                bio: profile.bio,
+                profilePicture: profile.profilePicture,
+                coverPicture: profile.coverPicture,
                 creator,
             }
         }
