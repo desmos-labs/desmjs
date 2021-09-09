@@ -184,7 +184,7 @@ export function desmosProfileFromAny({typeUrl, value}: Any): Profile {
 /**
  * Client to interact with the Desmos chain.
  */
-export class SigningDesmosClient extends SigningStargateClient {
+export class Desmosclient extends SigningStargateClient {
 
     private readonly url: string
     private _tmClient: Tendermint34Client | undefined;
@@ -203,12 +203,12 @@ export class SigningDesmosClient extends SigningStargateClient {
         this.url = url;
     }
 
-    static withoutSigner(url: string): SigningDesmosClient {
-        return new SigningDesmosClient(url, new SignerWrapper());
+    static withoutSigner(url: string): Desmosclient {
+        return new Desmosclient(url, new SignerWrapper());
     }
 
-    static withCosmJsSigner(url: string, signer: OfflineSigner): SigningDesmosClient {
-        return new SigningDesmosClient(url, new SignerWrapper(signer));
+    static withSigner(url: string, signer: OfflineSigner): Desmosclient {
+        return new Desmosclient(url, new SignerWrapper(signer));
     }
 
     async connect(): Promise<void> {
