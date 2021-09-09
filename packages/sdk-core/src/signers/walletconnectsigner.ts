@@ -1,22 +1,35 @@
-import {AccountData, decodePubkey, DirectSignResponse} from "@cosmjs/proto-signing";
+import {AccountData, decodePubkey, DirectSignResponse, OfflineDirectSigner} from "@cosmjs/proto-signing";
 import {PairingTypes, SessionTypes} from "@walletconnect/types";
 import WalletConnectClient, {CLIENT_EVENTS} from "@walletconnect/client";
 import {stringifySignDocValues} from "cosmos-wallet";
 import {Buffer} from "buffer";
 import {AuthInfo, SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import QRCodeModal from "@walletconnect/qrcode-modal";
 import {ERROR} from "@walletconnect/utils";
-import {Signer, SignerNotConnected, SignerStatus} from "./Signer";
 import {WalletConnect} from "../types";
-import {SignMode} from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
-import {StdSignDoc} from "@cosmjs/amino";
+import {ConnectableSigner, ConnectableSignerStatus} from "./connectablesigner";
 
+/**
+ * Controller to display the uri/Qr Code to initialize a Wallet Connect session.
+ */
 export interface QrCodeController {
+    /**
+     * Shows the uri/Qr Code to the user.
+     * @param uri - The session uri.
+     * @param onClose - Callback that will be called if the user close the view.
+     */
     open(uri: string, onClose: () => void): void;
+
+    /**
+     * Close the view.
+     */
     close(): void
 }
 
-export class WalletConnectSigner extends Signer {
+/**
+ * Signer that use the WalletConnect protocol to sign a transaction.
+ * NOTE: This signer is not able to provide the user public key at the moment.
+ */
+export class WalletConnectSigner extends ConnectableSigner implements OfflineDirectSigner {
 
     private readonly client: WalletConnectClient
     private readonly qrCodeController: QrCodeController
@@ -25,11 +38,10 @@ export class WalletConnectSigner extends Signer {
     private chainAndNamespace: string | undefined
     private accountData: AccountData | undefined;
 
-    constructor({client, session}: WalletConnect, qrCodeController?: QrCodeController) {
-        super(session === undefined ? SignerStatus.NOT_CONNECTED : SignerStatus.CONNECTED);
+    constructor({client, session}: WalletConnect, qrCodeController: QrCodeController) {
+        super(session !== undefined ? ConnectableSignerStatus.Connected : ConnectableSignerStatus.NotConnected);
         this.client = client;
-        this.qrCodeController = qrCodeController ?? QRCodeModal;
-
+        this.qrCodeController = qrCodeController;
         this.session = session;
         if (session !== undefined) {
             this.populateSessionDependedFields(session);
@@ -65,12 +77,12 @@ export class WalletConnectSigner extends Signer {
 
     }
 
-    override async connect(): Promise<void> {
-        if (this.status !== SignerStatus.NOT_CONNECTED) {
+    async connect(): Promise<void> {
+        if (this.status !== ConnectableSignerStatus.NotConnected) {
             return;
         }
 
-        this.updateStatus(SignerStatus.CONNECTING);
+        this.updateStatus(ConnectableSignerStatus.Connecting);
         return new Promise(async (resolve, reject) => {
             let rejected = false;
 
@@ -79,7 +91,7 @@ export class WalletConnectSigner extends Signer {
                 this.qrCodeController.open(uri, () => {
                     rejected = true;
                     this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
-                    this.updateStatus(SignerStatus.NOT_CONNECTED);
+                    this.updateStatus(ConnectableSignerStatus.NotConnected);
                     reject(new Error("Connection terminated from the user"));
                 });
             }
@@ -98,8 +110,8 @@ export class WalletConnectSigner extends Signer {
             }).catch((e: any) => {
                 this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
                 this.qrCodeController.close();
+                this.updateStatus(ConnectableSignerStatus.NotConnected);
                 reject(e);
-                this.updateStatus(SignerStatus.NOT_CONNECTED);
                 throw e;
             });
 
@@ -109,18 +121,18 @@ export class WalletConnectSigner extends Signer {
                 this.session = session;
                 this.populateSessionDependedFields(session);
                 this.client.on(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
-                this.updateStatus(SignerStatus.CONNECTED);
+                this.updateStatus(ConnectableSignerStatus.Connected);
                 resolve();
             }
         });
     }
 
-    override async disconnect(): Promise<void> {
-        if (this.status !== SignerStatus.CONNECTED) {
+    async disconnect(): Promise<void> {
+        if (this.status !== ConnectableSignerStatus.Connected) {
             return;
         }
 
-        this.updateStatus(SignerStatus.DISCONNECTING);
+        this.updateStatus(ConnectableSignerStatus.Disconnecting);
         this.client.removeListener(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
 
         if (this.session !== undefined) {
@@ -142,25 +154,16 @@ export class WalletConnectSigner extends Signer {
         this.bech32Address = undefined;
         this.chainAndNamespace = undefined;
         this.accountData = undefined;
-        this.updateStatus(SignerStatus.NOT_CONNECTED);
+        this.updateStatus(ConnectableSignerStatus.NotConnected);
     }
 
-    async getAccountData(): Promise<AccountData> {
-        if (this.status !== SignerStatus.CONNECTED) {
-            throw new SignerNotConnected()
-        }
-
-        return this.accountData!;
+    getAccounts(): Promise<readonly AccountData[]> {
+        this.assertConnected();
+        return Promise.resolve([this.accountData!]);
     }
 
-    async signDoc(signDoc: SignDoc, mode: SignMode): Promise<DirectSignResponse> {
-        if (this.status !== SignerStatus.CONNECTED) {
-            throw new SignerNotConnected()
-        }
-
-        if (mode !== SignMode.SIGN_MODE_DIRECT) {
-            throw new Error("The WalletConnect signer supports only SIGN_MODE_DIRECT");
-        }
+    async signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
+        this.assertConnected();
 
         const params = {
             signerAddress: this.bech32Address,

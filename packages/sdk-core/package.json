@@ -32,7 +32,6 @@
     "@cosmjs/tendermint-rpc": "0.26.0",
     "@desmos-labs/proto": "workspace:packages/proto",
     "@walletconnect/client": "2.0.0-beta.17",
-    "@walletconnect/qrcode-modal": "2.0.0-alpha.20",
     "@walletconnect/types": "2.0.0-beta.17",
     "@walletconnect/utils": "2.0.0-beta.17",
     "cosmjs-types": "0.2.0",
