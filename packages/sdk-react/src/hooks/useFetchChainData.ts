@@ -1,5 +1,5 @@
 import {DependencyList, useEffect} from "react";
-import {DesmosClient} from "@desmos-labs/sdk-core";
+import {DesmosClient} from "@desmoslabs/sdk-core";
 import {useFetchChainDataCallback} from "./useFetchChainDataCallback";
 
 /**

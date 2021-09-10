@@ -1,5 +1,5 @@
 import {DependencyList, useCallback, useState} from "react";
-import {DesmosClient} from "@desmos-labs/sdk-core";
+import {DesmosClient} from "@desmoslabs/sdk-core";
 import {ChainOperationStatus} from "../types";
 import {useDesmosClient} from "./useDesmosClient";
 import {useSigner} from "./useSigner";

@@ -1,4 +1,4 @@
-import {DesmosClient} from "@desmos-labs/sdk-core";
+import {DesmosClient} from "@desmoslabs/sdk-core";
 import {useEffect, useMemo} from "react";
 import {useCurrentChainInfo} from "./useCurrentChainInfo";
 

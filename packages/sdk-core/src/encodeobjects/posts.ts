@@ -7,7 +7,7 @@ import {
     MsgAnswerPoll,
     MsgRegisterReaction,
     MsgReportPost,
-} from "@desmos-labs/proto/desmos/posts/v1beta1/msgs"
+} from "@desmoslabs/proto/desmos/posts/v1beta1/msgs"
 
 export interface MsgCreatePostEncodeObject extends EncodeObject {
     readonly typeUrl: "/desmos.posts.v1beta1.MsgCreatePost",

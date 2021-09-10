@@ -2,7 +2,7 @@ import {useSdkContext} from "../context";
 import {useEffect} from "react";
 import {SignerType} from "../types";
 import {ClientOptions} from "@walletconnect/types/dist/cjs/client";
-import {QrCodeController} from "@desmos-labs/sdk-core";
+import {QrCodeController} from "@desmoslabs/sdk-core";
 
 /**
  * Hook to reconnect to a Wallet Connect signer if is available a previously settled session.

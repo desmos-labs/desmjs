@@ -1,5 +1,5 @@
 {
-  "name": "@desmos-labs/sdk-react",
+  "name": "@desmoslabs/sdk-react",
   "description": "Utilities to create dapp with react using the desmos sdk",
   "version": "1.0.0-beta-1",
   "author": "Manuel Turetta <manuel@forbole.com>",
@@ -26,8 +26,8 @@
   "dependencies": {
     "@cosmjs/proto-signing": "0.26.0",
     "@cosmjs/stargate": "0.26.0",
-    "@desmos-labs/proto": "workspace:packages/proto",
-    "@desmos-labs/sdk-core": "workspace:packages/sdk-core",
+    "@desmoslabs/proto": "workspace:packages/proto",
+    "@desmoslabs/sdk-core": "workspace:packages/sdk-core",
     "@walletconnect/client": "2.0.0-beta.17",
     "@walletconnect/types": "2.0.0-beta.17",
     "react": "17.0.2"

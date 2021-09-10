@@ -1,9 +1,9 @@
 import {EncodeObject} from "@cosmjs/proto-signing";
-import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
-import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
-import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
-import {MsgDeleteProfile, MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
-import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
+import {MsgLinkApplication, MsgUnlinkApplication} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_app_links";
+import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_chain_links";
+import {MsgAcceptDTagTransferRequest, MsgCancelDTagTransferRequest, MsgRefuseDTagTransferRequest, MsgRequestDTagTransfer} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
+import {MsgDeleteProfile, MsgSaveProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgBlockUser, MsgCreateRelationship, MsgDeleteRelationship, MsgUnblockUser} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_relationships";
 
 export interface MsgLinkApplicationEncodeObject extends EncodeObject {
     typeUrl: "/desmos.profiles.v1beta1.MsgLinkApplication",

@@ -8,7 +8,7 @@ import {
     MsgUnregisterUser,
     MsgBanUser,
     MsgUnbanUser,
-} from "@desmos-labs/proto/desmos/subspaces/v1beta1/msgs";
+} from "@desmoslabs/proto/desmos/subspaces/v1beta1/msgs";
 
 export interface MsgCreateSubSpaceEncodeObject extends EncodeObject {
     readonly typeUrl: "/desmos.subspaces.v1beta1.MsgCreateSubspace",

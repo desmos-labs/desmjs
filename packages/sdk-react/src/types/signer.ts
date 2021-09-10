@@ -1,4 +1,4 @@
-import {WalletConnectSigner as SdkWalletConnectSigner} from "@desmos-labs/sdk-core";
+import {WalletConnectSigner as SdkWalletConnectSigner} from "@desmoslabs/sdk-core";
 import {OfflineSigner} from "@cosmjs/proto-signing";
 
 /**

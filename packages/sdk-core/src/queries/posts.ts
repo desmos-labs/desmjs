@@ -9,7 +9,7 @@ import {
     QueryRegisteredReactionsResponse,
     QueryReportsResponse,
     QueryUserAnswersResponse
-} from "@desmos-labs/proto/desmos/posts/v1beta1/query";
+} from "@desmoslabs/proto/desmos/posts/v1beta1/query";
 
 
 export interface PostsExtension {

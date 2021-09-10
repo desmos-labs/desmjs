@@ -10,6 +10,6 @@ The dapp-sdk consists of multiple smaller npm packages each one with a specific 
 
 |Package|Description|  
 |-------|-----------|  
-|@desmos-labs/proto|Contains the Desmos protobuf definitions|
-|@desmos-labs/sdk-core|Contains the client to interact with the Desmos chain|
-|@desmos-labs/sdk-react|Contains a set of utility to develop dapp using React|
+|@desmoslabs/proto|Contains the Desmos protobuf definitions|
+|@desmoslabs/sdk-core|Contains the client to interact with the Desmos chain|
+|@desmoslabs/sdk-react|Contains a set of utility to develop dapp using React|

@@ -1,15 +1,15 @@
 import {Any} from "cosmjs-types/google/protobuf/any";
 import {createProtobufRpcClient, QueryClient} from "@cosmjs/stargate";
 import {PageRequest} from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
-import {QueryIncomingDTagTransferRequestsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_dtag_requests";
-import {QueryUserBlocksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_relationships";
-import {QueryUserRelationshipsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_relationships";
-import {QueryUserChainLinksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_chain_links";
-import {QueryUserChainLinkResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_chain_links";
-import {QueryUserApplicationLinksResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
-import {QueryUserApplicationLinkResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
-import {QueryApplicationLinkByClientIDResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_app_links";
-import {QueryClientImpl} from "@desmos-labs/proto/desmos/profiles/v1beta1/query";
+import {QueryIncomingDTagTransferRequestsResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_dtag_requests";
+import {QueryUserBlocksResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_relationships";
+import {QueryUserRelationshipsResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_relationships";
+import {QueryUserChainLinksResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_chain_links";
+import {QueryUserChainLinkResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_chain_links";
+import {QueryUserApplicationLinksResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_app_links";
+import {QueryUserApplicationLinkResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_app_links";
+import {QueryApplicationLinkByClientIDResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_app_links";
+import {QueryClientImpl} from "@desmoslabs/proto/desmos/profiles/v1beta1/query";
 
 
 export interface ProfilesExtension {

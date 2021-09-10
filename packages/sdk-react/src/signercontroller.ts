@@ -2,9 +2,9 @@ import {Signer, SignerType} from "./types";
 import {ClientOptions} from "@walletconnect/types/dist/cjs/client";
 import WalletConnectClient from "@walletconnect/client";
 import {SessionTypes} from "@walletconnect/types";
-import {WalletConnectSigner} from "@desmos-labs/sdk-core";
+import {WalletConnectSigner} from "@desmoslabs/sdk-core";
 import {AccountData, DirectSecp256k1HdWallet} from "@cosmjs/proto-signing";
-import {ConnectableSignerStatus, QrCodeController} from "@desmos-labs/sdk-core";
+import {ConnectableSignerStatus, QrCodeController} from "@desmoslabs/sdk-core";
 
 /**
  * Enum that represents the current signer status.

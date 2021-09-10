@@ -29,23 +29,23 @@ import {
     MsgDeleteProfileEncodeObject, MsgRefuseDTagTransferRequestEncodeObject, MsgRequestDTagTransferEncodeObject,
     MsgSaveProfileEncodeObject
 } from "./encodeobjects";
-import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
-import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
+import {MsgLinkApplication, MsgUnlinkApplication} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_app_links";
+import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_chain_links";
 import {
     MsgAcceptDTagTransferRequest,
     MsgCancelDTagTransferRequest,
     MsgRefuseDTagTransferRequest,
     MsgRequestDTagTransfer
-} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
-import {MsgDeleteProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
-import {MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
+} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
+import {MsgDeleteProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgSaveProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
 import {
     MsgBlockUser,
     MsgCreateRelationship,
     MsgDeleteRelationship,
     MsgUnblockUser
-} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
-import {Profile} from "@desmos-labs/proto/desmos/profiles/v1beta1/models_profile";
+} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_relationships";
+import {Profile} from "@desmoslabs/proto/desmos/profiles/v1beta1/models_profile";
 import {
     MsgCreatePost,
     MsgEditPost,
@@ -54,7 +54,7 @@ import {
     MsgAnswerPoll,
     MsgRegisterReaction,
     MsgReportPost,
-} from "@desmos-labs/proto/desmos/posts/v1beta1/msgs"
+} from "@desmoslabs/proto/desmos/posts/v1beta1/msgs"
 import {
     MsgCreateSubspace,
     MsgEditSubspace,
@@ -64,12 +64,12 @@ import {
     MsgUnregisterUser,
     MsgBanUser,
     MsgUnbanUser,
-} from "@desmos-labs/proto/desmos/subspaces/v1beta1/msgs";
+} from "@desmoslabs/proto/desmos/subspaces/v1beta1/msgs";
 import {ProfilesExtension, setupProfilesExtension} from "./queries/profiles";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 import {Pagination, paginationToPageRequest} from "./types/pagination";
-import {QueryIncomingDTagTransferRequestsResponse} from "@desmos-labs/proto/desmos/profiles/v1beta1/query_dtag_requests";
+import {QueryIncomingDTagTransferRequestsResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_dtag_requests";
 import {desmosTypes} from "./aminotypes";
 import {AccountData, AminoSignResponse, OfflineAminoSigner, StdSignDoc} from "@cosmjs/amino";
 import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";

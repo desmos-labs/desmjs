@@ -7,7 +7,7 @@ import {
     QueryRegisteredUsersResponse,
     QuerySubspaceResponse,
     QuerySubspacesResponse
-} from "@desmos-labs/proto/desmos/subspaces/v1beta1/query";
+} from "@desmoslabs/proto/desmos/subspaces/v1beta1/query";
 
 export interface SubspacesExtension {
     readonly subspaces: {

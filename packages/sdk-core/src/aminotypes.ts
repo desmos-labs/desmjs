@@ -15,22 +15,22 @@ import {
     AminoMsgUnlinkApplication,
     AminoMsgUnlinkChainAccount,
 } from "./aminomessages";
-import {MsgDeleteProfile, MsgSaveProfile} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgDeleteProfile, MsgSaveProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
 import {
     MsgAcceptDTagTransferRequest,
     MsgCancelDTagTransferRequest,
     MsgRefuseDTagTransferRequest,
     MsgRequestDTagTransfer
-} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
-import {MsgLinkApplication, MsgUnlinkApplication} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_app_links";
-import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_chain_links";
+} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
+import {MsgLinkApplication, MsgUnlinkApplication} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_app_links";
+import {MsgLinkChainAccount, MsgUnlinkChainAccount} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_chain_links";
 import {
     MsgBlockUser,
     MsgCreateRelationship,
     MsgDeleteRelationship,
     MsgUnblockUser
-} from "@desmos-labs/proto/desmos/profiles/v1beta1/msgs_relationships";
-import {Bech32Address, ChainConfig, Proof} from "@desmos-labs/proto/desmos/profiles/v1beta1/models_chain_links";
+} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_relationships";
+import {Bech32Address, ChainConfig, Proof} from "@desmoslabs/proto/desmos/profiles/v1beta1/models_chain_links";
 import {Any} from "cosmjs-types/google/protobuf/any";
 import {fromBase64, toBase64} from "@cosmjs/encoding";
 import {PubKey} from "cosmjs-types/cosmos/crypto/secp256k1/keys";
