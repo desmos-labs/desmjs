@@ -1,7 +1,7 @@
 {
   "name": "@desmoslabs/proto",
   "description": "JS and TS types relating to Protocol Buffers used by Desmos",
-  "version": "1.0.2-beta-1",
+  "version": "1.0.2-beta.1",
   "author": "Manuel Turetta <manuel@forbole.com>",
   "license": "Apache-2.0",
   "typesVersions": {
