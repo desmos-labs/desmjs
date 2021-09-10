@@ -14,7 +14,7 @@ export function useFetchChainData<V>(cb: (client: DesmosClient) => Promise<V>, d
 
     useEffect(() => {
         fetch();
-    }, [fetch()]);
+    }, [fetch]);
 
     return {
         status,
