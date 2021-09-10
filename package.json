@@ -23,7 +23,9 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build"
+    "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build",
+    "publish-next": "yarn workspaces foreach --no-private exec yarn npm publish --tag next",
+    "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
   },
   "devDependencies": {
     "@cosmjs/crypto": "0.26.0",
