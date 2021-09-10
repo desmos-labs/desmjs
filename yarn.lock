@@ -1558,6 +1558,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/sdk-react@workspace:packages/sdk-react"
   dependencies:
+    "@cosmjs/crypto": 0.26.0
     "@cosmjs/proto-signing": 0.26.0
     "@cosmjs/stargate": 0.26.0
     "@desmoslabs/proto": "workspace:packages/proto"

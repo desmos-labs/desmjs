@@ -2,9 +2,9 @@ import {Signer, SignerType} from "./types";
 import {ClientOptions} from "@walletconnect/types/dist/cjs/client";
 import WalletConnectClient from "@walletconnect/client";
 import {SessionTypes} from "@walletconnect/types";
-import {WalletConnectSigner} from "@desmoslabs/sdk-core";
+import {ConnectableSignerStatus, QrCodeController, WalletConnectSigner} from "@desmoslabs/sdk-core";
 import {AccountData, DirectSecp256k1HdWallet} from "@cosmjs/proto-signing";
-import {ConnectableSignerStatus, QrCodeController} from "@desmoslabs/sdk-core";
+import {stringToPath} from "@cosmjs/crypto";
 
 /**
  * Enum that represents the current signer status.
@@ -23,6 +23,7 @@ export enum SignerStatus {
 export interface ConnectToMnemonicSigner {
     type: SignerType.Mnemonic,
     mnemonic: string,
+    accounts?: number[]
 }
 
 /**
@@ -126,12 +127,23 @@ export class SignerController {
                 break;
 
             case SignerType.Mnemonic:
-                const cosmJsSigner = await DirectSecp256k1HdWallet.fromMnemonic(params.mnemonic);
-                const mnemonicSigner: Signer = {
-                    type: SignerType.Mnemonic,
-                    signer: cosmJsSigner,
+                try {
+                    let accounts = [0];
+                    if (params.accounts !== undefined && params.accounts.length > 0) {
+                        accounts = params.accounts;
+                    }
+                    const cosmJsSigner = await DirectSecp256k1HdWallet.fromMnemonic(params.mnemonic, {
+                        hdPaths: accounts.map(account => stringToPath(`m/44'/852'/${account}'/0/0`)),
+                        prefix: "desmos",
+                    });
+                    this._signer = {
+                        type: SignerType.Mnemonic,
+                        signer: cosmJsSigner,
+                    };
+                } catch (e) {
+                    this.updateSignerStatus(SignerStatus.NotConnected);
+                    throw e;
                 }
-                this._signer = mnemonicSigner;
                 break;
 
             default:
