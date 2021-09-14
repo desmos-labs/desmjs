@@ -10,7 +10,7 @@ const ChainSelector: React.FC<{ className?: string }> = ({className}) => {
         <Select
             value={currentChainId}
             onChange={(e) => {
-                setCurrentChainId(e.target.value);
+                setCurrentChainId(e.target.value as string);
             }}
         >
             {Object.keys(desmosChains).map(chain => <MenuItem value={chain} key={chain}>{chain}</MenuItem>)}
