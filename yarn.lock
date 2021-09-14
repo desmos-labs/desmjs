@@ -1498,7 +1498,6 @@ __metadata:
     "@cosmjs/encoding": 0.26.0
     "@cosmjs/proto-signing": 0.26.0
     "@cosmjs/utils": 0.26.0
-    "@desmoslabs/proto": "workspace:packages/proto"
     "@desmoslabs/sdk-core": "workspace:packages/sdk-core"
     "@desmoslabs/sdk-react": "workspace:packages/sdk-react"
     "@types/long": 4.0.1
@@ -1509,18 +1508,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@desmoslabs/proto@workspace:packages/proto":
-  version: 0.0.0-use.local
-  resolution: "@desmoslabs/proto@workspace:packages/proto"
+"@desmoslabs/proto@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@desmoslabs/proto@npm:1.0.0"
   dependencies:
-    "@types/long": 4.0.1
-    "@types/node": 16.7.6
     long: 4.0.0
     protobufjs: ~6.11.2
-    ts-proto: ~1.82.5
-    typescript: 4.3
-  languageName: unknown
-  linkType: soft
+  checksum: b9852f11ccff3a93b22618b6d230785b8dddfda7cbae39084b9b05bd24cca6b80d9bc6e745c400e96bca6dcce54ddcc6d4db5c99c91ce87d99c3d4b3be103937
+  languageName: node
+  linkType: hard
 
 "@desmoslabs/sdk-core@workspace:packages/sdk-core":
   version: 0.0.0-use.local
@@ -1535,7 +1531,7 @@ __metadata:
     "@cosmjs/proto-signing": 0.26.0
     "@cosmjs/stargate": 0.26.0
     "@cosmjs/tendermint-rpc": 0.26.0
-    "@desmoslabs/proto": "workspace:packages/proto"
+    "@desmoslabs/proto": 1.0.0
     "@types/jest": 27.0.1
     "@types/long": 4.0.1
     "@types/node": 16.7.6
@@ -1561,7 +1557,7 @@ __metadata:
     "@cosmjs/crypto": 0.26.0
     "@cosmjs/proto-signing": 0.26.0
     "@cosmjs/stargate": 0.26.0
-    "@desmoslabs/proto": "workspace:packages/proto"
+    "@desmoslabs/proto": 1.0.0
     "@desmoslabs/sdk-core": "workspace:packages/sdk-core"
     "@types/node": ^16.7.6
     "@types/react": 17.0.20
