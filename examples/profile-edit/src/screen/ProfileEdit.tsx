@@ -9,10 +9,10 @@ import {
 } from "@desmoslabs/sdk-react";
 import {DesmosClient} from "@desmoslabs/sdk-core";
 import {coin, StargateClient, StdFee} from "@cosmjs/stargate";
-import {Button, makeStyles, TextField, Typography} from "@material-ui/core";
+import {Button, makeStyles, TextField, Theme, Typography} from "@material-ui/core";
 import LoadingComponent from "../components/Loading";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
     root: {
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
