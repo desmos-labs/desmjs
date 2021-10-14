@@ -1,13 +1,13 @@
 import {useSdkContext} from "../context";
 import {useEffect} from "react";
 import {SignerType} from "../types";
-import {ClientOptions} from "@walletconnect/types/dist/cjs/client";
 import {QrCodeController} from "@desmoslabs/sdk-core";
+import {IWalletConnectOptions} from "@walletconnect/types";
 
 /**
  * Hook to reconnect to a Wallet Connect signer if is available a previously settled session.
  */
-export function useReconnectToWalletConnect(options: ClientOptions, qrCodeController: QrCodeController) {
+export function useReconnectToWalletConnect(options: IWalletConnectOptions, qrCodeController: QrCodeController) {
     const {signerController} = useSdkContext();
 
     useEffect(() => {

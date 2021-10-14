@@ -1,7 +1,7 @@
 {
   "name": "@desmoslabs/sdk-core",
   "description": "Core of the desmos dapp sdk",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.7",
   "author": "Manuel Turetta <manuel@forbole.com>",
   "license": "Apache-2.0",
   "main": "build/index.js",
@@ -31,9 +31,9 @@
     "@cosmjs/stargate": "0.26.0",
     "@cosmjs/tendermint-rpc": "0.26.0",
     "@desmoslabs/proto": "1.0.0",
-    "@walletconnect/client": "2.0.0-beta.17",
-    "@walletconnect/types": "2.0.0-beta.17",
-    "@walletconnect/utils": "2.0.0-beta.17",
+    "@walletconnect/client": "^1.6.6",
+    "@walletconnect/types": "^1.6.6",
+    "@walletconnect/utils": "^1.6.6",
     "cosmjs-types": "0.2.0",
     "cosmos-wallet": "1.1.0",
     "long": "4.0.0"

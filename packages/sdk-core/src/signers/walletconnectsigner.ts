@@ -1,11 +1,9 @@
 import {AccountData, decodePubkey, DirectSignResponse, OfflineDirectSigner} from "@cosmjs/proto-signing";
-import {PairingTypes, SessionTypes} from "@walletconnect/types";
-import WalletConnectClient, {CLIENT_EVENTS} from "@walletconnect/client";
+import {IInternalEvent, IWalletConnectOptions} from "@walletconnect/types";
+import WalletConnectClient from "@walletconnect/client";
 import {stringifySignDocValues} from "cosmos-wallet";
 import {Buffer} from "buffer";
 import {AuthInfo, SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import {ERROR} from "@walletconnect/utils";
-import {WalletConnect} from "../types";
 import {ConnectableSigner, ConnectableSignerStatus} from "./connectablesigner";
 
 /**
@@ -31,51 +29,58 @@ export interface QrCodeController {
  */
 export class WalletConnectSigner extends ConnectableSigner implements OfflineDirectSigner {
 
-    private readonly client: WalletConnectClient
-    private readonly qrCodeController: QrCodeController
-    private session: SessionTypes.Created | undefined
-    private bech32Address: string | undefined
-    private chainAndNamespace: string | undefined
+    private readonly walletConnectOptions: IWalletConnectOptions;
+    private readonly qrCodeController: QrCodeController;
+    private client: WalletConnectClient | undefined;
+    private bech32Address: string | undefined;
+    private chainId: number | undefined
     private accountData: AccountData | undefined;
+    private onPopupClose: (() => void) | undefined;
 
-    constructor({client, session}: WalletConnect, qrCodeController: QrCodeController) {
-        super(session !== undefined ? ConnectableSignerStatus.Connected : ConnectableSignerStatus.NotConnected);
-        this.client = client;
-        this.qrCodeController = qrCodeController;
-        this.session = session;
-        if (session !== undefined) {
-            this.populateSessionDependedFields(session);
-            this.client.on(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
+    constructor(walletConnectOptions: IWalletConnectOptions, qrCodeController: QrCodeController) {
+        super(ConnectableSignerStatus.NotConnected);
+        this.walletConnectOptions = walletConnectOptions;
+        this.qrCodeController = {
+            ...qrCodeController,
+            open: ((uri, onClose) => {
+                const newOnClose = (() => {
+                    if (this.onPopupClose !== undefined) {
+                        this.onPopupClose();
+                    }
+                    onClose();
+                })
+                qrCodeController.open(uri, newOnClose);
+            })
         }
     }
 
     /**
      * Callback called when a client terminates a wallet connect session.
-     * @param session
      */
-    private readonly onSessionDeleted = async (session: SessionTypes.Settled) => {
-        if (session.topic !== this.session?.topic)
-            return;
-
-        this.session = undefined;
+    private readonly onDisconnect = () => {
         this.disconnect();
     }
 
-    private populateSessionDependedFields(session: SessionTypes.Settled) {
-        const [namespace, chainId, address] = session.state.accounts[0].split(":");
-
-        if (address === undefined) {
-            throw new Error("Can't get address from the settled session");
-        }
-
-        this.bech32Address = address;
-        this.chainAndNamespace = `${namespace}:${chainId}`;
+    private populateSessionDependedFields({accounts, chainId}: { accounts: string[], chainId: number }) {
+        this.chainId = chainId;
+        this.bech32Address = accounts[0];
         this.accountData = {
-            address: address,
+            address: this.bech32Address!,
             algo: "secp256k1",
             pubkey: Uint8Array.from([0x02, ...(new Array(32).fill(0))]),
         }
+    }
 
+    private subscribeToEvents() {
+        this.client!.on("session_update", (error, payload) => {
+            if (error) {
+                console.error("session_update error", error);
+            } else {
+                this.populateSessionDependedFields(payload.params[0]);
+            }
+        });
+
+        this.client!.on("disconnect", this.onDisconnect);
     }
 
     async connect(): Promise<void> {
@@ -84,46 +89,37 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
         }
 
         this.updateStatus(ConnectableSignerStatus.Connecting);
+
+        this.client = new WalletConnectClient({
+            ...this.walletConnectOptions,
+            qrcodeModal: this.qrCodeController
+        });
+        this.subscribeToEvents();
+
         return new Promise(async (resolve, reject) => {
-            let rejected = false;
-
-            const onProposal = async (proposal: PairingTypes.Proposal) => {
-                const {uri} = proposal.signal.params;
-                this.qrCodeController.open(uri, () => {
-                    rejected = true;
-                    this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
-                    this.updateStatus(ConnectableSignerStatus.NotConnected);
-                    reject(new Error("Connection terminated from the user"));
-                });
+            this.onPopupClose = () => {
+                reject(new Error("Connection terminated from the user"));
+                this.onPopupClose = undefined;
             }
-
-            this.client.on(CLIENT_EVENTS.pairing.proposal, onProposal);
-            const session = await this.client.connect({
-                metadata: this.client.metadata,
-                permissions: {
-                    blockchain: {
-                        chains: ['desmos:morpheus-apollo-2']
-                    },
-                    jsonrpc: {
-                        methods: ['cosmos_signDirect']
-                    },
-                },
-            }).catch((e: any) => {
-                this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
-                this.qrCodeController.close();
-                this.updateStatus(ConnectableSignerStatus.NotConnected);
-                reject(e);
-                throw e;
-            });
-
-            if (!rejected) {
-                this.client.removeListener(CLIENT_EVENTS.pairing.proposal, onProposal);
-                this.qrCodeController.close();
-                this.session = session;
-                this.populateSessionDependedFields(session);
-                this.client.on(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
+            if (this.client!.connected) {
+                this.populateSessionDependedFields(this.client!);
                 this.updateStatus(ConnectableSignerStatus.Connected);
                 resolve();
+            } else {
+                await this.client!.createSession();
+                const onConnect = (error: any, payload: IInternalEvent) => {
+                    this.client!.off("connect");
+                    if(error) {
+                        this.updateStatus(ConnectableSignerStatus.NotConnected);
+                        this.client = undefined;
+                        reject(error)
+                    } else {
+                        this.populateSessionDependedFields(payload.params[0]);
+                        this.updateStatus(ConnectableSignerStatus.Connected);
+                        resolve();
+                    }
+                }
+                this.client!.on("connect", onConnect);
             }
         });
     }
@@ -134,26 +130,12 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
         }
 
         this.updateStatus(ConnectableSignerStatus.Disconnecting);
-        this.client.removeListener(CLIENT_EVENTS.session.deleted, this.onSessionDeleted);
-
-        if (this.session !== undefined) {
-            await this.client.disconnect({
-                topic: this.session.topic,
-                reason: ERROR.USER_DISCONNECTED.format(),
-            }).catch(console.error);
-            this.session = undefined;
-        }
-
-        const pairings = [...this.client.pairing.values];
-        for (let p of pairings) {
-            await this.client.pairing.delete({
-                topic: p.topic,
-                reason: ERROR.USER_DISCONNECTED.format()
-            }).catch(console.error);
-        }
-
+        this.client!.off("session_update");
+        this.client!.off("disconnect");
+        this.client!.killSession();
+        this.client = undefined;
         this.bech32Address = undefined;
-        this.chainAndNamespace = undefined;
+        this.chainId = undefined;
         this.accountData = undefined;
         this.updateStatus(ConnectableSignerStatus.NotConnected);
     }
@@ -171,18 +153,15 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
             signDoc: stringifySignDocValues(signDoc),
         };
 
-        const result = await this.client.request({
-            topic: this.session!.topic,
-            chainId: this.chainAndNamespace,
-            request: {
-                method: "cosmos_signDirect",
-                params,
-            },
+        const result = await this.client!.sendCustomRequest({
+            jsonrpc: "2.0",
+            method: "cosmos_signDirect",
+            params: [params],
         });
 
-        const authInfoBytes = Uint8Array.from(Buffer.from(result.signed.authInfoBytes, "hex"));
+        const authInfoBytes = Uint8Array.from(Buffer.from(result.authInfoBytes, "hex"));
         const resultSignDoc = SignDoc.fromPartial({
-            bodyBytes:  Uint8Array.from(Buffer.from(result.signed.bodyBytes, "hex")),
+            bodyBytes:  Uint8Array.from(Buffer.from(result.bodyBytes, "hex")),
             authInfoBytes,
             chainId: signDoc.chainId,
             accountNumber: signDoc.accountNumber,
@@ -198,7 +177,7 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
         return {
             signed: resultSignDoc,
             signature: {
-                signature: Buffer.from(result.signature.signature, "hex").toString("base64"),
+                signature: Buffer.from(result.signature, "hex").toString("base64"),
                 pub_key: pubKey,
             }
         }

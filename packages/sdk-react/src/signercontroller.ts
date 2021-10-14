@@ -1,7 +1,6 @@
 import {Signer, SignerType} from "./types";
-import {ClientOptions} from "@walletconnect/types/dist/cjs/client";
 import WalletConnectClient from "@walletconnect/client";
-import {SessionTypes} from "@walletconnect/types";
+import {IWalletConnectOptions} from "@walletconnect/types";
 import {ConnectableSignerStatus, QrCodeController, WalletConnectSigner} from "@desmoslabs/sdk-core";
 import {AccountData, DirectSecp256k1HdWallet} from "@cosmjs/proto-signing";
 import {stringToPath} from "@cosmjs/crypto";
@@ -32,7 +31,7 @@ export interface ConnectToMnemonicSigner {
  */
 export interface ConnectToWalletConnectSigner {
     type: SignerType.WalletConnect,
-    options: ClientOptions,
+    options: IWalletConnectOptions,
     qrCodeController: QrCodeController,
     restoreSession?: boolean,
 }
@@ -100,19 +99,15 @@ export class SignerController {
 
         switch (params.type) {
             case SignerType.WalletConnect:
-                const client = await WalletConnectClient.init(params.options);
-                let session: SessionTypes.Settled | undefined = undefined;
-                let sessions = client.session.values;
-                if (sessions.length > 0) {
-                    session = sessions[0];
+                if (params.restoreSession === true) {
+                    const walletConnect = new WalletConnectClient(params.options);
+                    if (!walletConnect.connected) {
+                        this.updateSignerStatus(SignerStatus.NotConnected);
+                        throw new Error("Can't restore the wallet connect session. No session available");
+                    }
                 }
 
-                if (params.restoreSession === true && session === undefined) {
-                    this.updateSignerStatus(SignerStatus.NotConnected);
-                    throw new Error("Can't restore the wallet connect session. No session available");
-                }
-
-                const walletConnectSigner = new WalletConnectSigner({client, session}, params.qrCodeController);
+                const walletConnectSigner = new WalletConnectSigner(params.options, params.qrCodeController);
                 try {
                     await walletConnectSigner.connect();
                     walletConnectSigner.addStatusListener(this.connectableSignerObserver);
