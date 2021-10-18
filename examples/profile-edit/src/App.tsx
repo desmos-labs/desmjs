@@ -31,7 +31,18 @@ const AppRoot: React.FC = (props) => {
 }
 
 export default function App(): JSX.Element {
-    return <DesmosSdkProvider chainId={'morpheus-apollo-2'} >
+    return <DesmosSdkProvider chainId={'morpheus-apollo-2'} extraChains={
+        {'testchain': {
+                rpcUrl: 'http://localhost:26657/',
+                chainId: 'testchain',
+                coinDenom: 'stake',
+                uiDenom: 'stake',
+                denomUnits: [{
+                    denom: 'stake',
+                    exponent: 0,
+                }]
+        }}
+    }>
         <AppRoot/>
     </DesmosSdkProvider>
 }

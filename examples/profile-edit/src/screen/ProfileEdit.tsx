@@ -82,7 +82,7 @@ export default function ProfileEdit(): JSX.Element {
             bio,
             profilePicture,
             coverPicture,
-        }, {gas: '200000', amount: [coin(10000, chainInfo.coinDenom)]} as StdFee).catch(e => {
+        }, {gas: '400000', amount: [coin(4000, chainInfo.coinDenom)]} as StdFee).catch(e => {
             setSaveProfileError(e.toString());
             setStage(ProfileEditStage.EditProfile);
         }).finally(() => {
