@@ -26,9 +26,13 @@
   "scripts": {
     "build": "yarn build-core && yarn build-react",
     "build-core": "yarn workspace @desmoslabs/sdk-core build",
+    "publish-core": "yarn workspace @desmoslabs/sdk-core npm publish",
+    "publish-core-next": "yarn workspace @desmoslabs/sdk-core npm publish --tag next",
     "build-react": "yarn workspace @desmoslabs/sdk-react build",
-    "publish-next": "yarn workspaces foreach --no-private exec yarn npm publish --tag next",
-    "publish-latest": "yarn workspaces foreach -A --no-private exec yarn npm publish"
+    "publish-react": "yarn workspace @desmoslabs/sdk-react npm publish",
+    "publish-react-next": "yarn workspace @desmoslabs/sdk-react npm publish --tag next",
+    "publish-next": "yarn publish-core-next && yarn publish-react-next",
+    "publish-latest": "yarn publish-core && yarn publish-react"
   },
   "devDependencies": {
     "@cosmjs/crypto": "0.26.0",
