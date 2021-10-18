@@ -49,7 +49,7 @@ export type Props = {
     /**
      * User defined chains configurations.
      */
-    extraChins?: Record<string, ChainInfo>,
+    extraChains?: Record<string, ChainInfo>,
 }
 
 export const DesmosSdkProvider: React.FC<Props> = (props) =>  {
@@ -62,9 +62,9 @@ export const DesmosSdkProvider: React.FC<Props> = (props) =>  {
     const desmosChains = useMemo(() => {
         return {
             ...Desmoschains,
-            ...props.extraChins,
+            ...props.extraChains,
         }
-    }, [props.extraChins]);
+    }, [props.extraChains]);
 
     // Gets the current chain from the current selected chain id
     const [currentChainId, setCurrentChainId] = useState(props.chainId);
