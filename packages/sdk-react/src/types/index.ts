@@ -1,5 +1,4 @@
 export * from "./signer"
-export * from "./desmoschains";
 
 export enum ChainOperationStatus {
     /**

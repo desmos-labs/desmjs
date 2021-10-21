@@ -32,23 +32,31 @@ export interface ChainInfo {
     denomUnits: DenomUnit[],
 }
 
+export const TestnetDenomUnits: DenomUnit[] = [
+    { denom: "udaric", exponent: 0 },
+    { denom: "daric", exponent: 6 },
+]
+
+export const MorpheusApollo2: ChainInfo = {
+    chainId: "morpheus-apollo-2",
+    rpcUrl: "https://rpc.morpheus.desmos.network",
+    coinDenom: "udaric",
+    denomUnits: TestnetDenomUnits
+}
+
+export const MainnetDenomUnits: DenomUnit[] = [
+    { denom: "udsm", exponent: 0 },
+    { denom: "dsm", exponent: 6 },
+]
+
+export const DesmosMainnet: ChainInfo = {
+    chainId: "desmos-mainnet",
+    rpcUrl: "https://rpc.mainnet.desmos.network",
+    coinDenom: "udsm",
+    denomUnits: MainnetDenomUnits
+}
+
 export const Desmoschains: Record<string, ChainInfo> = {
-    "morpheus-apollo-2": {
-        chainId: "morpheus-apollo-2",
-        rpcUrl: "https://rpc.morpheus.desmos.network",
-        coinDenom: "udaric",
-        denomUnits: [
-            { denom: "udaric", exponent: 0 },
-            { denom: "daric", exponent: 6 },
-        ]
-    },
-    "desmos-mainnet": {
-        chainId: "desmos-mainnet",
-        rpcUrl: "https://rpc.mainnet.desmos.network",
-        coinDenom: "udsm",
-        denomUnits: [
-            { denom: "udsm", exponent: 0 },
-            { denom: "dsm", exponent: 6 },
-        ]
-    }
+    "morpheus-apollo-2": MorpheusApollo2,
+    "desmos-mainnet": DesmosMainnet
 }

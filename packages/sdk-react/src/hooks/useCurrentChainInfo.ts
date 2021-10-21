@@ -1,5 +1,5 @@
 import {useSdkContext} from "../context";
-import {ChainInfo} from "../types";
+import {ChainInfo} from "@desmoslabs/sdk-core";
 
 /**
  * Hook to get the current select chain informations.
