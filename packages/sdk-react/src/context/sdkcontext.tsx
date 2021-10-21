@@ -1,6 +1,8 @@
 import React, {createContext, useContext, useEffect, useMemo, useState} from "react";
 import {SignerController, SignerStatus} from "../signercontroller";
-import {ChainInfo, Desmoschains, Signer} from "../types";
+import {Signer} from "../types";
+import {ChainInfo, Desmoschains} from "@desmoslabs/sdk-core";
+
 
 /**
  * Interface that represents the global sdk state.
