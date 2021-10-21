@@ -1,7 +1,7 @@
 {
   "name": "@desmoslabs/sdk-react",
   "description": "Utilities to create dapp with react using the desmos sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Manuel Turetta <manuel@forbole.com>",
   "license": "Apache-2.0",
   "main": "build/index.js",
