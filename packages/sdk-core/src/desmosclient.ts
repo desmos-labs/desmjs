@@ -1,32 +1,41 @@
 import {
     Account,
     accountFromAny,
+    AminoTypes,
+    assertIsBroadcastTxSuccess,
     AuthExtension,
     BankExtension,
     defaultRegistryTypes,
-    assertIsBroadcastTxSuccess,
     QueryClient,
     setupAuthExtension,
     setupBankExtension,
     setupStakingExtension,
+    SignerData,
     SigningStargateClient,
     StakingExtension,
-    StdFee, AminoTypes
+    StdFee
 } from "@cosmjs/stargate";
 import {Any} from "cosmjs-types/google/protobuf/any";
 import {
     DirectSignResponse,
+    EncodeObject,
+    encodePubkey,
     GeneratedType,
     isOfflineDirectSigner,
+    makeSignDoc,
     OfflineDirectSigner,
     OfflineSigner,
-    Registry
+    Registry,
+    TxBodyEncodeObject
 } from "@cosmjs/proto-signing";
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
-import {DesmosProfile} from "./types/desmos";
+import {DesmosProfile} from "./types";
 import {
-    MsgAcceptDTagTransferRequestEncodeObject, MsgCancelDTagTransferRequestEncodeObject,
-    MsgDeleteProfileEncodeObject, MsgRefuseDTagTransferRequestEncodeObject, MsgRequestDTagTransferEncodeObject,
+    MsgAcceptDTagTransferRequestEncodeObject,
+    MsgCancelDTagTransferRequestEncodeObject,
+    MsgDeleteProfileEncodeObject,
+    MsgRefuseDTagTransferRequestEncodeObject,
+    MsgRequestDTagTransferEncodeObject,
     MsgSaveProfileEncodeObject
 } from "./encodeobjects";
 import {MsgLinkApplication, MsgUnlinkApplication} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_app_links";
@@ -37,8 +46,7 @@ import {
     MsgRefuseDTagTransferRequest,
     MsgRequestDTagTransfer
 } from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_dtag_requests";
-import {MsgDeleteProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
-import {MsgSaveProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
+import {MsgDeleteProfile, MsgSaveProfile} from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_profile";
 import {
     MsgBlockUser,
     MsgCreateRelationship,
@@ -47,23 +55,23 @@ import {
 } from "@desmoslabs/proto/desmos/profiles/v1beta1/msgs_relationships";
 import {Profile} from "@desmoslabs/proto/desmos/profiles/v1beta1/models_profile";
 import {
+    MsgAddPostReaction,
+    MsgAnswerPoll,
     MsgCreatePost,
     MsgEditPost,
-    MsgAddPostReaction,
-    MsgRemovePostReaction,
-    MsgAnswerPoll,
     MsgRegisterReaction,
+    MsgRemovePostReaction,
     MsgReportPost,
 } from "@desmoslabs/proto/desmos/posts/v1beta1/msgs"
 import {
+    MsgAddAdmin,
+    MsgBanUser,
     MsgCreateSubspace,
     MsgEditSubspace,
-    MsgAddAdmin,
-    MsgRemoveAdmin,
     MsgRegisterUser,
-    MsgUnregisterUser,
-    MsgBanUser,
+    MsgRemoveAdmin,
     MsgUnbanUser,
+    MsgUnregisterUser,
 } from "@desmoslabs/proto/desmos/subspaces/v1beta1/msgs";
 import {ProfilesExtension, setupProfilesExtension} from "./queries/profiles";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
@@ -71,8 +79,20 @@ import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
 import {Pagination, paginationToPageRequest} from "./types/pagination";
 import {QueryIncomingDTagTransferRequestsResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_dtag_requests";
 import {desmosTypes} from "./aminotypes";
-import {AccountData, AminoSignResponse, OfflineAminoSigner, StdSignDoc} from "@cosmjs/amino";
-import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import {
+    AccountData,
+    AminoSignResponse,
+    encodeSecp256k1Pubkey,
+    makeSignDoc as makeSignDocAmino,
+    OfflineAminoSigner,
+    StdSignDoc
+} from "@cosmjs/amino";
+import {AuthInfo, SignDoc, SignerInfo, TxRaw} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import {SignMode} from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
+import {fromBase64} from "@cosmjs/encoding";
+import {Coin} from "cosmjs-types/cosmos/base/v1beta1/coin";
+import Long from "long";
+import {Int53} from "@cosmjs/math";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -110,6 +130,43 @@ const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
     ["/desmos.subspaces.v1beta1.MsgBanUser", MsgBanUser],
     ["/desmos.subspaces.v1beta1.MsgUnbanUser", MsgUnbanUser],
 ]
+
+function makeSignerInfos(
+    signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
+    signMode: SignMode,
+): SignerInfo[] {
+    return signers.map(
+        ({ pubkey, sequence }): SignerInfo => ({
+            publicKey: pubkey,
+            modeInfo: {
+                single: { mode: signMode },
+            },
+            sequence: Long.fromNumber(sequence),
+        }),
+    );
+}
+
+/**
+ * Creates and serializes an AuthInfo document.
+ *
+ * This implementation does not support different signing modes for the different signers.
+ */
+export function makeAuthInfoBytes(
+    signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
+    feeAmount: readonly Coin[],
+    gasLimit: number,
+    signMode = SignMode.SIGN_MODE_DIRECT,
+    granter?: string
+): Uint8Array {
+    return AuthInfo.encode(AuthInfo.fromPartial({
+        signerInfos: makeSignerInfos(signers, signMode),
+        fee: {
+            amount: [...feeAmount],
+            gasLimit: Long.fromNumber(gasLimit),
+            granter
+        },
+    })).finish();
+}
 
 /**
  * Wrapper class to allows on the fly signer update.
@@ -190,17 +247,23 @@ export class DesmosClient extends SigningStargateClient {
     private _tmClient: Tendermint34Client | undefined;
     private _queryClient: DesmosQueryClient | undefined;
     protected readonly signerWrapper: SignerWrapper;
+    private _registry: Registry;
+    private _aminoTypes: AminoTypes;
 
     protected constructor(url: string, signer: SignerWrapper = new SignerWrapper()) {
+        const registry =  new Registry(registryTypes);
+        const aminoTypes = new AminoTypes({
+            additions: desmosTypes,
+            prefix: "desmos"
+        });
         super(undefined, signer, {
-            registry: new Registry(registryTypes),
-            aminoTypes: new AminoTypes({
-                additions: desmosTypes,
-                prefix: "desmos"
-            })
+            registry,
+            aminoTypes,
         });
         this.signerWrapper = signer;
         this.url = url;
+        this._registry = registry;
+        this._aminoTypes = aminoTypes;
     }
 
     static withoutSigner(url: string): DesmosClient {
@@ -448,5 +511,125 @@ export class DesmosClient extends SigningStargateClient {
         }
 
         await this.signAndBroadcast(sender, [msg], fee).then(assertIsBroadcastTxSuccess);
+    }
+
+    /**
+     * Gets account number and sequence from the API, creates a sign doc,
+     * creates a single signature and assembles the signed transaction.
+     *
+     * The sign mode (SIGN_MODE_DIRECT or SIGN_MODE_LEGACY_AMINO_JSON) is determined by this client's signer.
+     *
+     * You can pass signer data (account number, sequence and chain ID) explicitly instead of querying them
+     * from the chain. This is needed when signing for a multisig account, but it also allows for offline signing
+     * (See the SigningStargateClient.offline constructor).
+     */
+    public override async sign(
+        signerAddress: string,
+        messages: readonly EncodeObject[],
+        fee: StdFee,
+        memo: string,
+        explicitSignerData?: SignerData,
+        feeGranter?: string,
+    ): Promise<TxRaw> {
+        let signerData: SignerData;
+        if (explicitSignerData) {
+            signerData = explicitSignerData;
+        } else {
+            const { accountNumber, sequence } = await this.getSequence(signerAddress);
+            const chainId = await this.getChainId();
+            signerData = {
+                accountNumber: accountNumber,
+                sequence: sequence,
+                chainId: chainId,
+            };
+        }
+
+        return isOfflineDirectSigner(this.signerWrapper)
+            ? this._signDirect(signerAddress, messages, fee, memo, signerData, feeGranter)
+            : this._signAmino(signerAddress, messages, fee, memo, signerData, feeGranter);
+    }
+
+    private async _signAmino(
+        signerAddress: string,
+        messages: readonly EncodeObject[],
+        fee: StdFee,
+        memo: string,
+        { accountNumber, sequence, chainId }: SignerData,
+        feeGranter?: string,
+    ): Promise<TxRaw> {
+        const accountFromSigner = (await this.signerWrapper.getAccounts()).find(
+            (account) => account.address === signerAddress,
+        );
+        if (!accountFromSigner) {
+            throw new Error("Failed to retrieve account from signer");
+        }
+        const pubkey = encodePubkey(encodeSecp256k1Pubkey(accountFromSigner.pubkey));
+        const signMode = SignMode.SIGN_MODE_LEGACY_AMINO_JSON;
+        const msgs = messages.map((msg) => this._aminoTypes.toAmino(msg));
+        const signDoc = makeSignDocAmino(msgs, fee, chainId, memo, accountNumber, sequence);
+        const { signature, signed } = await this.signerWrapper.signAmino(signerAddress, signDoc);
+        const signedTxBody = {
+            messages: signed.msgs.map((msg) => this._aminoTypes.fromAmino(msg)),
+            memo: signed.memo,
+        };
+        const signedTxBodyEncodeObject: TxBodyEncodeObject = {
+            typeUrl: "/cosmos.tx.v1beta1.TxBody",
+            value: signedTxBody,
+        };
+        const signedTxBodyBytes = this._registry.encode(signedTxBodyEncodeObject);
+        const signedGasLimit = Int53.fromString(signed.fee.gas).toNumber();
+        const signedSequence = Int53.fromString(signed.sequence).toNumber();
+        const signedAuthInfoBytes = makeAuthInfoBytes(
+            [{ pubkey, sequence: signedSequence }],
+            signed.fee.amount,
+            signedGasLimit,
+            signMode,
+            feeGranter
+        );
+        return TxRaw.fromPartial({
+            bodyBytes: signedTxBodyBytes,
+            authInfoBytes: signedAuthInfoBytes,
+            signatures: [fromBase64(signature.signature)],
+        });
+    }
+
+    private async _signDirect(
+        signerAddress: string,
+        messages: readonly EncodeObject[],
+        fee: StdFee,
+        memo: string,
+        { accountNumber, sequence, chainId }: SignerData,
+        feeGranter?: string,
+    ): Promise<TxRaw> {
+        const accountFromSigner = (await this.signerWrapper.getAccounts()).find(
+            (account) => account.address === signerAddress,
+        );
+        if (!accountFromSigner) {
+            throw new Error("Failed to retrieve account from signer");
+        }
+        const pubkey = encodePubkey(encodeSecp256k1Pubkey(accountFromSigner.pubkey));
+        const txBodyEncodeObject: TxBodyEncodeObject = {
+            typeUrl: "/cosmos.tx.v1beta1.TxBody",
+            value: {
+                messages: messages,
+                memo: memo,
+            },
+        };
+        const txBodyBytes = this._registry.encode(txBodyEncodeObject);
+        const gasLimit = Int53.fromString(fee.gas).toNumber();
+        const authInfoBytes = makeAuthInfoBytes(
+            [{ pubkey, sequence }],
+            fee.amount,
+            gasLimit,
+            SignMode.SIGN_MODE_DIRECT,
+            feeGranter
+        );
+        const signDoc = makeSignDoc(txBodyBytes, authInfoBytes, chainId, accountNumber);
+        const { signature, signed } = await this.signerWrapper.signDirect(signerAddress, signDoc);
+        return TxRaw.fromPartial({
+            bodyBytes: signed.bodyBytes,
+            authInfoBytes: signed.authInfoBytes,
+            signatures: [fromBase64(signature.signature)],
+        });
     }
 }
