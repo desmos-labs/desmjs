@@ -1,10 +1,17 @@
 import {
-    aminoSignerFromMnemonic,
+    aminoSignerFromMnemonic, CosmosHdPath,
     DefaultFees,
     desmosClientFromMnemonic, signerFromMnemonic, TEST_CHAIN_URL,
     testUser1, testUser2,
 } from "./testutils.spec";
 import {DesmosClient} from "./desmosclient";
+import {serializeSignDoc} from "@cosmjs/amino";
+import {MsgLinkChainAccountEncodeObject} from "./encodeobjects";
+import {Bech32Address, Proof} from "@desmoslabs/proto/desmos/profiles/v1beta1/models_chain_links";
+import {fromBase64, toHex} from "@cosmjs/encoding";
+import { Any } from "cosmjs-types/google/protobuf/any";
+import {PubKey} from "cosmjs-types/cosmos/crypto/secp256k1/keys";
+import {assertIsBroadcastTxSuccess} from "@cosmjs/stargate";
 
 describe("SigningDesmosClient", () => {
 
@@ -127,6 +134,74 @@ describe("SigningDesmosClient", () => {
             let requests = await testUser1Client.queryDtagTransferRequests(testUser2.address0).then(r => r.requests);
             expect(requests.length).toBe(0);
         });
+    })
+
+    describe("Amino signer", () => {
+
+        it("Create profile", async () => {
+            const client = DesmosClient.withoutSigner(TEST_CHAIN_URL);
+            await client.connect();
+            client.setSigner(await aminoSignerFromMnemonic(testUser1.mnemonic));
+
+            await client.saveProfile(testUser1.address0, {
+                dtag: "amino"
+            }, DefaultFees.SaveProfile);
+        });
+
+        it("Link chain account", async () => {
+            const externalChainSigner = await aminoSignerFromMnemonic(testUser1.mnemonic, [CosmosHdPath], "cosmos");
+            const accounts = await externalChainSigner.getAccounts();
+            const signed = await externalChainSigner.signAmino(accounts[0].address, {
+                fee: {
+                    gas: "0",
+                    amount: []
+                },
+                memo: testUser1.address0,
+                account_number: "0",
+                sequence: "0",
+                msgs: [],
+                chain_id: ""
+            });
+            const serializedProof = serializeSignDoc(signed.signed);
+
+            const client = DesmosClient.withoutSigner(TEST_CHAIN_URL);
+            await client.connect();
+            client.setSigner(await aminoSignerFromMnemonic(testUser1.mnemonic));
+
+            // Create profile
+            await client.saveProfile(testUser1.address0, {
+                dtag: "testdtag",
+            }, DefaultFees.SaveProfile);
+
+            // Link cosmos address
+            const response = await client.signAndBroadcast(testUser1.address0, [{
+                typeUrl: "/desmos.profiles.v1beta1.MsgLinkChainAccount",
+                value: {
+                    signer: testUser1.address0,
+                    proof: Proof.fromPartial({
+                        signature: toHex(fromBase64(signed.signature.signature)),
+                        plainText: toHex(serializedProof),
+                        pubKey: Any.fromPartial({
+                            typeUrl: "/cosmos.crypto.secp256k1.PubKey",
+                            value: PubKey.encode(PubKey.fromPartial({
+                                key: accounts[0].pubkey,
+                            })).finish(),
+                        })
+                    }),
+                    chainConfig: {
+                        name: "cosmos",
+                    },
+                    chainAddress: {
+                        typeUrl: "/desmos.profiles.v1beta1.Bech32Address",
+                        value: Bech32Address.encode(Bech32Address.fromPartial({
+                            value: accounts[0].address,
+                            prefix: "cosmos"
+                        })).finish(),
+                    }
+                }
+            } as MsgLinkChainAccountEncodeObject], DefaultFees.SaveProfile);
+            assertIsBroadcastTxSuccess(response);
+        })
     })
 
 })

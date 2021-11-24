@@ -6,11 +6,33 @@ import {stringToPath} from "@cosmjs/crypto";
 import {DesmosClient} from "./desmosclient";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
-import {Secp256k1HdWallet} from "@cosmjs/amino";
+import {OfflineAminoSigner, Secp256k1HdWallet} from "@cosmjs/amino";
+
+export type HdPath = {
+    coinType: number,
+    account: number,
+    change: number,
+    index: number,
+}
 
 export const TEST_CHAIN_URL = "http://localhost:26657";
 
 export const defaultGasPrice = GasPrice.fromString("0.025stake");
+
+export const DesmosHdPath: HdPath = {
+    coinType: 852,
+    account: 0,
+    change: 0,
+    index: 0,
+}
+
+export const CosmosHdPath: HdPath = {
+    coinType: 118,
+    account: 0,
+    change: 0,
+    index: 0,
+}
+
 export const DefaultFees = {
     SaveProfile: calculateFee(100_000, defaultGasPrice),
     DeleteProfile: calculateFee(100_000, defaultGasPrice),
@@ -51,14 +73,18 @@ export async function signerFromMnemonic(mnemonic: string, indexes: number[] = [
 /**
  * Creates a signer from the provided mnemonic.
  * @param mnemonic - The mnemonic passphrase used to derive the keys.
- * @param indexes - Derivation path indexes used to derive the keys.
+ * @param paths - Derivation paths used to derive the keys.
+ * @param prefix - The bech32 address prefix.
  */
-export function aminoSignerFromMnemonic(mnemonic: string, indexes: number[] = [0]): Promise<OfflineSigner> {
-    const hdPaths = indexes.map(i => `m/44'/852'/0'/${i}/0`).map(stringToPath);
+export function aminoSignerFromMnemonic(mnemonic: string,
+                                        paths: HdPath[] = [DesmosHdPath],
+                                        prefix: string = "desmos"
+): Promise<OfflineAminoSigner> {
+    const hdPaths = paths.map(path => `m/44'/${path.coinType}'/${path.account}'/${path.change}/${path.index}`).map(stringToPath);
 
     return Secp256k1HdWallet.fromMnemonic(mnemonic, {
         hdPaths: hdPaths,
-        prefix: "desmos"
+        prefix
     });
 }
 
