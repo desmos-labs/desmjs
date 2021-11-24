@@ -6,7 +6,7 @@ import {
 } from "./testutils.spec";
 import {DesmosClient} from "./desmosclient";
 import {serializeSignDoc} from "@cosmjs/amino";
-import {MsgLinkChainAccountEncodeObject} from "./encodeobjects";
+import {MsgLinkChainAccountEncodeObject, MsgUnlinkChainAccountEncodeObject} from "./encodeobjects";
 import {Bech32Address, Proof} from "@desmoslabs/proto/desmos/profiles/v1beta1/models_chain_links";
 import {fromBase64, toHex} from "@cosmjs/encoding";
 import { Any } from "cosmjs-types/google/protobuf/any";
@@ -148,7 +148,7 @@ describe("SigningDesmosClient", () => {
             }, DefaultFees.SaveProfile);
         });
 
-        it("Link chain account", async () => {
+        it("Chain link", async () => {
             const externalChainSigner = await aminoSignerFromMnemonic(testUser1.mnemonic, [CosmosHdPath], "cosmos");
             const accounts = await externalChainSigner.getAccounts();
             const signed = await externalChainSigner.signAmino(accounts[0].address, {
@@ -201,6 +201,17 @@ describe("SigningDesmosClient", () => {
                 }
             } as MsgLinkChainAccountEncodeObject], DefaultFees.SaveProfile);
             assertIsBroadcastTxSuccess(response);
+
+            // Unlink cosmos address
+            const unlinkResponse = await client.signAndBroadcast(testUser1.address0, [{
+                typeUrl: "/desmos.profiles.v1beta1.MsgUnlinkChainAccount",
+                value: {
+                    chainName: "cosmos",
+                    target: accounts[0].address,
+                    owner: testUser1.address0,
+                }
+            } as MsgUnlinkChainAccountEncodeObject], DefaultFees.SaveProfile);
+            assertIsBroadcastTxSuccess(unlinkResponse);
         })
     })
 
