@@ -35,10 +35,10 @@
     "publish-latest": "yarn publish-core && yarn publish-react"
   },
   "devDependencies": {
-    "@cosmjs/crypto": "0.26.0",
-    "@cosmjs/encoding": "0.26.0",
-    "@cosmjs/proto-signing": "0.26.0",
-    "@cosmjs/utils": "0.26.0",
+    "@cosmjs/crypto": "0.26.5",
+    "@cosmjs/encoding": "0.26.5",
+    "@cosmjs/proto-signing": "0.26.5",
+    "@cosmjs/utils": "0.26.5",
     "@desmoslabs/sdk-core": "workspace:packages/sdk-core",
     "@desmoslabs/sdk-react": "workspace:packages/sdk-react",
     "@types/long": "4.0.1",
