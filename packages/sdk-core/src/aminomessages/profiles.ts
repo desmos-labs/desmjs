@@ -93,6 +93,7 @@ export interface AminoMsgLinkChainAccount extends AminoMsg {
         },
         proof: {
             pub_key: {
+                type: string,
                 value: string,
             },
             signature: string,

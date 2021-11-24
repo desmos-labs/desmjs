@@ -36,6 +36,12 @@ import {fromBase64, toBase64} from "@cosmjs/encoding";
 import {PubKey} from "cosmjs-types/cosmos/crypto/secp256k1/keys";
 import Long from "long";
 
+function assertDefinedAndNotNull(object?: any, message?: string) {
+    if (object === undefined || object === null) {
+        throw message;
+    }
+}
+
 export const desmosTypes: Record<string, AminoConverter> = {
     // Profiles module
     "/desmos.profiles.v1beta1.MsgSaveProfile": {
@@ -193,6 +199,11 @@ export const desmosTypes: Record<string, AminoConverter> = {
     "/desmos.profiles.v1beta1.MsgLinkChainAccount": {
         aminoType: "desmos/MsgLinkChainAccount",
         toAmino: (msg: MsgLinkChainAccount): AminoMsgLinkChainAccount["value"] => {
+            assertDefinedAndNotNull(msg.chainAddress, "ChainAddress not defined");
+            assertDefinedAndNotNull(msg.proof, "proof not defined");
+            assertDefinedAndNotNull(msg.proof!.pubKey, "pubkey not defined");
+            assertDefinedAndNotNull(msg.chainConfig, "ChainConfig not defined");
+
             const chainAddress = Bech32Address.decode(msg.chainAddress!.value);
             const pubKey = PubKey.decode(msg.proof!.pubKey!.value);
 
@@ -207,7 +218,8 @@ export const desmosTypes: Record<string, AminoConverter> = {
                 },
                 proof: {
                     pub_key: {
-                        value: toBase64(pubKey.key)
+                        type: "tendermint/PubKeySecp256k1",
+                        value: toBase64(pubKey.key),
                     },
                     signature: msg.proof!.signature,
                     plain_text: msg.proof!.plainText,
