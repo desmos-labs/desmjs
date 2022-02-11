@@ -210,8 +210,11 @@ export const desmosTypes: Record<string, AminoConverter> = {
             return {
                 signer: msg.signer,
                 chain_address: {
-                    prefix: chainAddress.prefix,
-                    value: chainAddress.value,
+                    type: "desmos/Bech32Address",
+                    value: {
+                        prefix: chainAddress.prefix,
+                        value: chainAddress.value,
+                    },
                 },
                 chain_config: {
                     name: msg.chainConfig!.name,
@@ -227,9 +230,13 @@ export const desmosTypes: Record<string, AminoConverter> = {
             }
         },
         fromAmino: (msg: AminoMsgLinkChainAccount["value"]): MsgLinkChainAccount => {
+            if (msg.chain_address.type !== "desmos/Bech32Address") {
+                throw `Invalid chain_address type "${msg.chain_address.type}"`;
+            }
+
             const chainAddressBin = Bech32Address.encode({
-                value: msg.chain_address.value,
-                prefix: msg.chain_address.prefix
+                value: msg.chain_address.value.value,
+                prefix: msg.chain_address.value.prefix,
             }).finish();
 
             const chainAddress = Any.fromPartial({

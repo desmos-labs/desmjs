@@ -85,8 +85,11 @@ export interface AminoMsgLinkChainAccount extends AminoMsg {
     readonly value: {
         signer: string,
         chain_address: {
-            prefix: string,
-            value: string,
+            type: "desmos/Bech32Address",
+            value: {
+                prefix: string,
+                value: string,
+            },
         },
         chain_config: {
             name: string,
