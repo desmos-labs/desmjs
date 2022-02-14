@@ -36,7 +36,6 @@ export default function App(): JSX.Element {
                 rpcUrl: 'http://localhost:26657/',
                 chainId: 'testchain',
                 coinDenom: 'stake',
-                uiDenom: 'stake',
                 denomUnits: [{
                     denom: 'stake',
                     exponent: 0,
