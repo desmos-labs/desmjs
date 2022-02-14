@@ -5,6 +5,8 @@ import {stringifySignDocValues} from "cosmos-wallet";
 import {Buffer} from "buffer";
 import {AuthInfo, SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {ConnectableSigner, ConnectableSignerStatus} from "./connectablesigner";
+import {AminoSignResponse, OfflineAminoSigner, StdSignDoc} from "@cosmjs/amino";
+import {fromBase64} from "@cosmjs/encoding";
 
 /**
  * Controller to display the uri/Qr Code to initialize a Wallet Connect session.
@@ -27,7 +29,7 @@ export interface QrCodeController {
  * Signer that use the WalletConnect protocol to sign a transaction.
  * NOTE: This signer is not able to provide the user public key at the moment.
  */
-export class WalletConnectSigner extends ConnectableSigner implements OfflineDirectSigner {
+export class WalletConnectSigner extends ConnectableSigner implements OfflineDirectSigner, OfflineAminoSigner {
 
     private readonly walletConnectOptions: IWalletConnectOptions;
     private readonly qrCodeController: QrCodeController;
@@ -102,9 +104,13 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
                 this.onPopupClose = undefined;
             }
             if (this.client!.connected) {
-                this.populateSessionDependedFields(this.client!);
-                this.updateStatus(ConnectableSignerStatus.Connected);
-                resolve();
+                try {
+                    this.populateSessionDependedFields(this.client!);
+                    this.updateStatus(ConnectableSignerStatus.Connected);
+                    resolve();
+                } catch (ex) {
+                    reject(ex);
+                }
             } else {
                 await this.client!.createSession();
                 const onConnect = (error: any, payload: IInternalEvent) => {
@@ -140,9 +146,22 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
         this.updateStatus(ConnectableSignerStatus.NotConnected);
     }
 
-    getAccounts(): Promise<readonly AccountData[]> {
+    async getAccounts(): Promise<readonly AccountData[]> {
         this.assertConnected();
-        return Promise.resolve([this.accountData!]);
+
+        const result = await this.client!.sendCustomRequest({
+            jsonrpc: "2.0",
+            method: "cosmos_getAccounts",
+            params: [],
+        });
+
+        return result.map((accountData: any) => {
+            return {
+                address: accountData.address,
+                algo: accountData.algo,
+                pubkey: fromBase64(accountData.pubkey),
+            }
+        })
     }
 
     async signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
@@ -181,6 +200,30 @@ export class WalletConnectSigner extends ConnectableSigner implements OfflineDir
                 pub_key: pubKey,
             }
         }
+    }
+
+    async signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse> {
+        console.log("signAmino", signDoc);
+        const params = {
+            signerAddress: this.bech32Address,
+            signDoc: signDoc,
+        };
+
+        const result = await this.client!.sendCustomRequest({
+            jsonrpc: "2.0",
+            method: "cosmos_signAmino",
+            params: [params],
+        });
+
+        console.log("signAmino result", result);
+
+        return {
+            signed: signDoc,
+            signature: {
+                signature: result.signature,
+                pub_key: result.pub_key
+            }
+        } as AminoSignResponse;
     }
 
 }
