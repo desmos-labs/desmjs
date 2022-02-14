@@ -76,7 +76,7 @@ import {
 import {ProfilesExtension, setupProfilesExtension} from "./queries/profiles";
 import {PostsExtension, setupPostsExtension} from "./queries/posts";
 import {setupSubspacesExtension, SubspacesExtension} from "./queries/subspaces";
-import {Pagination, paginationToPageRequest} from "./types/pagination";
+import {Pagination, paginationToPageRequest} from "./types";
 import {QueryIncomingDTagTransferRequestsResponse} from "@desmoslabs/proto/desmos/profiles/v1beta1/query_dtag_requests";
 import {desmosTypes} from "./aminotypes";
 import {
@@ -195,12 +195,13 @@ class SignerWrapper implements OfflineDirectSigner, OfflineAminoSigner {
             raw["signAmino"] = this._throwError;
             raw["signDirect"] = this._throwError;
         }
+        else if ((signer as OfflineAminoSigner).signAmino !== undefined) {
+            raw["signAmino"] = (this.signer as OfflineAminoSigner).signAmino.bind(this.signer);
+            raw["signDirect"] = undefined;
+        }
         else if (isOfflineDirectSigner(signer)) {
             raw["signAmino"] = undefined;
             raw["signDirect"] = (this.signer as OfflineDirectSigner).signDirect.bind(this.signer);
-        } else {
-            raw["signAmino"] = (this.signer as OfflineAminoSigner).signAmino.bind(this.signer);
-            raw["signDirect"] = undefined;
         }
     }
 
