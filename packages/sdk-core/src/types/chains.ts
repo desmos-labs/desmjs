@@ -37,7 +37,7 @@ export const TestnetDenomUnits: DenomUnit[] = [
     { denom: "daric", exponent: 6 },
 ]
 
-export const MorpheusApollo2: ChainInfo = {
+export const DesmosTestnet: ChainInfo = {
     chainId: "morpheus-apollo-2",
     rpcUrl: "https://rpc.morpheus.desmos.network",
     coinDenom: "udaric",
@@ -56,7 +56,7 @@ export const DesmosMainnet: ChainInfo = {
     denomUnits: MainnetDenomUnits
 }
 
-export const Desmoschains: Record<string, ChainInfo> = {
-    "morpheus-apollo-2": MorpheusApollo2,
-    "desmos-mainnet": DesmosMainnet
+export const DesmosChains: Record<string, ChainInfo> = {
+    "testnet": DesmosTestnet,
+    "mainnet": DesmosMainnet
 }

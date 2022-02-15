@@ -93,6 +93,7 @@ import {fromBase64} from "@cosmjs/encoding";
 import {Coin} from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import {Int53} from "@cosmjs/math";
+import {Signer} from "src/signers";
 
 
 const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
@@ -271,11 +272,14 @@ export class DesmosClient extends SigningStargateClient {
         return new DesmosClient(url, new SignerWrapper());
     }
 
-    static withSigner(url: string, signer: OfflineSigner): DesmosClient {
+    static withSigner(url: string, signer: Signer): DesmosClient {
         return new DesmosClient(url, new SignerWrapper(signer));
     }
 
     async connect(): Promise<void> {
+
+        this.getQueryClient()
+
         if (this._tmClient === undefined) {
             this._tmClient = await Tendermint34Client.connect(this.url);
             this._queryClient = QueryClient.withExtensions(this._tmClient,
@@ -328,8 +332,8 @@ export class DesmosClient extends SigningStargateClient {
             } else {
                 return accountFromAny(account);
             }
-        } catch (error) {
-            if (/rpc error: code = NotFound/i.test(error)) {
+        } catch (error: any) {
+            if (/rpc error: code = NotFound/i.test(error.message)) {
                 return null;
             }
             throw error;
@@ -545,6 +549,7 @@ export class DesmosClient extends SigningStargateClient {
             };
         }
 
+        // TODO: Get signing method
         return isOfflineDirectSigner(this.signerWrapper)
             ? this._signDirect(signerAddress, messages, fee, memo, signerData, feeGranter)
             : this._signAmino(signerAddress, messages, fee, memo, signerData, feeGranter);

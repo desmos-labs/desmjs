@@ -1,2 +1,2 @@
-export * from "./connectablesigner";
-export * from "./walletconnectsigner";
+export * from "src/signers/signer";
+export * from "src/signers/walletconnect";

@@ -40,7 +40,6 @@
     "@cosmjs/proto-signing": "0.26.5",
     "@cosmjs/utils": "0.26.5",
     "@desmoslabs/sdk-core": "workspace:packages/sdk-core",
-    "@desmoslabs/sdk-react": "workspace:packages/sdk-react",
     "@types/long": "4.0.1",
     "@types/pino": "6.3.11",
     "@walletconnect/jsonrpc-types": "1.0.0",
