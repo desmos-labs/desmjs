@@ -19,9 +19,8 @@ import {
   TxBodyEncodeObject
 } from "@cosmjs/proto-signing";
 import {Tendermint34Client} from "@cosmjs/tendermint-rpc";
-import {profilesTypes} from "src/aminomessages/profiles/converter";
-import {encodeSecp256k1Pubkey, makeSignDoc as makeSignDocAmino} from "@cosmjs/amino";
-import {AuthInfo, SignerInfo, TxRaw} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import {encodeSecp256k1Pubkey, makeSignDoc as makeSignDocAmino, StdSignDoc} from "@cosmjs/amino";
+import {AuthInfo, SignDoc, SignerInfo, TxRaw} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {SignMode} from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
 import {fromBase64} from "@cosmjs/encoding";
 import {Coin} from "cosmjs-types/cosmos/base/v1beta1/coin";
@@ -33,7 +32,6 @@ import {setupAuthzExtension} from "src/queries/authz";
 import {DesmosQueryClient, profileFromAny, setupProfilesExtension} from "src/queries";
 import {registryTypes} from "src/registry";
 import {desmosTypes} from "src/aminomessages";
-
 
 function makeSignerInfos(
   signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
@@ -69,6 +67,15 @@ export function makeAuthInfoBytes(
       granter
     },
   })).finish();
+}
+
+/**
+ * Contains the result of a signature.
+ */
+export type SignatureResult = {
+  signerData: SignerData;
+  signDoc: SignDoc | StdSignDoc;
+  txRaw: TxRaw;
 }
 
 /**
@@ -173,14 +180,36 @@ export class DesmosClient extends SigningStargateClient {
    * from the chain. This is needed when signing for a multisig account, but it also allows for offline signing
    * (See the SigningStargateClient.offline constructor).
    */
-  public override async sign(
+  override async sign(
+    signerAddress: string,
+    messages: readonly EncodeObject[],
+    fee: StdFee,
+    memo: string,
+    explicitSignerData?: SignerData,
+  ): Promise<TxRaw> {
+    const result = await this.signTx(signerAddress, messages, fee, memo, explicitSignerData);
+    return result.txRaw;
+  }
+
+  /**
+   * Signs a transaction using the provided data.
+   * Note that an error will be thrown if the signer is not set (i.e. the client has been built
+   * without using the `withSigner` builder).
+   *
+   * The sign mode (SIGN_MODE_DIRECT or SIGN_MODE_LEGACY_AMINO_JSON) is determined by this client's signer.
+   *
+   * You can pass signer data (account number, sequence and chain id) explicitly instead of querying them
+   * from the chain. This is needed when signing for a multisig account, but it also allows for offline signing
+   * (See the SigningStargateClient.offline constructor).
+   */
+  public async signTx(
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee,
     memo: string,
     explicitSignerData?: SignerData,
     feeGranter?: string,
-  ): Promise<TxRaw> {
+  ): Promise<SignatureResult> {
     // Build the signer data
     const signerData = explicitSignerData ?? await this.getSignerData(signerAddress);
 
@@ -197,7 +226,7 @@ export class DesmosClient extends SigningStargateClient {
     memo: string,
     {accountNumber, sequence, chainId}: SignerData,
     feeGranter?: string,
-  ): Promise<TxRaw> {
+  ): Promise<SignatureResult> {
     // Get the account
     const accounts = await this._signer.getAccounts();
     const accountFromSigner = accounts.find((account) => account.address === signerAddress);
@@ -240,11 +269,15 @@ export class DesmosClient extends SigningStargateClient {
     );
 
     // Return the TxRaw instance
-    return TxRaw.fromPartial({
-      bodyBytes: signedTxBodyBytes,
-      authInfoBytes: signedAuthInfoBytes,
-      signatures: [fromBase64(signature.signature)],
-    });
+    return {
+      signerData: {accountNumber, sequence, chainId},
+      signDoc: signDoc,
+      txRaw: TxRaw.fromPartial({
+        bodyBytes: signedTxBodyBytes,
+        authInfoBytes: signedAuthInfoBytes,
+        signatures: [fromBase64(signature.signature)],
+      }),
+    };
   }
 
   private async _signDirect(
@@ -254,7 +287,7 @@ export class DesmosClient extends SigningStargateClient {
     memo: string,
     {accountNumber, sequence, chainId}: SignerData,
     feeGranter?: string,
-  ): Promise<TxRaw> {
+  ): Promise<SignatureResult> {
     // Get the account
     const accounts = await this._signer.getAccounts();
     const accountFromSigner = accounts.find((account) => account.address === signerAddress);
@@ -294,10 +327,14 @@ export class DesmosClient extends SigningStargateClient {
     const {signature, signed} = await this._signer.signDirect(signerAddress, signDoc);
 
     // Return the TxRaw instance
-    return TxRaw.fromPartial({
-      bodyBytes: signed.bodyBytes,
-      authInfoBytes: signed.authInfoBytes,
-      signatures: [fromBase64(signature.signature)],
-    });
+    return {
+      signerData: {accountNumber, sequence, chainId},
+      signDoc: signDoc,
+      txRaw: TxRaw.fromPartial({
+        bodyBytes: signed.bodyBytes,
+        authInfoBytes: signed.authInfoBytes,
+        signatures: [fromBase64(signature.signature)],
+      }),
+    };
   }
 }

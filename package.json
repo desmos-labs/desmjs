@@ -25,12 +25,15 @@
     "packages/types"
   ],
   "scripts": {
-    "build": "yarn build-core && yarn build-react",
+    "build": "yarn build-core && yarn build-types",
+    "publish": "yarn publish-core && yarn publish-types",
+    "publish-next": "yarn publish-core-next && yarn publish-types-next",
     "build-core": "yarn workspace @desmoslabs/desmjs build",
     "publish-core": "yarn workspace @desmoslabs/desmjs npm publish",
     "publish-core-next": "yarn workspace @desmoslabs/desmjs npm publish --tag next",
-    "publish-next": "yarn publish-core-next && yarn publish-react-next",
-    "publish-latest": "yarn publish-core && yarn publish-react"
+    "build-types": "yarn workspace @desmoslabs/desmjs-types build",
+    "publish-types": "yarn workspace @desmoslabs/desmjs-types npm publish",
+    "publish-types-next": "yarn workspace @desmoslabs/desmjs-types npm publish --tag next"
   },
   "devDependencies": {
     "@cosmjs/crypto": "^0.27.1",
