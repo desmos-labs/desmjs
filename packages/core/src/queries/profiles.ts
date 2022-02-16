@@ -7,16 +7,22 @@ import {
 } from "@cosmjs/stargate";
 import {PageRequest} from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
 import {QueryIncomingDTagTransferRequestsResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_dtag_requests";
-import {QueryUserBlocksResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_relationships";
-import {QueryUserRelationshipsResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_relationships";
-import {QueryUserChainLinksResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_chain_links";
-import {QueryUserChainLinkResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_chain_links";
-import {QueryUserApplicationLinksResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_app_links";
+import {
+  QueryChainLinksResponse,
+  QueryUserChainLinkResponse
+} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_chain_links";
+import {
+  QueryApplicationLinksResponse,
+} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_app_links";
 import {QueryUserApplicationLinkResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_app_links";
 import {QueryApplicationLinkByClientIDResponse} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_app_links";
 import {QueryClientImpl} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query";
 import {Profile} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_profile";
 import {assert} from "@cosmjs/utils";
+import {
+  QueryBlocksResponse,
+  QueryRelationshipsResponse
+} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_relationships";
 
 export interface ProfilesExtension {
   readonly profiles: {
@@ -34,15 +40,15 @@ export interface ProfilesExtension {
      * Queries the relationships for the user having the given
      * address.
      */
-    readonly userRelationships: (subspaceId: string, user: string, pagination?: PageRequest) => Promise<QueryUserRelationshipsResponse>,
+    readonly relationships: (subspaceId: string, user: string, pagination?: PageRequest) => Promise<QueryRelationshipsResponse>,
     /**
      * Queries the user blocks for the user having the given address.
      */
-    readonly userBlocks: (subspaceId: string, user: string, pagination?: PageRequest) => Promise<QueryUserBlocksResponse>,
+    readonly blocks: (subspaceId: string, user: string, pagination?: PageRequest) => Promise<QueryBlocksResponse>,
     /**
      * Queries chain links for the given user.
      */
-    readonly userChainLinks: (user: string, pagination?: PageRequest) => Promise<QueryUserChainLinksResponse>,
+    readonly chainLinks: (user: string, pagination?: PageRequest) => Promise<QueryChainLinksResponse>,
     /**
      * Queries the chain link for the given user, chain name and
      * target address
@@ -52,7 +58,7 @@ export interface ProfilesExtension {
      * Queries a single application link for a given user,
      * searching via the application name and username.
      */
-    readonly userApplicationLinks: (user: string, pagination?: PageRequest) => Promise<QueryUserApplicationLinksResponse>,
+    readonly applicationLinks: (user: string, pagination?: PageRequest) => Promise<QueryApplicationLinksResponse>,
     /**
      * Queries a single application link for a given user,
      * searching via the application name and username
@@ -81,22 +87,22 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
       incomingDTagTransferRequests: async (receiver: string, pagination?: PageRequest) => {
         return queryService.IncomingDTagTransferRequests({receiver, pagination})
       },
-      userRelationships: async (subspaceId: string, user: string, pagination?: PageRequest) => {
-        return queryService.UserRelationships({
+      relationships: async (subspaceId: string, user: string, pagination?: PageRequest) => {
+        return queryService.Relationships({
           user,
           subspaceId,
           pagination
         });
       },
-      userBlocks: async (subspaceId: string, user: string, pagination?: PageRequest) => {
-        return queryService.UserBlocks({
+      blocks: async (subspaceId: string, user: string, pagination?: PageRequest) => {
+        return queryService.Blocks({
           user: user,
           subspaceId,
           pagination
         });
       },
-      userChainLinks: async (user: string, pagination?: PageRequest) => {
-        return queryService.UserChainLinks({
+      chainLinks: async (user: string, pagination?: PageRequest) => {
+        return queryService.ChainLinks({
           user,
           pagination
         });
@@ -108,8 +114,8 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
           target
         });
       },
-      userApplicationLinks: async (user: string, pagination?: PageRequest) => {
-        return queryService.UserApplicationLinks({
+      applicationLinks: async (user: string, pagination?: PageRequest) => {
+        return queryService.ApplicationLinks({
           user,
           pagination
         });
