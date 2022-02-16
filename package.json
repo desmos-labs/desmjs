@@ -1,7 +1,7 @@
 {
-  "name": "@desmoslabs/dapp-sdk",
+  "name": "desmjs-monorepo-root",
+  "description": "Root for the DesmJS monorepo",
   "private": true,
-  "description": "",
   "author": "Manuel Turetta <manuel@forbole.com>",
   "license": "Apache-2.0",
   "main": "build/index.js",
@@ -12,9 +12,6 @@
     "!*.spec.*",
     "!**/testdata/"
   ],
-  "workspaces": [
-    "packages/*"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/desmos-labs/dapp-sdk"
@@ -23,27 +20,30 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
+  "workspaces": [
+    "packages/core",
+    "packages/types"
+  ],
   "scripts": {
     "build": "yarn build-core && yarn build-react",
-    "build-core": "yarn workspace @desmoslabs/sdk-core build",
-    "publish-core": "yarn workspace @desmoslabs/sdk-core npm publish",
-    "publish-core-next": "yarn workspace @desmoslabs/sdk-core npm publish --tag next",
-    "build-react": "yarn workspace @desmoslabs/sdk-react build",
-    "publish-react": "yarn workspace @desmoslabs/sdk-react npm publish",
-    "publish-react-next": "yarn workspace @desmoslabs/sdk-react npm publish --tag next",
+    "build-core": "yarn workspace @desmoslabs/desmjs build",
+    "publish-core": "yarn workspace @desmoslabs/desmjs npm publish",
+    "publish-core-next": "yarn workspace @desmoslabs/desmjs npm publish --tag next",
     "publish-next": "yarn publish-core-next && yarn publish-react-next",
     "publish-latest": "yarn publish-core && yarn publish-react"
   },
   "devDependencies": {
-    "@cosmjs/crypto": "0.26.5",
-    "@cosmjs/encoding": "0.26.5",
-    "@cosmjs/proto-signing": "0.26.5",
-    "@cosmjs/utils": "0.26.5",
-    "@desmoslabs/sdk-core": "workspace:packages/sdk-core",
-    "@types/long": "4.0.1",
-    "@types/pino": "6.3.11",
-    "@walletconnect/jsonrpc-types": "1.0.0",
-    "ts-proto": "~1.82.5",
-    "typescript": "~4.3"
-  }
+    "@cosmjs/crypto": "^0.27.1",
+    "@cosmjs/encoding": "^0.27.1",
+    "@cosmjs/proto-signing": "^0.27.1",
+    "@cosmjs/utils": "^0.27.1",
+    "@desmoslabs/desmjs": "workspace:packages/core",
+    "@desmoslabs/desmjs-types": "workspace:packages/types",
+    "@types/long": "^4.0.1",
+    "@types/pino": "^6.3.11",
+    "@walletconnect/jsonrpc-types": "^1.0.0",
+    "ts-proto": "^1.82.5",
+    "typescript": "^4.4.4"
+  },
+  "packageManager": "yarn@3.1.1"
 }

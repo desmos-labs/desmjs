@@ -32,4 +32,4 @@ yarn-error.log*
 !.yarn/plugins
 
 # Ignore downloaded desmos version
-packages/sdk-core/script/desmos
+packages/core/script/desmos
