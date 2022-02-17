@@ -55,7 +55,7 @@ function assertDefinedAndNotNull(object?: any, message?: string) {
   }
 }
 
-const profilesTypes: Record<string, AminoConverter> = {
+export const profilesTypes: Record<string, AminoConverter> = {
   // Profiles module
   "/desmos.profiles.v1beta1.MsgSaveProfile": {
     aminoType: "desmos/MsgSaveProfile",

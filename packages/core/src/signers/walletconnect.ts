@@ -23,9 +23,7 @@ export interface WalletConnectSignerOptions {
 export class WalletConnectSigner extends Signer {
   public readonly signingMode: SigningMode = SigningMode.AMINO;
 
-  private client: WalletConnectClient | undefined;
-
-  private chainId: number | undefined;
+  private readonly client: WalletConnectClient;
 
   private accountData: AccountData | undefined;
 
@@ -36,25 +34,24 @@ export class WalletConnectSigner extends Signer {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
     this.client = walletConnectClient;
+
+    // If the client is already connected, populate the data
+    if (this.client.connected) {
+      this.populateSessionDependedFields(this.client);
+      this.updateStatus(SignerStatus.Connected);
+    }
   }
 
   /**
    * Callback called when a client terminates a wallet connect session.
    */
-  private readonly onDisconnect = () => {
-    this.disconnect();
-  };
+  private async onDisconnect() {
+    await this.disconnect();
+  }
 
-  private populateSessionDependedFields({
-    accounts,
-    chainId,
-  }: {
-    accounts: string[];
-    chainId: number;
-  }) {
-    this.chainId = chainId;
+  private populateSessionDependedFields({ accounts }: { accounts: string[] }) {
     this.accountData = {
-      address: accounts[chainId],
+      address: accounts[0],
       algo: "secp256k1",
       pubkey: Uint8Array.from([0x02, ...new Array(32).fill(0)]),
     };
@@ -65,15 +62,11 @@ export class WalletConnectSigner extends Signer {
    * @private
    */
   private subscribeToEvents() {
-    assert(this.client);
-
     // Subscribe to the connect event
     this.client.on("connect", (error: any, payload: IInternalEvent) => {
-      this.client?.off("connect");
       if (error) {
         console.log("connect error", error);
         this.updateStatus(SignerStatus.NotConnected);
-        this.client = undefined;
         return;
       }
 
@@ -103,7 +96,6 @@ export class WalletConnectSigner extends Signer {
       return;
     }
 
-    assert(this.client);
     this.subscribeToEvents();
 
     // Check if the client is connected
@@ -115,7 +107,7 @@ export class WalletConnectSigner extends Signer {
 
     // Create the WalletConnect session
     this.updateStatus(SignerStatus.Connecting);
-    this.client.createSession();
+    await this.client.createSession();
   }
 
   /**
@@ -127,22 +119,34 @@ export class WalletConnectSigner extends Signer {
     }
 
     this.updateStatus(SignerStatus.Disconnecting);
-    this.client?.off("session_update");
-    this.client?.off("disconnect");
-    this.client?.killSession();
-    this.client = undefined;
-    this.chainId = undefined;
+    this.client.off("session_update");
+    this.client.off("disconnect");
+    await this.client.killSession();
     this.accountData = undefined;
     this.updateStatus(SignerStatus.NotConnected);
   }
 
   /**
    * Implements Signer.
+   *
+   * NOTE: The returned AccountData will contain an empty public key and a default algorithm set to "secp256k1".
+   * This is because WalletConnect does not return the public key nor the algorithm used after the connection.
+   */
+  async getCurrentAccount(): Promise<AccountData | undefined> {
+    return this.accountData;
+  }
+
+  /**
+   * Implements Signer.
+   *
+   * NOTE: This method might never return anything if the wallet is currently closed, due to the fact that all
+   * WalletConnect requests are asynchronous and complete only when the associated wallet is opened.
+   * If you want to get the currently used account, use `getCurrentAccount` instead.
    */
   async getAccounts(): Promise<readonly AccountData[]> {
     this.assertConnected();
 
-    const result = await this.client!.sendCustomRequest({
+    const result = await this.client.sendCustomRequest({
       jsonrpc: "2.0",
       method: "cosmos_getAccounts",
       params: [],
@@ -168,7 +172,7 @@ export class WalletConnectSigner extends Signer {
     assert(this.accountData);
 
     const params = {
-      signerAddress: this.accountData.address,
+      signerAddress,
       signDoc: stringifySignDocValues(signDoc),
     };
 
@@ -215,7 +219,7 @@ export class WalletConnectSigner extends Signer {
     assert(this.accountData);
 
     const params = {
-      signerAddress: this.accountData.address,
+      signerAddress,
       signDoc,
     };
 

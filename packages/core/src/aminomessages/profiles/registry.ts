@@ -1,5 +1,3 @@
-import { GeneratedType } from "@cosmjs/proto-signing";
-import { defaultRegistryTypes } from "@cosmjs/stargate";
 import {
   MsgLinkApplication,
   MsgUnlinkApplication,
@@ -24,11 +22,9 @@ import {
   MsgDeleteRelationship,
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_relationships";
+import { GeneratedType } from "@cosmjs/proto-signing";
 
-export const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
-  ...defaultRegistryTypes,
-
-  // Profiles module
+export const profilesRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ["/desmos.profiles.v1beta1.MsgLinkApplication", MsgLinkApplication],
   ["/desmos.profiles.v1beta1.MsgUnlinkApplication", MsgUnlinkApplication],
   ["/desmos.profiles.v1beta1.MsgLinkChainAccount", MsgLinkChainAccount],
@@ -54,4 +50,4 @@ export const registryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ["/desmos.profiles.v1beta1.MsgUnblockUser", MsgUnblockUser],
 ];
 
-export default registryTypes;
+export default profilesRegistryTypes;

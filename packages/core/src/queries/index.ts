@@ -1,6 +1,12 @@
-import {AuthExtension, BankExtension, QueryClient, StakingExtension, TxExtension} from "@cosmjs/stargate";
-import {AuthzExtension} from "./authz";
-import {ProfilesExtension} from "./profiles";
+import {
+  AuthExtension,
+  BankExtension,
+  QueryClient,
+  StakingExtension,
+  TxExtension,
+} from "@cosmjs/stargate";
+import { AuthzExtension } from "./authz";
+import { ProfilesExtension } from "./profiles";
 
 export type DesmosQueryClient = QueryClient &
   AuthzExtension &
@@ -8,7 +14,7 @@ export type DesmosQueryClient = QueryClient &
   BankExtension &
   StakingExtension &
   TxExtension &
-  ProfilesExtension
+  ProfilesExtension;
 
 export * from "./authz";
 export * from "./profiles";

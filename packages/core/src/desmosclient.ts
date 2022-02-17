@@ -35,6 +35,7 @@ import { fromBase64 } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53 } from "@cosmjs/math";
+import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_profile";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,
@@ -42,8 +43,7 @@ import {
   setupProfilesExtension,
   setupAuthzExtension,
 } from "./queries";
-import { registryTypes } from "./registry";
-import { desmosTypes } from "./aminomessages";
+import { desmosRegistry, desmosTypes } from "./aminomessages";
 
 function makeSignerInfos(
   signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
@@ -109,7 +109,7 @@ export class DesmosClient extends SigningStargateClient {
     return new DesmosClient(tmClient);
   }
 
-  public static async withSigner(
+  public static override async connectWithSigner(
     endpoint: string,
     signer: Signer
   ): Promise<DesmosClient> {
@@ -121,13 +121,13 @@ export class DesmosClient extends SigningStargateClient {
     client: Tendermint34Client,
     signer: Signer = new NoOpSigner()
   ) {
-    const registry = new Registry(registryTypes);
+    const registry = new Registry(desmosRegistry);
     const aminoTypes = new AminoTypes({
       additions: desmosTypes,
       prefix: "desmos",
     });
 
-    super(undefined, signer, {
+    super(client, signer, {
       registry,
       aminoTypes,
     });
@@ -160,6 +160,18 @@ export class DesmosClient extends SigningStargateClient {
     return profileFromAny(account);
   }
 
+  /**
+   * Gets the profile associated to the provided address, or `null` if no profile is found.
+   */
+  public async getProfile(searchAddress: string): Promise<Profile | null> {
+    const queryClient = this.forceGetQueryClient();
+    return queryClient.profiles.profile(searchAddress);
+  }
+
+  /**
+   * Implements SigningStargateClient.
+   * @protected
+   */
   protected override getQueryClient(): DesmosQueryClient | undefined {
     const client = super.getTmClient();
     return client
@@ -175,6 +187,10 @@ export class DesmosClient extends SigningStargateClient {
       : undefined;
   }
 
+  /**
+   * Implements SigningStargateClient.
+   * @protected
+   */
   protected override forceGetQueryClient(): DesmosQueryClient {
     const client = this.getQueryClient();
     if (!client) {

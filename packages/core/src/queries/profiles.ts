@@ -31,7 +31,7 @@ export interface ProfilesExtension {
      * If the queried user does not have a profile, the returned response will
      * contain a null profile.
      */
-    readonly profile: (user: string) => Promise<Any | null>;
+    readonly profile: (user: string) => Promise<Profile | null>;
     /**
      * Queries all the DTag transfers requests that have been made towards the user with the given address.
      */
@@ -109,7 +109,7 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
     profiles: {
       profile: async (user: string) => {
         const { profile } = await queryService.Profile({ user });
-        return profile ?? null;
+        return profile ? Profile.decode(profile.value) : null;
       },
       incomingDTagTransferRequests: async (
         receiver: string,

@@ -9,6 +9,7 @@ import {
   OfflineAminoSigner,
 } from "@cosmjs/amino";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { read } from "fs";
 import SignerNotConnected from "./errors";
 
 /**
@@ -124,7 +125,16 @@ export abstract class Signer
   public abstract disconnect(): Promise<void>;
 
   /**
+   * Gets the account selected by the user as the account to be used, or `undefined` if no account
+   * has been selected yet.
+   */
+  public abstract getCurrentAccount(): Promise<AccountData | undefined>;
+
+  /**
    * Gets all the accounts managed by the signer.
+   *
+   * NOTE: In some signer implementations, this method might execute asynchronously.
+   * This means the returned promise might never complete.
    */
   public abstract getAccounts(): Promise<readonly AccountData[]>;
 

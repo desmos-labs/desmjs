@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DirectSignResponse } from "@cosmjs/proto-signing";
+import { AccountData, DirectSignResponse } from "@cosmjs/proto-signing";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
 import { Signer, SignerStatus, SigningMode } from "./signer";
@@ -21,6 +21,10 @@ export class NoOpSigner extends Signer {
   }
 
   disconnect(): Promise<void> {
+    throw new Error("Operation not implemented");
+  }
+
+  getCurrentAccount(): Promise<AccountData | undefined> {
     throw new Error("Operation not implemented");
   }
 
