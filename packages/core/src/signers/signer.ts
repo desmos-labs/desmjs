@@ -1,13 +1,22 @@
-import {AccountData, DirectSignResponse, OfflineDirectSigner} from "@cosmjs/proto-signing";
-import {AminoSignResponse, StdSignDoc, OfflineAminoSigner} from "@cosmjs/amino";
-import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import {
+  AccountData,
+  DirectSignResponse,
+  OfflineDirectSigner,
+} from "@cosmjs/proto-signing";
+import {
+  AminoSignResponse,
+  StdSignDoc,
+  OfflineAminoSigner,
+} from "@cosmjs/amino";
+import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import SignerNotConnected from "./errors";
 
 /**
  * Represents the various signing modes that can be supported by signers.
  */
 export enum SigningMode {
   AMINO,
-  DIRECT
+  DIRECT,
 }
 
 /**
@@ -26,35 +35,13 @@ export enum SignerStatus {
 export type SignerObserver = (newStatus: SignerStatus) => void;
 
 /**
- * Represents the error that is thrown inside operations that require the client to be connected, if it is not.
- */
-export class SignerNotConnected extends Error {
-  constructor() {
-    super("Signer not connected");
-  }
-}
-
-/**
- * Checks if the provided object is an instance of ConnectableSigner.
- * @param signer - The object to check.
- * @returns Returns true if the provided object is an instance of ConnectableSigner, false otherwise.
- */
-export function isConnectableSigner(signer: any | undefined): signer is Signer {
-  if (signer === undefined) {
-    return false;
-  }
-
-  const castedSigner = signer as Signer;
-  return castedSigner.status !== undefined && castedSigner.connect !== undefined &&
-    castedSigner.disconnect !== undefined && castedSigner.getAccounts !== undefined &&
-    castedSigner.addStatusListener !== undefined && castedSigner.removeStatusListener !== undefined;
-}
-
-/**
  * Represents a remote signer.
  */
-export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner {
-  private _status: SignerStatus
+export abstract class Signer
+  implements OfflineDirectSigner, OfflineAminoSigner
+{
+  private signerStatus: SignerStatus;
+
   private observers: SignerObserver[] = [];
 
   /**
@@ -63,7 +50,7 @@ export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner 
    * @protected
    */
   protected constructor(status: SignerStatus) {
-    this._status = status;
+    this.signerStatus = status;
   }
 
   /**
@@ -72,8 +59,8 @@ export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner 
    * @protected
    */
   protected updateStatus(newStatus: SignerStatus) {
-    this._status = newStatus;
-    this.observers.forEach(o => o(newStatus));
+    this.signerStatus = newStatus;
+    this.observers.forEach((o) => o(newStatus));
   }
 
   /**
@@ -81,7 +68,7 @@ export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner 
    * @protected
    */
   protected assertConnected() {
-    if (this._status !== SignerStatus.Connected) {
+    if (this.signerStatus !== SignerStatus.Connected) {
       throw new SignerNotConnected();
     }
   }
@@ -109,14 +96,14 @@ export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner 
    * Gets the current signer status.
    */
   public get status(): SignerStatus {
-    return this._status;
+    return this.signerStatus;
   }
 
   /**
    * Tells whether the signer is connected or not.
    */
   public get isConnected(): boolean {
-    return this.status == SignerStatus.Connected;
+    return this.status === SignerStatus.Connected;
   }
 
   /**
@@ -144,10 +131,16 @@ export abstract class Signer implements OfflineDirectSigner, OfflineAminoSigner 
   /**
    * Implements OfflineDirectSigner.
    */
-  public abstract signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse>
+  public abstract signDirect(
+    signerAddress: string,
+    signDoc: SignDoc
+  ): Promise<DirectSignResponse>;
 
   /**
    * Implements OfflineAminoSigner.
    */
-  public abstract signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse>
+  public abstract signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc
+  ): Promise<AminoSignResponse>;
 }

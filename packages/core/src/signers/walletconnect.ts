@@ -1,13 +1,17 @@
-import {AccountData, decodePubkey, DirectSignResponse} from "@cosmjs/proto-signing";
-import {IInternalEvent} from "@walletconnect/types";
+import {
+  AccountData,
+  decodePubkey,
+  DirectSignResponse,
+} from "@cosmjs/proto-signing";
+import { IInternalEvent } from "@walletconnect/types";
 import WalletConnectClient from "@walletconnect/client";
-import {stringifySignDocValues} from "cosmos-wallet";
-import {Buffer} from "buffer";
-import {AuthInfo, SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import {Signer, SignerStatus, SigningMode} from "src/signers/signer";
-import {AminoSignResponse, StdSignDoc} from "@cosmjs/amino";
-import {fromBase64} from "@cosmjs/encoding";
-import {assert} from "@cosmjs/utils";
+import { stringifySignDocValues } from "cosmos-wallet";
+import { Buffer } from "buffer";
+import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
+import { fromBase64 } from "@cosmjs/encoding";
+import { assert } from "@cosmjs/utils";
+import { Signer, SignerStatus, SigningMode } from "./signer";
 
 export interface WalletConnectSignerOptions {
   signingMode: SigningMode;
@@ -18,11 +22,17 @@ export interface WalletConnectSignerOptions {
  */
 export class WalletConnectSigner extends Signer {
   public readonly signingMode: SigningMode = SigningMode.AMINO;
+
   private client: WalletConnectClient | undefined;
-  private chainId: number | undefined
+
+  private chainId: number | undefined;
+
   private accountData: AccountData | undefined;
 
-  constructor(walletConnectClient: WalletConnectClient, options: WalletConnectSignerOptions) {
+  constructor(
+    walletConnectClient: WalletConnectClient,
+    options: WalletConnectSignerOptions
+  ) {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
     this.client = walletConnectClient;
@@ -33,15 +43,21 @@ export class WalletConnectSigner extends Signer {
    */
   private readonly onDisconnect = () => {
     this.disconnect();
-  }
+  };
 
-  private populateSessionDependedFields({accounts, chainId}: { accounts: string[], chainId: number }) {
+  private populateSessionDependedFields({
+    accounts,
+    chainId,
+  }: {
+    accounts: string[];
+    chainId: number;
+  }) {
     this.chainId = chainId;
     this.accountData = {
       address: accounts[chainId],
       algo: "secp256k1",
-      pubkey: Uint8Array.from([0x02, ...(new Array(32).fill(0))]),
-    }
+      pubkey: Uint8Array.from([0x02, ...new Array(32).fill(0)]),
+    };
   }
 
   /**
@@ -58,7 +74,7 @@ export class WalletConnectSigner extends Signer {
         console.log("connect error", error);
         this.updateStatus(SignerStatus.NotConnected);
         this.client = undefined;
-        return
+        return;
       }
 
       this.populateSessionDependedFields(payload.params[0]);
@@ -69,7 +85,7 @@ export class WalletConnectSigner extends Signer {
     this.client.on("session_update", (error, payload) => {
       if (error) {
         console.error("session_update error", error);
-        return
+        return;
       }
 
       this.populateSessionDependedFields(payload.params[0]);
@@ -137,14 +153,17 @@ export class WalletConnectSigner extends Signer {
         address: accountData.address,
         algo: accountData.algo,
         pubkey: fromBase64(accountData.pubkey),
-      }
-    })
+      };
+    });
   }
 
   /**
    * Implements OfflineDirectSigner.
    */
-  async signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
+  async signDirect(
+    signerAddress: string,
+    signDoc: SignDoc
+  ): Promise<DirectSignResponse> {
     this.assertConnected();
     assert(this.accountData);
 
@@ -159,13 +178,15 @@ export class WalletConnectSigner extends Signer {
       params: [params],
     });
 
-    const authInfoBytes = Uint8Array.from(Buffer.from(result.authInfoBytes, "hex"));
+    const authInfoBytes = Uint8Array.from(
+      Buffer.from(result.authInfoBytes, "hex")
+    );
     const resultSignDoc = SignDoc.fromPartial({
       bodyBytes: Uint8Array.from(Buffer.from(result.bodyBytes, "hex")),
       authInfoBytes,
       chainId: signDoc.chainId,
       accountNumber: signDoc.accountNumber,
-    })
+    });
 
     // Extract the public key from the response
     const authInfo = AuthInfo.decode(authInfoBytes);
@@ -179,20 +200,23 @@ export class WalletConnectSigner extends Signer {
       signature: {
         signature: Buffer.from(result.signature, "hex").toString("base64"),
         pub_key: pubKey,
-      }
-    }
+      },
+    };
   }
 
   /**
    * Implements OfflineDirectSigner.
    */
-  async signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse> {
+  async signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc
+  ): Promise<AminoSignResponse> {
     this.assertConnected();
     assert(this.accountData);
 
     const params = {
       signerAddress: this.accountData.address,
-      signDoc: signDoc,
+      signDoc,
     };
 
     const result = await this.client!.sendCustomRequest({
@@ -205,8 +229,8 @@ export class WalletConnectSigner extends Signer {
       signed: signDoc,
       signature: {
         signature: result.signature,
-        pub_key: result.pub_key
-      }
+        pub_key: result.pub_key,
+      },
     } as AminoSignResponse;
   }
 }

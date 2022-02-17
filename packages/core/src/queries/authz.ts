@@ -1,10 +1,7 @@
-import {PageRequest} from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
-import {QueryClientImpl} from "cosmjs-types/cosmos/authz/v1beta1/query";
-import {
-  createProtobufRpcClient,
-  QueryClient,
-} from "@cosmjs/stargate";
-import {Grant} from "cosmjs-types/cosmos/authz/v1beta1/authz";
+import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
+import { QueryClientImpl } from "cosmjs-types/cosmos/authz/v1beta1/query";
+import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
+import { Grant } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 
 /**
  * Represents the Authz extension to be used on QueryClient instances.
@@ -17,7 +14,7 @@ export interface AuthzExtension {
       msgTypeUrl?: string,
       pagination?: PageRequest
     ) => Promise<Grant[] | undefined>;
-  }
+  };
 }
 
 /**
@@ -32,13 +29,18 @@ export function setupAuthzExtension(base: QueryClient): AuthzExtension {
 
   return {
     authz: {
-      grants: async (granter: string, grantee: string, msgTypeUrl?: string, pagination?: PageRequest) => {
+      grants: async (
+        granter: string,
+        grantee: string,
+        msgTypeUrl?: string,
+        pagination?: PageRequest
+      ) => {
         try {
-          const {grants} = await queryService.Grants({
-            granter: granter,
-            grantee: grantee,
+          const { grants } = await queryService.Grants({
+            granter,
+            grantee,
             msgTypeUrl: msgTypeUrl || "",
-            pagination: pagination,
+            pagination,
           });
           return grants;
         } catch (e) {
@@ -47,6 +49,5 @@ export function setupAuthzExtension(base: QueryClient): AuthzExtension {
         }
       },
     },
-  }
+  };
 }
-

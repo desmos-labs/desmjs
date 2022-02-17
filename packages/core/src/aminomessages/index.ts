@@ -1,8 +1,8 @@
-import {profilesTypes} from "src/aminomessages/profiles/converter";
-import {AminoConverter} from "@cosmjs/stargate";
+import { AminoConverter } from "@cosmjs/stargate";
+import profilesTypes from "./profiles/converter";
 
-export * from "src/aminomessages/profiles/messages";
+export * from "./profiles/messages";
 
 export const desmosTypes: Record<string, AminoConverter> = {
   ...profilesTypes,
-}
+};

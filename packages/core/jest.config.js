@@ -1,13 +1,13 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: "ts-jest",
+  testEnvironment: "node",
   globals: {
     "ts-jest": {
-      tsconfig: "./tsconfig.json"
-    }
+      tsconfig: "./tsconfig.json",
+    },
   },
   moduleNameMapper: {
-    '^@desmos-labs/proto/(.*)$': '<rootDir>/../proto/build/$1',
+    "^@desmos-labs/proto/(.*)$": "<rootDir>/../proto/build/$1",
   },
 };
