@@ -8,6 +8,9 @@ import {
 import { AuthzExtension } from "./authz";
 import { ProfilesExtension } from "./profiles";
 
+export * from "./authz";
+export * from "./profiles";
+
 export type DesmosQueryClient = QueryClient &
   AuthzExtension &
   AuthExtension &
@@ -15,6 +18,3 @@ export type DesmosQueryClient = QueryClient &
   StakingExtension &
   TxExtension &
   ProfilesExtension;
-
-export * from "./authz";
-export * from "./profiles";
