@@ -11,7 +11,7 @@ import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
 import { fromBase64 } from "@cosmjs/encoding";
 import { assert } from "@cosmjs/utils";
-import { Signer, SignerStatus, SigningMode } from "./signer";
+import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
 
 export interface WalletConnectSignerOptions {
   signingMode: SigningMode;

@@ -1,0 +1,15 @@
+# @desmoslabs/desmjs
+
+[![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs)
+
+This package contains the core of DesmJS.
+
+### `DesmosClient`
+Allows to easily create, sign and broadcast a transaction containing any kind of supported message. 
+It extends `@cosmjs/cosmjs` `SigningStargateClient` and supports both `SIGN_DIRECT` and `SIGN_AMINO_JSON` 
+signature methods. 
+
+In order to work sign transactions, it relies on a `Signer`. 
+
+### `Signer` 
+Represents an abstract signer able to sign a transaction either using `SIGN_MODE_DIRECT` or `SIGN_MODE_AMINO_JSON`.

@@ -22,18 +22,18 @@
   },
   "workspaces": [
     "packages/core",
-    "packages/types"
+    "packages/types",
+    "packages/walletconnect"
   ],
   "scripts": {
-    "build": "yarn build-core && yarn build-types",
-    "publish": "yarn publish-core && yarn publish-types",
-    "publish-next": "yarn publish-core-next && yarn publish-types-next",
+    "build": "yarn build-core && yarn build-types && yarn build-walletconnect",
+    "publish": "yarn publish-core && yarn publish-types && yarn publish-walletconnect",
     "build-core": "yarn workspace @desmoslabs/desmjs build",
     "publish-core": "yarn workspace @desmoslabs/desmjs npm publish",
-    "publish-core-next": "yarn workspace @desmoslabs/desmjs npm publish --tag next",
     "build-types": "yarn workspace @desmoslabs/desmjs-types build",
     "publish-types": "yarn workspace @desmoslabs/desmjs-types npm publish",
-    "publish-types-next": "yarn workspace @desmoslabs/desmjs-types npm publish --tag next",
+    "build-walletconnect": "yarn workspace @desmoslabs/desmjs-walletconnect build",
+    "publish-walletconnect": "yarn workspace @desmoslabs/desmjs-walletconnect npm publish",
     "lint": "pretty-quick packages --staged && lint-staged"
   },
   "devDependencies": {

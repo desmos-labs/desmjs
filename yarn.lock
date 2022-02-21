@@ -1538,6 +1538,41 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@desmoslabs/desmjs-walletconnect@workspace:packages/walletconnect":
+  version: 0.0.0-use.local
+  resolution: "@desmoslabs/desmjs-walletconnect@workspace:packages/walletconnect"
+  dependencies:
+    "@babel/core": ^7.15.0
+    "@babel/preset-env": ^7.15.0
+    "@babel/preset-typescript": ^7.15.0
+    "@cosmjs/amino": ^0.27.1
+    "@cosmjs/crypto": ^0.27.1
+    "@cosmjs/encoding": ^0.27.1
+    "@cosmjs/math": ^0.27.1
+    "@cosmjs/proto-signing": ^0.27.1
+    "@cosmjs/stargate": ^0.27.1
+    "@cosmjs/tendermint-rpc": ^0.27.1
+    "@cosmjs/utils": ^0.27.1
+    "@desmoslabs/desmjs": "workspace:packages/core"
+    "@desmoslabs/desmjs-types": "workspace:packages/types"
+    "@types/jest": ^27.0.1
+    "@types/long": ^4.0.1
+    "@types/node": ^16.7.6
+    "@types/pino": ^6.3.11
+    "@walletconnect/client": ^1.6.6
+    "@walletconnect/types": ^1.6.6
+    "@walletconnect/utils": ^1.6.6
+    babel-jest: ^27.1.0
+    cosmjs-types: ^0.4.1
+    cosmos-wallet: ^1.1.0
+    jest: ^27.1.0
+    long: ^4.0.0
+    ts-jest: ^27.0.5
+    ts-proto: ^1.82.5
+    typescript: ^4.4.4
+  languageName: unknown
+  linkType: soft
+
 "@desmoslabs/desmjs@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs@workspace:packages/core"
@@ -1558,9 +1593,6 @@ __metadata:
     "@types/long": ^4.0.1
     "@types/node": ^16.7.6
     "@types/pino": ^6.3.11
-    "@walletconnect/client": ^1.6.6
-    "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^1.6.6
     babel-jest: ^27.1.0
     cosmjs-types: ^0.4.1
     cosmos-wallet: ^1.1.0
