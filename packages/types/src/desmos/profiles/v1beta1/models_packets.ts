@@ -37,7 +37,15 @@ export interface LinkChainAccountPacketAck {
   sourceAddress: string;
 }
 
-const baseLinkChainAccountPacketData: object = { destinationAddress: "" };
+function createBaseLinkChainAccountPacketData(): LinkChainAccountPacketData {
+  return {
+    sourceAddress: undefined,
+    sourceProof: undefined,
+    sourceChainConfig: undefined,
+    destinationAddress: "",
+    destinationProof: undefined,
+  };
+}
 
 export const LinkChainAccountPacketData = {
   encode(
@@ -71,9 +79,7 @@ export const LinkChainAccountPacketData = {
   ): LinkChainAccountPacketData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseLinkChainAccountPacketData,
-    } as LinkChainAccountPacketData;
+    const message = createBaseLinkChainAccountPacketData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -104,46 +110,23 @@ export const LinkChainAccountPacketData = {
   },
 
   fromJSON(object: any): LinkChainAccountPacketData {
-    const message = {
-      ...baseLinkChainAccountPacketData,
-    } as LinkChainAccountPacketData;
-    if (object.sourceAddress !== undefined && object.sourceAddress !== null) {
-      message.sourceAddress = Any.fromJSON(object.sourceAddress);
-    } else {
-      message.sourceAddress = undefined;
-    }
-    if (object.sourceProof !== undefined && object.sourceProof !== null) {
-      message.sourceProof = Proof.fromJSON(object.sourceProof);
-    } else {
-      message.sourceProof = undefined;
-    }
-    if (
-      object.sourceChainConfig !== undefined &&
-      object.sourceChainConfig !== null
-    ) {
-      message.sourceChainConfig = ChainConfig.fromJSON(
-        object.sourceChainConfig
-      );
-    } else {
-      message.sourceChainConfig = undefined;
-    }
-    if (
-      object.destinationAddress !== undefined &&
-      object.destinationAddress !== null
-    ) {
-      message.destinationAddress = String(object.destinationAddress);
-    } else {
-      message.destinationAddress = "";
-    }
-    if (
-      object.destinationProof !== undefined &&
-      object.destinationProof !== null
-    ) {
-      message.destinationProof = Proof.fromJSON(object.destinationProof);
-    } else {
-      message.destinationProof = undefined;
-    }
-    return message;
+    return {
+      sourceAddress: isSet(object.sourceAddress)
+        ? Any.fromJSON(object.sourceAddress)
+        : undefined,
+      sourceProof: isSet(object.sourceProof)
+        ? Proof.fromJSON(object.sourceProof)
+        : undefined,
+      sourceChainConfig: isSet(object.sourceChainConfig)
+        ? ChainConfig.fromJSON(object.sourceChainConfig)
+        : undefined,
+      destinationAddress: isSet(object.destinationAddress)
+        ? String(object.destinationAddress)
+        : "",
+      destinationProof: isSet(object.destinationProof)
+        ? Proof.fromJSON(object.destinationProof)
+        : undefined,
+    };
   },
 
   toJSON(message: LinkChainAccountPacketData): unknown {
@@ -169,53 +152,35 @@ export const LinkChainAccountPacketData = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<LinkChainAccountPacketData>
+  fromPartial<I extends Exact<DeepPartial<LinkChainAccountPacketData>, I>>(
+    object: I
   ): LinkChainAccountPacketData {
-    const message = {
-      ...baseLinkChainAccountPacketData,
-    } as LinkChainAccountPacketData;
-    if (object.sourceAddress !== undefined && object.sourceAddress !== null) {
-      message.sourceAddress = Any.fromPartial(object.sourceAddress);
-    } else {
-      message.sourceAddress = undefined;
-    }
-    if (object.sourceProof !== undefined && object.sourceProof !== null) {
-      message.sourceProof = Proof.fromPartial(object.sourceProof);
-    } else {
-      message.sourceProof = undefined;
-    }
-    if (
+    const message = createBaseLinkChainAccountPacketData();
+    message.sourceAddress =
+      object.sourceAddress !== undefined && object.sourceAddress !== null
+        ? Any.fromPartial(object.sourceAddress)
+        : undefined;
+    message.sourceProof =
+      object.sourceProof !== undefined && object.sourceProof !== null
+        ? Proof.fromPartial(object.sourceProof)
+        : undefined;
+    message.sourceChainConfig =
       object.sourceChainConfig !== undefined &&
       object.sourceChainConfig !== null
-    ) {
-      message.sourceChainConfig = ChainConfig.fromPartial(
-        object.sourceChainConfig
-      );
-    } else {
-      message.sourceChainConfig = undefined;
-    }
-    if (
-      object.destinationAddress !== undefined &&
-      object.destinationAddress !== null
-    ) {
-      message.destinationAddress = object.destinationAddress;
-    } else {
-      message.destinationAddress = "";
-    }
-    if (
-      object.destinationProof !== undefined &&
-      object.destinationProof !== null
-    ) {
-      message.destinationProof = Proof.fromPartial(object.destinationProof);
-    } else {
-      message.destinationProof = undefined;
-    }
+        ? ChainConfig.fromPartial(object.sourceChainConfig)
+        : undefined;
+    message.destinationAddress = object.destinationAddress ?? "";
+    message.destinationProof =
+      object.destinationProof !== undefined && object.destinationProof !== null
+        ? Proof.fromPartial(object.destinationProof)
+        : undefined;
     return message;
   },
 };
 
-const baseLinkChainAccountPacketAck: object = { sourceAddress: "" };
+function createBaseLinkChainAccountPacketAck(): LinkChainAccountPacketAck {
+  return { sourceAddress: "" };
+}
 
 export const LinkChainAccountPacketAck = {
   encode(
@@ -234,9 +199,7 @@ export const LinkChainAccountPacketAck = {
   ): LinkChainAccountPacketAck {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseLinkChainAccountPacketAck,
-    } as LinkChainAccountPacketAck;
+    const message = createBaseLinkChainAccountPacketAck();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -252,15 +215,11 @@ export const LinkChainAccountPacketAck = {
   },
 
   fromJSON(object: any): LinkChainAccountPacketAck {
-    const message = {
-      ...baseLinkChainAccountPacketAck,
-    } as LinkChainAccountPacketAck;
-    if (object.sourceAddress !== undefined && object.sourceAddress !== null) {
-      message.sourceAddress = String(object.sourceAddress);
-    } else {
-      message.sourceAddress = "";
-    }
-    return message;
+    return {
+      sourceAddress: isSet(object.sourceAddress)
+        ? String(object.sourceAddress)
+        : "",
+    };
   },
 
   toJSON(message: LinkChainAccountPacketAck): unknown {
@@ -270,17 +229,11 @@ export const LinkChainAccountPacketAck = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<LinkChainAccountPacketAck>
+  fromPartial<I extends Exact<DeepPartial<LinkChainAccountPacketAck>, I>>(
+    object: I
   ): LinkChainAccountPacketAck {
-    const message = {
-      ...baseLinkChainAccountPacketAck,
-    } as LinkChainAccountPacketAck;
-    if (object.sourceAddress !== undefined && object.sourceAddress !== null) {
-      message.sourceAddress = object.sourceAddress;
-    } else {
-      message.sourceAddress = "";
-    }
+    const message = createBaseLinkChainAccountPacketAck();
+    message.sourceAddress = object.sourceAddress ?? "";
     return message;
   },
 };
@@ -292,10 +245,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -304,7 +259,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

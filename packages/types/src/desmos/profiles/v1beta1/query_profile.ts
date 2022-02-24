@@ -14,7 +14,9 @@ export interface QueryProfileResponse {
   profile?: Any;
 }
 
-const baseQueryProfileRequest: object = { user: "" };
+function createBaseQueryProfileRequest(): QueryProfileRequest {
+  return { user: "" };
+}
 
 export const QueryProfileRequest = {
   encode(
@@ -30,7 +32,7 @@ export const QueryProfileRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryProfileRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseQueryProfileRequest } as QueryProfileRequest;
+    const message = createBaseQueryProfileRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -46,13 +48,9 @@ export const QueryProfileRequest = {
   },
 
   fromJSON(object: any): QueryProfileRequest {
-    const message = { ...baseQueryProfileRequest } as QueryProfileRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+    };
   },
 
   toJSON(message: QueryProfileRequest): unknown {
@@ -61,18 +59,18 @@ export const QueryProfileRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<QueryProfileRequest>): QueryProfileRequest {
-    const message = { ...baseQueryProfileRequest } as QueryProfileRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<QueryProfileRequest>, I>>(
+    object: I
+  ): QueryProfileRequest {
+    const message = createBaseQueryProfileRequest();
+    message.user = object.user ?? "";
     return message;
   },
 };
 
-const baseQueryProfileResponse: object = {};
+function createBaseQueryProfileResponse(): QueryProfileResponse {
+  return { profile: undefined };
+}
 
 export const QueryProfileResponse = {
   encode(
@@ -91,7 +89,7 @@ export const QueryProfileResponse = {
   ): QueryProfileResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseQueryProfileResponse } as QueryProfileResponse;
+    const message = createBaseQueryProfileResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -107,13 +105,9 @@ export const QueryProfileResponse = {
   },
 
   fromJSON(object: any): QueryProfileResponse {
-    const message = { ...baseQueryProfileResponse } as QueryProfileResponse;
-    if (object.profile !== undefined && object.profile !== null) {
-      message.profile = Any.fromJSON(object.profile);
-    } else {
-      message.profile = undefined;
-    }
-    return message;
+    return {
+      profile: isSet(object.profile) ? Any.fromJSON(object.profile) : undefined,
+    };
   },
 
   toJSON(message: QueryProfileResponse): unknown {
@@ -123,13 +117,14 @@ export const QueryProfileResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<QueryProfileResponse>): QueryProfileResponse {
-    const message = { ...baseQueryProfileResponse } as QueryProfileResponse;
-    if (object.profile !== undefined && object.profile !== null) {
-      message.profile = Any.fromPartial(object.profile);
-    } else {
-      message.profile = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<QueryProfileResponse>, I>>(
+    object: I
+  ): QueryProfileResponse {
+    const message = createBaseQueryProfileResponse();
+    message.profile =
+      object.profile !== undefined && object.profile !== null
+        ? Any.fromPartial(object.profile)
+        : undefined;
     return message;
   },
 };
@@ -141,10 +136,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -153,7 +150,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

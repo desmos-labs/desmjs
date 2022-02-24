@@ -23,7 +23,9 @@ export interface ChainLinkJSON {
   chainConfig?: ChainConfig;
 }
 
-const baseChainLinkJSON: object = {};
+function createBaseChainLinkJSON(): ChainLinkJSON {
+  return { address: undefined, proof: undefined, chainConfig: undefined };
+}
 
 export const ChainLinkJSON = {
   encode(
@@ -48,7 +50,7 @@ export const ChainLinkJSON = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ChainLinkJSON {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseChainLinkJSON } as ChainLinkJSON;
+    const message = createBaseChainLinkJSON();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -70,23 +72,13 @@ export const ChainLinkJSON = {
   },
 
   fromJSON(object: any): ChainLinkJSON {
-    const message = { ...baseChainLinkJSON } as ChainLinkJSON;
-    if (object.address !== undefined && object.address !== null) {
-      message.address = Any.fromJSON(object.address);
-    } else {
-      message.address = undefined;
-    }
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromJSON(object.proof);
-    } else {
-      message.proof = undefined;
-    }
-    if (object.chainConfig !== undefined && object.chainConfig !== null) {
-      message.chainConfig = ChainConfig.fromJSON(object.chainConfig);
-    } else {
-      message.chainConfig = undefined;
-    }
-    return message;
+    return {
+      address: isSet(object.address) ? Any.fromJSON(object.address) : undefined,
+      proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
+      chainConfig: isSet(object.chainConfig)
+        ? ChainConfig.fromJSON(object.chainConfig)
+        : undefined,
+    };
   },
 
   toJSON(message: ChainLinkJSON): unknown {
@@ -102,23 +94,22 @@ export const ChainLinkJSON = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ChainLinkJSON>): ChainLinkJSON {
-    const message = { ...baseChainLinkJSON } as ChainLinkJSON;
-    if (object.address !== undefined && object.address !== null) {
-      message.address = Any.fromPartial(object.address);
-    } else {
-      message.address = undefined;
-    }
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromPartial(object.proof);
-    } else {
-      message.proof = undefined;
-    }
-    if (object.chainConfig !== undefined && object.chainConfig !== null) {
-      message.chainConfig = ChainConfig.fromPartial(object.chainConfig);
-    } else {
-      message.chainConfig = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ChainLinkJSON>, I>>(
+    object: I
+  ): ChainLinkJSON {
+    const message = createBaseChainLinkJSON();
+    message.address =
+      object.address !== undefined && object.address !== null
+        ? Any.fromPartial(object.address)
+        : undefined;
+    message.proof =
+      object.proof !== undefined && object.proof !== null
+        ? Proof.fromPartial(object.proof)
+        : undefined;
+    message.chainConfig =
+      object.chainConfig !== undefined && object.chainConfig !== null
+        ? ChainConfig.fromPartial(object.chainConfig)
+        : undefined;
     return message;
   },
 };
@@ -130,10 +121,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -142,7 +135,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

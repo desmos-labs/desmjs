@@ -62,13 +62,17 @@ export interface MsgUnlinkApplication {
  */
 export interface MsgUnlinkApplicationResponse {}
 
-const baseMsgLinkApplication: object = {
-  sender: "",
-  callData: "",
-  sourcePort: "",
-  sourceChannel: "",
-  timeoutTimestamp: Long.UZERO,
-};
+function createBaseMsgLinkApplication(): MsgLinkApplication {
+  return {
+    sender: "",
+    linkData: undefined,
+    callData: "",
+    sourcePort: "",
+    sourceChannel: "",
+    timeoutHeight: undefined,
+    timeoutTimestamp: Long.UZERO,
+  };
+}
 
 export const MsgLinkApplication = {
   encode(
@@ -102,7 +106,7 @@ export const MsgLinkApplication = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgLinkApplication {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgLinkApplication } as MsgLinkApplication;
+    const message = createBaseMsgLinkApplication();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -136,46 +140,23 @@ export const MsgLinkApplication = {
   },
 
   fromJSON(object: any): MsgLinkApplication {
-    const message = { ...baseMsgLinkApplication } as MsgLinkApplication;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    if (object.linkData !== undefined && object.linkData !== null) {
-      message.linkData = Data.fromJSON(object.linkData);
-    } else {
-      message.linkData = undefined;
-    }
-    if (object.callData !== undefined && object.callData !== null) {
-      message.callData = String(object.callData);
-    } else {
-      message.callData = "";
-    }
-    if (object.sourcePort !== undefined && object.sourcePort !== null) {
-      message.sourcePort = String(object.sourcePort);
-    } else {
-      message.sourcePort = "";
-    }
-    if (object.sourceChannel !== undefined && object.sourceChannel !== null) {
-      message.sourceChannel = String(object.sourceChannel);
-    } else {
-      message.sourceChannel = "";
-    }
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Height.fromJSON(object.timeoutHeight);
-    } else {
-      message.timeoutHeight = undefined;
-    }
-    if (
-      object.timeoutTimestamp !== undefined &&
-      object.timeoutTimestamp !== null
-    ) {
-      message.timeoutTimestamp = Long.fromString(object.timeoutTimestamp);
-    } else {
-      message.timeoutTimestamp = Long.UZERO;
-    }
-    return message;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      linkData: isSet(object.linkData)
+        ? Data.fromJSON(object.linkData)
+        : undefined,
+      callData: isSet(object.callData) ? String(object.callData) : "",
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel)
+        ? String(object.sourceChannel)
+        : "",
+      timeoutHeight: isSet(object.timeoutHeight)
+        ? Height.fromJSON(object.timeoutHeight)
+        : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp)
+        ? Long.fromString(object.timeoutTimestamp)
+        : Long.UZERO,
+    };
   },
 
   toJSON(message: MsgLinkApplication): unknown {
@@ -200,51 +181,33 @@ export const MsgLinkApplication = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgLinkApplication>): MsgLinkApplication {
-    const message = { ...baseMsgLinkApplication } as MsgLinkApplication;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
-    if (object.linkData !== undefined && object.linkData !== null) {
-      message.linkData = Data.fromPartial(object.linkData);
-    } else {
-      message.linkData = undefined;
-    }
-    if (object.callData !== undefined && object.callData !== null) {
-      message.callData = object.callData;
-    } else {
-      message.callData = "";
-    }
-    if (object.sourcePort !== undefined && object.sourcePort !== null) {
-      message.sourcePort = object.sourcePort;
-    } else {
-      message.sourcePort = "";
-    }
-    if (object.sourceChannel !== undefined && object.sourceChannel !== null) {
-      message.sourceChannel = object.sourceChannel;
-    } else {
-      message.sourceChannel = "";
-    }
-    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
-    } else {
-      message.timeoutHeight = undefined;
-    }
-    if (
-      object.timeoutTimestamp !== undefined &&
-      object.timeoutTimestamp !== null
-    ) {
-      message.timeoutTimestamp = object.timeoutTimestamp as Long;
-    } else {
-      message.timeoutTimestamp = Long.UZERO;
-    }
+  fromPartial<I extends Exact<DeepPartial<MsgLinkApplication>, I>>(
+    object: I
+  ): MsgLinkApplication {
+    const message = createBaseMsgLinkApplication();
+    message.sender = object.sender ?? "";
+    message.linkData =
+      object.linkData !== undefined && object.linkData !== null
+        ? Data.fromPartial(object.linkData)
+        : undefined;
+    message.callData = object.callData ?? "";
+    message.sourcePort = object.sourcePort ?? "";
+    message.sourceChannel = object.sourceChannel ?? "";
+    message.timeoutHeight =
+      object.timeoutHeight !== undefined && object.timeoutHeight !== null
+        ? Height.fromPartial(object.timeoutHeight)
+        : undefined;
+    message.timeoutTimestamp =
+      object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null
+        ? Long.fromValue(object.timeoutTimestamp)
+        : Long.UZERO;
     return message;
   },
 };
 
-const baseMsgLinkApplicationResponse: object = {};
+function createBaseMsgLinkApplicationResponse(): MsgLinkApplicationResponse {
+  return {};
+}
 
 export const MsgLinkApplicationResponse = {
   encode(
@@ -260,9 +223,7 @@ export const MsgLinkApplicationResponse = {
   ): MsgLinkApplicationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgLinkApplicationResponse,
-    } as MsgLinkApplicationResponse;
+    const message = createBaseMsgLinkApplicationResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -275,10 +236,7 @@ export const MsgLinkApplicationResponse = {
   },
 
   fromJSON(_: any): MsgLinkApplicationResponse {
-    const message = {
-      ...baseMsgLinkApplicationResponse,
-    } as MsgLinkApplicationResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgLinkApplicationResponse): unknown {
@@ -286,21 +244,17 @@ export const MsgLinkApplicationResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgLinkApplicationResponse>
+  fromPartial<I extends Exact<DeepPartial<MsgLinkApplicationResponse>, I>>(
+    _: I
   ): MsgLinkApplicationResponse {
-    const message = {
-      ...baseMsgLinkApplicationResponse,
-    } as MsgLinkApplicationResponse;
+    const message = createBaseMsgLinkApplicationResponse();
     return message;
   },
 };
 
-const baseMsgUnlinkApplication: object = {
-  application: "",
-  username: "",
-  signer: "",
-};
+function createBaseMsgUnlinkApplication(): MsgUnlinkApplication {
+  return { application: "", username: "", signer: "" };
+}
 
 export const MsgUnlinkApplication = {
   encode(
@@ -325,7 +279,7 @@ export const MsgUnlinkApplication = {
   ): MsgUnlinkApplication {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgUnlinkApplication } as MsgUnlinkApplication;
+    const message = createBaseMsgUnlinkApplication();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -347,23 +301,11 @@ export const MsgUnlinkApplication = {
   },
 
   fromJSON(object: any): MsgUnlinkApplication {
-    const message = { ...baseMsgUnlinkApplication } as MsgUnlinkApplication;
-    if (object.application !== undefined && object.application !== null) {
-      message.application = String(object.application);
-    } else {
-      message.application = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    if (object.signer !== undefined && object.signer !== null) {
-      message.signer = String(object.signer);
-    } else {
-      message.signer = "";
-    }
-    return message;
+    return {
+      application: isSet(object.application) ? String(object.application) : "",
+      username: isSet(object.username) ? String(object.username) : "",
+      signer: isSet(object.signer) ? String(object.signer) : "",
+    };
   },
 
   toJSON(message: MsgUnlinkApplication): unknown {
@@ -375,28 +317,20 @@ export const MsgUnlinkApplication = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgUnlinkApplication>): MsgUnlinkApplication {
-    const message = { ...baseMsgUnlinkApplication } as MsgUnlinkApplication;
-    if (object.application !== undefined && object.application !== null) {
-      message.application = object.application;
-    } else {
-      message.application = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
-    if (object.signer !== undefined && object.signer !== null) {
-      message.signer = object.signer;
-    } else {
-      message.signer = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<MsgUnlinkApplication>, I>>(
+    object: I
+  ): MsgUnlinkApplication {
+    const message = createBaseMsgUnlinkApplication();
+    message.application = object.application ?? "";
+    message.username = object.username ?? "";
+    message.signer = object.signer ?? "";
     return message;
   },
 };
 
-const baseMsgUnlinkApplicationResponse: object = {};
+function createBaseMsgUnlinkApplicationResponse(): MsgUnlinkApplicationResponse {
+  return {};
+}
 
 export const MsgUnlinkApplicationResponse = {
   encode(
@@ -412,9 +346,7 @@ export const MsgUnlinkApplicationResponse = {
   ): MsgUnlinkApplicationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgUnlinkApplicationResponse,
-    } as MsgUnlinkApplicationResponse;
+    const message = createBaseMsgUnlinkApplicationResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -427,10 +359,7 @@ export const MsgUnlinkApplicationResponse = {
   },
 
   fromJSON(_: any): MsgUnlinkApplicationResponse {
-    const message = {
-      ...baseMsgUnlinkApplicationResponse,
-    } as MsgUnlinkApplicationResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgUnlinkApplicationResponse): unknown {
@@ -438,12 +367,10 @@ export const MsgUnlinkApplicationResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgUnlinkApplicationResponse>
+  fromPartial<I extends Exact<DeepPartial<MsgUnlinkApplicationResponse>, I>>(
+    _: I
   ): MsgUnlinkApplicationResponse {
-    const message = {
-      ...baseMsgUnlinkApplicationResponse,
-    } as MsgUnlinkApplicationResponse;
+    const message = createBaseMsgUnlinkApplicationResponse();
     return message;
   },
 };
@@ -455,10 +382,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -467,7 +396,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

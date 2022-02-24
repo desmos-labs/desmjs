@@ -81,7 +81,9 @@ export interface MsgRefuseDTagTransferRequest {
  */
 export interface MsgRefuseDTagTransferRequestResponse {}
 
-const baseMsgRequestDTagTransfer: object = { receiver: "", sender: "" };
+function createBaseMsgRequestDTagTransfer(): MsgRequestDTagTransfer {
+  return { receiver: "", sender: "" };
+}
 
 export const MsgRequestDTagTransfer = {
   encode(
@@ -103,7 +105,7 @@ export const MsgRequestDTagTransfer = {
   ): MsgRequestDTagTransfer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgRequestDTagTransfer } as MsgRequestDTagTransfer;
+    const message = createBaseMsgRequestDTagTransfer();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -122,18 +124,10 @@ export const MsgRequestDTagTransfer = {
   },
 
   fromJSON(object: any): MsgRequestDTagTransfer {
-    const message = { ...baseMsgRequestDTagTransfer } as MsgRequestDTagTransfer;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = String(object.receiver);
-    } else {
-      message.receiver = "";
-    }
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    return message;
+    return {
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+    };
   },
 
   toJSON(message: MsgRequestDTagTransfer): unknown {
@@ -143,25 +137,19 @@ export const MsgRequestDTagTransfer = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<MsgRequestDTagTransfer>
+  fromPartial<I extends Exact<DeepPartial<MsgRequestDTagTransfer>, I>>(
+    object: I
   ): MsgRequestDTagTransfer {
-    const message = { ...baseMsgRequestDTagTransfer } as MsgRequestDTagTransfer;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = object.receiver;
-    } else {
-      message.receiver = "";
-    }
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
+    const message = createBaseMsgRequestDTagTransfer();
+    message.receiver = object.receiver ?? "";
+    message.sender = object.sender ?? "";
     return message;
   },
 };
 
-const baseMsgRequestDTagTransferResponse: object = {};
+function createBaseMsgRequestDTagTransferResponse(): MsgRequestDTagTransferResponse {
+  return {};
+}
 
 export const MsgRequestDTagTransferResponse = {
   encode(
@@ -177,9 +165,7 @@ export const MsgRequestDTagTransferResponse = {
   ): MsgRequestDTagTransferResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgRequestDTagTransferResponse,
-    } as MsgRequestDTagTransferResponse;
+    const message = createBaseMsgRequestDTagTransferResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -192,10 +178,7 @@ export const MsgRequestDTagTransferResponse = {
   },
 
   fromJSON(_: any): MsgRequestDTagTransferResponse {
-    const message = {
-      ...baseMsgRequestDTagTransferResponse,
-    } as MsgRequestDTagTransferResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgRequestDTagTransferResponse): unknown {
@@ -203,17 +186,17 @@ export const MsgRequestDTagTransferResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgRequestDTagTransferResponse>
+  fromPartial<I extends Exact<DeepPartial<MsgRequestDTagTransferResponse>, I>>(
+    _: I
   ): MsgRequestDTagTransferResponse {
-    const message = {
-      ...baseMsgRequestDTagTransferResponse,
-    } as MsgRequestDTagTransferResponse;
+    const message = createBaseMsgRequestDTagTransferResponse();
     return message;
   },
 };
 
-const baseMsgCancelDTagTransferRequest: object = { receiver: "", sender: "" };
+function createBaseMsgCancelDTagTransferRequest(): MsgCancelDTagTransferRequest {
+  return { receiver: "", sender: "" };
+}
 
 export const MsgCancelDTagTransferRequest = {
   encode(
@@ -235,9 +218,7 @@ export const MsgCancelDTagTransferRequest = {
   ): MsgCancelDTagTransferRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgCancelDTagTransferRequest,
-    } as MsgCancelDTagTransferRequest;
+    const message = createBaseMsgCancelDTagTransferRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -256,20 +237,10 @@ export const MsgCancelDTagTransferRequest = {
   },
 
   fromJSON(object: any): MsgCancelDTagTransferRequest {
-    const message = {
-      ...baseMsgCancelDTagTransferRequest,
-    } as MsgCancelDTagTransferRequest;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = String(object.receiver);
-    } else {
-      message.receiver = "";
-    }
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    return message;
+    return {
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+    };
   },
 
   toJSON(message: MsgCancelDTagTransferRequest): unknown {
@@ -279,27 +250,19 @@ export const MsgCancelDTagTransferRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<MsgCancelDTagTransferRequest>
+  fromPartial<I extends Exact<DeepPartial<MsgCancelDTagTransferRequest>, I>>(
+    object: I
   ): MsgCancelDTagTransferRequest {
-    const message = {
-      ...baseMsgCancelDTagTransferRequest,
-    } as MsgCancelDTagTransferRequest;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = object.receiver;
-    } else {
-      message.receiver = "";
-    }
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
+    const message = createBaseMsgCancelDTagTransferRequest();
+    message.receiver = object.receiver ?? "";
+    message.sender = object.sender ?? "";
     return message;
   },
 };
 
-const baseMsgCancelDTagTransferRequestResponse: object = {};
+function createBaseMsgCancelDTagTransferRequestResponse(): MsgCancelDTagTransferRequestResponse {
+  return {};
+}
 
 export const MsgCancelDTagTransferRequestResponse = {
   encode(
@@ -315,9 +278,7 @@ export const MsgCancelDTagTransferRequestResponse = {
   ): MsgCancelDTagTransferRequestResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgCancelDTagTransferRequestResponse,
-    } as MsgCancelDTagTransferRequestResponse;
+    const message = createBaseMsgCancelDTagTransferRequestResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -330,10 +291,7 @@ export const MsgCancelDTagTransferRequestResponse = {
   },
 
   fromJSON(_: any): MsgCancelDTagTransferRequestResponse {
-    const message = {
-      ...baseMsgCancelDTagTransferRequestResponse,
-    } as MsgCancelDTagTransferRequestResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgCancelDTagTransferRequestResponse): unknown {
@@ -341,21 +299,17 @@ export const MsgCancelDTagTransferRequestResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgCancelDTagTransferRequestResponse>
-  ): MsgCancelDTagTransferRequestResponse {
-    const message = {
-      ...baseMsgCancelDTagTransferRequestResponse,
-    } as MsgCancelDTagTransferRequestResponse;
+  fromPartial<
+    I extends Exact<DeepPartial<MsgCancelDTagTransferRequestResponse>, I>
+  >(_: I): MsgCancelDTagTransferRequestResponse {
+    const message = createBaseMsgCancelDTagTransferRequestResponse();
     return message;
   },
 };
 
-const baseMsgAcceptDTagTransferRequest: object = {
-  newDtag: "",
-  sender: "",
-  receiver: "",
-};
+function createBaseMsgAcceptDTagTransferRequest(): MsgAcceptDTagTransferRequest {
+  return { newDtag: "", sender: "", receiver: "" };
+}
 
 export const MsgAcceptDTagTransferRequest = {
   encode(
@@ -380,9 +334,7 @@ export const MsgAcceptDTagTransferRequest = {
   ): MsgAcceptDTagTransferRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgAcceptDTagTransferRequest,
-    } as MsgAcceptDTagTransferRequest;
+    const message = createBaseMsgAcceptDTagTransferRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -404,25 +356,11 @@ export const MsgAcceptDTagTransferRequest = {
   },
 
   fromJSON(object: any): MsgAcceptDTagTransferRequest {
-    const message = {
-      ...baseMsgAcceptDTagTransferRequest,
-    } as MsgAcceptDTagTransferRequest;
-    if (object.newDtag !== undefined && object.newDtag !== null) {
-      message.newDtag = String(object.newDtag);
-    } else {
-      message.newDtag = "";
-    }
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = String(object.receiver);
-    } else {
-      message.receiver = "";
-    }
-    return message;
+    return {
+      newDtag: isSet(object.newDtag) ? String(object.newDtag) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+    };
   },
 
   toJSON(message: MsgAcceptDTagTransferRequest): unknown {
@@ -433,32 +371,20 @@ export const MsgAcceptDTagTransferRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<MsgAcceptDTagTransferRequest>
+  fromPartial<I extends Exact<DeepPartial<MsgAcceptDTagTransferRequest>, I>>(
+    object: I
   ): MsgAcceptDTagTransferRequest {
-    const message = {
-      ...baseMsgAcceptDTagTransferRequest,
-    } as MsgAcceptDTagTransferRequest;
-    if (object.newDtag !== undefined && object.newDtag !== null) {
-      message.newDtag = object.newDtag;
-    } else {
-      message.newDtag = "";
-    }
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = object.receiver;
-    } else {
-      message.receiver = "";
-    }
+    const message = createBaseMsgAcceptDTagTransferRequest();
+    message.newDtag = object.newDtag ?? "";
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
     return message;
   },
 };
 
-const baseMsgAcceptDTagTransferRequestResponse: object = {};
+function createBaseMsgAcceptDTagTransferRequestResponse(): MsgAcceptDTagTransferRequestResponse {
+  return {};
+}
 
 export const MsgAcceptDTagTransferRequestResponse = {
   encode(
@@ -474,9 +400,7 @@ export const MsgAcceptDTagTransferRequestResponse = {
   ): MsgAcceptDTagTransferRequestResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgAcceptDTagTransferRequestResponse,
-    } as MsgAcceptDTagTransferRequestResponse;
+    const message = createBaseMsgAcceptDTagTransferRequestResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -489,10 +413,7 @@ export const MsgAcceptDTagTransferRequestResponse = {
   },
 
   fromJSON(_: any): MsgAcceptDTagTransferRequestResponse {
-    const message = {
-      ...baseMsgAcceptDTagTransferRequestResponse,
-    } as MsgAcceptDTagTransferRequestResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgAcceptDTagTransferRequestResponse): unknown {
@@ -500,17 +421,17 @@ export const MsgAcceptDTagTransferRequestResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgAcceptDTagTransferRequestResponse>
-  ): MsgAcceptDTagTransferRequestResponse {
-    const message = {
-      ...baseMsgAcceptDTagTransferRequestResponse,
-    } as MsgAcceptDTagTransferRequestResponse;
+  fromPartial<
+    I extends Exact<DeepPartial<MsgAcceptDTagTransferRequestResponse>, I>
+  >(_: I): MsgAcceptDTagTransferRequestResponse {
+    const message = createBaseMsgAcceptDTagTransferRequestResponse();
     return message;
   },
 };
 
-const baseMsgRefuseDTagTransferRequest: object = { sender: "", receiver: "" };
+function createBaseMsgRefuseDTagTransferRequest(): MsgRefuseDTagTransferRequest {
+  return { sender: "", receiver: "" };
+}
 
 export const MsgRefuseDTagTransferRequest = {
   encode(
@@ -532,9 +453,7 @@ export const MsgRefuseDTagTransferRequest = {
   ): MsgRefuseDTagTransferRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgRefuseDTagTransferRequest,
-    } as MsgRefuseDTagTransferRequest;
+    const message = createBaseMsgRefuseDTagTransferRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -553,20 +472,10 @@ export const MsgRefuseDTagTransferRequest = {
   },
 
   fromJSON(object: any): MsgRefuseDTagTransferRequest {
-    const message = {
-      ...baseMsgRefuseDTagTransferRequest,
-    } as MsgRefuseDTagTransferRequest;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = String(object.receiver);
-    } else {
-      message.receiver = "";
-    }
-    return message;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+    };
   },
 
   toJSON(message: MsgRefuseDTagTransferRequest): unknown {
@@ -576,27 +485,19 @@ export const MsgRefuseDTagTransferRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<MsgRefuseDTagTransferRequest>
+  fromPartial<I extends Exact<DeepPartial<MsgRefuseDTagTransferRequest>, I>>(
+    object: I
   ): MsgRefuseDTagTransferRequest {
-    const message = {
-      ...baseMsgRefuseDTagTransferRequest,
-    } as MsgRefuseDTagTransferRequest;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = object.receiver;
-    } else {
-      message.receiver = "";
-    }
+    const message = createBaseMsgRefuseDTagTransferRequest();
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
     return message;
   },
 };
 
-const baseMsgRefuseDTagTransferRequestResponse: object = {};
+function createBaseMsgRefuseDTagTransferRequestResponse(): MsgRefuseDTagTransferRequestResponse {
+  return {};
+}
 
 export const MsgRefuseDTagTransferRequestResponse = {
   encode(
@@ -612,9 +513,7 @@ export const MsgRefuseDTagTransferRequestResponse = {
   ): MsgRefuseDTagTransferRequestResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgRefuseDTagTransferRequestResponse,
-    } as MsgRefuseDTagTransferRequestResponse;
+    const message = createBaseMsgRefuseDTagTransferRequestResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -627,10 +526,7 @@ export const MsgRefuseDTagTransferRequestResponse = {
   },
 
   fromJSON(_: any): MsgRefuseDTagTransferRequestResponse {
-    const message = {
-      ...baseMsgRefuseDTagTransferRequestResponse,
-    } as MsgRefuseDTagTransferRequestResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgRefuseDTagTransferRequestResponse): unknown {
@@ -638,12 +534,10 @@ export const MsgRefuseDTagTransferRequestResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgRefuseDTagTransferRequestResponse>
-  ): MsgRefuseDTagTransferRequestResponse {
-    const message = {
-      ...baseMsgRefuseDTagTransferRequestResponse,
-    } as MsgRefuseDTagTransferRequestResponse;
+  fromPartial<
+    I extends Exact<DeepPartial<MsgRefuseDTagTransferRequestResponse>, I>
+  >(_: I): MsgRefuseDTagTransferRequestResponse {
+    const message = createBaseMsgRefuseDTagTransferRequestResponse();
     return message;
   },
 };
@@ -655,10 +549,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -667,7 +563,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

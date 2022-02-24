@@ -118,7 +118,9 @@ export interface Any {
   value: Uint8Array;
 }
 
-const baseAny: object = { typeUrl: "" };
+function createBaseAny(): Any {
+  return { typeUrl: "", value: new Uint8Array() };
+}
 
 export const Any = {
   encode(message: Any, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -134,8 +136,7 @@ export const Any = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Any {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseAny } as Any;
-    message.value = new Uint8Array();
+    const message = createBaseAny();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -154,17 +155,12 @@ export const Any = {
   },
 
   fromJSON(object: any): Any {
-    const message = { ...baseAny } as Any;
-    message.value = new Uint8Array();
-    if (object.typeUrl !== undefined && object.typeUrl !== null) {
-      message.typeUrl = String(object.typeUrl);
-    } else {
-      message.typeUrl = "";
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = bytesFromBase64(object.value);
-    }
-    return message;
+    return {
+      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
+      value: isSet(object.value)
+        ? bytesFromBase64(object.value)
+        : new Uint8Array(),
+    };
   },
 
   toJSON(message: Any): unknown {
@@ -177,24 +173,17 @@ export const Any = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Any>): Any {
-    const message = { ...baseAny } as Any;
-    if (object.typeUrl !== undefined && object.typeUrl !== null) {
-      message.typeUrl = object.typeUrl;
-    } else {
-      message.typeUrl = "";
-    }
-    if (object.value !== undefined && object.value !== null) {
-      message.value = object.value;
-    } else {
-      message.value = new Uint8Array();
-    }
+  fromPartial<I extends Exact<DeepPartial<Any>, I>>(object: I): Any {
+    const message = createBaseAny();
+    message.typeUrl = object.typeUrl ?? "";
+    message.value = object.value ?? new Uint8Array();
     return message;
   },
 };
 
 declare var self: any | undefined;
 declare var window: any | undefined;
+declare var global: any | undefined;
 var globalThis: any = (() => {
   if (typeof globalThis !== "undefined") return globalThis;
   if (typeof self !== "undefined") return self;
@@ -233,10 +222,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -245,7 +236,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

@@ -102,7 +102,9 @@ export interface Timestamp {
   nanos: number;
 }
 
-const baseTimestamp: object = { seconds: Long.ZERO, nanos: 0 };
+function createBaseTimestamp(): Timestamp {
+  return { seconds: Long.ZERO, nanos: 0 };
+}
 
 export const Timestamp = {
   encode(
@@ -121,7 +123,7 @@ export const Timestamp = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Timestamp {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseTimestamp } as Timestamp;
+    const message = createBaseTimestamp();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -140,40 +142,31 @@ export const Timestamp = {
   },
 
   fromJSON(object: any): Timestamp {
-    const message = { ...baseTimestamp } as Timestamp;
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = Long.fromString(object.seconds);
-    } else {
-      message.seconds = Long.ZERO;
-    }
-    if (object.nanos !== undefined && object.nanos !== null) {
-      message.nanos = Number(object.nanos);
-    } else {
-      message.nanos = 0;
-    }
-    return message;
+    return {
+      seconds: isSet(object.seconds)
+        ? Long.fromString(object.seconds)
+        : Long.ZERO,
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
+    };
   },
 
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
     message.seconds !== undefined &&
       (obj.seconds = (message.seconds || Long.ZERO).toString());
-    message.nanos !== undefined && (obj.nanos = message.nanos);
+    message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Timestamp>): Timestamp {
-    const message = { ...baseTimestamp } as Timestamp;
-    if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = object.seconds as Long;
-    } else {
-      message.seconds = Long.ZERO;
-    }
-    if (object.nanos !== undefined && object.nanos !== null) {
-      message.nanos = object.nanos;
-    } else {
-      message.nanos = 0;
-    }
+  fromPartial<I extends Exact<DeepPartial<Timestamp>, I>>(
+    object: I
+  ): Timestamp {
+    const message = createBaseTimestamp();
+    message.seconds =
+      object.seconds !== undefined && object.seconds !== null
+        ? Long.fromValue(object.seconds)
+        : Long.ZERO;
+    message.nanos = object.nanos ?? 0;
     return message;
   },
 };
@@ -185,10 +178,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -197,7 +192,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

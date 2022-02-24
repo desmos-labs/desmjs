@@ -37,6 +37,7 @@ yarn-error.log*
 # Ignore published dirs
 /cosmos
 /cosmos_proto
+/desmjs
 /desmos
 /gogoproto
 /google

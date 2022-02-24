@@ -58,11 +58,9 @@ export interface MsgUnblockUser {
 /** MsgUnblockUserResponse defines the Msg/UnblockUser response type. */
 export interface MsgUnblockUserResponse {}
 
-const baseMsgCreateRelationship: object = {
-  sender: "",
-  receiver: "",
-  subspace: "",
-};
+function createBaseMsgCreateRelationship(): MsgCreateRelationship {
+  return { sender: "", receiver: "", subspace: "" };
+}
 
 export const MsgCreateRelationship = {
   encode(
@@ -87,7 +85,7 @@ export const MsgCreateRelationship = {
   ): MsgCreateRelationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgCreateRelationship } as MsgCreateRelationship;
+    const message = createBaseMsgCreateRelationship();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -109,23 +107,11 @@ export const MsgCreateRelationship = {
   },
 
   fromJSON(object: any): MsgCreateRelationship {
-    const message = { ...baseMsgCreateRelationship } as MsgCreateRelationship;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = String(object.receiver);
-    } else {
-      message.receiver = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = String(object.subspace);
-    } else {
-      message.subspace = "";
-    }
-    return message;
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+    };
   },
 
   toJSON(message: MsgCreateRelationship): unknown {
@@ -136,30 +122,20 @@ export const MsgCreateRelationship = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<MsgCreateRelationship>
+  fromPartial<I extends Exact<DeepPartial<MsgCreateRelationship>, I>>(
+    object: I
   ): MsgCreateRelationship {
-    const message = { ...baseMsgCreateRelationship } as MsgCreateRelationship;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = object.receiver;
-    } else {
-      message.receiver = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = object.subspace;
-    } else {
-      message.subspace = "";
-    }
+    const message = createBaseMsgCreateRelationship();
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    message.subspace = object.subspace ?? "";
     return message;
   },
 };
 
-const baseMsgCreateRelationshipResponse: object = {};
+function createBaseMsgCreateRelationshipResponse(): MsgCreateRelationshipResponse {
+  return {};
+}
 
 export const MsgCreateRelationshipResponse = {
   encode(
@@ -175,9 +151,7 @@ export const MsgCreateRelationshipResponse = {
   ): MsgCreateRelationshipResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgCreateRelationshipResponse,
-    } as MsgCreateRelationshipResponse;
+    const message = createBaseMsgCreateRelationshipResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -190,10 +164,7 @@ export const MsgCreateRelationshipResponse = {
   },
 
   fromJSON(_: any): MsgCreateRelationshipResponse {
-    const message = {
-      ...baseMsgCreateRelationshipResponse,
-    } as MsgCreateRelationshipResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgCreateRelationshipResponse): unknown {
@@ -201,21 +172,17 @@ export const MsgCreateRelationshipResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgCreateRelationshipResponse>
+  fromPartial<I extends Exact<DeepPartial<MsgCreateRelationshipResponse>, I>>(
+    _: I
   ): MsgCreateRelationshipResponse {
-    const message = {
-      ...baseMsgCreateRelationshipResponse,
-    } as MsgCreateRelationshipResponse;
+    const message = createBaseMsgCreateRelationshipResponse();
     return message;
   },
 };
 
-const baseMsgDeleteRelationship: object = {
-  user: "",
-  counterparty: "",
-  subspace: "",
-};
+function createBaseMsgDeleteRelationship(): MsgDeleteRelationship {
+  return { user: "", counterparty: "", subspace: "" };
+}
 
 export const MsgDeleteRelationship = {
   encode(
@@ -240,7 +207,7 @@ export const MsgDeleteRelationship = {
   ): MsgDeleteRelationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgDeleteRelationship } as MsgDeleteRelationship;
+    const message = createBaseMsgDeleteRelationship();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -262,23 +229,13 @@ export const MsgDeleteRelationship = {
   },
 
   fromJSON(object: any): MsgDeleteRelationship {
-    const message = { ...baseMsgDeleteRelationship } as MsgDeleteRelationship;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = String(object.counterparty);
-    } else {
-      message.counterparty = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = String(object.subspace);
-    } else {
-      message.subspace = "";
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      counterparty: isSet(object.counterparty)
+        ? String(object.counterparty)
+        : "",
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+    };
   },
 
   toJSON(message: MsgDeleteRelationship): unknown {
@@ -290,30 +247,20 @@ export const MsgDeleteRelationship = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<MsgDeleteRelationship>
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationship>, I>>(
+    object: I
   ): MsgDeleteRelationship {
-    const message = { ...baseMsgDeleteRelationship } as MsgDeleteRelationship;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
-    if (object.counterparty !== undefined && object.counterparty !== null) {
-      message.counterparty = object.counterparty;
-    } else {
-      message.counterparty = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = object.subspace;
-    } else {
-      message.subspace = "";
-    }
+    const message = createBaseMsgDeleteRelationship();
+    message.user = object.user ?? "";
+    message.counterparty = object.counterparty ?? "";
+    message.subspace = object.subspace ?? "";
     return message;
   },
 };
 
-const baseMsgDeleteRelationshipResponse: object = {};
+function createBaseMsgDeleteRelationshipResponse(): MsgDeleteRelationshipResponse {
+  return {};
+}
 
 export const MsgDeleteRelationshipResponse = {
   encode(
@@ -329,9 +276,7 @@ export const MsgDeleteRelationshipResponse = {
   ): MsgDeleteRelationshipResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgDeleteRelationshipResponse,
-    } as MsgDeleteRelationshipResponse;
+    const message = createBaseMsgDeleteRelationshipResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -344,10 +289,7 @@ export const MsgDeleteRelationshipResponse = {
   },
 
   fromJSON(_: any): MsgDeleteRelationshipResponse {
-    const message = {
-      ...baseMsgDeleteRelationshipResponse,
-    } as MsgDeleteRelationshipResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgDeleteRelationshipResponse): unknown {
@@ -355,22 +297,17 @@ export const MsgDeleteRelationshipResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgDeleteRelationshipResponse>
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationshipResponse>, I>>(
+    _: I
   ): MsgDeleteRelationshipResponse {
-    const message = {
-      ...baseMsgDeleteRelationshipResponse,
-    } as MsgDeleteRelationshipResponse;
+    const message = createBaseMsgDeleteRelationshipResponse();
     return message;
   },
 };
 
-const baseMsgBlockUser: object = {
-  blocker: "",
-  blocked: "",
-  reason: "",
-  subspace: "",
-};
+function createBaseMsgBlockUser(): MsgBlockUser {
+  return { blocker: "", blocked: "", reason: "", subspace: "" };
+}
 
 export const MsgBlockUser = {
   encode(
@@ -395,7 +332,7 @@ export const MsgBlockUser = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgBlockUser {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgBlockUser } as MsgBlockUser;
+    const message = createBaseMsgBlockUser();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -420,28 +357,12 @@ export const MsgBlockUser = {
   },
 
   fromJSON(object: any): MsgBlockUser {
-    const message = { ...baseMsgBlockUser } as MsgBlockUser;
-    if (object.blocker !== undefined && object.blocker !== null) {
-      message.blocker = String(object.blocker);
-    } else {
-      message.blocker = "";
-    }
-    if (object.blocked !== undefined && object.blocked !== null) {
-      message.blocked = String(object.blocked);
-    } else {
-      message.blocked = "";
-    }
-    if (object.reason !== undefined && object.reason !== null) {
-      message.reason = String(object.reason);
-    } else {
-      message.reason = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = String(object.subspace);
-    } else {
-      message.subspace = "";
-    }
-    return message;
+    return {
+      blocker: isSet(object.blocker) ? String(object.blocker) : "",
+      blocked: isSet(object.blocked) ? String(object.blocked) : "",
+      reason: isSet(object.reason) ? String(object.reason) : "",
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+    };
   },
 
   toJSON(message: MsgBlockUser): unknown {
@@ -453,33 +374,21 @@ export const MsgBlockUser = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgBlockUser>): MsgBlockUser {
-    const message = { ...baseMsgBlockUser } as MsgBlockUser;
-    if (object.blocker !== undefined && object.blocker !== null) {
-      message.blocker = object.blocker;
-    } else {
-      message.blocker = "";
-    }
-    if (object.blocked !== undefined && object.blocked !== null) {
-      message.blocked = object.blocked;
-    } else {
-      message.blocked = "";
-    }
-    if (object.reason !== undefined && object.reason !== null) {
-      message.reason = object.reason;
-    } else {
-      message.reason = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = object.subspace;
-    } else {
-      message.subspace = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<MsgBlockUser>, I>>(
+    object: I
+  ): MsgBlockUser {
+    const message = createBaseMsgBlockUser();
+    message.blocker = object.blocker ?? "";
+    message.blocked = object.blocked ?? "";
+    message.reason = object.reason ?? "";
+    message.subspace = object.subspace ?? "";
     return message;
   },
 };
 
-const baseMsgBlockUserResponse: object = {};
+function createBaseMsgBlockUserResponse(): MsgBlockUserResponse {
+  return {};
+}
 
 export const MsgBlockUserResponse = {
   encode(
@@ -495,7 +404,7 @@ export const MsgBlockUserResponse = {
   ): MsgBlockUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgBlockUserResponse } as MsgBlockUserResponse;
+    const message = createBaseMsgBlockUserResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -508,8 +417,7 @@ export const MsgBlockUserResponse = {
   },
 
   fromJSON(_: any): MsgBlockUserResponse {
-    const message = { ...baseMsgBlockUserResponse } as MsgBlockUserResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgBlockUserResponse): unknown {
@@ -517,13 +425,17 @@ export const MsgBlockUserResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgBlockUserResponse>): MsgBlockUserResponse {
-    const message = { ...baseMsgBlockUserResponse } as MsgBlockUserResponse;
+  fromPartial<I extends Exact<DeepPartial<MsgBlockUserResponse>, I>>(
+    _: I
+  ): MsgBlockUserResponse {
+    const message = createBaseMsgBlockUserResponse();
     return message;
   },
 };
 
-const baseMsgUnblockUser: object = { blocker: "", blocked: "", subspace: "" };
+function createBaseMsgUnblockUser(): MsgUnblockUser {
+  return { blocker: "", blocked: "", subspace: "" };
+}
 
 export const MsgUnblockUser = {
   encode(
@@ -545,7 +457,7 @@ export const MsgUnblockUser = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnblockUser {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgUnblockUser } as MsgUnblockUser;
+    const message = createBaseMsgUnblockUser();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -567,23 +479,11 @@ export const MsgUnblockUser = {
   },
 
   fromJSON(object: any): MsgUnblockUser {
-    const message = { ...baseMsgUnblockUser } as MsgUnblockUser;
-    if (object.blocker !== undefined && object.blocker !== null) {
-      message.blocker = String(object.blocker);
-    } else {
-      message.blocker = "";
-    }
-    if (object.blocked !== undefined && object.blocked !== null) {
-      message.blocked = String(object.blocked);
-    } else {
-      message.blocked = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = String(object.subspace);
-    } else {
-      message.subspace = "";
-    }
-    return message;
+    return {
+      blocker: isSet(object.blocker) ? String(object.blocker) : "",
+      blocked: isSet(object.blocked) ? String(object.blocked) : "",
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+    };
   },
 
   toJSON(message: MsgUnblockUser): unknown {
@@ -594,28 +494,20 @@ export const MsgUnblockUser = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgUnblockUser>): MsgUnblockUser {
-    const message = { ...baseMsgUnblockUser } as MsgUnblockUser;
-    if (object.blocker !== undefined && object.blocker !== null) {
-      message.blocker = object.blocker;
-    } else {
-      message.blocker = "";
-    }
-    if (object.blocked !== undefined && object.blocked !== null) {
-      message.blocked = object.blocked;
-    } else {
-      message.blocked = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = object.subspace;
-    } else {
-      message.subspace = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<MsgUnblockUser>, I>>(
+    object: I
+  ): MsgUnblockUser {
+    const message = createBaseMsgUnblockUser();
+    message.blocker = object.blocker ?? "";
+    message.blocked = object.blocked ?? "";
+    message.subspace = object.subspace ?? "";
     return message;
   },
 };
 
-const baseMsgUnblockUserResponse: object = {};
+function createBaseMsgUnblockUserResponse(): MsgUnblockUserResponse {
+  return {};
+}
 
 export const MsgUnblockUserResponse = {
   encode(
@@ -631,7 +523,7 @@ export const MsgUnblockUserResponse = {
   ): MsgUnblockUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgUnblockUserResponse } as MsgUnblockUserResponse;
+    const message = createBaseMsgUnblockUserResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -644,8 +536,7 @@ export const MsgUnblockUserResponse = {
   },
 
   fromJSON(_: any): MsgUnblockUserResponse {
-    const message = { ...baseMsgUnblockUserResponse } as MsgUnblockUserResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgUnblockUserResponse): unknown {
@@ -653,8 +544,10 @@ export const MsgUnblockUserResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgUnblockUserResponse>): MsgUnblockUserResponse {
-    const message = { ...baseMsgUnblockUserResponse } as MsgUnblockUserResponse;
+  fromPartial<I extends Exact<DeepPartial<MsgUnblockUserResponse>, I>>(
+    _: I
+  ): MsgUnblockUserResponse {
+    const message = createBaseMsgUnblockUserResponse();
     return message;
   },
 };
@@ -666,10 +559,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -678,7 +573,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

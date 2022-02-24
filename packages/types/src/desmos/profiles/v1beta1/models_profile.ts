@@ -31,7 +31,16 @@ export interface Pictures {
   cover: string;
 }
 
-const baseProfile: object = { dtag: "", nickname: "", bio: "" };
+function createBaseProfile(): Profile {
+  return {
+    account: undefined,
+    dtag: "",
+    nickname: "",
+    bio: "",
+    pictures: undefined,
+    creationDate: undefined,
+  };
+}
 
 export const Profile = {
   encode(
@@ -65,7 +74,7 @@ export const Profile = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Profile {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseProfile } as Profile;
+    const message = createBaseProfile();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -98,38 +107,18 @@ export const Profile = {
   },
 
   fromJSON(object: any): Profile {
-    const message = { ...baseProfile } as Profile;
-    if (object.account !== undefined && object.account !== null) {
-      message.account = Any.fromJSON(object.account);
-    } else {
-      message.account = undefined;
-    }
-    if (object.dtag !== undefined && object.dtag !== null) {
-      message.dtag = String(object.dtag);
-    } else {
-      message.dtag = "";
-    }
-    if (object.nickname !== undefined && object.nickname !== null) {
-      message.nickname = String(object.nickname);
-    } else {
-      message.nickname = "";
-    }
-    if (object.bio !== undefined && object.bio !== null) {
-      message.bio = String(object.bio);
-    } else {
-      message.bio = "";
-    }
-    if (object.pictures !== undefined && object.pictures !== null) {
-      message.pictures = Pictures.fromJSON(object.pictures);
-    } else {
-      message.pictures = undefined;
-    }
-    if (object.creationDate !== undefined && object.creationDate !== null) {
-      message.creationDate = fromJsonTimestamp(object.creationDate);
-    } else {
-      message.creationDate = undefined;
-    }
-    return message;
+    return {
+      account: isSet(object.account) ? Any.fromJSON(object.account) : undefined,
+      dtag: isSet(object.dtag) ? String(object.dtag) : "",
+      nickname: isSet(object.nickname) ? String(object.nickname) : "",
+      bio: isSet(object.bio) ? String(object.bio) : "",
+      pictures: isSet(object.pictures)
+        ? Pictures.fromJSON(object.pictures)
+        : undefined,
+      creationDate: isSet(object.creationDate)
+        ? fromJsonTimestamp(object.creationDate)
+        : undefined,
+    };
   },
 
   toJSON(message: Profile): unknown {
@@ -148,43 +137,27 @@ export const Profile = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Profile>): Profile {
-    const message = { ...baseProfile } as Profile;
-    if (object.account !== undefined && object.account !== null) {
-      message.account = Any.fromPartial(object.account);
-    } else {
-      message.account = undefined;
-    }
-    if (object.dtag !== undefined && object.dtag !== null) {
-      message.dtag = object.dtag;
-    } else {
-      message.dtag = "";
-    }
-    if (object.nickname !== undefined && object.nickname !== null) {
-      message.nickname = object.nickname;
-    } else {
-      message.nickname = "";
-    }
-    if (object.bio !== undefined && object.bio !== null) {
-      message.bio = object.bio;
-    } else {
-      message.bio = "";
-    }
-    if (object.pictures !== undefined && object.pictures !== null) {
-      message.pictures = Pictures.fromPartial(object.pictures);
-    } else {
-      message.pictures = undefined;
-    }
-    if (object.creationDate !== undefined && object.creationDate !== null) {
-      message.creationDate = object.creationDate;
-    } else {
-      message.creationDate = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<Profile>, I>>(object: I): Profile {
+    const message = createBaseProfile();
+    message.account =
+      object.account !== undefined && object.account !== null
+        ? Any.fromPartial(object.account)
+        : undefined;
+    message.dtag = object.dtag ?? "";
+    message.nickname = object.nickname ?? "";
+    message.bio = object.bio ?? "";
+    message.pictures =
+      object.pictures !== undefined && object.pictures !== null
+        ? Pictures.fromPartial(object.pictures)
+        : undefined;
+    message.creationDate = object.creationDate ?? undefined;
     return message;
   },
 };
 
-const basePictures: object = { profile: "", cover: "" };
+function createBasePictures(): Pictures {
+  return { profile: "", cover: "" };
+}
 
 export const Pictures = {
   encode(
@@ -203,7 +176,7 @@ export const Pictures = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Pictures {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePictures } as Pictures;
+    const message = createBasePictures();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -222,18 +195,10 @@ export const Pictures = {
   },
 
   fromJSON(object: any): Pictures {
-    const message = { ...basePictures } as Pictures;
-    if (object.profile !== undefined && object.profile !== null) {
-      message.profile = String(object.profile);
-    } else {
-      message.profile = "";
-    }
-    if (object.cover !== undefined && object.cover !== null) {
-      message.cover = String(object.cover);
-    } else {
-      message.cover = "";
-    }
-    return message;
+    return {
+      profile: isSet(object.profile) ? String(object.profile) : "",
+      cover: isSet(object.cover) ? String(object.cover) : "",
+    };
   },
 
   toJSON(message: Pictures): unknown {
@@ -243,18 +208,10 @@ export const Pictures = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Pictures>): Pictures {
-    const message = { ...basePictures } as Pictures;
-    if (object.profile !== undefined && object.profile !== null) {
-      message.profile = object.profile;
-    } else {
-      message.profile = "";
-    }
-    if (object.cover !== undefined && object.cover !== null) {
-      message.cover = object.cover;
-    } else {
-      message.cover = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Pictures>, I>>(object: I): Pictures {
+    const message = createBasePictures();
+    message.profile = object.profile ?? "";
+    message.cover = object.cover ?? "";
     return message;
   },
 };
@@ -266,10 +223,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -277,6 +236,14 @@ type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
@@ -307,4 +274,8 @@ function numberToLong(number: number) {
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

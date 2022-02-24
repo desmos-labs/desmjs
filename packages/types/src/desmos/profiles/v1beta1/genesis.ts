@@ -21,7 +21,17 @@ export interface GenesisState {
   applicationLinks: ApplicationLink[];
 }
 
-const baseGenesisState: object = { ibcPortId: "" };
+function createBaseGenesisState(): GenesisState {
+  return {
+    dtagTransferRequests: [],
+    relationships: [],
+    blocks: [],
+    params: undefined,
+    ibcPortId: "",
+    chainLinks: [],
+    applicationLinks: [],
+  };
+}
 
 export const GenesisState = {
   encode(
@@ -55,12 +65,7 @@ export const GenesisState = {
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGenesisState } as GenesisState;
-    message.dtagTransferRequests = [];
-    message.relationships = [];
-    message.blocks = [];
-    message.chainLinks = [];
-    message.applicationLinks = [];
+    const message = createBaseGenesisState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -100,54 +105,27 @@ export const GenesisState = {
   },
 
   fromJSON(object: any): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.dtagTransferRequests = [];
-    message.relationships = [];
-    message.blocks = [];
-    message.chainLinks = [];
-    message.applicationLinks = [];
-    if (
-      object.dtagTransferRequests !== undefined &&
-      object.dtagTransferRequests !== null
-    ) {
-      for (const e of object.dtagTransferRequests) {
-        message.dtagTransferRequests.push(DTagTransferRequest.fromJSON(e));
-      }
-    }
-    if (object.relationships !== undefined && object.relationships !== null) {
-      for (const e of object.relationships) {
-        message.relationships.push(Relationship.fromJSON(e));
-      }
-    }
-    if (object.blocks !== undefined && object.blocks !== null) {
-      for (const e of object.blocks) {
-        message.blocks.push(UserBlock.fromJSON(e));
-      }
-    }
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromJSON(object.params);
-    } else {
-      message.params = undefined;
-    }
-    if (object.ibcPortId !== undefined && object.ibcPortId !== null) {
-      message.ibcPortId = String(object.ibcPortId);
-    } else {
-      message.ibcPortId = "";
-    }
-    if (object.chainLinks !== undefined && object.chainLinks !== null) {
-      for (const e of object.chainLinks) {
-        message.chainLinks.push(ChainLink.fromJSON(e));
-      }
-    }
-    if (
-      object.applicationLinks !== undefined &&
-      object.applicationLinks !== null
-    ) {
-      for (const e of object.applicationLinks) {
-        message.applicationLinks.push(ApplicationLink.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      dtagTransferRequests: Array.isArray(object?.dtagTransferRequests)
+        ? object.dtagTransferRequests.map((e: any) =>
+            DTagTransferRequest.fromJSON(e)
+          )
+        : [],
+      relationships: Array.isArray(object?.relationships)
+        ? object.relationships.map((e: any) => Relationship.fromJSON(e))
+        : [],
+      blocks: Array.isArray(object?.blocks)
+        ? object.blocks.map((e: any) => UserBlock.fromJSON(e))
+        : [],
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      ibcPortId: isSet(object.ibcPortId) ? String(object.ibcPortId) : "",
+      chainLinks: Array.isArray(object?.chainLinks)
+        ? object.chainLinks.map((e: any) => ChainLink.fromJSON(e))
+        : [],
+      applicationLinks: Array.isArray(object?.applicationLinks)
+        ? object.applicationLinks.map((e: any) => ApplicationLink.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: GenesisState): unknown {
@@ -193,54 +171,26 @@ export const GenesisState = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.dtagTransferRequests = [];
-    message.relationships = [];
-    message.blocks = [];
-    message.chainLinks = [];
-    message.applicationLinks = [];
-    if (
-      object.dtagTransferRequests !== undefined &&
-      object.dtagTransferRequests !== null
-    ) {
-      for (const e of object.dtagTransferRequests) {
-        message.dtagTransferRequests.push(DTagTransferRequest.fromPartial(e));
-      }
-    }
-    if (object.relationships !== undefined && object.relationships !== null) {
-      for (const e of object.relationships) {
-        message.relationships.push(Relationship.fromPartial(e));
-      }
-    }
-    if (object.blocks !== undefined && object.blocks !== null) {
-      for (const e of object.blocks) {
-        message.blocks.push(UserBlock.fromPartial(e));
-      }
-    }
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    } else {
-      message.params = undefined;
-    }
-    if (object.ibcPortId !== undefined && object.ibcPortId !== null) {
-      message.ibcPortId = object.ibcPortId;
-    } else {
-      message.ibcPortId = "";
-    }
-    if (object.chainLinks !== undefined && object.chainLinks !== null) {
-      for (const e of object.chainLinks) {
-        message.chainLinks.push(ChainLink.fromPartial(e));
-      }
-    }
-    if (
-      object.applicationLinks !== undefined &&
-      object.applicationLinks !== null
-    ) {
-      for (const e of object.applicationLinks) {
-        message.applicationLinks.push(ApplicationLink.fromPartial(e));
-      }
-    }
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
+    object: I
+  ): GenesisState {
+    const message = createBaseGenesisState();
+    message.dtagTransferRequests =
+      object.dtagTransferRequests?.map((e) =>
+        DTagTransferRequest.fromPartial(e)
+      ) || [];
+    message.relationships =
+      object.relationships?.map((e) => Relationship.fromPartial(e)) || [];
+    message.blocks = object.blocks?.map((e) => UserBlock.fromPartial(e)) || [];
+    message.params =
+      object.params !== undefined && object.params !== null
+        ? Params.fromPartial(object.params)
+        : undefined;
+    message.ibcPortId = object.ibcPortId ?? "";
+    message.chainLinks =
+      object.chainLinks?.map((e) => ChainLink.fromPartial(e)) || [];
+    message.applicationLinks =
+      object.applicationLinks?.map((e) => ApplicationLink.fromPartial(e)) || [];
     return message;
   },
 };
@@ -252,10 +202,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -264,7 +216,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

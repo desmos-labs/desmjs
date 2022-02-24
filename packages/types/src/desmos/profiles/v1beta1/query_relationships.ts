@@ -53,7 +53,9 @@ export interface QueryBlocksResponse {
   pagination?: PageResponse;
 }
 
-const baseQueryRelationshipsRequest: object = { user: "", subspaceId: "" };
+function createBaseQueryRelationshipsRequest(): QueryRelationshipsRequest {
+  return { user: "", subspaceId: "", pagination: undefined };
+}
 
 export const QueryRelationshipsRequest = {
   encode(
@@ -78,9 +80,7 @@ export const QueryRelationshipsRequest = {
   ): QueryRelationshipsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryRelationshipsRequest,
-    } as QueryRelationshipsRequest;
+    const message = createBaseQueryRelationshipsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -102,25 +102,13 @@ export const QueryRelationshipsRequest = {
   },
 
   fromJSON(object: any): QueryRelationshipsRequest {
-    const message = {
-      ...baseQueryRelationshipsRequest,
-    } as QueryRelationshipsRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    if (object.subspaceId !== undefined && object.subspaceId !== null) {
-      message.subspaceId = String(object.subspaceId);
-    } else {
-      message.subspaceId = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      subspaceId: isSet(object.subspaceId) ? String(object.subspaceId) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryRelationshipsRequest): unknown {
@@ -134,32 +122,23 @@ export const QueryRelationshipsRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryRelationshipsRequest>
+  fromPartial<I extends Exact<DeepPartial<QueryRelationshipsRequest>, I>>(
+    object: I
   ): QueryRelationshipsRequest {
-    const message = {
-      ...baseQueryRelationshipsRequest,
-    } as QueryRelationshipsRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
-    if (object.subspaceId !== undefined && object.subspaceId !== null) {
-      message.subspaceId = object.subspaceId;
-    } else {
-      message.subspaceId = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+    const message = createBaseQueryRelationshipsRequest();
+    message.user = object.user ?? "";
+    message.subspaceId = object.subspaceId ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryRelationshipsResponse: object = {};
+function createBaseQueryRelationshipsResponse(): QueryRelationshipsResponse {
+  return { relationships: [], pagination: undefined };
+}
 
 export const QueryRelationshipsResponse = {
   encode(
@@ -184,10 +163,7 @@ export const QueryRelationshipsResponse = {
   ): QueryRelationshipsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryRelationshipsResponse,
-    } as QueryRelationshipsResponse;
-    message.relationships = [];
+    const message = createBaseQueryRelationshipsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -208,21 +184,14 @@ export const QueryRelationshipsResponse = {
   },
 
   fromJSON(object: any): QueryRelationshipsResponse {
-    const message = {
-      ...baseQueryRelationshipsResponse,
-    } as QueryRelationshipsResponse;
-    message.relationships = [];
-    if (object.relationships !== undefined && object.relationships !== null) {
-      for (const e of object.relationships) {
-        message.relationships.push(Relationship.fromJSON(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      relationships: Array.isArray(object?.relationships)
+        ? object.relationships.map((e: any) => Relationship.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryRelationshipsResponse): unknown {
@@ -241,28 +210,23 @@ export const QueryRelationshipsResponse = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryRelationshipsResponse>
+  fromPartial<I extends Exact<DeepPartial<QueryRelationshipsResponse>, I>>(
+    object: I
   ): QueryRelationshipsResponse {
-    const message = {
-      ...baseQueryRelationshipsResponse,
-    } as QueryRelationshipsResponse;
-    message.relationships = [];
-    if (object.relationships !== undefined && object.relationships !== null) {
-      for (const e of object.relationships) {
-        message.relationships.push(Relationship.fromPartial(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+    const message = createBaseQueryRelationshipsResponse();
+    message.relationships =
+      object.relationships?.map((e) => Relationship.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryBlocksRequest: object = { user: "", subspaceId: "" };
+function createBaseQueryBlocksRequest(): QueryBlocksRequest {
+  return { user: "", subspaceId: "", pagination: undefined };
+}
 
 export const QueryBlocksRequest = {
   encode(
@@ -284,7 +248,7 @@ export const QueryBlocksRequest = {
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryBlocksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseQueryBlocksRequest } as QueryBlocksRequest;
+    const message = createBaseQueryBlocksRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -306,23 +270,13 @@ export const QueryBlocksRequest = {
   },
 
   fromJSON(object: any): QueryBlocksRequest {
-    const message = { ...baseQueryBlocksRequest } as QueryBlocksRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    if (object.subspaceId !== undefined && object.subspaceId !== null) {
-      message.subspaceId = String(object.subspaceId);
-    } else {
-      message.subspaceId = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      subspaceId: isSet(object.subspaceId) ? String(object.subspaceId) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryBlocksRequest): unknown {
@@ -336,28 +290,23 @@ export const QueryBlocksRequest = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<QueryBlocksRequest>): QueryBlocksRequest {
-    const message = { ...baseQueryBlocksRequest } as QueryBlocksRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
-    if (object.subspaceId !== undefined && object.subspaceId !== null) {
-      message.subspaceId = object.subspaceId;
-    } else {
-      message.subspaceId = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<QueryBlocksRequest>, I>>(
+    object: I
+  ): QueryBlocksRequest {
+    const message = createBaseQueryBlocksRequest();
+    message.user = object.user ?? "";
+    message.subspaceId = object.subspaceId ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryBlocksResponse: object = {};
+function createBaseQueryBlocksResponse(): QueryBlocksResponse {
+  return { blocks: [], pagination: undefined };
+}
 
 export const QueryBlocksResponse = {
   encode(
@@ -379,8 +328,7 @@ export const QueryBlocksResponse = {
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryBlocksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseQueryBlocksResponse } as QueryBlocksResponse;
-    message.blocks = [];
+    const message = createBaseQueryBlocksResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -399,19 +347,14 @@ export const QueryBlocksResponse = {
   },
 
   fromJSON(object: any): QueryBlocksResponse {
-    const message = { ...baseQueryBlocksResponse } as QueryBlocksResponse;
-    message.blocks = [];
-    if (object.blocks !== undefined && object.blocks !== null) {
-      for (const e of object.blocks) {
-        message.blocks.push(UserBlock.fromJSON(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      blocks: Array.isArray(object?.blocks)
+        ? object.blocks.map((e: any) => UserBlock.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryBlocksResponse): unknown {
@@ -430,19 +373,15 @@ export const QueryBlocksResponse = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<QueryBlocksResponse>): QueryBlocksResponse {
-    const message = { ...baseQueryBlocksResponse } as QueryBlocksResponse;
-    message.blocks = [];
-    if (object.blocks !== undefined && object.blocks !== null) {
-      for (const e of object.blocks) {
-        message.blocks.push(UserBlock.fromPartial(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<QueryBlocksResponse>, I>>(
+    object: I
+  ): QueryBlocksResponse {
+    const message = createBaseQueryBlocksResponse();
+    message.blocks = object.blocks?.map((e) => UserBlock.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -454,10 +393,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -466,7 +407,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

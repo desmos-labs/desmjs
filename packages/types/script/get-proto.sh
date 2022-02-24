@@ -8,12 +8,13 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # Temporary directory where will be extracted the proto files
 TMP_DIR="$SCRIPT_DIR/../tmp"
+
 # Path where will be downloaded the desmos sources
 ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
+
 # Directory where will be placed the proto files
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
-# Directory where will be placed the file generated from ts-proto
-SRC_DIR="$SCRIPT_DIR/../src"
+
 # Url from where will be downloaded the desmos proto files
 DESMOS_VERSION="2.3.1"
 SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"

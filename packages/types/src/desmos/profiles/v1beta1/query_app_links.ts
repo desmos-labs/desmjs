@@ -72,11 +72,9 @@ export interface QueryApplicationLinkByClientIDResponse {
   link?: ApplicationLink;
 }
 
-const baseQueryUserApplicationLinkRequest: object = {
-  user: "",
-  application: "",
-  username: "",
-};
+function createBaseQueryUserApplicationLinkRequest(): QueryUserApplicationLinkRequest {
+  return { user: "", application: "", username: "" };
+}
 
 export const QueryUserApplicationLinkRequest = {
   encode(
@@ -101,9 +99,7 @@ export const QueryUserApplicationLinkRequest = {
   ): QueryUserApplicationLinkRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryUserApplicationLinkRequest,
-    } as QueryUserApplicationLinkRequest;
+    const message = createBaseQueryUserApplicationLinkRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -125,25 +121,11 @@ export const QueryUserApplicationLinkRequest = {
   },
 
   fromJSON(object: any): QueryUserApplicationLinkRequest {
-    const message = {
-      ...baseQueryUserApplicationLinkRequest,
-    } as QueryUserApplicationLinkRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    if (object.application !== undefined && object.application !== null) {
-      message.application = String(object.application);
-    } else {
-      message.application = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = String(object.username);
-    } else {
-      message.username = "";
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      application: isSet(object.application) ? String(object.application) : "",
+      username: isSet(object.username) ? String(object.username) : "",
+    };
   },
 
   toJSON(message: QueryUserApplicationLinkRequest): unknown {
@@ -155,32 +137,20 @@ export const QueryUserApplicationLinkRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryUserApplicationLinkRequest>
+  fromPartial<I extends Exact<DeepPartial<QueryUserApplicationLinkRequest>, I>>(
+    object: I
   ): QueryUserApplicationLinkRequest {
-    const message = {
-      ...baseQueryUserApplicationLinkRequest,
-    } as QueryUserApplicationLinkRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
-    if (object.application !== undefined && object.application !== null) {
-      message.application = object.application;
-    } else {
-      message.application = "";
-    }
-    if (object.username !== undefined && object.username !== null) {
-      message.username = object.username;
-    } else {
-      message.username = "";
-    }
+    const message = createBaseQueryUserApplicationLinkRequest();
+    message.user = object.user ?? "";
+    message.application = object.application ?? "";
+    message.username = object.username ?? "";
     return message;
   },
 };
 
-const baseQueryUserApplicationLinkResponse: object = {};
+function createBaseQueryUserApplicationLinkResponse(): QueryUserApplicationLinkResponse {
+  return { link: undefined };
+}
 
 export const QueryUserApplicationLinkResponse = {
   encode(
@@ -199,9 +169,7 @@ export const QueryUserApplicationLinkResponse = {
   ): QueryUserApplicationLinkResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryUserApplicationLinkResponse,
-    } as QueryUserApplicationLinkResponse;
+    const message = createBaseQueryUserApplicationLinkResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -217,15 +185,11 @@ export const QueryUserApplicationLinkResponse = {
   },
 
   fromJSON(object: any): QueryUserApplicationLinkResponse {
-    const message = {
-      ...baseQueryUserApplicationLinkResponse,
-    } as QueryUserApplicationLinkResponse;
-    if (object.link !== undefined && object.link !== null) {
-      message.link = ApplicationLink.fromJSON(object.link);
-    } else {
-      message.link = undefined;
-    }
-    return message;
+    return {
+      link: isSet(object.link)
+        ? ApplicationLink.fromJSON(object.link)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryUserApplicationLinkResponse): unknown {
@@ -237,22 +201,21 @@ export const QueryUserApplicationLinkResponse = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryUserApplicationLinkResponse>
-  ): QueryUserApplicationLinkResponse {
-    const message = {
-      ...baseQueryUserApplicationLinkResponse,
-    } as QueryUserApplicationLinkResponse;
-    if (object.link !== undefined && object.link !== null) {
-      message.link = ApplicationLink.fromPartial(object.link);
-    } else {
-      message.link = undefined;
-    }
+  fromPartial<
+    I extends Exact<DeepPartial<QueryUserApplicationLinkResponse>, I>
+  >(object: I): QueryUserApplicationLinkResponse {
+    const message = createBaseQueryUserApplicationLinkResponse();
+    message.link =
+      object.link !== undefined && object.link !== null
+        ? ApplicationLink.fromPartial(object.link)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryApplicationLinksRequest: object = { user: "" };
+function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest {
+  return { user: "", pagination: undefined };
+}
 
 export const QueryApplicationLinksRequest = {
   encode(
@@ -274,9 +237,7 @@ export const QueryApplicationLinksRequest = {
   ): QueryApplicationLinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryApplicationLinksRequest,
-    } as QueryApplicationLinksRequest;
+    const message = createBaseQueryApplicationLinksRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -295,20 +256,12 @@ export const QueryApplicationLinksRequest = {
   },
 
   fromJSON(object: any): QueryApplicationLinksRequest {
-    const message = {
-      ...baseQueryApplicationLinksRequest,
-    } as QueryApplicationLinksRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryApplicationLinksRequest): unknown {
@@ -321,27 +274,22 @@ export const QueryApplicationLinksRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryApplicationLinksRequest>
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksRequest>, I>>(
+    object: I
   ): QueryApplicationLinksRequest {
-    const message = {
-      ...baseQueryApplicationLinksRequest,
-    } as QueryApplicationLinksRequest;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+    const message = createBaseQueryApplicationLinksRequest();
+    message.user = object.user ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryApplicationLinksResponse: object = {};
+function createBaseQueryApplicationLinksResponse(): QueryApplicationLinksResponse {
+  return { links: [], pagination: undefined };
+}
 
 export const QueryApplicationLinksResponse = {
   encode(
@@ -366,10 +314,7 @@ export const QueryApplicationLinksResponse = {
   ): QueryApplicationLinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryApplicationLinksResponse,
-    } as QueryApplicationLinksResponse;
-    message.links = [];
+    const message = createBaseQueryApplicationLinksResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -388,21 +333,14 @@ export const QueryApplicationLinksResponse = {
   },
 
   fromJSON(object: any): QueryApplicationLinksResponse {
-    const message = {
-      ...baseQueryApplicationLinksResponse,
-    } as QueryApplicationLinksResponse;
-    message.links = [];
-    if (object.links !== undefined && object.links !== null) {
-      for (const e of object.links) {
-        message.links.push(ApplicationLink.fromJSON(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      links: Array.isArray(object?.links)
+        ? object.links.map((e: any) => ApplicationLink.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryApplicationLinksResponse): unknown {
@@ -421,28 +359,23 @@ export const QueryApplicationLinksResponse = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryApplicationLinksResponse>
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksResponse>, I>>(
+    object: I
   ): QueryApplicationLinksResponse {
-    const message = {
-      ...baseQueryApplicationLinksResponse,
-    } as QueryApplicationLinksResponse;
-    message.links = [];
-    if (object.links !== undefined && object.links !== null) {
-      for (const e of object.links) {
-        message.links.push(ApplicationLink.fromPartial(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+    const message = createBaseQueryApplicationLinksResponse();
+    message.links =
+      object.links?.map((e) => ApplicationLink.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryApplicationLinkByClientIDRequest: object = { clientId: "" };
+function createBaseQueryApplicationLinkByClientIDRequest(): QueryApplicationLinkByClientIDRequest {
+  return { clientId: "" };
+}
 
 export const QueryApplicationLinkByClientIDRequest = {
   encode(
@@ -461,9 +394,7 @@ export const QueryApplicationLinkByClientIDRequest = {
   ): QueryApplicationLinkByClientIDRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryApplicationLinkByClientIDRequest,
-    } as QueryApplicationLinkByClientIDRequest;
+    const message = createBaseQueryApplicationLinkByClientIDRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -479,15 +410,9 @@ export const QueryApplicationLinkByClientIDRequest = {
   },
 
   fromJSON(object: any): QueryApplicationLinkByClientIDRequest {
-    const message = {
-      ...baseQueryApplicationLinkByClientIDRequest,
-    } as QueryApplicationLinkByClientIDRequest;
-    if (object.clientId !== undefined && object.clientId !== null) {
-      message.clientId = String(object.clientId);
-    } else {
-      message.clientId = "";
-    }
-    return message;
+    return {
+      clientId: isSet(object.clientId) ? String(object.clientId) : "",
+    };
   },
 
   toJSON(message: QueryApplicationLinkByClientIDRequest): unknown {
@@ -496,22 +421,18 @@ export const QueryApplicationLinkByClientIDRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryApplicationLinkByClientIDRequest>
-  ): QueryApplicationLinkByClientIDRequest {
-    const message = {
-      ...baseQueryApplicationLinkByClientIDRequest,
-    } as QueryApplicationLinkByClientIDRequest;
-    if (object.clientId !== undefined && object.clientId !== null) {
-      message.clientId = object.clientId;
-    } else {
-      message.clientId = "";
-    }
+  fromPartial<
+    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDRequest>, I>
+  >(object: I): QueryApplicationLinkByClientIDRequest {
+    const message = createBaseQueryApplicationLinkByClientIDRequest();
+    message.clientId = object.clientId ?? "";
     return message;
   },
 };
 
-const baseQueryApplicationLinkByClientIDResponse: object = {};
+function createBaseQueryApplicationLinkByClientIDResponse(): QueryApplicationLinkByClientIDResponse {
+  return { link: undefined };
+}
 
 export const QueryApplicationLinkByClientIDResponse = {
   encode(
@@ -530,9 +451,7 @@ export const QueryApplicationLinkByClientIDResponse = {
   ): QueryApplicationLinkByClientIDResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryApplicationLinkByClientIDResponse,
-    } as QueryApplicationLinkByClientIDResponse;
+    const message = createBaseQueryApplicationLinkByClientIDResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -548,15 +467,11 @@ export const QueryApplicationLinkByClientIDResponse = {
   },
 
   fromJSON(object: any): QueryApplicationLinkByClientIDResponse {
-    const message = {
-      ...baseQueryApplicationLinkByClientIDResponse,
-    } as QueryApplicationLinkByClientIDResponse;
-    if (object.link !== undefined && object.link !== null) {
-      message.link = ApplicationLink.fromJSON(object.link);
-    } else {
-      message.link = undefined;
-    }
-    return message;
+    return {
+      link: isSet(object.link)
+        ? ApplicationLink.fromJSON(object.link)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryApplicationLinkByClientIDResponse): unknown {
@@ -568,17 +483,14 @@ export const QueryApplicationLinkByClientIDResponse = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryApplicationLinkByClientIDResponse>
-  ): QueryApplicationLinkByClientIDResponse {
-    const message = {
-      ...baseQueryApplicationLinkByClientIDResponse,
-    } as QueryApplicationLinkByClientIDResponse;
-    if (object.link !== undefined && object.link !== null) {
-      message.link = ApplicationLink.fromPartial(object.link);
-    } else {
-      message.link = undefined;
-    }
+  fromPartial<
+    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDResponse>, I>
+  >(object: I): QueryApplicationLinkByClientIDResponse {
+    const message = createBaseQueryApplicationLinkByClientIDResponse();
+    message.link =
+      object.link !== undefined && object.link !== null
+        ? ApplicationLink.fromPartial(object.link)
+        : undefined;
     return message;
   },
 };
@@ -590,10 +502,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -602,7 +516,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

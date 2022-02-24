@@ -59,7 +59,15 @@ export interface Base58Address {
   value: string;
 }
 
-const baseChainLink: object = { user: "" };
+function createBaseChainLink(): ChainLink {
+  return {
+    user: "",
+    address: undefined,
+    proof: undefined,
+    chainConfig: undefined,
+    creationTime: undefined,
+  };
+}
 
 export const ChainLink = {
   encode(
@@ -93,7 +101,7 @@ export const ChainLink = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ChainLink {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseChainLink } as ChainLink;
+    const message = createBaseChainLink();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -123,33 +131,17 @@ export const ChainLink = {
   },
 
   fromJSON(object: any): ChainLink {
-    const message = { ...baseChainLink } as ChainLink;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = String(object.user);
-    } else {
-      message.user = "";
-    }
-    if (object.address !== undefined && object.address !== null) {
-      message.address = Any.fromJSON(object.address);
-    } else {
-      message.address = undefined;
-    }
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromJSON(object.proof);
-    } else {
-      message.proof = undefined;
-    }
-    if (object.chainConfig !== undefined && object.chainConfig !== null) {
-      message.chainConfig = ChainConfig.fromJSON(object.chainConfig);
-    } else {
-      message.chainConfig = undefined;
-    }
-    if (object.creationTime !== undefined && object.creationTime !== null) {
-      message.creationTime = fromJsonTimestamp(object.creationTime);
-    } else {
-      message.creationTime = undefined;
-    }
-    return message;
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      address: isSet(object.address) ? Any.fromJSON(object.address) : undefined,
+      proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
+      chainConfig: isSet(object.chainConfig)
+        ? ChainConfig.fromJSON(object.chainConfig)
+        : undefined,
+      creationTime: isSet(object.creationTime)
+        ? fromJsonTimestamp(object.creationTime)
+        : undefined,
+    };
   },
 
   toJSON(message: ChainLink): unknown {
@@ -168,38 +160,31 @@ export const ChainLink = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ChainLink>): ChainLink {
-    const message = { ...baseChainLink } as ChainLink;
-    if (object.user !== undefined && object.user !== null) {
-      message.user = object.user;
-    } else {
-      message.user = "";
-    }
-    if (object.address !== undefined && object.address !== null) {
-      message.address = Any.fromPartial(object.address);
-    } else {
-      message.address = undefined;
-    }
-    if (object.proof !== undefined && object.proof !== null) {
-      message.proof = Proof.fromPartial(object.proof);
-    } else {
-      message.proof = undefined;
-    }
-    if (object.chainConfig !== undefined && object.chainConfig !== null) {
-      message.chainConfig = ChainConfig.fromPartial(object.chainConfig);
-    } else {
-      message.chainConfig = undefined;
-    }
-    if (object.creationTime !== undefined && object.creationTime !== null) {
-      message.creationTime = object.creationTime;
-    } else {
-      message.creationTime = undefined;
-    }
+  fromPartial<I extends Exact<DeepPartial<ChainLink>, I>>(
+    object: I
+  ): ChainLink {
+    const message = createBaseChainLink();
+    message.user = object.user ?? "";
+    message.address =
+      object.address !== undefined && object.address !== null
+        ? Any.fromPartial(object.address)
+        : undefined;
+    message.proof =
+      object.proof !== undefined && object.proof !== null
+        ? Proof.fromPartial(object.proof)
+        : undefined;
+    message.chainConfig =
+      object.chainConfig !== undefined && object.chainConfig !== null
+        ? ChainConfig.fromPartial(object.chainConfig)
+        : undefined;
+    message.creationTime = object.creationTime ?? undefined;
     return message;
   },
 };
 
-const baseChainConfig: object = { name: "" };
+function createBaseChainConfig(): ChainConfig {
+  return { name: "" };
+}
 
 export const ChainConfig = {
   encode(
@@ -215,7 +200,7 @@ export const ChainConfig = {
   decode(input: _m0.Reader | Uint8Array, length?: number): ChainConfig {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseChainConfig } as ChainConfig;
+    const message = createBaseChainConfig();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -231,13 +216,9 @@ export const ChainConfig = {
   },
 
   fromJSON(object: any): ChainConfig {
-    const message = { ...baseChainConfig } as ChainConfig;
-    if (object.name !== undefined && object.name !== null) {
-      message.name = String(object.name);
-    } else {
-      message.name = "";
-    }
-    return message;
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+    };
   },
 
   toJSON(message: ChainConfig): unknown {
@@ -246,18 +227,18 @@ export const ChainConfig = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<ChainConfig>): ChainConfig {
-    const message = { ...baseChainConfig } as ChainConfig;
-    if (object.name !== undefined && object.name !== null) {
-      message.name = object.name;
-    } else {
-      message.name = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<ChainConfig>, I>>(
+    object: I
+  ): ChainConfig {
+    const message = createBaseChainConfig();
+    message.name = object.name ?? "";
     return message;
   },
 };
 
-const baseProof: object = { signature: "", plainText: "" };
+function createBaseProof(): Proof {
+  return { pubKey: undefined, signature: "", plainText: "" };
+}
 
 export const Proof = {
   encode(message: Proof, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
@@ -276,7 +257,7 @@ export const Proof = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Proof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseProof } as Proof;
+    const message = createBaseProof();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -298,23 +279,11 @@ export const Proof = {
   },
 
   fromJSON(object: any): Proof {
-    const message = { ...baseProof } as Proof;
-    if (object.pubKey !== undefined && object.pubKey !== null) {
-      message.pubKey = Any.fromJSON(object.pubKey);
-    } else {
-      message.pubKey = undefined;
-    }
-    if (object.signature !== undefined && object.signature !== null) {
-      message.signature = String(object.signature);
-    } else {
-      message.signature = "";
-    }
-    if (object.plainText !== undefined && object.plainText !== null) {
-      message.plainText = String(object.plainText);
-    } else {
-      message.plainText = "";
-    }
-    return message;
+    return {
+      pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
+      signature: isSet(object.signature) ? String(object.signature) : "",
+      plainText: isSet(object.plainText) ? String(object.plainText) : "",
+    };
   },
 
   toJSON(message: Proof): unknown {
@@ -326,28 +295,21 @@ export const Proof = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Proof>): Proof {
-    const message = { ...baseProof } as Proof;
-    if (object.pubKey !== undefined && object.pubKey !== null) {
-      message.pubKey = Any.fromPartial(object.pubKey);
-    } else {
-      message.pubKey = undefined;
-    }
-    if (object.signature !== undefined && object.signature !== null) {
-      message.signature = object.signature;
-    } else {
-      message.signature = "";
-    }
-    if (object.plainText !== undefined && object.plainText !== null) {
-      message.plainText = object.plainText;
-    } else {
-      message.plainText = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Proof>, I>>(object: I): Proof {
+    const message = createBaseProof();
+    message.pubKey =
+      object.pubKey !== undefined && object.pubKey !== null
+        ? Any.fromPartial(object.pubKey)
+        : undefined;
+    message.signature = object.signature ?? "";
+    message.plainText = object.plainText ?? "";
     return message;
   },
 };
 
-const baseBech32Address: object = { value: "", prefix: "" };
+function createBaseBech32Address(): Bech32Address {
+  return { value: "", prefix: "" };
+}
 
 export const Bech32Address = {
   encode(
@@ -366,7 +328,7 @@ export const Bech32Address = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Bech32Address {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseBech32Address } as Bech32Address;
+    const message = createBaseBech32Address();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -385,18 +347,10 @@ export const Bech32Address = {
   },
 
   fromJSON(object: any): Bech32Address {
-    const message = { ...baseBech32Address } as Bech32Address;
-    if (object.value !== undefined && object.value !== null) {
-      message.value = String(object.value);
-    } else {
-      message.value = "";
-    }
-    if (object.prefix !== undefined && object.prefix !== null) {
-      message.prefix = String(object.prefix);
-    } else {
-      message.prefix = "";
-    }
-    return message;
+    return {
+      value: isSet(object.value) ? String(object.value) : "",
+      prefix: isSet(object.prefix) ? String(object.prefix) : "",
+    };
   },
 
   toJSON(message: Bech32Address): unknown {
@@ -406,23 +360,19 @@ export const Bech32Address = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Bech32Address>): Bech32Address {
-    const message = { ...baseBech32Address } as Bech32Address;
-    if (object.value !== undefined && object.value !== null) {
-      message.value = object.value;
-    } else {
-      message.value = "";
-    }
-    if (object.prefix !== undefined && object.prefix !== null) {
-      message.prefix = object.prefix;
-    } else {
-      message.prefix = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Bech32Address>, I>>(
+    object: I
+  ): Bech32Address {
+    const message = createBaseBech32Address();
+    message.value = object.value ?? "";
+    message.prefix = object.prefix ?? "";
     return message;
   },
 };
 
-const baseBase58Address: object = { value: "" };
+function createBaseBase58Address(): Base58Address {
+  return { value: "" };
+}
 
 export const Base58Address = {
   encode(
@@ -438,7 +388,7 @@ export const Base58Address = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Base58Address {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseBase58Address } as Base58Address;
+    const message = createBaseBase58Address();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -454,13 +404,9 @@ export const Base58Address = {
   },
 
   fromJSON(object: any): Base58Address {
-    const message = { ...baseBase58Address } as Base58Address;
-    if (object.value !== undefined && object.value !== null) {
-      message.value = String(object.value);
-    } else {
-      message.value = "";
-    }
-    return message;
+    return {
+      value: isSet(object.value) ? String(object.value) : "",
+    };
   },
 
   toJSON(message: Base58Address): unknown {
@@ -469,13 +415,11 @@ export const Base58Address = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Base58Address>): Base58Address {
-    const message = { ...baseBase58Address } as Base58Address;
-    if (object.value !== undefined && object.value !== null) {
-      message.value = object.value;
-    } else {
-      message.value = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Base58Address>, I>>(
+    object: I
+  ): Base58Address {
+    const message = createBaseBase58Address();
+    message.value = object.value ?? "";
     return message;
   },
 };
@@ -487,10 +431,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -498,6 +444,14 @@ type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
@@ -528,4 +482,8 @@ function numberToLong(number: number) {
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

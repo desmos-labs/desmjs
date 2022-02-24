@@ -35,7 +35,9 @@ export interface QueryIncomingDTagTransferRequestsResponse {
   pagination?: PageResponse;
 }
 
-const baseQueryIncomingDTagTransferRequestsRequest: object = { receiver: "" };
+function createBaseQueryIncomingDTagTransferRequestsRequest(): QueryIncomingDTagTransferRequestsRequest {
+  return { receiver: "", pagination: undefined };
+}
 
 export const QueryIncomingDTagTransferRequestsRequest = {
   encode(
@@ -57,9 +59,7 @@ export const QueryIncomingDTagTransferRequestsRequest = {
   ): QueryIncomingDTagTransferRequestsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryIncomingDTagTransferRequestsRequest,
-    } as QueryIncomingDTagTransferRequestsRequest;
+    const message = createBaseQueryIncomingDTagTransferRequestsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -78,20 +78,12 @@ export const QueryIncomingDTagTransferRequestsRequest = {
   },
 
   fromJSON(object: any): QueryIncomingDTagTransferRequestsRequest {
-    const message = {
-      ...baseQueryIncomingDTagTransferRequestsRequest,
-    } as QueryIncomingDTagTransferRequestsRequest;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = String(object.receiver);
-    } else {
-      message.receiver = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryIncomingDTagTransferRequestsRequest): unknown {
@@ -104,27 +96,22 @@ export const QueryIncomingDTagTransferRequestsRequest = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryIncomingDTagTransferRequestsRequest>
-  ): QueryIncomingDTagTransferRequestsRequest {
-    const message = {
-      ...baseQueryIncomingDTagTransferRequestsRequest,
-    } as QueryIncomingDTagTransferRequestsRequest;
-    if (object.receiver !== undefined && object.receiver !== null) {
-      message.receiver = object.receiver;
-    } else {
-      message.receiver = "";
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageRequest.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+  fromPartial<
+    I extends Exact<DeepPartial<QueryIncomingDTagTransferRequestsRequest>, I>
+  >(object: I): QueryIncomingDTagTransferRequestsRequest {
+    const message = createBaseQueryIncomingDTagTransferRequestsRequest();
+    message.receiver = object.receiver ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
 
-const baseQueryIncomingDTagTransferRequestsResponse: object = {};
+function createBaseQueryIncomingDTagTransferRequestsResponse(): QueryIncomingDTagTransferRequestsResponse {
+  return { requests: [], pagination: undefined };
+}
 
 export const QueryIncomingDTagTransferRequestsResponse = {
   encode(
@@ -149,10 +136,7 @@ export const QueryIncomingDTagTransferRequestsResponse = {
   ): QueryIncomingDTagTransferRequestsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseQueryIncomingDTagTransferRequestsResponse,
-    } as QueryIncomingDTagTransferRequestsResponse;
-    message.requests = [];
+    const message = createBaseQueryIncomingDTagTransferRequestsResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -173,21 +157,14 @@ export const QueryIncomingDTagTransferRequestsResponse = {
   },
 
   fromJSON(object: any): QueryIncomingDTagTransferRequestsResponse {
-    const message = {
-      ...baseQueryIncomingDTagTransferRequestsResponse,
-    } as QueryIncomingDTagTransferRequestsResponse;
-    message.requests = [];
-    if (object.requests !== undefined && object.requests !== null) {
-      for (const e of object.requests) {
-        message.requests.push(DTagTransferRequest.fromJSON(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromJSON(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
-    return message;
+    return {
+      requests: Array.isArray(object?.requests)
+        ? object.requests.map((e: any) => DTagTransferRequest.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
   },
 
   toJSON(message: QueryIncomingDTagTransferRequestsResponse): unknown {
@@ -206,23 +183,16 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     return obj;
   },
 
-  fromPartial(
-    object: DeepPartial<QueryIncomingDTagTransferRequestsResponse>
-  ): QueryIncomingDTagTransferRequestsResponse {
-    const message = {
-      ...baseQueryIncomingDTagTransferRequestsResponse,
-    } as QueryIncomingDTagTransferRequestsResponse;
-    message.requests = [];
-    if (object.requests !== undefined && object.requests !== null) {
-      for (const e of object.requests) {
-        message.requests.push(DTagTransferRequest.fromPartial(e));
-      }
-    }
-    if (object.pagination !== undefined && object.pagination !== null) {
-      message.pagination = PageResponse.fromPartial(object.pagination);
-    } else {
-      message.pagination = undefined;
-    }
+  fromPartial<
+    I extends Exact<DeepPartial<QueryIncomingDTagTransferRequestsResponse>, I>
+  >(object: I): QueryIncomingDTagTransferRequestsResponse {
+    const message = createBaseQueryIncomingDTagTransferRequestsResponse();
+    message.requests =
+      object.requests?.map((e) => DTagTransferRequest.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -234,10 +204,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -246,7 +218,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

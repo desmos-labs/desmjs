@@ -30,7 +30,9 @@ export interface UserBlock {
   subspace: string;
 }
 
-const baseRelationship: object = { creator: "", recipient: "", subspace: "" };
+function createBaseRelationship(): Relationship {
+  return { creator: "", recipient: "", subspace: "" };
+}
 
 export const Relationship = {
   encode(
@@ -52,7 +54,7 @@ export const Relationship = {
   decode(input: _m0.Reader | Uint8Array, length?: number): Relationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseRelationship } as Relationship;
+    const message = createBaseRelationship();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -74,23 +76,11 @@ export const Relationship = {
   },
 
   fromJSON(object: any): Relationship {
-    const message = { ...baseRelationship } as Relationship;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = String(object.creator);
-    } else {
-      message.creator = "";
-    }
-    if (object.recipient !== undefined && object.recipient !== null) {
-      message.recipient = String(object.recipient);
-    } else {
-      message.recipient = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = String(object.subspace);
-    } else {
-      message.subspace = "";
-    }
-    return message;
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+    };
   },
 
   toJSON(message: Relationship): unknown {
@@ -101,33 +91,20 @@ export const Relationship = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<Relationship>): Relationship {
-    const message = { ...baseRelationship } as Relationship;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = object.creator;
-    } else {
-      message.creator = "";
-    }
-    if (object.recipient !== undefined && object.recipient !== null) {
-      message.recipient = object.recipient;
-    } else {
-      message.recipient = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = object.subspace;
-    } else {
-      message.subspace = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<Relationship>, I>>(
+    object: I
+  ): Relationship {
+    const message = createBaseRelationship();
+    message.creator = object.creator ?? "";
+    message.recipient = object.recipient ?? "";
+    message.subspace = object.subspace ?? "";
     return message;
   },
 };
 
-const baseUserBlock: object = {
-  blocker: "",
-  blocked: "",
-  reason: "",
-  subspace: "",
-};
+function createBaseUserBlock(): UserBlock {
+  return { blocker: "", blocked: "", reason: "", subspace: "" };
+}
 
 export const UserBlock = {
   encode(
@@ -152,7 +129,7 @@ export const UserBlock = {
   decode(input: _m0.Reader | Uint8Array, length?: number): UserBlock {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseUserBlock } as UserBlock;
+    const message = createBaseUserBlock();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -177,28 +154,12 @@ export const UserBlock = {
   },
 
   fromJSON(object: any): UserBlock {
-    const message = { ...baseUserBlock } as UserBlock;
-    if (object.blocker !== undefined && object.blocker !== null) {
-      message.blocker = String(object.blocker);
-    } else {
-      message.blocker = "";
-    }
-    if (object.blocked !== undefined && object.blocked !== null) {
-      message.blocked = String(object.blocked);
-    } else {
-      message.blocked = "";
-    }
-    if (object.reason !== undefined && object.reason !== null) {
-      message.reason = String(object.reason);
-    } else {
-      message.reason = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = String(object.subspace);
-    } else {
-      message.subspace = "";
-    }
-    return message;
+    return {
+      blocker: isSet(object.blocker) ? String(object.blocker) : "",
+      blocked: isSet(object.blocked) ? String(object.blocked) : "",
+      reason: isSet(object.reason) ? String(object.reason) : "",
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+    };
   },
 
   toJSON(message: UserBlock): unknown {
@@ -210,28 +171,14 @@ export const UserBlock = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<UserBlock>): UserBlock {
-    const message = { ...baseUserBlock } as UserBlock;
-    if (object.blocker !== undefined && object.blocker !== null) {
-      message.blocker = object.blocker;
-    } else {
-      message.blocker = "";
-    }
-    if (object.blocked !== undefined && object.blocked !== null) {
-      message.blocked = object.blocked;
-    } else {
-      message.blocked = "";
-    }
-    if (object.reason !== undefined && object.reason !== null) {
-      message.reason = object.reason;
-    } else {
-      message.reason = "";
-    }
-    if (object.subspace !== undefined && object.subspace !== null) {
-      message.subspace = object.subspace;
-    } else {
-      message.subspace = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<UserBlock>, I>>(
+    object: I
+  ): UserBlock {
+    const message = createBaseUserBlock();
+    message.blocker = object.blocker ?? "";
+    message.blocked = object.blocked ?? "";
+    message.reason = object.reason ?? "";
+    message.subspace = object.subspace ?? "";
     return message;
   },
 };
@@ -243,10 +190,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -255,7 +204,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }

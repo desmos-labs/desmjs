@@ -23,14 +23,16 @@ export interface MsgDeleteProfile {
 /** MsgDeleteProfileResponse defines the Msg/DeleteProfile response type. */
 export interface MsgDeleteProfileResponse {}
 
-const baseMsgSaveProfile: object = {
-  dtag: "",
-  nickname: "",
-  bio: "",
-  profilePicture: "",
-  coverPicture: "",
-  creator: "",
-};
+function createBaseMsgSaveProfile(): MsgSaveProfile {
+  return {
+    dtag: "",
+    nickname: "",
+    bio: "",
+    profilePicture: "",
+    coverPicture: "",
+    creator: "",
+  };
+}
 
 export const MsgSaveProfile = {
   encode(
@@ -61,7 +63,7 @@ export const MsgSaveProfile = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgSaveProfile {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgSaveProfile } as MsgSaveProfile;
+    const message = createBaseMsgSaveProfile();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -92,38 +94,18 @@ export const MsgSaveProfile = {
   },
 
   fromJSON(object: any): MsgSaveProfile {
-    const message = { ...baseMsgSaveProfile } as MsgSaveProfile;
-    if (object.dtag !== undefined && object.dtag !== null) {
-      message.dtag = String(object.dtag);
-    } else {
-      message.dtag = "";
-    }
-    if (object.nickname !== undefined && object.nickname !== null) {
-      message.nickname = String(object.nickname);
-    } else {
-      message.nickname = "";
-    }
-    if (object.bio !== undefined && object.bio !== null) {
-      message.bio = String(object.bio);
-    } else {
-      message.bio = "";
-    }
-    if (object.profilePicture !== undefined && object.profilePicture !== null) {
-      message.profilePicture = String(object.profilePicture);
-    } else {
-      message.profilePicture = "";
-    }
-    if (object.coverPicture !== undefined && object.coverPicture !== null) {
-      message.coverPicture = String(object.coverPicture);
-    } else {
-      message.coverPicture = "";
-    }
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = String(object.creator);
-    } else {
-      message.creator = "";
-    }
-    return message;
+    return {
+      dtag: isSet(object.dtag) ? String(object.dtag) : "",
+      nickname: isSet(object.nickname) ? String(object.nickname) : "",
+      bio: isSet(object.bio) ? String(object.bio) : "",
+      profilePicture: isSet(object.profilePicture)
+        ? String(object.profilePicture)
+        : "",
+      coverPicture: isSet(object.coverPicture)
+        ? String(object.coverPicture)
+        : "",
+      creator: isSet(object.creator) ? String(object.creator) : "",
+    };
   },
 
   toJSON(message: MsgSaveProfile): unknown {
@@ -139,43 +121,23 @@ export const MsgSaveProfile = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgSaveProfile>): MsgSaveProfile {
-    const message = { ...baseMsgSaveProfile } as MsgSaveProfile;
-    if (object.dtag !== undefined && object.dtag !== null) {
-      message.dtag = object.dtag;
-    } else {
-      message.dtag = "";
-    }
-    if (object.nickname !== undefined && object.nickname !== null) {
-      message.nickname = object.nickname;
-    } else {
-      message.nickname = "";
-    }
-    if (object.bio !== undefined && object.bio !== null) {
-      message.bio = object.bio;
-    } else {
-      message.bio = "";
-    }
-    if (object.profilePicture !== undefined && object.profilePicture !== null) {
-      message.profilePicture = object.profilePicture;
-    } else {
-      message.profilePicture = "";
-    }
-    if (object.coverPicture !== undefined && object.coverPicture !== null) {
-      message.coverPicture = object.coverPicture;
-    } else {
-      message.coverPicture = "";
-    }
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = object.creator;
-    } else {
-      message.creator = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<MsgSaveProfile>, I>>(
+    object: I
+  ): MsgSaveProfile {
+    const message = createBaseMsgSaveProfile();
+    message.dtag = object.dtag ?? "";
+    message.nickname = object.nickname ?? "";
+    message.bio = object.bio ?? "";
+    message.profilePicture = object.profilePicture ?? "";
+    message.coverPicture = object.coverPicture ?? "";
+    message.creator = object.creator ?? "";
     return message;
   },
 };
 
-const baseMsgSaveProfileResponse: object = {};
+function createBaseMsgSaveProfileResponse(): MsgSaveProfileResponse {
+  return {};
+}
 
 export const MsgSaveProfileResponse = {
   encode(
@@ -191,7 +153,7 @@ export const MsgSaveProfileResponse = {
   ): MsgSaveProfileResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgSaveProfileResponse } as MsgSaveProfileResponse;
+    const message = createBaseMsgSaveProfileResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -204,8 +166,7 @@ export const MsgSaveProfileResponse = {
   },
 
   fromJSON(_: any): MsgSaveProfileResponse {
-    const message = { ...baseMsgSaveProfileResponse } as MsgSaveProfileResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgSaveProfileResponse): unknown {
@@ -213,13 +174,17 @@ export const MsgSaveProfileResponse = {
     return obj;
   },
 
-  fromPartial(_: DeepPartial<MsgSaveProfileResponse>): MsgSaveProfileResponse {
-    const message = { ...baseMsgSaveProfileResponse } as MsgSaveProfileResponse;
+  fromPartial<I extends Exact<DeepPartial<MsgSaveProfileResponse>, I>>(
+    _: I
+  ): MsgSaveProfileResponse {
+    const message = createBaseMsgSaveProfileResponse();
     return message;
   },
 };
 
-const baseMsgDeleteProfile: object = { creator: "" };
+function createBaseMsgDeleteProfile(): MsgDeleteProfile {
+  return { creator: "" };
+}
 
 export const MsgDeleteProfile = {
   encode(
@@ -235,7 +200,7 @@ export const MsgDeleteProfile = {
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteProfile {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgDeleteProfile } as MsgDeleteProfile;
+    const message = createBaseMsgDeleteProfile();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -251,13 +216,9 @@ export const MsgDeleteProfile = {
   },
 
   fromJSON(object: any): MsgDeleteProfile {
-    const message = { ...baseMsgDeleteProfile } as MsgDeleteProfile;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = String(object.creator);
-    } else {
-      message.creator = "";
-    }
-    return message;
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+    };
   },
 
   toJSON(message: MsgDeleteProfile): unknown {
@@ -266,18 +227,18 @@ export const MsgDeleteProfile = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgDeleteProfile>): MsgDeleteProfile {
-    const message = { ...baseMsgDeleteProfile } as MsgDeleteProfile;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = object.creator;
-    } else {
-      message.creator = "";
-    }
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteProfile>, I>>(
+    object: I
+  ): MsgDeleteProfile {
+    const message = createBaseMsgDeleteProfile();
+    message.creator = object.creator ?? "";
     return message;
   },
 };
 
-const baseMsgDeleteProfileResponse: object = {};
+function createBaseMsgDeleteProfileResponse(): MsgDeleteProfileResponse {
+  return {};
+}
 
 export const MsgDeleteProfileResponse = {
   encode(
@@ -293,9 +254,7 @@ export const MsgDeleteProfileResponse = {
   ): MsgDeleteProfileResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = {
-      ...baseMsgDeleteProfileResponse,
-    } as MsgDeleteProfileResponse;
+    const message = createBaseMsgDeleteProfileResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -308,10 +267,7 @@ export const MsgDeleteProfileResponse = {
   },
 
   fromJSON(_: any): MsgDeleteProfileResponse {
-    const message = {
-      ...baseMsgDeleteProfileResponse,
-    } as MsgDeleteProfileResponse;
-    return message;
+    return {};
   },
 
   toJSON(_: MsgDeleteProfileResponse): unknown {
@@ -319,12 +275,10 @@ export const MsgDeleteProfileResponse = {
     return obj;
   },
 
-  fromPartial(
-    _: DeepPartial<MsgDeleteProfileResponse>
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteProfileResponse>, I>>(
+    _: I
   ): MsgDeleteProfileResponse {
-    const message = {
-      ...baseMsgDeleteProfileResponse,
-    } as MsgDeleteProfileResponse;
+    const message = createBaseMsgDeleteProfileResponse();
     return message;
   },
 };
@@ -336,10 +290,12 @@ type Builtin =
   | string
   | number
   | boolean
-  | undefined
-  | Long;
+  | undefined;
+
 type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
@@ -348,7 +304,19 @@ type DeepPartial<T> = T extends Builtin
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
   _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
 }
