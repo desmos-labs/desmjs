@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs",
-  "version": "2.3.1-alpha.9",
+  "version": "2.3.1-beta.0",
   "description": "Core of the desmos DApp SDK",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>",
