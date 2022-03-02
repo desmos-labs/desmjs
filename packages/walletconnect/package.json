@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-walletconnect",
-  "version": "2.3.1-beta.0",
+  "version": "2.0.0-beta.0",
   "description": "WalletConnect integration for DesmJS",
   "contributors": [
     "Riccardo Montagnin <riccardo@forbole.com>"
