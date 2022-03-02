@@ -8,11 +8,13 @@ export const desmjsTypes: Record<string, AminoConverter> = {
     toAmino: (value: MsgAuthenticate): AminoMsgAuthenticate["value"] => {
       return {
         user: value.user,
+        nonce: value.nonce,
       };
     },
     fromAmino: (msg: AminoMsgAuthenticate["value"]): MsgAuthenticate => {
       return {
         user: msg.user,
+        nonce: msg.nonce,
       };
     },
   },

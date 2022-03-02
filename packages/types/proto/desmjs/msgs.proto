@@ -1,8 +1,11 @@
 syntax = "proto3";
 package desmsjs.v2;
 
-
 // MsgAuthenticate represents the message used to authenticate a user
 message MsgAuthenticate {
-  string user = 4;
+  // Address of the user to authenticate
+  string user = 1;
+
+  // Nonce to avoid double spending attacks
+  bytes nonce = 2;
 }
