@@ -1,5 +1,7 @@
+import WalletConnect from "@walletconnect/client";
+import QRCodeModal from "@walletconnect/qrcode-modal";
+
 export * from "./signer";
 
 // Export the WalletConnect types
-export * from "@walletconnect/client";
-export * from "@walletconnect/qrcode-modal";
+export { WalletConnect, QRCodeModal };
