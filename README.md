@@ -2,9 +2,6 @@
 
 This repository contains a set of packages to develop DApps on Desmos.
 
-> **👷 Work in progress 👷**  
-> The SDK is currently in active development so the API is subject to change.
-
 ## Packages
 
 DesmJS consists of multiple smaller npm packages each one with a specific functionality.
