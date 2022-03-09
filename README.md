@@ -1,15 +1,19 @@
-# 👷 Work in progress
-The SDK is currently in active development and the API can change! 
+# DesmJS
 
-# Desmos dapp-sdk
-This repository contains a set of JS/Typescript packages to develop Decentralized applications (dapp) that
-runns on top of Desmos.
+This repository contains a set of packages to develop DApps on Desmos.
 
 ## Packages
-The dapp-sdk consists of multiple smaller npm packages each one with a specific functionality.
 
-|Package|Description|  
-|-------|-----------|  
-|@desmoslabs/proto|Contains the Desmos protobuf definitions|
-|@desmoslabs/sdk-core|Contains the client to interact with the Desmos chain|
-|@desmoslabs/sdk-react|Contains a set of utility to develop dapp using React|
+DesmJS consists of multiple smaller npm packages each one with a specific functionality.
+
+| Package                            | Description                                           | Version                                                                                                                                             |  
+|:-----------------------------------|:------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `@desmoslabs/desmjs`               | Contains the client to interact with the Desmos chain | [![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs)                             |
+| `@desmoslabs/desmjs-types`         | Contains the Desmos Protobuf definitions              | [![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-types.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-types)                 |
+| `@desmoslabs/desmjs-walletconnect` | Contains the WalletConnect signer implementation      | [![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-walletconnect.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-walletconnect) |
+
+## Compatibility table
+
+| DesmJS version | Desmos version | 
+|:--------------:|:--------------:|
+|    `2.0.0`     |    `2.3.1 `    |

@@ -31,5 +31,14 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/plugins
 
-# Ignore downloaded desmos version
-packages/core/script/desmos
+# Ignore downloaded proto
+/proto-files
+
+# Ignore published dirs
+/cosmos
+/cosmos_proto
+/desmjs
+/desmos
+/gogoproto
+/google
+/ibc
