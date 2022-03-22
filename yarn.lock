@@ -1534,6 +1534,7 @@ __metadata:
     long: ^4.0.0
     protobufjs: ^6.11.2
     ts-proto: ^1.82.5
+    ts-protoc-gen: ^0.15.0
     typescript: ^4.4.4
   languageName: unknown
   linkType: soft
@@ -4491,6 +4492,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"google-protobuf@npm:^3.15.5":
+  version: 3.19.4
+  resolution: "google-protobuf@npm:3.19.4"
+  checksum: c0ebc0afbb635271b54db933be74441429e0df095347d0145ae7036377a2cc6fc402ed015855ebc1809c7cedfde3246344ad28a98eac1e6a21800c7b572b2caf
+  languageName: node
+  linkType: hard
+
 "graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
   version: 4.2.9
   resolution: "graceful-fs@npm:4.2.9"
@@ -7421,6 +7429,17 @@ __metadata:
   bin:
     protoc-gen-ts_proto: protoc-gen-ts_proto
   checksum: 2e1a92677252f034f5c1d320d69411e1b159bf348d81bdd1e6e443e6c55a0e90b8335e0893b5a590592b874d299a373879357b4b792d0f5dbd620c9d4c2d247b
+  languageName: node
+  linkType: hard
+
+"ts-protoc-gen@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "ts-protoc-gen@npm:0.15.0"
+  dependencies:
+    google-protobuf: ^3.15.5
+  bin:
+    protoc-gen-ts: bin/protoc-gen-ts
+  checksum: 612799180832786ee28dfb3510015f840ff8acd480ec1159599535878cc77a4f6ad4d6993d1fa546bbb4523de5fb60f4987e1ea810c2e56d91be0448d30f29ad
   languageName: node
   linkType: hard
 
