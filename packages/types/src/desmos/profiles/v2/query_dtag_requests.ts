@@ -5,7 +5,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DTagTransferRequest } from "../../../desmos/profiles/v1beta1/models_dtag_requests";
+import { DTagTransferRequest } from "../../../desmos/profiles/v2/models_dtag_requests";
 
 /**
  * QueryIncomingDTagTransferRequestsRequest is the request type for the
@@ -13,8 +13,8 @@ import { DTagTransferRequest } from "../../../desmos/profiles/v1beta1/models_dta
  */
 export interface QueryIncomingDTagTransferRequestsRequest {
   /**
-   * Receiver represents the address of the user to which query the incoming
-   * requests for
+   * (optional) Receiver represents the address of the user to which query the
+   * incoming requests for
    */
   receiver: string;
   /** Pagination defines an optional pagination for the request */

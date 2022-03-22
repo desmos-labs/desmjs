@@ -6,7 +6,7 @@ import {
   MsgDeleteProfileResponse,
   MsgSaveProfile,
   MsgDeleteProfile,
-} from "../../../desmos/profiles/v1beta1/msgs_profile";
+} from "../../../desmos/profiles/v2/msgs_profile";
 import {
   MsgRequestDTagTransferResponse,
   MsgCancelDTagTransferRequestResponse,
@@ -16,29 +16,19 @@ import {
   MsgCancelDTagTransferRequest,
   MsgAcceptDTagTransferRequest,
   MsgRefuseDTagTransferRequest,
-} from "../../../desmos/profiles/v1beta1/msgs_dtag_requests";
-import {
-  MsgCreateRelationshipResponse,
-  MsgDeleteRelationshipResponse,
-  MsgBlockUserResponse,
-  MsgUnblockUserResponse,
-  MsgCreateRelationship,
-  MsgDeleteRelationship,
-  MsgBlockUser,
-  MsgUnblockUser,
-} from "../../../desmos/profiles/v1beta1/msgs_relationships";
+} from "../../../desmos/profiles/v2/msgs_dtag_requests";
 import {
   MsgLinkChainAccountResponse,
   MsgUnlinkChainAccountResponse,
   MsgLinkChainAccount,
   MsgUnlinkChainAccount,
-} from "../../../desmos/profiles/v1beta1/msgs_chain_links";
+} from "../../../desmos/profiles/v2/msgs_chain_links";
 import {
   MsgLinkApplicationResponse,
   MsgUnlinkApplicationResponse,
   MsgLinkApplication,
   MsgUnlinkApplication,
-} from "../../../desmos/profiles/v1beta1/msgs_app_links";
+} from "../../../desmos/profiles/v2/msgs_app_links";
 
 /** Msg defines the relationships Msg service. */
 export interface Msg {
@@ -74,18 +64,6 @@ export interface Msg {
   RefuseDTagTransferRequest(
     request: MsgRefuseDTagTransferRequest
   ): Promise<MsgRefuseDTagTransferRequestResponse>;
-  /** CreateRelationship defines a method for creating a new relationship */
-  CreateRelationship(
-    request: MsgCreateRelationship
-  ): Promise<MsgCreateRelationshipResponse>;
-  /** DeleteRelationship defines a method for deleting a relationship */
-  DeleteRelationship(
-    request: MsgDeleteRelationship
-  ): Promise<MsgDeleteRelationshipResponse>;
-  /** BlockUser defines a method for blocking a user */
-  BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse>;
-  /** UnblockUser defines a method for unblocking a user */
-  UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse>;
   /**
    * LinkChainAccount defines a method to link an external chain account to a
    * profile
@@ -123,10 +101,6 @@ export class MsgClientImpl implements Msg {
     this.CancelDTagTransferRequest = this.CancelDTagTransferRequest.bind(this);
     this.AcceptDTagTransferRequest = this.AcceptDTagTransferRequest.bind(this);
     this.RefuseDTagTransferRequest = this.RefuseDTagTransferRequest.bind(this);
-    this.CreateRelationship = this.CreateRelationship.bind(this);
-    this.DeleteRelationship = this.DeleteRelationship.bind(this);
-    this.BlockUser = this.BlockUser.bind(this);
-    this.UnblockUser = this.UnblockUser.bind(this);
     this.LinkChainAccount = this.LinkChainAccount.bind(this);
     this.UnlinkChainAccount = this.UnlinkChainAccount.bind(this);
     this.LinkApplication = this.LinkApplication.bind(this);
@@ -135,7 +109,7 @@ export class MsgClientImpl implements Msg {
   SaveProfile(request: MsgSaveProfile): Promise<MsgSaveProfileResponse> {
     const data = MsgSaveProfile.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "SaveProfile",
       data
     );
@@ -147,7 +121,7 @@ export class MsgClientImpl implements Msg {
   DeleteProfile(request: MsgDeleteProfile): Promise<MsgDeleteProfileResponse> {
     const data = MsgDeleteProfile.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "DeleteProfile",
       data
     );
@@ -161,7 +135,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRequestDTagTransferResponse> {
     const data = MsgRequestDTagTransfer.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "RequestDTagTransfer",
       data
     );
@@ -175,7 +149,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgCancelDTagTransferRequestResponse> {
     const data = MsgCancelDTagTransferRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "CancelDTagTransferRequest",
       data
     );
@@ -189,7 +163,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgAcceptDTagTransferRequestResponse> {
     const data = MsgAcceptDTagTransferRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "AcceptDTagTransferRequest",
       data
     );
@@ -203,7 +177,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRefuseDTagTransferRequestResponse> {
     const data = MsgRefuseDTagTransferRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "RefuseDTagTransferRequest",
       data
     );
@@ -212,64 +186,12 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  CreateRelationship(
-    request: MsgCreateRelationship
-  ): Promise<MsgCreateRelationshipResponse> {
-    const data = MsgCreateRelationship.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
-      "CreateRelationship",
-      data
-    );
-    return promise.then((data) =>
-      MsgCreateRelationshipResponse.decode(new _m0.Reader(data))
-    );
-  }
-
-  DeleteRelationship(
-    request: MsgDeleteRelationship
-  ): Promise<MsgDeleteRelationshipResponse> {
-    const data = MsgDeleteRelationship.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
-      "DeleteRelationship",
-      data
-    );
-    return promise.then((data) =>
-      MsgDeleteRelationshipResponse.decode(new _m0.Reader(data))
-    );
-  }
-
-  BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse> {
-    const data = MsgBlockUser.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
-      "BlockUser",
-      data
-    );
-    return promise.then((data) =>
-      MsgBlockUserResponse.decode(new _m0.Reader(data))
-    );
-  }
-
-  UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse> {
-    const data = MsgUnblockUser.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
-      "UnblockUser",
-      data
-    );
-    return promise.then((data) =>
-      MsgUnblockUserResponse.decode(new _m0.Reader(data))
-    );
-  }
-
   LinkChainAccount(
     request: MsgLinkChainAccount
   ): Promise<MsgLinkChainAccountResponse> {
     const data = MsgLinkChainAccount.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "LinkChainAccount",
       data
     );
@@ -283,7 +205,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUnlinkChainAccountResponse> {
     const data = MsgUnlinkChainAccount.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "UnlinkChainAccount",
       data
     );
@@ -297,7 +219,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgLinkApplicationResponse> {
     const data = MsgLinkApplication.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "LinkApplication",
       data
     );
@@ -311,7 +233,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUnlinkApplicationResponse> {
     const data = MsgUnlinkApplication.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v1beta1.Msg",
+      "desmos.profiles.v2.Msg",
       "UnlinkApplication",
       data
     );

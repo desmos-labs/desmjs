@@ -1,20 +1,14 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { Params } from "../../../desmos/profiles/v1beta1/models_params";
-import { DTagTransferRequest } from "../../../desmos/profiles/v1beta1/models_dtag_requests";
-import {
-  Relationship,
-  UserBlock,
-} from "../../../desmos/profiles/v1beta1/models_relationships";
-import { ChainLink } from "../../../desmos/profiles/v1beta1/models_chain_links";
-import { ApplicationLink } from "../../../desmos/profiles/v1beta1/models_app_links";
+import { Params } from "../../../desmos/profiles/v2/models_params";
+import { DTagTransferRequest } from "../../../desmos/profiles/v2/models_dtag_requests";
+import { ChainLink } from "../../../desmos/profiles/v2/models_chain_links";
+import { ApplicationLink } from "../../../desmos/profiles/v2/models_app_links";
 
 /** GenesisState defines the profiles module's genesis state. */
 export interface GenesisState {
   dtagTransferRequests: DTagTransferRequest[];
-  relationships: Relationship[];
-  blocks: UserBlock[];
   params?: Params;
   ibcPortId: string;
   chainLinks: ChainLink[];
@@ -24,8 +18,6 @@ export interface GenesisState {
 function createBaseGenesisState(): GenesisState {
   return {
     dtagTransferRequests: [],
-    relationships: [],
-    blocks: [],
     params: undefined,
     ibcPortId: "",
     chainLinks: [],
@@ -41,23 +33,17 @@ export const GenesisState = {
     for (const v of message.dtagTransferRequests) {
       DTagTransferRequest.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    for (const v of message.relationships) {
-      Relationship.encode(v!, writer.uint32(18).fork()).ldelim();
-    }
-    for (const v of message.blocks) {
-      UserBlock.encode(v!, writer.uint32(26).fork()).ldelim();
-    }
     if (message.params !== undefined) {
-      Params.encode(message.params, writer.uint32(34).fork()).ldelim();
+      Params.encode(message.params, writer.uint32(18).fork()).ldelim();
     }
     if (message.ibcPortId !== "") {
-      writer.uint32(42).string(message.ibcPortId);
+      writer.uint32(26).string(message.ibcPortId);
     }
     for (const v of message.chainLinks) {
-      ChainLink.encode(v!, writer.uint32(50).fork()).ldelim();
+      ChainLink.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     for (const v of message.applicationLinks) {
-      ApplicationLink.encode(v!, writer.uint32(58).fork()).ldelim();
+      ApplicationLink.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -75,23 +61,15 @@ export const GenesisState = {
           );
           break;
         case 2:
-          message.relationships.push(
-            Relationship.decode(reader, reader.uint32())
-          );
-          break;
-        case 3:
-          message.blocks.push(UserBlock.decode(reader, reader.uint32()));
-          break;
-        case 4:
           message.params = Params.decode(reader, reader.uint32());
           break;
-        case 5:
+        case 3:
           message.ibcPortId = reader.string();
           break;
-        case 6:
+        case 4:
           message.chainLinks.push(ChainLink.decode(reader, reader.uint32()));
           break;
-        case 7:
+        case 5:
           message.applicationLinks.push(
             ApplicationLink.decode(reader, reader.uint32())
           );
@@ -110,12 +88,6 @@ export const GenesisState = {
         ? object.dtagTransferRequests.map((e: any) =>
             DTagTransferRequest.fromJSON(e)
           )
-        : [],
-      relationships: Array.isArray(object?.relationships)
-        ? object.relationships.map((e: any) => Relationship.fromJSON(e))
-        : [],
-      blocks: Array.isArray(object?.blocks)
-        ? object.blocks.map((e: any) => UserBlock.fromJSON(e))
         : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
       ibcPortId: isSet(object.ibcPortId) ? String(object.ibcPortId) : "",
@@ -136,20 +108,6 @@ export const GenesisState = {
       );
     } else {
       obj.dtagTransferRequests = [];
-    }
-    if (message.relationships) {
-      obj.relationships = message.relationships.map((e) =>
-        e ? Relationship.toJSON(e) : undefined
-      );
-    } else {
-      obj.relationships = [];
-    }
-    if (message.blocks) {
-      obj.blocks = message.blocks.map((e) =>
-        e ? UserBlock.toJSON(e) : undefined
-      );
-    } else {
-      obj.blocks = [];
     }
     message.params !== undefined &&
       (obj.params = message.params ? Params.toJSON(message.params) : undefined);
@@ -179,9 +137,6 @@ export const GenesisState = {
       object.dtagTransferRequests?.map((e) =>
         DTagTransferRequest.fromPartial(e)
       ) || [];
-    message.relationships =
-      object.relationships?.map((e) => Relationship.fromPartial(e)) || [];
-    message.blocks = object.blocks?.map((e) => UserBlock.fromPartial(e)) || [];
     message.params =
       object.params !== undefined && object.params !== null
         ? Params.fromPartial(object.params)

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { Data } from "../../../desmos/profiles/v1beta1/models_app_links";
+import { Data } from "../../../desmos/profiles/v2/models_app_links";
 import { Height } from "../../../ibc/core/client/v1/client";
 
 /**

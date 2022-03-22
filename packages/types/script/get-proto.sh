@@ -16,7 +16,7 @@ ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
 
 # Url from where will be downloaded the desmos proto files
-DESMOS_VERSION="2.3.1"
+DESMOS_VERSION="3.0.0"
 SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"
 
 
@@ -26,19 +26,19 @@ wget -q  --show-progress $SRC_URL -O "$ZIP_FILE"
 mkdir -p "$TMP_DIR"
 # Get the proto from the zip
 unzip "$ZIP_FILE" "**.proto" -d "$TMP_DIR"
-rm $ZIP_FILE
+rm "$ZIP_FILE"
 
 # Clear the directory where will be extracted the proto files
-if [ -d $PROTO_DIR ]; then
-  rm -R $PROTO_DIR
+if [ -d "$PROTO_DIR" ]; then
+  rm -R "$PROTO_DIR"
 fi
-mkdir $PROTO_DIR
+mkdir "$PROTO_DIR"
 
 # Mv the proto file into the proto dir
-mv "$TMP_DIR/desmos-$DESMOS_VERSION/proto" $PROTO_DIR
-mv "$TMP_DIR/desmos-$DESMOS_VERSION/third_party" $PROTO_DIR
+mv "$TMP_DIR/desmos-$DESMOS_VERSION/proto" "$PROTO_DIR"
+mv "$TMP_DIR/desmos-$DESMOS_VERSION/third_party" "$PROTO_DIR"
 
 # Clean up tmp dir
-rm -Rf $TMP_DIR
+rm -Rf "$TMP_DIR"
 
 echo "Proto file obtained successfully!"

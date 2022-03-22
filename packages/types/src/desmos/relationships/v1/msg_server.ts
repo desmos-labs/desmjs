@@ -7,9 +7,9 @@ import _m0 from "protobufjs/minimal";
  * between two users on a specific subspace.
  */
 export interface MsgCreateRelationship {
-  sender: string;
-  receiver: string;
-  subspace: string;
+  signer: string;
+  counterparty: string;
+  subspaceId: Long;
 }
 
 /**
@@ -23,9 +23,9 @@ export interface MsgCreateRelationshipResponse {}
  * between two users.
  */
 export interface MsgDeleteRelationship {
-  user: string;
+  signer: string;
   counterparty: string;
-  subspace: string;
+  subspaceId: Long;
 }
 
 /**
@@ -42,7 +42,7 @@ export interface MsgBlockUser {
   blocker: string;
   blocked: string;
   reason: string;
-  subspace: string;
+  subspaceId: Long;
 }
 
 /** MsgBlockUserResponse defines the Msg/BlockUser response type. */
@@ -52,14 +52,14 @@ export interface MsgBlockUserResponse {}
 export interface MsgUnblockUser {
   blocker: string;
   blocked: string;
-  subspace: string;
+  subspaceId: Long;
 }
 
 /** MsgUnblockUserResponse defines the Msg/UnblockUser response type. */
 export interface MsgUnblockUserResponse {}
 
 function createBaseMsgCreateRelationship(): MsgCreateRelationship {
-  return { sender: "", receiver: "", subspace: "" };
+  return { signer: "", counterparty: "", subspaceId: Long.UZERO };
 }
 
 export const MsgCreateRelationship = {
@@ -67,14 +67,14 @@ export const MsgCreateRelationship = {
     message: MsgCreateRelationship,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.sender !== "") {
-      writer.uint32(10).string(message.sender);
+    if (message.signer !== "") {
+      writer.uint32(10).string(message.signer);
     }
-    if (message.receiver !== "") {
-      writer.uint32(18).string(message.receiver);
+    if (message.counterparty !== "") {
+      writer.uint32(18).string(message.counterparty);
     }
-    if (message.subspace !== "") {
-      writer.uint32(26).string(message.subspace);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(24).uint64(message.subspaceId);
     }
     return writer;
   },
@@ -90,13 +90,13 @@ export const MsgCreateRelationship = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sender = reader.string();
+          message.signer = reader.string();
           break;
         case 2:
-          message.receiver = reader.string();
+          message.counterparty = reader.string();
           break;
         case 3:
-          message.subspace = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -108,17 +108,23 @@ export const MsgCreateRelationship = {
 
   fromJSON(object: any): MsgCreateRelationship {
     return {
-      sender: isSet(object.sender) ? String(object.sender) : "",
-      receiver: isSet(object.receiver) ? String(object.receiver) : "",
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      signer: isSet(object.signer) ? String(object.signer) : "",
+      counterparty: isSet(object.counterparty)
+        ? String(object.counterparty)
+        : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
     };
   },
 
   toJSON(message: MsgCreateRelationship): unknown {
     const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.signer !== undefined && (obj.signer = message.signer);
+    message.counterparty !== undefined &&
+      (obj.counterparty = message.counterparty);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
@@ -126,9 +132,12 @@ export const MsgCreateRelationship = {
     object: I
   ): MsgCreateRelationship {
     const message = createBaseMsgCreateRelationship();
-    message.sender = object.sender ?? "";
-    message.receiver = object.receiver ?? "";
-    message.subspace = object.subspace ?? "";
+    message.signer = object.signer ?? "";
+    message.counterparty = object.counterparty ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     return message;
   },
 };
@@ -181,7 +190,7 @@ export const MsgCreateRelationshipResponse = {
 };
 
 function createBaseMsgDeleteRelationship(): MsgDeleteRelationship {
-  return { user: "", counterparty: "", subspace: "" };
+  return { signer: "", counterparty: "", subspaceId: Long.UZERO };
 }
 
 export const MsgDeleteRelationship = {
@@ -189,14 +198,14 @@ export const MsgDeleteRelationship = {
     message: MsgDeleteRelationship,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.user !== "") {
-      writer.uint32(10).string(message.user);
+    if (message.signer !== "") {
+      writer.uint32(10).string(message.signer);
     }
     if (message.counterparty !== "") {
       writer.uint32(18).string(message.counterparty);
     }
-    if (message.subspace !== "") {
-      writer.uint32(26).string(message.subspace);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(24).uint64(message.subspaceId);
     }
     return writer;
   },
@@ -212,13 +221,13 @@ export const MsgDeleteRelationship = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.user = reader.string();
+          message.signer = reader.string();
           break;
         case 2:
           message.counterparty = reader.string();
           break;
         case 3:
-          message.subspace = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -230,20 +239,23 @@ export const MsgDeleteRelationship = {
 
   fromJSON(object: any): MsgDeleteRelationship {
     return {
-      user: isSet(object.user) ? String(object.user) : "",
+      signer: isSet(object.signer) ? String(object.signer) : "",
       counterparty: isSet(object.counterparty)
         ? String(object.counterparty)
         : "",
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
     };
   },
 
   toJSON(message: MsgDeleteRelationship): unknown {
     const obj: any = {};
-    message.user !== undefined && (obj.user = message.user);
+    message.signer !== undefined && (obj.signer = message.signer);
     message.counterparty !== undefined &&
       (obj.counterparty = message.counterparty);
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
@@ -251,9 +263,12 @@ export const MsgDeleteRelationship = {
     object: I
   ): MsgDeleteRelationship {
     const message = createBaseMsgDeleteRelationship();
-    message.user = object.user ?? "";
+    message.signer = object.signer ?? "";
     message.counterparty = object.counterparty ?? "";
-    message.subspace = object.subspace ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     return message;
   },
 };
@@ -306,7 +321,7 @@ export const MsgDeleteRelationshipResponse = {
 };
 
 function createBaseMsgBlockUser(): MsgBlockUser {
-  return { blocker: "", blocked: "", reason: "", subspace: "" };
+  return { blocker: "", blocked: "", reason: "", subspaceId: Long.UZERO };
 }
 
 export const MsgBlockUser = {
@@ -323,8 +338,8 @@ export const MsgBlockUser = {
     if (message.reason !== "") {
       writer.uint32(26).string(message.reason);
     }
-    if (message.subspace !== "") {
-      writer.uint32(34).string(message.subspace);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(32).uint64(message.subspaceId);
     }
     return writer;
   },
@@ -346,7 +361,7 @@ export const MsgBlockUser = {
           message.reason = reader.string();
           break;
         case 4:
-          message.subspace = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -361,7 +376,9 @@ export const MsgBlockUser = {
       blocker: isSet(object.blocker) ? String(object.blocker) : "",
       blocked: isSet(object.blocked) ? String(object.blocked) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
     };
   },
 
@@ -370,7 +387,8 @@ export const MsgBlockUser = {
     message.blocker !== undefined && (obj.blocker = message.blocker);
     message.blocked !== undefined && (obj.blocked = message.blocked);
     message.reason !== undefined && (obj.reason = message.reason);
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
@@ -381,7 +399,10 @@ export const MsgBlockUser = {
     message.blocker = object.blocker ?? "";
     message.blocked = object.blocked ?? "";
     message.reason = object.reason ?? "";
-    message.subspace = object.subspace ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     return message;
   },
 };
@@ -434,7 +455,7 @@ export const MsgBlockUserResponse = {
 };
 
 function createBaseMsgUnblockUser(): MsgUnblockUser {
-  return { blocker: "", blocked: "", subspace: "" };
+  return { blocker: "", blocked: "", subspaceId: Long.UZERO };
 }
 
 export const MsgUnblockUser = {
@@ -448,8 +469,8 @@ export const MsgUnblockUser = {
     if (message.blocked !== "") {
       writer.uint32(18).string(message.blocked);
     }
-    if (message.subspace !== "") {
-      writer.uint32(34).string(message.subspace);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(32).uint64(message.subspaceId);
     }
     return writer;
   },
@@ -468,7 +489,7 @@ export const MsgUnblockUser = {
           message.blocked = reader.string();
           break;
         case 4:
-          message.subspace = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -482,7 +503,9 @@ export const MsgUnblockUser = {
     return {
       blocker: isSet(object.blocker) ? String(object.blocker) : "",
       blocked: isSet(object.blocked) ? String(object.blocked) : "",
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
     };
   },
 
@@ -490,7 +513,8 @@ export const MsgUnblockUser = {
     const obj: any = {};
     message.blocker !== undefined && (obj.blocker = message.blocker);
     message.blocked !== undefined && (obj.blocked = message.blocked);
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
@@ -500,7 +524,10 @@ export const MsgUnblockUser = {
     const message = createBaseMsgUnblockUser();
     message.blocker = object.blocker ?? "";
     message.blocked = object.blocked ?? "";
-    message.subspace = object.subspace ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     return message;
   },
 };
@@ -551,6 +578,92 @@ export const MsgUnblockUserResponse = {
     return message;
   },
 };
+
+/** Msg defines the relationships Msg service. */
+export interface Msg {
+  /** CreateRelationship defines a method for creating a new relationship */
+  CreateRelationship(
+    request: MsgCreateRelationship
+  ): Promise<MsgCreateRelationshipResponse>;
+  /** DeleteRelationship defines a method for deleting a relationship */
+  DeleteRelationship(
+    request: MsgDeleteRelationship
+  ): Promise<MsgDeleteRelationshipResponse>;
+  /** BlockUser defines a method for blocking a user */
+  BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse>;
+  /** UnblockUser defines a method for unblocking a user */
+  UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse>;
+}
+
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.CreateRelationship = this.CreateRelationship.bind(this);
+    this.DeleteRelationship = this.DeleteRelationship.bind(this);
+    this.BlockUser = this.BlockUser.bind(this);
+    this.UnblockUser = this.UnblockUser.bind(this);
+  }
+  CreateRelationship(
+    request: MsgCreateRelationship
+  ): Promise<MsgCreateRelationshipResponse> {
+    const data = MsgCreateRelationship.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.relationships.v1.Msg",
+      "CreateRelationship",
+      data
+    );
+    return promise.then((data) =>
+      MsgCreateRelationshipResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  DeleteRelationship(
+    request: MsgDeleteRelationship
+  ): Promise<MsgDeleteRelationshipResponse> {
+    const data = MsgDeleteRelationship.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.relationships.v1.Msg",
+      "DeleteRelationship",
+      data
+    );
+    return promise.then((data) =>
+      MsgDeleteRelationshipResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse> {
+    const data = MsgBlockUser.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.relationships.v1.Msg",
+      "BlockUser",
+      data
+    );
+    return promise.then((data) =>
+      MsgBlockUserResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse> {
+    const data = MsgUnblockUser.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.relationships.v1.Msg",
+      "UnblockUser",
+      data
+    );
+    return promise.then((data) =>
+      MsgUnblockUserResponse.decode(new _m0.Reader(data))
+    );
+  }
+}
+
+interface Rpc {
+  request(
+    service: string,
+    method: string,
+    data: Uint8Array
+  ): Promise<Uint8Array>;
+}
 
 type Builtin =
   | Date

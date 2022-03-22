@@ -5,7 +5,7 @@ import { Any } from "../../../../google/protobuf/any";
 import {
   Proof,
   ChainConfig,
-} from "../../../../desmos/profiles/v1beta1/models_chain_links";
+} from "../../../../desmos/profiles/v2/models_chain_links";
 
 /**
  * ChainLinkJSON contains the data required to create a ChainLink using the CLI

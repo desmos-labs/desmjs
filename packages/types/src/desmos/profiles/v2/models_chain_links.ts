@@ -2,6 +2,12 @@
 import Long from "long";
 import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
+import {
+  SignMode,
+  signModeFromJSON,
+  signModeToJSON,
+} from "../../../cosmos/tx/signing/v1beta1/signing";
+import { CompactBitArray } from "../../../cosmos/crypto/multisig/v1beta1/multisig";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /**
@@ -40,8 +46,11 @@ export interface Proof {
    */
   pubKey?: Any;
   /** Signature represents the hex-encoded signature of the PlainText value */
-  signature: string;
-  /** PlainText represents the hex-encoded value signed in order to produce the Signature */
+  signature?: Any;
+  /**
+   * PlainText represents the hex-encoded value signed in order to produce the
+   * Signature
+   */
   plainText: string;
 }
 
@@ -57,6 +66,36 @@ export interface Bech32Address {
 export interface Base58Address {
   /** Value contains the Base58-encoded address */
   value: string;
+}
+
+/**
+ * HexAddress represents an Hex-encoded address
+ * NOTE: Currently it only supports keccak256-uncompressed addresses
+ */
+export interface HexAddress {
+  /** Value represents the hex address value */
+  value: string;
+  /**
+   * Prefix represents the optional prefix used during address encoding (e.g.
+   * 0x)
+   */
+  prefix: string;
+}
+
+/** SingleSignatureData is the signature data for a single signer */
+export interface SingleSignatureData {
+  /** Mode is the signing mode of the single signer */
+  mode: SignMode;
+  /** Signature is the raw signature bytes */
+  signature: Uint8Array;
+}
+
+/** MultiSignatureData is the signature data for a multisig public key */
+export interface MultiSignatureData {
+  /** Bitarray specifies which keys within the multisig are signing */
+  bitArray?: CompactBitArray;
+  /** Signatures is the signatures of the multi-signature */
+  signatures: Any[];
 }
 
 function createBaseChainLink(): ChainLink {
@@ -237,7 +276,7 @@ export const ChainConfig = {
 };
 
 function createBaseProof(): Proof {
-  return { pubKey: undefined, signature: "", plainText: "" };
+  return { pubKey: undefined, signature: undefined, plainText: "" };
 }
 
 export const Proof = {
@@ -245,8 +284,8 @@ export const Proof = {
     if (message.pubKey !== undefined) {
       Any.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.signature !== "") {
-      writer.uint32(18).string(message.signature);
+    if (message.signature !== undefined) {
+      Any.encode(message.signature, writer.uint32(18).fork()).ldelim();
     }
     if (message.plainText !== "") {
       writer.uint32(26).string(message.plainText);
@@ -265,7 +304,7 @@ export const Proof = {
           message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 2:
-          message.signature = reader.string();
+          message.signature = Any.decode(reader, reader.uint32());
           break;
         case 3:
           message.plainText = reader.string();
@@ -281,7 +320,9 @@ export const Proof = {
   fromJSON(object: any): Proof {
     return {
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      signature: isSet(object.signature) ? String(object.signature) : "",
+      signature: isSet(object.signature)
+        ? Any.fromJSON(object.signature)
+        : undefined,
       plainText: isSet(object.plainText) ? String(object.plainText) : "",
     };
   },
@@ -290,7 +331,10 @@ export const Proof = {
     const obj: any = {};
     message.pubKey !== undefined &&
       (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.signature !== undefined && (obj.signature = message.signature);
+    message.signature !== undefined &&
+      (obj.signature = message.signature
+        ? Any.toJSON(message.signature)
+        : undefined);
     message.plainText !== undefined && (obj.plainText = message.plainText);
     return obj;
   },
@@ -301,7 +345,10 @@ export const Proof = {
       object.pubKey !== undefined && object.pubKey !== null
         ? Any.fromPartial(object.pubKey)
         : undefined;
-    message.signature = object.signature ?? "";
+    message.signature =
+      object.signature !== undefined && object.signature !== null
+        ? Any.fromPartial(object.signature)
+        : undefined;
     message.plainText = object.plainText ?? "";
     return message;
   },
@@ -423,6 +470,254 @@ export const Base58Address = {
     return message;
   },
 };
+
+function createBaseHexAddress(): HexAddress {
+  return { value: "", prefix: "" };
+}
+
+export const HexAddress = {
+  encode(
+    message: HexAddress,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.value !== "") {
+      writer.uint32(10).string(message.value);
+    }
+    if (message.prefix !== "") {
+      writer.uint32(18).string(message.prefix);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): HexAddress {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHexAddress();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.value = reader.string();
+          break;
+        case 2:
+          message.prefix = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): HexAddress {
+    return {
+      value: isSet(object.value) ? String(object.value) : "",
+      prefix: isSet(object.prefix) ? String(object.prefix) : "",
+    };
+  },
+
+  toJSON(message: HexAddress): unknown {
+    const obj: any = {};
+    message.value !== undefined && (obj.value = message.value);
+    message.prefix !== undefined && (obj.prefix = message.prefix);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<HexAddress>, I>>(
+    object: I
+  ): HexAddress {
+    const message = createBaseHexAddress();
+    message.value = object.value ?? "";
+    message.prefix = object.prefix ?? "";
+    return message;
+  },
+};
+
+function createBaseSingleSignatureData(): SingleSignatureData {
+  return { mode: 0, signature: new Uint8Array() };
+}
+
+export const SingleSignatureData = {
+  encode(
+    message: SingleSignatureData,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.mode !== 0) {
+      writer.uint32(8).int32(message.mode);
+    }
+    if (message.signature.length !== 0) {
+      writer.uint32(18).bytes(message.signature);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): SingleSignatureData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSingleSignatureData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.mode = reader.int32() as any;
+          break;
+        case 2:
+          message.signature = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SingleSignatureData {
+    return {
+      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      signature: isSet(object.signature)
+        ? bytesFromBase64(object.signature)
+        : new Uint8Array(),
+    };
+  },
+
+  toJSON(message: SingleSignatureData): unknown {
+    const obj: any = {};
+    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.signature !== undefined &&
+      (obj.signature = base64FromBytes(
+        message.signature !== undefined ? message.signature : new Uint8Array()
+      ));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<SingleSignatureData>, I>>(
+    object: I
+  ): SingleSignatureData {
+    const message = createBaseSingleSignatureData();
+    message.mode = object.mode ?? 0;
+    message.signature = object.signature ?? new Uint8Array();
+    return message;
+  },
+};
+
+function createBaseMultiSignatureData(): MultiSignatureData {
+  return { bitArray: undefined, signatures: [] };
+}
+
+export const MultiSignatureData = {
+  encode(
+    message: MultiSignatureData,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.bitArray !== undefined) {
+      CompactBitArray.encode(
+        message.bitArray,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    for (const v of message.signatures) {
+      Any.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MultiSignatureData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMultiSignatureData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.bitArray = CompactBitArray.decode(reader, reader.uint32());
+          break;
+        case 2:
+          message.signatures.push(Any.decode(reader, reader.uint32()));
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MultiSignatureData {
+    return {
+      bitArray: isSet(object.bitArray)
+        ? CompactBitArray.fromJSON(object.bitArray)
+        : undefined,
+      signatures: Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => Any.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: MultiSignatureData): unknown {
+    const obj: any = {};
+    message.bitArray !== undefined &&
+      (obj.bitArray = message.bitArray
+        ? CompactBitArray.toJSON(message.bitArray)
+        : undefined);
+    if (message.signatures) {
+      obj.signatures = message.signatures.map((e) =>
+        e ? Any.toJSON(e) : undefined
+      );
+    } else {
+      obj.signatures = [];
+    }
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MultiSignatureData>, I>>(
+    object: I
+  ): MultiSignatureData {
+    const message = createBaseMultiSignatureData();
+    message.bitArray =
+      object.bitArray !== undefined && object.bitArray !== null
+        ? CompactBitArray.fromPartial(object.bitArray)
+        : undefined;
+    message.signatures =
+      object.signatures?.map((e) => Any.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== "undefined") return globalThis;
+  if (typeof self !== "undefined") return self;
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  throw "Unable to locate global object";
+})();
+
+const atob: (b64: string) => string =
+  globalThis.atob ||
+  ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
+function bytesFromBase64(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; ++i) {
+    arr[i] = bin.charCodeAt(i);
+  }
+  return arr;
+}
+
+const btoa: (bin: string) => string =
+  globalThis.btoa ||
+  ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
+function base64FromBytes(arr: Uint8Array): string {
+  const bin: string[] = [];
+  for (const byte of arr) {
+    bin.push(String.fromCharCode(byte));
+  }
+  return btoa(bin.join(""));
+}
 
 type Builtin =
   | Date

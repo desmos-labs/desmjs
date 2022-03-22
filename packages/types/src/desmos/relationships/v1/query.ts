@@ -8,17 +8,22 @@ import {
 import {
   Relationship,
   UserBlock,
-} from "../../../desmos/profiles/v1beta1/models_relationships";
+} from "../../../desmos/relationships/v1/models";
 
 /**
  * QueryRelationshipsRequest is the request type for the
  * Query/Relationships RPC method.
  */
 export interface QueryRelationshipsRequest {
-  /** address of the user to query the relationships for */
-  user: string;
   /** subspace to query the relationships for */
-  subspaceId: string;
+  subspaceId: Long;
+  /** optional address of the user for which to query the relationships */
+  user: string;
+  /**
+   * optional address of the counterparty of the relationships (used only if the
+   * user is provided)
+   */
+  counterparty: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
@@ -29,7 +34,6 @@ export interface QueryRelationshipsRequest {
  */
 export interface QueryRelationshipsResponse {
   relationships: Relationship[];
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageResponse;
 }
 
@@ -38,9 +42,16 @@ export interface QueryRelationshipsResponse {
  * endpoint
  */
 export interface QueryBlocksRequest {
-  /** address of the user to query the blocks for */
-  user: string;
-  subspaceId: string;
+  /** subspace to query the blocks for */
+  subspaceId: Long;
+  /** optional address of the blocker to query the blocks for */
+  blocker: string;
+  /**
+   * optional address of the blocked user to query the block for (used only if
+   * the blocker is provided)
+   */
+  blocked: string;
+  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
 
@@ -54,7 +65,12 @@ export interface QueryBlocksResponse {
 }
 
 function createBaseQueryRelationshipsRequest(): QueryRelationshipsRequest {
-  return { user: "", subspaceId: "", pagination: undefined };
+  return {
+    subspaceId: Long.UZERO,
+    user: "",
+    counterparty: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryRelationshipsRequest = {
@@ -62,14 +78,17 @@ export const QueryRelationshipsRequest = {
     message: QueryRelationshipsRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.user !== "") {
-      writer.uint32(10).string(message.user);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
     }
-    if (message.subspaceId !== "") {
-      writer.uint32(18).string(message.subspaceId);
+    if (message.user !== "") {
+      writer.uint32(18).string(message.user);
+    }
+    if (message.counterparty !== "") {
+      writer.uint32(26).string(message.counterparty);
     }
     if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+      PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -85,12 +104,15 @@ export const QueryRelationshipsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.user = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.subspaceId = reader.string();
+          message.user = reader.string();
           break;
         case 3:
+          message.counterparty = reader.string();
+          break;
+        case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
@@ -103,8 +125,13 @@ export const QueryRelationshipsRequest = {
 
   fromJSON(object: any): QueryRelationshipsRequest {
     return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
       user: isSet(object.user) ? String(object.user) : "",
-      subspaceId: isSet(object.subspaceId) ? String(object.subspaceId) : "",
+      counterparty: isSet(object.counterparty)
+        ? String(object.counterparty)
+        : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -113,8 +140,11 @@ export const QueryRelationshipsRequest = {
 
   toJSON(message: QueryRelationshipsRequest): unknown {
     const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.user !== undefined && (obj.user = message.user);
-    message.subspaceId !== undefined && (obj.subspaceId = message.subspaceId);
+    message.counterparty !== undefined &&
+      (obj.counterparty = message.counterparty);
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageRequest.toJSON(message.pagination)
@@ -126,8 +156,12 @@ export const QueryRelationshipsRequest = {
     object: I
   ): QueryRelationshipsRequest {
     const message = createBaseQueryRelationshipsRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     message.user = object.user ?? "";
-    message.subspaceId = object.subspaceId ?? "";
+    message.counterparty = object.counterparty ?? "";
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
         ? PageRequest.fromPartial(object.pagination)
@@ -225,7 +259,12 @@ export const QueryRelationshipsResponse = {
 };
 
 function createBaseQueryBlocksRequest(): QueryBlocksRequest {
-  return { user: "", subspaceId: "", pagination: undefined };
+  return {
+    subspaceId: Long.UZERO,
+    blocker: "",
+    blocked: "",
+    pagination: undefined,
+  };
 }
 
 export const QueryBlocksRequest = {
@@ -233,14 +272,17 @@ export const QueryBlocksRequest = {
     message: QueryBlocksRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.user !== "") {
-      writer.uint32(10).string(message.user);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
     }
-    if (message.subspaceId !== "") {
-      writer.uint32(18).string(message.subspaceId);
+    if (message.blocker !== "") {
+      writer.uint32(18).string(message.blocker);
+    }
+    if (message.blocked !== "") {
+      writer.uint32(26).string(message.blocked);
     }
     if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+      PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -253,12 +295,15 @@ export const QueryBlocksRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.user = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.subspaceId = reader.string();
+          message.blocker = reader.string();
           break;
         case 3:
+          message.blocked = reader.string();
+          break;
+        case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
@@ -271,8 +316,11 @@ export const QueryBlocksRequest = {
 
   fromJSON(object: any): QueryBlocksRequest {
     return {
-      user: isSet(object.user) ? String(object.user) : "",
-      subspaceId: isSet(object.subspaceId) ? String(object.subspaceId) : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      blocker: isSet(object.blocker) ? String(object.blocker) : "",
+      blocked: isSet(object.blocked) ? String(object.blocked) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -281,8 +329,10 @@ export const QueryBlocksRequest = {
 
   toJSON(message: QueryBlocksRequest): unknown {
     const obj: any = {};
-    message.user !== undefined && (obj.user = message.user);
-    message.subspaceId !== undefined && (obj.subspaceId = message.subspaceId);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.blocker !== undefined && (obj.blocker = message.blocker);
+    message.blocked !== undefined && (obj.blocked = message.blocked);
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageRequest.toJSON(message.pagination)
@@ -294,8 +344,12 @@ export const QueryBlocksRequest = {
     object: I
   ): QueryBlocksRequest {
     const message = createBaseQueryBlocksRequest();
-    message.user = object.user ?? "";
-    message.subspaceId = object.subspaceId ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.blocker = object.blocker ?? "";
+    message.blocked = object.blocked ?? "";
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
         ? PageRequest.fromPartial(object.pagination)
@@ -385,6 +439,61 @@ export const QueryBlocksResponse = {
     return message;
   },
 };
+
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** Relationships queries all relationships present inside a specific subspace */
+  Relationships(
+    request: QueryRelationshipsRequest
+  ): Promise<QueryRelationshipsResponse>;
+  /**
+   * Blocks queries the blocks for the given user, if provided.
+   * Otherwise, it queries all the stored blocks.
+   */
+  Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse>;
+}
+
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.Relationships = this.Relationships.bind(this);
+    this.Blocks = this.Blocks.bind(this);
+  }
+  Relationships(
+    request: QueryRelationshipsRequest
+  ): Promise<QueryRelationshipsResponse> {
+    const data = QueryRelationshipsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.relationships.v1.Query",
+      "Relationships",
+      data
+    );
+    return promise.then((data) =>
+      QueryRelationshipsResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse> {
+    const data = QueryBlocksRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.relationships.v1.Query",
+      "Blocks",
+      data
+    );
+    return promise.then((data) =>
+      QueryBlocksResponse.decode(new _m0.Reader(data))
+    );
+  }
+}
+
+interface Rpc {
+  request(
+    service: string,
+    method: string,
+    data: Uint8Array
+  ): Promise<Uint8Array>;
+}
 
 type Builtin =
   | Date

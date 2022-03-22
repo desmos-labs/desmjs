@@ -7,9 +7,15 @@ import _m0 from "protobufjs/minimal";
  * It represent the concept of "follow" of traditional social networks.
  */
 export interface Relationship {
+  /** Creator represents the creator of the relationship */
   creator: string;
-  recipient: string;
-  subspace: string;
+  /** Counterparty represents the other user involved in the relationship */
+  counterparty: string;
+  /**
+   * SubspaceID represents the id of the subspace for which the relationship is
+   * valid
+   */
+  subspaceId: Long;
 }
 
 /**
@@ -24,14 +30,14 @@ export interface UserBlock {
   /** Reason represents the optional reason the user has been blocked for. */
   reason: string;
   /**
-   * Subspace contains the ID of the subspace inside which the user should be
-   * blocked
+   * SubspaceID represents the ID of the subspace inside which the user should
+   * be blocked
    */
-  subspace: string;
+  subspaceId: Long;
 }
 
 function createBaseRelationship(): Relationship {
-  return { creator: "", recipient: "", subspace: "" };
+  return { creator: "", counterparty: "", subspaceId: Long.UZERO };
 }
 
 export const Relationship = {
@@ -42,11 +48,11 @@ export const Relationship = {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
-    if (message.recipient !== "") {
-      writer.uint32(18).string(message.recipient);
+    if (message.counterparty !== "") {
+      writer.uint32(18).string(message.counterparty);
     }
-    if (message.subspace !== "") {
-      writer.uint32(26).string(message.subspace);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(24).uint64(message.subspaceId);
     }
     return writer;
   },
@@ -62,10 +68,10 @@ export const Relationship = {
           message.creator = reader.string();
           break;
         case 2:
-          message.recipient = reader.string();
+          message.counterparty = reader.string();
           break;
         case 3:
-          message.subspace = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -78,16 +84,22 @@ export const Relationship = {
   fromJSON(object: any): Relationship {
     return {
       creator: isSet(object.creator) ? String(object.creator) : "",
-      recipient: isSet(object.recipient) ? String(object.recipient) : "",
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      counterparty: isSet(object.counterparty)
+        ? String(object.counterparty)
+        : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
     };
   },
 
   toJSON(message: Relationship): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.recipient !== undefined && (obj.recipient = message.recipient);
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.counterparty !== undefined &&
+      (obj.counterparty = message.counterparty);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
@@ -96,14 +108,17 @@ export const Relationship = {
   ): Relationship {
     const message = createBaseRelationship();
     message.creator = object.creator ?? "";
-    message.recipient = object.recipient ?? "";
-    message.subspace = object.subspace ?? "";
+    message.counterparty = object.counterparty ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     return message;
   },
 };
 
 function createBaseUserBlock(): UserBlock {
-  return { blocker: "", blocked: "", reason: "", subspace: "" };
+  return { blocker: "", blocked: "", reason: "", subspaceId: Long.UZERO };
 }
 
 export const UserBlock = {
@@ -120,8 +135,8 @@ export const UserBlock = {
     if (message.reason !== "") {
       writer.uint32(26).string(message.reason);
     }
-    if (message.subspace !== "") {
-      writer.uint32(34).string(message.subspace);
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(32).uint64(message.subspaceId);
     }
     return writer;
   },
@@ -143,7 +158,7 @@ export const UserBlock = {
           message.reason = reader.string();
           break;
         case 4:
-          message.subspace = reader.string();
+          message.subspaceId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -158,7 +173,9 @@ export const UserBlock = {
       blocker: isSet(object.blocker) ? String(object.blocker) : "",
       blocked: isSet(object.blocked) ? String(object.blocked) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
-      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
     };
   },
 
@@ -167,7 +184,8 @@ export const UserBlock = {
     message.blocker !== undefined && (obj.blocker = message.blocker);
     message.blocked !== undefined && (obj.blocked = message.blocked);
     message.reason !== undefined && (obj.reason = message.reason);
-    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
@@ -178,7 +196,10 @@ export const UserBlock = {
     message.blocker = object.blocker ?? "";
     message.blocked = object.blocked ?? "";
     message.reason = object.reason ?? "";
-    message.subspace = object.subspace ?? "";
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
     return message;
   },
 };

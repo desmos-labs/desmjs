@@ -1,46 +1,32 @@
 /* eslint-disable */
 import Long from "long";
 import _m0 from "protobufjs/minimal";
-import { ApplicationLink } from "../../../desmos/profiles/v1beta1/models_app_links";
 import {
   PageRequest,
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
+import { ApplicationLink } from "../../../desmos/profiles/v2/models_app_links";
 
 /**
  * QueryUserApplicationLinkRequest represents the request used when querying an
  * application link using an application name and username for a given user
  */
-export interface QueryUserApplicationLinkRequest {
+export interface QueryApplicationLinksRequest {
   /**
-   * User contains the Desmos profile address associated for which the link
-   * should be searched for
+   * (Optional) User contains the Desmos profile address associated for which
+   * the link should be searched for
    */
   user: string;
-  /** Application represents the application name associated with the link */
+  /**
+   * (Optional) Application represents the application name associated with the
+   * link. Used only if user is also set.
+   */
   application: string;
   /**
    * Username represents the username inside the application associated with the
-   * link
+   * link. Used only if application is also set.
    */
   username: string;
-}
-
-/**
- * QueryUserApplicationLinkResponse represents the response to the query
- * allowing to get an application link for a specific user, searching via the
- * application name and username
- */
-export interface QueryUserApplicationLinkResponse {
-  link?: ApplicationLink;
-}
-
-/**
- * QueryApplicationLinksRequest represents the request used when querying
- * the application links of a specific user
- */
-export interface QueryApplicationLinksRequest {
-  user: string;
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
@@ -72,13 +58,13 @@ export interface QueryApplicationLinkByClientIDResponse {
   link?: ApplicationLink;
 }
 
-function createBaseQueryUserApplicationLinkRequest(): QueryUserApplicationLinkRequest {
-  return { user: "", application: "", username: "" };
+function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest {
+  return { user: "", application: "", username: "", pagination: undefined };
 }
 
-export const QueryUserApplicationLinkRequest = {
+export const QueryApplicationLinksRequest = {
   encode(
-    message: QueryUserApplicationLinkRequest,
+    message: QueryApplicationLinksRequest,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.user !== "") {
@@ -90,143 +76,8 @@ export const QueryUserApplicationLinkRequest = {
     if (message.username !== "") {
       writer.uint32(26).string(message.username);
     }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryUserApplicationLinkRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryUserApplicationLinkRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.user = reader.string();
-          break;
-        case 2:
-          message.application = reader.string();
-          break;
-        case 3:
-          message.username = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryUserApplicationLinkRequest {
-    return {
-      user: isSet(object.user) ? String(object.user) : "",
-      application: isSet(object.application) ? String(object.application) : "",
-      username: isSet(object.username) ? String(object.username) : "",
-    };
-  },
-
-  toJSON(message: QueryUserApplicationLinkRequest): unknown {
-    const obj: any = {};
-    message.user !== undefined && (obj.user = message.user);
-    message.application !== undefined &&
-      (obj.application = message.application);
-    message.username !== undefined && (obj.username = message.username);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QueryUserApplicationLinkRequest>, I>>(
-    object: I
-  ): QueryUserApplicationLinkRequest {
-    const message = createBaseQueryUserApplicationLinkRequest();
-    message.user = object.user ?? "";
-    message.application = object.application ?? "";
-    message.username = object.username ?? "";
-    return message;
-  },
-};
-
-function createBaseQueryUserApplicationLinkResponse(): QueryUserApplicationLinkResponse {
-  return { link: undefined };
-}
-
-export const QueryUserApplicationLinkResponse = {
-  encode(
-    message: QueryUserApplicationLinkResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.link !== undefined) {
-      ApplicationLink.encode(message.link, writer.uint32(10).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryUserApplicationLinkResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryUserApplicationLinkResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.link = ApplicationLink.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QueryUserApplicationLinkResponse {
-    return {
-      link: isSet(object.link)
-        ? ApplicationLink.fromJSON(object.link)
-        : undefined,
-    };
-  },
-
-  toJSON(message: QueryUserApplicationLinkResponse): unknown {
-    const obj: any = {};
-    message.link !== undefined &&
-      (obj.link = message.link
-        ? ApplicationLink.toJSON(message.link)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial<
-    I extends Exact<DeepPartial<QueryUserApplicationLinkResponse>, I>
-  >(object: I): QueryUserApplicationLinkResponse {
-    const message = createBaseQueryUserApplicationLinkResponse();
-    message.link =
-      object.link !== undefined && object.link !== null
-        ? ApplicationLink.fromPartial(object.link)
-        : undefined;
-    return message;
-  },
-};
-
-function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest {
-  return { user: "", pagination: undefined };
-}
-
-export const QueryApplicationLinksRequest = {
-  encode(
-    message: QueryApplicationLinksRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
-    if (message.user !== "") {
-      writer.uint32(10).string(message.user);
-    }
     if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+      PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -245,6 +96,12 @@ export const QueryApplicationLinksRequest = {
           message.user = reader.string();
           break;
         case 2:
+          message.application = reader.string();
+          break;
+        case 3:
+          message.username = reader.string();
+          break;
+        case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
@@ -258,6 +115,8 @@ export const QueryApplicationLinksRequest = {
   fromJSON(object: any): QueryApplicationLinksRequest {
     return {
       user: isSet(object.user) ? String(object.user) : "",
+      application: isSet(object.application) ? String(object.application) : "",
+      username: isSet(object.username) ? String(object.username) : "",
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -267,6 +126,9 @@ export const QueryApplicationLinksRequest = {
   toJSON(message: QueryApplicationLinksRequest): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
+    message.application !== undefined &&
+      (obj.application = message.application);
+    message.username !== undefined && (obj.username = message.username);
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageRequest.toJSON(message.pagination)
@@ -279,6 +141,8 @@ export const QueryApplicationLinksRequest = {
   ): QueryApplicationLinksRequest {
     const message = createBaseQueryApplicationLinksRequest();
     message.user = object.user ?? "";
+    message.application = object.application ?? "";
+    message.username = object.username ?? "";
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
         ? PageRequest.fromPartial(object.pagination)
