@@ -2,49 +2,39 @@ import { AminoConverter } from "@cosmjs/stargate";
 import {
   MsgDeleteProfile,
   MsgSaveProfile,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_profile";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_profile";
 import {
   MsgAcceptDTagTransferRequest,
   MsgCancelDTagTransferRequest,
   MsgRefuseDTagTransferRequest,
   MsgRequestDTagTransfer,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_dtag_requests";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_dtag_requests";
 import {
   MsgLinkApplication,
   MsgUnlinkApplication,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_app_links";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_app_links";
 import {
   MsgLinkChainAccount,
   MsgUnlinkChainAccount,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_chain_links";
-import {
-  MsgBlockUser,
-  MsgCreateRelationship,
-  MsgDeleteRelationship,
-  MsgUnblockUser,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_relationships";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_chain_links";
 import {
   Bech32Address,
   ChainConfig,
   Proof,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_chain_links";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/models_chain_links";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
 import { PubKey } from "cosmjs-types/cosmos/crypto/secp256k1/keys";
 import Long from "long";
 import {
   AminoMsgAcceptDTagTransferRequest,
-  AminoMsgBlockUser,
   AminoMsgCancelDTagTransferRequest,
-  AminoMsgCreateRelationship,
   AminoMsgDeleteProfile,
-  AminoMsgDeleteRelationship,
   AminoMsgLinkApplication,
   AminoMsgLinkChainAccount,
   AminoMsgRefuseDTagTransferRequest,
   AminoMsgRequestDTagTransfer,
   AminoMsgSaveProfile,
-  AminoMsgUnblockUser,
   AminoMsgUnlinkApplication,
   AminoMsgUnlinkChainAccount,
 } from "./messages";
@@ -57,7 +47,7 @@ function assertDefinedAndNotNull(object?: any, message?: string) {
 
 export const profilesTypes: Record<string, AminoConverter> = {
   // Profiles module
-  "/desmos.profiles.v1beta1.MsgSaveProfile": {
+  "/desmos.profiles.v2.MsgSaveProfile": {
     aminoType: "desmos/MsgSaveProfile",
     toAmino: (value: MsgSaveProfile): AminoMsgSaveProfile["value"] => {
       return {
@@ -80,7 +70,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgDeleteProfile": {
+  "/desmos.profiles.v2.MsgDeleteProfile": {
     aminoType: "desmos/MsgDeleteProfile",
     toAmino: (value: MsgDeleteProfile): AminoMsgDeleteProfile["value"] => {
       return {
@@ -93,7 +83,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgRequestDTagTransfer": {
+  "/desmos.profiles.v2.MsgRequestDTagTransfer": {
     aminoType: "desmos/MsgRequestDTagTransfer",
     toAmino: ({
       receiver,
@@ -114,7 +104,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgAcceptDTagTransferRequest": {
+  "/desmos.profiles.v2.MsgAcceptDTagTransferRequest": {
     aminoType: "desmos/MsgAcceptDTagTransferRequest",
     toAmino: ({
       newDtag,
@@ -139,7 +129,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgRefuseDTagTransferRequest": {
+  "/desmos.profiles.v2.MsgRefuseDTagTransferRequest": {
     aminoType: "desmos/MsgRefuseDTagTransferRequest",
     toAmino: ({
       sender,
@@ -160,7 +150,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgCancelDTagTransferRequest": {
+  "/desmos.profiles.v2.MsgCancelDTagTransferRequest": {
     aminoType: "desmos/MsgCancelDTagTransferRequest",
     toAmino: ({
       sender,
@@ -181,7 +171,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgLinkApplication": {
+  "/desmos.profiles.v2.MsgLinkApplication": {
     aminoType: "desmos/MsgLinkApplication",
     toAmino: (msg: MsgLinkApplication): AminoMsgLinkApplication["value"] => {
       return {
@@ -218,7 +208,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgUnlinkApplication": {
+  "/desmos.profiles.v2.MsgUnlinkApplication": {
     aminoType: "desmos/MsgUnlinkApplication",
     toAmino: (
       msg: MsgUnlinkApplication
@@ -239,7 +229,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgLinkChainAccount": {
+  "/desmos.profiles.v2.MsgLinkChainAccount": {
     aminoType: "desmos/MsgLinkChainAccount",
     toAmino: (msg: MsgLinkChainAccount): AminoMsgLinkChainAccount["value"] => {
       assertDefinedAndNotNull(msg.chainAddress, "ChainAddress not defined");
@@ -287,7 +277,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       }).finish();
 
       const chainAddress = Any.fromPartial({
-        typeUrl: "/desmos.profiles.v1beta1.Bech32Address",
+        typeUrl: "/desmos.profiles.v2.Bech32Address",
         value: chainAddressBin,
       });
       const chainConfig = ChainConfig.fromPartial({
@@ -311,7 +301,7 @@ export const profilesTypes: Record<string, AminoConverter> = {
       };
     },
   },
-  "/desmos.profiles.v1beta1.MsgUnlinkChainAccount": {
+  "/desmos.profiles.v2.MsgUnlinkChainAccount": {
     aminoType: "desmos/MsgUnlinkChainAccount",
     toAmino: (
       msg: MsgUnlinkChainAccount
@@ -329,84 +319,6 @@ export const profilesTypes: Record<string, AminoConverter> = {
         chainName: msg.chain_name,
         owner: msg.owner,
         target: msg.target,
-      };
-    },
-  },
-  "/desmos.profiles.v1beta1.MsgCreateRelationship": {
-    aminoType: "desmos/MsgCreateRelationship",
-    toAmino: (
-      msg: MsgCreateRelationship
-    ): AminoMsgCreateRelationship["value"] => {
-      return {
-        sender: msg.sender,
-        receiver: msg.receiver,
-        subspace: msg.subspace,
-      };
-    },
-    fromAmino: (
-      msg: AminoMsgCreateRelationship["value"]
-    ): MsgCreateRelationship => {
-      return {
-        sender: msg.sender,
-        receiver: msg.receiver,
-        subspace: msg.subspace,
-      };
-    },
-  },
-  "/desmos.profiles.v1beta1.MsgDeleteRelationship": {
-    aminoType: "desmos/MsgDeleteRelationship",
-    toAmino: (
-      msg: MsgDeleteRelationship
-    ): AminoMsgDeleteRelationship["value"] => {
-      return {
-        subspace: msg.subspace,
-        user: msg.user,
-        counterparty: msg.counterparty,
-      };
-    },
-    fromAmino: (
-      msg: AminoMsgDeleteRelationship["value"]
-    ): MsgDeleteRelationship => {
-      return {
-        subspace: msg.subspace,
-        user: msg.user,
-        counterparty: msg.counterparty,
-      };
-    },
-  },
-  "/desmos.profiles.v1beta1.MsgBlockUser": {
-    aminoType: "desmos/MsgBlockUser",
-    toAmino: (msg: MsgBlockUser): AminoMsgBlockUser["value"] => {
-      return {
-        blocked: msg.blocked,
-        blocker: msg.blocker,
-        subspace: msg.subspace,
-        reason: msg.reason,
-      };
-    },
-    fromAmino: (msg: AminoMsgBlockUser["value"]): MsgBlockUser => {
-      return {
-        blocked: msg.blocked,
-        blocker: msg.blocker,
-        subspace: msg.subspace,
-        reason: msg.reason,
-      };
-    },
-  },
-  "/desmos.profiles.v1beta1.MsgUnblockUser": {
-    aminoType: "desmos/MsgUnblockUser",
-    toAmino: (msg: MsgUnblockUser): AminoMsgUnblockUser["value"] => {
-      return {
-        subspace: msg.subspace,
-        blocked: msg.blocked,
-        blocker: msg.blocker,
-      };
-    },
-    fromAmino: (msg: AminoMsgUnblockUser["value"]): MsgUnblockUser => {
-      return {
-        subspace: msg.subspace,
-        blocked: msg.blocked,
-        blocker: msg.blocker,
       };
     },
   },

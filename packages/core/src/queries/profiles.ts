@@ -6,23 +6,16 @@ import {
   QueryClient,
 } from "@cosmjs/stargate";
 import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
-import { QueryIncomingDTagTransferRequestsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_dtag_requests";
-import {
-  QueryChainLinksResponse,
-  QueryUserChainLinkResponse,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_chain_links";
+import { QueryIncomingDTagTransferRequestsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_dtag_requests";
+import { QueryChainLinksResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_chain_links";
 import {
   QueryApplicationLinksResponse,
-  QueryUserApplicationLinkResponse,
   QueryApplicationLinkByClientIDResponse,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_app_links";
-import { QueryClientImpl } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query";
-import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_profile";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_app_links";
+import { QueryClientImpl } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query";
+import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v2/models_profile";
 import { assert } from "@cosmjs/utils";
-import {
-  QueryBlocksResponse,
-  QueryRelationshipsResponse,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/query_relationships";
+import { QueryParamsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_params";
 
 export interface ProfilesExtension {
   readonly profiles: {
@@ -40,55 +33,24 @@ export interface ProfilesExtension {
       pagination?: PageRequest
     ) => Promise<QueryIncomingDTagTransferRequestsResponse>;
     /**
-     * Queries the relationships for the user having the given
-     * address.
-     */
-    readonly relationships: (
-      subspaceId: string,
-      user: string,
-      pagination?: PageRequest
-    ) => Promise<QueryRelationshipsResponse>;
-    /**
-     * Queries the user blocks for the user having the given address.
-     */
-    readonly blocks: (
-      subspaceId: string,
-      user: string,
-      pagination?: PageRequest
-    ) => Promise<QueryBlocksResponse>;
-    /**
      * Queries chain links for the given user.
      */
     readonly chainLinks: (
-      user: string,
+      user?: string,
+      chainName?: string,
+      target?: string,
       pagination?: PageRequest
     ) => Promise<QueryChainLinksResponse>;
-    /**
-     * Queries the chain link for the given user, chain name and
-     * target address
-     */
-    readonly userChainLink: (
-      user: string,
-      chainName: string,
-      target: string
-    ) => Promise<QueryUserChainLinkResponse>;
     /**
      * Queries a single application link for a given user,
      * searching via the application name and username.
      */
     readonly applicationLinks: (
-      user: string,
+      user?: string,
+      application?: string,
+      username?: string,
       pagination?: PageRequest
     ) => Promise<QueryApplicationLinksResponse>;
-    /**
-     * Queries a single application link for a given user,
-     * searching via the application name and username
-     */
-    readonly userApplicationLink: (
-      user: string,
-      application: string,
-      username: string
-    ) => Promise<QueryUserApplicationLinkResponse>;
     /**
      * Queries a single application link for a given
      * client id.
@@ -96,6 +58,10 @@ export interface ProfilesExtension {
     readonly applicationLinkByClientID: (
       clientId: string
     ) => Promise<QueryApplicationLinkByClientIDResponse>;
+    /**
+     * Queries the module parameters.
+     */
+    readonly params: () => Promise<QueryParamsResponse>;
   };
 }
 
@@ -120,66 +86,39 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
           pagination,
         });
       },
-      relationships: async (
-        subspaceId: string,
-        user: string,
+      chainLinks: async (
+        user?: string,
+        chainName?: string,
+        target?: string,
         pagination?: PageRequest
       ) => {
-        return queryService.Relationships({
-          user,
-          subspaceId,
-          pagination,
-        });
-      },
-      blocks: async (
-        subspaceId: string,
-        user: string,
-        pagination?: PageRequest
-      ) => {
-        return queryService.Blocks({
-          user,
-          subspaceId,
-          pagination,
-        });
-      },
-      chainLinks: async (user: string, pagination?: PageRequest) => {
         return queryService.ChainLinks({
-          user,
+          user: user || "",
+          chainName: chainName || "",
+          target: target || "",
           pagination,
         });
       },
-      userChainLink: async (
-        user: string,
-        chainName: string,
-        target: string
+      applicationLinks: async (
+        user?: string,
+        application?: string,
+        username?: string,
+        pagination?: PageRequest
       ) => {
-        return queryService.UserChainLink({
-          user,
-          chainName,
-          target,
-        });
-      },
-      applicationLinks: async (user: string, pagination?: PageRequest) => {
         return queryService.ApplicationLinks({
-          user,
+          user: user || "",
+          application: application || "",
+          username: username || "",
           pagination,
-        });
-      },
-      userApplicationLink: async (
-        user: string,
-        application: string,
-        username: string
-      ) => {
-        return queryService.UserApplicationLink({
-          user,
-          application,
-          username,
         });
       },
       applicationLinkByClientID: async (clientId: string) => {
         return queryService.ApplicationLinkByClientID({
           clientId,
         });
+      },
+      params: async () => {
+        return queryService.Params({});
       },
     },
   };
@@ -188,7 +127,7 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
 export function profileFromAny(input: Any): Account {
   const { typeUrl, value } = input;
   switch (typeUrl) {
-    case "/desmos.profiles.v1beta1.Profile": {
+    case "/desmos.profiles.v2.Profile": {
       const baseAccount = Profile.decode(value)?.account;
       assert(baseAccount);
       return accountFromAny(baseAccount);
