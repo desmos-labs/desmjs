@@ -64,10 +64,10 @@ export interface AminoMsgLinkApplication extends AminoMsg {
     source_channel: string;
     source_port: string;
     timeout_height: {
-      revision_height: string;
-      revision_number: string;
+      revision_height?: string;
+      revision_number?: string;
     };
-    timeout_timestamp: string;
+    timeout_timestamp?: string;
   };
 }
 
