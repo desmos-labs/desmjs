@@ -55,6 +55,10 @@ function assertDefinedAndNotNull(object?: any, message?: string) {
   }
 }
 
+/**
+ * Replace default type values with `undefined`
+ * @returns `undefined` if it is the default type value, the original value otherwise
+ */
 function omitDefault<T extends string | number | Long>(
   input: T
 ): T | undefined {
