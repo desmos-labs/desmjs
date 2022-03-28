@@ -34,7 +34,7 @@
     "build": "rm -rf ./build && tsc && yarn prepare"
   },
   "dependencies": {
-    "long": "^4.0.0",
+    "long": "^5.2.0",
     "protobufjs": "^6.11.2"
   },
   "devDependencies": {
