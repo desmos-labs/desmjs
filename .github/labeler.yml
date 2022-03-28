@@ -1,0 +1,14 @@
+"pkg/core":
+  - packages/core/**/*
+"pkg/types":
+  - packages/types/**/*
+"pkg/walletconnect":
+  - packages/walletconnect/**/*
+"kind/build":
+  - .editorconfig
+  - .eslintrc.json
+  - .yarnrc.yaml
+  - tsconfig.json
+"kind/ci":
+  - .github/**/*.yml
+  - .mergify.yml
