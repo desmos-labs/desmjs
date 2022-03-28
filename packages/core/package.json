@@ -44,7 +44,7 @@
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^27.4.1",
     "@types/long": "^4.0.1",
     "@types/node": "^16.7.6",
     "@types/pino": "^6.3.11",
