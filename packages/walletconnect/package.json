@@ -42,7 +42,7 @@
     "@walletconnect/utils": "^1.6.6",
     "cosmjs-types": "^0.4.1",
     "cosmos-wallet": "^1.1.0",
-    "long": "^4.0.0"
+    "long": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
