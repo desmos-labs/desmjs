@@ -55,6 +55,28 @@ function assertDefinedAndNotNull(object?: any, message?: string) {
   }
 }
 
+/**
+ * Replace default type values with `undefined`
+ * @returns `undefined` if it is the default type value, the original value otherwise
+ */
+function omitDefault<T extends string | number | Long>(
+  input: T
+): T | undefined {
+  if (typeof input === "string") {
+    return input === "" ? undefined : input;
+  }
+
+  if (typeof input === "number") {
+    return input === 0 ? undefined : input;
+  }
+
+  if (Long.isLong(input)) {
+    return input.isZero() ? undefined : input;
+  }
+
+  throw new Error(`Got unsupported type '${typeof input}'`);
+}
+
 export const profilesTypes: Record<string, AminoConverter> = {
   // Profiles module
   "/desmos.profiles.v1beta1.MsgSaveProfile": {
@@ -193,11 +215,17 @@ export const profilesTypes: Record<string, AminoConverter> = {
         call_data: msg.callData,
         source_channel: msg.sourceChannel,
         source_port: msg.sourcePort,
-        timeout_height: {
-          revision_height: msg.timeoutHeight!.revisionHeight.toString(),
-          revision_number: msg.timeoutHeight!.revisionNumber.toString(),
-        },
-        timeout_timestamp: msg.timeoutTimestamp.toString(),
+        timeout_height: msg.timeoutHeight
+          ? {
+              revision_height: omitDefault(
+                msg.timeoutHeight.revisionHeight
+              )?.toString(),
+              revision_number: omitDefault(
+                msg.timeoutHeight.revisionNumber
+              )?.toString(),
+            }
+          : {},
+        timeout_timestamp: omitDefault(msg.timeoutTimestamp)?.toString(),
       };
     },
     fromAmino: (msg: AminoMsgLinkApplication["value"]): MsgLinkApplication => {
@@ -210,11 +238,19 @@ export const profilesTypes: Record<string, AminoConverter> = {
         callData: msg.call_data,
         sourceChannel: msg.source_channel,
         sourcePort: msg.source_port,
-        timeoutHeight: {
-          revisionHeight: Long.fromString(msg.timeout_height.revision_height),
-          revisionNumber: Long.fromString(msg.timeout_height.revision_number),
-        },
-        timeoutTimestamp: Long.fromString(msg.timeout_timestamp),
+        timeoutHeight: msg.timeout_height
+          ? {
+              revisionHeight: Long.fromString(
+                msg.timeout_height.revision_height || "0",
+                true
+              ),
+              revisionNumber: Long.fromString(
+                msg.timeout_height.revision_number || "0",
+                true
+              ),
+            }
+          : undefined,
+        timeoutTimestamp: Long.fromString(msg.timeout_timestamp || "0", true),
       };
     },
   },
