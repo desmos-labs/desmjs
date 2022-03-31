@@ -26,15 +26,9 @@
     "packages/walletconnect"
   ],
   "scripts": {
-    "build": "yarn build-core && yarn build-types && yarn build-walletconnect",
-    "publish": "yarn publish-core && yarn publish-types && yarn publish-walletconnect",
-    "build-core": "yarn workspace @desmoslabs/desmjs build",
-    "publish-core": "yarn workspace @desmoslabs/desmjs npm publish",
-    "build-types": "yarn workspace @desmoslabs/desmjs-types build",
-    "publish-types": "yarn workspace @desmoslabs/desmjs-types npm publish",
-    "build-walletconnect": "yarn workspace @desmoslabs/desmjs-walletconnect build",
-    "publish-walletconnect": "yarn workspace @desmoslabs/desmjs-walletconnect npm publish",
-    "lint": "pretty-quick packages --staged && lint-staged"
+    "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build",
+    "lint": "yarn workspaces foreach --topological-dev --parallel --verbose run lint",
+    "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
   },
   "devDependencies": {
     "@cosmjs/crypto": "^0.28.1",
