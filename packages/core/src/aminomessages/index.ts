@@ -15,7 +15,10 @@ export * from "./profiles/messages";
 export * from "./relationships/messages";
 export * from "./subspaces/messages";
 
-export const desmosTypes: Record<string, AminoConverter> = {
+export const desmosTypes: Record<
+  string,
+  AminoConverter | "not_supported_by_chain"
+> = {
   ...cosmosTypes,
   ...desmjsTypes,
   ...profilesTypes,

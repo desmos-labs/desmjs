@@ -35,7 +35,8 @@ import { fromBase64 } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53 } from "@cosmjs/math";
-import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v2/models_profile";
+import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_profile";
+import { StargateClientOptions } from "@cosmjs/stargate/build/stargateclient";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,
@@ -105,33 +106,36 @@ export class DesmosClient extends SigningStargateClient {
   private types: AminoTypes;
 
   public static override async connect(
-    endpoint: string
+    endpoint: string,
+    options?: StargateClientOptions
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint34Client.connect(endpoint);
-    return new DesmosClient(tmClient);
+    return new DesmosClient(tmClient, undefined, options);
   }
 
   public static override async connectWithSigner(
     endpoint: string,
-    signer: Signer
+    signer: Signer,
+    options?: StargateClientOptions
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint34Client.connect(endpoint);
-    return new DesmosClient(tmClient, signer);
+    return new DesmosClient(tmClient, signer, options);
   }
 
   protected constructor(
     client: Tendermint34Client,
-    signer: Signer = new NoOpSigner()
+    signer: Signer = new NoOpSigner(),
+    options?: StargateClientOptions
   ) {
     const registry = new Registry(desmosRegistry);
-    const aminoTypes = new AminoTypes({
-      additions: desmosTypes,
-      prefix: "desmos",
-    });
+    const aminoTypes = new AminoTypes(desmosTypes);
 
     super(client, signer, {
       registry,
       aminoTypes,
+      prefix: "desmos",
+      accountParser: profileFromAny,
+      ...options,
     });
 
     this.txSigner = signer;

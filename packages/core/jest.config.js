@@ -8,6 +8,6 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    "^@desmos-labs/proto/(.*)$": "<rootDir>/../proto/build/$1",
+    "^@desmoslabs/types/(.*)$": "<rootDir>/../types/build/$1",
   },
 };

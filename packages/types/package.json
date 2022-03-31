@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-types",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.4",
   "description": "JS and TS types relating to Protocol Buffers used by Desmos",
   "contributors": [
     "Manuel Turetta <manuel.turetta94@gmail.com>",
@@ -31,7 +31,7 @@
     "get-proto": "./script/get-proto.sh",
     "generate-code": "./script/generate-code.sh",
     "prepare": "./script/prepare.sh",
-    "build": "rm -rf ./build && tsc && yarn prepare"
+    "build": "yarn get-proto && yarn generate-code && rm -rf ./build && tsc && yarn prepare"
   },
   "dependencies": {
     "long": "^4.0.0",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/long": "^4.0.1",
-    "@types/node": "^16.7.6",
+    "@types/node": "^17.0.23",
     "ts-proto": "^1.82.5",
     "ts-protoc-gen": "^0.15.0",
     "typescript": "^4.4.4"

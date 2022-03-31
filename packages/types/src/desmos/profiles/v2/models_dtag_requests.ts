@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
+import * as _m0 from "protobufjs/minimal";
 
 /** DTagTransferRequest represent a DTag transfer request between two users */
 export interface DTagTransferRequest {
