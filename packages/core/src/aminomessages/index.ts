@@ -7,7 +7,10 @@ import { desmjsRegistryTypes, desmjsTypes } from "./desmjs";
 export * from "./cosmos/messages";
 export * from "./profiles/messages";
 
-export const desmosTypes: Record<string, AminoConverter> = {
+export const desmosTypes: Record<
+  string,
+  AminoConverter | "not_supported_by_chain"
+> = {
   ...cosmosTypes,
   ...desmjsTypes,
   ...profilesTypes,

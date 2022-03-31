@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Params } from "../../../desmos/profiles/v1beta1/models_params";
 import { DTagTransferRequest } from "../../../desmos/profiles/v1beta1/models_dtag_requests";
 import {

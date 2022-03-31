@@ -31,10 +31,10 @@
     "get-proto": "./script/get-proto.sh",
     "generate-code": "./script/generate-code.sh",
     "prepare": "./script/prepare.sh",
-    "build": "rm -rf ./build && tsc && yarn prepare"
+    "build": "yarn get-proto && yarn generate-code && rm -rf ./build && tsc && yarn prepare"
   },
   "dependencies": {
-    "long": "^5.2.0",
+    "long": "^4.0.0",
     "protobufjs": "^6.11.2"
   },
   "devDependencies": {

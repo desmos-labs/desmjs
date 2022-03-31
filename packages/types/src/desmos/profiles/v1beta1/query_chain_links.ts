@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { ChainLink } from "../../../desmos/profiles/v1beta1/models_chain_links";
 import {
   PageRequest,

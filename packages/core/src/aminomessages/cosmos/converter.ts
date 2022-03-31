@@ -1,4 +1,4 @@
-import { AminoConverter, isAminoMsgSend } from "@cosmjs/stargate";
+import { AminoConverter } from "@cosmjs/stargate";
 import { MsgGrant } from "cosmjs-types/cosmos/authz/v1beta1/tx";
 import {
   GenericAuthorization,
@@ -6,7 +6,6 @@ import {
 } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { SendAuthorization } from "cosmjs-types/cosmos/bank/v1beta1/authz";
-import { responseOfferSnapshot_ResultToJSON } from "cosmjs-types/tendermint/abci/types";
 import { Timestamp } from "cosmjs-types/google/protobuf/timestamp";
 import {
   AminoAuthorization,
@@ -70,7 +69,7 @@ function convertAminoGrant(grant: AminoGrant): Grant {
     ? Date.parse(grant.expiration)
     : undefined;
 
-  return Grant.fromPartial({
+  return {
     authorization: grant.authorization
       ? convertAminoAuthorization(grant.authorization)
       : undefined,
@@ -80,7 +79,7 @@ function convertAminoGrant(grant: AminoGrant): Grant {
           nanos: (expiration % 1000) * 1e6,
         })
       : undefined,
-  });
+  };
 }
 
 export const cosmosTypes: Record<string, AminoConverter> = {
