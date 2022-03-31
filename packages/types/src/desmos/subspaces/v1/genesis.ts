@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
+import * as _m0 from "protobufjs/minimal";
 import { Subspace, UserGroup } from "../../../desmos/subspaces/v1/models";
 
 /** GenesisState contains the data of the genesis state for the subspaces module */

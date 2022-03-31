@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import _m0 from "protobufjs/minimal";
+import * as _m0 from "protobufjs/minimal";
 
 /** MsgCreateSubspace represents the message used to create a subspace */
 export interface MsgCreateSubspace {
