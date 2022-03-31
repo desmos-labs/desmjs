@@ -17,3 +17,4 @@ DesmJS consists of multiple smaller npm packages each one with a specific functi
 | DesmJS version | Desmos version | 
 |:--------------:|:--------------:|
 |    `2.0.0`     |    `2.3.1 `    |
+|    `3.0.0`     |    `3.0.0 `    |
