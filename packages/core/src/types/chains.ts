@@ -1,13 +1,16 @@
+import { GasPrice } from "@cosmjs/stargate";
+
 export interface DenomUnit {
   /**
    * The coin denomination.
    */
-  denom: string;
+  readonly denom: string;
+
   /**
    * Exponent to the base chain coin denom.
    * For example the exponent for DMS is 6 since 1 DSM = 1 * 10 ^ 6 udsm.
    */
-  exponent: number;
+  readonly exponent: number;
 }
 
 /**
@@ -17,46 +20,52 @@ export interface ChainInfo {
   /**
    * Url used to perform the rpc requests
    */
-  rpcUrl: string;
+  readonly rpcUrl: string;
+
   /**
-   * The chain id
+   * ID of the chain
    */
-  chainId: string;
+  readonly chainId: string;
+
   /**
-   * Denom of the chain's coin.
+   * Gas price to be used when sending transactions to this chain.
    */
-  coinDenom: string;
+  readonly gasPrice: GasPrice;
+
   /**
-   * List of denoms that can be displayed to the user.
+   * Denom of the token used for staking
    */
-  denomUnits: DenomUnit[];
+  readonly stakingDenom: string;
+
+  /**
+   * List of denoms that can be displayed to the user
+   */
+  readonly denomUnits: DenomUnit[];
 }
 
-export const TestnetDenomUnits: DenomUnit[] = [
-  { denom: "udaric", exponent: 0 },
-  { denom: "daric", exponent: 6 },
-];
-
-export const DesmosTestnet: ChainInfo = {
+export const MorpheusApollo2: ChainInfo = {
   chainId: "morpheus-apollo-2",
   rpcUrl: "https://rpc.morpheus.desmos.network",
-  coinDenom: "udaric",
-  denomUnits: TestnetDenomUnits,
+  gasPrice: GasPrice.fromString("0.01udaric"),
+  stakingDenom: "udaric",
+  denomUnits: [
+    { denom: "udaric", exponent: 0 },
+    { denom: "daric", exponent: 6 },
+  ],
 };
-
-export const MainnetDenomUnits: DenomUnit[] = [
-  { denom: "udsm", exponent: 0 },
-  { denom: "dsm", exponent: 6 },
-];
 
 export const DesmosMainnet: ChainInfo = {
   chainId: "desmos-mainnet",
   rpcUrl: "https://rpc.mainnet.desmos.network",
-  coinDenom: "udsm",
-  denomUnits: MainnetDenomUnits,
+  gasPrice: GasPrice.fromString("0.01udsm"),
+  stakingDenom: "udsm",
+  denomUnits: [
+    { denom: "udsm", exponent: 0 },
+    { denom: "dsm", exponent: 6 },
+  ],
 };
 
 export const DesmosChains: Record<string, ChainInfo> = {
-  testnet: DesmosTestnet,
+  testnet: MorpheusApollo2,
   mainnet: DesmosMainnet,
 };

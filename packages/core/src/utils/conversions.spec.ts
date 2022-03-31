@@ -1,12 +1,12 @@
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import { convertCoin } from "./conversions";
-import { MainnetDenomUnits } from "../types";
+import { DesmosMainnet } from "../types";
 
 describe("Utils test", () => {
   describe("Conversions", () => {
     it("Convert base to available exponent", () => {
       const coin: Coin = { amount: "1000000", denom: "udsm" };
-      const convertedCoin = convertCoin(coin, 6, MainnetDenomUnits);
+      const convertedCoin = convertCoin(coin, 6, DesmosMainnet.denomUnits);
 
       expect(convertedCoin).not.toBe(null);
       expect(convertedCoin!.denom).toBe("dsm");
@@ -15,7 +15,7 @@ describe("Utils test", () => {
 
     it("Valid coin to base", () => {
       const coin: Coin = { amount: "1", denom: "dsm" };
-      const convertedCoin = convertCoin(coin, 0, MainnetDenomUnits);
+      const convertedCoin = convertCoin(coin, 0, DesmosMainnet.denomUnits);
 
       expect(convertedCoin).not.toBe(null);
       expect(convertedCoin!.denom).toBe("udsm");
@@ -24,7 +24,7 @@ describe("Utils test", () => {
 
     it("Convert coin to same exponent", () => {
       const coin: Coin = { amount: "1", denom: "dsm" };
-      const convertedCoin = convertCoin(coin, 6, MainnetDenomUnits);
+      const convertedCoin = convertCoin(coin, 6, DesmosMainnet.denomUnits);
 
       expect(convertedCoin).not.toBe(null);
       expect(convertedCoin!.denom).toBe("dsm");
@@ -33,21 +33,21 @@ describe("Utils test", () => {
 
     it("Convert base to unknown exponent", () => {
       const coin: Coin = { amount: "1000000", denom: "udsm" };
-      const convertedCoin = convertCoin(coin, 5, MainnetDenomUnits);
+      const convertedCoin = convertCoin(coin, 5, DesmosMainnet.denomUnits);
 
       expect(convertedCoin).toBe(null);
     });
 
     it("Convert unknown denom to exponent", () => {
       const coin: Coin = { amount: "1000000", denom: "unknown" };
-      const convertedCoin = convertCoin(coin, 0, MainnetDenomUnits);
+      const convertedCoin = convertCoin(coin, 0, DesmosMainnet.denomUnits);
 
       expect(convertedCoin).toBe(null);
     });
 
     it("Conversion precision", () => {
       const coin: Coin = { amount: "126432187423", denom: "udsm" };
-      const convertedCoin = convertCoin(coin, 6, MainnetDenomUnits);
+      const convertedCoin = convertCoin(coin, 6, DesmosMainnet.denomUnits);
 
       expect(convertedCoin).not.toBe(null);
       expect(convertedCoin!.denom).toBe("dsm");
