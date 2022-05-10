@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-types",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.2",
   "description": "JS and TS types relating to Protocol Buffers used by Desmos",
   "contributors": [
     "Manuel Turetta <manuel.turetta94@gmail.com>",
