@@ -31,7 +31,8 @@
     "get-proto": "./script/get-proto.sh",
     "generate-code": "./script/generate-code.sh",
     "prepare": "./script/prepare.sh",
-    "build": "yarn get-proto && yarn generate-code && rm -rf ./build && tsc && yarn prepare"
+    "build-ts": "rm -rf ./build && tsc --build --verbose",
+    "build": "yarn get-proto && yarn generate-code && yarn build-ts && yarn prepare"
   },
   "dependencies": {
     "long": "^4.0.0",

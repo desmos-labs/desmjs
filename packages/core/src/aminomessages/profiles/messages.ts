@@ -1,4 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
+import { AminoAddressData } from "./types";
 
 export interface AminoMsgSaveProfile extends AminoMsg {
   readonly type: "desmos/MsgSaveProfile";
@@ -84,13 +85,7 @@ export interface AminoMsgLinkChainAccount extends AminoMsg {
   readonly type: "desmos/MsgLinkChainAccount";
   readonly value: {
     signer: string;
-    chain_address: {
-      type: "desmos/Bech32Address";
-      value: {
-        prefix: string;
-        value: string;
-      };
-    };
+    chain_address: AminoAddressData;
     chain_config: {
       name: string;
     };

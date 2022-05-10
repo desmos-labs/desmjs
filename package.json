@@ -31,10 +31,10 @@
     "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
   },
   "devDependencies": {
-    "@cosmjs/crypto": "^0.28.1",
-    "@cosmjs/encoding": "^0.28.1",
-    "@cosmjs/proto-signing": "^0.28.1",
-    "@cosmjs/utils": "^0.28.1",
+    "@cosmjs/crypto": "^0.28.4",
+    "@cosmjs/encoding": "^0.28.4",
+    "@cosmjs/proto-signing": "^0.28.4",
+    "@cosmjs/utils": "^0.28.4",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@types/long": "^4.0.1",

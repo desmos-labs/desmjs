@@ -1,32 +1,46 @@
-import { AminoConverter, defaultRegistryTypes } from "@cosmjs/stargate";
-import { GeneratedType } from "@cosmjs/proto-signing";
 import {
-  relationshipsRegistryTypes,
-  relationshipsTypes,
-} from "./relationships";
-import { cosmosRegistryTypes, cosmosTypes } from "./cosmos";
-import { profilesRegistryTypes, profilesTypes } from "./profiles";
-import { desmjsRegistryTypes, desmjsTypes } from "./desmjs";
-import { subspacesRegistryTypes } from "./subspaces";
-import subspacesTypes from "./subspaces/converter";
+  AminoConverters,
+  createBankAminoConverters,
+  createDistributionAminoConverters,
+  createFreegrantAminoConverters,
+  createGovAminoConverters,
+  createIbcAminoConverters,
+  createStakingAminoConverters,
+  defaultRegistryTypes,
+} from "@cosmjs/stargate";
+import { GeneratedType } from "@cosmjs/proto-signing";
+import { createVestingAminoConverters } from "@cosmjs/stargate/build/modules";
+import { cosmosRegistryTypes, createCosmosConverters } from "./cosmos";
+import { createProfilesConverters, profilesRegistryTypes } from "./profiles";
+import { createDesmJSConverters, desmjsRegistryTypes } from "./desmjs";
 
 export * from "./cosmos/messages";
 export * from "./profiles/messages";
 export * from "./relationships/messages";
 export * from "./subspaces/messages";
 
-export const desmosTypes: Record<
-  string,
-  AminoConverter | "not_supported_by_chain"
-> = {
-  ...cosmosTypes,
-  ...desmjsTypes,
-  ...profilesTypes,
-  ...relationshipsTypes,
-  ...subspacesTypes,
-};
+export function createDesmosTypes(prefix: string): AminoConverters {
+  return {
+    // TODO: Use this once they are implemented properly
+    // ...createAuthzAminoConverters(),
 
-export const desmosRegistry: ReadonlyArray<[string, GeneratedType]> = [
+    ...createBankAminoConverters(),
+    ...createDistributionAminoConverters(),
+    ...createGovAminoConverters(),
+    ...createStakingAminoConverters(prefix),
+    ...createIbcAminoConverters(),
+    ...createFreegrantAminoConverters(),
+    ...createVestingAminoConverters(),
+
+    ...createCosmosConverters(),
+    ...createDesmJSConverters(),
+    ...createProfilesConverters(),
+    ...createRelationshipsConverters(),
+    ...createSubspacesConverters(),
+  };
+}
+
+export const desmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ...defaultRegistryTypes,
 
   ...cosmosRegistryTypes,
