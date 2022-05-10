@@ -36,7 +36,7 @@ import { fromBase64 } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53 } from "@cosmjs/math";
-import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_profile";
+import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v2/models_profile";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,

@@ -38,6 +38,9 @@ mkdir "$PROTO_DIR"
 mv "$TMP_DIR/desmos-$DESMOS_VERSION/proto" "$PROTO_DIR"
 mv "$TMP_DIR/desmos-$DESMOS_VERSION/third_party" "$PROTO_DIR"
 
+# Remove all the v1beta1 proto folders
+rm -r "$PROTO_DIR/proto/desmos/profiles/v1beta1"
+
 # Clean up tmp dir
 rm -Rf "$TMP_DIR"
 

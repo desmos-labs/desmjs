@@ -13,6 +13,11 @@ import { createVestingAminoConverters } from "@cosmjs/stargate/build/modules";
 import { cosmosRegistryTypes, createCosmosConverters } from "./cosmos";
 import { createProfilesConverters, profilesRegistryTypes } from "./profiles";
 import { createDesmJSConverters, desmjsRegistryTypes } from "./desmjs";
+import {
+  createRelationshipsConverters,
+  relationshipsRegistryTypes,
+} from "./relationships";
+import { createSubspacesConverters, subspacesRegistryTypes } from "./subspaces";
 
 export * from "./cosmos/messages";
 export * from "./profiles/messages";
