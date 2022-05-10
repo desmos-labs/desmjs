@@ -1,4 +1,4 @@
-import { AminoConverter } from "@cosmjs/stargate";
+import { AminoConverter, AminoConverters } from "@cosmjs/stargate";
 import { MsgGrant } from "cosmjs-types/cosmos/authz/v1beta1/tx";
 import {
   GenericAuthorization,
@@ -82,25 +82,27 @@ function convertAminoGrant(grant: AminoGrant): Grant {
   };
 }
 
-export const cosmosTypes: Record<string, AminoConverter> = {
-  // Authz types
-  "/cosmos.authz.v1beta1.MsgGrant": {
-    aminoType: "",
-    toAmino: (value: MsgGrant): AminoMsgGrant => {
-      return {
-        grant: value.grant ? convertGrant(value.grant) : undefined,
-        granter: value.granter,
-        grantee: value.grantee,
-      };
+export function createCosmosConverters(): AminoConverters {
+  return {
+    // Authz types
+    "/cosmos.authz.v1beta1.MsgGrant": {
+      aminoType: "",
+      toAmino: (value: MsgGrant): AminoMsgGrant => {
+        return {
+          grant: value.grant ? convertGrant(value.grant) : undefined,
+          granter: value.granter,
+          grantee: value.grantee,
+        };
+      },
+      fromAmino: (msg: AminoMsgGrant): MsgGrant => {
+        return MsgGrant.fromPartial({
+          grant: msg.grant ? convertAminoGrant(msg.grant) : undefined,
+          granter: msg.granter,
+          grantee: msg.grantee,
+        });
+      },
     },
-    fromAmino: (msg: AminoMsgGrant): MsgGrant => {
-      return MsgGrant.fromPartial({
-        grant: msg.grant ? convertAminoGrant(msg.grant) : undefined,
-        granter: msg.granter,
-        grantee: msg.grantee,
-      });
-    },
-  },
-};
+  };
+}
 
-export default cosmosTypes;
+export default createCosmosConverters;

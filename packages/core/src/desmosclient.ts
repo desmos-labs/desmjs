@@ -8,6 +8,7 @@ import {
   setupTxExtension,
   SignerData,
   SigningStargateClient,
+  SigningStargateClientOptions,
   StdFee,
 } from "@cosmjs/stargate";
 import { Any } from "cosmjs-types/google/protobuf/any";
@@ -36,7 +37,6 @@ import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53 } from "@cosmjs/math";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/models_profile";
-import { StargateClientOptions } from "@cosmjs/stargate/build/stargateclient";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,
@@ -44,7 +44,11 @@ import {
   setupProfilesExtension,
   setupAuthzExtension,
 } from "./queries";
-import { desmosRegistry, desmosTypes } from "./aminomessages";
+import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
+
+function createDefaultRegistry(): Registry {
+  return new Registry(desmosRegistryTypes);
+}
 
 function makeSignerInfos(
   signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
@@ -105,28 +109,31 @@ export class DesmosClient extends SigningStargateClient {
 
   public static override async connect(
     endpoint: string,
-    options?: StargateClientOptions
+    options: SigningStargateClientOptions = {}
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint34Client.connect(endpoint);
-    return new DesmosClient(tmClient, undefined, options);
+    return new DesmosClient(tmClient, options, undefined);
   }
 
   public static override async connectWithSigner(
     endpoint: string,
     signer: Signer,
-    options?: StargateClientOptions
+    options: SigningStargateClientOptions = {}
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint34Client.connect(endpoint);
-    return new DesmosClient(tmClient, signer, options);
+    return new DesmosClient(tmClient, options, signer);
   }
 
   protected constructor(
     client: Tendermint34Client,
-    signer: Signer = new NoOpSigner(),
-    options?: StargateClientOptions
+    options: SigningStargateClientOptions,
+    signer: Signer = new NoOpSigner()
   ) {
-    const registry = new Registry(desmosRegistry);
-    const aminoTypes = new AminoTypes(desmosTypes);
+    const prefix = options?.prefix ?? "desmos";
+    const {
+      registry = createDefaultRegistry(),
+      aminoTypes = new AminoTypes(createDesmosTypes(prefix)),
+    } = options;
 
     super(client, signer, {
       registry,

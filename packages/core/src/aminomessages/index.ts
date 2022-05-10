@@ -1,22 +1,42 @@
-import { AminoConverter, defaultRegistryTypes } from "@cosmjs/stargate";
+import {
+  AminoConverters,
+  createBankAminoConverters,
+  createDistributionAminoConverters,
+  createFreegrantAminoConverters,
+  createGovAminoConverters,
+  createIbcAminoConverters,
+  createStakingAminoConverters,
+  defaultRegistryTypes,
+} from "@cosmjs/stargate";
 import { GeneratedType } from "@cosmjs/proto-signing";
-import { cosmosRegistryTypes, cosmosTypes } from "./cosmos";
-import { profilesRegistryTypes, profilesTypes } from "./profiles";
-import { desmjsRegistryTypes, desmjsTypes } from "./desmjs";
+import { createVestingAminoConverters } from "@cosmjs/stargate/build/modules";
+import { cosmosRegistryTypes, createCosmosConverters } from "./cosmos";
+import { createProfilesConverters, profilesRegistryTypes } from "./profiles";
+import { createDesmJSConverters, desmjsRegistryTypes } from "./desmjs";
 
 export * from "./cosmos/messages";
 export * from "./profiles/messages";
 
-export const desmosTypes: Record<
-  string,
-  AminoConverter | "not_supported_by_chain"
-> = {
-  ...cosmosTypes,
-  ...desmjsTypes,
-  ...profilesTypes,
-};
+export function createDesmosTypes(prefix: string): AminoConverters {
+  return {
+    // TODO: Use this once they are implemented properly
+    // ...createAuthzAminoConverters(),
 
-export const desmosRegistry: ReadonlyArray<[string, GeneratedType]> = [
+    ...createBankAminoConverters(),
+    ...createDistributionAminoConverters(),
+    ...createGovAminoConverters(),
+    ...createStakingAminoConverters(prefix),
+    ...createIbcAminoConverters(),
+    ...createFreegrantAminoConverters(),
+    ...createVestingAminoConverters(),
+
+    ...createCosmosConverters(),
+    ...createDesmJSConverters(),
+    ...createProfilesConverters(),
+  };
+}
+
+export const desmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ...defaultRegistryTypes,
 
   ...cosmosRegistryTypes,
