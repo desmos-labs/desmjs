@@ -2,7 +2,10 @@
   "name": "desmjs-monorepo-root",
   "description": "Root for the DesmJS monorepo",
   "private": true,
-  "author": "Manuel Turetta <manuel@forbole.com>",
+  "contributors": [
+    "Manuel Turetta <manuel@forbole.com>",
+    "Riccardo Montagnin <riccardo@forbole.com>"
+  ],
   "license": "Apache-2.0",
   "main": "build/index.js",
   "types": "build/index.d.ts",
