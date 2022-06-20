@@ -1,7 +1,7 @@
-cosmos/
-cosmos_proto/
-desmjs/
-desmos/
-gogoproto/
-google/
-ibc/
+./cosmos/
+./cosmos_proto/
+./desmjs/
+./desmos/
+./gogoproto/
+./google/
+./ibc/
