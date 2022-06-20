@@ -44,3 +44,6 @@ proto_dirs=$(find "$PROTO_DIR" -path -prune -o -name '*.proto' -print0 | xargs -
 for dir in $proto_dirs; do
   $PROTOC -I"$PROTO_DIR" $(find "${dir}" -maxdepth 1 -name '*.proto')
 done
+
+# Remove the proto-files dir
+rm -r "$PROTO_FILES_DIR"
