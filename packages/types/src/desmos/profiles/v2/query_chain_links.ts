@@ -42,6 +42,43 @@ export interface QueryChainLinksResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryChainLinkOwnersRequest contains the data of the request that can
+ * be used to get chain link owners
+ */
+export interface QueryChainLinkOwnersRequest {
+  /**
+   * (Optional) Chain name to search link owners of. If not specified, all
+   * links stored will be searched instead.
+   */
+  chainName: string;
+  /**
+   * (Optional) External address to search for. This will only be used if the
+   * chain name is specified as well
+   */
+  target: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryChainLinkOwnersResponse contains the data returned by the request
+ * allowing to get chain link owners.
+ */
+export interface QueryChainLinkOwnersResponse {
+  /** Addresses of the chain links owners */
+  owners: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponse;
+}
+
+/** ChainLinkOwnerDetails contains the details of a single chain link owner */
+export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+  user: string;
+  chainName: string;
+  target: string;
+}
+
 function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
   return { user: "", chainName: "", target: "", pagination: undefined };
 }
@@ -215,6 +252,269 @@ export const QueryChainLinksResponse = {
       object.pagination !== undefined && object.pagination !== null
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryChainLinkOwnersRequest(): QueryChainLinkOwnersRequest {
+  return { chainName: "", target: "", pagination: undefined };
+}
+
+export const QueryChainLinkOwnersRequest = {
+  encode(
+    message: QueryChainLinkOwnersRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.chainName !== "") {
+      writer.uint32(10).string(message.chainName);
+    }
+    if (message.target !== "") {
+      writer.uint32(18).string(message.target);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryChainLinkOwnersRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryChainLinkOwnersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.chainName = reader.string();
+          break;
+        case 2:
+          message.target = reader.string();
+          break;
+        case 3:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryChainLinkOwnersRequest {
+    return {
+      chainName: isSet(object.chainName) ? String(object.chainName) : "",
+      target: isSet(object.target) ? String(object.target) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryChainLinkOwnersRequest): unknown {
+    const obj: any = {};
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    message.target !== undefined && (obj.target = message.target);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersRequest>, I>>(
+    object: I
+  ): QueryChainLinkOwnersRequest {
+    const message = createBaseQueryChainLinkOwnersRequest();
+    message.chainName = object.chainName ?? "";
+    message.target = object.target ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryChainLinkOwnersResponse(): QueryChainLinkOwnersResponse {
+  return { owners: [], pagination: undefined };
+}
+
+export const QueryChainLinkOwnersResponse = {
+  encode(
+    message: QueryChainLinkOwnersResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.owners) {
+      QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
+        v!,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryChainLinkOwnersResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryChainLinkOwnersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.owners.push(
+            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.decode(
+              reader,
+              reader.uint32()
+            )
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryChainLinkOwnersResponse {
+    return {
+      owners: Array.isArray(object?.owners)
+        ? object.owners.map((e: any) =>
+            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromJSON(e)
+          )
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryChainLinkOwnersResponse): unknown {
+    const obj: any = {};
+    if (message.owners) {
+      obj.owners = message.owners.map((e) =>
+        e
+          ? QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.toJSON(e)
+          : undefined
+      );
+    } else {
+      obj.owners = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersResponse>, I>>(
+    object: I
+  ): QueryChainLinkOwnersResponse {
+    const message = createBaseQueryChainLinkOwnersResponse();
+    message.owners =
+      object.owners?.map((e) =>
+        QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromPartial(e)
+      ) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails(): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+  return { user: "", chainName: "", target: "" };
+}
+
+export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
+  encode(
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.user !== "") {
+      writer.uint32(10).string(message.user);
+    }
+    if (message.chainName !== "") {
+      writer.uint32(18).string(message.chainName);
+    }
+    if (message.target !== "") {
+      writer.uint32(26).string(message.target);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message =
+      createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.user = reader.string();
+          break;
+        case 2:
+          message.chainName = reader.string();
+          break;
+        case 3:
+          message.target = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      chainName: isSet(object.chainName) ? String(object.chainName) : "",
+      target: isSet(object.target) ? String(object.target) : "",
+    };
+  },
+
+  toJSON(message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails): unknown {
+    const obj: any = {};
+    message.user !== undefined && (obj.user = message.user);
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    message.target !== undefined && (obj.target = message.target);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<
+      DeepPartial<QueryChainLinkOwnersResponse_ChainLinkOwnerDetails>,
+      I
+    >
+  >(object: I): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    const message =
+      createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
+    message.user = object.user ?? "";
+    message.chainName = object.chainName ?? "";
+    message.target = object.target ?? "";
     return message;
   },
 };

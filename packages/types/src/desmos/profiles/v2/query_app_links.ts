@@ -58,6 +58,46 @@ export interface QueryApplicationLinkByClientIDResponse {
   link?: ApplicationLink;
 }
 
+/**
+ * QueryApplicationLinkOwnersRequest contains the data of the request that can
+ * be used to get application link owners
+ */
+export interface QueryApplicationLinkOwnersRequest {
+  /**
+   * (Optional) Application name to search link owners of. If not specified, all
+   * links stored will be searched instead.
+   */
+  application: string;
+  /**
+   * (Optional) Username to search for. This will only be used if the
+   * application is specified as well
+   */
+  username: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryApplicationLinkOwnersResponse contains the data returned by the request
+ * allowing to get application link owners.
+ */
+export interface QueryApplicationLinkOwnersResponse {
+  /** Addresses of the application links owners */
+  owners: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponse;
+}
+
+/**
+ * ApplicationLinkOwnerDetails contains the details of a single application
+ * link owner
+ */
+export interface QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+  user: string;
+  application: string;
+  username: string;
+}
+
 function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest {
   return { user: "", application: "", username: "", pagination: undefined };
 }
@@ -355,6 +395,281 @@ export const QueryApplicationLinkByClientIDResponse = {
       object.link !== undefined && object.link !== null
         ? ApplicationLink.fromPartial(object.link)
         : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryApplicationLinkOwnersRequest(): QueryApplicationLinkOwnersRequest {
+  return { application: "", username: "", pagination: undefined };
+}
+
+export const QueryApplicationLinkOwnersRequest = {
+  encode(
+    message: QueryApplicationLinkOwnersRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.application !== "") {
+      writer.uint32(10).string(message.application);
+    }
+    if (message.username !== "") {
+      writer.uint32(18).string(message.username);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryApplicationLinkOwnersRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryApplicationLinkOwnersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.application = reader.string();
+          break;
+        case 2:
+          message.username = reader.string();
+          break;
+        case 3:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryApplicationLinkOwnersRequest {
+    return {
+      application: isSet(object.application) ? String(object.application) : "",
+      username: isSet(object.username) ? String(object.username) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryApplicationLinkOwnersRequest): unknown {
+    const obj: any = {};
+    message.application !== undefined &&
+      (obj.application = message.application);
+    message.username !== undefined && (obj.username = message.username);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryApplicationLinkOwnersRequest>, I>
+  >(object: I): QueryApplicationLinkOwnersRequest {
+    const message = createBaseQueryApplicationLinkOwnersRequest();
+    message.application = object.application ?? "";
+    message.username = object.username ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryApplicationLinkOwnersResponse(): QueryApplicationLinkOwnersResponse {
+  return { owners: [], pagination: undefined };
+}
+
+export const QueryApplicationLinkOwnersResponse = {
+  encode(
+    message: QueryApplicationLinkOwnersResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.owners) {
+      QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
+        v!,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryApplicationLinkOwnersResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryApplicationLinkOwnersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.owners.push(
+            QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.decode(
+              reader,
+              reader.uint32()
+            )
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryApplicationLinkOwnersResponse {
+    return {
+      owners: Array.isArray(object?.owners)
+        ? object.owners.map((e: any) =>
+            QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromJSON(
+              e
+            )
+          )
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryApplicationLinkOwnersResponse): unknown {
+    const obj: any = {};
+    if (message.owners) {
+      obj.owners = message.owners.map((e) =>
+        e
+          ? QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.toJSON(
+              e
+            )
+          : undefined
+      );
+    } else {
+      obj.owners = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryApplicationLinkOwnersResponse>, I>
+  >(object: I): QueryApplicationLinkOwnersResponse {
+    const message = createBaseQueryApplicationLinkOwnersResponse();
+    message.owners =
+      object.owners?.map((e) =>
+        QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromPartial(
+          e
+        )
+      ) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails(): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+  return { user: "", application: "", username: "" };
+}
+
+export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
+  encode(
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.user !== "") {
+      writer.uint32(10).string(message.user);
+    }
+    if (message.application !== "") {
+      writer.uint32(18).string(message.application);
+    }
+    if (message.username !== "") {
+      writer.uint32(26).string(message.username);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message =
+      createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.user = reader.string();
+          break;
+        case 2:
+          message.application = reader.string();
+          break;
+        case 3:
+          message.username = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(
+    object: any
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      application: isSet(object.application) ? String(object.application) : "",
+      username: isSet(object.username) ? String(object.username) : "",
+    };
+  },
+
+  toJSON(
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+  ): unknown {
+    const obj: any = {};
+    message.user !== undefined && (obj.user = message.user);
+    message.application !== undefined &&
+      (obj.application = message.application);
+    message.username !== undefined && (obj.username = message.username);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<
+      DeepPartial<QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails>,
+      I
+    >
+  >(object: I): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    const message =
+      createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
+    message.user = object.user ?? "";
+    message.application = object.application ?? "";
+    message.username = object.username ?? "";
     return message;
   },
 };

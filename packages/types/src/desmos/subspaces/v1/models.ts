@@ -46,7 +46,7 @@ export interface PermissionDetail {
   group?: PermissionDetail_Group | undefined;
 }
 
-/** Success is a permission that has been set to a specific user */
+/** User is a permission that has been set to a specific user */
 export interface PermissionDetail_User {
   /** User for which the permission was set */
   user: string;
@@ -56,7 +56,7 @@ export interface PermissionDetail_User {
 
 /** Group is a permission that has been set to a user group */
 export interface PermissionDetail_Group {
-  /** Error that is associated with the failure */
+  /** Unique id of the group */
   groupId: number;
   /** Permission set to the group */
   permission: number;

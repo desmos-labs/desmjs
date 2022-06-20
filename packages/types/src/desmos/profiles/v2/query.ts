@@ -11,13 +11,17 @@ import {
 } from "../../../desmos/profiles/v2/query_dtag_requests";
 import {
   QueryChainLinksResponse,
+  QueryChainLinkOwnersResponse,
   QueryChainLinksRequest,
+  QueryChainLinkOwnersRequest,
 } from "../../../desmos/profiles/v2/query_chain_links";
 import {
   QueryApplicationLinksResponse,
   QueryApplicationLinkByClientIDResponse,
+  QueryApplicationLinkOwnersResponse,
   QueryApplicationLinksRequest,
   QueryApplicationLinkByClientIDRequest,
+  QueryApplicationLinkOwnersRequest,
 } from "../../../desmos/profiles/v2/query_app_links";
 import {
   QueryParamsResponse,
@@ -45,6 +49,13 @@ export interface Query {
    */
   ChainLinks(request: QueryChainLinksRequest): Promise<QueryChainLinksResponse>;
   /**
+   * ChainLinkOwners queries for the owners of chain links, optionally searching
+   * for a specific chain name and external address
+   */
+  ChainLinkOwners(
+    request: QueryChainLinkOwnersRequest
+  ): Promise<QueryChainLinkOwnersResponse>;
+  /**
    * ApplicationLinks queries the applications links associated to the given
    * user, if provided. Otherwise, it queries all the application links stored.
    */
@@ -58,6 +69,13 @@ export interface Query {
   ApplicationLinkByClientID(
     request: QueryApplicationLinkByClientIDRequest
   ): Promise<QueryApplicationLinkByClientIDResponse>;
+  /**
+   * ApplicationLinkOwners queries for the owners of applications links,
+   * optionally searching for a specific application and username.
+   */
+  ApplicationLinkOwners(
+    request: QueryApplicationLinkOwnersRequest
+  ): Promise<QueryApplicationLinkOwnersResponse>;
   /** Params queries the profiles module params */
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
@@ -70,8 +88,10 @@ export class QueryClientImpl implements Query {
     this.IncomingDTagTransferRequests =
       this.IncomingDTagTransferRequests.bind(this);
     this.ChainLinks = this.ChainLinks.bind(this);
+    this.ChainLinkOwners = this.ChainLinkOwners.bind(this);
     this.ApplicationLinks = this.ApplicationLinks.bind(this);
     this.ApplicationLinkByClientID = this.ApplicationLinkByClientID.bind(this);
+    this.ApplicationLinkOwners = this.ApplicationLinkOwners.bind(this);
     this.Params = this.Params.bind(this);
   }
   Profile(request: QueryProfileRequest): Promise<QueryProfileResponse> {
@@ -115,6 +135,20 @@ export class QueryClientImpl implements Query {
     );
   }
 
+  ChainLinkOwners(
+    request: QueryChainLinkOwnersRequest
+  ): Promise<QueryChainLinkOwnersResponse> {
+    const data = QueryChainLinkOwnersRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.profiles.v2.Query",
+      "ChainLinkOwners",
+      data
+    );
+    return promise.then((data) =>
+      QueryChainLinkOwnersResponse.decode(new _m0.Reader(data))
+    );
+  }
+
   ApplicationLinks(
     request: QueryApplicationLinksRequest
   ): Promise<QueryApplicationLinksResponse> {
@@ -140,6 +174,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryApplicationLinkByClientIDResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  ApplicationLinkOwners(
+    request: QueryApplicationLinkOwnersRequest
+  ): Promise<QueryApplicationLinkOwnersResponse> {
+    const data = QueryApplicationLinkOwnersRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.profiles.v2.Query",
+      "ApplicationLinkOwners",
+      data
+    );
+    return promise.then((data) =>
+      QueryApplicationLinkOwnersResponse.decode(new _m0.Reader(data))
     );
   }
 

@@ -7,10 +7,14 @@ import {
 } from "@cosmjs/stargate";
 import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
 import { QueryIncomingDTagTransferRequestsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_dtag_requests";
-import { QueryChainLinksResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_chain_links";
+import {
+  QueryChainLinkOwnersResponse,
+  QueryChainLinksResponse,
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_chain_links";
 import {
   QueryApplicationLinksResponse,
   QueryApplicationLinkByClientIDResponse,
+  QueryApplicationLinkOwnersResponse,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_app_links";
 import { QueryClientImpl } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v2/models_profile";
@@ -42,6 +46,15 @@ export interface ProfilesExtension {
       pagination?: PageRequest
     ) => Promise<QueryChainLinksResponse>;
     /**
+     * Queries chain link owners for an optional chain name and user.
+     * The specified target will be used only if a chain name is specified as well.
+     */
+    readonly chainLinkOwners: (
+      chainName?: string,
+      target?: string,
+      pagination?: PageRequest
+    ) => Promise<QueryChainLinkOwnersResponse>;
+    /**
      * Queries a single application link for a given user,
      * searching via the application name and username.
      */
@@ -58,6 +71,15 @@ export interface ProfilesExtension {
     readonly applicationLinkByClientID: (
       clientId: string
     ) => Promise<QueryApplicationLinkByClientIDResponse>;
+    /**
+     * Queries the application link owners with an optional application and username.
+     * The username will be used only if the application is specified as well.
+     */
+    readonly applicationLinkOwners: (
+      application?: string,
+      username?: string,
+      pagination?: PageRequest
+    ) => Promise<QueryApplicationLinkOwnersResponse>;
     /**
      * Queries the module parameters.
      */
@@ -99,6 +121,17 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
           pagination,
         });
       },
+      chainLinkOwners: async (
+        chainName?: string,
+        target?: string,
+        pagination?: PageRequest
+      ) => {
+        return queryService.ChainLinkOwners({
+          chainName: chainName || "",
+          target: target || "",
+          pagination,
+        });
+      },
       applicationLinks: async (
         user?: string,
         application?: string,
@@ -115,6 +148,17 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
       applicationLinkByClientID: async (clientId: string) => {
         return queryService.ApplicationLinkByClientID({
           clientId,
+        });
+      },
+      applicationLinkOwners: async (
+        application?: string,
+        username?: string,
+        pagination?: PageRequest
+      ) => {
+        return queryService.ApplicationLinkOwners({
+          application: application || "",
+          username: username || "",
+          pagination,
         });
       },
       params: async () => {

@@ -47,6 +47,8 @@ import {
   setupSubspacesExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
+import { setupFeesExtension } from "./queries/fees";
+import { setupSupplyExtension } from "./queries/supply";
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -197,7 +199,9 @@ export class DesmosClient extends SigningStargateClient {
           setupTxExtension,
           setupProfilesExtension,
           setupRelationshipsExtension,
-          setupSubspacesExtension
+          setupSubspacesExtension,
+          setupFeesExtension,
+          setupSupplyExtension
         )
       : undefined;
   }
