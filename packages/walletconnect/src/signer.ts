@@ -3,7 +3,11 @@ import {
   decodePubkey,
   DirectSignResponse,
 } from "@cosmjs/proto-signing";
-import { IInternalEvent } from "@walletconnect/types";
+import {
+  IInternalEvent,
+  IPushServerOptions,
+  IWalletConnectOptions,
+} from "@walletconnect/types";
 import WalletConnectClient from "@walletconnect/client";
 import { stringifySignDocValues } from "cosmos-wallet";
 import { Buffer } from "buffer";
@@ -13,7 +17,7 @@ import { fromBase64 } from "@cosmjs/encoding";
 import { assert } from "@cosmjs/utils";
 import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
 
-export interface WalletConnectSignerOptions {
+export interface WalletConnectSignerOptions extends IWalletConnectOptions {
   signingMode: SigningMode;
 }
 
@@ -28,12 +32,12 @@ export class WalletConnectSigner extends Signer {
   private accountData: AccountData | undefined;
 
   constructor(
-    walletConnectClient: WalletConnectClient,
-    options: WalletConnectSignerOptions
+    options: WalletConnectSignerOptions,
+    pushServerOptions?: IPushServerOptions
   ) {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
-    this.client = walletConnectClient;
+    this.client = new WalletConnectClient(options, pushServerOptions);
 
     // If the client is already connected, populate the data
     if (this.client.connected) {
