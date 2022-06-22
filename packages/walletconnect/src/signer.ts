@@ -42,13 +42,6 @@ export class WalletConnectSigner extends Signer {
     }
   }
 
-  /**
-   * Callback called when a client terminates a wallet connect session.
-   */
-  private async onDisconnect() {
-    await this.disconnect();
-  }
-
   private populateSessionDependedFields({ accounts }: { accounts: string[] }) {
     this.accountData = {
       address: accounts[0],
@@ -75,7 +68,7 @@ export class WalletConnectSigner extends Signer {
     });
 
     // Subscribe to the session update event
-    this.client.on("session_update", (error, payload) => {
+    this.client.on("session_update", (error: any, payload: IInternalEvent) => {
       if (error) {
         console.error("session_update error", error);
         return;
@@ -85,7 +78,27 @@ export class WalletConnectSigner extends Signer {
     });
 
     // Subscribe to the disconnect event
-    this.client.on("disconnect", this.onDisconnect);
+    this.client.on("disconnect", async (error: any) => {
+      if (error) {
+        console.log("disconnect error", error);
+        return;
+      }
+
+      this.updateStatus(SignerStatus.Disconnecting);
+      this.accountData = undefined;
+      this.unsubscribeEvents();
+      this.updateStatus(SignerStatus.NotConnected);
+    });
+  }
+
+  /**
+   * Unsubscribe all the WalletConnect events.
+   * @private
+   */
+  private unsubscribeEvents() {
+    this.client.off("connect");
+    this.client.off("session_update");
+    this.client.off("disconnect");
   }
 
   /**
@@ -118,12 +131,7 @@ export class WalletConnectSigner extends Signer {
       return;
     }
 
-    this.updateStatus(SignerStatus.Disconnecting);
-    this.client.off("session_update");
-    this.client.off("disconnect");
     await this.client.killSession();
-    this.accountData = undefined;
-    this.updateStatus(SignerStatus.NotConnected);
   }
 
   /**
