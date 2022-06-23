@@ -25,7 +25,7 @@ wget -q  --show-progress $SRC_URL -O "$ZIP_FILE"
 # Create a temp dir where will be extracted the proto files
 mkdir -p "$TMP_DIR"
 # Get the proto from the zip
-unzip "$ZIP_FILE" "**.proto" -d "$TMP_DIR"
+unzip -qq "$ZIP_FILE" "**.proto" -d "$TMP_DIR"
 rm $ZIP_FILE
 
 # Clear the directory where will be extracted the proto files
