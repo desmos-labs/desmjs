@@ -24,7 +24,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "rm -rf ./build && tsc"
+    "build": "rm -rf ./build && yarn tsc"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.28.1",

@@ -3886,6 +3886,7 @@ __metadata:
     prettier: ^2.5.1
     pretty-quick: ^3.1.3
     ts-proto: ^1.92.1
+    tsc: ^2.0.4
     typescript: ^4.5.5
   languageName: unknown
   linkType: soft
@@ -7694,6 +7695,15 @@ __metadata:
   bin:
     protoc-gen-ts: bin/protoc-gen-ts
   checksum: 612799180832786ee28dfb3510015f840ff8acd480ec1159599535878cc77a4f6ad4d6993d1fa546bbb4523de5fb60f4987e1ea810c2e56d91be0448d30f29ad
+  languageName: node
+  linkType: hard
+
+"tsc@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "tsc@npm:2.0.4"
+  bin:
+    tsc: bin/tsc
+  checksum: 50b10240887424c66454687f0fca4e319713b35cb44f0dab228719eb4dd757251f83c3d79e60d29dfbe90c2d6f1272f793b83e75a9fca2c622b4213ad3eb8cb1
   languageName: node
   linkType: hard
 

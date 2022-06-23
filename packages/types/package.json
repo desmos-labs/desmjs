@@ -23,7 +23,9 @@
   },
   "scripts": {
     "generate-proto": "./script/get-proto.sh && ./script/generate-code.sh",
-    "build": "yarn generate-proto && tsc"
+    "generate-code": "yarn generate-proto && yarn tsc",
+    "prepare": "./script/prepare.sh",
+    "build": "yarn generate-code && yarn prepare"
   },
   "dependencies": {
     "long": "^4.0.0",
