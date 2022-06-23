@@ -45,5 +45,12 @@ for dir in $proto_dirs; do
   $PROTOC -I"$PROTO_DIR" $(find "${dir}" -maxdepth 1 -name '*.proto')
 done
 
+# Remove the unused folders
+echo "Removing useless folders..."
+DIRS="confio cosmos_proto gogoproto tendermint"
+for dir in $DIRS; do
+  rm -rf "$SCRIPT_DIR/../src/$dir"
+done
+
 # Remove the proto-files dir
 rm -r "$PROTO_FILES_DIR"
