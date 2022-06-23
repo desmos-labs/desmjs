@@ -93,6 +93,15 @@ export function makeAuthInfoBytes(
 }
 
 /**
+ * Represents an invalid signer address.
+ */
+export class ErrInvalidSignerAddress extends Error {
+  constructor() {
+    super("Signer address is not equals to the signer current account address");
+  }
+}
+
+/**
  * Contains the result of a signature.
  */
 export type SignatureResult = {
@@ -314,12 +323,9 @@ export class DesmosClient extends SigningStargateClient {
     feeGranter?: string
   ): Promise<SignatureResult> {
     // Get the account
-    const accounts = await this.txSigner.getAccounts();
-    const accountFromSigner = accounts.find(
-      (account) => account.address === signerAddress
-    );
-    if (!accountFromSigner) {
-      throw new Error("Failed to retrieve account from signer");
+    const accountFromSigner = await this.txSigner.getCurrentAccount();
+    if (signerAddress !== accountFromSigner?.address) {
+      throw new ErrInvalidSignerAddress();
     }
 
     // Build the SignDoc
@@ -349,9 +355,7 @@ export class DesmosClient extends SigningStargateClient {
     };
 
     // Get everything that is needed to build the AuthInfoBytes
-    const pubkey = encodePubkey(
-      encodeSecp256k1Pubkey(accountFromSigner.pubkey)
-    );
+    const pubkey = encodePubkey(signature.pub_key);
     const signedGasLimit = Int53.fromString(signed.fee.gas).toNumber();
     const signedSequence = Int53.fromString(signed.sequence).toNumber();
     const signedTxBodyBytes = this.registry.encode(signedTxBodyEncodeObject);
@@ -391,12 +395,9 @@ export class DesmosClient extends SigningStargateClient {
     feeGranter?: string
   ): Promise<SignatureResult> {
     // Get the account
-    const accounts = await this.txSigner.getAccounts();
-    const accountFromSigner = accounts.find(
-      (account) => account.address === signerAddress
-    );
-    if (!accountFromSigner) {
-      throw new Error("Failed to retrieve account from signer");
+    const accountFromSigner = await this.txSigner.getCurrentAccount();
+    if (signerAddress !== accountFromSigner?.address) {
+      throw new ErrInvalidSignerAddress();
     }
 
     // Build the tx object to be signed
