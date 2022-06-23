@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-types",
-  "version": "2.0.0-beta.6",
+  "version": "2.0.0-beta.7",
   "description": "JS and TS types relating to Protocol Buffers used by Desmos",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>",
@@ -8,13 +8,7 @@
   ],
   "license": "Apache-2.0",
   "files": [
-    "cosmos/",
-    "cosmos_proto/",
-    "desmjs/",
-    "desmos/",
-    "gogoproto/",
-    "google/",
-    "ibc/",
+    "build/",
     "*.md",
     "!wasmd-0.16/**/*.md",
     "!wasmd-0.18/**/*.md"
@@ -28,11 +22,8 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "get-proto": "./script/get-proto.sh",
-    "generate-proto": "./script/generate-code.sh",
-    "prepare": "./script/prepare.sh",
-    "build-ts": "rm -rf ./build && tsc",
-    "build": "yarn get-proto && yarn generate-proto && yarn build-ts && yarn prepare"
+    "generate-proto": "./script/get-proto.sh && ./script/generate-code.sh",
+    "build": "yarn generate-proto && tsc"
   },
   "dependencies": {
     "long": "^4.0.0",
