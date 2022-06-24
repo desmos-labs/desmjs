@@ -9,8 +9,7 @@ import {
   OfflineAminoSigner,
 } from "@cosmjs/amino";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import { read } from "fs";
-import SignerNotConnected from "./errors";
+import { SignerNotConnected } from "./errors";
 
 /**
  * Represents the various signing modes that can be supported by signers.

@@ -94,7 +94,7 @@ export interface AminoMsgLinkChainAccount extends AminoMsg {
         type: string;
         value: string;
       };
-      signature: string;
+      signature: any;
       plain_text: string;
     };
   };
@@ -106,42 +106,5 @@ export interface AminoMsgUnlinkChainAccount extends AminoMsg {
     chain_name: string;
     owner: string;
     target: string;
-  };
-}
-
-export interface AminoMsgCreateRelationship extends AminoMsg {
-  readonly type: "desmos/MsgCreateRelationship";
-  readonly value: {
-    sender: string;
-    receiver: string;
-    subspace: string;
-  };
-}
-
-export interface AminoMsgDeleteRelationship extends AminoMsg {
-  readonly type: "desmos/MsgDeleteRelationship";
-  readonly value: {
-    subspace: string;
-    user: string;
-    counterparty: string;
-  };
-}
-
-export interface AminoMsgBlockUser extends AminoMsg {
-  readonly type: "desmos/MsgBlockUser";
-  readonly value: {
-    blocked: string;
-    blocker: string;
-    subspace: string;
-    reason: string;
-  };
-}
-
-export interface AminoMsgUnblockUser extends AminoMsg {
-  readonly type: "desmos/MsgUnblockUser";
-  readonly value: {
-    subspace: string;
-    blocked: string;
-    blocker: string;
   };
 }

@@ -16,7 +16,7 @@ ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
 
 # Url from where will be downloaded the desmos proto files
-DESMOS_VERSION="2.3.1"
+DESMOS_VERSION="3.2.0"
 SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"
 
 
@@ -37,6 +37,9 @@ mkdir $PROTO_DIR
 # Mv the proto file into the proto dir
 mv "$TMP_DIR/desmos-$DESMOS_VERSION/proto" $PROTO_DIR
 mv "$TMP_DIR/desmos-$DESMOS_VERSION/third_party" $PROTO_DIR
+
+# Remove all the v1beta1 proto folders
+rm -r "$PROTO_DIR/proto/desmos/profiles/v1beta1"
 
 # Clean up tmp dir
 rm -Rf $TMP_DIR

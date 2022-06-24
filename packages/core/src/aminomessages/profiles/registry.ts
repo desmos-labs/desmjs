@@ -1,53 +1,43 @@
+import { GeneratedType } from "@cosmjs/proto-signing";
 import {
   MsgLinkApplication,
   MsgUnlinkApplication,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_app_links";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_app_links";
 import {
   MsgLinkChainAccount,
   MsgUnlinkChainAccount,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_chain_links";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_chain_links";
 import {
   MsgAcceptDTagTransferRequest,
   MsgCancelDTagTransferRequest,
   MsgRefuseDTagTransferRequest,
   MsgRequestDTagTransfer,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_dtag_requests";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_dtag_requests";
 import {
   MsgDeleteProfile,
   MsgSaveProfile,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_profile";
-import {
-  MsgBlockUser,
-  MsgCreateRelationship,
-  MsgDeleteRelationship,
-  MsgUnblockUser,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v1beta1/msgs_relationships";
-import { GeneratedType } from "@cosmjs/proto-signing";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_profile";
 
 export const profilesRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
-  ["/desmos.profiles.v1beta1.MsgLinkApplication", MsgLinkApplication],
-  ["/desmos.profiles.v1beta1.MsgUnlinkApplication", MsgUnlinkApplication],
-  ["/desmos.profiles.v1beta1.MsgLinkChainAccount", MsgLinkChainAccount],
-  ["/desmos.profiles.v1beta1.MsgUnlinkChainAccount", MsgUnlinkChainAccount],
-  ["/desmos.profiles.v1beta1.MsgRequestDTagTransfer", MsgRequestDTagTransfer],
+  ["/desmos.profiles.v2.MsgLinkApplication", MsgLinkApplication],
+  ["/desmos.profiles.v2.MsgUnlinkApplication", MsgUnlinkApplication],
+  ["/desmos.profiles.v2.MsgLinkChainAccount", MsgLinkChainAccount],
+  ["/desmos.profiles.v2.MsgUnlinkChainAccount", MsgUnlinkChainAccount],
+  ["/desmos.profiles.v2.MsgRequestDTagTransfer", MsgRequestDTagTransfer],
   [
-    "/desmos.profiles.v1beta1.MsgCancelDTagTransferRequest",
+    "/desmos.profiles.v2.MsgCancelDTagTransferRequest",
     MsgCancelDTagTransferRequest,
   ],
   [
-    "/desmos.profiles.v1beta1.MsgAcceptDTagTransferRequest",
+    "/desmos.profiles.v2.MsgAcceptDTagTransferRequest",
     MsgAcceptDTagTransferRequest,
   ],
   [
-    "/desmos.profiles.v1beta1.MsgRefuseDTagTransferRequest",
+    "/desmos.profiles.v2.MsgRefuseDTagTransferRequest",
     MsgRefuseDTagTransferRequest,
   ],
-  ["/desmos.profiles.v1beta1.MsgSaveProfile", MsgSaveProfile],
-  ["/desmos.profiles.v1beta1.MsgDeleteProfile", MsgDeleteProfile],
-  ["/desmos.profiles.v1beta1.MsgCreateRelationship", MsgCreateRelationship],
-  ["/desmos.profiles.v1beta1.MsgDeleteRelationship", MsgDeleteRelationship],
-  ["/desmos.profiles.v1beta1.MsgBlockUser", MsgBlockUser],
-  ["/desmos.profiles.v1beta1.MsgUnblockUser", MsgUnblockUser],
+  ["/desmos.profiles.v2.MsgSaveProfile", MsgSaveProfile],
+  ["/desmos.profiles.v2.MsgDeleteProfile", MsgDeleteProfile],
 ];
 
 export default profilesRegistryTypes;

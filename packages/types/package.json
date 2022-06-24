@@ -8,7 +8,13 @@
   ],
   "license": "Apache-2.0",
   "files": [
-    "build/",
+    "cosmos/",
+    "cosmos_proto/",
+    "desmjs/",
+    "desmos/",
+    "gogoproto/",
+    "google/",
+    "ibc/",
     "*.md",
     "!wasmd-0.16/**/*.md",
     "!wasmd-0.18/**/*.md"
@@ -23,7 +29,9 @@
   },
   "scripts": {
     "generate-proto": "./script/get-proto.sh && ./script/generate-code.sh",
-    "build": "yarn generate-proto && tsc"
+    "generate-code": "yarn generate-proto && yarn tsc",
+    "prepare": "./script/prepare.sh",
+    "build": "yarn generate-code && yarn prepare"
   },
   "dependencies": {
     "long": "^4.0.0",

@@ -13,9 +13,16 @@ import { createVestingAminoConverters } from "@cosmjs/stargate/build/modules";
 import { cosmosRegistryTypes, createCosmosConverters } from "./cosmos";
 import { createProfilesConverters, profilesRegistryTypes } from "./profiles";
 import { createDesmJSConverters, desmjsRegistryTypes } from "./desmjs";
+import {
+  createRelationshipsConverters,
+  relationshipsRegistryTypes,
+} from "./relationships";
+import { createSubspacesConverters, subspacesRegistryTypes } from "./subspaces";
 
 export * from "./cosmos/messages";
 export * from "./profiles/messages";
+export * from "./relationships/messages";
+export * from "./subspaces/messages";
 
 export function createDesmosTypes(prefix: string): AminoConverters {
   return {
@@ -33,6 +40,8 @@ export function createDesmosTypes(prefix: string): AminoConverters {
     ...createCosmosConverters(),
     ...createDesmJSConverters(),
     ...createProfilesConverters(),
+    ...createRelationshipsConverters(),
+    ...createSubspacesConverters(),
   };
 }
 
@@ -42,4 +51,6 @@ export const desmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ...cosmosRegistryTypes,
   ...desmjsRegistryTypes,
   ...profilesRegistryTypes,
+  ...relationshipsRegistryTypes,
+  ...subspacesRegistryTypes,
 ];

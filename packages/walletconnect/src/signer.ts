@@ -28,12 +28,12 @@ export class WalletConnectSigner extends Signer {
   private accountData: AccountData | undefined;
 
   constructor(
-    walletConnectClient: WalletConnectClient,
+    client: WalletConnectClient,
     options: WalletConnectSignerOptions
   ) {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
-    this.client = walletConnectClient;
+    this.client = client;
 
     // If the client is already connected, populate the data
     if (this.client.connected) {
@@ -184,7 +184,7 @@ export class WalletConnectSigner extends Signer {
       signDoc: stringifySignDocValues(signDoc),
     };
 
-    const result = await this.client!.sendCustomRequest({
+    const result = await this.client.sendCustomRequest({
       jsonrpc: "2.0",
       method: "cosmos_signDirect",
       params: [params],
@@ -231,7 +231,7 @@ export class WalletConnectSigner extends Signer {
       signDoc,
     };
 
-    const result = await this.client!.sendCustomRequest({
+    const result = await this.client.sendCustomRequest({
       jsonrpc: "2.0",
       method: "cosmos_signAmino",
       params: [params],
