@@ -7,7 +7,7 @@ by signing transactions through a [WalletConnect](https://walletconnect.com) cli
 
 ## Compatibility table
 
-| DesmJS version |   Desmos version    | 
-|:--------------:|:-------------------:|
-|    `2.0.0`     |      `v2.3.x `      |
-|    `3.0.0`     | `v3.0.x `, `v3.1.x` |
+| DesmJS version |        Desmos version         | 
+|:--------------:|:-----------------------------:|
+|    `2.0.x`     |           `v2.3.x `           |
+|    `3.0.x`     | `v3.0.x `, `v3.1.x`, `v3.2.x` |

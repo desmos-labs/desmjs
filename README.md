@@ -14,7 +14,7 @@ DesmJS consists of multiple smaller npm packages each one with a specific functi
 
 ## Compatibility table
 
-| DesmJS version |   Desmos version    | 
-|:--------------:|:-------------------:|
-|    `2.0.0`     |      `v2.3.x `      |
-|    `3.0.0`     | `v3.0.x `, `v3.1.x` |
+| DesmJS version |        Desmos version         | 
+|:--------------:|:-----------------------------:|
+|    `2.0.x`     |           `v2.3.x `           |
+|    `3.0.x`     | `v3.0.x `, `v3.1.x`, `v3.2.x` |
