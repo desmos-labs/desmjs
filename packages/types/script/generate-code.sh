@@ -45,6 +45,13 @@ for dir in $proto_dirs; do
   $PROTOC -I"$PROTO_DIR" $(find "${dir}" -maxdepth 1 -name '*.proto')
 done
 
+# Remove old models files
+echo "Removing old models folders..."
+DIRS="subspaces/v1"
+for dir in $DIRS; do
+  rm -rf "$SCRIPT_DIR/../src/desmos/$dir"
+done
+
 # Remove the unused folders
 echo "Removing useless folders..."
 DIRS="confio cosmos_proto gogoproto tendermint"
