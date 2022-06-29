@@ -16,7 +16,7 @@ Represents an abstract signer able to sign a transaction either using `SIGN_MODE
 
 ## Compatibility table
 
-| DesmJS version | Desmos version | 
-|:--------------:|:--------------:|
-|    `2.0.0`     |    `2.3.1 `    |
-|    `3.0.0`     |    `3.0.0 `    |
+| DesmJS version |   Desmos version    | 
+|:--------------:|:-------------------:|
+|    `2.0.0`     |      `v2.3.x `      |
+|    `3.0.0`     | `v3.0.x `, `v3.1.x` |

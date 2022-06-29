@@ -21,6 +21,7 @@ import {
 } from "@cosmjs/proto-signing";
 import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
 import {
+  AccountData,
   encodeSecp256k1Pubkey,
   makeSignDoc as makeSignDocAmino,
   StdSignDoc,
@@ -90,6 +91,15 @@ export function makeAuthInfoBytes(
       },
     })
   ).finish();
+}
+
+/**
+ * Represents an invalid signer address.
+ */
+export class ErrInvalidSignerAddress extends Error {
+  constructor() {
+    super("Signer address is not equals to the signer current account address");
+  }
 }
 
 /**
@@ -263,6 +273,22 @@ export class DesmosClient extends SigningStargateClient {
   }
 
   /**
+   * Returns the account having the given address reading them from the signer.
+   * @param address {String}: Address of the account to be searched for.
+   * @private
+   */
+  private async getAccountFromSigner(address: string): Promise<AccountData> {
+    const accounts = await this.txSigner.getAccounts();
+    const accountFromSigner = accounts.find(
+      (account) => account.address === address
+    );
+    if (!accountFromSigner) {
+      throw new Error("Failed to retrieve account from signer");
+    }
+    return accountFromSigner;
+  }
+
+  /**
    * Signs a transaction using the provided data.
    * Note that an error will be thrown if the signer is not set (i.e. the client has been built
    * without using the `withSigner` builder).
@@ -313,14 +339,8 @@ export class DesmosClient extends SigningStargateClient {
     { accountNumber, sequence, chainId }: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
-    // Get the account
-    const accounts = await this.txSigner.getAccounts();
-    const accountFromSigner = accounts.find(
-      (account) => account.address === signerAddress
-    );
-    if (!accountFromSigner) {
-      throw new Error("Failed to retrieve account from signer");
-    }
+    // Get the signer account
+    const signerAccount = await this.getAccountFromSigner(signerAddress);
 
     // Build the SignDoc
     const msgs = messages.map((msg) => this.types.toAmino(msg));
@@ -349,9 +369,7 @@ export class DesmosClient extends SigningStargateClient {
     };
 
     // Get everything that is needed to build the AuthInfoBytes
-    const pubkey = encodePubkey(
-      encodeSecp256k1Pubkey(accountFromSigner.pubkey)
-    );
+    const pubkey = encodePubkey(encodeSecp256k1Pubkey(signerAccount.pubkey));
     const signedGasLimit = Int53.fromString(signed.fee.gas).toNumber();
     const signedSequence = Int53.fromString(signed.sequence).toNumber();
     const signedTxBodyBytes = this.registry.encode(signedTxBodyEncodeObject);
@@ -390,14 +408,8 @@ export class DesmosClient extends SigningStargateClient {
     { accountNumber, sequence, chainId }: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
-    // Get the account
-    const accounts = await this.txSigner.getAccounts();
-    const accountFromSigner = accounts.find(
-      (account) => account.address === signerAddress
-    );
-    if (!accountFromSigner) {
-      throw new Error("Failed to retrieve account from signer");
-    }
+    // Get the signer account
+    const signerAccount = await this.getAccountFromSigner(signerAddress);
 
     // Build the tx object to be signed
     const txBodyEncodeObject: TxBodyEncodeObject = {
@@ -413,9 +425,7 @@ export class DesmosClient extends SigningStargateClient {
     const gasLimit = Int53.fromString(fee.gas).toNumber();
 
     // Get everything that is needed to build the AuthInfoBytes
-    const pubkey = encodePubkey(
-      encodeSecp256k1Pubkey(accountFromSigner.pubkey)
-    );
+    const pubkey = encodePubkey(encodeSecp256k1Pubkey(signerAccount.pubkey));
 
     // Build the AuthInfoBytes
     const authInfoBytes = makeAuthInfoBytes(
