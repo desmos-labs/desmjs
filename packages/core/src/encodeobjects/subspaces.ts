@@ -10,8 +10,6 @@ import {
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
-} from "@desmoslabs/desmjs-types/desmos/subspaces/v1/msgs";
-import {
   MsgCreateSection,
   MsgDeleteSection,
   MsgEditSection,

@@ -7,7 +7,7 @@ import {
   QueryUserGroupsResponse,
   QueryClientImpl,
   QueryUserPermissionsResponse,
-} from "@desmoslabs/desmjs-types/desmos/subspaces/v1/query";
+} from "@desmoslabs/desmjs-types/desmos/subspaces/v2/query";
 import Long from "long";
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 
@@ -30,6 +30,7 @@ export interface SubspacesExtension {
      */
     readonly userGroups: (
       subspaceId: Long,
+      sectionId: number,
       pagination?: PageRequest
     ) => Promise<QueryUserGroupsResponse>;
 
@@ -55,6 +56,7 @@ export interface SubspacesExtension {
      */
     readonly userPermissions: (
       subspaceId: Long,
+      sectionId: number,
       user: string
     ) => Promise<QueryUserPermissionsResponse>;
   };
@@ -78,9 +80,14 @@ export function setupSubspacesExtension(base: QueryClient): SubspacesExtension {
           subspaceId: id,
         });
       },
-      userGroups: async (subspaceId: Long, pagination?: PageRequest) => {
+      userGroups: async (
+        subspaceId: Long,
+        sectionId: number,
+        pagination?: PageRequest
+      ) => {
         return queryService.UserGroups({
           subspaceId,
+          sectionId,
           pagination,
         });
       },
@@ -101,9 +108,14 @@ export function setupSubspacesExtension(base: QueryClient): SubspacesExtension {
           pagination,
         });
       },
-      userPermissions: async (subspaceId: Long, user: string) => {
+      userPermissions: async (
+        subspaceId: Long,
+        sectionId: number,
+        user: string
+      ) => {
         return queryService.UserPermissions({
           subspaceId,
+          sectionId,
           user,
         });
       },
