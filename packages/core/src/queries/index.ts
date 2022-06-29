@@ -13,6 +13,7 @@ import { FeesExtension } from "./fees";
 import { SupplyExtension } from "./supply";
 import { PostsExtension } from "./posts";
 import { ReactionsExtension } from "./reactions";
+import { ReportsExtension } from "./reports";
 
 export * from "./authz";
 export * from "./fees";
@@ -20,6 +21,7 @@ export * from "./posts";
 export * from "./profiles";
 export * from "./reactions";
 export * from "./relationships";
+export * from "./reports";
 export * from "./subspaces";
 export * from "./supply";
 
@@ -34,5 +36,6 @@ export type DesmosQueryClient = QueryClient &
   SubspacesExtension &
   PostsExtension &
   ReactionsExtension &
+  ReportsExtension &
   FeesExtension &
   SupplyExtension;

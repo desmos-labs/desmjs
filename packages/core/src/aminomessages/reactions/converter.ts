@@ -30,7 +30,7 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 
-export const reactionConverters: AminoConverters = {
+export const reactionValueConverters: AminoConverters = {
   "/desmos.reactions.v1.RegisteredReactionValue": {
     aminoType: "desmos/RegisteredReactionValue",
     toAmino: (msg: Any): AminoRegisteredReaction["value"] => {
@@ -72,7 +72,7 @@ export const reactionConverters: AminoConverters = {
 };
 
 export function convertReactionValueToAmino(value: Any): AminoReaction {
-  const converter = reactionConverters[value.typeUrl] as AminoConverter;
+  const converter = reactionValueConverters[value.typeUrl] as AminoConverter;
   return {
     type: converter.aminoType,
     value: converter.toAmino(value),
@@ -80,7 +80,7 @@ export function convertReactionValueToAmino(value: Any): AminoReaction {
 }
 
 export function convertReactionFromAmino(value: AminoReaction): Any {
-  const matches = Object.entries(reactionConverters)
+  const matches = Object.entries(reactionValueConverters)
     .filter(isAminoConverter)
     .filter(([, { aminoType }]) => aminoType === value.type);
   const [, converter] = matches[0];
@@ -107,12 +107,15 @@ export function convertFreeTextValueParamsFromAmino(
   };
 }
 
+/**
+ * Creates all the Amino converters for the reactions messages.
+ */
 export function createReactionsConverters(): AminoConverters {
   return {
     "/desmos.reactions.v1.MsgAddReaction": {
       aminoType: "desmos/MsgAddReaction",
       toAmino: (msg: MsgAddReaction): AminoMsgAddReaction["value"] => {
-        assertDefinedAndNotNull(msg.value, "missing reaction value");
+        assertDefinedAndNotNull(msg.value, "reaction value not defined");
         return {
           subspace_id: msg.subspaceId,
           post_id: msg.postId,

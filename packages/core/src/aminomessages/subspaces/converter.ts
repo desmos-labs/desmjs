@@ -34,6 +34,9 @@ import {
   AminoMsgMoveUserGroup,
 } from "./messages";
 
+/**
+ * Creates all the Amino converters for the subspaces messages.
+ */
 export function createSubspacesConverters(): AminoConverters {
   return {
     "/desmos.subspaces.v2.MsgCreateRelationships": {

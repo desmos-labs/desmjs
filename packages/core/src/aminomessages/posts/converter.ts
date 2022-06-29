@@ -125,7 +125,7 @@ export function convertEntitiesFromAmino(entities: AminoEntities): Entities {
 }
 
 /**
- * Creates the posts Amino converters.
+ * Creates all the Amino converters for the posts messages.
  */
 export function createPostsConverters(): AminoConverters {
   return {
@@ -223,7 +223,7 @@ export function createPostsConverters(): AminoConverters {
       toAmino: (
         msg: MsgAddPostAttachment
       ): AminoMsgAddPostAttachment["value"] => {
-        assertDefinedAndNotNull(msg.content, "missing attachment content");
+        assertDefinedAndNotNull(msg.content, "attachment content not defined");
         return {
           subspace_id: msg.subspaceId,
           post_id: msg.postId,

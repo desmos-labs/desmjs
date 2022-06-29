@@ -50,6 +50,7 @@ import {
   setupSupplyExtension,
   setupFeesExtension,
   setupReactionsExtension,
+  setupReportsExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
 
@@ -214,6 +215,7 @@ export class DesmosClient extends SigningStargateClient {
           setupSubspacesExtension,
           setupPostsExtension,
           setupReactionsExtension,
+          setupReportsExtension,
           setupFeesExtension,
           setupSupplyExtension
         )
