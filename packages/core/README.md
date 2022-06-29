@@ -13,3 +13,10 @@ In order to work sign transactions, it relies on a `Signer`.
 
 ### `Signer` 
 Represents an abstract signer able to sign a transaction either using `SIGN_MODE_DIRECT` or `SIGN_MODE_AMINO_JSON`.
+
+## Compatibility table
+
+| DesmJS version |   Desmos version    | 
+|:--------------:|:-------------------:|
+|    `2.0.0`     |      `v2.3.x `      |
+|    `3.0.0`     | `v3.0.x `, `v3.1.x` |
