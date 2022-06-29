@@ -1,3 +1,9 @@
+# Version 3.0.0
+
+## Features
+
+- Updated Desmos to `v3.1.0`
+
 # Version 2.0.0
 
 ## Features
