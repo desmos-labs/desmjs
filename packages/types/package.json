@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-types",
-  "version": "3.0.0-alpha.8",
+  "version": "3.0.0-alpha.9",
   "description": "JS and TS types relating to Protocol Buffers used by Desmos",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>",
@@ -8,7 +8,11 @@
   ],
   "license": "Apache-2.0",
   "files": [
-    "build/",
+    "cosmos/",
+    "desmjs/",
+    "desmos/",
+    "google/",
+    "ibc/",
     "*.md",
     "!wasmd-0.16/**/*.md",
     "!wasmd-0.18/**/*.md"
