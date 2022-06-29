@@ -7,9 +7,9 @@ import {
 } from "../../../cosmos/base/query/v1beta1/pagination";
 import {
   Subspace,
+  Section,
   UserGroup,
-  PermissionDetail,
-} from "../../../desmos/subspaces/v1/models";
+} from "../../../desmos/subspaces/v2/models";
 
 /** QuerySubspacesRequest is the request type for the Query/Subspaces RPC method */
 export interface QuerySubspacesRequest {
@@ -36,12 +36,42 @@ export interface QuerySubspaceResponse {
   subspace?: Subspace;
 }
 
+/** QuerySectionsRequest is the request type for Query/Sections RPC method */
+export interface QuerySectionsRequest {
+  /** Id of the subspace to query the sections for */
+  subspaceId: Long;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/** QuerySectionsResponse is the response type for Query/Sections RPC method */
+export interface QuerySectionsResponse {
+  sections: Section[];
+  pagination?: PageResponse;
+}
+
+/** QuerySectionRequest is the request type for Query/Section RPC method */
+export interface QuerySectionRequest {
+  /** Id of the subspace inside which to search for */
+  subspaceId: Long;
+  /** Id of the searched section */
+  sectionId: number;
+}
+
+/** QuerySectionResponse is the response type for Query/Section RPC method */
+export interface QuerySectionResponse {
+  section?: Section;
+}
+
 /**
  * QueryUserGroupsRequest is the request type for the Query/UserGroups RPC
  * method
  */
 export interface QueryUserGroupsRequest {
+  /** Id of the subspace to query the groups for */
   subspaceId: Long;
+  /** (optional) Section id to query the groups for */
+  sectionId: number;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
@@ -95,6 +125,7 @@ export interface QueryUserGroupMembersResponse {
  */
 export interface QueryUserPermissionsRequest {
   subspaceId: Long;
+  sectionId: number;
   user: string;
 }
 
@@ -103,8 +134,36 @@ export interface QueryUserPermissionsRequest {
  * Query/UserPermissions method
  */
 export interface QueryUserPermissionsResponse {
-  permissions: number;
+  permissions: string[];
   details: PermissionDetail[];
+}
+
+/** PermissionDetail contains the details data of a permission */
+export interface PermissionDetail {
+  /** Id of the subspace for which this permission is valid */
+  subspaceId: Long;
+  /** Id of the section for which this permission is valid */
+  sectionId: number;
+  /** User represents a user permission */
+  user?: PermissionDetail_User | undefined;
+  /** Group represents a group permission */
+  group?: PermissionDetail_Group | undefined;
+}
+
+/** User is a permission that has been set to a specific user */
+export interface PermissionDetail_User {
+  /** User for which the permission was set */
+  user: string;
+  /** Permissions set to the user */
+  permission: string[];
+}
+
+/** Group is a permission that has been set to a user group */
+export interface PermissionDetail_Group {
+  /** Unique id of the group */
+  groupId: number;
+  /** Permissions set to the group */
+  permission: string[];
 }
 
 function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
@@ -386,8 +445,309 @@ export const QuerySubspaceResponse = {
   },
 };
 
-function createBaseQueryUserGroupsRequest(): QueryUserGroupsRequest {
+function createBaseQuerySectionsRequest(): QuerySectionsRequest {
   return { subspaceId: Long.UZERO, pagination: undefined };
+}
+
+export const QuerySectionsRequest = {
+  encode(
+    message: QuerySectionsRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QuerySectionsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuerySectionsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QuerySectionsRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QuerySectionsRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuerySectionsRequest>, I>>(
+    object: I
+  ): QuerySectionsRequest {
+    const message = createBaseQuerySectionsRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQuerySectionsResponse(): QuerySectionsResponse {
+  return { sections: [], pagination: undefined };
+}
+
+export const QuerySectionsResponse = {
+  encode(
+    message: QuerySectionsResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.sections) {
+      Section.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QuerySectionsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuerySectionsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.sections.push(Section.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QuerySectionsResponse {
+    return {
+      sections: Array.isArray(object?.sections)
+        ? object.sections.map((e: any) => Section.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QuerySectionsResponse): unknown {
+    const obj: any = {};
+    if (message.sections) {
+      obj.sections = message.sections.map((e) =>
+        e ? Section.toJSON(e) : undefined
+      );
+    } else {
+      obj.sections = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuerySectionsResponse>, I>>(
+    object: I
+  ): QuerySectionsResponse {
+    const message = createBaseQuerySectionsResponse();
+    message.sections =
+      object.sections?.map((e) => Section.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQuerySectionRequest(): QuerySectionRequest {
+  return { subspaceId: Long.UZERO, sectionId: 0 };
+}
+
+export const QuerySectionRequest = {
+  encode(
+    message: QuerySectionRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySectionRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuerySectionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.sectionId = reader.uint32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QuerySectionRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
+    };
+  },
+
+  toJSON(message: QuerySectionRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuerySectionRequest>, I>>(
+    object: I
+  ): QuerySectionRequest {
+    const message = createBaseQuerySectionRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
+    return message;
+  },
+};
+
+function createBaseQuerySectionResponse(): QuerySectionResponse {
+  return { section: undefined };
+}
+
+export const QuerySectionResponse = {
+  encode(
+    message: QuerySectionResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.section !== undefined) {
+      Section.encode(message.section, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QuerySectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuerySectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.section = Section.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QuerySectionResponse {
+    return {
+      section: isSet(object.section)
+        ? Section.fromJSON(object.section)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QuerySectionResponse): unknown {
+    const obj: any = {};
+    message.section !== undefined &&
+      (obj.section = message.section
+        ? Section.toJSON(message.section)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuerySectionResponse>, I>>(
+    object: I
+  ): QuerySectionResponse {
+    const message = createBaseQuerySectionResponse();
+    message.section =
+      object.section !== undefined && object.section !== null
+        ? Section.fromPartial(object.section)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryUserGroupsRequest(): QueryUserGroupsRequest {
+  return { subspaceId: Long.UZERO, sectionId: 0, pagination: undefined };
 }
 
 export const QueryUserGroupsRequest = {
@@ -398,8 +758,11 @@ export const QueryUserGroupsRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
     if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -418,6 +781,9 @@ export const QueryUserGroupsRequest = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
+          message.sectionId = reader.uint32();
+          break;
+        case 3:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
         default:
@@ -433,6 +799,7 @@ export const QueryUserGroupsRequest = {
       subspaceId: isSet(object.subspaceId)
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
@@ -443,6 +810,8 @@ export const QueryUserGroupsRequest = {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageRequest.toJSON(message.pagination)
@@ -458,6 +827,7 @@ export const QueryUserGroupsRequest = {
       object.subspaceId !== undefined && object.subspaceId !== null
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
         ? PageRequest.fromPartial(object.pagination)
@@ -859,7 +1229,7 @@ export const QueryUserGroupMembersResponse = {
 };
 
 function createBaseQueryUserPermissionsRequest(): QueryUserPermissionsRequest {
-  return { subspaceId: Long.UZERO, user: "" };
+  return { subspaceId: Long.UZERO, sectionId: 0, user: "" };
 }
 
 export const QueryUserPermissionsRequest = {
@@ -870,8 +1240,11 @@ export const QueryUserPermissionsRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
     if (message.user !== "") {
-      writer.uint32(18).string(message.user);
+      writer.uint32(26).string(message.user);
     }
     return writer;
   },
@@ -890,6 +1263,9 @@ export const QueryUserPermissionsRequest = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
+          message.sectionId = reader.uint32();
+          break;
+        case 3:
           message.user = reader.string();
           break;
         default:
@@ -905,6 +1281,7 @@ export const QueryUserPermissionsRequest = {
       subspaceId: isSet(object.subspaceId)
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
@@ -913,6 +1290,8 @@ export const QueryUserPermissionsRequest = {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
@@ -925,13 +1304,14 @@ export const QueryUserPermissionsRequest = {
       object.subspaceId !== undefined && object.subspaceId !== null
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
     message.user = object.user ?? "";
     return message;
   },
 };
 
 function createBaseQueryUserPermissionsResponse(): QueryUserPermissionsResponse {
-  return { permissions: 0, details: [] };
+  return { permissions: [], details: [] };
 }
 
 export const QueryUserPermissionsResponse = {
@@ -939,8 +1319,8 @@ export const QueryUserPermissionsResponse = {
     message: QueryUserPermissionsResponse,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.permissions !== 0) {
-      writer.uint32(8).uint32(message.permissions);
+    for (const v of message.permissions) {
+      writer.uint32(10).string(v!);
     }
     for (const v of message.details) {
       PermissionDetail.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -959,7 +1339,7 @@ export const QueryUserPermissionsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.permissions = reader.uint32();
+          message.permissions.push(reader.string());
           break;
         case 2:
           message.details.push(
@@ -976,7 +1356,9 @@ export const QueryUserPermissionsResponse = {
 
   fromJSON(object: any): QueryUserPermissionsResponse {
     return {
-      permissions: isSet(object.permissions) ? Number(object.permissions) : 0,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => String(e))
+        : [],
       details: Array.isArray(object?.details)
         ? object.details.map((e: any) => PermissionDetail.fromJSON(e))
         : [],
@@ -985,8 +1367,11 @@ export const QueryUserPermissionsResponse = {
 
   toJSON(message: QueryUserPermissionsResponse): unknown {
     const obj: any = {};
-    message.permissions !== undefined &&
-      (obj.permissions = Math.round(message.permissions));
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
     if (message.details) {
       obj.details = message.details.map((e) =>
         e ? PermissionDetail.toJSON(e) : undefined
@@ -1001,9 +1386,272 @@ export const QueryUserPermissionsResponse = {
     object: I
   ): QueryUserPermissionsResponse {
     const message = createBaseQueryUserPermissionsResponse();
-    message.permissions = object.permissions ?? 0;
+    message.permissions = object.permissions?.map((e) => e) || [];
     message.details =
       object.details?.map((e) => PermissionDetail.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBasePermissionDetail(): PermissionDetail {
+  return {
+    subspaceId: Long.UZERO,
+    sectionId: 0,
+    user: undefined,
+    group: undefined,
+  };
+}
+
+export const PermissionDetail = {
+  encode(
+    message: PermissionDetail,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
+    if (message.user !== undefined) {
+      PermissionDetail_User.encode(
+        message.user,
+        writer.uint32(26).fork()
+      ).ldelim();
+    }
+    if (message.group !== undefined) {
+      PermissionDetail_Group.encode(
+        message.group,
+        writer.uint32(34).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PermissionDetail {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePermissionDetail();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.sectionId = reader.uint32();
+          break;
+        case 3:
+          message.user = PermissionDetail_User.decode(reader, reader.uint32());
+          break;
+        case 4:
+          message.group = PermissionDetail_Group.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PermissionDetail {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
+      user: isSet(object.user)
+        ? PermissionDetail_User.fromJSON(object.user)
+        : undefined,
+      group: isSet(object.group)
+        ? PermissionDetail_Group.fromJSON(object.group)
+        : undefined,
+    };
+  },
+
+  toJSON(message: PermissionDetail): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
+    message.user !== undefined &&
+      (obj.user = message.user
+        ? PermissionDetail_User.toJSON(message.user)
+        : undefined);
+    message.group !== undefined &&
+      (obj.group = message.group
+        ? PermissionDetail_Group.toJSON(message.group)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PermissionDetail>, I>>(
+    object: I
+  ): PermissionDetail {
+    const message = createBasePermissionDetail();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
+    message.user =
+      object.user !== undefined && object.user !== null
+        ? PermissionDetail_User.fromPartial(object.user)
+        : undefined;
+    message.group =
+      object.group !== undefined && object.group !== null
+        ? PermissionDetail_Group.fromPartial(object.group)
+        : undefined;
+    return message;
+  },
+};
+
+function createBasePermissionDetail_User(): PermissionDetail_User {
+  return { user: "", permission: [] };
+}
+
+export const PermissionDetail_User = {
+  encode(
+    message: PermissionDetail_User,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.user !== "") {
+      writer.uint32(10).string(message.user);
+    }
+    for (const v of message.permission) {
+      writer.uint32(18).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): PermissionDetail_User {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePermissionDetail_User();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.user = reader.string();
+          break;
+        case 2:
+          message.permission.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PermissionDetail_User {
+    return {
+      user: isSet(object.user) ? String(object.user) : "",
+      permission: Array.isArray(object?.permission)
+        ? object.permission.map((e: any) => String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: PermissionDetail_User): unknown {
+    const obj: any = {};
+    message.user !== undefined && (obj.user = message.user);
+    if (message.permission) {
+      obj.permission = message.permission.map((e) => e);
+    } else {
+      obj.permission = [];
+    }
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PermissionDetail_User>, I>>(
+    object: I
+  ): PermissionDetail_User {
+    const message = createBasePermissionDetail_User();
+    message.user = object.user ?? "";
+    message.permission = object.permission?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBasePermissionDetail_Group(): PermissionDetail_Group {
+  return { groupId: 0, permission: [] };
+}
+
+export const PermissionDetail_Group = {
+  encode(
+    message: PermissionDetail_Group,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.groupId !== 0) {
+      writer.uint32(8).uint32(message.groupId);
+    }
+    for (const v of message.permission) {
+      writer.uint32(18).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): PermissionDetail_Group {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePermissionDetail_Group();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.groupId = reader.uint32();
+          break;
+        case 2:
+          message.permission.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PermissionDetail_Group {
+    return {
+      groupId: isSet(object.groupId) ? Number(object.groupId) : 0,
+      permission: Array.isArray(object?.permission)
+        ? object.permission.map((e: any) => String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: PermissionDetail_Group): unknown {
+    const obj: any = {};
+    message.groupId !== undefined &&
+      (obj.groupId = Math.round(message.groupId));
+    if (message.permission) {
+      obj.permission = message.permission.map((e) => e);
+    } else {
+      obj.permission = [];
+    }
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PermissionDetail_Group>, I>>(
+    object: I
+  ): PermissionDetail_Group {
+    const message = createBasePermissionDetail_Group();
+    message.groupId = object.groupId ?? 0;
+    message.permission = object.permission?.map((e) => e) || [];
     return message;
   },
 };
@@ -1014,6 +1662,10 @@ export interface Query {
   Subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
   /** Subspace queries all the information about the subspace with the given id */
   Subspace(request: QuerySubspaceRequest): Promise<QuerySubspaceResponse>;
+  /** Sections allows to query for the sections of a specific subspace */
+  Sections(request: QuerySectionsRequest): Promise<QuerySectionsResponse>;
+  /** Section queries all the information about the section with the given id */
+  Section(request: QuerySectionRequest): Promise<QuerySectionResponse>;
   /**
    * UserGroups queries all the groups that are present inside the subspace with
    * the given id
@@ -1040,6 +1692,8 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
     this.Subspaces = this.Subspaces.bind(this);
     this.Subspace = this.Subspace.bind(this);
+    this.Sections = this.Sections.bind(this);
+    this.Section = this.Section.bind(this);
     this.UserGroups = this.UserGroups.bind(this);
     this.UserGroup = this.UserGroup.bind(this);
     this.UserGroupMembers = this.UserGroupMembers.bind(this);
@@ -1048,7 +1702,7 @@ export class QueryClientImpl implements Query {
   Subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
     const data = QuerySubspacesRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Query",
+      "desmos.subspaces.v2.Query",
       "Subspaces",
       data
     );
@@ -1060,7 +1714,7 @@ export class QueryClientImpl implements Query {
   Subspace(request: QuerySubspaceRequest): Promise<QuerySubspaceResponse> {
     const data = QuerySubspaceRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Query",
+      "desmos.subspaces.v2.Query",
       "Subspace",
       data
     );
@@ -1069,12 +1723,36 @@ export class QueryClientImpl implements Query {
     );
   }
 
+  Sections(request: QuerySectionsRequest): Promise<QuerySectionsResponse> {
+    const data = QuerySectionsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Query",
+      "Sections",
+      data
+    );
+    return promise.then((data) =>
+      QuerySectionsResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  Section(request: QuerySectionRequest): Promise<QuerySectionResponse> {
+    const data = QuerySectionRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Query",
+      "Section",
+      data
+    );
+    return promise.then((data) =>
+      QuerySectionResponse.decode(new _m0.Reader(data))
+    );
+  }
+
   UserGroups(
     request: QueryUserGroupsRequest
   ): Promise<QueryUserGroupsResponse> {
     const data = QueryUserGroupsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Query",
+      "desmos.subspaces.v2.Query",
       "UserGroups",
       data
     );
@@ -1086,7 +1764,7 @@ export class QueryClientImpl implements Query {
   UserGroup(request: QueryUserGroupRequest): Promise<QueryUserGroupResponse> {
     const data = QueryUserGroupRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Query",
+      "desmos.subspaces.v2.Query",
       "UserGroup",
       data
     );
@@ -1100,7 +1778,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryUserGroupMembersResponse> {
     const data = QueryUserGroupMembersRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Query",
+      "desmos.subspaces.v2.Query",
       "UserGroupMembers",
       data
     );
@@ -1114,7 +1792,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryUserPermissionsResponse> {
     const data = QueryUserPermissionsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Query",
+      "desmos.subspaces.v2.Query",
       "UserPermissions",
       data
     );

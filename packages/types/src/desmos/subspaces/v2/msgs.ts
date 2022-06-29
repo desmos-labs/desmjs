@@ -38,15 +38,92 @@ export interface MsgDeleteSubspace {
 /** MsgDeleteSubspaceResponse defines the Msg/DeleteSubspace response type */
 export interface MsgDeleteSubspaceResponse {}
 
+/**
+ * MsgCreateSection represents the message to be used when creating a subspace
+ * section
+ */
+export interface MsgCreateSection {
+  /** Id of the subspace inside which the section will be placed */
+  subspaceId: Long;
+  /** Name of the section to be created */
+  name: string;
+  /** (optional) Description of the section */
+  description: string;
+  /** (optional) Id of the parent section */
+  parentId: number;
+  /** User creating the section */
+  creator: string;
+}
+
+/** MsgCreateSectionResponse represents the Msg/CreateSection response type */
+export interface MsgCreateSectionResponse {
+  /** Id of the newly created section */
+  sectionId: number;
+}
+
+/**
+ * MsgEditSection represents the message to be used when editing a subspace
+ * section
+ */
+export interface MsgEditSection {
+  /** Id of the subspace inside which the section to be edited is */
+  subspaceId: Long;
+  /** Id of the section to be edited */
+  sectionId: number;
+  /** (optional) New name of the section */
+  name: string;
+  /** (optional) New description of the section */
+  description: string;
+  /** User editing the section */
+  editor: string;
+}
+
+/** MsgEditSectionResponse represents the Msg/EditSection response type */
+export interface MsgEditSectionResponse {}
+
+/**
+ * MsgMoveSection represents the message to be used when moving a section to
+ * another parent
+ */
+export interface MsgMoveSection {
+  /** Id of the subspace inside which the section lies */
+  subspaceId: Long;
+  /** Id of the section to be moved */
+  sectionId: number;
+  /** Id of the new parent */
+  newParentId: number;
+  /** Signer of the message */
+  signer: string;
+}
+
+/** MsgMoveSectionResponse */
+export interface MsgMoveSectionResponse {}
+
+/** MsgDeleteSection represents the message to be used when deleting a section */
+export interface MsgDeleteSection {
+  /** Id of the subspace inside which the section to be deleted is */
+  subspaceId: Long;
+  /** Id of the section to delete */
+  sectionId: number;
+  /** User deleting the section */
+  signer: string;
+}
+
+/** MsgDeleteSectionResponse represents the Msg/DeleteSection response type */
+export interface MsgDeleteSectionResponse {}
+
 /** MsgCreateUserGroup represents the message used to create a user group */
 export interface MsgCreateUserGroup {
+  /** Id of the subspace inside which the group will be created */
   subspaceId: Long;
+  /** (optional) Id of the section inside which the group will be created */
+  sectionId: number;
   /** Name of the group */
   name: string;
-  /** Optional description of the group */
+  /** (optional) Description of the group */
   description: string;
   /** Default permissions to be applied to the group */
-  defaultPermissions: number;
+  defaultPermissions: string[];
   /** Creator of the group */
   creator: string;
 }
@@ -58,10 +135,15 @@ export interface MsgCreateUserGroupResponse {
 
 /** MsgEditUserGroup represents the message used to edit a user group */
 export interface MsgEditUserGroup {
+  /** Id of the subspace inside which the group to be edited is */
   subspaceId: Long;
+  /** Id of the group to be edited */
   groupId: number;
+  /** (optional) New name of the group */
   name: string;
+  /** (optional) New description of the group */
   description: string;
+  /** User editing the group */
   signer: string;
 }
 
@@ -69,13 +151,35 @@ export interface MsgEditUserGroup {
 export interface MsgEditUserGroupResponse {}
 
 /**
+ * MsgMoveUserGroup represents the message used to move one user group from a
+ * section to anoter
+ */
+export interface MsgMoveUserGroup {
+  /** Id of the subspace inside which the group to move is */
+  subspaceId: Long;
+  /** Id of the group to be moved */
+  groupId: number;
+  /** Id of the new section where to move the group */
+  newSectionId: number;
+  /** User signing the message */
+  signer: string;
+}
+
+/** MsgMoveUserGroupResponse defines the Msg/MoveUserGroup response type */
+export interface MsgMoveUserGroupResponse {}
+
+/**
  * MsgSetUserGroupPermissions represents the message used to set the permissions
  * of a user group
  */
 export interface MsgSetUserGroupPermissions {
+  /** Id of the subspace inside which the group is */
   subspaceId: Long;
+  /** Id of the group for which to set the new permissions */
   groupId: number;
-  permissions: number;
+  /** New permissions to be set to the group */
+  permissions: string[];
+  /** User setting the new permissions */
   signer: string;
 }
 
@@ -87,8 +191,11 @@ export interface MsgSetUserGroupPermissionsResponse {}
 
 /** MsgDeleteUserGroup represents the message used to delete a user group */
 export interface MsgDeleteUserGroup {
+  /** Id of the subspace inside which the group to delete is */
   subspaceId: Long;
+  /** Id of the group to be deleted */
   groupId: number;
+  /** User deleting the group */
   signer: string;
 }
 
@@ -100,9 +207,13 @@ export interface MsgDeleteUserGroupResponse {}
  * group
  */
 export interface MsgAddUserToUserGroup {
+  /** Id of the subspace inside which the group is */
   subspaceId: Long;
+  /** Id of the group to which to add the user */
   groupId: number;
+  /** User to be added to the group */
   user: string;
+  /** User signing the message */
   signer: string;
 }
 
@@ -117,9 +228,13 @@ export interface MsgAddUserToUserGroupResponse {}
  * a user group
  */
 export interface MsgRemoveUserFromUserGroup {
+  /** Id of the subspace inside which the group to remove the user from is */
   subspaceId: Long;
+  /** Id of the group from which to remove the user */
   groupId: number;
+  /** User to be removed from the group */
   user: string;
+  /** User signing the message */
   signer: string;
 }
 
@@ -134,9 +249,15 @@ export interface MsgRemoveUserFromUserGroupResponse {}
  * specific user
  */
 export interface MsgSetUserPermissions {
+  /** Id of the subspace inside which to set the permissions */
   subspaceId: Long;
+  /** Id of the section for which to set the permissions */
+  sectionId: number;
+  /** User for which to set the permissions */
   user: string;
-  permissions: number;
+  /** Permissions to be set to the user */
+  permissions: string[];
+  /** User signing the message */
   signer: string;
 }
 
@@ -576,12 +697,588 @@ export const MsgDeleteSubspaceResponse = {
   },
 };
 
-function createBaseMsgCreateUserGroup(): MsgCreateUserGroup {
+function createBaseMsgCreateSection(): MsgCreateSection {
   return {
     subspaceId: Long.UZERO,
     name: "",
     description: "",
-    defaultPermissions: 0,
+    parentId: 0,
+    creator: "",
+  };
+}
+
+export const MsgCreateSection = {
+  encode(
+    message: MsgCreateSection,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.description !== "") {
+      writer.uint32(26).string(message.description);
+    }
+    if (message.parentId !== 0) {
+      writer.uint32(32).uint32(message.parentId);
+    }
+    if (message.creator !== "") {
+      writer.uint32(42).string(message.creator);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateSection {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateSection();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.name = reader.string();
+          break;
+        case 3:
+          message.description = reader.string();
+          break;
+        case 4:
+          message.parentId = reader.uint32();
+          break;
+        case 5:
+          message.creator = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateSection {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      parentId: isSet(object.parentId) ? Number(object.parentId) : 0,
+      creator: isSet(object.creator) ? String(object.creator) : "",
+    };
+  },
+
+  toJSON(message: MsgCreateSection): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.parentId !== undefined &&
+      (obj.parentId = Math.round(message.parentId));
+    message.creator !== undefined && (obj.creator = message.creator);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgCreateSection>, I>>(
+    object: I
+  ): MsgCreateSection {
+    const message = createBaseMsgCreateSection();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
+    message.parentId = object.parentId ?? 0;
+    message.creator = object.creator ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgCreateSectionResponse(): MsgCreateSectionResponse {
+  return { sectionId: 0 };
+}
+
+export const MsgCreateSectionResponse = {
+  encode(
+    message: MsgCreateSectionResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.sectionId !== 0) {
+      writer.uint32(8).uint32(message.sectionId);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgCreateSectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateSectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.sectionId = reader.uint32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCreateSectionResponse {
+    return {
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
+    };
+  },
+
+  toJSON(message: MsgCreateSectionResponse): unknown {
+    const obj: any = {};
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgCreateSectionResponse>, I>>(
+    object: I
+  ): MsgCreateSectionResponse {
+    const message = createBaseMsgCreateSectionResponse();
+    message.sectionId = object.sectionId ?? 0;
+    return message;
+  },
+};
+
+function createBaseMsgEditSection(): MsgEditSection {
+  return {
+    subspaceId: Long.UZERO,
+    sectionId: 0,
+    name: "",
+    description: "",
+    editor: "",
+  };
+}
+
+export const MsgEditSection = {
+  encode(
+    message: MsgEditSection,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
+    if (message.name !== "") {
+      writer.uint32(26).string(message.name);
+    }
+    if (message.description !== "") {
+      writer.uint32(34).string(message.description);
+    }
+    if (message.editor !== "") {
+      writer.uint32(42).string(message.editor);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditSection {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgEditSection();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.sectionId = reader.uint32();
+          break;
+        case 3:
+          message.name = reader.string();
+          break;
+        case 4:
+          message.description = reader.string();
+          break;
+        case 5:
+          message.editor = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgEditSection {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      editor: isSet(object.editor) ? String(object.editor) : "",
+    };
+  },
+
+  toJSON(message: MsgEditSection): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
+    message.name !== undefined && (obj.name = message.name);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.editor !== undefined && (obj.editor = message.editor);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgEditSection>, I>>(
+    object: I
+  ): MsgEditSection {
+    const message = createBaseMsgEditSection();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
+    message.editor = object.editor ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgEditSectionResponse(): MsgEditSectionResponse {
+  return {};
+}
+
+export const MsgEditSectionResponse = {
+  encode(
+    _: MsgEditSectionResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgEditSectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgEditSectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgEditSectionResponse {
+    return {};
+  },
+
+  toJSON(_: MsgEditSectionResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgEditSectionResponse>, I>>(
+    _: I
+  ): MsgEditSectionResponse {
+    const message = createBaseMsgEditSectionResponse();
+    return message;
+  },
+};
+
+function createBaseMsgMoveSection(): MsgMoveSection {
+  return { subspaceId: Long.UZERO, sectionId: 0, newParentId: 0, signer: "" };
+}
+
+export const MsgMoveSection = {
+  encode(
+    message: MsgMoveSection,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
+    if (message.newParentId !== 0) {
+      writer.uint32(24).uint32(message.newParentId);
+    }
+    if (message.signer !== "") {
+      writer.uint32(34).string(message.signer);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMoveSection {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgMoveSection();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.sectionId = reader.uint32();
+          break;
+        case 3:
+          message.newParentId = reader.uint32();
+          break;
+        case 4:
+          message.signer = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgMoveSection {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
+      newParentId: isSet(object.newParentId) ? Number(object.newParentId) : 0,
+      signer: isSet(object.signer) ? String(object.signer) : "",
+    };
+  },
+
+  toJSON(message: MsgMoveSection): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
+    message.newParentId !== undefined &&
+      (obj.newParentId = Math.round(message.newParentId));
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgMoveSection>, I>>(
+    object: I
+  ): MsgMoveSection {
+    const message = createBaseMsgMoveSection();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
+    message.newParentId = object.newParentId ?? 0;
+    message.signer = object.signer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgMoveSectionResponse(): MsgMoveSectionResponse {
+  return {};
+}
+
+export const MsgMoveSectionResponse = {
+  encode(
+    _: MsgMoveSectionResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgMoveSectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgMoveSectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgMoveSectionResponse {
+    return {};
+  },
+
+  toJSON(_: MsgMoveSectionResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgMoveSectionResponse>, I>>(
+    _: I
+  ): MsgMoveSectionResponse {
+    const message = createBaseMsgMoveSectionResponse();
+    return message;
+  },
+};
+
+function createBaseMsgDeleteSection(): MsgDeleteSection {
+  return { subspaceId: Long.UZERO, sectionId: 0, signer: "" };
+}
+
+export const MsgDeleteSection = {
+  encode(
+    message: MsgDeleteSection,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
+    if (message.signer !== "") {
+      writer.uint32(26).string(message.signer);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteSection {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgDeleteSection();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.sectionId = reader.uint32();
+          break;
+        case 3:
+          message.signer = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgDeleteSection {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
+      signer: isSet(object.signer) ? String(object.signer) : "",
+    };
+  },
+
+  toJSON(message: MsgDeleteSection): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteSection>, I>>(
+    object: I
+  ): MsgDeleteSection {
+    const message = createBaseMsgDeleteSection();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
+    message.signer = object.signer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgDeleteSectionResponse(): MsgDeleteSectionResponse {
+  return {};
+}
+
+export const MsgDeleteSectionResponse = {
+  encode(
+    _: MsgDeleteSectionResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgDeleteSectionResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgDeleteSectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgDeleteSectionResponse {
+    return {};
+  },
+
+  toJSON(_: MsgDeleteSectionResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteSectionResponse>, I>>(
+    _: I
+  ): MsgDeleteSectionResponse {
+    const message = createBaseMsgDeleteSectionResponse();
+    return message;
+  },
+};
+
+function createBaseMsgCreateUserGroup(): MsgCreateUserGroup {
+  return {
+    subspaceId: Long.UZERO,
+    sectionId: 0,
+    name: "",
+    description: "",
+    defaultPermissions: [],
     creator: "",
   };
 }
@@ -594,17 +1291,20 @@ export const MsgCreateUserGroup = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
+    }
     if (message.name !== "") {
-      writer.uint32(18).string(message.name);
+      writer.uint32(26).string(message.name);
     }
     if (message.description !== "") {
-      writer.uint32(26).string(message.description);
+      writer.uint32(34).string(message.description);
     }
-    if (message.defaultPermissions !== 0) {
-      writer.uint32(32).uint32(message.defaultPermissions);
+    for (const v of message.defaultPermissions) {
+      writer.uint32(42).string(v!);
     }
     if (message.creator !== "") {
-      writer.uint32(42).string(message.creator);
+      writer.uint32(50).string(message.creator);
     }
     return writer;
   },
@@ -620,15 +1320,18 @@ export const MsgCreateUserGroup = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.name = reader.string();
+          message.sectionId = reader.uint32();
           break;
         case 3:
-          message.description = reader.string();
+          message.name = reader.string();
           break;
         case 4:
-          message.defaultPermissions = reader.uint32();
+          message.description = reader.string();
           break;
         case 5:
+          message.defaultPermissions.push(reader.string());
+          break;
+        case 6:
           message.creator = reader.string();
           break;
         default:
@@ -644,11 +1347,12 @@ export const MsgCreateUserGroup = {
       subspaceId: isSet(object.subspaceId)
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      defaultPermissions: isSet(object.defaultPermissions)
-        ? Number(object.defaultPermissions)
-        : 0,
+      defaultPermissions: Array.isArray(object?.defaultPermissions)
+        ? object.defaultPermissions.map((e: any) => String(e))
+        : [],
       creator: isSet(object.creator) ? String(object.creator) : "",
     };
   },
@@ -657,11 +1361,16 @@ export const MsgCreateUserGroup = {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined &&
       (obj.description = message.description);
-    message.defaultPermissions !== undefined &&
-      (obj.defaultPermissions = Math.round(message.defaultPermissions));
+    if (message.defaultPermissions) {
+      obj.defaultPermissions = message.defaultPermissions.map((e) => e);
+    } else {
+      obj.defaultPermissions = [];
+    }
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
   },
@@ -674,9 +1383,10 @@ export const MsgCreateUserGroup = {
       object.subspaceId !== undefined && object.subspaceId !== null
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
     message.name = object.name ?? "";
     message.description = object.description ?? "";
-    message.defaultPermissions = object.defaultPermissions ?? 0;
+    message.defaultPermissions = object.defaultPermissions?.map((e) => e) || [];
     message.creator = object.creator ?? "";
     return message;
   },
@@ -891,8 +1601,146 @@ export const MsgEditUserGroupResponse = {
   },
 };
 
+function createBaseMsgMoveUserGroup(): MsgMoveUserGroup {
+  return { subspaceId: Long.UZERO, groupId: 0, newSectionId: 0, signer: "" };
+}
+
+export const MsgMoveUserGroup = {
+  encode(
+    message: MsgMoveUserGroup,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.groupId !== 0) {
+      writer.uint32(16).uint32(message.groupId);
+    }
+    if (message.newSectionId !== 0) {
+      writer.uint32(24).uint32(message.newSectionId);
+    }
+    if (message.signer !== "") {
+      writer.uint32(34).string(message.signer);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMoveUserGroup {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgMoveUserGroup();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.groupId = reader.uint32();
+          break;
+        case 3:
+          message.newSectionId = reader.uint32();
+          break;
+        case 4:
+          message.signer = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgMoveUserGroup {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromString(object.subspaceId)
+        : Long.UZERO,
+      groupId: isSet(object.groupId) ? Number(object.groupId) : 0,
+      newSectionId: isSet(object.newSectionId)
+        ? Number(object.newSectionId)
+        : 0,
+      signer: isSet(object.signer) ? String(object.signer) : "",
+    };
+  },
+
+  toJSON(message: MsgMoveUserGroup): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.groupId !== undefined &&
+      (obj.groupId = Math.round(message.groupId));
+    message.newSectionId !== undefined &&
+      (obj.newSectionId = Math.round(message.newSectionId));
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgMoveUserGroup>, I>>(
+    object: I
+  ): MsgMoveUserGroup {
+    const message = createBaseMsgMoveUserGroup();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.groupId = object.groupId ?? 0;
+    message.newSectionId = object.newSectionId ?? 0;
+    message.signer = object.signer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgMoveUserGroupResponse(): MsgMoveUserGroupResponse {
+  return {};
+}
+
+export const MsgMoveUserGroupResponse = {
+  encode(
+    _: MsgMoveUserGroupResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgMoveUserGroupResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgMoveUserGroupResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgMoveUserGroupResponse {
+    return {};
+  },
+
+  toJSON(_: MsgMoveUserGroupResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgMoveUserGroupResponse>, I>>(
+    _: I
+  ): MsgMoveUserGroupResponse {
+    const message = createBaseMsgMoveUserGroupResponse();
+    return message;
+  },
+};
+
 function createBaseMsgSetUserGroupPermissions(): MsgSetUserGroupPermissions {
-  return { subspaceId: Long.UZERO, groupId: 0, permissions: 0, signer: "" };
+  return { subspaceId: Long.UZERO, groupId: 0, permissions: [], signer: "" };
 }
 
 export const MsgSetUserGroupPermissions = {
@@ -906,8 +1754,8 @@ export const MsgSetUserGroupPermissions = {
     if (message.groupId !== 0) {
       writer.uint32(16).uint32(message.groupId);
     }
-    if (message.permissions !== 0) {
-      writer.uint32(24).uint32(message.permissions);
+    for (const v of message.permissions) {
+      writer.uint32(26).string(v!);
     }
     if (message.signer !== "") {
       writer.uint32(34).string(message.signer);
@@ -932,7 +1780,7 @@ export const MsgSetUserGroupPermissions = {
           message.groupId = reader.uint32();
           break;
         case 3:
-          message.permissions = reader.uint32();
+          message.permissions.push(reader.string());
           break;
         case 4:
           message.signer = reader.string();
@@ -951,7 +1799,9 @@ export const MsgSetUserGroupPermissions = {
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
       groupId: isSet(object.groupId) ? Number(object.groupId) : 0,
-      permissions: isSet(object.permissions) ? Number(object.permissions) : 0,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => String(e))
+        : [],
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
@@ -962,8 +1812,11 @@ export const MsgSetUserGroupPermissions = {
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.groupId !== undefined &&
       (obj.groupId = Math.round(message.groupId));
-    message.permissions !== undefined &&
-      (obj.permissions = Math.round(message.permissions));
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -977,7 +1830,7 @@ export const MsgSetUserGroupPermissions = {
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
     message.groupId = object.groupId ?? 0;
-    message.permissions = object.permissions ?? 0;
+    message.permissions = object.permissions?.map((e) => e) || [];
     message.signer = object.signer ?? "";
     return message;
   },
@@ -1433,7 +2286,13 @@ export const MsgRemoveUserFromUserGroupResponse = {
 };
 
 function createBaseMsgSetUserPermissions(): MsgSetUserPermissions {
-  return { subspaceId: Long.UZERO, user: "", permissions: 0, signer: "" };
+  return {
+    subspaceId: Long.UZERO,
+    sectionId: 0,
+    user: "",
+    permissions: [],
+    signer: "",
+  };
 }
 
 export const MsgSetUserPermissions = {
@@ -1444,14 +2303,17 @@ export const MsgSetUserPermissions = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-    if (message.user !== "") {
-      writer.uint32(18).string(message.user);
+    if (message.sectionId !== 0) {
+      writer.uint32(16).uint32(message.sectionId);
     }
-    if (message.permissions !== 0) {
-      writer.uint32(24).uint32(message.permissions);
+    if (message.user !== "") {
+      writer.uint32(26).string(message.user);
+    }
+    for (const v of message.permissions) {
+      writer.uint32(34).string(v!);
     }
     if (message.signer !== "") {
-      writer.uint32(34).string(message.signer);
+      writer.uint32(42).string(message.signer);
     }
     return writer;
   },
@@ -1470,12 +2332,15 @@ export const MsgSetUserPermissions = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.user = reader.string();
+          message.sectionId = reader.uint32();
           break;
         case 3:
-          message.permissions = reader.uint32();
+          message.user = reader.string();
           break;
         case 4:
+          message.permissions.push(reader.string());
+          break;
+        case 5:
           message.signer = reader.string();
           break;
         default:
@@ -1491,8 +2356,11 @@ export const MsgSetUserPermissions = {
       subspaceId: isSet(object.subspaceId)
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
+      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       user: isSet(object.user) ? String(object.user) : "",
-      permissions: isSet(object.permissions) ? Number(object.permissions) : 0,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => String(e))
+        : [],
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
@@ -1501,9 +2369,14 @@ export const MsgSetUserPermissions = {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined &&
+      (obj.sectionId = Math.round(message.sectionId));
     message.user !== undefined && (obj.user = message.user);
-    message.permissions !== undefined &&
-      (obj.permissions = Math.round(message.permissions));
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
@@ -1516,8 +2389,9 @@ export const MsgSetUserPermissions = {
       object.subspaceId !== undefined && object.subspaceId !== null
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
+    message.sectionId = object.sectionId ?? 0;
     message.user = object.user ?? "";
-    message.permissions = object.permissions ?? 0;
+    message.permissions = object.permissions?.map((e) => e) || [];
     message.signer = object.signer ?? "";
     return message;
   },
@@ -1582,12 +2456,22 @@ export interface Msg {
   DeleteSubspace(
     request: MsgDeleteSubspace
   ): Promise<MsgDeleteSubspaceResponse>;
+  /** CreateSection allows to create a new subspace section */
+  CreateSection(request: MsgCreateSection): Promise<MsgCreateSectionResponse>;
+  /** EditSection allows to edit an existing section */
+  EditSection(request: MsgEditSection): Promise<MsgEditSectionResponse>;
+  /** MoveSection allows to move an existing section to another parent */
+  MoveSection(request: MsgMoveSection): Promise<MsgMoveSectionResponse>;
+  /** DeleteSection allows to delete an existing section */
+  DeleteSection(request: MsgDeleteSection): Promise<MsgDeleteSectionResponse>;
   /** CreateUserGroup allows to create a user group */
   CreateUserGroup(
     request: MsgCreateUserGroup
   ): Promise<MsgCreateUserGroupResponse>;
   /** EditUserGroup allows to edit a user group */
   EditUserGroup(request: MsgEditUserGroup): Promise<MsgEditUserGroupResponse>;
+  /** MoveUserGroup allows to move a user group from a section to another */
+  MoveUserGroup(request: MsgMoveUserGroup): Promise<MsgMoveUserGroupResponse>;
   /** SetUserGroupPermissions allows to set the permissions for a specific group */
   SetUserGroupPermissions(
     request: MsgSetUserGroupPermissions
@@ -1620,8 +2504,13 @@ export class MsgClientImpl implements Msg {
     this.CreateSubspace = this.CreateSubspace.bind(this);
     this.EditSubspace = this.EditSubspace.bind(this);
     this.DeleteSubspace = this.DeleteSubspace.bind(this);
+    this.CreateSection = this.CreateSection.bind(this);
+    this.EditSection = this.EditSection.bind(this);
+    this.MoveSection = this.MoveSection.bind(this);
+    this.DeleteSection = this.DeleteSection.bind(this);
     this.CreateUserGroup = this.CreateUserGroup.bind(this);
     this.EditUserGroup = this.EditUserGroup.bind(this);
+    this.MoveUserGroup = this.MoveUserGroup.bind(this);
     this.SetUserGroupPermissions = this.SetUserGroupPermissions.bind(this);
     this.DeleteUserGroup = this.DeleteUserGroup.bind(this);
     this.AddUserToUserGroup = this.AddUserToUserGroup.bind(this);
@@ -1633,7 +2522,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgCreateSubspaceResponse> {
     const data = MsgCreateSubspace.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "CreateSubspace",
       data
     );
@@ -1645,7 +2534,7 @@ export class MsgClientImpl implements Msg {
   EditSubspace(request: MsgEditSubspace): Promise<MsgEditSubspaceResponse> {
     const data = MsgEditSubspace.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "EditSubspace",
       data
     );
@@ -1659,7 +2548,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgDeleteSubspaceResponse> {
     const data = MsgDeleteSubspace.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "DeleteSubspace",
       data
     );
@@ -1668,12 +2557,60 @@ export class MsgClientImpl implements Msg {
     );
   }
 
+  CreateSection(request: MsgCreateSection): Promise<MsgCreateSectionResponse> {
+    const data = MsgCreateSection.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Msg",
+      "CreateSection",
+      data
+    );
+    return promise.then((data) =>
+      MsgCreateSectionResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  EditSection(request: MsgEditSection): Promise<MsgEditSectionResponse> {
+    const data = MsgEditSection.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Msg",
+      "EditSection",
+      data
+    );
+    return promise.then((data) =>
+      MsgEditSectionResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  MoveSection(request: MsgMoveSection): Promise<MsgMoveSectionResponse> {
+    const data = MsgMoveSection.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Msg",
+      "MoveSection",
+      data
+    );
+    return promise.then((data) =>
+      MsgMoveSectionResponse.decode(new _m0.Reader(data))
+    );
+  }
+
+  DeleteSection(request: MsgDeleteSection): Promise<MsgDeleteSectionResponse> {
+    const data = MsgDeleteSection.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Msg",
+      "DeleteSection",
+      data
+    );
+    return promise.then((data) =>
+      MsgDeleteSectionResponse.decode(new _m0.Reader(data))
+    );
+  }
+
   CreateUserGroup(
     request: MsgCreateUserGroup
   ): Promise<MsgCreateUserGroupResponse> {
     const data = MsgCreateUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "CreateUserGroup",
       data
     );
@@ -1685,7 +2622,7 @@ export class MsgClientImpl implements Msg {
   EditUserGroup(request: MsgEditUserGroup): Promise<MsgEditUserGroupResponse> {
     const data = MsgEditUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "EditUserGroup",
       data
     );
@@ -1694,12 +2631,24 @@ export class MsgClientImpl implements Msg {
     );
   }
 
+  MoveUserGroup(request: MsgMoveUserGroup): Promise<MsgMoveUserGroupResponse> {
+    const data = MsgMoveUserGroup.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v2.Msg",
+      "MoveUserGroup",
+      data
+    );
+    return promise.then((data) =>
+      MsgMoveUserGroupResponse.decode(new _m0.Reader(data))
+    );
+  }
+
   SetUserGroupPermissions(
     request: MsgSetUserGroupPermissions
   ): Promise<MsgSetUserGroupPermissionsResponse> {
     const data = MsgSetUserGroupPermissions.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "SetUserGroupPermissions",
       data
     );
@@ -1713,7 +2662,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgDeleteUserGroupResponse> {
     const data = MsgDeleteUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "DeleteUserGroup",
       data
     );
@@ -1727,7 +2676,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgAddUserToUserGroupResponse> {
     const data = MsgAddUserToUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "AddUserToUserGroup",
       data
     );
@@ -1741,7 +2690,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRemoveUserFromUserGroupResponse> {
     const data = MsgRemoveUserFromUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "RemoveUserFromUserGroup",
       data
     );
@@ -1755,7 +2704,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgSetUserPermissionsResponse> {
     const data = MsgSetUserPermissions.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v1.Msg",
+      "desmos.subspaces.v2.Msg",
       "SetUserPermissions",
       data
     );
