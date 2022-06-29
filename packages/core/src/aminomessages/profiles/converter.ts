@@ -249,6 +249,9 @@ function convertAminoSignature(signature: AminoSignatureData): Any {
   throw new Error(`Unsupported signature type: ${signature}`);
 }
 
+/**
+ * Creates all the Amino converters for the profiles messages.
+ */
 export function createProfilesConverters(): AminoConverters {
   return {
     // Profiles module

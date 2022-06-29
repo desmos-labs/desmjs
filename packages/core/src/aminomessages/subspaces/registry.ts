@@ -10,25 +10,35 @@ import {
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
-} from "@desmoslabs/desmjs-types/desmos/subspaces/v1/msgs";
+  MsgCreateSection,
+  MsgEditSection,
+  MsgMoveSection,
+  MsgDeleteSection,
+  MsgMoveUserGroup,
+} from "@desmoslabs/desmjs-types/desmos/subspaces/v2/msgs";
 
 export const subspacesRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
-  ["/desmos.subspaces.v1.MsgCreateSubspace", MsgCreateSubspace],
-  ["/desmos.subspaces.v1.MsgEditSubspace", MsgEditSubspace],
-  ["/desmos.subspaces.v1.MsgDeleteSubspace", MsgDeleteSubspace],
-  ["/desmos.subspaces.v1.MsgCreateUserGroup", MsgCreateUserGroup],
-  ["/desmos.subspaces.v1.MsgEditUserGroup", MsgEditUserGroup],
+  ["/desmos.subspaces.v2.MsgCreateSubspace", MsgCreateSubspace],
+  ["/desmos.subspaces.v2.MsgEditSubspace", MsgEditSubspace],
+  ["/desmos.subspaces.v2.MsgDeleteSubspace", MsgDeleteSubspace],
+  ["/desmos.subspaces.v2.MsgCreateSection", MsgCreateSection],
+  ["/desmos.subspaces.v2.MsgEditSection", MsgEditSection],
+  ["/desmos.subspaces.v2.MsgMoveSection", MsgMoveSection],
+  ["/desmos.subspaces.v2.MsgDeleteSection", MsgDeleteSection],
+  ["/desmos.subspaces.v2.MsgCreateUserGroup", MsgCreateUserGroup],
+  ["/desmos.subspaces.v2.MsgEditUserGroup", MsgEditUserGroup],
+  ["/desmos.subspaces.v2.MsgMoveUserGroup", MsgMoveUserGroup],
   [
-    "/desmos.subspaces.v1.MsgSetUserGroupPermissions",
+    "/desmos.subspaces.v2.MsgSetUserGroupPermissions",
     MsgSetUserGroupPermissions,
   ],
-  ["/desmos.subspaces.v1.MsgDeleteUserGroup", MsgDeleteUserGroup],
-  ["/desmos.subspaces.v1.MsgAddUserToUserGroup", MsgAddUserToUserGroup],
+  ["/desmos.subspaces.v2.MsgDeleteUserGroup", MsgDeleteUserGroup],
+  ["/desmos.subspaces.v2.MsgAddUserToUserGroup", MsgAddUserToUserGroup],
   [
-    "/desmos.subspaces.v1.MsgRemoveUserFromUserGroup",
+    "/desmos.subspaces.v2.MsgRemoveUserFromUserGroup",
     MsgRemoveUserFromUserGroup,
   ],
-  ["/desmos.subspaces.v1.MsgSetUserPermissions", MsgSetUserPermissions],
+  ["/desmos.subspaces.v2.MsgSetUserPermissions", MsgSetUserPermissions],
 ];
 
 export default subspacesRegistryTypes;

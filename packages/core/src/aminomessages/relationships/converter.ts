@@ -12,6 +12,9 @@ import {
   AminoMsgUnblockUser,
 } from "./messages";
 
+/**
+ * Creates all the Amino converters for the relationships messages.
+ */
 export function createRelationshipsConverters(): AminoConverters {
   return {
     "/desmos.relationships.v1.MsgCreateRelationship": {

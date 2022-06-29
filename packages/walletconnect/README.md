@@ -11,3 +11,4 @@ by signing transactions through a [WalletConnect](https://walletconnect.com) cli
 |:--------------:|:-----------------------------:|
 |    `2.0.x`     |           `v2.3.x `           |
 |    `3.0.x`     | `v3.0.x `, `v3.1.x`, `v3.2.x` |
+|    `4.0.x`     |           `v4.0.0 `           |

@@ -1,0 +1,305 @@
+/* eslint-disable */
+import Long from "long";
+import * as _m0 from "protobufjs/minimal";
+import {
+  Entities,
+  ReplySetting,
+  PostReference,
+  replySettingFromJSON,
+  replySettingToJSON,
+} from "../../../../desmos/posts/v1/models";
+import { Any } from "../../../../google/protobuf/any";
+
+/**
+ * CreatePostJSON contains the data that can be specified when creating a Post
+ * using the CLi command
+ */
+export interface CreatePostJSON {
+  /** (optional) External id for this post */
+  externalId: string;
+  /** (optional) Text of the post */
+  text: string;
+  /** (optional) Entities connected to this post */
+  entities?: Entities;
+  /** Attachments of the post */
+  attachments: Any[];
+  /** (optional) Id of the original post of the conversation */
+  conversationId: Long;
+  /** Reply settings of this post */
+  replySettings: ReplySetting;
+  /** A list this posts references (either as a reply, repost or quote) */
+  referencedPosts: PostReference[];
+}
+
+/**
+ * EditPostJSON contains the data that can be specified when editing a Post
+ * using the CLI command
+ */
+export interface EditPostJSON {
+  /** New text of the post */
+  text: string;
+  /** New entities connected to this post */
+  entities?: Entities;
+}
+
+function createBaseCreatePostJSON(): CreatePostJSON {
+  return {
+    externalId: "",
+    text: "",
+    entities: undefined,
+    attachments: [],
+    conversationId: Long.UZERO,
+    replySettings: 0,
+    referencedPosts: [],
+  };
+}
+
+export const CreatePostJSON = {
+  encode(
+    message: CreatePostJSON,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.externalId !== "") {
+      writer.uint32(10).string(message.externalId);
+    }
+    if (message.text !== "") {
+      writer.uint32(18).string(message.text);
+    }
+    if (message.entities !== undefined) {
+      Entities.encode(message.entities, writer.uint32(26).fork()).ldelim();
+    }
+    for (const v of message.attachments) {
+      Any.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    if (!message.conversationId.isZero()) {
+      writer.uint32(40).uint64(message.conversationId);
+    }
+    if (message.replySettings !== 0) {
+      writer.uint32(48).int32(message.replySettings);
+    }
+    for (const v of message.referencedPosts) {
+      PostReference.encode(v!, writer.uint32(58).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CreatePostJSON {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCreatePostJSON();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.externalId = reader.string();
+          break;
+        case 2:
+          message.text = reader.string();
+          break;
+        case 3:
+          message.entities = Entities.decode(reader, reader.uint32());
+          break;
+        case 4:
+          message.attachments.push(Any.decode(reader, reader.uint32()));
+          break;
+        case 5:
+          message.conversationId = reader.uint64() as Long;
+          break;
+        case 6:
+          message.replySettings = reader.int32() as any;
+          break;
+        case 7:
+          message.referencedPosts.push(
+            PostReference.decode(reader, reader.uint32())
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CreatePostJSON {
+    return {
+      externalId: isSet(object.externalId) ? String(object.externalId) : "",
+      text: isSet(object.text) ? String(object.text) : "",
+      entities: isSet(object.entities)
+        ? Entities.fromJSON(object.entities)
+        : undefined,
+      attachments: Array.isArray(object?.attachments)
+        ? object.attachments.map((e: any) => Any.fromJSON(e))
+        : [],
+      conversationId: isSet(object.conversationId)
+        ? Long.fromString(object.conversationId)
+        : Long.UZERO,
+      replySettings: isSet(object.replySettings)
+        ? replySettingFromJSON(object.replySettings)
+        : 0,
+      referencedPosts: Array.isArray(object?.referencedPosts)
+        ? object.referencedPosts.map((e: any) => PostReference.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: CreatePostJSON): unknown {
+    const obj: any = {};
+    message.externalId !== undefined && (obj.externalId = message.externalId);
+    message.text !== undefined && (obj.text = message.text);
+    message.entities !== undefined &&
+      (obj.entities = message.entities
+        ? Entities.toJSON(message.entities)
+        : undefined);
+    if (message.attachments) {
+      obj.attachments = message.attachments.map((e) =>
+        e ? Any.toJSON(e) : undefined
+      );
+    } else {
+      obj.attachments = [];
+    }
+    message.conversationId !== undefined &&
+      (obj.conversationId = (message.conversationId || Long.UZERO).toString());
+    message.replySettings !== undefined &&
+      (obj.replySettings = replySettingToJSON(message.replySettings));
+    if (message.referencedPosts) {
+      obj.referencedPosts = message.referencedPosts.map((e) =>
+        e ? PostReference.toJSON(e) : undefined
+      );
+    } else {
+      obj.referencedPosts = [];
+    }
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<CreatePostJSON>, I>>(
+    object: I
+  ): CreatePostJSON {
+    const message = createBaseCreatePostJSON();
+    message.externalId = object.externalId ?? "";
+    message.text = object.text ?? "";
+    message.entities =
+      object.entities !== undefined && object.entities !== null
+        ? Entities.fromPartial(object.entities)
+        : undefined;
+    message.attachments =
+      object.attachments?.map((e) => Any.fromPartial(e)) || [];
+    message.conversationId =
+      object.conversationId !== undefined && object.conversationId !== null
+        ? Long.fromValue(object.conversationId)
+        : Long.UZERO;
+    message.replySettings = object.replySettings ?? 0;
+    message.referencedPosts =
+      object.referencedPosts?.map((e) => PostReference.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseEditPostJSON(): EditPostJSON {
+  return { text: "", entities: undefined };
+}
+
+export const EditPostJSON = {
+  encode(
+    message: EditPostJSON,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.text !== "") {
+      writer.uint32(10).string(message.text);
+    }
+    if (message.entities !== undefined) {
+      Entities.encode(message.entities, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EditPostJSON {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEditPostJSON();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.text = reader.string();
+          break;
+        case 2:
+          message.entities = Entities.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EditPostJSON {
+    return {
+      text: isSet(object.text) ? String(object.text) : "",
+      entities: isSet(object.entities)
+        ? Entities.fromJSON(object.entities)
+        : undefined,
+    };
+  },
+
+  toJSON(message: EditPostJSON): unknown {
+    const obj: any = {};
+    message.text !== undefined && (obj.text = message.text);
+    message.entities !== undefined &&
+      (obj.entities = message.entities
+        ? Entities.toJSON(message.entities)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EditPostJSON>, I>>(
+    object: I
+  ): EditPostJSON {
+    const message = createBaseEditPostJSON();
+    message.text = object.text ?? "";
+    message.entities =
+      object.entities !== undefined && object.entities !== null
+        ? Entities.fromPartial(object.entities)
+        : undefined;
+    return message;
+  },
+};
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
+type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+  ? string | number | Long
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P>>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

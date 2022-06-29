@@ -20,3 +20,4 @@ Represents an abstract signer able to sign a transaction either using `SIGN_MODE
 |:--------------:|:-----------------------------:|
 |    `2.0.x`     |           `v2.3.x `           |
 |    `3.0.x`     | `v3.0.x `, `v3.1.x`, `v3.2.x` |
+|    `4.0.x`     |           `v4.0.0 `           |

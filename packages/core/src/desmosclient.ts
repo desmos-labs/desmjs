@@ -46,10 +46,13 @@ import {
   setupAuthzExtension,
   setupRelationshipsExtension,
   setupSubspacesExtension,
+  setupPostsExtension,
+  setupSupplyExtension,
+  setupFeesExtension,
+  setupReactionsExtension,
+  setupReportsExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
-import { setupFeesExtension } from "./queries/fees";
-import { setupSupplyExtension } from "./queries/supply";
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -210,6 +213,9 @@ export class DesmosClient extends SigningStargateClient {
           setupProfilesExtension,
           setupRelationshipsExtension,
           setupSubspacesExtension,
+          setupPostsExtension,
+          setupReactionsExtension,
+          setupReportsExtension,
           setupFeesExtension,
           setupSupplyExtension
         )

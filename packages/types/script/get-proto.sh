@@ -16,9 +16,8 @@ ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
 
 # Url from where will be downloaded the desmos proto files
-DESMOS_VERSION="3.1.0"
+DESMOS_VERSION="4.0.0"
 SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"
-
 
 # Download the proto files
 wget -q  --show-progress $SRC_URL -O "$ZIP_FILE"
