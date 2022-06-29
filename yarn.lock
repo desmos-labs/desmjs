@@ -4763,9 +4763,9 @@ __metadata:
   linkType: hard
 
 "google-protobuf@npm:^3.15.5":
-  version: 3.19.4
-  resolution: "google-protobuf@npm:3.19.4"
-  checksum: c0ebc0afbb635271b54db933be74441429e0df095347d0145ae7036377a2cc6fc402ed015855ebc1809c7cedfde3246344ad28a98eac1e6a21800c7b572b2caf
+  version: 3.20.1
+  resolution: "google-protobuf@npm:3.20.1"
+  checksum: a440fbc329bb441b253bc421b01540918f4b66921c47a3bc57d154d2677dc917cb1a29126ff35ddc4d8872d1b5843ef1ece60b6dff506ba64a9f5807962d3f61
   languageName: node
   linkType: hard
 
