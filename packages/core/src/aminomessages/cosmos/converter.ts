@@ -1,4 +1,4 @@
-import { AminoConverter, AminoConverters } from "@cosmjs/stargate";
+import { AminoConverters } from "@cosmjs/stargate";
 import { MsgGrant } from "cosmjs-types/cosmos/authz/v1beta1/tx";
 import {
   GenericAuthorization,
