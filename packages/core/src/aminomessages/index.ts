@@ -18,8 +18,12 @@ import {
   relationshipsRegistryTypes,
 } from "./relationships";
 import { createSubspacesConverters, subspacesRegistryTypes } from "./subspaces";
+import { createPostsConverters, postsRegistryTypes } from "./posts";
+import { createReactionsConverters, reactionsRegistryTypes } from "./reactions";
 
 export * from "./cosmos/messages";
+export * from "./desmjs/messages";
+export * from "./posts/messages";
 export * from "./profiles/messages";
 export * from "./relationships/messages";
 export * from "./subspaces/messages";
@@ -39,7 +43,9 @@ export function createDesmosTypes(prefix: string): AminoConverters {
 
     ...createCosmosConverters(),
     ...createDesmJSConverters(),
+    ...createPostsConverters(),
     ...createProfilesConverters(),
+    ...createReactionsConverters(),
     ...createRelationshipsConverters(),
     ...createSubspacesConverters(),
   };
@@ -50,7 +56,9 @@ export const desmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
 
   ...cosmosRegistryTypes,
   ...desmjsRegistryTypes,
+  ...postsRegistryTypes,
   ...profilesRegistryTypes,
+  ...reactionsRegistryTypes,
   ...relationshipsRegistryTypes,
   ...subspacesRegistryTypes,
 ];
