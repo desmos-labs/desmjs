@@ -7,7 +7,7 @@ import {
   PostReference,
   replySettingFromJSON,
   replySettingToJSON,
-} from "../../../desmos/posts/v1/models";
+} from "../../../desmos/posts/v2/models";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
@@ -23,6 +23,8 @@ export interface MsgCreatePost {
   text: string;
   /** (optional) Entities connected to this post */
   entities?: Entities;
+  /** Tags connected to this post */
+  tags: string[];
   /** Attachments of the post */
   attachments: Any[];
   /** Author of the post */
@@ -59,6 +61,11 @@ export interface MsgEditPost {
    * post's entities
    */
   entities?: Entities;
+  /**
+   * New tags connected to this post. These will always replace the current
+   * post's tags
+   */
+  tags: string[];
   /** Editor of the post */
   editor: string;
 }
@@ -153,6 +160,7 @@ function createBaseMsgCreatePost(): MsgCreatePost {
     externalId: "",
     text: "",
     entities: undefined,
+    tags: [],
     attachments: [],
     author: "",
     conversationId: Long.UZERO,
@@ -181,20 +189,23 @@ export const MsgCreatePost = {
     if (message.entities !== undefined) {
       Entities.encode(message.entities, writer.uint32(42).fork()).ldelim();
     }
+    for (const v of message.tags) {
+      writer.uint32(50).string(v!);
+    }
     for (const v of message.attachments) {
-      Any.encode(v!, writer.uint32(50).fork()).ldelim();
+      Any.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     if (message.author !== "") {
-      writer.uint32(58).string(message.author);
+      writer.uint32(66).string(message.author);
     }
     if (!message.conversationId.isZero()) {
-      writer.uint32(64).uint64(message.conversationId);
+      writer.uint32(72).uint64(message.conversationId);
     }
     if (message.replySettings !== 0) {
-      writer.uint32(72).int32(message.replySettings);
+      writer.uint32(80).int32(message.replySettings);
     }
     for (const v of message.referencedPosts) {
-      PostReference.encode(v!, writer.uint32(82).fork()).ldelim();
+      PostReference.encode(v!, writer.uint32(90).fork()).ldelim();
     }
     return writer;
   },
@@ -222,18 +233,21 @@ export const MsgCreatePost = {
           message.entities = Entities.decode(reader, reader.uint32());
           break;
         case 6:
-          message.attachments.push(Any.decode(reader, reader.uint32()));
+          message.tags.push(reader.string());
           break;
         case 7:
-          message.author = reader.string();
+          message.attachments.push(Any.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.conversationId = reader.uint64() as Long;
+          message.author = reader.string();
           break;
         case 9:
-          message.replySettings = reader.int32() as any;
+          message.conversationId = reader.uint64() as Long;
           break;
         case 10:
+          message.replySettings = reader.int32() as any;
+          break;
+        case 11:
           message.referencedPosts.push(
             PostReference.decode(reader, reader.uint32())
           );
@@ -257,6 +271,9 @@ export const MsgCreatePost = {
       entities: isSet(object.entities)
         ? Entities.fromJSON(object.entities)
         : undefined,
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => String(e))
+        : [],
       attachments: Array.isArray(object?.attachments)
         ? object.attachments.map((e: any) => Any.fromJSON(e))
         : [],
@@ -285,6 +302,11 @@ export const MsgCreatePost = {
       (obj.entities = message.entities
         ? Entities.toJSON(message.entities)
         : undefined);
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
         e ? Any.toJSON(e) : undefined
@@ -322,6 +344,7 @@ export const MsgCreatePost = {
       object.entities !== undefined && object.entities !== null
         ? Entities.fromPartial(object.entities)
         : undefined;
+    message.tags = object.tags?.map((e) => e) || [];
     message.attachments =
       object.attachments?.map((e) => Any.fromPartial(e)) || [];
     message.author = object.author ?? "";
@@ -422,6 +445,7 @@ function createBaseMsgEditPost(): MsgEditPost {
     postId: Long.UZERO,
     text: "",
     entities: undefined,
+    tags: [],
     editor: "",
   };
 }
@@ -443,8 +467,11 @@ export const MsgEditPost = {
     if (message.entities !== undefined) {
       Entities.encode(message.entities, writer.uint32(34).fork()).ldelim();
     }
+    for (const v of message.tags) {
+      writer.uint32(42).string(v!);
+    }
     if (message.editor !== "") {
-      writer.uint32(42).string(message.editor);
+      writer.uint32(50).string(message.editor);
     }
     return writer;
   },
@@ -469,6 +496,9 @@ export const MsgEditPost = {
           message.entities = Entities.decode(reader, reader.uint32());
           break;
         case 5:
+          message.tags.push(reader.string());
+          break;
+        case 6:
           message.editor = reader.string();
           break;
         default:
@@ -491,6 +521,9 @@ export const MsgEditPost = {
       entities: isSet(object.entities)
         ? Entities.fromJSON(object.entities)
         : undefined,
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => String(e))
+        : [],
       editor: isSet(object.editor) ? String(object.editor) : "",
     };
   },
@@ -506,6 +539,11 @@ export const MsgEditPost = {
       (obj.entities = message.entities
         ? Entities.toJSON(message.entities)
         : undefined);
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
     message.editor !== undefined && (obj.editor = message.editor);
     return obj;
   },
@@ -527,6 +565,7 @@ export const MsgEditPost = {
       object.entities !== undefined && object.entities !== null
         ? Entities.fromPartial(object.entities)
         : undefined;
+    message.tags = object.tags?.map((e) => e) || [];
     message.editor = object.editor ?? "";
     return message;
   },
@@ -1279,7 +1318,7 @@ export class MsgClientImpl implements Msg {
   }
   CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse> {
     const data = MsgCreatePost.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v1.Msg", "CreatePost", data);
+    const promise = this.rpc.request("desmos.posts.v2.Msg", "CreatePost", data);
     return promise.then((data) =>
       MsgCreatePostResponse.decode(new _m0.Reader(data))
     );
@@ -1287,7 +1326,7 @@ export class MsgClientImpl implements Msg {
 
   EditPost(request: MsgEditPost): Promise<MsgEditPostResponse> {
     const data = MsgEditPost.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v1.Msg", "EditPost", data);
+    const promise = this.rpc.request("desmos.posts.v2.Msg", "EditPost", data);
     return promise.then((data) =>
       MsgEditPostResponse.decode(new _m0.Reader(data))
     );
@@ -1295,7 +1334,7 @@ export class MsgClientImpl implements Msg {
 
   DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse> {
     const data = MsgDeletePost.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v1.Msg", "DeletePost", data);
+    const promise = this.rpc.request("desmos.posts.v2.Msg", "DeletePost", data);
     return promise.then((data) =>
       MsgDeletePostResponse.decode(new _m0.Reader(data))
     );
@@ -1306,7 +1345,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgAddPostAttachmentResponse> {
     const data = MsgAddPostAttachment.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.posts.v1.Msg",
+      "desmos.posts.v2.Msg",
       "AddPostAttachment",
       data
     );
@@ -1320,7 +1359,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRemovePostAttachmentResponse> {
     const data = MsgRemovePostAttachment.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.posts.v1.Msg",
+      "desmos.posts.v2.Msg",
       "RemovePostAttachment",
       data
     );
@@ -1331,7 +1370,7 @@ export class MsgClientImpl implements Msg {
 
   AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse> {
     const data = MsgAnswerPoll.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v1.Msg", "AnswerPoll", data);
+    const promise = this.rpc.request("desmos.posts.v2.Msg", "AnswerPoll", data);
     return promise.then((data) =>
       MsgAnswerPollResponse.decode(new _m0.Reader(data))
     );

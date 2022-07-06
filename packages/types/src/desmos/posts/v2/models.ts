@@ -123,6 +123,8 @@ export interface Post {
   text: string;
   /** (optional) Entities connected to this post */
   entities?: Entities;
+  /** Tags related to this post, useful for categorization */
+  tags: string[];
   /** Author of the post */
   author: string;
   /** (optional) Id of the original post of the conversation */
@@ -152,13 +154,16 @@ export interface PostReference {
 
 /** Contains the details of entities parsed out of the post text */
 export interface Entities {
-  hashtags: Tag[];
-  mentions: Tag[];
+  /** Hashtags represent inside the post text */
+  hashtags: TextTag[];
+  /** Mentions present inside the post text */
+  mentions: TextTag[];
+  /** Links present inside the post text */
   urls: Url[];
 }
 
-/** Tag represents a generic tag */
-export interface Tag {
+/** TextTag represents a tag within the post text */
+export interface TextTag {
   /** Index of the character inside the text at which the tag starts */
   start: Long;
   /** Index of the character inside the text at which the tag ends */
@@ -186,11 +191,6 @@ export interface Attachment {
    * connected is
    */
   subspaceId: Long;
-  /**
-   * Id of the subspace section inside which the post to which this attachment
-   * should be connected is
-   */
-  sectionId: number;
   /** Id of the post to which this attachment should be connected */
   postId: Long;
   /** If of this attachment */
@@ -233,8 +233,6 @@ export interface Poll_ProvidedAnswer {
 export interface UserAnswer {
   /** Subspace id inside which the post related to this attachment is located */
   subspaceId: Long;
-  /** Section id inside which the post related to this attachment is located */
-  sectionId: number;
   /** Id of the post associated to this attachment */
   postId: Long;
   /** Id of the poll to which this answer is associated */
@@ -272,6 +270,7 @@ function createBasePost(): Post {
     externalId: "",
     text: "",
     entities: undefined,
+    tags: [],
     author: "",
     conversationId: Long.UZERO,
     referencedPosts: [],
@@ -301,28 +300,31 @@ export const Post = {
     if (message.entities !== undefined) {
       Entities.encode(message.entities, writer.uint32(50).fork()).ldelim();
     }
+    for (const v of message.tags) {
+      writer.uint32(58).string(v!);
+    }
     if (message.author !== "") {
-      writer.uint32(58).string(message.author);
+      writer.uint32(66).string(message.author);
     }
     if (!message.conversationId.isZero()) {
-      writer.uint32(64).uint64(message.conversationId);
+      writer.uint32(72).uint64(message.conversationId);
     }
     for (const v of message.referencedPosts) {
-      PostReference.encode(v!, writer.uint32(74).fork()).ldelim();
+      PostReference.encode(v!, writer.uint32(82).fork()).ldelim();
     }
     if (message.replySettings !== 0) {
-      writer.uint32(80).int32(message.replySettings);
+      writer.uint32(88).int32(message.replySettings);
     }
     if (message.creationDate !== undefined) {
       Timestamp.encode(
         toTimestamp(message.creationDate),
-        writer.uint32(90).fork()
+        writer.uint32(98).fork()
       ).ldelim();
     }
     if (message.lastEditedDate !== undefined) {
       Timestamp.encode(
         toTimestamp(message.lastEditedDate),
-        writer.uint32(98).fork()
+        writer.uint32(106).fork()
       ).ldelim();
     }
     return writer;
@@ -354,25 +356,28 @@ export const Post = {
           message.entities = Entities.decode(reader, reader.uint32());
           break;
         case 7:
-          message.author = reader.string();
+          message.tags.push(reader.string());
           break;
         case 8:
-          message.conversationId = reader.uint64() as Long;
+          message.author = reader.string();
           break;
         case 9:
+          message.conversationId = reader.uint64() as Long;
+          break;
+        case 10:
           message.referencedPosts.push(
             PostReference.decode(reader, reader.uint32())
           );
           break;
-        case 10:
+        case 11:
           message.replySettings = reader.int32() as any;
           break;
-        case 11:
+        case 12:
           message.creationDate = fromTimestamp(
             Timestamp.decode(reader, reader.uint32())
           );
           break;
-        case 12:
+        case 13:
           message.lastEditedDate = fromTimestamp(
             Timestamp.decode(reader, reader.uint32())
           );
@@ -397,6 +402,9 @@ export const Post = {
       entities: isSet(object.entities)
         ? Entities.fromJSON(object.entities)
         : undefined,
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => String(e))
+        : [],
       author: isSet(object.author) ? String(object.author) : "",
       conversationId: isSet(object.conversationId)
         ? Long.fromString(object.conversationId)
@@ -430,6 +438,11 @@ export const Post = {
       (obj.entities = message.entities
         ? Entities.toJSON(message.entities)
         : undefined);
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
     message.author !== undefined && (obj.author = message.author);
     message.conversationId !== undefined &&
       (obj.conversationId = (message.conversationId || Long.UZERO).toString());
@@ -466,6 +479,7 @@ export const Post = {
       object.entities !== undefined && object.entities !== null
         ? Entities.fromPartial(object.entities)
         : undefined;
+    message.tags = object.tags?.map((e) => e) || [];
     message.author = object.author ?? "";
     message.conversationId =
       object.conversationId !== undefined && object.conversationId !== null
@@ -575,10 +589,10 @@ export const Entities = {
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     for (const v of message.hashtags) {
-      Tag.encode(v!, writer.uint32(10).fork()).ldelim();
+      TextTag.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.mentions) {
-      Tag.encode(v!, writer.uint32(18).fork()).ldelim();
+      TextTag.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.urls) {
       Url.encode(v!, writer.uint32(26).fork()).ldelim();
@@ -594,10 +608,10 @@ export const Entities = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.hashtags.push(Tag.decode(reader, reader.uint32()));
+          message.hashtags.push(TextTag.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.mentions.push(Tag.decode(reader, reader.uint32()));
+          message.mentions.push(TextTag.decode(reader, reader.uint32()));
           break;
         case 3:
           message.urls.push(Url.decode(reader, reader.uint32()));
@@ -613,10 +627,10 @@ export const Entities = {
   fromJSON(object: any): Entities {
     return {
       hashtags: Array.isArray(object?.hashtags)
-        ? object.hashtags.map((e: any) => Tag.fromJSON(e))
+        ? object.hashtags.map((e: any) => TextTag.fromJSON(e))
         : [],
       mentions: Array.isArray(object?.mentions)
-        ? object.mentions.map((e: any) => Tag.fromJSON(e))
+        ? object.mentions.map((e: any) => TextTag.fromJSON(e))
         : [],
       urls: Array.isArray(object?.urls)
         ? object.urls.map((e: any) => Url.fromJSON(e))
@@ -628,14 +642,14 @@ export const Entities = {
     const obj: any = {};
     if (message.hashtags) {
       obj.hashtags = message.hashtags.map((e) =>
-        e ? Tag.toJSON(e) : undefined
+        e ? TextTag.toJSON(e) : undefined
       );
     } else {
       obj.hashtags = [];
     }
     if (message.mentions) {
       obj.mentions = message.mentions.map((e) =>
-        e ? Tag.toJSON(e) : undefined
+        e ? TextTag.toJSON(e) : undefined
       );
     } else {
       obj.mentions = [];
@@ -650,19 +664,24 @@ export const Entities = {
 
   fromPartial<I extends Exact<DeepPartial<Entities>, I>>(object: I): Entities {
     const message = createBaseEntities();
-    message.hashtags = object.hashtags?.map((e) => Tag.fromPartial(e)) || [];
-    message.mentions = object.mentions?.map((e) => Tag.fromPartial(e)) || [];
+    message.hashtags =
+      object.hashtags?.map((e) => TextTag.fromPartial(e)) || [];
+    message.mentions =
+      object.mentions?.map((e) => TextTag.fromPartial(e)) || [];
     message.urls = object.urls?.map((e) => Url.fromPartial(e)) || [];
     return message;
   },
 };
 
-function createBaseTag(): Tag {
+function createBaseTextTag(): TextTag {
   return { start: Long.UZERO, end: Long.UZERO, tag: "" };
 }
 
-export const Tag = {
-  encode(message: Tag, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+export const TextTag = {
+  encode(
+    message: TextTag,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
     if (!message.start.isZero()) {
       writer.uint32(8).uint64(message.start);
     }
@@ -675,10 +694,10 @@ export const Tag = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Tag {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TextTag {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTag();
+    const message = createBaseTextTag();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -699,7 +718,7 @@ export const Tag = {
     return message;
   },
 
-  fromJSON(object: any): Tag {
+  fromJSON(object: any): TextTag {
     return {
       start: isSet(object.start) ? Long.fromString(object.start) : Long.UZERO,
       end: isSet(object.end) ? Long.fromString(object.end) : Long.UZERO,
@@ -707,7 +726,7 @@ export const Tag = {
     };
   },
 
-  toJSON(message: Tag): unknown {
+  toJSON(message: TextTag): unknown {
     const obj: any = {};
     message.start !== undefined &&
       (obj.start = (message.start || Long.UZERO).toString());
@@ -717,8 +736,8 @@ export const Tag = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Tag>, I>>(object: I): Tag {
-    const message = createBaseTag();
+  fromPartial<I extends Exact<DeepPartial<TextTag>, I>>(object: I): TextTag {
+    const message = createBaseTextTag();
     message.start =
       object.start !== undefined && object.start !== null
         ? Long.fromValue(object.start)
@@ -819,7 +838,6 @@ export const Url = {
 function createBaseAttachment(): Attachment {
   return {
     subspaceId: Long.UZERO,
-    sectionId: 0,
     postId: Long.UZERO,
     id: 0,
     content: undefined,
@@ -834,17 +852,14 @@ export const Attachment = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-    if (message.sectionId !== 0) {
-      writer.uint32(16).uint32(message.sectionId);
-    }
     if (!message.postId.isZero()) {
-      writer.uint32(24).uint64(message.postId);
+      writer.uint32(16).uint64(message.postId);
     }
     if (message.id !== 0) {
-      writer.uint32(32).uint32(message.id);
+      writer.uint32(24).uint32(message.id);
     }
     if (message.content !== undefined) {
-      Any.encode(message.content, writer.uint32(42).fork()).ldelim();
+      Any.encode(message.content, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -860,15 +875,12 @@ export const Attachment = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.sectionId = reader.uint32();
-          break;
-        case 3:
           message.postId = reader.uint64() as Long;
           break;
-        case 4:
+        case 3:
           message.id = reader.uint32();
           break;
-        case 5:
+        case 4:
           message.content = Any.decode(reader, reader.uint32());
           break;
         default:
@@ -884,7 +896,6 @@ export const Attachment = {
       subspaceId: isSet(object.subspaceId)
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
-      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       postId: isSet(object.postId)
         ? Long.fromString(object.postId)
         : Long.UZERO,
@@ -897,8 +908,6 @@ export const Attachment = {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
     message.postId !== undefined &&
       (obj.postId = (message.postId || Long.UZERO).toString());
     message.id !== undefined && (obj.id = Math.round(message.id));
@@ -915,7 +924,6 @@ export const Attachment = {
       object.subspaceId !== undefined && object.subspaceId !== null
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
-    message.sectionId = object.sectionId ?? 0;
     message.postId =
       object.postId !== undefined && object.postId !== null
         ? Long.fromValue(object.postId)
@@ -1206,7 +1214,6 @@ export const Poll_ProvidedAnswer = {
 function createBaseUserAnswer(): UserAnswer {
   return {
     subspaceId: Long.UZERO,
-    sectionId: 0,
     postId: Long.UZERO,
     pollId: 0,
     answersIndexes: [],
@@ -1222,22 +1229,19 @@ export const UserAnswer = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-    if (message.sectionId !== 0) {
-      writer.uint32(16).uint32(message.sectionId);
-    }
     if (!message.postId.isZero()) {
-      writer.uint32(24).uint64(message.postId);
+      writer.uint32(16).uint64(message.postId);
     }
     if (message.pollId !== 0) {
-      writer.uint32(32).uint32(message.pollId);
+      writer.uint32(24).uint32(message.pollId);
     }
-    writer.uint32(42).fork();
+    writer.uint32(34).fork();
     for (const v of message.answersIndexes) {
       writer.uint32(v);
     }
     writer.ldelim();
     if (message.user !== "") {
-      writer.uint32(50).string(message.user);
+      writer.uint32(42).string(message.user);
     }
     return writer;
   },
@@ -1253,15 +1257,12 @@ export const UserAnswer = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.sectionId = reader.uint32();
-          break;
-        case 3:
           message.postId = reader.uint64() as Long;
           break;
-        case 4:
+        case 3:
           message.pollId = reader.uint32();
           break;
-        case 5:
+        case 4:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
@@ -1271,7 +1272,7 @@ export const UserAnswer = {
             message.answersIndexes.push(reader.uint32());
           }
           break;
-        case 6:
+        case 5:
           message.user = reader.string();
           break;
         default:
@@ -1287,7 +1288,6 @@ export const UserAnswer = {
       subspaceId: isSet(object.subspaceId)
         ? Long.fromString(object.subspaceId)
         : Long.UZERO,
-      sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       postId: isSet(object.postId)
         ? Long.fromString(object.postId)
         : Long.UZERO,
@@ -1303,8 +1303,6 @@ export const UserAnswer = {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
     message.postId !== undefined &&
       (obj.postId = (message.postId || Long.UZERO).toString());
     message.pollId !== undefined && (obj.pollId = Math.round(message.pollId));
@@ -1325,7 +1323,6 @@ export const UserAnswer = {
       object.subspaceId !== undefined && object.subspaceId !== null
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
-    message.sectionId = object.sectionId ?? 0;
     message.postId =
       object.postId !== undefined && object.postId !== null
         ? Long.fromValue(object.postId)

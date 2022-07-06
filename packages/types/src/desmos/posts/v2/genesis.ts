@@ -6,7 +6,7 @@ import {
   Post,
   Attachment,
   UserAnswer,
-} from "../../../desmos/posts/v1/models";
+} from "../../../desmos/posts/v2/models";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /** GenesisState contains the data of the genesis state for the posts module */

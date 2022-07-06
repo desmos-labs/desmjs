@@ -28,6 +28,7 @@ export interface QuerySubspacesResponse {
 
 /** QuerySubspace is the request type for the Query/Subspace RPC method */
 export interface QuerySubspaceRequest {
+  /** Id of the subspace to query */
   subspaceId: Long;
 }
 
@@ -87,7 +88,9 @@ export interface QueryUserGroupsResponse {
 
 /** QueryUserGroupRequest is the request type for the Query/UserGroup RPC method */
 export interface QueryUserGroupRequest {
+  /** Id of the subspace that contains the group */
   subspaceId: Long;
+  /** Id of the group to query */
   groupId: number;
 }
 
@@ -104,7 +107,9 @@ export interface QueryUserGroupResponse {
  * Query/UserGroupMembers RPC method
  */
 export interface QueryUserGroupMembersRequest {
+  /** Id of the subspace that contains the group */
   subspaceId: Long;
+  /** Id of the user group to query the members for */
   groupId: number;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
@@ -124,8 +129,11 @@ export interface QueryUserGroupMembersResponse {
  * RPC method
  */
 export interface QueryUserPermissionsRequest {
+  /** Id of the subspace to query the permissions for */
   subspaceId: Long;
+  /** Id of the section to query the permissions for */
   sectionId: number;
+  /** Address of the user to query the permissions for */
   user: string;
 }
 
