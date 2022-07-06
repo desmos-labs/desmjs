@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-walletconnect",
-  "version": "4.0.0-alpha.1",
+  "version": "4.1.0-alpha.1",
   "description": "WalletConnect integration for DesmJS",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>",
@@ -36,7 +36,6 @@
     "@cosmjs/tendermint-rpc": "^0.28.1",
     "@cosmjs/utils": "^0.28.1",
     "@desmoslabs/desmjs": "workspace:packages/core",
-    "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@walletconnect/client": "^1.7.7",
     "@walletconnect/qrcode-modal": "^1.7.7",
     "@walletconnect/types": "^1.6.6",
