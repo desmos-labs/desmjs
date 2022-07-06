@@ -6,12 +6,12 @@ import {
   MsgDeletePost,
   MsgEditPost,
   MsgRemovePostAttachment,
-} from "@desmoslabs/desmjs-types/desmos/posts/v1/msgs";
+} from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
 import {
   Entities,
   Media,
   Poll,
-} from "@desmoslabs/desmjs-types/desmos/posts/v1/models";
+} from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 import {
@@ -26,7 +26,7 @@ import { isAminoConverter } from "../../types";
 import { AminoAttachment, AminoEntities, AminoMedia, AminoPoll } from "./types";
 
 export const attachmentConverters: AminoConverters = {
-  "/desmos.posts.v1.Poll": {
+  "/desmos.posts.v2.Poll": {
     aminoType: "desmos/Poll",
     toAmino: (msg: Any): AminoPoll["value"] => {
       const poll = Poll.decode(msg.value);
@@ -41,7 +41,7 @@ export const attachmentConverters: AminoConverters = {
     },
     fromAmino: (msg: AminoPoll["value"]): Any => {
       return Any.fromPartial({
-        typeUrl: "/desmos.posts.v1.Poll",
+        typeUrl: "/desmos.posts.v2.Poll",
         value: Poll.encode(
           Poll.fromPartial({
             question: msg.question,
@@ -55,7 +55,7 @@ export const attachmentConverters: AminoConverters = {
       });
     },
   },
-  "/desmos.posts.v1.Media": {
+  "/desmos.posts.v2.Media": {
     aminoType: "desmos/Media",
     toAmino: (msg: Any): AminoMedia["value"] => {
       const media = Media.decode(msg.value);
@@ -66,7 +66,7 @@ export const attachmentConverters: AminoConverters = {
     },
     fromAmino: (msg: AminoMedia["value"]): Any => {
       return Any.fromPartial({
-        typeUrl: "/desmos.posts.v1.Media",
+        typeUrl: "/desmos.posts.v2.Media",
         value: Media.encode(
           Media.fromPartial({
             uri: msg.uri,
@@ -129,7 +129,7 @@ export function convertEntitiesFromAmino(entities: AminoEntities): Entities {
  */
 export function createPostsConverters(): AminoConverters {
   return {
-    "/desmos.posts.v1.MsgCreatePost": {
+    "/desmos.posts.v2.MsgCreatePost": {
       aminoType: "desmos/MsgCreatePost",
       toAmino: (msg: MsgCreatePost): AminoMsgCreatePost["value"] => {
         return {
@@ -140,6 +140,7 @@ export function createPostsConverters(): AminoConverters {
           entities: msg.entities
             ? convertEntitiesToAmino(msg.entities)
             : undefined,
+          tags: msg.tags,
           attachments: msg.attachments.map(convertAttachmentToAmino),
           author: msg.author,
           conversation_id: msg.conversationId,
@@ -162,6 +163,7 @@ export function createPostsConverters(): AminoConverters {
           entities: msg.entities
             ? convertEntitiesFromAmino(msg.entities)
             : undefined,
+          tags: msg.tags,
           attachments: msg.attachments.map(convertAttachmentFromAmino),
           author: msg.author,
           conversationId: msg.conversation_id,
@@ -176,7 +178,7 @@ export function createPostsConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.posts.v1.MsgEditPost": {
+    "/desmos.posts.v2.MsgEditPost": {
       aminoType: "desmos/MsgEditPost",
       toAmino: (msg: MsgEditPost): AminoMsgEditPost["value"] => {
         return {
@@ -186,6 +188,7 @@ export function createPostsConverters(): AminoConverters {
           entities: msg.entities
             ? convertEntitiesToAmino(msg.entities)
             : undefined,
+          tags: msg.tags,
           editor: msg.editor,
         };
       },
@@ -197,11 +200,12 @@ export function createPostsConverters(): AminoConverters {
           entities: msg.entities
             ? convertEntitiesFromAmino(msg.entities)
             : undefined,
+          tags: msg.tags,
           editor: msg.editor,
         };
       },
     },
-    "/desmos.posts.v1.MsgDeletePost": {
+    "/desmos.posts.v2.MsgDeletePost": {
       aminoType: "desmos/MsgDeletePost",
       toAmino: (msg: MsgDeletePost): AminoMsgDeletePost["value"] => {
         return {
@@ -218,7 +222,7 @@ export function createPostsConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.posts.v1.MsgAddPostAttachment": {
+    "/desmos.posts.v2.MsgAddPostAttachment": {
       aminoType: "desmos/MsgAddPostAttachment",
       toAmino: (
         msg: MsgAddPostAttachment
@@ -242,7 +246,7 @@ export function createPostsConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.posts.v1.MsgRemovePostAttachment": {
+    "/desmos.posts.v2.MsgRemovePostAttachment": {
       aminoType: "desmos/MsgRemovePostAttachment",
       toAmino: (
         msg: MsgRemovePostAttachment
@@ -265,7 +269,7 @@ export function createPostsConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.posts.v1.MsgAnswerPoll": {
+    "/desmos.posts.v2.MsgAnswerPoll": {
       aminoType: "desmos/MsgAnswerPoll",
       toAmino: (msg: MsgAnswerPoll): AminoMsgAnswerPoll["value"] => {
         return {

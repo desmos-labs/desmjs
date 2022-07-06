@@ -1,6 +1,6 @@
 import { AminoMsg } from "@cosmjs/amino";
 import Long from "long";
-import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v1/models";
+import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import { AminoAttachment, AminoEntities, AminoPostReference } from "./types";
 
 export interface AminoMsgCreatePost extends AminoMsg {
@@ -11,6 +11,7 @@ export interface AminoMsgCreatePost extends AminoMsg {
     external_id: string;
     text: string;
     entities?: AminoEntities;
+    tags: string[];
     attachments: AminoAttachment[];
     author: string;
     conversation_id: Long;
@@ -26,6 +27,7 @@ export interface AminoMsgEditPost extends AminoMsg {
     post_id: Long;
     text: string;
     entities?: AminoEntities;
+    tags: string[];
     editor: string;
   };
 }

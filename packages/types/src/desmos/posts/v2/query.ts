@@ -10,7 +10,7 @@ import {
   Params,
   Attachment,
   UserAnswer,
-} from "../../../desmos/posts/v1/models";
+} from "../../../desmos/posts/v2/models";
 
 /**
  * QuerySubspacePostsRequest is the request type for the Query/SubspacePosts RPC
@@ -1120,7 +1120,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QuerySubspacePostsResponse> {
     const data = QuerySubspacePostsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.posts.v1.Query",
+      "desmos.posts.v2.Query",
       "SubspacePosts",
       data
     );
@@ -1134,7 +1134,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QuerySectionPostsResponse> {
     const data = QuerySectionPostsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.posts.v1.Query",
+      "desmos.posts.v2.Query",
       "SectionPosts",
       data
     );
@@ -1145,7 +1145,7 @@ export class QueryClientImpl implements Query {
 
   Post(request: QueryPostRequest): Promise<QueryPostResponse> {
     const data = QueryPostRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v1.Query", "Post", data);
+    const promise = this.rpc.request("desmos.posts.v2.Query", "Post", data);
     return promise.then((data) =>
       QueryPostResponse.decode(new _m0.Reader(data))
     );
@@ -1156,7 +1156,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryPostAttachmentsResponse> {
     const data = QueryPostAttachmentsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.posts.v1.Query",
+      "desmos.posts.v2.Query",
       "PostAttachments",
       data
     );
@@ -1170,7 +1170,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryPollAnswersResponse> {
     const data = QueryPollAnswersRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.posts.v1.Query",
+      "desmos.posts.v2.Query",
       "PollAnswers",
       data
     );
@@ -1181,7 +1181,7 @@ export class QueryClientImpl implements Query {
 
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v1.Query", "Params", data);
+    const promise = this.rpc.request("desmos.posts.v2.Query", "Params", data);
     return promise.then((data) =>
       QueryParamsResponse.decode(new _m0.Reader(data))
     );

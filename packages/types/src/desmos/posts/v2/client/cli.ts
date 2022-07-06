@@ -7,7 +7,7 @@ import {
   PostReference,
   replySettingFromJSON,
   replySettingToJSON,
-} from "../../../../desmos/posts/v1/models";
+} from "../../../../desmos/posts/v2/models";
 import { Any } from "../../../../google/protobuf/any";
 
 /**
@@ -21,6 +21,8 @@ export interface CreatePostJSON {
   text: string;
   /** (optional) Entities connected to this post */
   entities?: Entities;
+  /** Tags related to this post */
+  tags: string[];
   /** Attachments of the post */
   attachments: Any[];
   /** (optional) Id of the original post of the conversation */
@@ -40,6 +42,8 @@ export interface EditPostJSON {
   text: string;
   /** New entities connected to this post */
   entities?: Entities;
+  /** New tags associated to this post */
+  tags: string[];
 }
 
 function createBaseCreatePostJSON(): CreatePostJSON {
@@ -47,6 +51,7 @@ function createBaseCreatePostJSON(): CreatePostJSON {
     externalId: "",
     text: "",
     entities: undefined,
+    tags: [],
     attachments: [],
     conversationId: Long.UZERO,
     replySettings: 0,
@@ -68,17 +73,20 @@ export const CreatePostJSON = {
     if (message.entities !== undefined) {
       Entities.encode(message.entities, writer.uint32(26).fork()).ldelim();
     }
+    for (const v of message.tags) {
+      writer.uint32(34).string(v!);
+    }
     for (const v of message.attachments) {
-      Any.encode(v!, writer.uint32(34).fork()).ldelim();
+      Any.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     if (!message.conversationId.isZero()) {
-      writer.uint32(40).uint64(message.conversationId);
+      writer.uint32(48).uint64(message.conversationId);
     }
     if (message.replySettings !== 0) {
-      writer.uint32(48).int32(message.replySettings);
+      writer.uint32(56).int32(message.replySettings);
     }
     for (const v of message.referencedPosts) {
-      PostReference.encode(v!, writer.uint32(58).fork()).ldelim();
+      PostReference.encode(v!, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -100,15 +108,18 @@ export const CreatePostJSON = {
           message.entities = Entities.decode(reader, reader.uint32());
           break;
         case 4:
-          message.attachments.push(Any.decode(reader, reader.uint32()));
+          message.tags.push(reader.string());
           break;
         case 5:
-          message.conversationId = reader.uint64() as Long;
+          message.attachments.push(Any.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.replySettings = reader.int32() as any;
+          message.conversationId = reader.uint64() as Long;
           break;
         case 7:
+          message.replySettings = reader.int32() as any;
+          break;
+        case 8:
           message.referencedPosts.push(
             PostReference.decode(reader, reader.uint32())
           );
@@ -128,6 +139,9 @@ export const CreatePostJSON = {
       entities: isSet(object.entities)
         ? Entities.fromJSON(object.entities)
         : undefined,
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => String(e))
+        : [],
       attachments: Array.isArray(object?.attachments)
         ? object.attachments.map((e: any) => Any.fromJSON(e))
         : [],
@@ -151,6 +165,11 @@ export const CreatePostJSON = {
       (obj.entities = message.entities
         ? Entities.toJSON(message.entities)
         : undefined);
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
         e ? Any.toJSON(e) : undefined
@@ -182,6 +201,7 @@ export const CreatePostJSON = {
       object.entities !== undefined && object.entities !== null
         ? Entities.fromPartial(object.entities)
         : undefined;
+    message.tags = object.tags?.map((e) => e) || [];
     message.attachments =
       object.attachments?.map((e) => Any.fromPartial(e)) || [];
     message.conversationId =
@@ -196,7 +216,7 @@ export const CreatePostJSON = {
 };
 
 function createBaseEditPostJSON(): EditPostJSON {
-  return { text: "", entities: undefined };
+  return { text: "", entities: undefined, tags: [] };
 }
 
 export const EditPostJSON = {
@@ -209,6 +229,9 @@ export const EditPostJSON = {
     }
     if (message.entities !== undefined) {
       Entities.encode(message.entities, writer.uint32(18).fork()).ldelim();
+    }
+    for (const v of message.tags) {
+      writer.uint32(26).string(v!);
     }
     return writer;
   },
@@ -226,6 +249,9 @@ export const EditPostJSON = {
         case 2:
           message.entities = Entities.decode(reader, reader.uint32());
           break;
+        case 3:
+          message.tags.push(reader.string());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -240,6 +266,9 @@ export const EditPostJSON = {
       entities: isSet(object.entities)
         ? Entities.fromJSON(object.entities)
         : undefined,
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => String(e))
+        : [],
     };
   },
 
@@ -250,6 +279,11 @@ export const EditPostJSON = {
       (obj.entities = message.entities
         ? Entities.toJSON(message.entities)
         : undefined);
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
     return obj;
   },
 
@@ -262,6 +296,7 @@ export const EditPostJSON = {
       object.entities !== undefined && object.entities !== null
         ? Entities.fromPartial(object.entities)
         : undefined;
+    message.tags = object.tags?.map((e) => e) || [];
     return message;
   },
 };

@@ -1,15 +1,15 @@
+import { Long } from "long";
 import { AminoMsg } from "@cosmjs/amino";
 import {
   Poll_ProvidedAnswer,
   PollTallyResults,
   PostReferenceType,
-  Tag,
-} from "@desmoslabs/desmjs-types/desmos/posts/v1/models";
-import { Long } from "long";
+  TextTag,
+} from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 
 export interface AminoEntities {
-  readonly hashtags: Tag[];
-  readonly mentions: Tag[];
+  readonly hashtags: TextTag[];
+  readonly mentions: TextTag[];
   readonly urls: AminoUrl[];
 }
 
