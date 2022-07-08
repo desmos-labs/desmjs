@@ -27,7 +27,7 @@ export interface OfflineSignerConfig {
 }
 
 /**
- * Adapter class to use the cosmjs OfflineSigner instances as signers.
+ * Adapter class to use a CosmJS OfflineSigner instance as a Signer instance.
  */
 export default class OfflineSignerAdapter extends Signer {
   private readonly signer: OfflineSigner;
