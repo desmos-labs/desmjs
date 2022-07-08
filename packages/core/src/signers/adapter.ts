@@ -109,7 +109,7 @@ export default class OfflineSignerAdapter extends Signer {
    *
    * @param mode The sign mode supported from the signer.
    * @param length The number of words in the mnemonic (12, 15, 18, 21 or 24).
-   * @param options An optional `OfflineSignerConfig` object optionally containing a hdPaths, and prefix.
+   * @param options An optional `OfflineSignerConfig` object optionally containing an HD path and prefix.
    */
   static generate(mode: SigningMode, length?: 12 | 15 | 18 | 21 | 24, options?: OfflineSignerConfig): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
