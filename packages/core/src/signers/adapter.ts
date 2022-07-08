@@ -86,7 +86,7 @@ export default class OfflineSignerAdapter extends Signer {
    *
    * @param mode The sign mode supported from the signer.
    * @param mnemonic Any valid English mnemonic.
-   * @param options An optional `OfflineSignerConfig` object optionally containing a hdPaths, and prefix.
+   * @param options An optional `OfflineSignerConfig` object optionally containing an HD path and prefix.
    */
   static fromMnemonic(mode: SigningMode, mnemonic: string, options?: OfflineSignerConfig): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
