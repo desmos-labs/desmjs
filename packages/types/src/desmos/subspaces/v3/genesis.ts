@@ -6,7 +6,7 @@ import {
   Section,
   UserPermission,
   UserGroup,
-} from "../../../desmos/subspaces/v2/models";
+} from "../../../desmos/subspaces/v3/models";
 
 /** GenesisState contains the data of the genesis state for the subspaces module */
 export interface GenesisState {

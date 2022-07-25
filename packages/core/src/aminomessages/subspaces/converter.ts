@@ -15,7 +15,7 @@ import {
   MsgMoveSection,
   MsgDeleteSection,
   MsgMoveUserGroup,
-} from "@desmoslabs/desmjs-types/desmos/subspaces/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import {
   AminoMsgAddUserToUserGroup,
   AminoMsgCreateSubspace,
@@ -39,7 +39,7 @@ import {
  */
 export function createSubspacesConverters(): AminoConverters {
   return {
-    "/desmos.subspaces.v2.MsgCreateRelationships": {
+    "/desmos.subspaces.v3.MsgCreateRelationships": {
       aminoType: "desmos/MsgCreateRelationships",
       toAmino: (msg: MsgCreateSubspace): AminoMsgCreateSubspace["value"] => {
         return {
@@ -60,7 +60,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgEditSubspace": {
+    "/desmos.subspaces.v3.MsgEditSubspace": {
       aminoType: "desmos/MsgEditSubspace",
       toAmino: (msg: MsgEditSubspace): AminoMsgEditSubspace["value"] => {
         return {
@@ -83,7 +83,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgDeleteSubspace": {
+    "/desmos.subspaces.v3.MsgDeleteSubspace": {
       aminoType: "desmos/MsgDeleteSubspace",
       toAmino: (msg: MsgDeleteSubspace): AminoMsgDeleteSubspace["value"] => {
         return {
@@ -98,7 +98,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgCreateSection": {
+    "/desmos.subspaces.v3.MsgCreateSection": {
       aminoType: "desmos/MsgCreateSection",
       toAmino: (msg: MsgCreateSection): AminoMsgCreateSection["value"] => {
         return {
@@ -119,7 +119,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgEditSection": {
+    "/desmos.subspaces.v3.MsgEditSection": {
       aminoType: "desmos/MsgEditSection",
       toAmino: (msg: MsgEditSection): AminoMsgEditSection["value"] => {
         return {
@@ -140,7 +140,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgMoveSection": {
+    "/desmos.subspaces.v3.MsgMoveSection": {
       aminoType: "desmos/MsgMoveSection",
       toAmino: (msg: MsgMoveSection): AminoMsgMoveSection["value"] => {
         return {
@@ -159,7 +159,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgDeleteSection": {
+    "/desmos.subspaces.v3.MsgDeleteSection": {
       aminoType: "desmos/MsgDeleteSection",
       toAmino: (msg: MsgDeleteSection): AminoMsgDeleteSection["value"] => {
         return {
@@ -176,7 +176,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgCreateUserGroup": {
+    "/desmos.subspaces.v3.MsgCreateUserGroup": {
       aminoType: "desmos/MsgCreateUserGroup",
       toAmino: (msg: MsgCreateUserGroup): AminoMsgCreateUserGroup["value"] => {
         return {
@@ -185,6 +185,7 @@ export function createSubspacesConverters(): AminoConverters {
           name: msg.name,
           description: msg.description,
           default_permissions: msg.defaultPermissions,
+          initial_members: msg.initialMembers,
           creator: msg.creator,
         };
       },
@@ -197,11 +198,12 @@ export function createSubspacesConverters(): AminoConverters {
           name: msg.name,
           description: msg.description,
           defaultPermissions: msg.default_permissions,
+          initialMembers: msg.initial_members,
           creator: msg.creator,
         };
       },
     },
-    "/desmos.subspaces.v2.MsgEditUserGroup": {
+    "/desmos.subspaces.v3.MsgEditUserGroup": {
       aminoType: "desmos/MsgEditUserGroup",
       toAmino: (msg: MsgEditUserGroup): AminoMsgEditUserGroup["value"] => {
         return {
@@ -222,7 +224,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgMoveUserGroup": {
+    "/desmos.subspaces.v3.MsgMoveUserGroup": {
       aminoType: "desmos/MsgMoveUserGroup",
       toAmino: (msg: MsgMoveUserGroup): AminoMsgMoveUserGroup["value"] => {
         return {
@@ -241,7 +243,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgSetUserGroupPermissions": {
+    "/desmos.subspaces.v3.MsgSetUserGroupPermissions": {
       aminoType: "desmos/MsgSetUserGroupPermissions",
       toAmino: (
         msg: MsgSetUserGroupPermissions
@@ -264,7 +266,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgDeleteUserGroup": {
+    "/desmos.subspaces.v3.MsgDeleteUserGroup": {
       aminoType: "desmos/MsgDeleteUserGroup",
       toAmino: (msg: MsgDeleteUserGroup): AminoMsgDeleteUserGroup["value"] => {
         return {
@@ -283,7 +285,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgAddUserToUserGroup": {
+    "/desmos.subspaces.v3.MsgAddUserToUserGroup": {
       aminoType: "desmos/MsgAddUserToUserGroup",
       toAmino: (
         msg: MsgAddUserToUserGroup
@@ -306,7 +308,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgRemoveUserFromUserGroup": {
+    "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup": {
       aminoType: "desmos/MsgRemoveUserFromUserGroup",
       toAmino: (
         msg: MsgRemoveUserFromUserGroup
@@ -329,7 +331,7 @@ export function createSubspacesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.subspaces.v2.MsgSetUserPermissions": {
+    "/desmos.subspaces.v3.MsgSetUserPermissions": {
       aminoType: "desmos/MsgSetUserPermissions",
       toAmino: (
         msg: MsgSetUserPermissions

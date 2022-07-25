@@ -5,7 +5,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { ChainLink } from "../../../desmos/profiles/v2/models_chain_links";
+import { ChainLink } from "../../../desmos/profiles/v3/models_chain_links";
 
 /**
  * QueryChainLinksRequest represents the request that should be used in order
@@ -77,6 +77,32 @@ export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
   user: string;
   chainName: string;
   target: string;
+}
+
+/**
+ * QueryDefaultExternalAddressesRequest is the request type for
+ * Query/DefaultExternalAddresses RPC method
+ */
+export interface QueryDefaultExternalAddressesRequest {
+  /** (Optional) Owner for which to query the default addresses */
+  owner: string;
+  /** (Optional) Chain name to query the default address for */
+  chainName: string;
+  /** Pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryDefaultExternalAddressesResponse is the response type for
+ * Query/DefaultExternalAddresses RPC method
+ */
+export interface QueryDefaultExternalAddressesResponse {
+  /**
+   * List of default addresses, each one represented by the associated chain
+   * link
+   */
+  links: ChainLink[];
+  pagination?: PageResponse;
 }
 
 function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
@@ -515,6 +541,174 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     message.user = object.user ?? "";
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryDefaultExternalAddressesRequest(): QueryDefaultExternalAddressesRequest {
+  return { owner: "", chainName: "", pagination: undefined };
+}
+
+export const QueryDefaultExternalAddressesRequest = {
+  encode(
+    message: QueryDefaultExternalAddressesRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.owner !== "") {
+      writer.uint32(10).string(message.owner);
+    }
+    if (message.chainName !== "") {
+      writer.uint32(18).string(message.chainName);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryDefaultExternalAddressesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDefaultExternalAddressesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.owner = reader.string();
+          break;
+        case 2:
+          message.chainName = reader.string();
+          break;
+        case 3:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDefaultExternalAddressesRequest {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      chainName: isSet(object.chainName) ? String(object.chainName) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDefaultExternalAddressesRequest): unknown {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryDefaultExternalAddressesRequest>, I>
+  >(object: I): QueryDefaultExternalAddressesRequest {
+    const message = createBaseQueryDefaultExternalAddressesRequest();
+    message.owner = object.owner ?? "";
+    message.chainName = object.chainName ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseQueryDefaultExternalAddressesResponse(): QueryDefaultExternalAddressesResponse {
+  return { links: [], pagination: undefined };
+}
+
+export const QueryDefaultExternalAddressesResponse = {
+  encode(
+    message: QueryDefaultExternalAddressesResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.links) {
+      ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryDefaultExternalAddressesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDefaultExternalAddressesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.links.push(ChainLink.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDefaultExternalAddressesResponse {
+    return {
+      links: Array.isArray(object?.links)
+        ? object.links.map((e: any) => ChainLink.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDefaultExternalAddressesResponse): unknown {
+    const obj: any = {};
+    if (message.links) {
+      obj.links = message.links.map((e) =>
+        e ? ChainLink.toJSON(e) : undefined
+      );
+    } else {
+      obj.links = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryDefaultExternalAddressesResponse>, I>
+  >(object: I): QueryDefaultExternalAddressesResponse {
+    const message = createBaseQueryDefaultExternalAddressesResponse();
+    message.links = object.links?.map((e) => ChainLink.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };

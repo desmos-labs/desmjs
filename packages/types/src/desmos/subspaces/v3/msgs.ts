@@ -124,6 +124,8 @@ export interface MsgCreateUserGroup {
   description: string;
   /** Default permissions to be applied to the group */
   defaultPermissions: string[];
+  /** Initial members to be put inside the group */
+  initialMembers: string[];
   /** Creator of the group */
   creator: string;
 }
@@ -1279,6 +1281,7 @@ function createBaseMsgCreateUserGroup(): MsgCreateUserGroup {
     name: "",
     description: "",
     defaultPermissions: [],
+    initialMembers: [],
     creator: "",
   };
 }
@@ -1303,8 +1306,11 @@ export const MsgCreateUserGroup = {
     for (const v of message.defaultPermissions) {
       writer.uint32(42).string(v!);
     }
+    for (const v of message.initialMembers) {
+      writer.uint32(50).string(v!);
+    }
     if (message.creator !== "") {
-      writer.uint32(50).string(message.creator);
+      writer.uint32(58).string(message.creator);
     }
     return writer;
   },
@@ -1332,6 +1338,9 @@ export const MsgCreateUserGroup = {
           message.defaultPermissions.push(reader.string());
           break;
         case 6:
+          message.initialMembers.push(reader.string());
+          break;
+        case 7:
           message.creator = reader.string();
           break;
         default:
@@ -1353,6 +1362,9 @@ export const MsgCreateUserGroup = {
       defaultPermissions: Array.isArray(object?.defaultPermissions)
         ? object.defaultPermissions.map((e: any) => String(e))
         : [],
+      initialMembers: Array.isArray(object?.initialMembers)
+        ? object.initialMembers.map((e: any) => String(e))
+        : [],
       creator: isSet(object.creator) ? String(object.creator) : "",
     };
   },
@@ -1371,6 +1383,11 @@ export const MsgCreateUserGroup = {
     } else {
       obj.defaultPermissions = [];
     }
+    if (message.initialMembers) {
+      obj.initialMembers = message.initialMembers.map((e) => e);
+    } else {
+      obj.initialMembers = [];
+    }
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
   },
@@ -1387,6 +1404,7 @@ export const MsgCreateUserGroup = {
     message.name = object.name ?? "";
     message.description = object.description ?? "";
     message.defaultPermissions = object.defaultPermissions?.map((e) => e) || [];
+    message.initialMembers = object.initialMembers?.map((e) => e) || [];
     message.creator = object.creator ?? "";
     return message;
   },
@@ -2522,7 +2540,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgCreateSubspaceResponse> {
     const data = MsgCreateSubspace.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "CreateSubspace",
       data
     );
@@ -2534,7 +2552,7 @@ export class MsgClientImpl implements Msg {
   EditSubspace(request: MsgEditSubspace): Promise<MsgEditSubspaceResponse> {
     const data = MsgEditSubspace.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "EditSubspace",
       data
     );
@@ -2548,7 +2566,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgDeleteSubspaceResponse> {
     const data = MsgDeleteSubspace.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "DeleteSubspace",
       data
     );
@@ -2560,7 +2578,7 @@ export class MsgClientImpl implements Msg {
   CreateSection(request: MsgCreateSection): Promise<MsgCreateSectionResponse> {
     const data = MsgCreateSection.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "CreateSection",
       data
     );
@@ -2572,7 +2590,7 @@ export class MsgClientImpl implements Msg {
   EditSection(request: MsgEditSection): Promise<MsgEditSectionResponse> {
     const data = MsgEditSection.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "EditSection",
       data
     );
@@ -2584,7 +2602,7 @@ export class MsgClientImpl implements Msg {
   MoveSection(request: MsgMoveSection): Promise<MsgMoveSectionResponse> {
     const data = MsgMoveSection.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "MoveSection",
       data
     );
@@ -2596,7 +2614,7 @@ export class MsgClientImpl implements Msg {
   DeleteSection(request: MsgDeleteSection): Promise<MsgDeleteSectionResponse> {
     const data = MsgDeleteSection.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "DeleteSection",
       data
     );
@@ -2610,7 +2628,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgCreateUserGroupResponse> {
     const data = MsgCreateUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "CreateUserGroup",
       data
     );
@@ -2622,7 +2640,7 @@ export class MsgClientImpl implements Msg {
   EditUserGroup(request: MsgEditUserGroup): Promise<MsgEditUserGroupResponse> {
     const data = MsgEditUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "EditUserGroup",
       data
     );
@@ -2634,7 +2652,7 @@ export class MsgClientImpl implements Msg {
   MoveUserGroup(request: MsgMoveUserGroup): Promise<MsgMoveUserGroupResponse> {
     const data = MsgMoveUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "MoveUserGroup",
       data
     );
@@ -2648,7 +2666,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgSetUserGroupPermissionsResponse> {
     const data = MsgSetUserGroupPermissions.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "SetUserGroupPermissions",
       data
     );
@@ -2662,7 +2680,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgDeleteUserGroupResponse> {
     const data = MsgDeleteUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "DeleteUserGroup",
       data
     );
@@ -2676,7 +2694,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgAddUserToUserGroupResponse> {
     const data = MsgAddUserToUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "AddUserToUserGroup",
       data
     );
@@ -2690,7 +2708,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRemoveUserFromUserGroupResponse> {
     const data = MsgRemoveUserFromUserGroup.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "RemoveUserFromUserGroup",
       data
     );
@@ -2704,7 +2722,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgSetUserPermissionsResponse> {
     const data = MsgSetUserPermissions.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Msg",
+      "desmos.subspaces.v3.Msg",
       "SetUserPermissions",
       data
     );

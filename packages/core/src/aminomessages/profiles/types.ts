@@ -25,20 +25,20 @@ export interface AminoHexAddress extends AminoMsg {
   };
 }
 
-export interface AminoSignatureData extends AminoMsg {}
+export interface AminoSignature extends AminoMsg {}
 
-export interface AminoSingleSignatureData extends AminoSignatureData {
-  readonly type: "desmos/SingleSignatureData";
+export interface AminoSingleSignature extends AminoSignature {
+  readonly type: "desmos/SingleSignature";
   readonly value: {
-    readonly mode: number;
+    readonly value_type: number;
     readonly signature: string;
   };
 }
 
-export interface AminoMultiSignatureData extends AminoSignatureData {
-  readonly type: "desmos/MultiSignatureDat";
+export interface AminoCosmosMultiSignature extends AminoSignature {
+  readonly type: "desmos/CosmosMultiSignature";
   value: {
     readonly bit_array: string;
-    readonly signatures: [AminoSignatureData];
+    readonly signatures: [AminoSignature];
   };
 }

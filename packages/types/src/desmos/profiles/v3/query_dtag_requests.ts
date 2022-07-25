@@ -5,7 +5,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DTagTransferRequest } from "../../../desmos/profiles/v2/models_dtag_requests";
+import { DTagTransferRequest } from "../../../desmos/profiles/v3/models_dtag_requests";
 
 /**
  * QueryIncomingDTagTransferRequestsRequest is the request type for the

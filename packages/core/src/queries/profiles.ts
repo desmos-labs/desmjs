@@ -6,27 +6,28 @@ import {
   QueryClient,
 } from "@cosmjs/stargate";
 import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
-import { QueryIncomingDTagTransferRequestsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_dtag_requests";
+import { QueryIncomingDTagTransferRequestsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_dtag_requests";
 import {
   QueryChainLinkOwnersResponse,
   QueryChainLinksResponse,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_chain_links";
+  QueryDefaultExternalAddressesResponse,
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_chain_links";
 import {
   QueryApplicationLinksResponse,
   QueryApplicationLinkByClientIDResponse,
   QueryApplicationLinkOwnersResponse,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_app_links";
-import { QueryClientImpl } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query";
-import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v2/models_profile";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_app_links";
+import { QueryClientImpl } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query";
+import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { assert } from "@cosmjs/utils";
-import { QueryParamsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v2/query_params";
+import { QueryParamsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_params";
 
 export interface ProfilesExtension {
   readonly profiles: {
     /**
      * Queries the profile of a specific user given their DTag or address.
      * If the queried user does not have a profile, the returned response will
-     * contain a null profile.
+     * contain null instead.
      */
     readonly profile: (user: string) => Promise<Profile | null>;
     /**
@@ -36,6 +37,7 @@ export interface ProfilesExtension {
       address: string,
       pagination?: PageRequest
     ) => Promise<QueryIncomingDTagTransferRequestsResponse>;
+
     /**
      * Queries chain links for the given user.
      */
@@ -54,6 +56,15 @@ export interface ProfilesExtension {
       target?: string,
       pagination?: PageRequest
     ) => Promise<QueryChainLinkOwnersResponse>;
+    /**
+     * Queries the default external addresses for an optional user and chain name.
+     * The specified chain name will be used only if a user is specified as well.
+     */
+    readonly defaultExternalAddresses: (
+      user?: string,
+      chainName?: string,
+      pagination?: PageRequest
+    ) => Promise<QueryDefaultExternalAddressesResponse>;
     /**
      * Queries a single application link for a given user,
      * searching via the application name and username.
@@ -96,8 +107,12 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
   return {
     profiles: {
       profile: async (user: string) => {
-        const { profile } = await queryService.Profile({ user });
-        return profile ? Profile.decode(profile.value) : null;
+        try {
+          const res = await queryService.Profile({ user });
+          return Profile.decode(res.profile!.value);
+        } catch (e) {
+          return null;
+        }
       },
       incomingDTagTransferRequests: async (
         receiver: string,
@@ -129,6 +144,17 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
         return queryService.ChainLinkOwners({
           chainName: chainName || "",
           target: target || "",
+          pagination,
+        });
+      },
+      defaultExternalAddresses: async (
+        user?: string,
+        chainName?: string,
+        pagination?: PageRequest
+      ) => {
+        return queryService.DefaultExternalAddresses({
+          owner: user ?? "",
+          chainName: chainName ?? "",
           pagination,
         });
       },
@@ -171,7 +197,7 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
 export function profileFromAny(input: Any): Account {
   const { typeUrl, value } = input;
   switch (typeUrl) {
-    case "/desmos.profiles.v2.Profile": {
+    case "/desmos.profiles.v3.Profile": {
       const baseAccount = Profile.decode(value)?.account;
       assert(baseAccount);
       return accountFromAny(baseAccount);

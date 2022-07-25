@@ -5,7 +5,7 @@ import { Any } from "../../../google/protobuf/any";
 import {
   Proof,
   ChainConfig,
-} from "../../../desmos/profiles/v2/models_chain_links";
+} from "../../../desmos/profiles/v3/models_chain_links";
 
 /**
  * LinkChainAccountPacketData defines the object that should be sent inside a

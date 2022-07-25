@@ -7,7 +7,7 @@ import {
   QueryUserGroupsResponse,
   QueryClientImpl,
   QueryUserPermissionsResponse,
-} from "@desmoslabs/desmjs-types/desmos/subspaces/v2/query";
+} from "@desmoslabs/desmjs-types/desmos/subspaces/v3/query";
 import Long from "long";
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 

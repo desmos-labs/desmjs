@@ -2,13 +2,81 @@
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-import {
-  SignMode,
-  signModeFromJSON,
-  signModeToJSON,
-} from "../../../cosmos/tx/signing/v1beta1/signing";
 import { CompactBitArray } from "../../../cosmos/crypto/multisig/v1beta1/multisig";
 import { Timestamp } from "../../../google/protobuf/timestamp";
+
+/** SignatureValueType specifies all the possible signature types */
+export enum SignatureValueType {
+  /**
+   * SIGNATURE_VALUE_TYPE_UNSPECIFIED - SIGNATURE_VALUE_TYPE_UNSPECIFIED specifies an unknown signing mode
+   * and will be rejected
+   */
+  SIGNATURE_VALUE_TYPE_UNSPECIFIED = 0,
+  /**
+   * SIGNATURE_VALUE_TYPE_RAW - SIGNATURE_VALUE_TYPE_RAW should be used when the value has been
+   * signed as a raw byte array
+   */
+  SIGNATURE_VALUE_TYPE_RAW = 1,
+  /**
+   * SIGNATURE_VALUE_TYPE_COSMOS_DIRECT - SIGNATURE_VALUE_TYPE_COSMOS_DIRECT should be used when the signed
+   * value has been encoded as a Protobuf transaction containing the owner
+   * address inside its memo field
+   */
+  SIGNATURE_VALUE_TYPE_COSMOS_DIRECT = 2,
+  /**
+   * SIGNATURE_VALUE_TYPE_COSMOS_AMINO - SIGNATURE_VALUE_TYPE_COSMOS_AMINO should be used when the value has
+   * been encoded as an Amino transaction containing the owner address inside
+   * its memo field
+   */
+  SIGNATURE_VALUE_TYPE_COSMOS_AMINO = 3,
+  /**
+   * SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN - SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN should be used when the value
+   * has been encoded following the EVM personal_sign specification
+   */
+  SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function signatureValueTypeFromJSON(object: any): SignatureValueType {
+  switch (object) {
+    case 0:
+    case "SIGNATURE_VALUE_TYPE_UNSPECIFIED":
+      return SignatureValueType.SIGNATURE_VALUE_TYPE_UNSPECIFIED;
+    case 1:
+    case "SIGNATURE_VALUE_TYPE_RAW":
+      return SignatureValueType.SIGNATURE_VALUE_TYPE_RAW;
+    case 2:
+    case "SIGNATURE_VALUE_TYPE_COSMOS_DIRECT":
+      return SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_DIRECT;
+    case 3:
+    case "SIGNATURE_VALUE_TYPE_COSMOS_AMINO":
+      return SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_AMINO;
+    case 4:
+    case "SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN":
+      return SignatureValueType.SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SignatureValueType.UNRECOGNIZED;
+  }
+}
+
+export function signatureValueTypeToJSON(object: SignatureValueType): string {
+  switch (object) {
+    case SignatureValueType.SIGNATURE_VALUE_TYPE_UNSPECIFIED:
+      return "SIGNATURE_VALUE_TYPE_UNSPECIFIED";
+    case SignatureValueType.SIGNATURE_VALUE_TYPE_RAW:
+      return "SIGNATURE_VALUE_TYPE_RAW";
+    case SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_DIRECT:
+      return "SIGNATURE_VALUE_TYPE_COSMOS_DIRECT";
+    case SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_AMINO:
+      return "SIGNATURE_VALUE_TYPE_COSMOS_AMINO";
+    case SignatureValueType.SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN:
+      return "SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN";
+    default:
+      return "UNKNOWN";
+  }
+}
 
 /**
  * ChainLink contains the data representing either an inter- or cross- chain
@@ -82,16 +150,16 @@ export interface HexAddress {
   prefix: string;
 }
 
-/** SingleSignatureData is the signature data for a single signer */
-export interface SingleSignatureData {
-  /** Mode is the signing mode of the single signer */
-  mode: SignMode;
+/** SingleSignature is the signature data for a single signer */
+export interface SingleSignature {
+  /** Type represents the type of the signature value */
+  valueType: SignatureValueType;
   /** Signature is the raw signature bytes */
   signature: Uint8Array;
 }
 
-/** MultiSignatureData is the signature data for a multisig public key */
-export interface MultiSignatureData {
+/** CosmosMultiSignature is the signature data for a multisig public key */
+export interface CosmosMultiSignature {
   /** Bitarray specifies which keys within the multisig are signing */
   bitArray?: CompactBitArray;
   /** Signatures is the signatures of the multi-signature */
@@ -534,17 +602,17 @@ export const HexAddress = {
   },
 };
 
-function createBaseSingleSignatureData(): SingleSignatureData {
-  return { mode: 0, signature: new Uint8Array() };
+function createBaseSingleSignature(): SingleSignature {
+  return { valueType: 0, signature: new Uint8Array() };
 }
 
-export const SingleSignatureData = {
+export const SingleSignature = {
   encode(
-    message: SingleSignatureData,
+    message: SingleSignature,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.mode !== 0) {
-      writer.uint32(8).int32(message.mode);
+    if (message.valueType !== 0) {
+      writer.uint32(8).int32(message.valueType);
     }
     if (message.signature.length !== 0) {
       writer.uint32(18).bytes(message.signature);
@@ -552,15 +620,15 @@ export const SingleSignatureData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): SingleSignatureData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SingleSignature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseSingleSignatureData();
+    const message = createBaseSingleSignature();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.mode = reader.int32() as any;
+          message.valueType = reader.int32() as any;
           break;
         case 2:
           message.signature = reader.bytes();
@@ -573,18 +641,21 @@ export const SingleSignatureData = {
     return message;
   },
 
-  fromJSON(object: any): SingleSignatureData {
+  fromJSON(object: any): SingleSignature {
     return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : 0,
+      valueType: isSet(object.valueType)
+        ? signatureValueTypeFromJSON(object.valueType)
+        : 0,
       signature: isSet(object.signature)
         ? bytesFromBase64(object.signature)
         : new Uint8Array(),
     };
   },
 
-  toJSON(message: SingleSignatureData): unknown {
+  toJSON(message: SingleSignature): unknown {
     const obj: any = {};
-    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
+    message.valueType !== undefined &&
+      (obj.valueType = signatureValueTypeToJSON(message.valueType));
     message.signature !== undefined &&
       (obj.signature = base64FromBytes(
         message.signature !== undefined ? message.signature : new Uint8Array()
@@ -592,23 +663,23 @@ export const SingleSignatureData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SingleSignatureData>, I>>(
+  fromPartial<I extends Exact<DeepPartial<SingleSignature>, I>>(
     object: I
-  ): SingleSignatureData {
-    const message = createBaseSingleSignatureData();
-    message.mode = object.mode ?? 0;
+  ): SingleSignature {
+    const message = createBaseSingleSignature();
+    message.valueType = object.valueType ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
   },
 };
 
-function createBaseMultiSignatureData(): MultiSignatureData {
+function createBaseCosmosMultiSignature(): CosmosMultiSignature {
   return { bitArray: undefined, signatures: [] };
 }
 
-export const MultiSignatureData = {
+export const CosmosMultiSignature = {
   encode(
-    message: MultiSignatureData,
+    message: CosmosMultiSignature,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
     if (message.bitArray !== undefined) {
@@ -623,10 +694,13 @@ export const MultiSignatureData = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): MultiSignatureData {
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): CosmosMultiSignature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseMultiSignatureData();
+    const message = createBaseCosmosMultiSignature();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -644,7 +718,7 @@ export const MultiSignatureData = {
     return message;
   },
 
-  fromJSON(object: any): MultiSignatureData {
+  fromJSON(object: any): CosmosMultiSignature {
     return {
       bitArray: isSet(object.bitArray)
         ? CompactBitArray.fromJSON(object.bitArray)
@@ -655,7 +729,7 @@ export const MultiSignatureData = {
     };
   },
 
-  toJSON(message: MultiSignatureData): unknown {
+  toJSON(message: CosmosMultiSignature): unknown {
     const obj: any = {};
     message.bitArray !== undefined &&
       (obj.bitArray = message.bitArray
@@ -671,10 +745,10 @@ export const MultiSignatureData = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MultiSignatureData>, I>>(
+  fromPartial<I extends Exact<DeepPartial<CosmosMultiSignature>, I>>(
     object: I
-  ): MultiSignatureData {
-    const message = createBaseMultiSignatureData();
+  ): CosmosMultiSignature {
+    const message = createBaseCosmosMultiSignature();
     message.bitArray =
       object.bitArray !== undefined && object.bitArray !== null
         ? CompactBitArray.fromPartial(object.bitArray)

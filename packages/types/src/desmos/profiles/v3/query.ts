@@ -4,17 +4,19 @@ import * as _m0 from "protobufjs/minimal";
 import {
   QueryProfileResponse,
   QueryProfileRequest,
-} from "../../../desmos/profiles/v2/query_profile";
+} from "../../../desmos/profiles/v3/query_profile";
 import {
   QueryIncomingDTagTransferRequestsResponse,
   QueryIncomingDTagTransferRequestsRequest,
-} from "../../../desmos/profiles/v2/query_dtag_requests";
+} from "../../../desmos/profiles/v3/query_dtag_requests";
 import {
   QueryChainLinksResponse,
   QueryChainLinkOwnersResponse,
+  QueryDefaultExternalAddressesResponse,
   QueryChainLinksRequest,
   QueryChainLinkOwnersRequest,
-} from "../../../desmos/profiles/v2/query_chain_links";
+  QueryDefaultExternalAddressesRequest,
+} from "../../../desmos/profiles/v3/query_chain_links";
 import {
   QueryApplicationLinksResponse,
   QueryApplicationLinkByClientIDResponse,
@@ -22,11 +24,11 @@ import {
   QueryApplicationLinksRequest,
   QueryApplicationLinkByClientIDRequest,
   QueryApplicationLinkOwnersRequest,
-} from "../../../desmos/profiles/v2/query_app_links";
+} from "../../../desmos/profiles/v3/query_app_links";
 import {
   QueryParamsResponse,
   QueryParamsRequest,
-} from "../../../desmos/profiles/v2/query_params";
+} from "../../../desmos/profiles/v3/query_params";
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -55,6 +57,13 @@ export interface Query {
   ChainLinkOwners(
     request: QueryChainLinkOwnersRequest
   ): Promise<QueryChainLinkOwnersResponse>;
+  /**
+   * DefaultExternalAddresses queries the default addresses associated to the
+   * given user and (optionally) chain name
+   */
+  DefaultExternalAddresses(
+    request: QueryDefaultExternalAddressesRequest
+  ): Promise<QueryDefaultExternalAddressesResponse>;
   /**
    * ApplicationLinks queries the applications links associated to the given
    * user, if provided. Otherwise, it queries all the application links stored.
@@ -89,6 +98,7 @@ export class QueryClientImpl implements Query {
       this.IncomingDTagTransferRequests.bind(this);
     this.ChainLinks = this.ChainLinks.bind(this);
     this.ChainLinkOwners = this.ChainLinkOwners.bind(this);
+    this.DefaultExternalAddresses = this.DefaultExternalAddresses.bind(this);
     this.ApplicationLinks = this.ApplicationLinks.bind(this);
     this.ApplicationLinkByClientID = this.ApplicationLinkByClientID.bind(this);
     this.ApplicationLinkOwners = this.ApplicationLinkOwners.bind(this);
@@ -97,7 +107,7 @@ export class QueryClientImpl implements Query {
   Profile(request: QueryProfileRequest): Promise<QueryProfileResponse> {
     const data = QueryProfileRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "Profile",
       data
     );
@@ -112,7 +122,7 @@ export class QueryClientImpl implements Query {
     const data =
       QueryIncomingDTagTransferRequestsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "IncomingDTagTransferRequests",
       data
     );
@@ -126,7 +136,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryChainLinksResponse> {
     const data = QueryChainLinksRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "ChainLinks",
       data
     );
@@ -140,7 +150,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryChainLinkOwnersResponse> {
     const data = QueryChainLinkOwnersRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "ChainLinkOwners",
       data
     );
@@ -149,12 +159,26 @@ export class QueryClientImpl implements Query {
     );
   }
 
+  DefaultExternalAddresses(
+    request: QueryDefaultExternalAddressesRequest
+  ): Promise<QueryDefaultExternalAddressesResponse> {
+    const data = QueryDefaultExternalAddressesRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.profiles.v3.Query",
+      "DefaultExternalAddresses",
+      data
+    );
+    return promise.then((data) =>
+      QueryDefaultExternalAddressesResponse.decode(new _m0.Reader(data))
+    );
+  }
+
   ApplicationLinks(
     request: QueryApplicationLinksRequest
   ): Promise<QueryApplicationLinksResponse> {
     const data = QueryApplicationLinksRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "ApplicationLinks",
       data
     );
@@ -168,7 +192,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryApplicationLinkByClientIDResponse> {
     const data = QueryApplicationLinkByClientIDRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "ApplicationLinkByClientID",
       data
     );
@@ -182,7 +206,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryApplicationLinkOwnersResponse> {
     const data = QueryApplicationLinkOwnersRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "ApplicationLinkOwners",
       data
     );
@@ -194,7 +218,7 @@ export class QueryClientImpl implements Query {
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Query",
+      "desmos.profiles.v3.Query",
       "Params",
       data
     );

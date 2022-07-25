@@ -5,7 +5,7 @@ import { Any } from "../../../google/protobuf/any";
 import {
   Proof,
   ChainConfig,
-} from "../../../desmos/profiles/v2/models_chain_links";
+} from "../../../desmos/profiles/v3/models_chain_links";
 
 /** MsgLinkChainAccount represents a message to link an account to a profile. */
 export interface MsgLinkChainAccount {
@@ -46,6 +46,25 @@ export interface MsgUnlinkChainAccount {
 
 /** MsgUnlinkChainAccountResponse defines the Msg/UnlinkAccount response type. */
 export interface MsgUnlinkChainAccountResponse {}
+
+/**
+ * MsgSetDefaultExternalAddress represents the message used to set a default
+ * address for a specific chain
+ */
+export interface MsgSetDefaultExternalAddress {
+  /** Name of the chain for which to set the default address */
+  chainName: string;
+  /** Address to be set as the default one */
+  target: string;
+  /** User signing the message */
+  signer: string;
+}
+
+/**
+ * MsgSetDefaultExternalAddressResponse represents the
+ * Msg/SetDefaultExternalAddress response type
+ */
+export interface MsgSetDefaultExternalAddressResponse {}
 
 function createBaseMsgLinkChainAccount(): MsgLinkChainAccount {
   return {
@@ -321,6 +340,128 @@ export const MsgUnlinkChainAccountResponse = {
     _: I
   ): MsgUnlinkChainAccountResponse {
     const message = createBaseMsgUnlinkChainAccountResponse();
+    return message;
+  },
+};
+
+function createBaseMsgSetDefaultExternalAddress(): MsgSetDefaultExternalAddress {
+  return { chainName: "", target: "", signer: "" };
+}
+
+export const MsgSetDefaultExternalAddress = {
+  encode(
+    message: MsgSetDefaultExternalAddress,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.chainName !== "") {
+      writer.uint32(10).string(message.chainName);
+    }
+    if (message.target !== "") {
+      writer.uint32(18).string(message.target);
+    }
+    if (message.signer !== "") {
+      writer.uint32(26).string(message.signer);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgSetDefaultExternalAddress {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSetDefaultExternalAddress();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.chainName = reader.string();
+          break;
+        case 2:
+          message.target = reader.string();
+          break;
+        case 3:
+          message.signer = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgSetDefaultExternalAddress {
+    return {
+      chainName: isSet(object.chainName) ? String(object.chainName) : "",
+      target: isSet(object.target) ? String(object.target) : "",
+      signer: isSet(object.signer) ? String(object.signer) : "",
+    };
+  },
+
+  toJSON(message: MsgSetDefaultExternalAddress): unknown {
+    const obj: any = {};
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    message.target !== undefined && (obj.target = message.target);
+    message.signer !== undefined && (obj.signer = message.signer);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgSetDefaultExternalAddress>, I>>(
+    object: I
+  ): MsgSetDefaultExternalAddress {
+    const message = createBaseMsgSetDefaultExternalAddress();
+    message.chainName = object.chainName ?? "";
+    message.target = object.target ?? "";
+    message.signer = object.signer ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgSetDefaultExternalAddressResponse(): MsgSetDefaultExternalAddressResponse {
+  return {};
+}
+
+export const MsgSetDefaultExternalAddressResponse = {
+  encode(
+    _: MsgSetDefaultExternalAddressResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgSetDefaultExternalAddressResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSetDefaultExternalAddressResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgSetDefaultExternalAddressResponse {
+    return {};
+  },
+
+  toJSON(_: MsgSetDefaultExternalAddressResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<MsgSetDefaultExternalAddressResponse>, I>
+  >(_: I): MsgSetDefaultExternalAddressResponse {
+    const message = createBaseMsgSetDefaultExternalAddressResponse();
     return message;
   },
 };

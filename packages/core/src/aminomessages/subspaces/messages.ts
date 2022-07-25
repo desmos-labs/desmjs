@@ -81,6 +81,7 @@ export interface AminoMsgCreateUserGroup extends AminoMsg {
     name: string;
     description: string;
     default_permissions: string[];
+    initial_members: string[];
     creator: string;
   };
 }

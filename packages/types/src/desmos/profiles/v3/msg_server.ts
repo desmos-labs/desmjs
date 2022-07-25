@@ -6,7 +6,7 @@ import {
   MsgDeleteProfileResponse,
   MsgSaveProfile,
   MsgDeleteProfile,
-} from "../../../desmos/profiles/v2/msgs_profile";
+} from "../../../desmos/profiles/v3/msgs_profile";
 import {
   MsgRequestDTagTransferResponse,
   MsgCancelDTagTransferRequestResponse,
@@ -16,19 +16,21 @@ import {
   MsgCancelDTagTransferRequest,
   MsgAcceptDTagTransferRequest,
   MsgRefuseDTagTransferRequest,
-} from "../../../desmos/profiles/v2/msgs_dtag_requests";
+} from "../../../desmos/profiles/v3/msgs_dtag_requests";
 import {
   MsgLinkChainAccountResponse,
   MsgUnlinkChainAccountResponse,
+  MsgSetDefaultExternalAddressResponse,
   MsgLinkChainAccount,
   MsgUnlinkChainAccount,
-} from "../../../desmos/profiles/v2/msgs_chain_links";
+  MsgSetDefaultExternalAddress,
+} from "../../../desmos/profiles/v3/msgs_chain_links";
 import {
   MsgLinkApplicationResponse,
   MsgUnlinkApplicationResponse,
   MsgLinkApplication,
   MsgUnlinkApplication,
-} from "../../../desmos/profiles/v2/msgs_app_links";
+} from "../../../desmos/profiles/v3/msgs_app_links";
 
 /** Msg defines the relationships Msg service. */
 export interface Msg {
@@ -79,6 +81,13 @@ export interface Msg {
     request: MsgUnlinkChainAccount
   ): Promise<MsgUnlinkChainAccountResponse>;
   /**
+   * SetDefaultExternalAddress allows to set a specific external address as the
+   * default one for a given chain
+   */
+  SetDefaultExternalAddress(
+    request: MsgSetDefaultExternalAddress
+  ): Promise<MsgSetDefaultExternalAddressResponse>;
+  /**
    * LinkApplication defines a method to create a centralized application
    * link
    */
@@ -103,13 +112,14 @@ export class MsgClientImpl implements Msg {
     this.RefuseDTagTransferRequest = this.RefuseDTagTransferRequest.bind(this);
     this.LinkChainAccount = this.LinkChainAccount.bind(this);
     this.UnlinkChainAccount = this.UnlinkChainAccount.bind(this);
+    this.SetDefaultExternalAddress = this.SetDefaultExternalAddress.bind(this);
     this.LinkApplication = this.LinkApplication.bind(this);
     this.UnlinkApplication = this.UnlinkApplication.bind(this);
   }
   SaveProfile(request: MsgSaveProfile): Promise<MsgSaveProfileResponse> {
     const data = MsgSaveProfile.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "SaveProfile",
       data
     );
@@ -121,7 +131,7 @@ export class MsgClientImpl implements Msg {
   DeleteProfile(request: MsgDeleteProfile): Promise<MsgDeleteProfileResponse> {
     const data = MsgDeleteProfile.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "DeleteProfile",
       data
     );
@@ -135,7 +145,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRequestDTagTransferResponse> {
     const data = MsgRequestDTagTransfer.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "RequestDTagTransfer",
       data
     );
@@ -149,7 +159,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgCancelDTagTransferRequestResponse> {
     const data = MsgCancelDTagTransferRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "CancelDTagTransferRequest",
       data
     );
@@ -163,7 +173,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgAcceptDTagTransferRequestResponse> {
     const data = MsgAcceptDTagTransferRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "AcceptDTagTransferRequest",
       data
     );
@@ -177,7 +187,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgRefuseDTagTransferRequestResponse> {
     const data = MsgRefuseDTagTransferRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "RefuseDTagTransferRequest",
       data
     );
@@ -191,7 +201,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgLinkChainAccountResponse> {
     const data = MsgLinkChainAccount.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "LinkChainAccount",
       data
     );
@@ -205,7 +215,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUnlinkChainAccountResponse> {
     const data = MsgUnlinkChainAccount.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "UnlinkChainAccount",
       data
     );
@@ -214,12 +224,26 @@ export class MsgClientImpl implements Msg {
     );
   }
 
+  SetDefaultExternalAddress(
+    request: MsgSetDefaultExternalAddress
+  ): Promise<MsgSetDefaultExternalAddressResponse> {
+    const data = MsgSetDefaultExternalAddress.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.profiles.v3.Msg",
+      "SetDefaultExternalAddress",
+      data
+    );
+    return promise.then((data) =>
+      MsgSetDefaultExternalAddressResponse.decode(new _m0.Reader(data))
+    );
+  }
+
   LinkApplication(
     request: MsgLinkApplication
   ): Promise<MsgLinkApplicationResponse> {
     const data = MsgLinkApplication.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "LinkApplication",
       data
     );
@@ -233,7 +257,7 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUnlinkApplicationResponse> {
     const data = MsgUnlinkApplication.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.profiles.v2.Msg",
+      "desmos.profiles.v3.Msg",
       "UnlinkApplication",
       data
     );

@@ -83,6 +83,8 @@ export interface ApplicationLink {
   result?: Result;
   /** CreationTime represents the time in which the link was created */
   creationTime?: Date;
+  /** ExpirationTime represents the time in which the link will expire */
+  expirationTime?: Date;
 }
 
 /**
@@ -161,6 +163,7 @@ function createBaseApplicationLink(): ApplicationLink {
     oracleRequest: undefined,
     result: undefined,
     creationTime: undefined,
+    expirationTime: undefined,
   };
 }
 
@@ -193,6 +196,12 @@ export const ApplicationLink = {
         writer.uint32(50).fork()
       ).ldelim();
     }
+    if (message.expirationTime !== undefined) {
+      Timestamp.encode(
+        toTimestamp(message.expirationTime),
+        writer.uint32(58).fork()
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -223,6 +232,11 @@ export const ApplicationLink = {
             Timestamp.decode(reader, reader.uint32())
           );
           break;
+        case 7:
+          message.expirationTime = fromTimestamp(
+            Timestamp.decode(reader, reader.uint32())
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -245,6 +259,9 @@ export const ApplicationLink = {
       creationTime: isSet(object.creationTime)
         ? fromJsonTimestamp(object.creationTime)
         : undefined,
+      expirationTime: isSet(object.expirationTime)
+        ? fromJsonTimestamp(object.expirationTime)
+        : undefined,
     };
   },
 
@@ -263,6 +280,8 @@ export const ApplicationLink = {
       (obj.result = message.result ? Result.toJSON(message.result) : undefined);
     message.creationTime !== undefined &&
       (obj.creationTime = message.creationTime.toISOString());
+    message.expirationTime !== undefined &&
+      (obj.expirationTime = message.expirationTime.toISOString());
     return obj;
   },
 
@@ -285,6 +304,7 @@ export const ApplicationLink = {
         ? Result.fromPartial(object.result)
         : undefined;
     message.creationTime = object.creationTime ?? undefined;
+    message.expirationTime = object.expirationTime ?? undefined;
     return message;
   },
 };

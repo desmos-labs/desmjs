@@ -9,7 +9,7 @@ import {
   Subspace,
   Section,
   UserGroup,
-} from "../../../desmos/subspaces/v2/models";
+} from "../../../desmos/subspaces/v3/models";
 
 /** QuerySubspacesRequest is the request type for the Query/Subspaces RPC method */
 export interface QuerySubspacesRequest {
@@ -1710,7 +1710,7 @@ export class QueryClientImpl implements Query {
   Subspaces(request: QuerySubspacesRequest): Promise<QuerySubspacesResponse> {
     const data = QuerySubspacesRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "Subspaces",
       data
     );
@@ -1722,7 +1722,7 @@ export class QueryClientImpl implements Query {
   Subspace(request: QuerySubspaceRequest): Promise<QuerySubspaceResponse> {
     const data = QuerySubspaceRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "Subspace",
       data
     );
@@ -1734,7 +1734,7 @@ export class QueryClientImpl implements Query {
   Sections(request: QuerySectionsRequest): Promise<QuerySectionsResponse> {
     const data = QuerySectionsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "Sections",
       data
     );
@@ -1746,7 +1746,7 @@ export class QueryClientImpl implements Query {
   Section(request: QuerySectionRequest): Promise<QuerySectionResponse> {
     const data = QuerySectionRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "Section",
       data
     );
@@ -1760,7 +1760,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryUserGroupsResponse> {
     const data = QueryUserGroupsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "UserGroups",
       data
     );
@@ -1772,7 +1772,7 @@ export class QueryClientImpl implements Query {
   UserGroup(request: QueryUserGroupRequest): Promise<QueryUserGroupResponse> {
     const data = QueryUserGroupRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "UserGroup",
       data
     );
@@ -1786,7 +1786,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryUserGroupMembersResponse> {
     const data = QueryUserGroupMembersRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "UserGroupMembers",
       data
     );
@@ -1800,7 +1800,7 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryUserPermissionsResponse> {
     const data = QueryUserPermissionsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "desmos.subspaces.v2.Query",
+      "desmos.subspaces.v3.Query",
       "UserPermissions",
       data
     );

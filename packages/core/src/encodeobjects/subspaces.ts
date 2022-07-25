@@ -15,10 +15,10 @@ import {
   MsgEditSection,
   MsgMoveSection,
   MsgMoveUserGroup,
-} from "@desmoslabs/desmjs-types/desmos/subspaces/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 
 export interface MsgCreateSubspaceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgCreateSubspace";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgCreateSubspace";
   readonly value: MsgCreateSubspace;
 }
 
@@ -27,12 +27,12 @@ export function isMsgCreateSubspaceEncodeObject(
 ): encodeObject is MsgCreateSubspaceEncodeObject {
   return (
     (encodeObject as MsgCreateSubspaceEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgCreateSubspace"
+    "/desmos.subspaces.v3.MsgCreateSubspace"
   );
 }
 
 export interface MsgEditSubspaceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgEditSubspace";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgEditSubspace";
   readonly value: MsgEditSubspace;
 }
 
@@ -41,12 +41,12 @@ export function isMsgEditSubspaceEncodeObject(
 ): encodeObject is MsgEditSubspaceEncodeObject {
   return (
     (encodeObject as MsgEditSubspaceEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgEditSubspace"
+    "/desmos.subspaces.v3.MsgEditSubspace"
   );
 }
 
 export interface MsgDeleteSubspaceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgDeleteSubspace";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspace";
   readonly value: MsgDeleteSubspace;
 }
 
@@ -55,12 +55,12 @@ export function isMsgDeleteSubspaceEncodeObject(
 ): encodeObject is MsgDeleteSubspaceEncodeObject {
   return (
     (encodeObject as MsgDeleteSubspaceEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgDeleteSubspace"
+    "/desmos.subspaces.v3.MsgDeleteSubspace"
   );
 }
 
 export interface MsgCreateSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgCreateSection";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgCreateSection";
   readonly value: MsgCreateSection;
 }
 
@@ -69,12 +69,12 @@ export function isMsgCreateSectionEncodeObject(
 ): encodeObject is MsgCreateSectionEncodeObject {
   return (
     (encodeObject as MsgCreateSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgCreateSection"
+    "/desmos.subspaces.v3.MsgCreateSection"
   );
 }
 
 export interface MsgEditSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgEditSection";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgEditSection";
   readonly value: MsgEditSection;
 }
 
@@ -83,12 +83,12 @@ export function isMsgEditSectionEncodeObject(
 ): encodeObject is MsgEditSectionEncodeObject {
   return (
     (encodeObject as MsgEditSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgEditSection"
+    "/desmos.subspaces.v3.MsgEditSection"
   );
 }
 
 export interface MsgMoveSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgMoveSection";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgMoveSection";
   readonly value: MsgMoveSection;
 }
 
@@ -97,12 +97,12 @@ export function isMsgMoveSectionEncodeObject(
 ): encodeObject is MsgMoveSectionEncodeObject {
   return (
     (encodeObject as MsgMoveSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgMoveSection"
+    "/desmos.subspaces.v3.MsgMoveSection"
   );
 }
 
 export interface MsgDeleteSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgDeleteSection";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgDeleteSection";
   readonly value: MsgDeleteSection;
 }
 
@@ -111,12 +111,12 @@ export function isMsgDeleteSectionEncodeObject(
 ): encodeObject is MsgDeleteSectionEncodeObject {
   return (
     (encodeObject as MsgDeleteSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgDeleteSection"
+    "/desmos.subspaces.v3.MsgDeleteSection"
   );
 }
 
 export interface MsgCreateUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgCreateUserGroup";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroup";
   readonly value: MsgCreateUserGroup;
 }
 
@@ -125,12 +125,12 @@ export function isMsgCreateUserGroupEncodeObject(
 ): encodeObject is MsgCreateUserGroupEncodeObject {
   return (
     (encodeObject as MsgCreateUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgCreateUserGroup"
+    "/desmos.subspaces.v3.MsgCreateUserGroup"
   );
 }
 
 export interface MsgEditUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgEditUserGroup";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgEditUserGroup";
   readonly value: MsgEditUserGroup;
 }
 
@@ -139,12 +139,12 @@ export function isMsgEditUserGroupEncodeObject(
 ): encodeObject is MsgEditUserGroupEncodeObject {
   return (
     (encodeObject as MsgEditUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgEditUserGroup"
+    "/desmos.subspaces.v3.MsgEditUserGroup"
   );
 }
 
 export interface MsgMoveUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgMoveUserGroup";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroup";
   readonly value: MsgMoveUserGroup;
 }
 
@@ -153,12 +153,12 @@ export function isMsgMoveUserGroupEncodeObject(
 ): encodeObject is MsgMoveUserGroupEncodeObject {
   return (
     (encodeObject as MsgMoveUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgMoveUserGroup"
+    "/desmos.subspaces.v3.MsgMoveUserGroup"
   );
 }
 
 export interface MsgSetUserGroupPermissionsEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgSetUserGroupPermissions";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissions";
   readonly value: MsgSetUserGroupPermissions;
 }
 
@@ -167,12 +167,12 @@ export function isMsgSetUserGroupPermissionsEncodeObject(
 ): encodeObject is MsgSetUserGroupPermissionsEncodeObject {
   return (
     (encodeObject as MsgSetUserGroupPermissionsEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgSetUserGroupPermissions"
+    "/desmos.subspaces.v3.MsgSetUserGroupPermissions"
   );
 }
 
 export interface MsgDeleteUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgDeleteUserGroup";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroup";
   readonly value: MsgDeleteUserGroup;
 }
 
@@ -181,12 +181,12 @@ export function isMsgDeleteUserGroupEncodeObject(
 ): encodeObject is MsgDeleteUserGroupEncodeObject {
   return (
     (encodeObject as MsgDeleteUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgDeleteUserGroup"
+    "/desmos.subspaces.v3.MsgDeleteUserGroup"
   );
 }
 
 export interface MsgAddUserToUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgAddUserToUserGroup";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroup";
   readonly value: MsgAddUserToUserGroup;
 }
 
@@ -195,12 +195,12 @@ export function isMsgAddUserToUserGroupEncodeObject(
 ): encodeObject is MsgAddUserToUserGroupEncodeObject {
   return (
     (encodeObject as MsgAddUserToUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgAddUserToUserGroup"
+    "/desmos.subspaces.v3.MsgAddUserToUserGroup"
   );
 }
 
 export interface MsgRemoveUserFromUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgRemoveUserFromUserGroup";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup";
   readonly value: MsgRemoveUserFromUserGroup;
 }
 
@@ -209,12 +209,12 @@ export function isMsgRemoveUserFromUserGroupEncodeObject(
 ): encodeObject is MsgRemoveUserFromUserGroupEncodeObject {
   return (
     (encodeObject as MsgRemoveUserFromUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgRemoveUserFromUserGroup"
+    "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup"
   );
 }
 
 export interface MsgSetUserPermissionsEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v2.MsgSetUserPermissions";
+  readonly typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissions";
   readonly value: MsgSetUserPermissions;
 }
 
@@ -223,6 +223,6 @@ export function isMsgSetUserPermissionsEncodeObject(
 ): encodeObject is MsgSetUserPermissionsEncodeObject {
   return (
     (encodeObject as MsgSetUserPermissionsEncodeObject).typeUrl ===
-    "/desmos.subspaces.v2.MsgSetUserPermissions"
+    "/desmos.subspaces.v3.MsgSetUserPermissions"
   );
 }

@@ -2,24 +2,24 @@ import { EncodeObject } from "@cosmjs/proto-signing";
 import {
   MsgLinkApplication,
   MsgUnlinkApplication,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_app_links";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_app_links";
 import {
   MsgLinkChainAccount,
   MsgUnlinkChainAccount,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_chain_links";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
 import {
   MsgAcceptDTagTransferRequest,
   MsgCancelDTagTransferRequest,
   MsgRefuseDTagTransferRequest,
   MsgRequestDTagTransfer,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_dtag_requests";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_dtag_requests";
 import {
   MsgDeleteProfile,
   MsgSaveProfile,
-} from "@desmoslabs/desmjs-types/desmos/profiles/v2/msgs_profile";
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
 
 export interface MsgLinkApplicationEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgLinkApplication";
+  typeUrl: "/desmos.profiles.v3.MsgLinkApplication";
   readonly value: MsgLinkApplication;
 }
 
@@ -28,12 +28,12 @@ export function isMsgLinkApplicationEncodeObject(
 ): encodeObject is MsgLinkApplicationEncodeObject {
   return (
     (encodeObject as MsgLinkApplicationEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgLinkApplication"
+    "/desmos.profiles.v3.MsgLinkApplication"
   );
 }
 
 export interface MsgUnlinkApplicationEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgUnlinkApplication";
+  typeUrl: "/desmos.profiles.v3.MsgUnlinkApplication";
   readonly value: MsgUnlinkApplication;
 }
 
@@ -42,12 +42,12 @@ export function isMsgUnlinkApplicationEncodeObject(
 ): encodeObject is MsgUnlinkApplicationEncodeObject {
   return (
     (encodeObject as MsgUnlinkApplicationEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgUnlinkApplication"
+    "/desmos.profiles.v3.MsgUnlinkApplication"
   );
 }
 
 export interface MsgLinkChainAccountEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgLinkChainAccount";
+  typeUrl: "/desmos.profiles.v3.MsgLinkChainAccount";
   readonly value: MsgLinkChainAccount;
 }
 
@@ -56,12 +56,12 @@ export function isMsgLinkChainAccountEncodeObject(
 ): encodeObject is MsgLinkChainAccountEncodeObject {
   return (
     (encodeObject as MsgLinkChainAccountEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgLinkChainAccount"
+    "/desmos.profiles.v3.MsgLinkChainAccount"
   );
 }
 
 export interface MsgUnlinkChainAccountEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgUnlinkChainAccount";
+  typeUrl: "/desmos.profiles.v3.MsgUnlinkChainAccount";
   readonly value: MsgUnlinkChainAccount;
 }
 
@@ -70,12 +70,12 @@ export function isMsgUnlinkChainAccountEncodeObject(
 ): encodeObject is MsgUnlinkChainAccountEncodeObject {
   return (
     (encodeObject as MsgUnlinkChainAccountEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgUnlinkChainAccount"
+    "/desmos.profiles.v3.MsgUnlinkChainAccount"
   );
 }
 
 export interface MsgRequestDTagTransferEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgRequestDTagTransfer";
+  typeUrl: "/desmos.profiles.v3.MsgRequestDTagTransfer";
   readonly value: MsgRequestDTagTransfer;
 }
 
@@ -84,12 +84,12 @@ export function isMsgRequestDTagTransferEncodeObject(
 ): encodeObject is MsgRequestDTagTransferEncodeObject {
   return (
     (encodeObject as MsgRequestDTagTransferEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgRequestDTagTransfer"
+    "/desmos.profiles.v3.MsgRequestDTagTransfer"
   );
 }
 
 export interface MsgCancelDTagTransferRequestEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgCancelDTagTransferRequest";
+  typeUrl: "/desmos.profiles.v3.MsgCancelDTagTransferRequest";
   readonly value: MsgCancelDTagTransferRequest;
 }
 
@@ -98,12 +98,12 @@ export function isMsgCancelDTagTransferRequestEncodeObject(
 ): encodeObject is MsgCancelDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgCancelDTagTransferRequestEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgCancelDTagTransferRequest"
+    "/desmos.profiles.v3.MsgCancelDTagTransferRequest"
   );
 }
 
 export interface MsgAcceptDTagTransferRequestEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgAcceptDTagTransferRequest";
+  typeUrl: "/desmos.profiles.v3.MsgAcceptDTagTransferRequest";
   readonly value: MsgAcceptDTagTransferRequest;
 }
 
@@ -112,12 +112,12 @@ export function isMsgAcceptDTagTransferRequestEncodeObject(
 ): encodeObject is MsgAcceptDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgAcceptDTagTransferRequestEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgAcceptDTagTransferRequest"
+    "/desmos.profiles.v3.MsgAcceptDTagTransferRequest"
   );
 }
 
 export interface MsgRefuseDTagTransferRequestEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgRefuseDTagTransferRequest";
+  typeUrl: "/desmos.profiles.v3.MsgRefuseDTagTransferRequest";
   readonly value: MsgRefuseDTagTransferRequest;
 }
 
@@ -126,12 +126,12 @@ export function isMsgRefuseDTagTransferRequestEncodeObject(
 ): encodeObject is MsgRefuseDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgRefuseDTagTransferRequestEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgRefuseDTagTransferRequest"
+    "/desmos.profiles.v3.MsgRefuseDTagTransferRequest"
   );
 }
 
 export interface MsgSaveProfileEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgSaveProfile";
+  typeUrl: "/desmos.profiles.v3.MsgSaveProfile";
   readonly value: MsgSaveProfile;
 }
 
@@ -140,12 +140,12 @@ export function isMsgSaveProfileEncodeObject(
 ): encodeObject is MsgSaveProfileEncodeObject {
   return (
     (encodeObject as MsgSaveProfileEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgSaveProfile"
+    "/desmos.profiles.v3.MsgSaveProfile"
   );
 }
 
 export interface MsgDeleteProfileEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.profiles.v2.MsgDeleteProfile";
+  typeUrl: "/desmos.profiles.v3.MsgDeleteProfile";
   readonly value: MsgDeleteProfile;
 }
 
@@ -154,6 +154,6 @@ export function isMsgDeleteProfileEncodeObject(
 ): encodeObject is MsgDeleteProfileEncodeObject {
   return (
     (encodeObject as MsgDeleteProfileEncodeObject).typeUrl ===
-    "/desmos.profiles.v2.MsgDeleteProfile"
+    "/desmos.profiles.v3.MsgDeleteProfile"
   );
 }

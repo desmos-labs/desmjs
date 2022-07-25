@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Long from "long";
 import * as _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 
 /** Params contains the parameters for the profiles module */
@@ -9,6 +10,7 @@ export interface Params {
   dtag?: DTagParams;
   bio?: BioParams;
   oracle?: OracleParams;
+  appLinks?: AppLinksParams;
 }
 
 /** NicknameParams defines the parameters related to the profiles nicknames */
@@ -64,12 +66,19 @@ export interface OracleParams {
   feeAmount: Coin[];
 }
 
+/** AppLinksParams define the parameters related to the app links */
+export interface AppLinksParams {
+  /** Default validity duration before an application link expires */
+  validityDuration?: Duration;
+}
+
 function createBaseParams(): Params {
   return {
     nickname: undefined,
     dtag: undefined,
     bio: undefined,
     oracle: undefined,
+    appLinks: undefined,
   };
 }
 
@@ -93,6 +102,12 @@ export const Params = {
     if (message.oracle !== undefined) {
       OracleParams.encode(message.oracle, writer.uint32(34).fork()).ldelim();
     }
+    if (message.appLinks !== undefined) {
+      AppLinksParams.encode(
+        message.appLinks,
+        writer.uint32(42).fork()
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -115,6 +130,9 @@ export const Params = {
         case 4:
           message.oracle = OracleParams.decode(reader, reader.uint32());
           break;
+        case 5:
+          message.appLinks = AppLinksParams.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -133,6 +151,9 @@ export const Params = {
       oracle: isSet(object.oracle)
         ? OracleParams.fromJSON(object.oracle)
         : undefined,
+      appLinks: isSet(object.appLinks)
+        ? AppLinksParams.fromJSON(object.appLinks)
+        : undefined,
     };
   },
 
@@ -149,6 +170,10 @@ export const Params = {
     message.oracle !== undefined &&
       (obj.oracle = message.oracle
         ? OracleParams.toJSON(message.oracle)
+        : undefined);
+    message.appLinks !== undefined &&
+      (obj.appLinks = message.appLinks
+        ? AppLinksParams.toJSON(message.appLinks)
         : undefined);
     return obj;
   },
@@ -170,6 +195,10 @@ export const Params = {
     message.oracle =
       object.oracle !== undefined && object.oracle !== null
         ? OracleParams.fromPartial(object.oracle)
+        : undefined;
+    message.appLinks =
+      object.appLinks !== undefined && object.appLinks !== null
+        ? AppLinksParams.fromPartial(object.appLinks)
         : undefined;
     return message;
   },
@@ -533,6 +562,71 @@ export const OracleParams = {
         ? Long.fromValue(object.executeGas)
         : Long.UZERO;
     message.feeAmount = object.feeAmount?.map((e) => Coin.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseAppLinksParams(): AppLinksParams {
+  return { validityDuration: undefined };
+}
+
+export const AppLinksParams = {
+  encode(
+    message: AppLinksParams,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.validityDuration !== undefined) {
+      Duration.encode(
+        message.validityDuration,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AppLinksParams {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAppLinksParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.validityDuration = Duration.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AppLinksParams {
+    return {
+      validityDuration: isSet(object.validityDuration)
+        ? Duration.fromJSON(object.validityDuration)
+        : undefined,
+    };
+  },
+
+  toJSON(message: AppLinksParams): unknown {
+    const obj: any = {};
+    message.validityDuration !== undefined &&
+      (obj.validityDuration = message.validityDuration
+        ? Duration.toJSON(message.validityDuration)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<AppLinksParams>, I>>(
+    object: I
+  ): AppLinksParams {
+    const message = createBaseAppLinksParams();
+    message.validityDuration =
+      object.validityDuration !== undefined && object.validityDuration !== null
+        ? Duration.fromPartial(object.validityDuration)
+        : undefined;
     return message;
   },
 };

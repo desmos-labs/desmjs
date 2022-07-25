@@ -5,7 +5,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { ApplicationLink } from "../../../desmos/profiles/v2/models_app_links";
+import { ApplicationLink } from "../../../desmos/profiles/v3/models_app_links";
 
 /**
  * QueryUserApplicationLinkRequest represents the request used when querying an
