@@ -3,11 +3,10 @@ import {
   AminoTypes,
   QueryClient,
   setupAuthExtension,
-  setupBankExtension,
+  setupBankExtension, setupIbcExtension,
   setupStakingExtension,
   setupTxExtension,
   SignerData,
-  SigningStargateClient,
   SigningStargateClientOptions,
   StdFee,
 } from "@cosmjs/stargate";
@@ -53,6 +52,7 @@ import {
   setupReportsExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
+import {setupWasmExtension, SigningCosmWasmClient} from "@cosmjs/cosmwasm-stargate";
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -117,7 +117,7 @@ export type SignatureResult = {
 /**
  * Client to interact with the Desmos chain.
  */
-export class DesmosClient extends SigningStargateClient {
+export class DesmosClient extends SigningCosmWasmClient {
   private txSigner: Signer;
 
   private typesRegistry: Registry;
@@ -217,7 +217,9 @@ export class DesmosClient extends SigningStargateClient {
           setupReactionsExtension,
           setupReportsExtension,
           setupFeesExtension,
-          setupSupplyExtension
+          setupSupplyExtension,
+          setupWasmExtension,
+          setupIbcExtension
         )
       : undefined;
   }

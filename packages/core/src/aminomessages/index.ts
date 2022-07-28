@@ -21,6 +21,8 @@ import { createSubspacesConverters, subspacesRegistryTypes } from "./subspaces";
 import { createPostsConverters, postsRegistryTypes } from "./posts";
 import { createReactionsConverters, reactionsRegistryTypes } from "./reactions";
 import { createReportsConverters, reportsRegistryTypes } from "./reports";
+import { createWasmAminoConverters } from "@cosmjs/cosmwasm-stargate";
+import { wasmTypes } from "@cosmjs/cosmwasm-stargate/build/modules";
 
 export * from "./cosmos/messages";
 export * from "./desmjs/messages";
@@ -51,6 +53,8 @@ export function createDesmosTypes(prefix: string): AminoConverters {
     ...createRelationshipsConverters(),
     ...createReportsConverters(),
     ...createSubspacesConverters(),
+    ...createIbcAminoConverters(),
+    ...createWasmAminoConverters(),
   };
 }
 
@@ -65,4 +69,5 @@ export const desmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ...relationshipsRegistryTypes,
   ...reportsRegistryTypes,
   ...subspacesRegistryTypes,
+  ...wasmTypes
 ];
