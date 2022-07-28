@@ -53,7 +53,6 @@ export function createDesmosTypes(prefix: string): AminoConverters {
     ...createRelationshipsConverters(),
     ...createReportsConverters(),
     ...createSubspacesConverters(),
-    ...createIbcAminoConverters(),
     ...createWasmAminoConverters(),
   };
 }
