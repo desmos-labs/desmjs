@@ -12,7 +12,7 @@ import {
   MigrateResult,
   UploadResult
 } from "@cosmjs/cosmwasm-stargate";
-import {Coin, EncodeObject} from "@cosmjs/proto-signing";
+import { Coin, EncodeObject } from "@cosmjs/proto-signing";
 import {
   assertIsDeliverTxFailure,
   assertIsDeliverTxSuccess,
@@ -27,7 +27,7 @@ import {
   SequenceResponse,
   StdFee
 } from "@cosmjs/stargate";
-import {TxRaw} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 
 
 export {
@@ -55,5 +55,5 @@ export {
   CodeDetails,
   Contract,
   ContractCodeHistoryEntry,
-  JsonObject
+  JsonObject,
 };
