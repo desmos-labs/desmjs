@@ -18,7 +18,7 @@ jobs:
       - name: yarn install
         run: yarn install
 
-      - name: yarn install
+      - name: yarn build
         run: yarn build
 
       - name: Run core unit tests
@@ -38,7 +38,7 @@ jobs:
       - name: yarn install
         run: yarn install
 
-      - name: yarn install
+      - name: yarn build
         run: yarn build
 
       - name: Download desmos bin
