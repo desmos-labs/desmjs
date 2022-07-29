@@ -16,7 +16,9 @@ jobs:
           node-version: 12
 
       - name: Install protobuf compiler
-        run: sudo apt update && sudo apt install protobuf-compile
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install protobuf-compiler
 
       - name: yarn install
         run: yarn install
