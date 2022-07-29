@@ -8,6 +8,6 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    "^@desmoslabs/types/(.*)$": "<rootDir>/../types/build/$1",
+    "^@desmoslabs/desmjs-types/(.*)$": "<rootDir>/../types/build/$1",
   },
 };
