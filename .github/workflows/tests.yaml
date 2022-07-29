@@ -18,8 +18,11 @@ jobs:
       - name: yarn install
         run: yarn install
 
+      - name: yarn install
+        run: yarn build
+
       - name: Run core unit tests
-        run: yarn workspace @desmoslabs/desmjs unit-test
+        run: yarn workspace @desmoslabs/desmjs unit-tests
 
   integration-tests:
     name: Integration tests
@@ -34,6 +37,9 @@ jobs:
 
       - name: yarn install
         run: yarn install
+
+      - name: yarn install
+        run: yarn build
 
       - name: Download desmos bin
         run: |
