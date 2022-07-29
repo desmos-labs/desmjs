@@ -18,6 +18,7 @@ import {
   assertIsDeliverTxSuccess,
   Block,
   DeliverTxResponse,
+  GasPrice,
   IndexedTx,
   SearchByHeightQuery,
   SearchBySentFromOrToQuery,
@@ -56,4 +57,5 @@ export {
   Contract,
   ContractCodeHistoryEntry,
   JsonObject,
+  GasPrice,
 };
