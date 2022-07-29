@@ -24,7 +24,9 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "rm -rf ./build && yarn tsc"
+    "build": "rm -rf ./build && yarn tsc",
+    "unit-tests": "jest \".*unit.spec.ts\"",
+    "integration-tests": "jest --runInBand \".*integration.spec.ts\""
   },
   "dependencies": {
     "@cosmjs/amino": "^0.28.11",
