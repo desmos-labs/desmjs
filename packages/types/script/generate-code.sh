@@ -47,7 +47,7 @@ done
 
 # Remove old models files
 echo "Removing old models folders..."
-DIRS="subspaces/v1 posts/v1"
+DIRS="subspaces/v1 subspaces/v2 posts/v1"
 for dir in $DIRS; do
   rm -rf "$SCRIPT_DIR/../src/desmos/$dir"
 done

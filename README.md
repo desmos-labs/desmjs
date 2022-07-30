@@ -21,3 +21,4 @@ DesmJS consists of multiple smaller npm packages each one with a specific functi
 |    `4.0.x`     |           `v4.0.0 `           |
 |    `4.1.x`     |           `v4.1.0 `           |
 |    `4.2.x`     |           `v4.2.0 `           |
+|    `4.3.x`     |           `v4.3.0 `           |
