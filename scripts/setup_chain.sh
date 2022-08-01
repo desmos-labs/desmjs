@@ -39,7 +39,7 @@ echo "Contract initialized"
 CONTRACT=$(desmos query wasm list-contract-by-code 1 --output json | jq -r '.contracts[-1]')
 echo "Contract address $CONTRACT"
 
-# Create a profile for the smart contract to allow the creation of posts
+# Create a profile for the smart contract to perform some queries
 MSG="{\"desmos_messages\":{\"msgs\":[{\"custom\":{\"profiles\":{\"save_profile\":{\"dtag\":\"test_profile\",\"nickname\":\"contract_nick\",\"bio\":\"test_bio\",\"profile_picture\":\"https://i.imgur.com/X2aK5Bq.jpeg\",\"cover_picture\":\"https://i.imgur.com/X2aK5Bq.jpeg\",\"creator\":\"$CONTRACT\"}}}}]}}"
 echo "Create smart contract profile"
 echo $KEYRING_PASS | desmos tx wasm execute "$CONTRACT" "$MSG" \
