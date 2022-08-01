@@ -21,9 +21,7 @@ export function setupFeesExtension(base: QueryClient): FeesExtension {
 
   return {
     fees: {
-      params: async () => {
-        return queryService.Params({});
-      },
+      params: async () => queryService.Params({}),
     },
   };
 }

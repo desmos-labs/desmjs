@@ -39,8 +39,7 @@ export const attachmentConverters: AminoConverters = {
         final_tally_results: poll.finalTallyResults,
       };
     },
-    fromAmino: (msg: AminoPoll["value"]): Any => {
-      return Any.fromPartial({
+    fromAmino: (msg: AminoPoll["value"]): Any => Any.fromPartial({
         typeUrl: "/desmos.posts.v2.Poll",
         value: Poll.encode(
           Poll.fromPartial({
@@ -52,8 +51,7 @@ export const attachmentConverters: AminoConverters = {
             finalTallyResults: msg.final_tally_results,
           })
         ).finish(),
-      });
-    },
+      }),
   },
   "/desmos.posts.v2.Media": {
     aminoType: "desmos/Media",
@@ -64,8 +62,7 @@ export const attachmentConverters: AminoConverters = {
         mime_type: media.mimeType,
       };
     },
-    fromAmino: (msg: AminoMedia["value"]): Any => {
-      return Any.fromPartial({
+    fromAmino: (msg: AminoMedia["value"]): Any => Any.fromPartial({
         typeUrl: "/desmos.posts.v2.Media",
         value: Media.encode(
           Media.fromPartial({
@@ -73,8 +70,7 @@ export const attachmentConverters: AminoConverters = {
             mimeType: msg.mime_type,
           })
         ).finish(),
-      });
-    },
+      }),
   },
 };
 
@@ -98,14 +94,12 @@ export function convertEntitiesToAmino(entities: Entities): AminoEntities {
   return {
     hashtags: entities.hashtags,
     mentions: entities.mentions,
-    urls: entities.urls.map((url) => {
-      return {
+    urls: entities.urls.map((url) => ({
         start: url.start,
         end: url.end,
         url: url.url,
         display_url: url.displayUrl,
-      };
-    }),
+      })),
   };
 }
 
@@ -113,14 +107,12 @@ export function convertEntitiesFromAmino(entities: AminoEntities): Entities {
   return {
     hashtags: entities.hashtags,
     mentions: entities.mentions,
-    urls: entities.urls.map((url) => {
-      return {
+    urls: entities.urls.map((url) => ({
         start: url.start,
         end: url.end,
         url: url.url,
         displayUrl: url.display_url,
-      };
-    }),
+      })),
   };
 }
 
@@ -131,8 +123,7 @@ export function createPostsConverters(): AminoConverters {
   return {
     "/desmos.posts.v2.MsgCreatePost": {
       aminoType: "desmos/MsgCreatePost",
-      toAmino: (msg: MsgCreatePost): AminoMsgCreatePost["value"] => {
-        return {
+      toAmino: (msg: MsgCreatePost): AminoMsgCreatePost["value"] => ({
           subspace_id: msg.subspaceId,
           section_id: msg.sectionId,
           external_id: msg.externalId,
@@ -145,17 +136,13 @@ export function createPostsConverters(): AminoConverters {
           author: msg.author,
           conversation_id: msg.conversationId,
           reply_settings: msg.replySettings,
-          referenced_posts: msg.referencedPosts?.map((reference) => {
-            return {
+          referenced_posts: msg.referencedPosts?.map((reference) => ({
               type: reference.type,
               post_id: reference.postId,
               position: reference.position,
-            };
-          }),
-        };
-      },
-      fromAmino: (msg: AminoMsgCreatePost["value"]): MsgCreatePost => {
-        return {
+            })),
+        }),
+      fromAmino: (msg: AminoMsgCreatePost["value"]): MsgCreatePost => ({
           subspaceId: msg.subspace_id,
           sectionId: msg.section_id,
           externalId: msg.external_id,
@@ -168,20 +155,16 @@ export function createPostsConverters(): AminoConverters {
           author: msg.author,
           conversationId: msg.conversation_id,
           replySettings: msg.reply_settings,
-          referencedPosts: msg.referenced_posts.map((reference) => {
-            return {
+          referencedPosts: msg.referenced_posts.map((reference) => ({
               type: reference.type,
               postId: reference.post_id,
               position: reference.position,
-            };
-          }),
-        };
-      },
+            })),
+        }),
     },
     "/desmos.posts.v2.MsgEditPost": {
       aminoType: "desmos/MsgEditPost",
-      toAmino: (msg: MsgEditPost): AminoMsgEditPost["value"] => {
-        return {
+      toAmino: (msg: MsgEditPost): AminoMsgEditPost["value"] => ({
           subspace_id: msg.subspaceId,
           post_id: msg.postId,
           text: msg.text,
@@ -190,10 +173,8 @@ export function createPostsConverters(): AminoConverters {
             : undefined,
           tags: msg.tags,
           editor: msg.editor,
-        };
-      },
-      fromAmino: (msg: AminoMsgEditPost["value"]): MsgEditPost => {
-        return {
+        }),
+      fromAmino: (msg: AminoMsgEditPost["value"]): MsgEditPost => ({
           subspaceId: msg.subspace_id,
           postId: msg.post_id,
           text: msg.text,
@@ -202,25 +183,20 @@ export function createPostsConverters(): AminoConverters {
             : undefined,
           tags: msg.tags,
           editor: msg.editor,
-        };
-      },
+        }),
     },
     "/desmos.posts.v2.MsgDeletePost": {
       aminoType: "desmos/MsgDeletePost",
-      toAmino: (msg: MsgDeletePost): AminoMsgDeletePost["value"] => {
-        return {
+      toAmino: (msg: MsgDeletePost): AminoMsgDeletePost["value"] => ({
           subspace_id: msg.subspaceId,
           post_id: msg.postId,
           signer: msg.signer,
-        };
-      },
-      fromAmino: (msg: AminoMsgDeletePost["value"]): MsgDeletePost => {
-        return {
+        }),
+      fromAmino: (msg: AminoMsgDeletePost["value"]): MsgDeletePost => ({
           subspaceId: msg.subspace_id,
           postId: msg.post_id,
           signer: msg.signer,
-        };
-      },
+        }),
     },
     "/desmos.posts.v2.MsgAddPostAttachment": {
       aminoType: "desmos/MsgAddPostAttachment",
@@ -237,58 +213,48 @@ export function createPostsConverters(): AminoConverters {
       },
       fromAmino: (
         msg: AminoMsgAddPostAttachment["value"]
-      ): MsgAddPostAttachment => {
-        return {
+      ): MsgAddPostAttachment => ({
           subspaceId: msg.subspace_id,
           postId: msg.post_id,
           content: convertAttachmentFromAmino(msg.content),
           editor: msg.editor,
-        };
-      },
+        }),
     },
     "/desmos.posts.v2.MsgRemovePostAttachment": {
       aminoType: "desmos/MsgRemovePostAttachment",
       toAmino: (
         msg: MsgRemovePostAttachment
-      ): AminoMsgRemovePostAttachment["value"] => {
-        return {
+      ): AminoMsgRemovePostAttachment["value"] => ({
           subspace_id: msg.subspaceId,
           post_id: msg.postId,
           attachment_id: msg.attachmentId,
           editor: msg.editor,
-        };
-      },
+        }),
       fromAmino: (
         msg: AminoMsgRemovePostAttachment["value"]
-      ): MsgRemovePostAttachment => {
-        return {
+      ): MsgRemovePostAttachment => ({
           subspaceId: msg.subspace_id,
           postId: msg.post_id,
           attachmentId: msg.attachment_id,
           editor: msg.editor,
-        };
-      },
+        }),
     },
     "/desmos.posts.v2.MsgAnswerPoll": {
       aminoType: "desmos/MsgAnswerPoll",
-      toAmino: (msg: MsgAnswerPoll): AminoMsgAnswerPoll["value"] => {
-        return {
+      toAmino: (msg: MsgAnswerPoll): AminoMsgAnswerPoll["value"] => ({
           subspace_id: msg.subspaceId,
           post_id: msg.postId,
           poll_id: msg.pollId,
           answers_indexes: msg.answersIndexes,
           signer: msg.signer,
-        };
-      },
-      fromAmino: (msg: AminoMsgAnswerPoll["value"]): MsgAnswerPoll => {
-        return {
+        }),
+      fromAmino: (msg: AminoMsgAnswerPoll["value"]): MsgAnswerPoll => ({
           subspaceId: msg.subspace_id,
           postId: msg.post_id,
           pollId: msg.poll_id,
           answersIndexes: msg.answers_indexes,
           signer: msg.signer,
-        };
-      },
+        }),
     },
   };
 }

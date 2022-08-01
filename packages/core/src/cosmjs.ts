@@ -10,7 +10,7 @@ import {
   InstantiateResult,
   JsonObject,
   MigrateResult,
-  UploadResult
+  UploadResult,
 } from "@cosmjs/cosmwasm-stargate";
 import { Coin, EncodeObject } from "@cosmjs/proto-signing";
 import {
@@ -26,14 +26,14 @@ import {
   SearchTxFilter,
   SearchTxQuery,
   SequenceResponse,
-  StdFee
+  StdFee,
 } from "@cosmjs/stargate";
 import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 
-
 export {
   assertIsDeliverTxSuccess,
-  assertIsDeliverTxFailure, StdFee,
+  assertIsDeliverTxFailure,
+  StdFee,
   EncodeObject,
   UploadResult,
   InstantiateOptions,

@@ -46,27 +46,23 @@ export function setupRelationshipsExtension(
         user?: string,
         counterparty?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.Relationships({
+      ) => queryService.Relationships({
           subspaceId,
           user: user || "",
           counterparty: counterparty || "",
           pagination,
-        });
-      },
+        }),
       blocks: async (
         subspaceId: Long,
         blocker?: string,
         blocked?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.Blocks({
+      ) => queryService.Blocks({
           subspaceId,
           blocker: blocker || "",
           blocked: blocked || "",
           pagination,
-        });
-      },
+        }),
     },
   };
 }

@@ -70,55 +70,43 @@ export function setupSubspacesExtension(base: QueryClient): SubspacesExtension {
 
   return {
     subspaces: {
-      subspaces: async (pagination?: PageRequest) => {
-        return queryService.Subspaces({
+      subspaces: async (pagination?: PageRequest) => queryService.Subspaces({
           pagination,
-        });
-      },
-      subspace: async (id: Long) => {
-        return queryService.Subspace({
+        }),
+      subspace: async (id: Long) => queryService.Subspace({
           subspaceId: id,
-        });
-      },
+        }),
       userGroups: async (
         subspaceId: Long,
         sectionId: number,
         pagination?: PageRequest
-      ) => {
-        return queryService.UserGroups({
+      ) => queryService.UserGroups({
           subspaceId,
           sectionId,
           pagination,
-        });
-      },
-      userGroup: async (subspaceId: Long, groupId: number) => {
-        return queryService.UserGroup({
+        }),
+      userGroup: async (subspaceId: Long, groupId: number) => queryService.UserGroup({
           subspaceId,
           groupId,
-        });
-      },
+        }),
       userGroupMembers: async (
         subspaceId: Long,
         groupId: number,
         pagination?: PageRequest
-      ) => {
-        return queryService.UserGroupMembers({
+      ) => queryService.UserGroupMembers({
           subspaceId,
           groupId,
           pagination,
-        });
-      },
+        }),
       userPermissions: async (
         subspaceId: Long,
         sectionId: number,
         user: string
-      ) => {
-        return queryService.UserPermissions({
+      ) => queryService.UserPermissions({
           subspaceId,
           sectionId,
           user,
-        });
-      },
+        }),
     },
   };
 }

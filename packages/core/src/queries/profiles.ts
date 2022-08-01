@@ -117,79 +117,63 @@ export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
       incomingDTagTransferRequests: async (
         receiver: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.IncomingDTagTransferRequests({
+      ) => queryService.IncomingDTagTransferRequests({
           receiver,
           pagination,
-        });
-      },
+        }),
       chainLinks: async (
         user?: string,
         chainName?: string,
         target?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.ChainLinks({
+      ) => queryService.ChainLinks({
           user: user || "",
           chainName: chainName || "",
           target: target || "",
           pagination,
-        });
-      },
+        }),
       chainLinkOwners: async (
         chainName?: string,
         target?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.ChainLinkOwners({
+      ) => queryService.ChainLinkOwners({
           chainName: chainName || "",
           target: target || "",
           pagination,
-        });
-      },
+        }),
       defaultExternalAddresses: async (
         user?: string,
         chainName?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.DefaultExternalAddresses({
+      ) => queryService.DefaultExternalAddresses({
           owner: user ?? "",
           chainName: chainName ?? "",
           pagination,
-        });
-      },
+        }),
       applicationLinks: async (
         user?: string,
         application?: string,
         username?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.ApplicationLinks({
+      ) => queryService.ApplicationLinks({
           user: user || "",
           application: application || "",
           username: username || "",
           pagination,
-        });
-      },
-      applicationLinkByClientID: async (clientId: string) => {
-        return queryService.ApplicationLinkByClientID({
+        }),
+      applicationLinkByClientID: async (clientId: string) => queryService.ApplicationLinkByClientID({
           clientId,
-        });
-      },
+        }),
       applicationLinkOwners: async (
         application?: string,
         username?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.ApplicationLinkOwners({
+      ) => queryService.ApplicationLinkOwners({
           application: application || "",
           username: username || "",
           pagination,
-        });
-      },
-      params: async () => {
-        return queryService.Params({});
-      },
+        }),
+      params: async () => queryService.Params({}),
     },
   };
 }

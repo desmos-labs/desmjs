@@ -71,23 +71,19 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
 
   return {
     posts: {
-      subspacePosts: async (subspaceId: Long, pagination?: PageRequest) => {
-        return queryService.SubspacePosts({
+      subspacePosts: async (subspaceId: Long, pagination?: PageRequest) => queryService.SubspacePosts({
           subspaceId,
           pagination,
-        });
-      },
+        }),
       sectionPosts: async (
         subspaceId: Long,
         sectionId: number,
         pagination?: PageRequest
-      ) => {
-        return queryService.SectionPosts({
+      ) => queryService.SectionPosts({
           subspaceId,
           sectionId,
           pagination,
-        });
-      },
+        }),
       post: async (subspaceId: Long, postId: Long) => {
         try {
           const res = await queryService.Post({
@@ -103,28 +99,24 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
         subspaceId: Long,
         postId: Long,
         pagination?: PageRequest
-      ) => {
-        return queryService.PostAttachments({
+      ) => queryService.PostAttachments({
           subspaceId,
           postId,
           pagination,
-        });
-      },
+        }),
       pollAnswers: async (
         subspaceId: Long,
         postId: Long,
         pollId: number,
         user?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.PollAnswers({
+      ) => queryService.PollAnswers({
           subspaceId,
           postId,
           pollId,
           user: user || "",
           pagination,
-        });
-      },
+        }),
       params: async () => {
         const res = await queryService.Params({});
         assertDefinedAndNotNull(res.params);

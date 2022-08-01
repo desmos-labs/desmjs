@@ -60,14 +60,12 @@ export function setupReportsExtension(base: QueryClient): ReportsExtension {
         target?: Any,
         reporter?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.Reports({
+      ) => queryService.Reports({
           subspaceId,
           target,
           reporter: reporter || "",
           pagination,
-        });
-      },
+        }),
       report: async (subspaceId: Long, reportId: Long) => {
         try {
           const res = await queryService.Report({
@@ -79,12 +77,10 @@ export function setupReportsExtension(base: QueryClient): ReportsExtension {
           return undefined;
         }
       },
-      reasons: async (subspaceId: Long, pagination?: PageRequest) => {
-        return queryService.Reasons({
+      reasons: async (subspaceId: Long, pagination?: PageRequest) => queryService.Reasons({
           subspaceId,
           pagination,
-        });
-      },
+        }),
       reason: async (subspaceId: Long, reasonId: number) => {
         try {
           const res = await queryService.Reason({
