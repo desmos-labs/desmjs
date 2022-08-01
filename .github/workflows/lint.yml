@@ -24,7 +24,16 @@ jobs:
             .ts
             .js
 
+      - name: install node v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+        if: "env.GIT_DIFF != ''"
+
+      - name: Run yarn install
+        run: yarn install
+        if: "env.GIT_DIFF != ''"
+
       - name: Run lint ✅
-        uses: golangci/golangci-lint-action@v3
-        run: eslint . --ext .ts,.js
+        run: yarn lint
         if: "env.GIT_DIFF != ''"
