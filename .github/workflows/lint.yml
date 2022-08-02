@@ -30,7 +30,7 @@ jobs:
           node-version: 12
         if: "env.GIT_DIFF != ''"
 
-      - name: Run yarn install
+      - name: Install 🔨
         run: yarn install --immutable
         if: "env.GIT_DIFF != ''"
 
