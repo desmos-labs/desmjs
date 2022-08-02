@@ -472,6 +472,9 @@ export class DesmosClient extends SigningCosmWasmClient {
     };
   }
 
+  /**
+  * This has been re-implemented to support backward compatibility with the SigningStargateClient type.
+  */
   public async sendIbcTokens(
     senderAddress: string,
     recipientAddress: string,
