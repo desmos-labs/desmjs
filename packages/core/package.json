@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "@cosmjs/amino": "^0.28.11",
-    "@cosmjs/crypto": "^0.28.11",
     "@cosmjs/cosmwasm-stargate": "^0.28.11",
+    "@cosmjs/crypto": "^0.28.11",
     "@cosmjs/encoding": "^0.28.11",
     "@cosmjs/math": "^0.28.11",
     "@cosmjs/proto-signing": "^0.28.11",
