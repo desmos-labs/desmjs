@@ -24,7 +24,7 @@ jobs:
             .ts
             .js
 
-      - name: install node v12
+      - name: Setup Node 👷
         uses: actions/setup-node@v1
         with:
           node-version: 12
