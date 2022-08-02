@@ -93,3 +93,11 @@ export function aminoSignerFromMnemonic(
     prefix,
   });
 }
+
+/**
+ * Returns a promise that resolves after the provided amount of milliseconds.
+ * @param ms - Milliseconds that must pass before the promise resolves.
+ */
+export async function delay(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms))
+}

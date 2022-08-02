@@ -24,17 +24,19 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "rm -rf ./build && yarn tsc"
+    "build": "rm -rf ./build && yarn tsc",
+    "unit-tests": "jest \".*unit.spec.ts\"",
+    "integration-tests": "jest --runInBand \".*integration.spec.ts\""
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.28.4",
-    "@cosmjs/crypto": "^0.28.4",
-    "@cosmjs/encoding": "^0.28.4",
-    "@cosmjs/math": "^0.28.4",
-    "@cosmjs/proto-signing": "^0.28.4",
-    "@cosmjs/stargate": "^0.28.4",
-    "@cosmjs/tendermint-rpc": "^0.28.4",
-    "@cosmjs/utils": "^0.28.4",
+    "@cosmjs/amino": "^0.28.11",
+    "@cosmjs/crypto": "^0.28.11",
+    "@cosmjs/encoding": "^0.28.11",
+    "@cosmjs/math": "^0.28.11",
+    "@cosmjs/proto-signing": "^0.28.11",
+    "@cosmjs/stargate": "^0.28.11",
+    "@cosmjs/tendermint-rpc": "^0.28.11",
+    "@cosmjs/utils": "^0.28.11",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "cosmjs-types": "^0.4.1",
     "cosmos-wallet": "^1.1.0",

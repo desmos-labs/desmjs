@@ -1,6 +1,7 @@
 import {
   AuthExtension,
   BankExtension,
+  IbcExtension,
   QueryClient,
   StakingExtension,
   TxExtension,
@@ -14,6 +15,7 @@ import { SupplyExtension } from "./supply";
 import { PostsExtension } from "./posts";
 import { ReactionsExtension } from "./reactions";
 import { ReportsExtension } from "./reports";
+import {WasmExtension} from "@cosmjs/cosmwasm-stargate";
 
 export * from "./authz";
 export * from "./fees";
@@ -38,4 +40,6 @@ export type DesmosQueryClient = QueryClient &
   ReactionsExtension &
   ReportsExtension &
   FeesExtension &
-  SupplyExtension;
+  SupplyExtension &
+  WasmExtension &
+  IbcExtension;

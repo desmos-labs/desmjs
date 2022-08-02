@@ -1,13 +1,12 @@
 import {
   Account,
-  AminoTypes,
+  AminoTypes, DeliverTxResponse, MsgTransferEncodeObject,
   QueryClient,
   setupAuthExtension,
-  setupBankExtension,
+  setupBankExtension, setupIbcExtension,
   setupStakingExtension,
   setupTxExtension,
   SignerData,
-  SigningStargateClient,
   SigningStargateClientOptions,
   StdFee,
 } from "@cosmjs/stargate";
@@ -53,6 +52,9 @@ import {
   setupReportsExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
+import { setupWasmExtension, SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
+import { MsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
+import { Height } from "@desmoslabs/desmjs-types/ibc/core/client/v1/client";
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -117,7 +119,7 @@ export type SignatureResult = {
 /**
  * Client to interact with the Desmos chain.
  */
-export class DesmosClient extends SigningStargateClient {
+export class DesmosClient extends SigningCosmWasmClient {
   private txSigner: Signer;
 
   private typesRegistry: Registry;
@@ -217,7 +219,9 @@ export class DesmosClient extends SigningStargateClient {
           setupReactionsExtension,
           setupReportsExtension,
           setupFeesExtension,
-          setupSupplyExtension
+          setupSupplyExtension,
+          setupWasmExtension,
+          setupIbcExtension
         )
       : undefined;
   }
@@ -467,4 +471,38 @@ export class DesmosClient extends SigningStargateClient {
       }),
     };
   }
+
+  /**
+  * This has been re-implemented to support backward compatibility with the SigningStargateClient type.
+  */
+  public async sendIbcTokens(
+    senderAddress: string,
+    recipientAddress: string,
+    transferAmount: Coin,
+    sourcePort: string,
+    sourceChannel: string,
+    timeoutHeight: Height | undefined,
+    /** timeout in seconds */
+    timeoutTimestamp: number | undefined,
+    fee: StdFee | "auto" | number,
+    memo = "",
+  ): Promise<DeliverTxResponse> {
+    const timeoutTimestampNanoseconds = timeoutTimestamp
+      ? Long.fromNumber(timeoutTimestamp).multiply(1_000_000_000)
+      : undefined;
+    const transferMsg: MsgTransferEncodeObject = {
+      typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
+      value: MsgTransfer.fromPartial({
+        sourcePort: sourcePort,
+        sourceChannel: sourceChannel,
+        sender: senderAddress,
+        receiver: recipientAddress,
+        token: transferAmount,
+        timeoutHeight: timeoutHeight,
+        timeoutTimestamp: timeoutTimestampNanoseconds,
+      }),
+    };
+    return this.signAndBroadcast(senderAddress, [transferMsg], fee, memo);
+  }
+
 }

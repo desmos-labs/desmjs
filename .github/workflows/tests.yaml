@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  pull_request:
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: install node v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install protobuf compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install protobuf-compiler
+
+      - name: yarn install
+        run: yarn install
+
+      - name: yarn build
+        run: yarn build
+
+      - name: Run core unit tests
+        run: yarn workspace @desmoslabs/desmjs unit-tests
+
+      - name: Run core integration tests
+        run: |
+          scripts/get_desmos_bin.sh 4.2.0
+          scripts/spawn_test_chain.sh -b
+          sleep 10
+          scripts/setup_chain.sh
+          yarn workspace @desmoslabs/desmjs integration-tests
