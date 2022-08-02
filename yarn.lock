@@ -2054,7 +2054,6 @@ __metadata:
     "@babel/preset-env": ^7.15.0
     "@babel/preset-typescript": ^7.15.0
     "@cosmjs/amino": ^0.28.11
-    "@cosmjs/cosmwasm-stargate": ^0.28.11
     "@cosmjs/crypto": ^0.28.11
     "@cosmjs/encoding": ^0.28.11
     "@cosmjs/math": ^0.28.11

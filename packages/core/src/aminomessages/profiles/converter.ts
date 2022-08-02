@@ -255,60 +255,48 @@ export function createProfilesConverters(): AminoConverters {
     // Profiles module
     "/desmos.profiles.v3.MsgSaveProfile": {
       aminoType: "desmos/MsgSaveProfile",
-      toAmino: (value: MsgSaveProfile): AminoMsgSaveProfile["value"] => {
-        return {
-          bio: value.bio,
-          creator: value.creator,
-          dtag: value.dtag,
-          nickname: value.nickname,
-          profile_picture: value.profilePicture,
-          cover_picture: value.coverPicture,
-        };
-      },
-      fromAmino: (msg: AminoMsgSaveProfile["value"]): MsgSaveProfile => {
-        return {
-          dtag: msg.dtag,
-          creator: msg.creator,
-          nickname: msg.nickname ?? "",
-          bio: msg.bio ?? "",
-          profilePicture: msg.profile_picture ?? "",
-          coverPicture: msg.cover_picture ?? "",
-        };
-      },
+      toAmino: (value: MsgSaveProfile): AminoMsgSaveProfile["value"] => ({
+        bio: value.bio,
+        creator: value.creator,
+        dtag: value.dtag,
+        nickname: value.nickname,
+        profile_picture: value.profilePicture,
+        cover_picture: value.coverPicture,
+      }),
+      fromAmino: (msg: AminoMsgSaveProfile["value"]): MsgSaveProfile => ({
+        dtag: msg.dtag,
+        creator: msg.creator,
+        nickname: msg.nickname ?? "",
+        bio: msg.bio ?? "",
+        profilePicture: msg.profile_picture ?? "",
+        coverPicture: msg.cover_picture ?? "",
+      }),
     },
     "/desmos.profiles.v3.MsgDeleteProfile": {
       aminoType: "desmos/MsgDeleteProfile",
-      toAmino: (value: MsgDeleteProfile): AminoMsgDeleteProfile["value"] => {
-        return {
-          creator: value.creator,
-        };
-      },
-      fromAmino: (msg: AminoMsgDeleteProfile["value"]): MsgDeleteProfile => {
-        return {
-          creator: msg.creator,
-        };
-      },
+      toAmino: (value: MsgDeleteProfile): AminoMsgDeleteProfile["value"] => ({
+        creator: value.creator,
+      }),
+      fromAmino: (msg: AminoMsgDeleteProfile["value"]): MsgDeleteProfile => ({
+        creator: msg.creator,
+      }),
     },
     "/desmos.profiles.v3.MsgRequestDTagTransfer": {
       aminoType: "desmos/MsgRequestDTagTransfer",
       toAmino: ({
         receiver,
         sender,
-      }: MsgRequestDTagTransfer): AminoMsgRequestDTagTransfer["value"] => {
-        return {
-          receiver,
-          sender,
-        };
-      },
+      }: MsgRequestDTagTransfer): AminoMsgRequestDTagTransfer["value"] => ({
+        receiver,
+        sender,
+      }),
       fromAmino: ({
         receiver,
         sender,
-      }: AminoMsgRequestDTagTransfer["value"]): MsgRequestDTagTransfer => {
-        return {
-          receiver,
-          sender,
-        };
-      },
+      }: AminoMsgRequestDTagTransfer["value"]): MsgRequestDTagTransfer => ({
+        receiver,
+        sender,
+      }),
     },
     "/desmos.profiles.v3.MsgAcceptDTagTransferRequest": {
       aminoType: "desmos/MsgAcceptDTagTransferRequest",
@@ -316,140 +304,120 @@ export function createProfilesConverters(): AminoConverters {
         newDtag,
         sender,
         receiver,
-      }: MsgAcceptDTagTransferRequest): AminoMsgAcceptDTagTransferRequest["value"] => {
-        return {
-          new_dtag: newDtag,
-          sender,
-          receiver,
-        };
-      },
+      }: MsgAcceptDTagTransferRequest): AminoMsgAcceptDTagTransferRequest["value"] => ({
+        new_dtag: newDtag,
+        sender,
+        receiver,
+      }),
       fromAmino: ({
         new_dtag,
         sender,
         receiver,
-      }: AminoMsgAcceptDTagTransferRequest["value"]): MsgAcceptDTagTransferRequest => {
-        return {
-          newDtag: new_dtag,
-          sender,
-          receiver,
-        };
-      },
+      }: AminoMsgAcceptDTagTransferRequest["value"]): MsgAcceptDTagTransferRequest => ({
+        newDtag: new_dtag,
+        sender,
+        receiver,
+      }),
     },
     "/desmos.profiles.v3.MsgRefuseDTagTransferRequest": {
       aminoType: "desmos/MsgRefuseDTagTransferRequest",
       toAmino: ({
         sender,
         receiver,
-      }: MsgRefuseDTagTransferRequest): AminoMsgRefuseDTagTransferRequest["value"] => {
-        return {
-          sender,
-          receiver,
-        };
-      },
+      }: MsgRefuseDTagTransferRequest): AminoMsgRefuseDTagTransferRequest["value"] => ({
+        sender,
+        receiver,
+      }),
       fromAmino: ({
         sender,
         receiver,
-      }: AminoMsgRefuseDTagTransferRequest["value"]): MsgRefuseDTagTransferRequest => {
-        return {
-          sender,
-          receiver,
-        };
-      },
+      }: AminoMsgRefuseDTagTransferRequest["value"]): MsgRefuseDTagTransferRequest => ({
+        sender,
+        receiver,
+      }),
     },
     "/desmos.profiles.v3.MsgCancelDTagTransferRequest": {
       aminoType: "desmos/MsgCancelDTagTransferRequest",
       toAmino: ({
         sender,
         receiver,
-      }: MsgCancelDTagTransferRequest): AminoMsgCancelDTagTransferRequest["value"] => {
-        return {
-          sender,
-          receiver,
-        };
-      },
+      }: MsgCancelDTagTransferRequest): AminoMsgCancelDTagTransferRequest["value"] => ({
+        sender,
+        receiver,
+      }),
       fromAmino: ({
         sender,
         receiver,
-      }: AminoMsgCancelDTagTransferRequest["value"]): MsgCancelDTagTransferRequest => {
-        return {
-          sender,
-          receiver,
-        };
-      },
+      }: AminoMsgCancelDTagTransferRequest["value"]): MsgCancelDTagTransferRequest => ({
+        sender,
+        receiver,
+      }),
     },
     "/desmos.profiles.v3.MsgLinkApplication": {
       aminoType: "desmos/MsgLinkApplication",
-      toAmino: (msg: MsgLinkApplication): AminoMsgLinkApplication["value"] => {
-        return {
-          sender: msg.sender,
-          link_data: {
-            application: msg.linkData!.application,
-            username: msg.linkData!.username,
-          },
-          call_data: msg.callData,
-          source_channel: msg.sourceChannel,
-          source_port: msg.sourcePort,
-          timeout_height: msg.timeoutHeight
-            ? {
-                revision_height: omitDefault(
-                  msg.timeoutHeight.revisionHeight
-                )?.toString(),
-                revision_number: omitDefault(
-                  msg.timeoutHeight.revisionNumber
-                )?.toString(),
-              }
-            : {},
-          timeout_timestamp: omitDefault(msg.timeoutTimestamp)?.toString(),
-        };
-      },
+      toAmino: (msg: MsgLinkApplication): AminoMsgLinkApplication["value"] => ({
+        sender: msg.sender,
+        link_data: {
+          application: msg.linkData!.application,
+          username: msg.linkData!.username,
+        },
+        call_data: msg.callData,
+        source_channel: msg.sourceChannel,
+        source_port: msg.sourcePort,
+        timeout_height: msg.timeoutHeight
+          ? {
+              revision_height: omitDefault(
+                msg.timeoutHeight.revisionHeight
+              )?.toString(),
+              revision_number: omitDefault(
+                msg.timeoutHeight.revisionNumber
+              )?.toString(),
+            }
+          : {},
+        timeout_timestamp: omitDefault(msg.timeoutTimestamp)?.toString(),
+      }),
       fromAmino: (
         msg: AminoMsgLinkApplication["value"]
-      ): MsgLinkApplication => {
-        return {
-          sender: msg.sender,
-          linkData: {
-            application: msg.link_data.application,
-            username: msg.link_data.username,
-          },
-          callData: msg.call_data,
-          sourceChannel: msg.source_channel,
-          sourcePort: msg.source_port,
-          timeoutHeight: msg.timeout_height
-            ? {
-                revisionHeight: Long.fromString(
-                  msg.timeout_height.revision_height || "0",
-                  true
-                ),
-                revisionNumber: Long.fromString(
-                  msg.timeout_height.revision_number || "0",
-                  true
-                ),
-              }
-            : undefined,
-          timeoutTimestamp: Long.fromString(msg.timeout_timestamp || "0", true),
-        };
-      },
+      ): MsgLinkApplication => ({
+        sender: msg.sender,
+        linkData: {
+          application: msg.link_data.application,
+          username: msg.link_data.username,
+        },
+        callData: msg.call_data,
+        sourceChannel: msg.source_channel,
+        sourcePort: msg.source_port,
+        timeoutHeight: msg.timeout_height
+          ? {
+              revisionHeight: Long.fromString(
+                msg.timeout_height.revision_height || "0",
+                true
+              ),
+              revisionNumber: Long.fromString(
+                msg.timeout_height.revision_number || "0",
+                true
+              ),
+            }
+          : undefined,
+        timeoutTimestamp: Long.fromString(msg.timeout_timestamp || "0", true),
+      }),
     },
     "/desmos.profiles.v3.MsgUnlinkApplication": {
       aminoType: "desmos/MsgUnlinkApplication",
       toAmino: (
         msg: MsgUnlinkApplication
-      ): AminoMsgUnlinkApplication["value"] => {
-        return {
-          signer: msg.signer,
-          application: msg.application,
-          username: msg.username,
-        };
-      },
+      ): AminoMsgUnlinkApplication["value"] => ({
+        signer: msg.signer,
+        application: msg.application,
+        username: msg.username,
+      }),
       fromAmino: (
         msg: AminoMsgUnlinkApplication["value"]
-      ): MsgUnlinkApplication => {
-        return {
-          signer: msg.signer,
-          application: msg.application,
-          username: msg.username,
-        };
-      },
+      ): MsgUnlinkApplication => ({
+        signer: msg.signer,
+        application: msg.application,
+        username: msg.username,
+      }),
     },
     "/desmos.profiles.v3.MsgLinkChainAccount": {
       aminoType: "desmos/MsgLinkChainAccount",
@@ -511,22 +479,18 @@ export function createProfilesConverters(): AminoConverters {
       aminoType: "desmos/MsgUnlinkChainAccount",
       toAmino: (
         msg: MsgUnlinkChainAccount
-      ): AminoMsgUnlinkChainAccount["value"] => {
-        return {
-          chain_name: msg.chainName,
-          owner: msg.owner,
-          target: msg.target,
-        };
-      },
+      ): AminoMsgUnlinkChainAccount["value"] => ({
+        chain_name: msg.chainName,
+        owner: msg.owner,
+        target: msg.target,
+      }),
       fromAmino: (
         msg: AminoMsgUnlinkChainAccount["value"]
-      ): MsgUnlinkChainAccount => {
-        return {
-          chainName: msg.chain_name,
-          owner: msg.owner,
-          target: msg.target,
-        };
-      },
+      ): MsgUnlinkChainAccount => ({
+        chainName: msg.chain_name,
+        owner: msg.owner,
+        target: msg.target,
+      }),
     },
   };
 }

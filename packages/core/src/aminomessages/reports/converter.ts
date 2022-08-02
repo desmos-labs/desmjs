@@ -45,13 +45,12 @@ export const reportTargetConverters: AminoConverters = {
         user: target.user,
       };
     },
-    fromAmino: (msg: AminoUserTarget["value"]): Any => {
-      return convertUserTargetToAny(
+    fromAmino: (msg: AminoUserTarget["value"]): Any =>
+      convertUserTargetToAny(
         UserTarget.fromPartial({
           user: msg.user,
         })
-      );
-    },
+      ),
   },
   "/desmos.reports.v1.PostTarget": {
     aminoType: "desmos/PostTarget",
@@ -61,13 +60,12 @@ export const reportTargetConverters: AminoConverters = {
         post_id: target.postId,
       };
     },
-    fromAmino: (msg: AminoPostTarget["value"]): Any => {
-      return convertPostTargetToAny(
+    fromAmino: (msg: AminoPostTarget["value"]): Any =>
+      convertPostTargetToAny(
         PostTarget.fromPartial({
           postId: msg.post_id,
         })
-      );
-    },
+      ),
   },
 };
 
@@ -104,89 +102,71 @@ export function createReportsConverters(): AminoConverters {
           target: convertReportTargetToAmino(msg.target),
         };
       },
-      fromAmino: (msg: AminoMsgCreateReport["value"]): MsgCreateReport => {
-        return {
-          subspaceId: msg.subspace_id,
-          reasonsIds: msg.reasons_ids,
-          message: msg.message,
-          reporter: msg.reporter,
-          target: convertReportTargetFromAmino(msg.target),
-        };
-      },
+      fromAmino: (msg: AminoMsgCreateReport["value"]): MsgCreateReport => ({
+        subspaceId: msg.subspace_id,
+        reasonsIds: msg.reasons_ids,
+        message: msg.message,
+        reporter: msg.reporter,
+        target: convertReportTargetFromAmino(msg.target),
+      }),
     },
     "/desmos.reports.v1.MsgDeleteReport": {
       aminoType: "desmos/MsgDeleteReport",
-      toAmino: (msg: MsgDeleteReport): AminoMsgDeleteReport["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          report_id: msg.reportId,
-          signer: msg.signer,
-        };
-      },
-      fromAmino: (msg: AminoMsgDeleteReport["value"]): MsgDeleteReport => {
-        return {
-          subspaceId: msg.subspace_id,
-          reportId: msg.report_id,
-          signer: msg.signer,
-        };
-      },
+      toAmino: (msg: MsgDeleteReport): AminoMsgDeleteReport["value"] => ({
+        subspace_id: msg.subspaceId,
+        report_id: msg.reportId,
+        signer: msg.signer,
+      }),
+      fromAmino: (msg: AminoMsgDeleteReport["value"]): MsgDeleteReport => ({
+        subspaceId: msg.subspace_id,
+        reportId: msg.report_id,
+        signer: msg.signer,
+      }),
     },
     "/desmos.reports.v1.MsgSupportStandardReason": {
       aminoType: "desmos/MsgSupportStandardReason",
       toAmino: (
         msg: MsgSupportStandardReason
-      ): AminoMsgSupportStandardReason["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          standard_reason_id: msg.standardReasonId,
-          signer: msg.signer,
-        };
-      },
+      ): AminoMsgSupportStandardReason["value"] => ({
+        subspace_id: msg.subspaceId,
+        standard_reason_id: msg.standardReasonId,
+        signer: msg.signer,
+      }),
       fromAmino: (
         msg: AminoMsgSupportStandardReason["value"]
-      ): MsgSupportStandardReason => {
-        return {
-          subspaceId: msg.subspace_id,
-          standardReasonId: msg.standard_reason_id,
-          signer: msg.signer,
-        };
-      },
+      ): MsgSupportStandardReason => ({
+        subspaceId: msg.subspace_id,
+        standardReasonId: msg.standard_reason_id,
+        signer: msg.signer,
+      }),
     },
     "/desmos.reports.v1.MsgAddReason": {
       aminoType: "desmos/MsgAddReason",
-      toAmino: (msg: MsgAddReason): AminoMsgAddReason["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          title: msg.title,
-          description: msg.description,
-          signer: msg.signer,
-        };
-      },
-      fromAmino: (msg: AminoMsgAddReason["value"]): MsgAddReason => {
-        return {
-          subspaceId: msg.subspace_id,
-          title: msg.title,
-          description: msg.description,
-          signer: msg.signer,
-        };
-      },
+      toAmino: (msg: MsgAddReason): AminoMsgAddReason["value"] => ({
+        subspace_id: msg.subspaceId,
+        title: msg.title,
+        description: msg.description,
+        signer: msg.signer,
+      }),
+      fromAmino: (msg: AminoMsgAddReason["value"]): MsgAddReason => ({
+        subspaceId: msg.subspace_id,
+        title: msg.title,
+        description: msg.description,
+        signer: msg.signer,
+      }),
     },
     "/desmos.reports.v1.MsgRemoveReason": {
       aminoType: "desmos/MsgRemoveReason",
-      toAmino: (msg: MsgRemoveReason): AminoMsgRemoveReason["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          reason_id: msg.reasonId,
-          signer: msg.signer,
-        };
-      },
-      fromAmino: (msg: AminoMsgRemoveReason["value"]): MsgRemoveReason => {
-        return {
-          subspaceId: msg.subspace_id,
-          reasonId: msg.reason_id,
-          signer: msg.signer,
-        };
-      },
+      toAmino: (msg: MsgRemoveReason): AminoMsgRemoveReason["value"] => ({
+        subspace_id: msg.subspaceId,
+        reason_id: msg.reasonId,
+        signer: msg.signer,
+      }),
+      fromAmino: (msg: AminoMsgRemoveReason["value"]): MsgRemoveReason => ({
+        subspaceId: msg.subspace_id,
+        reasonId: msg.reason_id,
+        signer: msg.signer,
+      }),
     },
   };
 }

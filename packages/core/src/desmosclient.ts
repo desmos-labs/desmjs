@@ -1,9 +1,12 @@
 import {
   Account,
-  AminoTypes, DeliverTxResponse, MsgTransferEncodeObject,
+  AminoTypes,
+  DeliverTxResponse,
+  MsgTransferEncodeObject,
   QueryClient,
   setupAuthExtension,
-  setupBankExtension, setupIbcExtension,
+  setupBankExtension,
+  setupIbcExtension,
   setupStakingExtension,
   setupTxExtension,
   SignerData,
@@ -37,6 +40,12 @@ import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53 } from "@cosmjs/math";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
+import {
+  setupWasmExtension,
+  SigningCosmWasmClient,
+} from "@cosmjs/cosmwasm-stargate";
+import { MsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
+import { Height } from "@desmoslabs/desmjs-types/ibc/core/client/v1/client";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,
@@ -52,9 +61,6 @@ import {
   setupReportsExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
-import { setupWasmExtension, SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
-import { MsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
-import { Height } from "@desmoslabs/desmjs-types/ibc/core/client/v1/client";
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -96,15 +102,6 @@ export function makeAuthInfoBytes(
       },
     })
   ).finish();
-}
-
-/**
- * Represents an invalid signer address.
- */
-export class ErrInvalidSignerAddress extends Error {
-  constructor() {
-    super("Signer address is not equals to the signer current account address");
-  }
 }
 
 /**
@@ -473,8 +470,8 @@ export class DesmosClient extends SigningCosmWasmClient {
   }
 
   /**
-  * This has been re-implemented to support backward compatibility with the SigningStargateClient type.
-  */
+   * This has been re-implemented to support backward compatibility with the SigningStargateClient type.
+   */
   public async sendIbcTokens(
     senderAddress: string,
     recipientAddress: string,
@@ -485,7 +482,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     /** timeout in seconds */
     timeoutTimestamp: number | undefined,
     fee: StdFee | "auto" | number,
-    memo = "",
+    memo = ""
   ): Promise<DeliverTxResponse> {
     const timeoutTimestampNanoseconds = timeoutTimestamp
       ? Long.fromNumber(timeoutTimestamp).multiply(1_000_000_000)
@@ -493,16 +490,15 @@ export class DesmosClient extends SigningCosmWasmClient {
     const transferMsg: MsgTransferEncodeObject = {
       typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
       value: MsgTransfer.fromPartial({
-        sourcePort: sourcePort,
-        sourceChannel: sourceChannel,
+        sourcePort,
+        sourceChannel,
         sender: senderAddress,
         receiver: recipientAddress,
         token: transferAmount,
-        timeoutHeight: timeoutHeight,
+        timeoutHeight,
         timeoutTimestamp: timeoutTimestampNanoseconds,
       }),
     };
     return this.signAndBroadcast(senderAddress, [transferMsg], fee, memo);
   }
-
 }

@@ -1,29 +1,41 @@
-import {AccountData, AminoSignResponse, OfflineAminoSigner, Secp256k1HdWallet, StdSignDoc} from '@cosmjs/amino';
+import {
+  AccountData,
+  AminoSignResponse,
+  OfflineAminoSigner,
+  Secp256k1HdWallet,
+  StdSignDoc,
+} from "@cosmjs/amino";
 import {
   DirectSecp256k1HdWallet,
   DirectSignResponse,
   isOfflineDirectSigner,
   OfflineDirectSigner,
   OfflineSigner,
-} from '@cosmjs/proto-signing';
-import {SignDoc} from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import {Signer, SignerStatus, SigningMode} from "./signer";
-import {HdPath} from "@cosmjs/crypto";
-import {Slip10RawIndex} from "@cosmjs/crypto/build/slip10";
+} from "@cosmjs/proto-signing";
+import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { HdPath } from "@cosmjs/crypto";
+import { Slip10RawIndex } from "@cosmjs/crypto/build/slip10";
+import { Signer, SignerStatus, SigningMode } from "./signer";
 
-const DESMOS_HD_PATH: HdPath = [Slip10RawIndex.hardened(44), Slip10RawIndex.hardened(852), Slip10RawIndex.hardened(0), Slip10RawIndex.normal(0), Slip10RawIndex.normal(0)];
+const DESMOS_HD_PATH: HdPath = [
+  Slip10RawIndex.hardened(44),
+  Slip10RawIndex.hardened(852),
+  Slip10RawIndex.hardened(0),
+  Slip10RawIndex.normal(0),
+  Slip10RawIndex.normal(0),
+];
 
 export interface OfflineSignerConfig {
   /**
    * The BIP-32/SLIP-10 derivation paths.
    * Defaults to the Desmos path `m/44'/852'/0'/0/0`.
    */
-  hdPath: readonly HdPath[],
+  hdPath: readonly HdPath[];
   /**
    * The bech32 address prefix (human readable part).
    * Defaults to "desmos".
    */
-  prefix: string,
+  prefix: string;
 }
 
 /**
@@ -31,6 +43,7 @@ export interface OfflineSignerConfig {
  */
 export default class OfflineSignerAdapter extends Signer {
   private readonly signer: OfflineSigner;
+
   private readonly _signMode: SigningMode | undefined;
 
   constructor(signer: OfflineSigner) {
@@ -43,20 +56,32 @@ export default class OfflineSignerAdapter extends Signer {
     }
   }
 
-  signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
+  signDirect(
+    signerAddress: string,
+    signDoc: SignDoc
+  ): Promise<DirectSignResponse> {
     if (this._signMode === SigningMode.DIRECT) {
-      return (this.signer as OfflineDirectSigner).signDirect(signerAddress, signDoc);
+      return (this.signer as OfflineDirectSigner).signDirect(
+        signerAddress,
+        signDoc
+      );
     }
 
-    return Promise.reject("Direct sign mode not supported");
+    return Promise.reject(new Error("Direct sign mode not supported"));
   }
 
-  signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse> {
+  signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc
+  ): Promise<AminoSignResponse> {
     if (this._signMode === SigningMode.AMINO) {
-      return (this.signer as OfflineAminoSigner).signAmino(signerAddress, signDoc);
+      return (this.signer as OfflineAminoSigner).signAmino(
+        signerAddress,
+        signDoc
+      );
     }
 
-    return Promise.reject("Amino sign mode not supported");
+    return Promise.reject(new Error("Amino sign mode not supported"));
   }
 
   async getAccounts(): Promise<readonly AccountData[]> {
@@ -64,18 +89,22 @@ export default class OfflineSignerAdapter extends Signer {
   }
 
   getCurrentAccount(): Promise<AccountData | undefined> {
-    return this.getAccounts().then((accounts) => (accounts.length > 0 ? accounts[0] : undefined));
+    return this.getAccounts().then((accounts) =>
+      accounts.length > 0 ? accounts[0] : undefined
+    );
   }
 
   get signingMode(): SigningMode {
     return this._signMode!;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   connect(): Promise<void> {
     // The offline signers can not connect/disconnect.
     return Promise.resolve();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   disconnect(): Promise<void> {
     // The offline signers can not connect/disconnect.
     return Promise.resolve();
@@ -88,20 +117,24 @@ export default class OfflineSignerAdapter extends Signer {
    * @param mnemonic Any valid English mnemonic.
    * @param options An optional `OfflineSignerConfig` object optionally containing an HD path and prefix.
    */
-  static fromMnemonic(mode: SigningMode, mnemonic: string, options?: OfflineSignerConfig): Promise<OfflineSignerAdapter> {
+  static fromMnemonic(
+    mode: SigningMode,
+    mnemonic: string,
+    options?: OfflineSignerConfig
+  ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
         hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
-        prefix: options?.prefix ?? 'desmos',
-      }).then(signer => new OfflineSignerAdapter(signer));
-    } else if (mode === SigningMode.AMINO) {
+        prefix: options?.prefix ?? "desmos",
+      }).then((signer) => new OfflineSignerAdapter(signer));
+    }
+    if (mode === SigningMode.AMINO) {
       return Secp256k1HdWallet.fromMnemonic(mnemonic, {
         hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
-        prefix: options?.prefix ?? 'desmos',
-      }).then(signer => new OfflineSignerAdapter(signer));
-    } else {
-      return Promise.reject(`invalid sign mode ${mode}`);
+        prefix: options?.prefix ?? "desmos",
+      }).then((signer) => new OfflineSignerAdapter(signer));
     }
+    return Promise.reject(new Error(`invalid sign mode ${mode}`));
   }
 
   /**
@@ -111,20 +144,23 @@ export default class OfflineSignerAdapter extends Signer {
    * @param length The number of words in the mnemonic (12, 15, 18, 21 or 24).
    * @param options An optional `OfflineSignerConfig` object optionally containing an HD path and prefix.
    */
-  static generate(mode: SigningMode, length?: 12 | 15 | 18 | 21 | 24, options?: OfflineSignerConfig): Promise<OfflineSignerAdapter> {
+  static generate(
+    mode: SigningMode,
+    length?: 12 | 15 | 18 | 21 | 24,
+    options?: OfflineSignerConfig
+  ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.generate(length, {
         hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
-        prefix: options?.prefix ?? 'desmos',
-      }).then(signer => new OfflineSignerAdapter(signer));
-    } else if (mode === SigningMode.AMINO) {
+        prefix: options?.prefix ?? "desmos",
+      }).then((signer) => new OfflineSignerAdapter(signer));
+    }
+    if (mode === SigningMode.AMINO) {
       return Secp256k1HdWallet.generate(length, {
         hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
-        prefix: options?.prefix ?? 'desmos',
-      }).then(signer => new OfflineSignerAdapter(signer));
-    } else {
-      return Promise.reject(`invalid sign mode ${mode}`);
+        prefix: options?.prefix ?? "desmos",
+      }).then((signer) => new OfflineSignerAdapter(signer));
     }
+    return Promise.reject(new Error(`invalid sign mode ${mode}`));
   }
-
 }

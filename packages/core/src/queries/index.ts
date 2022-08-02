@@ -6,6 +6,7 @@ import {
   StakingExtension,
   TxExtension,
 } from "@cosmjs/stargate";
+import { WasmExtension } from "@cosmjs/cosmwasm-stargate";
 import { AuthzExtension } from "./authz";
 import { ProfilesExtension } from "./profiles";
 import { RelationshipsExtension } from "./relationships";
@@ -15,7 +16,6 @@ import { SupplyExtension } from "./supply";
 import { PostsExtension } from "./posts";
 import { ReactionsExtension } from "./reactions";
 import { ReportsExtension } from "./reports";
-import {WasmExtension} from "@cosmjs/cosmwasm-stargate";
 
 export * from "./authz";
 export * from "./fees";

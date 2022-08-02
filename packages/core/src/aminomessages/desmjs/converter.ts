@@ -6,18 +6,14 @@ export function createDesmJSConverters(): AminoConverters {
   return {
     "/desmjs.v1.MsgAuthenticate": {
       aminoType: "desmjs/MsgAuthenticate",
-      toAmino: (value: MsgAuthenticate): AminoMsgAuthenticate["value"] => {
-        return {
-          user: value.user,
-          nonce: value.nonce,
-        };
-      },
-      fromAmino: (msg: AminoMsgAuthenticate["value"]): MsgAuthenticate => {
-        return {
-          user: msg.user,
-          nonce: msg.nonce,
-        };
-      },
+      toAmino: (value: MsgAuthenticate): AminoMsgAuthenticate["value"] => ({
+        user: value.user,
+        nonce: value.nonce,
+      }),
+      fromAmino: (msg: AminoMsgAuthenticate["value"]): MsgAuthenticate => ({
+        user: msg.user,
+        nonce: msg.nonce,
+      }),
     },
   };
 }

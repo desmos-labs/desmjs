@@ -34,18 +34,16 @@ export function setupSupplyExtension(base: QueryClient): SupplyExtension {
 
   return {
     supply: {
-      circulatingSupply: async (denom: string, dividerExponent?: Long) => {
-        return queryService.Circulating({
+      circulatingSupply: async (denom: string, dividerExponent?: Long) =>
+        queryService.Circulating({
           denom,
           dividerExponent: dividerExponent || Long.ZERO,
-        });
-      },
-      totalSupply: async (denom: string, dividerExponent?: Long) => {
-        return queryService.Total({
+        }),
+      totalSupply: async (denom: string, dividerExponent?: Long) =>
+        queryService.Total({
           denom,
           dividerExponent: dividerExponent || Long.ZERO,
-        });
-      },
+        }),
     },
   };
 }

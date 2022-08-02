@@ -87,20 +87,17 @@ export function createCosmosConverters(): AminoConverters {
     // Authz types
     "/cosmos.authz.v1beta1.MsgGrant": {
       aminoType: "",
-      toAmino: (value: MsgGrant): AminoMsgGrant => {
-        return {
-          grant: value.grant ? convertGrant(value.grant) : undefined,
-          granter: value.granter,
-          grantee: value.grantee,
-        };
-      },
-      fromAmino: (msg: AminoMsgGrant): MsgGrant => {
-        return MsgGrant.fromPartial({
+      toAmino: (value: MsgGrant): AminoMsgGrant => ({
+        grant: value.grant ? convertGrant(value.grant) : undefined,
+        granter: value.granter,
+        grantee: value.grantee,
+      }),
+      fromAmino: (msg: AminoMsgGrant): MsgGrant =>
+        MsgGrant.fromPartial({
           grant: msg.grant ? convertAminoGrant(msg.grant) : undefined,
           granter: msg.granter,
           grantee: msg.grantee,
-        });
-      },
+        }),
     },
   };
 }
