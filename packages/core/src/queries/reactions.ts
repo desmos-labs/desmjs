@@ -1,7 +1,5 @@
 import { Long } from "long";
 import {
-  QueryReactionResponse,
-  QueryRegisteredReactionResponse,
   QueryClientImpl,
   QueryReactionsResponse,
   QueryRegisteredReactionsResponse,
