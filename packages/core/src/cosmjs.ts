@@ -1,5 +1,5 @@
-// File to export the cosmjs structs used in this package
-import {
+// File to export the cosmjs structs used in this package and that can be useful when using this library
+export {
   ChangeAdminResult,
   Code,
   CodeDetails,
@@ -10,10 +10,10 @@ import {
   InstantiateResult,
   JsonObject,
   MigrateResult,
-  UploadResult
+  UploadResult,
 } from "@cosmjs/cosmwasm-stargate";
-import { Coin, EncodeObject } from "@cosmjs/proto-signing";
-import {
+export { Coin, EncodeObject } from "@cosmjs/proto-signing";
+export {
   assertIsDeliverTxFailure,
   assertIsDeliverTxSuccess,
   Block,
@@ -26,36 +26,6 @@ import {
   SearchTxFilter,
   SearchTxQuery,
   SequenceResponse,
-  StdFee
+  StdFee,
 } from "@cosmjs/stargate";
-import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
-
-
-export {
-  assertIsDeliverTxSuccess,
-  assertIsDeliverTxFailure, StdFee,
-  EncodeObject,
-  UploadResult,
-  InstantiateOptions,
-  InstantiateResult,
-  ChangeAdminResult,
-  MigrateResult,
-  ExecuteResult,
-  Coin,
-  DeliverTxResponse,
-  TxRaw,
-  SequenceResponse,
-  Block,
-  IndexedTx,
-  SearchTxQuery,
-  SearchByHeightQuery,
-  SearchBySentFromOrToQuery,
-  SearchByTagsQuery,
-  SearchTxFilter,
-  Code,
-  CodeDetails,
-  Contract,
-  ContractCodeHistoryEntry,
-  JsonObject,
-  GasPrice,
-};
+export { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
