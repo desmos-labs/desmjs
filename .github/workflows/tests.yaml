@@ -10,20 +10,20 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: install node v12
+      - name: Setup Node 👷
         uses: actions/setup-node@v1
         with:
           node-version: 16
 
-      - name: Install protobuf compiler
+      - name: Install protobuf compiler 🔨
         run: |
           sudo apt-get update
           sudo apt-get -y install protobuf-compiler
 
-      - name: yarn install
+      - name: Install 🔨
         run: yarn install --immutable
 
-      - name: yarn build
+      - name: Build 🔨
         run: yarn build
 
       - name: Run core unit tests
