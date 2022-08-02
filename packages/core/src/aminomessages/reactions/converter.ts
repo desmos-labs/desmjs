@@ -39,16 +39,15 @@ export const reactionValueConverters: AminoConverters = {
         registered_reaction_id: reaction.registeredReactionId,
       };
     },
-    fromAmino: (msg: AminoRegisteredReaction["value"]): Any => {
-      return Any.fromPartial({
+    fromAmino: (msg: AminoRegisteredReaction["value"]): Any =>
+      Any.fromPartial({
         typeUrl: "/desmos.reactions.v1.RegisteredReactionValue",
         value: RegisteredReactionValue.encode(
           RegisteredReactionValue.fromPartial({
             registeredReactionId: msg.registered_reaction_id,
           })
         ).finish(),
-      });
-    },
+      }),
   },
   "/desmos.reactions.v1.FreeTextValue": {
     aminoType: "desmos/FreeTextValue",
@@ -58,16 +57,15 @@ export const reactionValueConverters: AminoConverters = {
         text: reaction.text,
       };
     },
-    fromAmino: (msg: AminoFreeTextReaction["value"]): Any => {
-      return Any.fromPartial({
+    fromAmino: (msg: AminoFreeTextReaction["value"]): Any =>
+      Any.fromPartial({
         typeUrl: "/desmos.reactions.v1.FreeTextValue",
         value: FreeTextValue.encode(
           FreeTextValue.fromPartial({
             text: msg.text,
           })
         ).finish(),
-      });
-    },
+      }),
   },
 };
 
@@ -123,129 +121,107 @@ export function createReactionsConverters(): AminoConverters {
           user: msg.user,
         };
       },
-      fromAmino: (msg: AminoMsgAddReaction["value"]): MsgAddReaction => {
-        return {
-          subspaceId: msg.subspace_id,
-          postId: msg.post_id,
-          value: convertReactionFromAmino(msg.value),
-          user: msg.user,
-        };
-      },
+      fromAmino: (msg: AminoMsgAddReaction["value"]): MsgAddReaction => ({
+        subspaceId: msg.subspace_id,
+        postId: msg.post_id,
+        value: convertReactionFromAmino(msg.value),
+        user: msg.user,
+      }),
     },
     "/desmos.reactions.v1.MsgRemoveReaction": {
       aminoType: "desmos/MsgRemoveReaction",
-      toAmino: (msg: MsgRemoveReaction): AminoMsgRemoveReaction["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          post_id: msg.postId,
-          reaction_id: msg.reactionId,
-          user: msg.user,
-        };
-      },
-      fromAmino: (msg: AminoMsgRemoveReaction["value"]): MsgRemoveReaction => {
-        return {
-          subspaceId: msg.subspace_id,
-          postId: msg.post_id,
-          reactionId: msg.reaction_id,
-          user: msg.user,
-        };
-      },
+      toAmino: (msg: MsgRemoveReaction): AminoMsgRemoveReaction["value"] => ({
+        subspace_id: msg.subspaceId,
+        post_id: msg.postId,
+        reaction_id: msg.reactionId,
+        user: msg.user,
+      }),
+      fromAmino: (msg: AminoMsgRemoveReaction["value"]): MsgRemoveReaction => ({
+        subspaceId: msg.subspace_id,
+        postId: msg.post_id,
+        reactionId: msg.reaction_id,
+        user: msg.user,
+      }),
     },
     "/desmos.reactions.v1.MsgAddRegisteredReaction": {
       aminoType: "desmos/MsgAddRegisteredReaction",
       toAmino: (
         msg: MsgAddRegisteredReaction
-      ): AminoMsgAddRegisteredReaction["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          shorthand_code: msg.shorthandCode,
-          display_value: msg.displayValue,
-          user: msg.user,
-        };
-      },
+      ): AminoMsgAddRegisteredReaction["value"] => ({
+        subspace_id: msg.subspaceId,
+        shorthand_code: msg.shorthandCode,
+        display_value: msg.displayValue,
+        user: msg.user,
+      }),
       fromAmino: (
         msg: AminoMsgAddRegisteredReaction["value"]
-      ): MsgAddRegisteredReaction => {
-        return {
-          subspaceId: msg.subspace_id,
-          shorthandCode: msg.shorthand_code,
-          displayValue: msg.display_value,
-          user: msg.user,
-        };
-      },
+      ): MsgAddRegisteredReaction => ({
+        subspaceId: msg.subspace_id,
+        shorthandCode: msg.shorthand_code,
+        displayValue: msg.display_value,
+        user: msg.user,
+      }),
     },
     "/desmos.reactions.v1.MsgEditRegisteredReaction": {
       aminoType: "desmos/MsgEditRegisteredReaction",
       toAmino: (
         msg: MsgEditRegisteredReaction
-      ): AminoMsgEditRegisteredReaction["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          registered_reaction_id: msg.registeredReactionId,
-          shorthand_code: msg.shorthandCode,
-          display_value: msg.displayValue,
-          user: msg.user,
-        };
-      },
+      ): AminoMsgEditRegisteredReaction["value"] => ({
+        subspace_id: msg.subspaceId,
+        registered_reaction_id: msg.registeredReactionId,
+        shorthand_code: msg.shorthandCode,
+        display_value: msg.displayValue,
+        user: msg.user,
+      }),
       fromAmino: (
         msg: AminoMsgEditRegisteredReaction["value"]
-      ): MsgEditRegisteredReaction => {
-        return {
-          subspaceId: msg.subspace_id,
-          registeredReactionId: msg.registered_reaction_id,
-          shorthandCode: msg.shorthand_code,
-          displayValue: msg.display_value,
-          user: msg.user,
-        };
-      },
+      ): MsgEditRegisteredReaction => ({
+        subspaceId: msg.subspace_id,
+        registeredReactionId: msg.registered_reaction_id,
+        shorthandCode: msg.shorthand_code,
+        displayValue: msg.display_value,
+        user: msg.user,
+      }),
     },
     "/desmos.reactions.v1.MsgRemoveRegisteredReaction": {
       aminoType: "desmos/MsgRemoveRegisteredReaction",
       toAmino: (
         msg: MsgRemoveRegisteredReaction
-      ): AminoMsgRemoveRegisteredReaction["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          registered_reaction_id: msg.registeredReactionId,
-          user: msg.user,
-        };
-      },
+      ): AminoMsgRemoveRegisteredReaction["value"] => ({
+        subspace_id: msg.subspaceId,
+        registered_reaction_id: msg.registeredReactionId,
+        user: msg.user,
+      }),
       fromAmino: (
         msg: AminoMsgRemoveRegisteredReaction["value"]
-      ): MsgRemoveRegisteredReaction => {
-        return {
-          subspaceId: msg.subspace_id,
-          registeredReactionId: msg.registered_reaction_id,
-          user: msg.user,
-        };
-      },
+      ): MsgRemoveRegisteredReaction => ({
+        subspaceId: msg.subspace_id,
+        registeredReactionId: msg.registered_reaction_id,
+        user: msg.user,
+      }),
     },
     "/desmos.reactions.v1.MsgSetReactionsParams": {
       aminoType: "desmos/MsgSetReactionsParams",
       toAmino: (
         msg: MsgSetReactionsParams
-      ): AminoMsgSetReactionsParams["value"] => {
-        return {
-          subspace_id: msg.subspaceId,
-          registered_reaction: msg.registeredReaction,
-          free_text: msg.freeText
-            ? convertFreeTextValueParamsToAmino(msg.freeText)
-            : undefined,
-          user: msg.user,
-        };
-      },
+      ): AminoMsgSetReactionsParams["value"] => ({
+        subspace_id: msg.subspaceId,
+        registered_reaction: msg.registeredReaction,
+        free_text: msg.freeText
+          ? convertFreeTextValueParamsToAmino(msg.freeText)
+          : undefined,
+        user: msg.user,
+      }),
       fromAmino: (
         msg: AminoMsgSetReactionsParams["value"]
-      ): MsgSetReactionsParams => {
-        return {
-          subspaceId: msg.subspace_id,
-          registeredReaction: msg.registered_reaction,
-          freeText: msg.free_text
-            ? convertFreeTextValueParamsFromAmino(msg.free_text)
-            : undefined,
-          user: msg.user,
-        };
-      },
+      ): MsgSetReactionsParams => ({
+        subspaceId: msg.subspace_id,
+        registeredReaction: msg.registered_reaction,
+        freeText: msg.free_text
+          ? convertFreeTextValueParamsFromAmino(msg.free_text)
+          : undefined,
+        user: msg.user,
+      }),
     },
   };
 }

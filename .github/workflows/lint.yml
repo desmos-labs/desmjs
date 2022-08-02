@@ -24,7 +24,16 @@ jobs:
             .ts
             .js
 
+      - name: Setup Node 👷
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+        if: "env.GIT_DIFF != ''"
+
+      - name: Install 🔨
+        run: yarn install --immutable
+        if: "env.GIT_DIFF != ''"
+
       - name: Run lint ✅
-        uses: golangci/golangci-lint-action@v3
-        run: eslint . --ext .ts,.js
+        run: yarn lint
         if: "env.GIT_DIFF != ''"

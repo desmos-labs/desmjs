@@ -26,10 +26,13 @@
   "scripts": {
     "build": "rm -rf ./build && yarn tsc",
     "unit-tests": "jest \".*unit.spec.ts\"",
-    "integration-tests": "jest --runInBand \".*integration.spec.ts\""
+    "integration-tests": "jest --runInBand \".*integration.spec.ts\"",
+    "lint": "eslint src --ignore-path ../../.gitignore --max-warnings 0 --ext .js,.ts",
+    "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.28.11",
+    "@cosmjs/cosmwasm-stargate": "^0.28.11",
     "@cosmjs/crypto": "^0.28.11",
     "@cosmjs/encoding": "^0.28.11",
     "@cosmjs/math": "^0.28.11",

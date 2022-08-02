@@ -1,9 +1,14 @@
-import { DesmosClient } from "./desmosclient";
-import OfflineSignerAdapter from "./signers/adapter";
-import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
-import { SigningMode } from "./signers";
 import { fromBase64, fromUtf8 } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
+import { DesmosClient } from "./desmosclient";
+import OfflineSignerAdapter from "./signers/adapter";
+import {
+  defaultGasPrice,
+  TEST_CHAIN_URL,
+  testUser1,
+  testUser2,
+} from "./testutils";
+import { SigningMode } from "./signers";
 
 async function getTestContractAddress(client: DesmosClient): Promise<string> {
   const contracts = await client.getContracts(1);
@@ -11,26 +16,38 @@ async function getTestContractAddress(client: DesmosClient): Promise<string> {
 }
 
 describe("DesmosClient", () => {
-
   jest.setTimeout(30000);
 
   describe("Cosmwasm", () => {
-
     it("test getCodes", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
-        gasPrice: defaultGasPrice
-      });
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
+        {
+          gasPrice: defaultGasPrice,
+        }
+      );
 
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
     });
 
     it("test getCodeDetails", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
-        gasPrice: defaultGasPrice
-      });
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
+        {
+          gasPrice: defaultGasPrice,
+        }
+      );
 
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
@@ -39,29 +56,41 @@ describe("DesmosClient", () => {
     });
 
     it("test getContracts", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
       // Get contract codes
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
-      const contract_code = codes[0];
+      const contractCode = codes[0];
 
       // Gets the list of instantiated contracts
-      const contracts = await client.getContracts(contract_code.id);
+      const contracts = await client.getContracts(contractCode.id);
       // Should be at least the one instantiated during the chain setup
       expect(contracts.length).toBeGreaterThan(0);
     });
 
     it("test getContract", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
       // Gets the list of instantiated contracts
       const contracts = await client.getContracts(1);
@@ -72,11 +101,17 @@ describe("DesmosClient", () => {
     });
 
     it("test getContractCodeHistory", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
       // Gets the list of instantiated contracts
       const contracts = await client.getContracts(1);
@@ -87,110 +122,177 @@ describe("DesmosClient", () => {
     });
 
     it("test queryContractSmart", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
-      const test_contract = await getTestContractAddress(client);
+      const testContract = await getTestContractAddress(client);
 
-      let response = await client.queryContractSmart(test_contract, {
-        desmos_chain : {
+      const response = await client.queryContractSmart(testContract, {
+        desmos_chain: {
           request: {
             custom: {
               profiles: {
                 profile: {
-                  user: test_contract
-                }
-              }
-            }
-          }
-        }
+                  user: testContract,
+                },
+              },
+            },
+          },
+        },
       });
       // Expect to have some data
-      expect(response.data).toBeDefined()
+      expect(response.data).toBeDefined();
 
       // Parse the received json
-      let received_json = JSON.parse(fromUtf8(fromBase64(response.data)))
+      const receivedJson = JSON.parse(fromUtf8(fromBase64(response.data)));
       // Expect a profile to be defined
-      expect(received_json.profile).toBeDefined();
+      expect(receivedJson.profile).toBeDefined();
 
-      const profile = received_json.profile as Profile
+      const profile = receivedJson.profile as Profile;
 
       expect(profile.dtag).toBe("test_profile");
       expect(profile.nickname).toBe("contract_nick");
       expect(profile.bio).toBe("test_bio");
-      expect(profile.pictures?.profile).toBe("https://i.imgur.com/X2aK5Bq.jpeg");
+      expect(profile.pictures?.profile).toBe(
+        "https://i.imgur.com/X2aK5Bq.jpeg"
+      );
       expect(profile.pictures?.cover).toBe("https://i.imgur.com/X2aK5Bq.jpeg");
     });
 
     it("test initialize", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
-      await client.instantiate(testUser1.address0, 1, {}, "test-contract-init", "auto");
+      await client.instantiate(
+        testUser1.address0,
+        1,
+        {},
+        "test-contract-init",
+        "auto"
+      );
     });
 
     it("test updateAdmin", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
-      const response = await client.instantiate(testUser1.address0, 1, {}, "test-contract-init", "auto", {
-        admin: testUser1.address0
-      });
+      const response = await client.instantiate(
+        testUser1.address0,
+        1,
+        {},
+        "test-contract-init",
+        "auto",
+        {
+          admin: testUser1.address0,
+        }
+      );
 
-      await client.updateAdmin(testUser1.address0, response.contractAddress, testUser2.address0, "auto");
+      await client.updateAdmin(
+        testUser1.address0,
+        response.contractAddress,
+        testUser2.address0,
+        "auto"
+      );
     });
 
-
     it("test clearAdmin", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
+          gasPrice: defaultGasPrice,
+        }
+      );
 
-      const response = await client.instantiate(testUser1.address0, 1, {}, "test-contract-init", "auto", {
-        admin: testUser1.address0
-      });
+      const response = await client.instantiate(
+        testUser1.address0,
+        1,
+        {},
+        "test-contract-init",
+        "auto",
+        {
+          admin: testUser1.address0,
+        }
+      );
 
-      await client.clearAdmin(testUser1.address0, response.contractAddress, "auto");
+      await client.clearAdmin(
+        testUser1.address0,
+        response.contractAddress,
+        "auto"
+      );
     });
 
     it("test execute", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, testUser1.mnemonic);
-      const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer,
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
         {
-          gasPrice: defaultGasPrice
-        });
-
-      const test_contract = await getTestContractAddress(client);
-
-      await client.execute(testUser1.address0, test_contract, {
-        desmos_messages: {
-          msgs: [ {
-            custom: {
-              profiles: {
-                save_profile: {
-                  dtag: '[do-not-modify]',
-                  bio: '[do-not-modify]',
-                  profile_picture: '[do-not-modify]',
-                  cover_picture: '[do-not-modify]',
-                  nickname: '[do-not-modify]',
-                  creator: test_contract
-                }
-              }
-            }
-          }]
+          gasPrice: defaultGasPrice,
         }
-      }, "auto");
+      );
+
+      const testContract = await getTestContractAddress(client);
+
+      await client.execute(
+        testUser1.address0,
+        testContract,
+        {
+          desmos_messages: {
+            msgs: [
+              {
+                custom: {
+                  profiles: {
+                    save_profile: {
+                      dtag: "[do-not-modify]",
+                      bio: "[do-not-modify]",
+                      profile_picture: "[do-not-modify]",
+                      cover_picture: "[do-not-modify]",
+                      nickname: "[do-not-modify]",
+                      creator: testContract,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+        "auto"
+      );
     });
-  })
+  });
 });

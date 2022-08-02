@@ -99,5 +99,7 @@ export function aminoSignerFromMnemonic(
  * @param ms - Milliseconds that must pass before the promise resolves.
  */
 export async function delay(ms: number): Promise<void> {
-  return new Promise((r) => setTimeout(r, ms))
+  return new Promise((r) => {
+    setTimeout(r, ms);
+  });
 }

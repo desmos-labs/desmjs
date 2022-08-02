@@ -6,4 +6,3 @@ export * from "./types";
 export * from "./utils";
 export * from "./desmosclient";
 export * from "./cosmjs";
-

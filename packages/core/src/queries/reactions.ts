@@ -1,7 +1,5 @@
 import { Long } from "long";
 import {
-  QueryReactionResponse,
-  QueryRegisteredReactionResponse,
   QueryClientImpl,
   QueryReactionsResponse,
   QueryRegisteredReactionsResponse,
@@ -74,14 +72,13 @@ export function setupReactionsExtension(base: QueryClient): ReactionsExtension {
         postId: Long,
         user?: string,
         pagination?: PageRequest
-      ) => {
-        return queryService.Reactions({
+      ) =>
+        queryService.Reactions({
           subspaceId,
           postId,
           user: user || "",
           pagination,
-        });
-      },
+        }),
       reaction: async (subspaceId: Long, postId: Long, reactionId: number) => {
         try {
           const res = await queryService.Reaction({
@@ -94,15 +91,11 @@ export function setupReactionsExtension(base: QueryClient): ReactionsExtension {
           return undefined;
         }
       },
-      registeredReactions: async (
-        subspaceId: Long,
-        pagination?: PageRequest
-      ) => {
-        return queryService.RegisteredReactions({
+      registeredReactions: async (subspaceId: Long, pagination?: PageRequest) =>
+        queryService.RegisteredReactions({
           subspaceId,
           pagination,
-        });
-      },
+        }),
       registeredReaction: async (subspaceId: Long, reactionId: number) => {
         try {
           const res = await queryService.RegisteredReaction({
