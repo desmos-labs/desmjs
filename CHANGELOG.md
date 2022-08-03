@@ -1,3 +1,7 @@
+## Version 4.3.1
+### Features
+- Added CosmWASM support to upload, execute and query a smart contract
+
 ## Version 4.3.0
 ### Features
 - Updated Desmos to `v4.3.0`
