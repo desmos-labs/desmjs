@@ -1,3 +1,10 @@
+## Version 4.3.2
+### Features
+- Fixed wrong export of `OfflineSignerAdapter`
+- Made `options` param of `OfflineSignerAdapter.fromMnemonic` and `OfflineSignerAdapter.generate` `Partial`
+- Exposed the cosmjs `stringToPath` and `pathToString` functions
+- Added `makeDesmosPath` to generate a Desmos derivation path with coin type 852
+
 ## Version 4.3.1
 ### Features
 - Added CosmWASM support to upload, execute and query a smart contract
