@@ -14,16 +14,8 @@ import {
 } from "@cosmjs/proto-signing";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { HdPath } from "@cosmjs/crypto";
-import { Slip10RawIndex } from "@cosmjs/crypto/build/slip10";
 import { Signer, SignerStatus, SigningMode } from "./signer";
-
-const DESMOS_HD_PATH: HdPath = [
-  Slip10RawIndex.hardened(44),
-  Slip10RawIndex.hardened(852),
-  Slip10RawIndex.hardened(0),
-  Slip10RawIndex.normal(0),
-  Slip10RawIndex.normal(0),
-];
+import { makeDesmosPath } from "./path";
 
 export interface OfflineSignerConfig {
   /**
@@ -124,13 +116,13 @@ export class OfflineSignerAdapter extends Signer {
   ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
-        hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
+        hdPaths: options?.hdPath ?? [makeDesmosPath()],
         prefix: options?.prefix ?? "desmos",
       }).then((signer) => new OfflineSignerAdapter(signer));
     }
     if (mode === SigningMode.AMINO) {
       return Secp256k1HdWallet.fromMnemonic(mnemonic, {
-        hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
+        hdPaths: options?.hdPath ?? [makeDesmosPath()],
         prefix: options?.prefix ?? "desmos",
       }).then((signer) => new OfflineSignerAdapter(signer));
     }
@@ -151,13 +143,13 @@ export class OfflineSignerAdapter extends Signer {
   ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.generate(length, {
-        hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
+        hdPaths: options?.hdPath ?? [makeDesmosPath()],
         prefix: options?.prefix ?? "desmos",
       }).then((signer) => new OfflineSignerAdapter(signer));
     }
     if (mode === SigningMode.AMINO) {
       return Secp256k1HdWallet.generate(length, {
-        hdPaths: options?.hdPath ?? [DESMOS_HD_PATH],
+        hdPaths: options?.hdPath ?? [makeDesmosPath()],
         prefix: options?.prefix ?? "desmos",
       }).then((signer) => new OfflineSignerAdapter(signer));
     }
