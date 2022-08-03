@@ -120,7 +120,7 @@ export class OfflineSignerAdapter extends Signer {
   static fromMnemonic(
     mode: SigningMode,
     mnemonic: string,
-    options?: OfflineSignerConfig
+    options?: Partial<OfflineSignerConfig>
   ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
@@ -147,7 +147,7 @@ export class OfflineSignerAdapter extends Signer {
   static generate(
     mode: SigningMode,
     length?: 12 | 15 | 18 | 21 | 24,
-    options?: OfflineSignerConfig
+    options?: Partial<OfflineSignerConfig>
   ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.generate(length, {
