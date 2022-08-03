@@ -1,14 +1,13 @@
 import { fromBase64, fromUtf8 } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { DesmosClient } from "./desmosclient";
-import OfflineSignerAdapter from "./signers/adapter";
+import { OfflineSignerAdapter, SigningMode } from "./signers";
 import {
   defaultGasPrice,
   TEST_CHAIN_URL,
   testUser1,
   testUser2,
 } from "./testutils";
-import { SigningMode } from "./signers";
 
 async function getTestContractAddress(client: DesmosClient): Promise<string> {
   const contracts = await client.getContracts(1);
