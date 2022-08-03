@@ -4,7 +4,7 @@ import { Slip10RawIndex } from "@cosmjs/crypto/build/slip10";
 /**
  * Desmos BIP44 coin type.
  */
-export const DesmosCoinType = 852.
+export const DesmosCoinType = 852;
 
 /**
  * Configurations to generate the BIP44 derivation path.
