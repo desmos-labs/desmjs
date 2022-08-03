@@ -28,4 +28,5 @@ export {
   SequenceResponse,
   StdFee,
 } from "@cosmjs/stargate";
+export { stringToPath, pathToString } from "@cosmjs/crypto";
 export { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
