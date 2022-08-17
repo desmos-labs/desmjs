@@ -50,7 +50,7 @@ function convertAminoGrant(grant: AminoGrant): Grant {
   };
 }
 
-export function createCosmosConverters(): AminoConverters {
+export function createAuthzConverters(): AminoConverters {
   return {
     // Authz types
     "/cosmos.authz.v1beta1.MsgGrant": {
@@ -82,4 +82,4 @@ export function createCosmosConverters(): AminoConverters {
   };
 }
 
-export default createCosmosConverters;
+export default createAuthzConverters;
