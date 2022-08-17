@@ -12,7 +12,11 @@ import { GeneratedType } from "@cosmjs/proto-signing";
 import { createVestingAminoConverters } from "@cosmjs/stargate/build/modules";
 import { createWasmAminoConverters } from "@cosmjs/cosmwasm-stargate";
 import { wasmTypes } from "@cosmjs/cosmwasm-stargate/build/modules";
-import { cosmosRegistryTypes, createAuthzConverters } from "./cosmos";
+import {
+  cosmosRegistryTypes,
+  createAuthzConverters,
+  createFeegrantConverters,
+} from "./cosmos";
 import { createProfilesConverters, profilesRegistryTypes } from "./profiles";
 import { createDesmJSConverters, desmjsRegistryTypes } from "./desmjs";
 import {
@@ -36,17 +40,17 @@ export * from "./subspaces/messages";
 
 export function createDesmosTypes(prefix: string): AminoConverters {
   return {
-    // TODO: Use this once they are implemented properly
-    // ...createAuthzAminoConverters(),
     ...createBankAminoConverters(),
     ...createDistributionAminoConverters(),
     ...createGovAminoConverters(),
     ...createStakingAminoConverters(prefix),
     ...createIbcAminoConverters(),
-    ...createFreegrantAminoConverters(),
     ...createVestingAminoConverters(),
 
+    // TODO: Replace with official ones when they are available
     ...createAuthzConverters(),
+    ...createFeegrantConverters(),
+
     ...createDesmJSConverters(),
     ...createPostsConverters(),
     ...createProfilesConverters(),
