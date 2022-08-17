@@ -6,7 +6,7 @@ import {
 import { AminoMsg } from "@cosmjs/amino";
 
 export interface AminoStakeAuthorization extends AminoMsg {
-  readonly type: "cosmos/StakeAuthorization";
+  readonly type: "cosmos-sdk/StakeAuthorization";
   readonly value: {
     max_tokens?: Coin;
     allow_list?: StakeAuthorization_Validators | undefined;
