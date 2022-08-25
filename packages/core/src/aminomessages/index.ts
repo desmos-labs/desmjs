@@ -2,7 +2,6 @@ import {
   AminoConverters,
   createBankAminoConverters,
   createDistributionAminoConverters,
-  createFreegrantAminoConverters,
   createGovAminoConverters,
   createIbcAminoConverters,
   createStakingAminoConverters,
@@ -12,7 +11,11 @@ import { GeneratedType } from "@cosmjs/proto-signing";
 import { createVestingAminoConverters } from "@cosmjs/stargate/build/modules";
 import { createWasmAminoConverters } from "@cosmjs/cosmwasm-stargate";
 import { wasmTypes } from "@cosmjs/cosmwasm-stargate/build/modules";
-import { cosmosRegistryTypes, createCosmosConverters } from "./cosmos";
+import {
+  cosmosRegistryTypes,
+  createAuthzConverters,
+  createFeegrantConverters,
+} from "./cosmos";
 import { createProfilesConverters, profilesRegistryTypes } from "./profiles";
 import { createDesmJSConverters, desmjsRegistryTypes } from "./desmjs";
 import {
@@ -24,7 +27,9 @@ import { createPostsConverters, postsRegistryTypes } from "./posts";
 import { createReactionsConverters, reactionsRegistryTypes } from "./reactions";
 import { createReportsConverters, reportsRegistryTypes } from "./reports";
 
-export * from "./cosmos/messages";
+export * from "./cosmos/authz/messages";
+export * from "./cosmos/bank/messages";
+export * from "./cosmos/staking/messages";
 export * from "./desmjs/messages";
 export * from "./posts/messages";
 export * from "./profiles/messages";
@@ -34,18 +39,17 @@ export * from "./subspaces/messages";
 
 export function createDesmosTypes(prefix: string): AminoConverters {
   return {
-    // TODO: Use this once they are implemented properly
-    // ...createAuthzAminoConverters(),
-
     ...createBankAminoConverters(),
     ...createDistributionAminoConverters(),
     ...createGovAminoConverters(),
     ...createStakingAminoConverters(prefix),
     ...createIbcAminoConverters(),
-    ...createFreegrantAminoConverters(),
     ...createVestingAminoConverters(),
 
-    ...createCosmosConverters(),
+    // TODO: Replace with official ones when they are available
+    ...createAuthzConverters(),
+    ...createFeegrantConverters(),
+
     ...createDesmJSConverters(),
     ...createPostsConverters(),
     ...createProfilesConverters(),
