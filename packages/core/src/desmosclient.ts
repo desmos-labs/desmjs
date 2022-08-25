@@ -108,8 +108,16 @@ export function makeAuthInfoBytes(
  * Contains the result of a signature.
  */
 export type SignatureResult = {
+  // Signer data used during the signature
   signerData: SignerData;
+
+  // Public key associated to the private key used to sign
+  pubKey: Any;
+
+  // SignDoc used during the signature
   signDoc: SignDoc | StdSignDoc;
+
+  // Raw transaction bytes containing the signature
   txRaw: TxRaw;
 };
 
@@ -395,9 +403,9 @@ export class DesmosClient extends SigningCosmWasmClient {
       feeGranter
     );
 
-    // Return the TxRaw instance
     return {
       signerData: { accountNumber, sequence, chainId },
+      pubKey: pubkey,
       signDoc,
       txRaw: TxRaw.fromPartial({
         bodyBytes: signedTxBodyBytes,
@@ -457,9 +465,9 @@ export class DesmosClient extends SigningCosmWasmClient {
       signDoc
     );
 
-    // Return the TxRaw instance
     return {
       signerData: { accountNumber, sequence, chainId },
+      pubKey: pubkey,
       signDoc,
       txRaw: TxRaw.fromPartial({
         bodyBytes: signed.bodyBytes,
