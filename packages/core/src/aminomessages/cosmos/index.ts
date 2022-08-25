@@ -1,3 +1,5 @@
-export * from "./converter";
-export * from "./messages";
+export * from "./authz";
+export * from "./bank";
+export * from "./staking";
+
 export * from "./registry";

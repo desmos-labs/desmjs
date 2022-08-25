@@ -16,8 +16,14 @@ import {
   MsgDeleteSection,
   MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
+import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/authz/authz";
 
 export const subspacesRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
+  [
+    "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization",
+    GenericSubspaceAuthorization,
+  ],
+
   ["/desmos.subspaces.v3.MsgCreateSubspace", MsgCreateSubspace],
   ["/desmos.subspaces.v3.MsgEditSubspace", MsgEditSubspace],
   ["/desmos.subspaces.v3.MsgDeleteSubspace", MsgDeleteSubspace],

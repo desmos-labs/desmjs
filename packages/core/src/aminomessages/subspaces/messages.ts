@@ -1,6 +1,14 @@
 import { AminoMsg } from "@cosmjs/amino";
 import Long from "long";
 
+export interface AminoGenericSubspaceAuthorization extends AminoMsg {
+  readonly type: "desmos/GenericSubspaceAuthorization";
+  readonly value: {
+    subspaces_ids: Long[];
+    msg: string;
+  };
+}
+
 export interface AminoMsgCreateSubspace extends AminoMsg {
   readonly type: "desmos/MsgCreateSubspace";
   readonly value: {
