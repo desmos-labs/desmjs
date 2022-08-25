@@ -24,6 +24,7 @@ import {
 import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
 import {
   AccountData,
+  AminoMsg,
   encodeSecp256k1Pubkey,
   makeSignDoc as makeSignDocAmino,
   StdSignDoc,
@@ -346,6 +347,14 @@ export class DesmosClient extends SigningCosmWasmClient {
         );
   }
 
+  /**
+   * Encode the given message objects into Amino messages.
+   * @param msgs: Messages to be encoded.
+   */
+  public encodeToAmino(msgs: readonly EncodeObject[]): AminoMsg[] {
+    return msgs.map((msg) => this.types.toAmino(msg));
+  }
+
   private async signTxAmino(
     signerAddress: string,
     messages: readonly EncodeObject[],
@@ -358,7 +367,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     const signerAccount = await this.getAccountFromSigner(signerAddress);
 
     // Build the SignDoc
-    const msgs = messages.map((msg) => this.types.toAmino(msg));
+    const msgs = this.encodeToAmino(messages);
     const signDoc = makeSignDocAmino(
       msgs,
       fee,
