@@ -14,6 +14,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: Setup Protoc 👷
+        uses: arduino/setup-protoc@v1
+        with:
+          version: "3.x"
+
       - name: Setup Node 👷
         uses: actions/setup-node@v1
         with:
