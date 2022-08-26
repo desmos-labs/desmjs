@@ -1,3 +1,12 @@
+## Version 4.3.3
+### Features
+- Added a new `encodeToAmino` method to `DesmosClient` to easily encode a list of messages to Amino
+- Added a new `pubKey` field to `SignatureResult` representing the bytes of the public key associated to the private key used to sign a transaction
+
+## Bug fixes
+- Properly support the `x/feegrant` messages
+- Properly support the `x/authz` messages
+
 ## Version 4.3.2
 ### Features
 - Fixed wrong export of `OfflineSignerAdapter`
