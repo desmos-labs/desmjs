@@ -1,3 +1,7 @@
+## Version 4.3.4
+### Features
+- Improve the `SignatureResult` usability to adding methods to extract useful data from it (signed bytes, signature bytes, public key bytes)
+
 ## Version 4.3.3
 ### Features
 - Added a new `encodeToAmino` method to `DesmosClient` to easily encode a list of messages to Amino
