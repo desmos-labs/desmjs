@@ -27,14 +27,8 @@ import {
   AminoMsg,
   encodeSecp256k1Pubkey,
   makeSignDoc as makeSignDocAmino,
-  StdSignDoc,
 } from "@cosmjs/amino";
-import {
-  AuthInfo,
-  SignDoc,
-  SignerInfo,
-  TxRaw,
-} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { AuthInfo, SignerInfo, TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { SignMode } from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
 import { fromBase64 } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
@@ -62,6 +56,7 @@ import {
   setupReportsExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
+import { SignatureResult } from "./signatureresult";
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -104,23 +99,6 @@ export function makeAuthInfoBytes(
     })
   ).finish();
 }
-
-/**
- * Contains the result of a signature.
- */
-export type SignatureResult = {
-  // Signer data used during the signature
-  signerData: SignerData;
-
-  // Public key associated to the private key used to sign
-  pubKey: Any;
-
-  // SignDoc used during the signature
-  signDoc: SignDoc | StdSignDoc;
-
-  // Raw transaction bytes containing the signature
-  txRaw: TxRaw;
-};
 
 /**
  * Client to interact with the Desmos chain.
