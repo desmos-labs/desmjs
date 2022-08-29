@@ -2,6 +2,7 @@ name: Release
 # Release workflow builds the binaries for a release, and then publishes them to NPM.
 
 on:
+  pull_request:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
@@ -13,6 +14,11 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+
+      - name: Setup Protoc 👷
+        uses: arduino/setup-protoc@v1
+        with:
+          version: "3.x"
 
       - name: Setup Node 👷
         uses: actions/setup-node@v1
@@ -29,6 +35,7 @@ jobs:
         run: yarn build
 
       - name: Create release 📜
+        if: startsWith(github.ref, 'refs/tags/v')
         run: yarn publish-latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
