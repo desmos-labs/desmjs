@@ -32,7 +32,7 @@
     "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build",
     "lint": "yarn workspaces foreach --topological-dev --parallel --verbose run lint",
     "lint-fix": "yarn workspaces foreach --topological-dev --parallel --verbose run lint-fix",
-    "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
+    "publish-latest": "yarn workspaces foreach --no-private exec npm publish"
   },
   "devDependencies": {
     "@cosmjs/cosmwasm-stargate": "^0.28.11",
