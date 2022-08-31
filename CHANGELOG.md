@@ -1,3 +1,7 @@
+## Version 4.3.5
+### Features
+- Added missing `EncodeObject` instances for feegrant and authz supported messages.
+
 ## Version 4.3.4
 ### Features
 - Improve the `SignatureResult` usability to adding methods to extract useful data from it (signed bytes, signature bytes, public key bytes)
