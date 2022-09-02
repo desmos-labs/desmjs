@@ -30,6 +30,22 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 
+export function convertRegisteredReactionValueToAny(
+  value: RegisteredReactionValue
+): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.reactions.v1.RegisteredReactionValue",
+    value: RegisteredReactionValue.encode(value).finish(),
+  });
+}
+
+export function convertFreeTextValueToAny(value: FreeTextValue): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.reactions.v1.FreeTextValue",
+    value: FreeTextValue.encode(value).finish(),
+  });
+}
+
 export const reactionValueConverters: AminoConverters = {
   "/desmos.reactions.v1.RegisteredReactionValue": {
     aminoType: "desmos/RegisteredReactionValue",
@@ -40,14 +56,11 @@ export const reactionValueConverters: AminoConverters = {
       };
     },
     fromAmino: (msg: AminoRegisteredReaction["value"]): Any =>
-      Any.fromPartial({
-        typeUrl: "/desmos.reactions.v1.RegisteredReactionValue",
-        value: RegisteredReactionValue.encode(
-          RegisteredReactionValue.fromPartial({
-            registeredReactionId: msg.registered_reaction_id,
-          })
-        ).finish(),
-      }),
+      convertRegisteredReactionValueToAny(
+        RegisteredReactionValue.fromPartial({
+          registeredReactionId: msg.registered_reaction_id,
+        })
+      ),
   },
   "/desmos.reactions.v1.FreeTextValue": {
     aminoType: "desmos/FreeTextValue",
@@ -58,14 +71,11 @@ export const reactionValueConverters: AminoConverters = {
       };
     },
     fromAmino: (msg: AminoFreeTextReaction["value"]): Any =>
-      Any.fromPartial({
-        typeUrl: "/desmos.reactions.v1.FreeTextValue",
-        value: FreeTextValue.encode(
-          FreeTextValue.fromPartial({
-            text: msg.text,
-          })
-        ).finish(),
-      }),
+      convertFreeTextValueToAny(
+        FreeTextValue.fromPartial({
+          text: msg.text,
+        })
+      ),
   },
 };
 
