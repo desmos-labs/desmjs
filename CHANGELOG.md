@@ -1,6 +1,10 @@
+## Version 4.3.6
+### Features
+- Export report target to `Any` converter methods
+
 ## Version 4.3.5
 ### Features
-- Added missing `EncodeObject` instances for feegrant and authz supported messages.
+- Added missing `EncodeObject` instances for feegrant and authz supported messages
 
 ## Version 4.3.4
 ### Features
