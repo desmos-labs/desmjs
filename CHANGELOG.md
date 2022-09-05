@@ -1,3 +1,7 @@
+## Version 4.3.7
+### Bug fixes
+- Fixed wrong reports-related `EncodeObject` naming and type url  
+
 ## Version 4.3.6
 ### Features
 - Export report target to `Any` converter methods
