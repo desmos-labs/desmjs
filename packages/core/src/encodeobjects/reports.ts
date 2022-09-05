@@ -7,72 +7,72 @@ import {
   MsgSupportStandardReason,
 } from "@desmoslabs/desmjs-types/desmos/reports/v1/msgs";
 
-export interface MsgMsgCreateReportEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.AminoMsgCreateReport";
+export interface MsgCreateReportEncodeObject extends EncodeObject {
+  readonly typeUrl: "/desmos.reports.v1.MsgCreateReport";
   readonly value: MsgCreateReport;
 }
 
-export function isMsgMsgCreateReportEncodeObject(
+export function isMsgCreateReportEncodeObject(
   encodeObject: EncodeObject
-): encodeObject is MsgMsgCreateReportEncodeObject {
+): encodeObject is MsgCreateReportEncodeObject {
   return (
-    (encodeObject as MsgMsgCreateReportEncodeObject).typeUrl ===
-    "/desmos.reports.v1.AminoMsgCreateReport"
+    (encodeObject as MsgCreateReportEncodeObject).typeUrl ===
+    "/desmos.reports.v1.MsgCreateReport"
   );
 }
 
-export interface MsgMsgDeleteReportEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.AminoMsgDeleteReport";
+export interface MsgDeleteReportEncodeObject extends EncodeObject {
+  readonly typeUrl: "/desmos.reports.v1.MsgDeleteReport";
   readonly value: MsgDeleteReport;
 }
 
-export function isMsgMsgDeleteReportEncodeObject(
+export function isMsgDeleteReportEncodeObject(
   encodeObject: EncodeObject
-): encodeObject is MsgMsgDeleteReportEncodeObject {
+): encodeObject is MsgDeleteReportEncodeObject {
   return (
-    (encodeObject as MsgMsgDeleteReportEncodeObject).typeUrl ===
-    "/desmos.reports.v1.AminoMsgDeleteReport"
+    (encodeObject as MsgDeleteReportEncodeObject).typeUrl ===
+    "/desmos.reports.v1.MsgDeleteReport"
   );
 }
 
-export interface MsgMsgSupportStandardReasonEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.AminoMsgSupportStandardReason";
+export interface MsgSupportStandardReasonEncodeObject extends EncodeObject {
+  readonly typeUrl: "/desmos.reports.v1.MsgSupportStandardReason";
   readonly value: MsgSupportStandardReason;
 }
 
-export function isMsgMsgSupportStandardReasonEncodeObject(
+export function isMsgSupportStandardReasonEncodeObject(
   encodeObject: EncodeObject
-): encodeObject is MsgMsgSupportStandardReasonEncodeObject {
+): encodeObject is MsgSupportStandardReasonEncodeObject {
   return (
-    (encodeObject as MsgMsgSupportStandardReasonEncodeObject).typeUrl ===
-    "/desmos.reports.v1.AminoMsgSupportStandardReason"
+    (encodeObject as MsgSupportStandardReasonEncodeObject).typeUrl ===
+    "/desmos.reports.v1.MsgSupportStandardReason"
   );
 }
 
-export interface MsgMsgAddReasonEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.AminoMsgAddReason";
+export interface MsgAddReasonEncodeObject extends EncodeObject {
+  readonly typeUrl: "/desmos.reports.v1.MsgAddReason";
   readonly value: MsgAddReason;
 }
 
-export function isMsgMsgAddReasonEncodeObject(
+export function isMsgAddReasonEncodeObject(
   encodeObject: EncodeObject
-): encodeObject is MsgMsgAddReasonEncodeObject {
+): encodeObject is MsgAddReasonEncodeObject {
   return (
-    (encodeObject as MsgMsgAddReasonEncodeObject).typeUrl ===
-    "/desmos.reports.v1.AminoMsgAddReason"
+    (encodeObject as MsgAddReasonEncodeObject).typeUrl ===
+    "/desmos.reports.v1.MsgAddReason"
   );
 }
 
-export interface MsgMsgRemoveReasonEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.AminoMsgRemoveReason";
+export interface MsgRemoveReasonEncodeObject extends EncodeObject {
+  readonly typeUrl: "/desmos.reports.v1.MsgRemoveReason";
   readonly value: MsgRemoveReason;
 }
 
-export function isMsgMsgRemoveReasonEncodeObject(
+export function isMsgRemoveReasonEncodeObject(
   encodeObject: EncodeObject
-): encodeObject is MsgMsgRemoveReasonEncodeObject {
+): encodeObject is MsgRemoveReasonEncodeObject {
   return (
-    (encodeObject as MsgMsgRemoveReasonEncodeObject).typeUrl ===
-    "/desmos.reports.v1.AminoMsgRemoveReason"
+    (encodeObject as MsgRemoveReasonEncodeObject).typeUrl ===
+    "/desmos.reports.v1.MsgRemoveReason"
   );
 }
