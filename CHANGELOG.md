@@ -1,3 +1,7 @@
+## Version 4.3.8
+### Bug fixes
+- Fixed wrong reports-related messages URLs within type registry (thanks @g-luca)
+
 ## Version 4.3.7
 ### Bug fixes
 - Fixed wrong reports-related `EncodeObject` naming and type url  
