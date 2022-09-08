@@ -1,0 +1,58 @@
+{
+  "name": "@desmoslabs/desmjs-keplr",
+  "version": "4.3.8",
+  "description": "Keplr integration for DesmJS",
+  "contributors": [
+    "Manuel Turetta <manuel@forbole.com>",
+    "Riccardo Montagnin <riccardo@forbole.com>"
+  ],
+  "license": "Apache-2.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/",
+    "*.md",
+    "!*.spec.*",
+    "!**/testdata/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/desmos-labs/desmjs/tree/main/packages/core"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "rm -rf ./build && yarn tsc"
+  },
+  "dependencies": {
+    "@cosmjs/amino": "^0.28.1",
+    "@cosmjs/crypto": "^0.28.1",
+    "@cosmjs/encoding": "^0.28.1",
+    "@cosmjs/math": "^0.28.1",
+    "@cosmjs/proto-signing": "^0.28.1",
+    "@cosmjs/stargate": "^0.28.1",
+    "@cosmjs/tendermint-rpc": "^0.28.1",
+    "@cosmjs/utils": "^0.28.1",
+    "@desmoslabs/desmjs": "workspace:packages/core",
+    "@keplr-wallet/types": "0.10.19",
+    "cosmjs-types": "^0.4.1",
+    "cosmos-wallet": "^1.1.0",
+    "long": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jest": "^27.4.1",
+    "@types/long": "^4.0.1",
+    "@types/node": "^17.0.23",
+    "@types/pino": "^6.3.11",
+    "babel-jest": "^27.1.0",
+    "jest": "^27.1.0",
+    "ts-jest": "^27.1.4",
+    "ts-proto": "^1.82.5",
+    "typescript": "^4.4.4"
+  }
+}

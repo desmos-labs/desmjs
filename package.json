@@ -26,7 +26,8 @@
   "workspaces": [
     "packages/core",
     "packages/types",
-    "packages/walletconnect"
+    "packages/walletconnect",
+    "packages/keplr"
   ],
   "scripts": {
     "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build",
