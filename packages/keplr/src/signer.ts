@@ -63,7 +63,7 @@ export const DesmosMainnet: ChainInfo = {
     average: 0.03,
     high: 0.05,
   },
-  features: ["no-legacy-stdTx"],
+  features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
 };
 
 export const DesmosTestnet: ChainInfo = {
@@ -106,6 +106,7 @@ export const DesmosTestnet: ChainInfo = {
     average: 0.03,
     high: 0.05,
   },
+  features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
 };
 
 /**
@@ -146,7 +147,7 @@ export class KeplrSigner extends Signer {
    * Implements Signer.
    */
   async connect(): Promise<void> {
-    if (this.status !== SignerStatus.NotConnected) {
+    if (this.status !== SignerStatus.NotConnected && this.accountData) {
       return;
     }
     this.updateStatus(SignerStatus.Connecting);
