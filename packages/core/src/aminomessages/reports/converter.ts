@@ -12,6 +12,7 @@ import {
   PostTarget,
   UserTarget,
 } from "@desmoslabs/desmjs-types/desmos/reports/v1/models";
+import Long from "long";
 import { AminoPostTarget, AminoReportTarget, AminoUserTarget } from "./types";
 import {
   AminoMsgAddReason,
@@ -57,13 +58,13 @@ export const reportTargetConverters: AminoConverters = {
     toAmino: (msg: Any): AminoPostTarget["value"] => {
       const target = PostTarget.decode(msg.value);
       return {
-        post_id: target.postId,
+        post_id: target.postId.toString(),
       };
     },
     fromAmino: (msg: AminoPostTarget["value"]): Any =>
       convertPostTargetToAny(
         PostTarget.fromPartial({
-          postId: msg.post_id,
+          postId: Long.fromString(msg.post_id),
         })
       ),
   },
@@ -95,7 +96,7 @@ export function createReportsConverters(): AminoConverters {
       toAmino: (msg: MsgCreateReport): AminoMsgCreateReport["value"] => {
         assertDefinedAndNotNull(msg.target, "report target not defined");
         return {
-          subspace_id: msg.subspaceId,
+          subspace_id: msg.subspaceId.toString(),
           reasons_ids: msg.reasonsIds,
           message: msg.message,
           reporter: msg.reporter,
@@ -103,7 +104,7 @@ export function createReportsConverters(): AminoConverters {
         };
       },
       fromAmino: (msg: AminoMsgCreateReport["value"]): MsgCreateReport => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         reasonsIds: msg.reasons_ids,
         message: msg.message,
         reporter: msg.reporter,
@@ -113,13 +114,13 @@ export function createReportsConverters(): AminoConverters {
     "/desmos.reports.v1.MsgDeleteReport": {
       aminoType: "desmos/MsgDeleteReport",
       toAmino: (msg: MsgDeleteReport): AminoMsgDeleteReport["value"] => ({
-        subspace_id: msg.subspaceId,
-        report_id: msg.reportId,
+        subspace_id: msg.subspaceId.toString(),
+        report_id: msg.reportId.toString(),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgDeleteReport["value"]): MsgDeleteReport => ({
-        subspaceId: msg.subspace_id,
-        reportId: msg.report_id,
+        subspaceId: Long.fromString(msg.subspace_id),
+        reportId: Long.fromString(msg.report_id),
         signer: msg.signer,
       }),
     },
@@ -128,14 +129,14 @@ export function createReportsConverters(): AminoConverters {
       toAmino: (
         msg: MsgSupportStandardReason
       ): AminoMsgSupportStandardReason["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         standard_reason_id: msg.standardReasonId,
         signer: msg.signer,
       }),
       fromAmino: (
         msg: AminoMsgSupportStandardReason["value"]
       ): MsgSupportStandardReason => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         standardReasonId: msg.standard_reason_id,
         signer: msg.signer,
       }),
@@ -143,13 +144,13 @@ export function createReportsConverters(): AminoConverters {
     "/desmos.reports.v1.MsgAddReason": {
       aminoType: "desmos/MsgAddReason",
       toAmino: (msg: MsgAddReason): AminoMsgAddReason["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         title: msg.title,
         description: msg.description,
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgAddReason["value"]): MsgAddReason => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         title: msg.title,
         description: msg.description,
         signer: msg.signer,
@@ -158,12 +159,12 @@ export function createReportsConverters(): AminoConverters {
     "/desmos.reports.v1.MsgRemoveReason": {
       aminoType: "desmos/MsgRemoveReason",
       toAmino: (msg: MsgRemoveReason): AminoMsgRemoveReason["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         reason_id: msg.reasonId,
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgRemoveReason["value"]): MsgRemoveReason => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         reasonId: msg.reason_id,
         signer: msg.signer,
       }),
