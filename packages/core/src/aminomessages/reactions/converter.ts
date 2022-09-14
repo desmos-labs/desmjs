@@ -14,6 +14,7 @@ import {
   FreeTextValueParams,
   RegisteredReactionValue,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/models";
+import Long from "long";
 import {
   AminoFreeTextReaction,
   AminoFreeTextValueParams,
@@ -125,15 +126,15 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (msg: MsgAddReaction): AminoMsgAddReaction["value"] => {
         assertDefinedAndNotNull(msg.value, "reaction value not defined");
         return {
-          subspace_id: msg.subspaceId,
-          post_id: msg.postId,
+          subspace_id: msg.subspaceId.toString(),
+          post_id: msg.postId.toString(),
           value: convertReactionValueToAmino(msg.value),
           user: msg.user,
         };
       },
       fromAmino: (msg: AminoMsgAddReaction["value"]): MsgAddReaction => ({
-        subspaceId: msg.subspace_id,
-        postId: msg.post_id,
+        subspaceId: Long.fromString(msg.subspace_id),
+        postId: Long.fromString(msg.post_id),
         value: convertReactionFromAmino(msg.value),
         user: msg.user,
       }),
@@ -141,14 +142,14 @@ export function createReactionsConverters(): AminoConverters {
     "/desmos.reactions.v1.MsgRemoveReaction": {
       aminoType: "desmos/MsgRemoveReaction",
       toAmino: (msg: MsgRemoveReaction): AminoMsgRemoveReaction["value"] => ({
-        subspace_id: msg.subspaceId,
-        post_id: msg.postId,
+        subspace_id: msg.subspaceId.toString(),
+        post_id: msg.postId.toString(),
         reaction_id: msg.reactionId,
         user: msg.user,
       }),
       fromAmino: (msg: AminoMsgRemoveReaction["value"]): MsgRemoveReaction => ({
-        subspaceId: msg.subspace_id,
-        postId: msg.post_id,
+        subspaceId: Long.fromString(msg.subspace_id),
+        postId: Long.fromString(msg.post_id),
         reactionId: msg.reaction_id,
         user: msg.user,
       }),
@@ -158,7 +159,7 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgAddRegisteredReaction
       ): AminoMsgAddRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         shorthand_code: msg.shorthandCode,
         display_value: msg.displayValue,
         user: msg.user,
@@ -166,7 +167,7 @@ export function createReactionsConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgAddRegisteredReaction["value"]
       ): MsgAddRegisteredReaction => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         shorthandCode: msg.shorthand_code,
         displayValue: msg.display_value,
         user: msg.user,
@@ -177,7 +178,7 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgEditRegisteredReaction
       ): AminoMsgEditRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         registered_reaction_id: msg.registeredReactionId,
         shorthand_code: msg.shorthandCode,
         display_value: msg.displayValue,
@@ -186,7 +187,7 @@ export function createReactionsConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgEditRegisteredReaction["value"]
       ): MsgEditRegisteredReaction => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         registeredReactionId: msg.registered_reaction_id,
         shorthandCode: msg.shorthand_code,
         displayValue: msg.display_value,
@@ -198,14 +199,14 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgRemoveRegisteredReaction
       ): AminoMsgRemoveRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         registered_reaction_id: msg.registeredReactionId,
         user: msg.user,
       }),
       fromAmino: (
         msg: AminoMsgRemoveRegisteredReaction["value"]
       ): MsgRemoveRegisteredReaction => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         registeredReactionId: msg.registered_reaction_id,
         user: msg.user,
       }),
@@ -215,7 +216,7 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgSetReactionsParams
       ): AminoMsgSetReactionsParams["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         registered_reaction: msg.registeredReaction,
         free_text: msg.freeText
           ? convertFreeTextValueParamsToAmino(msg.freeText)
@@ -225,7 +226,7 @@ export function createReactionsConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgSetReactionsParams["value"]
       ): MsgSetReactionsParams => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         registeredReaction: msg.registered_reaction,
         freeText: msg.free_text
           ? convertFreeTextValueParamsFromAmino(msg.free_text)

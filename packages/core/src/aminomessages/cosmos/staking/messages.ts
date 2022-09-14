@@ -1,9 +1,8 @@
-import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
+import { Coin, AminoMsg } from "@cosmjs/amino";
 import {
   AuthorizationType,
   StakeAuthorization_Validators,
 } from "cosmjs-types/cosmos/staking/v1beta1/authz";
-import { AminoMsg } from "@cosmjs/amino";
 
 export interface AminoStakeAuthorization extends AminoMsg {
   readonly type: "cosmos-sdk/StakeAuthorization";

@@ -1,12 +1,11 @@
 import { AminoMsg } from "@cosmjs/amino";
-import Long from "long";
 
 export interface AminoMsgCreateRelationship extends AminoMsg {
   readonly type: "desmos/MsgCreateRelationship";
   readonly value: {
     signer: string;
     counterparty: string;
-    subspace_id: Long;
+    subspace_id: string;
   };
 }
 
@@ -15,7 +14,7 @@ export interface AminoMsgDeleteRelationship extends AminoMsg {
   readonly value: {
     signer: string;
     counterparty: string;
-    subspace_id: Long;
+    subspace_id: string;
   };
 }
 
@@ -25,7 +24,7 @@ export interface AminoMsgBlockUser extends AminoMsg {
     blocker: string;
     blocked: string;
     reason: string;
-    subspace_id: Long;
+    subspace_id: string;
   };
 }
 
@@ -34,6 +33,6 @@ export interface AminoMsgUnblockUser extends AminoMsg {
   readonly value: {
     blocker: string;
     blocked: string;
-    subspace_id: Long;
+    subspace_id: string;
   };
 }
