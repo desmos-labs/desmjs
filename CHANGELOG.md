@@ -1,3 +1,10 @@
+## Version 4.3.9
+### Bug fixes
+- Fixed wrong `Long` Amino serializations
+
+### Features
+- Added `timestampFromDate` and `timestampToDate` utility methods
+
 ## Version 4.3.8
 ### Bug fixes
 - Fixed wrong reports-related messages URLs within type registry (thanks @g-luca)
