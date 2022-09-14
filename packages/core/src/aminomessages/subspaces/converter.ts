@@ -16,6 +16,7 @@ import {
   MsgDeleteSection,
   MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
+import Long from "long";
 import {
   AminoMsgAddUserToUserGroup,
   AminoMsgCreateSubspace,
@@ -59,7 +60,7 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgEditSubspace": {
       aminoType: "desmos/MsgEditSubspace",
       toAmino: (msg: MsgEditSubspace): AminoMsgEditSubspace["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         name: msg.name,
         description: msg.description,
         treasury: msg.treasury,
@@ -67,7 +68,7 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgEditSubspace["value"]): MsgEditSubspace => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         name: msg.name,
         description: msg.description,
         treasury: msg.treasury,
@@ -78,25 +79,25 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgDeleteSubspace": {
       aminoType: "desmos/MsgDeleteSubspace",
       toAmino: (msg: MsgDeleteSubspace): AminoMsgDeleteSubspace["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgDeleteSubspace["value"]): MsgDeleteSubspace => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         signer: msg.signer,
       }),
     },
     "/desmos.subspaces.v3.MsgCreateSection": {
       aminoType: "desmos/MsgCreateSection",
       toAmino: (msg: MsgCreateSection): AminoMsgCreateSection["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         name: msg.name,
         description: msg.description,
         parent_id: msg.parentId,
         creator: msg.creator,
       }),
       fromAmino: (msg: AminoMsgCreateSection["value"]): MsgCreateSection => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         name: msg.name,
         description: msg.description,
         parentId: msg.parent_id,
@@ -106,14 +107,14 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgEditSection": {
       aminoType: "desmos/MsgEditSection",
       toAmino: (msg: MsgEditSection): AminoMsgEditSection["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
         name: msg.name,
         description: msg.description,
         editor: msg.editor,
       }),
       fromAmino: (msg: AminoMsgEditSection["value"]): MsgEditSection => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         sectionId: msg.section_id,
         name: msg.name,
         description: msg.description,
@@ -123,13 +124,13 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgMoveSection": {
       aminoType: "desmos/MsgMoveSection",
       toAmino: (msg: MsgMoveSection): AminoMsgMoveSection["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
         new_parent_id: msg.newParentId,
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgMoveSection["value"]): MsgMoveSection => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         sectionId: msg.section_id,
         newParentId: msg.new_parent_id,
         signer: msg.signer,
@@ -138,12 +139,12 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgDeleteSection": {
       aminoType: "desmos/MsgDeleteSection",
       toAmino: (msg: MsgDeleteSection): AminoMsgDeleteSection["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgDeleteSection["value"]): MsgDeleteSection => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         sectionId: msg.section_id,
         signer: msg.signer,
       }),
@@ -151,7 +152,7 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgCreateUserGroup": {
       aminoType: "desmos/MsgCreateUserGroup",
       toAmino: (msg: MsgCreateUserGroup): AminoMsgCreateUserGroup["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
         name: msg.name,
         description: msg.description,
@@ -162,7 +163,7 @@ export function createSubspacesConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgCreateUserGroup["value"]
       ): MsgCreateUserGroup => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         sectionId: msg.section_id,
         name: msg.name,
         description: msg.description,
@@ -174,14 +175,14 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgEditUserGroup": {
       aminoType: "desmos/MsgEditUserGroup",
       toAmino: (msg: MsgEditUserGroup): AminoMsgEditUserGroup["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
         name: msg.name,
         description: msg.description,
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgEditUserGroup["value"]): MsgEditUserGroup => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         groupId: msg.group_id,
         name: msg.name,
         description: msg.description,
@@ -191,13 +192,13 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgMoveUserGroup": {
       aminoType: "desmos/MsgMoveUserGroup",
       toAmino: (msg: MsgMoveUserGroup): AminoMsgMoveUserGroup["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
         new_section_id: msg.newSectionId,
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgMoveUserGroup["value"]): MsgMoveUserGroup => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         groupId: msg.group_id,
         newSectionId: msg.new_section_id,
         signer: msg.signer,
@@ -208,7 +209,7 @@ export function createSubspacesConverters(): AminoConverters {
       toAmino: (
         msg: MsgSetUserGroupPermissions
       ): AminoMsgSetUserGroupPermissions["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
         permissions: msg.permissions,
         signer: msg.signer,
@@ -216,7 +217,7 @@ export function createSubspacesConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgSetUserGroupPermissions["value"]
       ): MsgSetUserGroupPermissions => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         groupId: msg.group_id,
         permissions: msg.permissions,
         signer: msg.signer,
@@ -225,14 +226,14 @@ export function createSubspacesConverters(): AminoConverters {
     "/desmos.subspaces.v3.MsgDeleteUserGroup": {
       aminoType: "desmos/MsgDeleteUserGroup",
       toAmino: (msg: MsgDeleteUserGroup): AminoMsgDeleteUserGroup["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
         signer: msg.signer,
       }),
       fromAmino: (
         msg: AminoMsgDeleteUserGroup["value"]
       ): MsgDeleteUserGroup => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         groupId: msg.group_id,
         signer: msg.signer,
       }),
@@ -242,7 +243,7 @@ export function createSubspacesConverters(): AminoConverters {
       toAmino: (
         msg: MsgAddUserToUserGroup
       ): AminoMsgAddUserToUserGroup["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
         user: msg.user,
         signer: msg.signer,
@@ -250,7 +251,7 @@ export function createSubspacesConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgAddUserToUserGroup["value"]
       ): MsgAddUserToUserGroup => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         groupId: msg.group_id,
         user: msg.user,
         signer: msg.signer,
@@ -261,7 +262,7 @@ export function createSubspacesConverters(): AminoConverters {
       toAmino: (
         msg: MsgRemoveUserFromUserGroup
       ): AminoMsgRemoveUserFromUserGroup["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
         user: msg.user,
         signer: msg.signer,
@@ -269,7 +270,7 @@ export function createSubspacesConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgRemoveUserFromUserGroup["value"]
       ): MsgRemoveUserFromUserGroup => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         groupId: msg.group_id,
         user: msg.user,
         signer: msg.signer,
@@ -280,7 +281,7 @@ export function createSubspacesConverters(): AminoConverters {
       toAmino: (
         msg: MsgSetUserPermissions
       ): AminoMsgSetUserPermissions["value"] => ({
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
         user: msg.user,
         permissions: msg.permissions,
@@ -289,7 +290,7 @@ export function createSubspacesConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgSetUserPermissions["value"]
       ): MsgSetUserPermissions => ({
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
         sectionId: msg.section_id,
         user: msg.user,
         permissions: msg.permissions,
