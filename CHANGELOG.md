@@ -1,3 +1,7 @@
+## Version 4.3.10
+### Features
+- First release of the new `@desmoslabs/desmjs-keplr` package that allows to easily integrate with Keplr (thanks [@g-luca](https://github.com/g-luca))
+
 ## Version 4.3.9
 ### Bug fixes
 - Fixed wrong `Long` Amino serializations
@@ -7,7 +11,7 @@
 
 ## Version 4.3.8
 ### Bug fixes
-- Fixed wrong reports-related messages URLs within type registry (thanks @g-luca)
+- Fixed wrong reports-related messages URLs within type registry (thanks [@g-luca](https://github.com/g-luca))
 
 ## Version 4.3.7
 ### Bug fixes
