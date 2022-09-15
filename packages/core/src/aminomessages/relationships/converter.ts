@@ -5,6 +5,7 @@ import {
   MsgDeleteRelationship,
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msg_server";
+import Long from "long";
 import {
   AminoMsgBlockUser,
   AminoMsgCreateRelationship,
@@ -24,14 +25,14 @@ export function createRelationshipsConverters(): AminoConverters {
       ): AminoMsgCreateRelationship["value"] => ({
         signer: msg.signer,
         counterparty: msg.counterparty,
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
       }),
       fromAmino: (
         msg: AminoMsgCreateRelationship["value"]
       ): MsgCreateRelationship => ({
         signer: msg.signer,
         counterparty: msg.counterparty,
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
     "/desmos.relationships.v1.MsgDeleteRelationship": {
@@ -41,14 +42,14 @@ export function createRelationshipsConverters(): AminoConverters {
       ): AminoMsgDeleteRelationship["value"] => ({
         signer: msg.signer,
         counterparty: msg.counterparty,
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
       }),
       fromAmino: (
         msg: AminoMsgDeleteRelationship["value"]
       ): MsgDeleteRelationship => ({
         signer: msg.signer,
         counterparty: msg.counterparty,
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
     "/desmos.relationships.v1.MsgBlockUser": {
@@ -57,13 +58,13 @@ export function createRelationshipsConverters(): AminoConverters {
         blocker: msg.blocker,
         blocked: msg.blocked,
         reason: msg.reason,
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
       }),
       fromAmino: (msg: AminoMsgBlockUser["value"]): MsgBlockUser => ({
         blocker: msg.blocker,
         blocked: msg.blocked,
         reason: msg.reason,
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
     "/desmos.relationships.v1.MsgUnblockUser": {
@@ -71,12 +72,12 @@ export function createRelationshipsConverters(): AminoConverters {
       toAmino: (msg: MsgUnblockUser): AminoMsgUnblockUser["value"] => ({
         blocker: msg.blocker,
         blocked: msg.blocked,
-        subspace_id: msg.subspaceId,
+        subspace_id: msg.subspaceId.toString(),
       }),
       fromAmino: (msg: AminoMsgUnblockUser["value"]): MsgUnblockUser => ({
         blocker: msg.blocker,
         blocked: msg.blocked,
-        subspaceId: msg.subspace_id,
+        subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
   };

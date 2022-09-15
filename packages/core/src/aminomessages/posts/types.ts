@@ -1,4 +1,3 @@
-import { Long } from "long";
 import { AminoMsg } from "@cosmjs/amino";
 import {
   Poll_ProvidedAnswer,
@@ -14,8 +13,8 @@ export interface AminoEntities {
 }
 
 export interface AminoUrl {
-  readonly start: Long;
-  readonly end: Long;
+  readonly start: string;
+  readonly end: string;
   readonly url: string;
   readonly display_url: string;
 }
@@ -44,6 +43,6 @@ export interface AminoMedia extends AminoAttachment {
 
 export interface AminoPostReference {
   readonly type: PostReferenceType;
-  readonly post_id: Long;
-  readonly position: Long;
+  readonly post_id: string;
+  readonly position: string;
 }

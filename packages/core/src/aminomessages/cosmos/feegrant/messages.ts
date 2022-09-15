@@ -1,5 +1,4 @@
-import { AminoMsg } from "@cosmjs/amino";
-import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
+import { AminoMsg, Coin } from "@cosmjs/amino";
 import { Timestamp } from "cosmjs-types/google/protobuf/timestamp";
 import { Duration } from "cosmjs-types/google/protobuf/duration";
 

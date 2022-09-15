@@ -1,5 +1,5 @@
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
-import { convertCoin } from "./conversions";
+import { convertCoin } from "./coins";
 import { DesmosMainnet } from "../types";
 
 describe("Utils test", () => {
