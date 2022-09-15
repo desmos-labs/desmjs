@@ -11,8 +11,9 @@ import { assert } from "@cosmjs/utils";
 import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
 import { DesmosMainnet } from "./chains";
 
+// Add KeplrWindow types to the global Window interface
 declare global {
-  interface Window extends KeplrWindow {}
+  interface Window extends KeplrWindow { }
 }
 
 export interface KeplrSignerOptions {
@@ -25,13 +26,13 @@ export interface KeplrSignerOptions {
  * Signer that use Keplr to sign a transaction.
  */
 export class KeplrSigner extends Signer {
-  public readonly chainInfo: ChainInfo = DesmosMainnet;
-
   public readonly signingMode: SigningMode = SigningMode.DIRECT;
 
   private readonly client: Keplr;
 
   private accountData: AccountData | undefined;
+
+  private chainInfo: ChainInfo = DesmosMainnet;
 
   constructor(keplrClient: Keplr, options: KeplrSignerOptions) {
     super(SignerStatus.NotConnected);
@@ -41,18 +42,36 @@ export class KeplrSigner extends Signer {
   }
 
   /**
-   * Subscribes to all the Keplr events.
+   * Subscribes to Keplr events.
    * @private
    */
   private subscribeToEvents() {
     // Subscribe to the Keplr Storage event
-    window.addEventListener("keplr_keystorechange", async () => {
-      // disconnect from the current wallet
-      await this.disconnect();
+    window.addEventListener("keplr_keystorechange", () =>
+      this.handleKeyStoreChange()
+    );
+  }
 
-      // connect to the new wallet
-      await this.connect();
-    });
+  /**
+   * Unsubscribes from Keplr events.
+   * @private
+   */
+  private unsubscribeFromEvents() {
+    // Unsubscribe from the Keplr Storage event
+    window.removeEventListener("keplr_keystorechange", () =>
+      this.handleKeyStoreChange()
+    );
+  }
+
+  /**
+   * Handle the Keplr keystore change event.
+   */
+  private async handleKeyStoreChange() {
+    // disconnect from the current wallet
+    await this.disconnect();
+
+    // connect to the new wallet
+    await this.connect();
   }
 
   /**
@@ -83,13 +102,14 @@ export class KeplrSigner extends Signer {
   /**
    * Implements Signer.
    */
-  disconnect(): Promise<void> {
+  async disconnect(): Promise<void> {
     if (this.status !== SignerStatus.Connected) {
       return Promise.resolve();
     }
 
     this.updateStatus(SignerStatus.Disconnecting);
     this.accountData = undefined;
+    this.unsubscribeFromEvents();
     this.updateStatus(SignerStatus.NotConnected);
     return Promise.resolve();
   }
@@ -151,8 +171,30 @@ export class KeplrSigner extends Signer {
     return signResponse;
   }
 
+  /**
+   * Prompt a new Keplr Chain configuration.
+   * @param chainInfo new chain configuration
+   */
   public static async setupChainNetwork(chainInfo: ChainInfo): Promise<void> {
     assert(window.keplr);
     await window.keplr.experimentalSuggestChain(chainInfo);
+  }
+
+  /**
+   * Switch to the given ChainInfo.
+   * @param chainInfo chain configuration
+   */
+  public async switchChainNetwork(chainInfo: ChainInfo): Promise<void> {
+    assert(window.keplr);
+    await this.disconnect();
+    this.chainInfo = chainInfo;
+    this.connect();
+  }
+
+  /**
+   * Get the current ChainInfo.
+   */
+  public getCurrentChainInfo(): ChainInfo {
+    return this.chainInfo;
   }
 }
