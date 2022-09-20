@@ -1,3 +1,7 @@
+## Version 4.3.11
+### Features
+- Added `mediaToAny` and `pollToAny` utility methods.
+
 ## Version 4.3.10
 ### Features
 - First release of the new `@desmoslabs/desmjs-keplr` package that allows to easily integrate with Keplr (thanks [@g-luca](https://github.com/g-luca))
