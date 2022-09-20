@@ -26,6 +26,28 @@ import {
 import { isAminoConverter } from "../../types";
 import { AminoAttachment, AminoEntities, AminoMedia, AminoPoll } from "./types";
 
+/**
+ * Converts the given `Poll` into an `Any` instance so that it can be used within `MsgCreatePost` and `MsgAddPostAttachment`.
+ * @param poll: The poll to be converted.
+ */
+export function pollToAny(poll: Poll): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.posts.v2.Poll",
+    value: Poll.encode(poll).finish(),
+  });
+}
+
+/**
+ * Converts the given `Media` into an `Any` instance so that it can be used within `MsgCreatePost` and `MsgAddPostAttachment`.
+ * @param media: The media to be converted.
+ */
+export function mediaToAny(media: Media): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.posts.v2.Media",
+    value: Media.encode(media).finish(),
+  });
+}
+
 export const attachmentConverters: AminoConverters = {
   "/desmos.posts.v2.Poll": {
     aminoType: "desmos/Poll",
@@ -41,19 +63,16 @@ export const attachmentConverters: AminoConverters = {
       };
     },
     fromAmino: (msg: AminoPoll["value"]): Any =>
-      Any.fromPartial({
-        typeUrl: "/desmos.posts.v2.Poll",
-        value: Poll.encode(
-          Poll.fromPartial({
-            question: msg.question,
-            providedAnswers: msg.provided_answers,
-            endDate: msg.end_date,
-            allowsMultipleAnswers: msg.allows_multiple_answers,
-            allowsAnswerEdits: msg.allows_answer_edits,
-            finalTallyResults: msg.final_tally_results,
-          })
-        ).finish(),
-      }),
+      pollToAny(
+        Poll.fromPartial({
+          question: msg.question,
+          providedAnswers: msg.provided_answers,
+          endDate: msg.end_date,
+          allowsMultipleAnswers: msg.allows_multiple_answers,
+          allowsAnswerEdits: msg.allows_answer_edits,
+          finalTallyResults: msg.final_tally_results,
+        })
+      ),
   },
   "/desmos.posts.v2.Media": {
     aminoType: "desmos/Media",
@@ -65,19 +84,16 @@ export const attachmentConverters: AminoConverters = {
       };
     },
     fromAmino: (msg: AminoMedia["value"]): Any =>
-      Any.fromPartial({
-        typeUrl: "/desmos.posts.v2.Media",
-        value: Media.encode(
-          Media.fromPartial({
-            uri: msg.uri,
-            mimeType: msg.mime_type,
-          })
-        ).finish(),
-      }),
+      mediaToAny(
+        Media.fromPartial({
+          uri: msg.uri,
+          mimeType: msg.mime_type,
+        })
+      ),
   },
 };
 
-export function convertAttachmentToAmino(attachment: Any): AminoAttachment {
+function convertAttachmentToAmino(attachment: Any): AminoAttachment {
   const converter = attachmentConverters[attachment.typeUrl] as AminoConverter;
   return {
     type: converter.aminoType,
@@ -85,7 +101,7 @@ export function convertAttachmentToAmino(attachment: Any): AminoAttachment {
   };
 }
 
-export function convertAttachmentFromAmino(attachment: AminoAttachment): Any {
+function convertAttachmentFromAmino(attachment: AminoAttachment): Any {
   const matches = Object.entries(attachmentConverters)
     .filter(isAminoConverter)
     .filter(([, { aminoType }]) => aminoType === attachment.type);
@@ -93,7 +109,7 @@ export function convertAttachmentFromAmino(attachment: AminoAttachment): Any {
   return converter.fromAmino(attachment);
 }
 
-export function convertEntitiesToAmino(entities: Entities): AminoEntities {
+function convertEntitiesToAmino(entities: Entities): AminoEntities {
   return {
     hashtags: entities.hashtags,
     mentions: entities.mentions,
@@ -106,7 +122,7 @@ export function convertEntitiesToAmino(entities: Entities): AminoEntities {
   };
 }
 
-export function convertEntitiesFromAmino(entities: AminoEntities): Entities {
+function convertEntitiesFromAmino(entities: AminoEntities): Entities {
   return {
     hashtags: entities.hashtags,
     mentions: entities.mentions,
