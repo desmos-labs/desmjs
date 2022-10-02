@@ -4,7 +4,7 @@ import {
   MsgCreateRelationship,
   MsgDeleteRelationship,
   MsgUnblockUser,
-} from "@desmoslabs/desmjs-types/desmos/relationships/v1/msg_server";
+} from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
 
 export interface MsgCreateRelationshipEncodeObject extends EncodeObject {
   typeUrl: "/desmos.relationships.v1.MsgCreateRelationship";
