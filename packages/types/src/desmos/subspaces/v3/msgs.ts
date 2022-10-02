@@ -4,25 +4,52 @@ import * as _m0 from "protobufjs/minimal";
 
 /** MsgCreateSubspace represents the message used to create a subspace */
 export interface MsgCreateSubspace {
+  /** Name of the subspace */
   name: string;
+  /** (optional) Description of the subspace */
   description: string;
+  /** (optional) Treasury address associated to this subspace */
   treasury: string;
+  /**
+   * (optional) Owner of this subspace. If not specified, the creator will be the
+   * default owner.
+   */
   owner: string;
+  /** Address creating the subspace */
   creator: string;
 }
 
 /** MsgCreateSubspaceResponse defines the Msg/CreateSubspace response type */
 export interface MsgCreateSubspaceResponse {
+  /** Id of the newly created subspace id */
   subspaceId: Long;
 }
 
 /** MsgEditSubspace represents the message used to edit a subspace fields */
 export interface MsgEditSubspace {
+  /** Id of the subspace to edit */
   subspaceId: Long;
+  /**
+   * New name of the subspace. If it shouldn't be changed, use [do-not-modify]
+   * instead.
+   */
   name: string;
+  /**
+   * New description of the subspace. If it shouldn't be changed, use
+   * [do-not-modify] instead.
+   */
   description: string;
+  /**
+   * New treasury address of the subspace. If it shouldn't be changed, use
+   * [do-not-modify] instead.
+   */
   treasury: string;
+  /**
+   * New owner of the subspace. If it shouldn't be changed, use [do-not-modify]
+   * instead.
+   */
   owner: string;
+  /** Address of the user editing the subspace */
   signer: string;
 }
 
@@ -31,7 +58,9 @@ export interface MsgEditSubspaceResponse {}
 
 /** MsgDeleteSubspace represents the message used to delete a subspace */
 export interface MsgDeleteSubspace {
+  /** Id of the subspace to delete */
   subspaceId: Long;
+  /** Address of the user deleting the subspace */
   signer: string;
 }
 

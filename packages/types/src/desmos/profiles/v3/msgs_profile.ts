@@ -4,11 +4,32 @@ import * as _m0 from "protobufjs/minimal";
 
 /** MsgSaveProfile represents a message to save a profile. */
 export interface MsgSaveProfile {
+  /**
+   * DTag of the profile. If it shouldn't be changed, [do-no-modify] can be used
+   * instead.
+   */
   dtag: string;
+  /**
+   * Nickname of the profile. If it shouldn't be changed, [do-no-modify] can be
+   * used instead.
+   */
   nickname: string;
+  /**
+   * Bio of the profile. If it shouldn't be changed, [do-no-modify] can be used
+   * instead.
+   */
   bio: string;
+  /**
+   * URL to the profile picture. If it shouldn't be changed, [do-no-modify] can
+   * be used instead.
+   */
   profilePicture: string;
+  /**
+   * URL to the profile cover. If it shouldn't be changed, [do-no-modify] can be
+   * used instead.
+   */
   coverPicture: string;
+  /** Address of the user associated to the profile */
   creator: string;
 }
 
@@ -17,6 +38,7 @@ export interface MsgSaveProfileResponse {}
 
 /** MsgDeleteProfile represents the message used to delete an existing profile. */
 export interface MsgDeleteProfile {
+  /** Address associated to the profile to be deleted */
   creator: string;
 }
 

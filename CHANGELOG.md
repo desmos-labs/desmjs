@@ -1,3 +1,7 @@
+## Version 4.4.0
+### Features
+- Updated Desmos to `v4.4.1`
+
 ## Version 4.3.11
 ### Features
 - Added `mediaToAny` and `pollToAny` utility methods.

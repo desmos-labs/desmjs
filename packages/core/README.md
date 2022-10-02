@@ -24,3 +24,4 @@ Represents an abstract signer able to sign a transaction either using `SIGN_MODE
 |     `4.1.x`     |           `v4.1.0`            |
 |     `4.2.x`     |           `v4.2.0`            |
 |     `4.3.x`     |           `v4.3.0`            |
+|     `4.4.x`     |           `v4.4.x`            |
