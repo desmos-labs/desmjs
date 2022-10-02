@@ -7,8 +7,11 @@ import * as _m0 from "protobufjs/minimal";
  * between two users on a specific subspace.
  */
 export interface MsgCreateRelationship {
+  /** User creating the relationship */
   signer: string;
+  /** Counterparty of the relationship (i.e. user to be followed) */
   counterparty: string;
+  /** Subspace id inside which the relationship will be valid */
   subspaceId: Long;
 }
 
@@ -23,8 +26,11 @@ export interface MsgCreateRelationshipResponse {}
  * between two users.
  */
 export interface MsgDeleteRelationship {
+  /** User that created the relationship */
   signer: string;
+  /** Counterparty of the relationship that should be deleted */
   counterparty: string;
+  /** Id of the subspace inside which the relationship to delete exists */
   subspaceId: Long;
 }
 
@@ -39,9 +45,13 @@ export interface MsgDeleteRelationshipResponse {}
  * optional reason.
  */
 export interface MsgBlockUser {
+  /** Address of the user blocking the other user */
   blocker: string;
+  /** Address of the user that should be blocked */
   blocked: string;
+  /** (optional) Reason why the user has been blocked */
   reason: string;
+  /** Id of the subspace inside which the user should be blocked */
   subspaceId: Long;
 }
 
@@ -50,8 +60,11 @@ export interface MsgBlockUserResponse {}
 
 /** MsgUnblockUser represents a message to unblock a previously blocked user. */
 export interface MsgUnblockUser {
+  /** Address of the user that blocked another user */
   blocker: string;
+  /** Address of the user that should be unblocked */
   blocked: string;
+  /** Id of the subspace inside which the user should be unblocked */
   subspaceId: Long;
 }
 

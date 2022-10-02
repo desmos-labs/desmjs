@@ -11,8 +11,8 @@ export interface MsgCreateSubspace {
   /** (optional) Treasury address associated to this subspace */
   treasury: string;
   /**
-   * (optional) Owner of this subspace. If not specified, the creator will be the
-   * default owner.
+   * (optional) Owner of this subspace. If not specified, the creator will be
+   * the default owner.
    */
   owner: string;
   /** Address creating the subspace */

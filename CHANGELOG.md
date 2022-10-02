@@ -1,3 +1,7 @@
+## Version 4.5.0
+### Features
+- Updated Desmos to `v4.5.0`
+
 ## Version 4.4.1
 ### Bug fixes
 - Fixed build error
