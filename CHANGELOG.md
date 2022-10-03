@@ -1,3 +1,10 @@
+## Version 4.5.1
+### Features
+- Added utility methods to easily encode various authorizations to `Any`
+
+### Bug fixes
+- Fixed wrong `GenericSubspaceAuthorization` Amino type
+
 ## Version 4.5.0
 ### Features
 - Updated Desmos to `v4.5.0`

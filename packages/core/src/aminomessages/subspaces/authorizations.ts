@@ -4,10 +4,19 @@ import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/su
 import Long from "long";
 import { AminoGenericSubspaceAuthorization } from "./messages";
 
+export function genericSubspaceAuthorizationToAny(
+  authorization: GenericSubspaceAuthorization
+): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization",
+    value: GenericSubspaceAuthorization.encode(authorization).finish(),
+  });
+}
+
 export function createSubspacesAuthorizationConverters(): AminoConverters {
   return {
-    "/desmos.subspaces.v3.GenericAuthorization": {
-      aminoType: "cosmos-sdk/GenericAuthorization",
+    "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization": {
+      aminoType: "desmos/GenericSubspaceAuthorization",
       toAmino: (
         authorization: Any["value"]
       ): AminoGenericSubspaceAuthorization["value"] => {
@@ -22,15 +31,17 @@ export function createSubspacesAuthorizationConverters(): AminoConverters {
       },
       fromAmino: (
         authorization: AminoGenericSubspaceAuthorization["value"]
-      ): Any["value"] =>
-        GenericSubspaceAuthorization.encode(
+      ): Any["value"] => {
+        const any = genericSubspaceAuthorizationToAny(
           GenericSubspaceAuthorization.fromPartial({
             subspacesIds: authorization.subspaces_ids.map((id) =>
               Long.fromString(id)
             ),
             msg: authorization.msg,
           })
-        ).finish(),
+        );
+        return any.value;
+      },
     },
   };
 }

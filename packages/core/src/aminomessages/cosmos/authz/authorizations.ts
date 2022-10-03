@@ -4,19 +4,37 @@ import { AminoConverters } from "@cosmjs/stargate";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { AminoGenericAuthorization } from "./messages";
 
+export function genericAuthorizationToAny(
+  authorization: GenericAuthorization
+): Any {
+  return Any.fromPartial({
+    typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+    value: GenericAuthorization.encode(authorization).finish(),
+  });
+}
+
 export function createAuthzAuthorizationConverters(): AminoConverters {
   return {
     "/cosmos.authz.v1beta1.GenericAuthorization": {
       aminoType: "cosmos-sdk/GenericAuthorization",
       toAmino: (
         authorization: Any["value"]
-      ): AminoGenericAuthorization["value"] => ({}),
+      ): AminoGenericAuthorization["value"] => {
+        const genericAuth = GenericAuthorization.decode(authorization);
+        return {
+          msg: genericAuth.msg,
+        };
+      },
       fromAmino: (
         authorization: AminoGenericAuthorization["value"]
-      ): Any["value"] =>
-        GenericAuthorization.encode(
-          GenericAuthorization.fromPartial({})
-        ).finish(),
+      ): Any["value"] => {
+        const any = genericAuthorizationToAny(
+          GenericAuthorization.fromPartial({
+            msg: authorization.msg,
+          })
+        );
+        return any.value;
+      },
     },
   };
 }

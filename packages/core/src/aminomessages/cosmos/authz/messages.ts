@@ -2,7 +2,9 @@ import { AminoMsg } from "@cosmjs/amino";
 
 export interface AminoGenericAuthorization extends AminoMsg {
   readonly type: "cosmos-sdk/GenericAuthorization";
-  readonly value: {};
+  readonly value: {
+    readonly msg: string;
+  };
 }
 
 export interface AminoGrant {

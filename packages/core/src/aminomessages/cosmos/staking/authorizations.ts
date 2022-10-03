@@ -3,6 +3,15 @@ import { Any } from "cosmjs-types/google/protobuf/any";
 import { StakeAuthorization } from "cosmjs-types/cosmos/staking/v1beta1/authz";
 import { AminoStakeAuthorization } from "./messages";
 
+export function stakeAuthorizationToAny(
+  authorization: StakeAuthorization
+): Any {
+  return Any.fromPartial({
+    typeUrl: "/cosmos.bank.v1beta1.StakeAuthorization",
+    value: StakeAuthorization.encode(authorization).finish(),
+  });
+}
+
 export function createStakeAuthorizationConverters(): AminoConverters {
   return {
     "/cosmos.bank.v1beta1.StakeAuthorization": {
@@ -20,15 +29,17 @@ export function createStakeAuthorizationConverters(): AminoConverters {
       },
       fromAmino: (
         authorization: AminoStakeAuthorization["value"]
-      ): Any["value"] =>
-        StakeAuthorization.encode(
+      ): Any["value"] => {
+        const any = stakeAuthorizationToAny(
           StakeAuthorization.fromPartial({
             maxTokens: authorization.max_tokens,
             authorizationType: authorization.authorization_type,
             allowList: authorization.allow_list,
             denyList: authorization.deny_list,
           })
-        ).finish(),
+        );
+        return any.value;
+      },
     },
   };
 }
