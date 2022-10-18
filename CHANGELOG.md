@@ -1,3 +1,10 @@
+## Version 4.5.2
+### Features
+- Added the ability to automatically estimate transaction gas and fees.  
+  Both `DesmosClient#signTx` and `DesmosClient#sign` methods now accept `"auto"` as a fee value. If this is given, 
+  both fees and gas amount will be estimated automatically before signing the transaction. Note that fees estimation 
+  can be performed only if a `gasPrice` is specified inside the client options when creating it.
+
 ## Version 4.5.1
 ### Features
 - Added utility methods to easily encode various authorizations to `Any`
