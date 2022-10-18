@@ -1,5 +1,7 @@
 import { fromBase64, fromUtf8 } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
+import { MsgSendEncodeObject } from "@cosmjs/stargate";
+import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, SigningMode } from "./signers";
 import {
@@ -16,6 +18,44 @@ async function getTestContractAddress(client: DesmosClient): Promise<string> {
 
 describe("DesmosClient", () => {
   jest.setTimeout(30000);
+
+  describe("Transaction signing", () => {
+    it("test estimate fees", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const client = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        signer,
+        {
+          gasPrice: defaultGasPrice,
+          gasAdjustment: 1.2,
+        }
+      );
+
+      const accounts = await signer.getAccounts();
+      const { address } = accounts[0];
+      const msg: MsgSendEncodeObject = {
+        typeUrl: "/cosmos.bank.v1beta1.MsgSend",
+        value: {
+          fromAddress: address,
+          toAddress: "desmos182pjjr3lexdpxszz3dn56xur7zs0xzj0akmkag",
+          amount: [
+            {
+              amount: "1000",
+              denom: defaultGasPrice.denom,
+            },
+          ],
+        },
+      };
+      const response = await client.signTx(address, [msg], "auto", "Test memo");
+      const signDoc = response.signDoc as SignDoc;
+      const authInfo = AuthInfo.decode(signDoc.authInfoBytes);
+      expect(authInfo.fee?.gasLimit).toBeDefined();
+      expect(authInfo.fee?.amount).toHaveLength(1);
+    });
+  });
 
   describe("Cosmwasm", () => {
     it("test getCodes", async () => {

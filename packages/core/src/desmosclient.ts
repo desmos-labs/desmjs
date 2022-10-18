@@ -33,7 +33,7 @@ import { SignMode } from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
 import { fromBase64 } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
-import { Int53 } from "@cosmjs/math";
+import { Int53, Uint64 } from "@cosmjs/math";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import {
   setupWasmExtension,
@@ -62,6 +62,11 @@ function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
 }
 
+/**
+ * Creates a SignerInfo instance from the data given.
+ * @param signers: List of accounts that have signed a transaction.
+ * @param signMode: Signing mode used while signing the transaction
+ */
 function makeSignerInfos(
   signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
   signMode: SignMode
@@ -100,6 +105,10 @@ export function makeAuthInfoBytes(
   ).finish();
 }
 
+interface Options extends SigningStargateClientOptions {
+  readonly gasAdjustment?: number;
+}
+
 /**
  * Client to interact with the Desmos chain.
  */
@@ -110,9 +119,11 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   private types: AminoTypes;
 
+  private options: Options;
+
   public static override async connect(
     endpoint: string,
-    options: SigningStargateClientOptions = {}
+    options: Options = {}
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint34Client.connect(endpoint);
     return new DesmosClient(tmClient, options, undefined);
@@ -121,7 +132,7 @@ export class DesmosClient extends SigningCosmWasmClient {
   public static override async connectWithSigner(
     endpoint: string,
     signer: Signer,
-    options: SigningStargateClientOptions = {}
+    options: Options = {}
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint34Client.connect(endpoint);
     return new DesmosClient(tmClient, options, signer);
@@ -129,7 +140,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   protected constructor(
     client: Tendermint34Client,
-    options: SigningStargateClientOptions,
+    options: Options,
     signer: Signer = new NoOpSigner()
   ) {
     const prefix = options?.prefix ?? "desmos";
@@ -149,6 +160,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     this.txSigner = signer;
     this.typesRegistry = registry;
     this.types = aminoTypes;
+    this.options = options;
   }
 
   /**
@@ -252,7 +264,7 @@ export class DesmosClient extends SigningCosmWasmClient {
   override async sign(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    fee: StdFee,
+    fee: StdFee | "auto",
     memo: string,
     explicitSignerData?: SignerData
   ): Promise<TxRaw> {
@@ -296,11 +308,17 @@ export class DesmosClient extends SigningCosmWasmClient {
   public async signTx(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    fee: StdFee,
+    fee: StdFee | "auto",
     memo: string,
     explicitSignerData?: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
+    // Get the transaction fees based on the given value
+    const txFee =
+      fee !== "auto"
+        ? fee
+        : await this.estimateTxFee(signerAddress, messages, memo);
+
     // Build the signer data
     const signerData =
       explicitSignerData ?? (await this.getSignerData(signerAddress));
@@ -310,7 +328,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       ? this.signTxDirect(
           signerAddress,
           messages,
-          fee,
+          txFee,
           memo,
           signerData,
           feeGranter
@@ -318,11 +336,44 @@ export class DesmosClient extends SigningCosmWasmClient {
       : this.signTxAmino(
           signerAddress,
           messages,
-          fee,
+          txFee,
           memo,
           signerData,
           feeGranter
         );
+  }
+
+  /**
+   * Estimates the transaction fees should be used in order to broadcast a transaction containing the given details.
+   * @private
+   */
+  private async estimateTxFee(
+    signerAddress: string,
+    messages: readonly EncodeObject[],
+    memo: string
+  ): Promise<StdFee> {
+    const { gasPrice } = this.options;
+    if (!gasPrice) {
+      throw new Error(
+        "Cannot estimate transaction fees and gas without a gas price"
+      );
+    }
+
+    const estimated = await this.simulate(signerAddress, messages, memo);
+    const gasAdjustment = this.options.gasAdjustment || 1.5;
+    const gas = estimated * gasAdjustment;
+    return {
+      gas: gas.toString(),
+      amount: [
+        {
+          amount: gasPrice.amount
+            .multiply(Uint64.fromNumber(gas))
+            .ceil()
+            .toString(),
+          denom: gasPrice.denom,
+        },
+      ],
+    };
   }
 
   /**
