@@ -1,3 +1,9 @@
+## Version 4.5.3
+### Features
+- Added `toAny` converters for various `AddressData` instances
+- Added `toAny` converters for various `Signature` instances
+- Now the `memo` if optional when signing transactions (defaults to an empty memo)
+
 ## Version 4.5.2
 ### Features
 - Added the ability to automatically estimate transaction gas and fees.  
