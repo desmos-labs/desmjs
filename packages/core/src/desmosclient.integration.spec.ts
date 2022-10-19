@@ -1,6 +1,6 @@
 import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
-import { MsgSendEncodeObject } from "@cosmjs/stargate";
+import { MsgSendEncodeObject, StdFee } from "@cosmjs/stargate";
 import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {
   Bech32Address,
@@ -12,8 +12,9 @@ import {
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
 import { MsgSaveProfile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
+import { EncodeObject } from "@cosmjs/proto-signing";
 import { DesmosClient } from "./desmosclient";
-import { OfflineSignerAdapter, SigningMode } from "./signers";
+import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
 import {
   defaultGasPrice,
   TEST_CHAIN_URL,
@@ -33,24 +34,36 @@ import {
 describe("DesmosClient", () => {
   jest.setTimeout(30000);
 
+  /**
+   * Builds a Signer and DesmosClient instance based on a test mnemonic.
+   */
+  async function getSignerAndClient(): Promise<[Signer, DesmosClient]> {
+    const signer = await OfflineSignerAdapter.fromMnemonic(
+      SigningMode.DIRECT,
+      testUser1.mnemonic
+    );
+    const client = await DesmosClient.connectWithSigner(
+      TEST_CHAIN_URL,
+      signer,
+      {
+        gasPrice: defaultGasPrice,
+      }
+    );
+    return [signer, client];
+  }
+
   describe("Transaction signing", () => {
-    it("test estimate fees", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-          gasAdjustment: 1.2,
-        }
-      );
+    /**
+     * Builds a new Signer, DesmosClient and custom message that can be used for test purposes.
+     */
+    async function buildTestMsg(): Promise<
+      [Signer, DesmosClient, EncodeObject]
+    > {
+      const [signer, client] = await getSignerAndClient();
 
       const accounts = await signer.getAccounts();
       const { address } = accounts[0];
-      const msg: MsgSendEncodeObject = {
+      const msgSend: MsgSendEncodeObject = {
         typeUrl: "/cosmos.bank.v1beta1.MsgSend",
         value: {
           fromAddress: address,
@@ -63,7 +76,37 @@ describe("DesmosClient", () => {
           ],
         },
       };
+      return [signer, client, msgSend];
+    }
+
+    it("test custom fees", async () => {
+      const [signer, client, msg] = await buildTestMsg();
+      const { address } = (await signer.getAccounts())[0];
+
+      const fee: StdFee = {
+        gas: "200000",
+        amount: [
+          {
+            amount: "10000",
+            denom: defaultGasPrice.denom,
+          },
+        ],
+      };
+
+      const response = await client.signTx(address, [msg], fee, "Test memo");
+
+      const signDoc = response.signDoc as SignDoc;
+      const authInfo = AuthInfo.decode(signDoc.authInfoBytes);
+      expect(authInfo.fee?.gasLimit).toBeDefined();
+      expect(authInfo.fee?.amount).toHaveLength(1);
+    });
+
+    it("test estimate fees", async () => {
+      const [signer, client, msg] = await buildTestMsg();
+      const { address } = (await signer.getAccounts())[0];
+
       const response = await client.signTx(address, [msg], "auto", "Test memo");
+
       const signDoc = response.signDoc as SignDoc;
       const authInfo = AuthInfo.decode(signDoc.authInfoBytes);
       expect(authInfo.fee?.gasLimit).toBeDefined();
@@ -177,34 +220,14 @@ describe("DesmosClient", () => {
     }
 
     it("test getCodes", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
     });
 
     it("test getCodeDetails", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
@@ -213,17 +236,7 @@ describe("DesmosClient", () => {
     });
 
     it("test getContracts", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       // Get contract codes
       const codes = await client.getCodes();
@@ -237,17 +250,7 @@ describe("DesmosClient", () => {
     });
 
     it("test getContract", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       // Gets the list of instantiated contracts
       const contracts = await client.getContracts(1);
@@ -258,17 +261,7 @@ describe("DesmosClient", () => {
     });
 
     it("test getContractCodeHistory", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       // Gets the list of instantiated contracts
       const contracts = await client.getContracts(1);
@@ -279,17 +272,7 @@ describe("DesmosClient", () => {
     });
 
     it("test queryContractSmart", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       const testContract = await getTestContractAddress(client);
 
@@ -326,17 +309,7 @@ describe("DesmosClient", () => {
     });
 
     it("test initialize", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       await client.instantiate(
         testUser1.address0,
@@ -348,17 +321,7 @@ describe("DesmosClient", () => {
     });
 
     it("test updateAdmin", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       const response = await client.instantiate(
         testUser1.address0,
@@ -411,17 +374,7 @@ describe("DesmosClient", () => {
     });
 
     it("test execute", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getSignerAndClient();
 
       const testContract = await getTestContractAddress(client);
 
