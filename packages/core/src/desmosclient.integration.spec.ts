@@ -1,7 +1,17 @@
-import { fromBase64, fromUtf8 } from "@cosmjs/encoding";
+import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { MsgSendEncodeObject } from "@cosmjs/stargate";
 import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import {
+  Bech32Address,
+  ChainConfig,
+  Proof,
+  SignatureValueType,
+  SingleSignature,
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
+import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
+import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
+import { MsgSaveProfile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, SigningMode } from "./signers";
 import {
@@ -10,11 +20,15 @@ import {
   testUser1,
   testUser2,
 } from "./testutils";
-
-async function getTestContractAddress(client: DesmosClient): Promise<string> {
-  const contracts = await client.getContracts(1);
-  return contracts[0];
-}
+import { getSignatureBytes, getSignedBytes } from "./signatureresult";
+import {
+  MsgLinkChainAccountEncodeObject,
+  MsgSaveProfileEncodeObject,
+} from "./encodeobjects";
+import {
+  bech32AddressToAny,
+  singleSignatureToAny,
+} from "./aminomessages/profiles";
 
 describe("DesmosClient", () => {
   jest.setTimeout(30000);
@@ -55,9 +69,113 @@ describe("DesmosClient", () => {
       expect(authInfo.fee?.gasLimit).toBeDefined();
       expect(authInfo.fee?.amount).toHaveLength(1);
     });
+
+    it("test chain connection", async () => {
+      // Setup the client associated to the external wallet
+      const externalSigner = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.AMINO,
+        testUser2.mnemonic
+      );
+      const externalClient = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        externalSigner,
+        {
+          gasPrice: defaultGasPrice,
+          gasAdjustment: 1.2,
+        }
+      );
+      const externalAccounts = await externalSigner.getAccounts();
+      const externalAddress = externalAccounts[0].address;
+
+      // Setup the client associated to the Desmos profile
+      const profileSigner = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+      const profileClient = await DesmosClient.connectWithSigner(
+        TEST_CHAIN_URL,
+        profileSigner,
+        {
+          gasPrice: defaultGasPrice,
+          gasAdjustment: 1.2,
+        }
+      );
+      const profileAccounts = await profileSigner.getAccounts();
+      const profileAddress = profileAccounts[0].address;
+
+      // Create a profile (required to simulate the transaction properly)
+      const msgSaveProfile: MsgSaveProfileEncodeObject = {
+        typeUrl: "/desmos.profiles.v3.MsgSaveProfile",
+        value: MsgSaveProfile.fromPartial({
+          dtag: "JohnDoe",
+          creator: profileAddress,
+        }),
+      };
+      const saveProfileResult = await profileClient.signAndBroadcast(
+        profileAddress,
+        [msgSaveProfile],
+        "auto"
+      );
+      expect(saveProfileResult.code).toBe(0);
+
+      // Sign a dummy tx that includes the Desmos profile address within its memo, using the external account
+      const dummySignatureResult = await externalClient.signTx(
+        externalAddress,
+        [],
+        { amount: [], gas: "0" },
+        profileAddress
+      );
+
+      // Build the chain config
+      const chainConfig: ChainConfig = {
+        name: "desmos",
+      };
+
+      // Build the address data
+      const chainAddress: Any = bech32AddressToAny(
+        Bech32Address.fromPartial({
+          value: externalAddress,
+          prefix: "desmos",
+        })
+      );
+
+      // Build the signature
+      const signature: SingleSignature = SingleSignature.fromPartial({
+        valueType: SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_AMINO, // Proper signature type
+        signature: getSignatureBytes(dummySignatureResult),
+      });
+
+      // Build the proof
+      const proof: Proof = Proof.fromPartial({
+        pubKey: dummySignatureResult.pubKey,
+        signature: singleSignatureToAny(signature),
+        plainText: toHex(getSignedBytes(dummySignatureResult)),
+      });
+
+      // Create the message to link the chain account
+      const msg: MsgLinkChainAccountEncodeObject = {
+        typeUrl: "/desmos.profiles.v3.MsgLinkChainAccount",
+        value: MsgLinkChainAccount.fromPartial({
+          chainConfig,
+          chainAddress,
+          proof,
+          signer: profileAddress,
+        }),
+      };
+
+      const result = await profileClient.signTx(profileAddress, [msg], "auto");
+      expect(result.txRaw.signatures).toHaveLength(1);
+    });
   });
 
-  describe("Cosmwasm", () => {
+  describe("CosmWasm", () => {
+    async function getTestContractAddress(
+      client: DesmosClient
+    ): Promise<string> {
+      const contracts = await client.getContracts(1);
+      return contracts[0];
+    }
+
     it("test getCodes", async () => {
       const signer = await OfflineSignerAdapter.fromMnemonic(
         SigningMode.DIRECT,
