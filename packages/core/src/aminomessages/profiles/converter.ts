@@ -119,43 +119,41 @@ function convertAddressData(address: Any): AminoAddressData {
   throw new Error(`Unsupported address type: ${address.typeUrl}`);
 }
 
+export function bech32AddressToAny(address: Bech32Address): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.profiles.v3.Bech32Address",
+    value: Bech32Address.encode(address).finish(),
+  });
+}
+
+export function base58AddressToAny(address: Base58Address): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.profiles.v3.Base58Address",
+    value: Base58Address.encode(address).finish(),
+  });
+}
+
+export function hexAddressToAny(address: HexAddress): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.profiles.v3.HexAddress",
+    value: HexAddress.encode(address).finish(),
+  });
+}
+
 function convertAminoAddressData(address: AminoAddressData): Any {
   if (address.type === "desmos/Bech32Address") {
     const addressData = address.value as AminoBech32Address["value"];
-    return {
-      typeUrl: "/desmos.profiles.v3.Bech32Address",
-      value: Bech32Address.encode(
-        Bech32Address.fromPartial({
-          prefix: addressData.prefix,
-          value: addressData.value,
-        })
-      ).finish(),
-    };
+    return bech32AddressToAny(addressData);
   }
 
   if (address.type === "desmos/Base58Address") {
     const addressData = address.value as AminoBase58Address["value"];
-    return {
-      typeUrl: "/desmos.profiles.v3.Base58Address",
-      value: Base58Address.encode(
-        Base58Address.fromPartial({
-          value: addressData.value,
-        })
-      ).finish(),
-    };
+    return base58AddressToAny(addressData);
   }
 
   if (address.type === "desmos/HexAddress") {
     const addressData = address.value as AminoHexAddress["value"];
-    return {
-      typeUrl: "/desmos.profiles.v3.HexAddress",
-      value: HexAddress.encode(
-        HexAddress.fromPartial({
-          value: addressData.value,
-          prefix: addressData.prefix,
-        })
-      ).finish(),
-    };
+    return hexAddressToAny(addressData);
   }
 
   throw new Error(`Unsupported address type: ${address.type}`);
@@ -216,32 +214,41 @@ function convertSignatureData(signatureData: Any): AminoSignature {
   throw new Error(`Unsupported signature type: ${signatureData}`);
 }
 
+export function singleSignatureToAny(signature: SingleSignature): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.profiles.v3.SingleSignature",
+    value: SingleSignature.encode(signature).finish(),
+  });
+}
+
+export function cosmosMultiSignatureToAny(
+  signature: CosmosMultiSignature
+): Any {
+  return Any.fromPartial({
+    typeUrl: "/desmos.profiles.v3.CosmosMultiSignature",
+    value: CosmosMultiSignature.encode(signature).finish(),
+  });
+}
+
 function convertAminoSignature(signature: AminoSignature): Any {
   if (signature.type === "desmos/SingleSignature") {
     const signatureData = signature.value as AminoSingleSignature["value"];
-    return {
-      typeUrl: "/desmos.profiles.v3.SingleSignature",
-      value: SingleSignature.encode(
-        SingleSignature.fromPartial({
-          signature: fromBase64(signatureData.signature),
-          valueType: signatureValueTypeFromJSON(signatureData.value_type),
-        })
-      ).finish(),
-    };
+    return singleSignatureToAny(
+      SingleSignature.fromPartial({
+        signature: fromBase64(signatureData.signature),
+        valueType: signatureValueTypeFromJSON(signatureData.value_type),
+      })
+    );
   }
 
   if (signature.type === "desmos/CosmosMultiSignature") {
     const signatureData = signature.value as AminoCosmosMultiSignature["value"];
-    const signatures = signatureData.signatures.map(convertAminoSignature);
-    return {
-      typeUrl: "/desmos.profiles.v3.CosmosMultiSignature",
-      value: CosmosMultiSignature.encode(
-        CosmosMultiSignature.fromPartial({
-          bitArray: convertAminoCompactBitArray(signatureData.bit_array),
-          signatures,
-        })
-      ).finish(),
-    };
+    return cosmosMultiSignatureToAny(
+      CosmosMultiSignature.fromPartial({
+        signatures: signatureData.signatures.map(convertAminoSignature),
+        bitArray: convertAminoCompactBitArray(signatureData.bit_array),
+      })
+    );
   }
 
   throw new Error(`Unsupported signature type: ${signature}`);
