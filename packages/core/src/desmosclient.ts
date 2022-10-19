@@ -309,7 +309,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee | "auto",
-    memo: string,
+    memo: string = "",
     explicitSignerData?: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
@@ -361,7 +361,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
     const estimated = await this.simulate(signerAddress, messages, memo);
     const gasAdjustment = this.options.gasAdjustment || 1.5;
-    const gas = estimated * gasAdjustment;
+    const gas = Math.ceil(estimated * gasAdjustment);
     return {
       gas: gas.toString(),
       amount: [
