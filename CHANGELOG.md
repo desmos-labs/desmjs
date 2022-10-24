@@ -1,3 +1,9 @@
+## Version 4.5.4
+### Features
+- Updated the `ChainInfo` type to include more information
+- Added the `getChainId` utility method to easily retrieve the id of a network given a `ChainInfo` instance
+- Automatically get `chainId` from `ChainInfo` when signing a transaction using Keplr
+
 ## Version 4.5.3
 ### Features
 - Added `toAny` converters for various `AddressData` instances
