@@ -2,23 +2,29 @@ import { AccountData, DirectSignResponse } from "@cosmjs/proto-signing";
 import {
   ChainInfo,
   Keplr,
-  Window as KeplrWindow,
   KeplrSignOptions,
+  Window as KeplrWindow,
 } from "@keplr-wallet/types";
+import {
+  ChainInfo as DesmJSChainInfo,
+  DesmosMainnet,
+  Signer,
+  SignerStatus,
+  SigningMode,
+} from "@desmoslabs/desmjs";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import { AminoSignResponse, StdSignDoc, Algo } from "@cosmjs/amino";
+import { Algo, AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
 import { assert } from "@cosmjs/utils";
-import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
-import { DesmosMainnet } from "./chains";
+import { setupChainInfo } from "./chains";
 
 // Add KeplrWindow types to the global Window interface
 declare global {
-  interface Window extends KeplrWindow { }
+  interface Window extends KeplrWindow {}
 }
 
 export interface KeplrSignerOptions {
   signingMode: SigningMode;
-  chainInfo: ChainInfo;
+  chainInfo: DesmJSChainInfo;
   signOptions: KeplrSignOptions;
 }
 
@@ -32,7 +38,9 @@ export class KeplrSigner extends Signer {
 
   private accountData: AccountData | undefined;
 
-  private chainInfo: ChainInfo = DesmosMainnet;
+  private chainInfo: DesmJSChainInfo = DesmosMainnet;
+
+  private keplrChainInfo: ChainInfo | undefined;
 
   constructor(keplrClient: Keplr, options: KeplrSignerOptions) {
     super(SignerStatus.NotConnected);
@@ -75,6 +83,17 @@ export class KeplrSigner extends Signer {
   }
 
   /**
+   * Returns the Keplr ChainInfo instance to be used.
+   * @private
+   */
+  private async getChainInfo(): Promise<ChainInfo> {
+    if (!this.keplrChainInfo) {
+      this.keplrChainInfo = await setupChainInfo(this.chainInfo);
+    }
+    return this.keplrChainInfo;
+  }
+
+  /**
    * Implements Signer.
    */
   async connect(): Promise<void> {
@@ -82,9 +101,13 @@ export class KeplrSigner extends Signer {
       return;
     }
     this.updateStatus(SignerStatus.Connecting);
-    // prompt the Keplr Desmos network configuration
-    await KeplrSigner.setupChainNetwork(this.chainInfo);
-    const account = await this.client.getKey(this.chainInfo.chainId);
+
+    // Get the chain info
+    const chainInfo = await this.getChainInfo();
+
+    // Prompt the Keplr Desmos network configuration
+    await KeplrSigner.setupChainNetwork(chainInfo);
+    const account = await this.client.getKey(chainInfo.chainId);
     this.accountData = {
       address: account.bech32Address,
       algo: <Algo>account.algo,
@@ -94,7 +117,7 @@ export class KeplrSigner extends Signer {
     this.subscribeToEvents();
 
     // Connect Keplr client to the current chainId
-    await this.client.enable(this.chainInfo.chainId);
+    await this.client.enable(chainInfo.chainId);
 
     this.updateStatus(SignerStatus.Connected);
   }
@@ -127,7 +150,11 @@ export class KeplrSigner extends Signer {
    */
   async getAccounts(): Promise<readonly AccountData[]> {
     this.assertConnected();
-    const result = await this.client!.getKey(this.chainInfo.chainId);
+
+    // Get the chain info
+    const chainInfo = await this.getChainInfo();
+
+    const result = await this.client!.getKey(chainInfo.chainId);
     return [
       {
         address: result.bech32Address,
@@ -146,12 +173,8 @@ export class KeplrSigner extends Signer {
   ): Promise<DirectSignResponse> {
     this.assertConnected();
     assert(this.accountData);
-    const signResponse = await this.client.signDirect(
-      this.chainInfo.chainId,
-      signerAddress,
-      signDoc
-    );
-    return signResponse;
+    const chainInfo = await this.getChainInfo();
+    return this.client.signDirect(chainInfo.chainId, signerAddress, signDoc);
   }
 
   /**
@@ -163,12 +186,8 @@ export class KeplrSigner extends Signer {
   ): Promise<AminoSignResponse> {
     this.assertConnected();
     assert(this.accountData);
-    const signResponse = await this.client.signAmino(
-      this.chainInfo.chainId,
-      signerAddress,
-      signDoc
-    );
-    return signResponse;
+    const chainInfo = await this.getChainInfo();
+    return this.client.signAmino(chainInfo.chainId, signerAddress, signDoc);
   }
 
   /**
@@ -184,17 +203,29 @@ export class KeplrSigner extends Signer {
    * Switch to the given ChainInfo.
    * @param chainInfo chain configuration
    */
-  public async switchChainNetwork(chainInfo: ChainInfo): Promise<void> {
+  public async switchChainNetwork(chainInfo: DesmJSChainInfo): Promise<void> {
     assert(window.keplr);
     await this.disconnect();
+
+    // Reset the chain info
     this.chainInfo = chainInfo;
-    this.connect();
+    this.keplrChainInfo = undefined;
+
+    return this.connect();
   }
 
   /**
-   * Get the current ChainInfo.
+   * Get the current Desmos ChainInfo.
    */
-  public getCurrentChainInfo(): ChainInfo {
+  public getCurrentChainNetwork(): DesmJSChainInfo {
     return this.chainInfo;
+  }
+
+  /**
+   * Get the current Keplr ChainInfo.
+   * NOTE: This can be undefined if the client has not connected yet.
+   */
+  public getCurrentChainInfo(): ChainInfo | undefined {
+    return this.keplrChainInfo;
   }
 }
