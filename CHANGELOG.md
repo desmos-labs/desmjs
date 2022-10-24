@@ -1,3 +1,7 @@
+## Version 4.6.0
+### Features
+- Updated Desmos to `4.6.2`
+
 ## Version 4.5.4
 ### Features
 - Updated the `ChainInfo` type to include more information
