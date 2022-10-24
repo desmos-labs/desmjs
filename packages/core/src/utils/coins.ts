@@ -1,39 +1,62 @@
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
-import { DenomUnit } from "../types";
+import { Currency } from "../types";
+import { convertReactionValueToAmino } from "../aminomessages/reactions";
 
 /**
  * Converts a coin to its equivalent which has the provided exponent.
  * @param coin - The source coin.
  * @param toExponent - The target exponent.
- * @param denomUnits - Array that contains all the possible denoms.
+ * @param currencies - Array that contains all the possible denoms.
  * @returns Returns the converted coin or null on error.
  */
 export function convertCoin(
   coin: Coin,
   toExponent: number,
-  denomUnits: DenomUnit[]
+  currencies: Currency[]
 ): Coin | null {
-  const currentCoinExponent = denomUnits.find(
-    (denomUnit) => denomUnit.denom === coin.denom
-  )?.exponent;
-  const destCoin = denomUnits.find(
-    (denomUnit) => denomUnit.exponent === toExponent
+  const destCoin = currencies.find(
+    (currency) =>
+      currency.coinMinimalDenom.toLowerCase() === coin.denom.toLowerCase() ||
+      currency.coinDenom.toLowerCase() === coin.denom.toLowerCase()
   );
 
-  if (destCoin === undefined || currentCoinExponent === undefined) {
+  if (destCoin === undefined) {
     return null;
   }
 
-  if (currentCoinExponent === toExponent) {
-    return coin;
+  if (toExponent !== 0 && toExponent !== destCoin.coinDecimals) {
+    return null;
   }
 
-  const conversionFactor = 10 ** (destCoin.exponent - currentCoinExponent);
-  const newValue = parseFloat(coin.amount) / conversionFactor;
+  let conversionFactor = 0;
+  let destCoinDenom = coin.denom;
+  switch (coin.denom.toLowerCase()) {
+    case destCoin.coinDenom.toLowerCase(): {
+      if (toExponent === 0) {
+        // We are going from lowest to higher exponent
+        conversionFactor = destCoin.coinDecimals;
+        destCoinDenom = destCoin.coinMinimalDenom;
+      }
+      break;
+    }
 
+    case destCoin.coinMinimalDenom.toLowerCase(): {
+      if (toExponent === destCoin.coinDecimals) {
+        // We are going from min to max exponent
+        conversionFactor = -destCoin.coinDecimals;
+        destCoinDenom = destCoin.coinDenom;
+      }
+      break;
+    }
+
+    default:
+      return null;
+  }
+
+  const newValue = parseFloat(coin.amount) * 10 ** conversionFactor;
   return {
     amount: newValue.toString(),
-    denom: destCoin.denom,
+    denom: destCoinDenom,
   };
 }
 
