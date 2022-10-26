@@ -1,6 +1,6 @@
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
+import { Decimal, Uint64 } from "@cosmjs/math";
 import { Currency } from "../types";
-import { convertReactionValueToAmino } from "../aminomessages/reactions";
 
 /**
  * Converts a coin to its equivalent which has the provided exponent.
@@ -28,14 +28,19 @@ export function convertCoin(
     return null;
   }
 
-  let conversionFactor = 0;
+  let destCoinAmount = coin.amount;
   let destCoinDenom = coin.denom;
   switch (coin.denom.toLowerCase()) {
     case destCoin.coinDenom.toLowerCase(): {
       if (toExponent === 0) {
-        // We are going from lowest to higher exponent
-        conversionFactor = destCoin.coinDecimals;
         destCoinDenom = destCoin.coinMinimalDenom;
+        // We are going from lowest to higher exponent
+        destCoinAmount = Decimal.fromUserInput(
+          coin.amount,
+          destCoin.coinDecimals
+        )
+          .multiply(Uint64.fromNumber(10 ** destCoin.coinDecimals))
+          .toString();
       }
       break;
     }
@@ -43,8 +48,11 @@ export function convertCoin(
     case destCoin.coinMinimalDenom.toLowerCase(): {
       if (toExponent === destCoin.coinDecimals) {
         // We are going from min to max exponent
-        conversionFactor = -destCoin.coinDecimals;
         destCoinDenom = destCoin.coinDenom;
+        destCoinAmount = (
+          Uint64.fromString(coin.amount).toNumber() /
+          10 ** destCoin.coinDecimals
+        ).toString();
       }
       break;
     }
@@ -53,9 +61,8 @@ export function convertCoin(
       return null;
   }
 
-  const newValue = parseFloat(coin.amount) * 10 ** conversionFactor;
   return {
-    amount: newValue.toString(),
+    amount: destCoinAmount,
     denom: destCoinDenom,
   };
 }
