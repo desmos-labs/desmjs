@@ -1,3 +1,7 @@
+## Version 4.6.1
+### Bug fixes
+- Fixed incorrect `Coin` conversion when output coin should have decimal places
+
 ## Version 4.6.0
 ### Features
 - Updated Desmos to `4.6.2`
