@@ -1,3 +1,7 @@
+## Version 4.6.2
+### Feartures
+- Bumped `@cosmjs` to `0.29.3`
+
 ## Version 4.6.1
 ### Bug fixes
 - Fixed incorrect `Coin` conversion when output coin should have decimal places
