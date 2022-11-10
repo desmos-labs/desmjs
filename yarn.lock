@@ -2240,7 +2240,7 @@ __metadata:
     "@types/long": ^4.0.1
     "@types/node": ^18.11.9
     long: ^4.0.0
-    protobufjs: ^7.1.0
+    protobufjs: ^7.1.2
     ts-proto: ^1.82.5
     ts-protoc-gen: ^0.15.0
     typescript: ^4.8.4
@@ -8718,9 +8718,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"protobufjs@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "protobufjs@npm:7.1.0"
+"protobufjs@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "protobufjs@npm:7.1.2"
   dependencies:
     "@protobufjs/aspromise": ^1.1.2
     "@protobufjs/base64": ^1.1.2
@@ -8734,7 +8734,7 @@ __metadata:
     "@protobufjs/utf8": ^1.1.0
     "@types/node": ">=13.7.0"
     long: ^5.0.0
-  checksum: 11946cef7002cd28837abdfe6294841763dfaad9d4176260c98ccee092ae1afed8a626910f1c2d28177b2e654a838a9cb71710fe52650dc5fc8543229693dbb6
+  checksum: ae41669b1b0372fb1d49f506f2d1f2b0fb3dc3cece85987b17bcb544e4cef7c8d27f480486cdec324146ad0a5d22a327166a7ea864a9b3e49cc3c92a5d3f6500
   languageName: node
   linkType: hard
 
