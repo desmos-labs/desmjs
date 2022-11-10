@@ -3368,6 +3368,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/jsonrpc-types@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@walletconnect/jsonrpc-types@npm:1.0.1"
+  dependencies:
+    keyvaluestorage-interface: ^1.0.0
+  checksum: 89ae6378541772b1c2ea4a217b017ae56dc0fba79222cc35cd4ad04f83af8d18834c46ef1c9f8d1fbebd5bf61e2133e4538d81636c64b10a6e14e46b25a3a1ff
+  languageName: node
+  linkType: hard
+
 "@walletconnect/jsonrpc-utils@npm:^1.0.0":
   version: 1.0.0
   resolution: "@walletconnect/jsonrpc-utils@npm:1.0.0"
@@ -4719,7 +4728,7 @@ __metadata:
     "@types/pino": ^6.3.11
     "@typescript-eslint/eslint-plugin": ^5.31.0
     "@typescript-eslint/parser": ^5.31.0
-    "@walletconnect/jsonrpc-types": ^1.0.0
+    "@walletconnect/jsonrpc-types": ^1.0.1
     eslint: ^8.21.0
     eslint-config-airbnb: ^19.0.4
     eslint-config-airbnb-base: ^15.0.0
