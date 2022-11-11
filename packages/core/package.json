@@ -42,7 +42,7 @@
     "@cosmjs/utils": "^0.29.3",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "cosmjs-types": "^0.5.2",
-    "cosmos-wallet": "^1.1.0",
+    "cosmos-wallet": "^1.2.0",
     "long": "^4.0.0"
   },
   "devDependencies": {
