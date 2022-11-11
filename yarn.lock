@@ -2178,7 +2178,7 @@ __metadata:
     "@types/node": ^18.11.9
     "@types/pino": ^6.3.11
     babel-jest: ^29.3.1
-    cosmjs-types: ^0.4.1
+    cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.1.0
     jest: ^27.1.0
     long: ^4.0.0
@@ -2227,7 +2227,7 @@ __metadata:
     "@walletconnect/types": ^1.6.6
     "@walletconnect/utils": ^2.1.1
     babel-jest: ^29.3.1
-    cosmjs-types: ^0.4.1
+    cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.1.0
     jest: ^27.1.0
     long: ^4.0.0
@@ -2259,7 +2259,7 @@ __metadata:
     "@types/node": ^18.11.9
     "@types/pino": ^6.3.11
     babel-jest: ^29.3.1
-    cosmjs-types: ^0.4.1
+    cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.1.0
     jest: ^27.1.0
     long: ^4.0.0
@@ -4947,16 +4947,6 @@ __metadata:
   dependencies:
     browserslist: ^4.21.4
   checksum: 120780ec33d441e476810abac9bf57199c2083006b179dc23d0ab0cfea096eff2a2fc3e9cb315d245735df661cfa4b76a8b8c37f5056fd02428a3cd2ea1d9f36
-  languageName: node
-  linkType: hard
-
-"cosmjs-types@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "cosmjs-types@npm:0.4.1"
-  dependencies:
-    long: ^4.0.0
-    protobufjs: ~6.11.2
-  checksum: 7921026bb7f1fef70a6d3c3cbfc71d6af21616d532e5cd9f2af15b94c53f98f8d76da65a8fd60f930df2a9ff4eebed1bb3f49baa3eac7117981fbc8f45259005
   languageName: node
   linkType: hard
 
