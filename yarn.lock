@@ -2142,7 +2142,7 @@ __metadata:
     "@types/pino": ^7.0.5
     babel-jest: ^29.3.1
     cosmjs-types: ^0.5.2
-    cosmos-wallet: ^1.1.0
+    cosmos-wallet: ^1.2.0
     jest: ^27.1.0
     long: ^4.0.0
     ts-jest: ^29.0.3
@@ -2191,7 +2191,7 @@ __metadata:
     "@walletconnect/utils": ^2.1.2
     babel-jest: ^29.3.1
     cosmjs-types: ^0.5.2
-    cosmos-wallet: ^1.1.0
+    cosmos-wallet: ^1.2.0
     jest: ^27.1.0
     long: ^4.0.0
     ts-jest: ^29.0.3
@@ -2223,7 +2223,7 @@ __metadata:
     "@types/pino": ^7.0.5
     babel-jest: ^29.3.1
     cosmjs-types: ^0.5.2
-    cosmos-wallet: ^1.1.0
+    cosmos-wallet: ^1.2.0
     jest: ^27.1.0
     long: ^4.0.0
     ts-jest: ^29.0.3
@@ -4900,13 +4900,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmos-wallet@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "cosmos-wallet@npm:1.1.0"
+"cosmos-wallet@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "cosmos-wallet@npm:1.2.0"
   dependencies:
     "@cosmjs/amino": ^0.25.4
     "@cosmjs/proto-signing": ^0.25.4
-  checksum: 6df2b8f644e6e688cc67f2a777ab4006b188cc49d8469220577d28efb4634eb668426e06a531630674a050574368ff4ddb6d4c2d96da876897e7a53c569a0b33
+  checksum: 2f458fc30e89ca9eb439d4464b1c6ff1b0ba705e906159ada2765ebfd760967b45bf7c7a4e40b50a0631efec5a7ba25b43fe6529330b37093b2b30199e967c9c
   languageName: node
   linkType: hard
 
