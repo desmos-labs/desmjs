@@ -1,11 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-import {
-  RegisteredReactionValueParams,
-  FreeTextValueParams,
-} from "../../../desmos/reactions/v1/models";
+import { FreeTextValueParams, RegisteredReactionValueParams } from "./models";
 
 /** MsgAddReaction represents the message to be used to add a post reaction */
 export interface MsgAddReaction {
@@ -41,7 +38,8 @@ export interface MsgRemoveReaction {
 }
 
 /** MsgRemoveReactionResponse represents the Msg/RemoveReaction response type */
-export interface MsgRemoveReactionResponse {}
+export interface MsgRemoveReactionResponse {
+}
 
 /**
  * MsgAddRegisteredReaction represents the message to be used to
@@ -88,7 +86,8 @@ export interface MsgEditRegisteredReaction {
  * MsgEditRegisteredReactionResponse represents the Msg/EditRegisteredReaction
  * response type
  */
-export interface MsgEditRegisteredReactionResponse {}
+export interface MsgEditRegisteredReactionResponse {
+}
 
 /**
  * MsgRemoveRegisteredReaction represents the message to be used to
@@ -107,7 +106,8 @@ export interface MsgRemoveRegisteredReaction {
  * MsgRemoveRegisteredReactionResponse represents the
  * Msg/RemoveRegisteredReaction response type
  */
-export interface MsgRemoveRegisteredReactionResponse {}
+export interface MsgRemoveRegisteredReactionResponse {
+}
 
 /**
  * MsgSetReactionsParams represents the message to be used when setting
@@ -128,22 +128,15 @@ export interface MsgSetReactionsParams {
  * MsgSetReactionsParamsResponse represents the Msg/SetReactionsParams response
  * type
  */
-export interface MsgSetReactionsParamsResponse {}
+export interface MsgSetReactionsParamsResponse {
+}
 
 function createBaseMsgAddReaction(): MsgAddReaction {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    value: undefined,
-    user: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, value: undefined, user: "" };
 }
 
 export const MsgAddReaction = {
-  encode(
-    message: MsgAddReaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddReaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -188,12 +181,8 @@ export const MsgAddReaction = {
 
   fromJSON(object: any): MsgAddReaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       value: isSet(object.value) ? Any.fromJSON(object.value) : undefined,
       user: isSet(object.user) ? String(object.user) : "",
     };
@@ -201,32 +190,22 @@ export const MsgAddReaction = {
 
   toJSON(message: MsgAddReaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.value !== undefined &&
-      (obj.value = message.value ? Any.toJSON(message.value) : undefined);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.value !== undefined && (obj.value = message.value ? Any.toJSON(message.value) : undefined);
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddReaction>, I>>(
-    object: I
-  ): MsgAddReaction {
+  fromPartial<I extends Exact<DeepPartial<MsgAddReaction>, I>>(object: I): MsgAddReaction {
     const message = createBaseMsgAddReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
-    message.value =
-      object.value !== undefined && object.value !== null
-        ? Any.fromPartial(object.value)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
+    message.value = (object.value !== undefined && object.value !== null) ? Any.fromPartial(object.value) : undefined;
     message.user = object.user ?? "";
     return message;
   },
@@ -237,20 +216,14 @@ function createBaseMsgAddReactionResponse(): MsgAddReactionResponse {
 }
 
 export const MsgAddReactionResponse = {
-  encode(
-    message: MsgAddReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reactionId !== 0) {
       writer.uint32(8).uint32(message.reactionId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAddReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddReactionResponse();
@@ -269,21 +242,16 @@ export const MsgAddReactionResponse = {
   },
 
   fromJSON(object: any): MsgAddReactionResponse {
-    return {
-      reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
-    };
+    return { reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0 };
   },
 
   toJSON(message: MsgAddReactionResponse): unknown {
     const obj: any = {};
-    message.reactionId !== undefined &&
-      (obj.reactionId = Math.round(message.reactionId));
+    message.reactionId !== undefined && (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddReactionResponse>, I>>(
-    object: I
-  ): MsgAddReactionResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAddReactionResponse>, I>>(object: I): MsgAddReactionResponse {
     const message = createBaseMsgAddReactionResponse();
     message.reactionId = object.reactionId ?? 0;
     return message;
@@ -291,19 +259,11 @@ export const MsgAddReactionResponse = {
 };
 
 function createBaseMsgRemoveReaction(): MsgRemoveReaction {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    reactionId: 0,
-    user: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, reactionId: 0, user: "" };
 }
 
 export const MsgRemoveReaction = {
-  encode(
-    message: MsgRemoveReaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgRemoveReaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -348,12 +308,8 @@ export const MsgRemoveReaction = {
 
   fromJSON(object: any): MsgRemoveReaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
       user: isSet(object.user) ? String(object.user) : "",
     };
@@ -361,28 +317,21 @@ export const MsgRemoveReaction = {
 
   toJSON(message: MsgRemoveReaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.reactionId !== undefined &&
-      (obj.reactionId = Math.round(message.reactionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.reactionId !== undefined && (obj.reactionId = Math.round(message.reactionId));
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveReaction>, I>>(
-    object: I
-  ): MsgRemoveReaction {
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveReaction>, I>>(object: I): MsgRemoveReaction {
     const message = createBaseMsgRemoveReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.reactionId = object.reactionId ?? 0;
     message.user = object.user ?? "";
     return message;
@@ -394,17 +343,11 @@ function createBaseMsgRemoveReactionResponse(): MsgRemoveReactionResponse {
 }
 
 export const MsgRemoveReactionResponse = {
-  encode(
-    _: MsgRemoveReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgRemoveReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgRemoveReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveReactionResponse();
@@ -428,28 +371,18 @@ export const MsgRemoveReactionResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveReactionResponse>, I>>(
-    _: I
-  ): MsgRemoveReactionResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveReactionResponse>, I>>(_: I): MsgRemoveReactionResponse {
     const message = createBaseMsgRemoveReactionResponse();
     return message;
   },
 };
 
 function createBaseMsgAddRegisteredReaction(): MsgAddRegisteredReaction {
-  return {
-    subspaceId: Long.UZERO,
-    shorthandCode: "",
-    displayValue: "",
-    user: "",
-  };
+  return { subspaceId: Long.UZERO, shorthandCode: "", displayValue: "", user: "" };
 }
 
 export const MsgAddRegisteredReaction = {
-  encode(
-    message: MsgAddRegisteredReaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddRegisteredReaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -465,10 +398,7 @@ export const MsgAddRegisteredReaction = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAddRegisteredReaction {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddRegisteredReaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddRegisteredReaction();
@@ -497,39 +427,27 @@ export const MsgAddRegisteredReaction = {
 
   fromJSON(object: any): MsgAddRegisteredReaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      shorthandCode: isSet(object.shorthandCode)
-        ? String(object.shorthandCode)
-        : "",
-      displayValue: isSet(object.displayValue)
-        ? String(object.displayValue)
-        : "",
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      shorthandCode: isSet(object.shorthandCode) ? String(object.shorthandCode) : "",
+      displayValue: isSet(object.displayValue) ? String(object.displayValue) : "",
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
 
   toJSON(message: MsgAddRegisteredReaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.shorthandCode !== undefined &&
-      (obj.shorthandCode = message.shorthandCode);
-    message.displayValue !== undefined &&
-      (obj.displayValue = message.displayValue);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.shorthandCode !== undefined && (obj.shorthandCode = message.shorthandCode);
+    message.displayValue !== undefined && (obj.displayValue = message.displayValue);
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddRegisteredReaction>, I>>(
-    object: I
-  ): MsgAddRegisteredReaction {
+  fromPartial<I extends Exact<DeepPartial<MsgAddRegisteredReaction>, I>>(object: I): MsgAddRegisteredReaction {
     const message = createBaseMsgAddRegisteredReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.shorthandCode = object.shorthandCode ?? "";
     message.displayValue = object.displayValue ?? "";
     message.user = object.user ?? "";
@@ -542,20 +460,14 @@ function createBaseMsgAddRegisteredReactionResponse(): MsgAddRegisteredReactionR
 }
 
 export const MsgAddRegisteredReactionResponse = {
-  encode(
-    message: MsgAddRegisteredReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddRegisteredReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.registeredReactionId !== 0) {
       writer.uint32(8).uint32(message.registeredReactionId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAddRegisteredReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddRegisteredReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddRegisteredReactionResponse();
@@ -574,23 +486,18 @@ export const MsgAddRegisteredReactionResponse = {
   },
 
   fromJSON(object: any): MsgAddRegisteredReactionResponse {
-    return {
-      registeredReactionId: isSet(object.registeredReactionId)
-        ? Number(object.registeredReactionId)
-        : 0,
-    };
+    return { registeredReactionId: isSet(object.registeredReactionId) ? Number(object.registeredReactionId) : 0 };
   },
 
   toJSON(message: MsgAddRegisteredReactionResponse): unknown {
     const obj: any = {};
-    message.registeredReactionId !== undefined &&
-      (obj.registeredReactionId = Math.round(message.registeredReactionId));
+    message.registeredReactionId !== undefined && (obj.registeredReactionId = Math.round(message.registeredReactionId));
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgAddRegisteredReactionResponse>, I>
-  >(object: I): MsgAddRegisteredReactionResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAddRegisteredReactionResponse>, I>>(
+    object: I,
+  ): MsgAddRegisteredReactionResponse {
     const message = createBaseMsgAddRegisteredReactionResponse();
     message.registeredReactionId = object.registeredReactionId ?? 0;
     return message;
@@ -598,20 +505,11 @@ export const MsgAddRegisteredReactionResponse = {
 };
 
 function createBaseMsgEditRegisteredReaction(): MsgEditRegisteredReaction {
-  return {
-    subspaceId: Long.UZERO,
-    registeredReactionId: 0,
-    shorthandCode: "",
-    displayValue: "",
-    user: "",
-  };
+  return { subspaceId: Long.UZERO, registeredReactionId: 0, shorthandCode: "", displayValue: "", user: "" };
 }
 
 export const MsgEditRegisteredReaction = {
-  encode(
-    message: MsgEditRegisteredReaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgEditRegisteredReaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -630,10 +528,7 @@ export const MsgEditRegisteredReaction = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgEditRegisteredReaction {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditRegisteredReaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditRegisteredReaction();
@@ -665,44 +560,29 @@ export const MsgEditRegisteredReaction = {
 
   fromJSON(object: any): MsgEditRegisteredReaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      registeredReactionId: isSet(object.registeredReactionId)
-        ? Number(object.registeredReactionId)
-        : 0,
-      shorthandCode: isSet(object.shorthandCode)
-        ? String(object.shorthandCode)
-        : "",
-      displayValue: isSet(object.displayValue)
-        ? String(object.displayValue)
-        : "",
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      registeredReactionId: isSet(object.registeredReactionId) ? Number(object.registeredReactionId) : 0,
+      shorthandCode: isSet(object.shorthandCode) ? String(object.shorthandCode) : "",
+      displayValue: isSet(object.displayValue) ? String(object.displayValue) : "",
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
 
   toJSON(message: MsgEditRegisteredReaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.registeredReactionId !== undefined &&
-      (obj.registeredReactionId = Math.round(message.registeredReactionId));
-    message.shorthandCode !== undefined &&
-      (obj.shorthandCode = message.shorthandCode);
-    message.displayValue !== undefined &&
-      (obj.displayValue = message.displayValue);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.registeredReactionId !== undefined && (obj.registeredReactionId = Math.round(message.registeredReactionId));
+    message.shorthandCode !== undefined && (obj.shorthandCode = message.shorthandCode);
+    message.displayValue !== undefined && (obj.displayValue = message.displayValue);
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgEditRegisteredReaction>, I>>(
-    object: I
-  ): MsgEditRegisteredReaction {
+  fromPartial<I extends Exact<DeepPartial<MsgEditRegisteredReaction>, I>>(object: I): MsgEditRegisteredReaction {
     const message = createBaseMsgEditRegisteredReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.registeredReactionId = object.registeredReactionId ?? 0;
     message.shorthandCode = object.shorthandCode ?? "";
     message.displayValue = object.displayValue ?? "";
@@ -716,17 +596,11 @@ function createBaseMsgEditRegisteredReactionResponse(): MsgEditRegisteredReactio
 }
 
 export const MsgEditRegisteredReactionResponse = {
-  encode(
-    _: MsgEditRegisteredReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgEditRegisteredReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgEditRegisteredReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgEditRegisteredReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditRegisteredReactionResponse();
@@ -750,9 +624,9 @@ export const MsgEditRegisteredReactionResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgEditRegisteredReactionResponse>, I>
-  >(_: I): MsgEditRegisteredReactionResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgEditRegisteredReactionResponse>, I>>(
+    _: I,
+  ): MsgEditRegisteredReactionResponse {
     const message = createBaseMsgEditRegisteredReactionResponse();
     return message;
   },
@@ -763,10 +637,7 @@ function createBaseMsgRemoveRegisteredReaction(): MsgRemoveRegisteredReaction {
 }
 
 export const MsgRemoveRegisteredReaction = {
-  encode(
-    message: MsgRemoveRegisteredReaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgRemoveRegisteredReaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -779,10 +650,7 @@ export const MsgRemoveRegisteredReaction = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgRemoveRegisteredReaction {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveRegisteredReaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveRegisteredReaction();
@@ -808,34 +676,25 @@ export const MsgRemoveRegisteredReaction = {
 
   fromJSON(object: any): MsgRemoveRegisteredReaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      registeredReactionId: isSet(object.registeredReactionId)
-        ? Number(object.registeredReactionId)
-        : 0,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      registeredReactionId: isSet(object.registeredReactionId) ? Number(object.registeredReactionId) : 0,
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
 
   toJSON(message: MsgRemoveRegisteredReaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.registeredReactionId !== undefined &&
-      (obj.registeredReactionId = Math.round(message.registeredReactionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.registeredReactionId !== undefined && (obj.registeredReactionId = Math.round(message.registeredReactionId));
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveRegisteredReaction>, I>>(
-    object: I
-  ): MsgRemoveRegisteredReaction {
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveRegisteredReaction>, I>>(object: I): MsgRemoveRegisteredReaction {
     const message = createBaseMsgRemoveRegisteredReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.registeredReactionId = object.registeredReactionId ?? 0;
     message.user = object.user ?? "";
     return message;
@@ -847,17 +706,11 @@ function createBaseMsgRemoveRegisteredReactionResponse(): MsgRemoveRegisteredRea
 }
 
 export const MsgRemoveRegisteredReactionResponse = {
-  encode(
-    _: MsgRemoveRegisteredReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgRemoveRegisteredReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgRemoveRegisteredReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveRegisteredReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveRegisteredReactionResponse();
@@ -881,42 +734,28 @@ export const MsgRemoveRegisteredReactionResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgRemoveRegisteredReactionResponse>, I>
-  >(_: I): MsgRemoveRegisteredReactionResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveRegisteredReactionResponse>, I>>(
+    _: I,
+  ): MsgRemoveRegisteredReactionResponse {
     const message = createBaseMsgRemoveRegisteredReactionResponse();
     return message;
   },
 };
 
 function createBaseMsgSetReactionsParams(): MsgSetReactionsParams {
-  return {
-    subspaceId: Long.UZERO,
-    registeredReaction: undefined,
-    freeText: undefined,
-    user: "",
-  };
+  return { subspaceId: Long.UZERO, registeredReaction: undefined, freeText: undefined, user: "" };
 }
 
 export const MsgSetReactionsParams = {
-  encode(
-    message: MsgSetReactionsParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgSetReactionsParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
     if (message.registeredReaction !== undefined) {
-      RegisteredReactionValueParams.encode(
-        message.registeredReaction,
-        writer.uint32(18).fork()
-      ).ldelim();
+      RegisteredReactionValueParams.encode(message.registeredReaction, writer.uint32(18).fork()).ldelim();
     }
     if (message.freeText !== undefined) {
-      FreeTextValueParams.encode(
-        message.freeText,
-        writer.uint32(26).fork()
-      ).ldelim();
+      FreeTextValueParams.encode(message.freeText, writer.uint32(26).fork()).ldelim();
     }
     if (message.user !== "") {
       writer.uint32(34).string(message.user);
@@ -924,10 +763,7 @@ export const MsgSetReactionsParams = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgSetReactionsParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetReactionsParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetReactionsParams();
@@ -938,16 +774,10 @@ export const MsgSetReactionsParams = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.registeredReaction = RegisteredReactionValueParams.decode(
-            reader,
-            reader.uint32()
-          );
+          message.registeredReaction = RegisteredReactionValueParams.decode(reader, reader.uint32());
           break;
         case 3:
-          message.freeText = FreeTextValueParams.decode(
-            reader,
-            reader.uint32()
-          );
+          message.freeText = FreeTextValueParams.decode(reader, reader.uint32());
           break;
         case 4:
           message.user = reader.string();
@@ -962,52 +792,38 @@ export const MsgSetReactionsParams = {
 
   fromJSON(object: any): MsgSetReactionsParams {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       registeredReaction: isSet(object.registeredReaction)
         ? RegisteredReactionValueParams.fromJSON(object.registeredReaction)
         : undefined,
-      freeText: isSet(object.freeText)
-        ? FreeTextValueParams.fromJSON(object.freeText)
-        : undefined,
+      freeText: isSet(object.freeText) ? FreeTextValueParams.fromJSON(object.freeText) : undefined,
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
 
   toJSON(message: MsgSetReactionsParams): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.registeredReaction !== undefined &&
-      (obj.registeredReaction = message.registeredReaction
-        ? RegisteredReactionValueParams.toJSON(message.registeredReaction)
-        : undefined);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.registeredReaction !== undefined && (obj.registeredReaction = message.registeredReaction
+      ? RegisteredReactionValueParams.toJSON(message.registeredReaction)
+      : undefined);
     message.freeText !== undefined &&
-      (obj.freeText = message.freeText
-        ? FreeTextValueParams.toJSON(message.freeText)
-        : undefined);
+      (obj.freeText = message.freeText ? FreeTextValueParams.toJSON(message.freeText) : undefined);
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSetReactionsParams>, I>>(
-    object: I
-  ): MsgSetReactionsParams {
+  fromPartial<I extends Exact<DeepPartial<MsgSetReactionsParams>, I>>(object: I): MsgSetReactionsParams {
     const message = createBaseMsgSetReactionsParams();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.registeredReaction =
-      object.registeredReaction !== undefined &&
-      object.registeredReaction !== null
-        ? RegisteredReactionValueParams.fromPartial(object.registeredReaction)
-        : undefined;
-    message.freeText =
-      object.freeText !== undefined && object.freeText !== null
-        ? FreeTextValueParams.fromPartial(object.freeText)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.registeredReaction = (object.registeredReaction !== undefined && object.registeredReaction !== null)
+      ? RegisteredReactionValueParams.fromPartial(object.registeredReaction)
+      : undefined;
+    message.freeText = (object.freeText !== undefined && object.freeText !== null)
+      ? FreeTextValueParams.fromPartial(object.freeText)
+      : undefined;
     message.user = object.user ?? "";
     return message;
   },
@@ -1018,17 +834,11 @@ function createBaseMsgSetReactionsParamsResponse(): MsgSetReactionsParamsRespons
 }
 
 export const MsgSetReactionsParamsResponse = {
-  encode(
-    _: MsgSetReactionsParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgSetReactionsParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgSetReactionsParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetReactionsParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetReactionsParamsResponse();
@@ -1052,9 +862,7 @@ export const MsgSetReactionsParamsResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSetReactionsParamsResponse>, I>>(
-    _: I
-  ): MsgSetReactionsParamsResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSetReactionsParamsResponse>, I>>(_: I): MsgSetReactionsParamsResponse {
     const message = createBaseMsgSetReactionsParamsResponse();
     return message;
   },
@@ -1065,30 +873,22 @@ export interface Msg {
   /** AddReaction allows to add a post reaction */
   AddReaction(request: MsgAddReaction): Promise<MsgAddReactionResponse>;
   /** RemoveReaction allows to remove an existing post reaction */
-  RemoveReaction(
-    request: MsgRemoveReaction
-  ): Promise<MsgRemoveReactionResponse>;
+  RemoveReaction(request: MsgRemoveReaction): Promise<MsgRemoveReactionResponse>;
   /** AddRegisteredReaction allows to registered a new supported reaction */
-  AddRegisteredReaction(
-    request: MsgAddRegisteredReaction
-  ): Promise<MsgAddRegisteredReactionResponse>;
+  AddRegisteredReaction(request: MsgAddRegisteredReaction): Promise<MsgAddRegisteredReactionResponse>;
   /** EditRegisteredReaction allows to edit a registered reaction */
-  EditRegisteredReaction(
-    request: MsgEditRegisteredReaction
-  ): Promise<MsgEditRegisteredReactionResponse>;
+  EditRegisteredReaction(request: MsgEditRegisteredReaction): Promise<MsgEditRegisteredReactionResponse>;
   /** RemoveRegisteredReaction allows to remove an existing supported reaction */
-  RemoveRegisteredReaction(
-    request: MsgRemoveRegisteredReaction
-  ): Promise<MsgRemoveRegisteredReactionResponse>;
+  RemoveRegisteredReaction(request: MsgRemoveRegisteredReaction): Promise<MsgRemoveRegisteredReactionResponse>;
   /** SetReactionsParams allows to set the reactions params */
-  SetReactionsParams(
-    request: MsgSetReactionsParams
-  ): Promise<MsgSetReactionsParamsResponse>;
+  SetReactionsParams(request: MsgSetReactionsParams): Promise<MsgSetReactionsParamsResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "desmos.reactions.v1.Msg";
     this.rpc = rpc;
     this.AddReaction = this.AddReaction.bind(this);
     this.RemoveReaction = this.RemoveReaction.bind(this);
@@ -1099,123 +899,56 @@ export class MsgClientImpl implements Msg {
   }
   AddReaction(request: MsgAddReaction): Promise<MsgAddReactionResponse> {
     const data = MsgAddReaction.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Msg",
-      "AddReaction",
-      data
-    );
-    return promise.then((data) =>
-      MsgAddReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "AddReaction", data);
+    return promise.then((data) => MsgAddReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  RemoveReaction(
-    request: MsgRemoveReaction
-  ): Promise<MsgRemoveReactionResponse> {
+  RemoveReaction(request: MsgRemoveReaction): Promise<MsgRemoveReactionResponse> {
     const data = MsgRemoveReaction.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Msg",
-      "RemoveReaction",
-      data
-    );
-    return promise.then((data) =>
-      MsgRemoveReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "RemoveReaction", data);
+    return promise.then((data) => MsgRemoveReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  AddRegisteredReaction(
-    request: MsgAddRegisteredReaction
-  ): Promise<MsgAddRegisteredReactionResponse> {
+  AddRegisteredReaction(request: MsgAddRegisteredReaction): Promise<MsgAddRegisteredReactionResponse> {
     const data = MsgAddRegisteredReaction.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Msg",
-      "AddRegisteredReaction",
-      data
-    );
-    return promise.then((data) =>
-      MsgAddRegisteredReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "AddRegisteredReaction", data);
+    return promise.then((data) => MsgAddRegisteredReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  EditRegisteredReaction(
-    request: MsgEditRegisteredReaction
-  ): Promise<MsgEditRegisteredReactionResponse> {
+  EditRegisteredReaction(request: MsgEditRegisteredReaction): Promise<MsgEditRegisteredReactionResponse> {
     const data = MsgEditRegisteredReaction.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Msg",
-      "EditRegisteredReaction",
-      data
-    );
-    return promise.then((data) =>
-      MsgEditRegisteredReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "EditRegisteredReaction", data);
+    return promise.then((data) => MsgEditRegisteredReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  RemoveRegisteredReaction(
-    request: MsgRemoveRegisteredReaction
-  ): Promise<MsgRemoveRegisteredReactionResponse> {
+  RemoveRegisteredReaction(request: MsgRemoveRegisteredReaction): Promise<MsgRemoveRegisteredReactionResponse> {
     const data = MsgRemoveRegisteredReaction.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Msg",
-      "RemoveRegisteredReaction",
-      data
-    );
-    return promise.then((data) =>
-      MsgRemoveRegisteredReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "RemoveRegisteredReaction", data);
+    return promise.then((data) => MsgRemoveRegisteredReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  SetReactionsParams(
-    request: MsgSetReactionsParams
-  ): Promise<MsgSetReactionsParamsResponse> {
+  SetReactionsParams(request: MsgSetReactionsParams): Promise<MsgSetReactionsParamsResponse> {
     const data = MsgSetReactionsParams.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Msg",
-      "SetReactionsParams",
-      data
-    );
-    return promise.then((data) =>
-      MsgSetReactionsParamsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "SetReactionsParams", data);
+    return promise.then((data) => MsgSetReactionsParamsResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

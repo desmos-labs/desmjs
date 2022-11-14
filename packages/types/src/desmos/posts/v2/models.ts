@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
@@ -48,8 +48,9 @@ export function postReferenceTypeToJSON(object: PostReferenceType): string {
       return "POST_REFERENCE_TYPE_QUOTE";
     case PostReferenceType.POST_REFERENCE_TYPE_REPOST:
       return "POST_REFERENCE_TYPE_REPOST";
+    case PostReferenceType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -104,8 +105,9 @@ export function replySettingToJSON(object: ReplySetting): string {
       return "REPLY_SETTING_MUTUAL";
     case ReplySetting.REPLY_SETTING_MENTIONS:
       return "REPLY_SETTING_MENTIONS";
+    case ReplySetting.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -316,16 +318,10 @@ export const Post = {
       writer.uint32(88).int32(message.replySettings);
     }
     if (message.creationDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationDate),
-        writer.uint32(98).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationDate), writer.uint32(98).fork()).ldelim();
     }
     if (message.lastEditedDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.lastEditedDate),
-        writer.uint32(106).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.lastEditedDate), writer.uint32(106).fork()).ldelim();
     }
     return writer;
   },
@@ -365,22 +361,16 @@ export const Post = {
           message.conversationId = reader.uint64() as Long;
           break;
         case 10:
-          message.referencedPosts.push(
-            PostReference.decode(reader, reader.uint32())
-          );
+          message.referencedPosts.push(PostReference.decode(reader, reader.uint32()));
           break;
         case 11:
           message.replySettings = reader.int32() as any;
           break;
         case 12:
-          message.creationDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 13:
-          message.lastEditedDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.lastEditedDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -392,101 +382,68 @@ export const Post = {
 
   fromJSON(object: any): Post {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
       externalId: isSet(object.externalId) ? String(object.externalId) : "",
       text: isSet(object.text) ? String(object.text) : "",
-      entities: isSet(object.entities)
-        ? Entities.fromJSON(object.entities)
-        : undefined,
-      tags: Array.isArray(object?.tags)
-        ? object.tags.map((e: any) => String(e))
-        : [],
+      entities: isSet(object.entities) ? Entities.fromJSON(object.entities) : undefined,
+      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => String(e)) : [],
       author: isSet(object.author) ? String(object.author) : "",
-      conversationId: isSet(object.conversationId)
-        ? Long.fromString(object.conversationId)
-        : Long.UZERO,
+      conversationId: isSet(object.conversationId) ? Long.fromValue(object.conversationId) : Long.UZERO,
       referencedPosts: Array.isArray(object?.referencedPosts)
         ? object.referencedPosts.map((e: any) => PostReference.fromJSON(e))
         : [],
-      replySettings: isSet(object.replySettings)
-        ? replySettingFromJSON(object.replySettings)
-        : 0,
-      creationDate: isSet(object.creationDate)
-        ? fromJsonTimestamp(object.creationDate)
-        : undefined,
-      lastEditedDate: isSet(object.lastEditedDate)
-        ? fromJsonTimestamp(object.lastEditedDate)
-        : undefined,
+      replySettings: isSet(object.replySettings) ? replySettingFromJSON(object.replySettings) : 0,
+      creationDate: isSet(object.creationDate) ? fromJsonTimestamp(object.creationDate) : undefined,
+      lastEditedDate: isSet(object.lastEditedDate) ? fromJsonTimestamp(object.lastEditedDate) : undefined,
     };
   },
 
   toJSON(message: Post): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
-    message.id !== undefined &&
-      (obj.id = (message.id || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined && (obj.sectionId = Math.round(message.sectionId));
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     message.externalId !== undefined && (obj.externalId = message.externalId);
     message.text !== undefined && (obj.text = message.text);
-    message.entities !== undefined &&
-      (obj.entities = message.entities
-        ? Entities.toJSON(message.entities)
-        : undefined);
+    message.entities !== undefined && (obj.entities = message.entities ? Entities.toJSON(message.entities) : undefined);
     if (message.tags) {
       obj.tags = message.tags.map((e) => e);
     } else {
       obj.tags = [];
     }
     message.author !== undefined && (obj.author = message.author);
-    message.conversationId !== undefined &&
-      (obj.conversationId = (message.conversationId || Long.UZERO).toString());
+    message.conversationId !== undefined && (obj.conversationId = (message.conversationId || Long.UZERO).toString());
     if (message.referencedPosts) {
-      obj.referencedPosts = message.referencedPosts.map((e) =>
-        e ? PostReference.toJSON(e) : undefined
-      );
+      obj.referencedPosts = message.referencedPosts.map((e) => e ? PostReference.toJSON(e) : undefined);
     } else {
       obj.referencedPosts = [];
     }
-    message.replySettings !== undefined &&
-      (obj.replySettings = replySettingToJSON(message.replySettings));
-    message.creationDate !== undefined &&
-      (obj.creationDate = message.creationDate.toISOString());
-    message.lastEditedDate !== undefined &&
-      (obj.lastEditedDate = message.lastEditedDate.toISOString());
+    message.replySettings !== undefined && (obj.replySettings = replySettingToJSON(message.replySettings));
+    message.creationDate !== undefined && (obj.creationDate = message.creationDate.toISOString());
+    message.lastEditedDate !== undefined && (obj.lastEditedDate = message.lastEditedDate.toISOString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Post>, I>>(object: I): Post {
     const message = createBasePost();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.sectionId = object.sectionId ?? 0;
-    message.id =
-      object.id !== undefined && object.id !== null
-        ? Long.fromValue(object.id)
-        : Long.UZERO;
+    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.UZERO;
     message.externalId = object.externalId ?? "";
     message.text = object.text ?? "";
-    message.entities =
-      object.entities !== undefined && object.entities !== null
-        ? Entities.fromPartial(object.entities)
-        : undefined;
+    message.entities = (object.entities !== undefined && object.entities !== null)
+      ? Entities.fromPartial(object.entities)
+      : undefined;
     message.tags = object.tags?.map((e) => e) || [];
     message.author = object.author ?? "";
-    message.conversationId =
-      object.conversationId !== undefined && object.conversationId !== null
-        ? Long.fromValue(object.conversationId)
-        : Long.UZERO;
-    message.referencedPosts =
-      object.referencedPosts?.map((e) => PostReference.fromPartial(e)) || [];
+    message.conversationId = (object.conversationId !== undefined && object.conversationId !== null)
+      ? Long.fromValue(object.conversationId)
+      : Long.UZERO;
+    message.referencedPosts = object.referencedPosts?.map((e) => PostReference.fromPartial(e)) || [];
     message.replySettings = object.replySettings ?? 0;
     message.creationDate = object.creationDate ?? undefined;
     message.lastEditedDate = object.lastEditedDate ?? undefined;
@@ -499,10 +456,7 @@ function createBasePostReference(): PostReference {
 }
 
 export const PostReference = {
-  encode(
-    message: PostReference,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PostReference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
@@ -542,39 +496,28 @@ export const PostReference = {
   fromJSON(object: any): PostReference {
     return {
       type: isSet(object.type) ? postReferenceTypeFromJSON(object.type) : 0,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
-      position: isSet(object.position)
-        ? Long.fromString(object.position)
-        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      position: isSet(object.position) ? Long.fromValue(object.position) : Long.UZERO,
     };
   },
 
   toJSON(message: PostReference): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = postReferenceTypeToJSON(message.type));
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.position !== undefined &&
-      (obj.position = (message.position || Long.UZERO).toString());
+    message.type !== undefined && (obj.type = postReferenceTypeToJSON(message.type));
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.position !== undefined && (obj.position = (message.position || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PostReference>, I>>(
-    object: I
-  ): PostReference {
+  fromPartial<I extends Exact<DeepPartial<PostReference>, I>>(object: I): PostReference {
     const message = createBasePostReference();
     message.type = object.type ?? 0;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
-    message.position =
-      object.position !== undefined && object.position !== null
-        ? Long.fromValue(object.position)
-        : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
+    message.position = (object.position !== undefined && object.position !== null)
+      ? Long.fromValue(object.position)
+      : Long.UZERO;
     return message;
   },
 };
@@ -584,10 +527,7 @@ function createBaseEntities(): Entities {
 }
 
 export const Entities = {
-  encode(
-    message: Entities,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Entities, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.hashtags) {
       TextTag.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -626,36 +566,26 @@ export const Entities = {
 
   fromJSON(object: any): Entities {
     return {
-      hashtags: Array.isArray(object?.hashtags)
-        ? object.hashtags.map((e: any) => TextTag.fromJSON(e))
-        : [],
-      mentions: Array.isArray(object?.mentions)
-        ? object.mentions.map((e: any) => TextTag.fromJSON(e))
-        : [],
-      urls: Array.isArray(object?.urls)
-        ? object.urls.map((e: any) => Url.fromJSON(e))
-        : [],
+      hashtags: Array.isArray(object?.hashtags) ? object.hashtags.map((e: any) => TextTag.fromJSON(e)) : [],
+      mentions: Array.isArray(object?.mentions) ? object.mentions.map((e: any) => TextTag.fromJSON(e)) : [],
+      urls: Array.isArray(object?.urls) ? object.urls.map((e: any) => Url.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Entities): unknown {
     const obj: any = {};
     if (message.hashtags) {
-      obj.hashtags = message.hashtags.map((e) =>
-        e ? TextTag.toJSON(e) : undefined
-      );
+      obj.hashtags = message.hashtags.map((e) => e ? TextTag.toJSON(e) : undefined);
     } else {
       obj.hashtags = [];
     }
     if (message.mentions) {
-      obj.mentions = message.mentions.map((e) =>
-        e ? TextTag.toJSON(e) : undefined
-      );
+      obj.mentions = message.mentions.map((e) => e ? TextTag.toJSON(e) : undefined);
     } else {
       obj.mentions = [];
     }
     if (message.urls) {
-      obj.urls = message.urls.map((e) => (e ? Url.toJSON(e) : undefined));
+      obj.urls = message.urls.map((e) => e ? Url.toJSON(e) : undefined);
     } else {
       obj.urls = [];
     }
@@ -664,10 +594,8 @@ export const Entities = {
 
   fromPartial<I extends Exact<DeepPartial<Entities>, I>>(object: I): Entities {
     const message = createBaseEntities();
-    message.hashtags =
-      object.hashtags?.map((e) => TextTag.fromPartial(e)) || [];
-    message.mentions =
-      object.mentions?.map((e) => TextTag.fromPartial(e)) || [];
+    message.hashtags = object.hashtags?.map((e) => TextTag.fromPartial(e)) || [];
+    message.mentions = object.mentions?.map((e) => TextTag.fromPartial(e)) || [];
     message.urls = object.urls?.map((e) => Url.fromPartial(e)) || [];
     return message;
   },
@@ -678,10 +606,7 @@ function createBaseTextTag(): TextTag {
 }
 
 export const TextTag = {
-  encode(
-    message: TextTag,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: TextTag, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.start.isZero()) {
       writer.uint32(8).uint64(message.start);
     }
@@ -720,32 +645,24 @@ export const TextTag = {
 
   fromJSON(object: any): TextTag {
     return {
-      start: isSet(object.start) ? Long.fromString(object.start) : Long.UZERO,
-      end: isSet(object.end) ? Long.fromString(object.end) : Long.UZERO,
+      start: isSet(object.start) ? Long.fromValue(object.start) : Long.UZERO,
+      end: isSet(object.end) ? Long.fromValue(object.end) : Long.UZERO,
       tag: isSet(object.tag) ? String(object.tag) : "",
     };
   },
 
   toJSON(message: TextTag): unknown {
     const obj: any = {};
-    message.start !== undefined &&
-      (obj.start = (message.start || Long.UZERO).toString());
-    message.end !== undefined &&
-      (obj.end = (message.end || Long.UZERO).toString());
+    message.start !== undefined && (obj.start = (message.start || Long.UZERO).toString());
+    message.end !== undefined && (obj.end = (message.end || Long.UZERO).toString());
     message.tag !== undefined && (obj.tag = message.tag);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<TextTag>, I>>(object: I): TextTag {
     const message = createBaseTextTag();
-    message.start =
-      object.start !== undefined && object.start !== null
-        ? Long.fromValue(object.start)
-        : Long.UZERO;
-    message.end =
-      object.end !== undefined && object.end !== null
-        ? Long.fromValue(object.end)
-        : Long.UZERO;
+    message.start = (object.start !== undefined && object.start !== null) ? Long.fromValue(object.start) : Long.UZERO;
+    message.end = (object.end !== undefined && object.end !== null) ? Long.fromValue(object.end) : Long.UZERO;
     message.tag = object.tag ?? "";
     return message;
   },
@@ -801,8 +718,8 @@ export const Url = {
 
   fromJSON(object: any): Url {
     return {
-      start: isSet(object.start) ? Long.fromString(object.start) : Long.UZERO,
-      end: isSet(object.end) ? Long.fromString(object.end) : Long.UZERO,
+      start: isSet(object.start) ? Long.fromValue(object.start) : Long.UZERO,
+      end: isSet(object.end) ? Long.fromValue(object.end) : Long.UZERO,
       url: isSet(object.url) ? String(object.url) : "",
       displayUrl: isSet(object.displayUrl) ? String(object.displayUrl) : "",
     };
@@ -810,10 +727,8 @@ export const Url = {
 
   toJSON(message: Url): unknown {
     const obj: any = {};
-    message.start !== undefined &&
-      (obj.start = (message.start || Long.UZERO).toString());
-    message.end !== undefined &&
-      (obj.end = (message.end || Long.UZERO).toString());
+    message.start !== undefined && (obj.start = (message.start || Long.UZERO).toString());
+    message.end !== undefined && (obj.end = (message.end || Long.UZERO).toString());
     message.url !== undefined && (obj.url = message.url);
     message.displayUrl !== undefined && (obj.displayUrl = message.displayUrl);
     return obj;
@@ -821,14 +736,8 @@ export const Url = {
 
   fromPartial<I extends Exact<DeepPartial<Url>, I>>(object: I): Url {
     const message = createBaseUrl();
-    message.start =
-      object.start !== undefined && object.start !== null
-        ? Long.fromValue(object.start)
-        : Long.UZERO;
-    message.end =
-      object.end !== undefined && object.end !== null
-        ? Long.fromValue(object.end)
-        : Long.UZERO;
+    message.start = (object.start !== undefined && object.start !== null) ? Long.fromValue(object.start) : Long.UZERO;
+    message.end = (object.end !== undefined && object.end !== null) ? Long.fromValue(object.end) : Long.UZERO;
     message.url = object.url ?? "";
     message.displayUrl = object.displayUrl ?? "";
     return message;
@@ -836,19 +745,11 @@ export const Url = {
 };
 
 function createBaseAttachment(): Attachment {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    id: 0,
-    content: undefined,
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, id: 0, content: undefined };
 }
 
 export const Attachment = {
-  encode(
-    message: Attachment,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Attachment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -893,12 +794,8 @@ export const Attachment = {
 
   fromJSON(object: any): Attachment {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       id: isSet(object.id) ? Number(object.id) : 0,
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
     };
@@ -906,33 +803,25 @@ export const Attachment = {
 
   toJSON(message: Attachment): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.id !== undefined && (obj.id = Math.round(message.id));
-    message.content !== undefined &&
-      (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Attachment>, I>>(
-    object: I
-  ): Attachment {
+  fromPartial<I extends Exact<DeepPartial<Attachment>, I>>(object: I): Attachment {
     const message = createBaseAttachment();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.id = object.id ?? 0;
-    message.content =
-      object.content !== undefined && object.content !== null
-        ? Any.fromPartial(object.content)
-        : undefined;
+    message.content = (object.content !== undefined && object.content !== null)
+      ? Any.fromPartial(object.content)
+      : undefined;
     return message;
   },
 };
@@ -1015,10 +904,7 @@ export const Poll = {
       Poll_ProvidedAnswer.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.endDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.endDate),
-        writer.uint32(26).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.endDate), writer.uint32(26).fork()).ldelim();
     }
     if (message.allowsMultipleAnswers === true) {
       writer.uint32(32).bool(message.allowsMultipleAnswers);
@@ -1027,10 +913,7 @@ export const Poll = {
       writer.uint32(40).bool(message.allowsAnswerEdits);
     }
     if (message.finalTallyResults !== undefined) {
-      PollTallyResults.encode(
-        message.finalTallyResults,
-        writer.uint32(50).fork()
-      ).ldelim();
+      PollTallyResults.encode(message.finalTallyResults, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -1046,14 +929,10 @@ export const Poll = {
           message.question = reader.string();
           break;
         case 2:
-          message.providedAnswers.push(
-            Poll_ProvidedAnswer.decode(reader, reader.uint32())
-          );
+          message.providedAnswers.push(Poll_ProvidedAnswer.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.endDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.endDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 4:
           message.allowsMultipleAnswers = reader.bool();
@@ -1062,10 +941,7 @@ export const Poll = {
           message.allowsAnswerEdits = reader.bool();
           break;
         case 6:
-          message.finalTallyResults = PollTallyResults.decode(
-            reader,
-            reader.uint32()
-          );
+          message.finalTallyResults = PollTallyResults.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1079,19 +955,11 @@ export const Poll = {
     return {
       question: isSet(object.question) ? String(object.question) : "",
       providedAnswers: Array.isArray(object?.providedAnswers)
-        ? object.providedAnswers.map((e: any) =>
-            Poll_ProvidedAnswer.fromJSON(e)
-          )
+        ? object.providedAnswers.map((e: any) => Poll_ProvidedAnswer.fromJSON(e))
         : [],
-      endDate: isSet(object.endDate)
-        ? fromJsonTimestamp(object.endDate)
-        : undefined,
-      allowsMultipleAnswers: isSet(object.allowsMultipleAnswers)
-        ? Boolean(object.allowsMultipleAnswers)
-        : false,
-      allowsAnswerEdits: isSet(object.allowsAnswerEdits)
-        ? Boolean(object.allowsAnswerEdits)
-        : false,
+      endDate: isSet(object.endDate) ? fromJsonTimestamp(object.endDate) : undefined,
+      allowsMultipleAnswers: isSet(object.allowsMultipleAnswers) ? Boolean(object.allowsMultipleAnswers) : false,
+      allowsAnswerEdits: isSet(object.allowsAnswerEdits) ? Boolean(object.allowsAnswerEdits) : false,
       finalTallyResults: isSet(object.finalTallyResults)
         ? PollTallyResults.fromJSON(object.finalTallyResults)
         : undefined,
@@ -1102,39 +970,29 @@ export const Poll = {
     const obj: any = {};
     message.question !== undefined && (obj.question = message.question);
     if (message.providedAnswers) {
-      obj.providedAnswers = message.providedAnswers.map((e) =>
-        e ? Poll_ProvidedAnswer.toJSON(e) : undefined
-      );
+      obj.providedAnswers = message.providedAnswers.map((e) => e ? Poll_ProvidedAnswer.toJSON(e) : undefined);
     } else {
       obj.providedAnswers = [];
     }
-    message.endDate !== undefined &&
-      (obj.endDate = message.endDate.toISOString());
-    message.allowsMultipleAnswers !== undefined &&
-      (obj.allowsMultipleAnswers = message.allowsMultipleAnswers);
-    message.allowsAnswerEdits !== undefined &&
-      (obj.allowsAnswerEdits = message.allowsAnswerEdits);
-    message.finalTallyResults !== undefined &&
-      (obj.finalTallyResults = message.finalTallyResults
-        ? PollTallyResults.toJSON(message.finalTallyResults)
-        : undefined);
+    message.endDate !== undefined && (obj.endDate = message.endDate.toISOString());
+    message.allowsMultipleAnswers !== undefined && (obj.allowsMultipleAnswers = message.allowsMultipleAnswers);
+    message.allowsAnswerEdits !== undefined && (obj.allowsAnswerEdits = message.allowsAnswerEdits);
+    message.finalTallyResults !== undefined && (obj.finalTallyResults = message.finalTallyResults
+      ? PollTallyResults.toJSON(message.finalTallyResults)
+      : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Poll>, I>>(object: I): Poll {
     const message = createBasePoll();
     message.question = object.question ?? "";
-    message.providedAnswers =
-      object.providedAnswers?.map((e) => Poll_ProvidedAnswer.fromPartial(e)) ||
-      [];
+    message.providedAnswers = object.providedAnswers?.map((e) => Poll_ProvidedAnswer.fromPartial(e)) || [];
     message.endDate = object.endDate ?? undefined;
     message.allowsMultipleAnswers = object.allowsMultipleAnswers ?? false;
     message.allowsAnswerEdits = object.allowsAnswerEdits ?? false;
-    message.finalTallyResults =
-      object.finalTallyResults !== undefined &&
-      object.finalTallyResults !== null
-        ? PollTallyResults.fromPartial(object.finalTallyResults)
-        : undefined;
+    message.finalTallyResults = (object.finalTallyResults !== undefined && object.finalTallyResults !== null)
+      ? PollTallyResults.fromPartial(object.finalTallyResults)
+      : undefined;
     return message;
   },
 };
@@ -1144,10 +1002,7 @@ function createBasePoll_ProvidedAnswer(): Poll_ProvidedAnswer {
 }
 
 export const Poll_ProvidedAnswer = {
-  encode(
-    message: Poll_ProvidedAnswer,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Poll_ProvidedAnswer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.text !== "") {
       writer.uint32(10).string(message.text);
     }
@@ -1181,9 +1036,7 @@ export const Poll_ProvidedAnswer = {
   fromJSON(object: any): Poll_ProvidedAnswer {
     return {
       text: isSet(object.text) ? String(object.text) : "",
-      attachments: Array.isArray(object?.attachments)
-        ? object.attachments.map((e: any) => Attachment.fromJSON(e))
-        : [],
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Attachment.fromJSON(e)) : [],
     };
   },
 
@@ -1191,41 +1044,27 @@ export const Poll_ProvidedAnswer = {
     const obj: any = {};
     message.text !== undefined && (obj.text = message.text);
     if (message.attachments) {
-      obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toJSON(e) : undefined
-      );
+      obj.attachments = message.attachments.map((e) => e ? Attachment.toJSON(e) : undefined);
     } else {
       obj.attachments = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Poll_ProvidedAnswer>, I>>(
-    object: I
-  ): Poll_ProvidedAnswer {
+  fromPartial<I extends Exact<DeepPartial<Poll_ProvidedAnswer>, I>>(object: I): Poll_ProvidedAnswer {
     const message = createBasePoll_ProvidedAnswer();
     message.text = object.text ?? "";
-    message.attachments =
-      object.attachments?.map((e) => Attachment.fromPartial(e)) || [];
+    message.attachments = object.attachments?.map((e) => Attachment.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseUserAnswer(): UserAnswer {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    pollId: 0,
-    answersIndexes: [],
-    user: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, pollId: 0, answersIndexes: [], user: "" };
 }
 
 export const UserAnswer = {
-  encode(
-    message: UserAnswer,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UserAnswer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -1285,26 +1124,18 @@ export const UserAnswer = {
 
   fromJSON(object: any): UserAnswer {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       pollId: isSet(object.pollId) ? Number(object.pollId) : 0,
-      answersIndexes: Array.isArray(object?.answersIndexes)
-        ? object.answersIndexes.map((e: any) => Number(e))
-        : [],
+      answersIndexes: Array.isArray(object?.answersIndexes) ? object.answersIndexes.map((e: any) => Number(e)) : [],
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
 
   toJSON(message: UserAnswer): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.pollId !== undefined && (obj.pollId = Math.round(message.pollId));
     if (message.answersIndexes) {
       obj.answersIndexes = message.answersIndexes.map((e) => Math.round(e));
@@ -1315,18 +1146,14 @@ export const UserAnswer = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UserAnswer>, I>>(
-    object: I
-  ): UserAnswer {
+  fromPartial<I extends Exact<DeepPartial<UserAnswer>, I>>(object: I): UserAnswer {
     const message = createBaseUserAnswer();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.pollId = object.pollId ?? 0;
     message.answersIndexes = object.answersIndexes?.map((e) => e) || [];
     message.user = object.user ?? "";
@@ -1339,15 +1166,9 @@ function createBasePollTallyResults(): PollTallyResults {
 }
 
 export const PollTallyResults = {
-  encode(
-    message: PollTallyResults,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PollTallyResults, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.results) {
-      PollTallyResults_AnswerResult.encode(
-        v!,
-        writer.uint32(10).fork()
-      ).ldelim();
+      PollTallyResults_AnswerResult.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -1360,9 +1181,7 @@ export const PollTallyResults = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.results.push(
-            PollTallyResults_AnswerResult.decode(reader, reader.uint32())
-          );
+          message.results.push(PollTallyResults_AnswerResult.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1375,9 +1194,7 @@ export const PollTallyResults = {
   fromJSON(object: any): PollTallyResults {
     return {
       results: Array.isArray(object?.results)
-        ? object.results.map((e: any) =>
-            PollTallyResults_AnswerResult.fromJSON(e)
-          )
+        ? object.results.map((e: any) => PollTallyResults_AnswerResult.fromJSON(e))
         : [],
     };
   },
@@ -1385,23 +1202,16 @@ export const PollTallyResults = {
   toJSON(message: PollTallyResults): unknown {
     const obj: any = {};
     if (message.results) {
-      obj.results = message.results.map((e) =>
-        e ? PollTallyResults_AnswerResult.toJSON(e) : undefined
-      );
+      obj.results = message.results.map((e) => e ? PollTallyResults_AnswerResult.toJSON(e) : undefined);
     } else {
       obj.results = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PollTallyResults>, I>>(
-    object: I
-  ): PollTallyResults {
+  fromPartial<I extends Exact<DeepPartial<PollTallyResults>, I>>(object: I): PollTallyResults {
     const message = createBasePollTallyResults();
-    message.results =
-      object.results?.map((e) =>
-        PollTallyResults_AnswerResult.fromPartial(e)
-      ) || [];
+    message.results = object.results?.map((e) => PollTallyResults_AnswerResult.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1411,10 +1221,7 @@ function createBasePollTallyResults_AnswerResult(): PollTallyResults_AnswerResul
 }
 
 export const PollTallyResults_AnswerResult = {
-  encode(
-    message: PollTallyResults_AnswerResult,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: PollTallyResults_AnswerResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.answerIndex !== 0) {
       writer.uint32(8).uint32(message.answerIndex);
     }
@@ -1424,10 +1231,7 @@ export const PollTallyResults_AnswerResult = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): PollTallyResults_AnswerResult {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PollTallyResults_AnswerResult {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePollTallyResults_AnswerResult();
@@ -1451,28 +1255,23 @@ export const PollTallyResults_AnswerResult = {
   fromJSON(object: any): PollTallyResults_AnswerResult {
     return {
       answerIndex: isSet(object.answerIndex) ? Number(object.answerIndex) : 0,
-      votes: isSet(object.votes) ? Long.fromString(object.votes) : Long.UZERO,
+      votes: isSet(object.votes) ? Long.fromValue(object.votes) : Long.UZERO,
     };
   },
 
   toJSON(message: PollTallyResults_AnswerResult): unknown {
     const obj: any = {};
-    message.answerIndex !== undefined &&
-      (obj.answerIndex = Math.round(message.answerIndex));
-    message.votes !== undefined &&
-      (obj.votes = (message.votes || Long.UZERO).toString());
+    message.answerIndex !== undefined && (obj.answerIndex = Math.round(message.answerIndex));
+    message.votes !== undefined && (obj.votes = (message.votes || Long.UZERO).toString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<PollTallyResults_AnswerResult>, I>>(
-    object: I
+    object: I,
   ): PollTallyResults_AnswerResult {
     const message = createBasePollTallyResults_AnswerResult();
     message.answerIndex = object.answerIndex ?? 0;
-    message.votes =
-      object.votes !== undefined && object.votes !== null
-        ? Long.fromValue(object.votes)
-        : Long.UZERO;
+    message.votes = (object.votes !== undefined && object.votes !== null) ? Long.fromValue(object.votes) : Long.UZERO;
     return message;
   },
 };
@@ -1482,10 +1281,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(
-    message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxTextLength !== 0) {
       writer.uint32(8).uint32(message.maxTextLength);
     }
@@ -1511,17 +1307,12 @@ export const Params = {
   },
 
   fromJSON(object: any): Params {
-    return {
-      maxTextLength: isSet(object.maxTextLength)
-        ? Number(object.maxTextLength)
-        : 0,
-    };
+    return { maxTextLength: isSet(object.maxTextLength) ? Number(object.maxTextLength) : 0 };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxTextLength !== undefined &&
-      (obj.maxTextLength = Math.round(message.maxTextLength));
+    message.maxTextLength !== undefined && (obj.maxTextLength = Math.round(message.maxTextLength));
     return obj;
   },
 
@@ -1532,34 +1323,17 @@ export const Params = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /**
@@ -21,9 +21,7 @@ export enum ApplicationLinkState {
   UNRECOGNIZED = -1,
 }
 
-export function applicationLinkStateFromJSON(
-  object: any
-): ApplicationLinkState {
+export function applicationLinkStateFromJSON(object: any): ApplicationLinkState {
   switch (object) {
     case 0:
     case "APPLICATION_LINK_STATE_INITIALIZED_UNSPECIFIED":
@@ -47,9 +45,7 @@ export function applicationLinkStateFromJSON(
   }
 }
 
-export function applicationLinkStateToJSON(
-  object: ApplicationLinkState
-): string {
+export function applicationLinkStateToJSON(object: ApplicationLinkState): string {
   switch (object) {
     case ApplicationLinkState.APPLICATION_LINK_STATE_INITIALIZED_UNSPECIFIED:
       return "APPLICATION_LINK_STATE_INITIALIZED_UNSPECIFIED";
@@ -61,8 +57,9 @@ export function applicationLinkStateToJSON(
       return "APPLICATION_LINK_STATE_VERIFICATION_SUCCESS";
     case ApplicationLinkState.APPLICATION_LINK_STATE_TIMED_OUT:
       return "APPLICATION_LINK_STATE_TIMED_OUT";
+    case ApplicationLinkState.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -130,7 +127,9 @@ export interface OracleRequest_CallData {
 /** Result represents a verification result */
 export interface Result {
   /** Success represents a successful verification */
-  success?: Result_Success | undefined;
+  success?:
+    | Result_Success
+    | undefined;
   /** Failed represents a failed verification */
   failed?: Result_Failed | undefined;
 }
@@ -168,10 +167,7 @@ function createBaseApplicationLink(): ApplicationLink {
 }
 
 export const ApplicationLink = {
-  encode(
-    message: ApplicationLink,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ApplicationLink, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
@@ -182,25 +178,16 @@ export const ApplicationLink = {
       writer.uint32(24).int32(message.state);
     }
     if (message.oracleRequest !== undefined) {
-      OracleRequest.encode(
-        message.oracleRequest,
-        writer.uint32(34).fork()
-      ).ldelim();
+      OracleRequest.encode(message.oracleRequest, writer.uint32(34).fork()).ldelim();
     }
     if (message.result !== undefined) {
       Result.encode(message.result, writer.uint32(42).fork()).ldelim();
     }
     if (message.creationTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationTime),
-        writer.uint32(50).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationTime), writer.uint32(50).fork()).ldelim();
     }
     if (message.expirationTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.expirationTime),
-        writer.uint32(58).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.expirationTime), writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -228,14 +215,10 @@ export const ApplicationLink = {
           message.result = Result.decode(reader, reader.uint32());
           break;
         case 6:
-          message.creationTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.expirationTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.expirationTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -249,60 +232,38 @@ export const ApplicationLink = {
     return {
       user: isSet(object.user) ? String(object.user) : "",
       data: isSet(object.data) ? Data.fromJSON(object.data) : undefined,
-      state: isSet(object.state)
-        ? applicationLinkStateFromJSON(object.state)
-        : 0,
-      oracleRequest: isSet(object.oracleRequest)
-        ? OracleRequest.fromJSON(object.oracleRequest)
-        : undefined,
+      state: isSet(object.state) ? applicationLinkStateFromJSON(object.state) : 0,
+      oracleRequest: isSet(object.oracleRequest) ? OracleRequest.fromJSON(object.oracleRequest) : undefined,
       result: isSet(object.result) ? Result.fromJSON(object.result) : undefined,
-      creationTime: isSet(object.creationTime)
-        ? fromJsonTimestamp(object.creationTime)
-        : undefined,
-      expirationTime: isSet(object.expirationTime)
-        ? fromJsonTimestamp(object.expirationTime)
-        : undefined,
+      creationTime: isSet(object.creationTime) ? fromJsonTimestamp(object.creationTime) : undefined,
+      expirationTime: isSet(object.expirationTime) ? fromJsonTimestamp(object.expirationTime) : undefined,
     };
   },
 
   toJSON(message: ApplicationLink): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
-    message.data !== undefined &&
-      (obj.data = message.data ? Data.toJSON(message.data) : undefined);
-    message.state !== undefined &&
-      (obj.state = applicationLinkStateToJSON(message.state));
+    message.data !== undefined && (obj.data = message.data ? Data.toJSON(message.data) : undefined);
+    message.state !== undefined && (obj.state = applicationLinkStateToJSON(message.state));
     message.oracleRequest !== undefined &&
-      (obj.oracleRequest = message.oracleRequest
-        ? OracleRequest.toJSON(message.oracleRequest)
-        : undefined);
-    message.result !== undefined &&
-      (obj.result = message.result ? Result.toJSON(message.result) : undefined);
-    message.creationTime !== undefined &&
-      (obj.creationTime = message.creationTime.toISOString());
-    message.expirationTime !== undefined &&
-      (obj.expirationTime = message.expirationTime.toISOString());
+      (obj.oracleRequest = message.oracleRequest ? OracleRequest.toJSON(message.oracleRequest) : undefined);
+    message.result !== undefined && (obj.result = message.result ? Result.toJSON(message.result) : undefined);
+    message.creationTime !== undefined && (obj.creationTime = message.creationTime.toISOString());
+    message.expirationTime !== undefined && (obj.expirationTime = message.expirationTime.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ApplicationLink>, I>>(
-    object: I
-  ): ApplicationLink {
+  fromPartial<I extends Exact<DeepPartial<ApplicationLink>, I>>(object: I): ApplicationLink {
     const message = createBaseApplicationLink();
     message.user = object.user ?? "";
-    message.data =
-      object.data !== undefined && object.data !== null
-        ? Data.fromPartial(object.data)
-        : undefined;
+    message.data = (object.data !== undefined && object.data !== null) ? Data.fromPartial(object.data) : undefined;
     message.state = object.state ?? 0;
-    message.oracleRequest =
-      object.oracleRequest !== undefined && object.oracleRequest !== null
-        ? OracleRequest.fromPartial(object.oracleRequest)
-        : undefined;
-    message.result =
-      object.result !== undefined && object.result !== null
-        ? Result.fromPartial(object.result)
-        : undefined;
+    message.oracleRequest = (object.oracleRequest !== undefined && object.oracleRequest !== null)
+      ? OracleRequest.fromPartial(object.oracleRequest)
+      : undefined;
+    message.result = (object.result !== undefined && object.result !== null)
+      ? Result.fromPartial(object.result)
+      : undefined;
     message.creationTime = object.creationTime ?? undefined;
     message.expirationTime = object.expirationTime ?? undefined;
     return message;
@@ -354,8 +315,7 @@ export const Data = {
 
   toJSON(message: Data): unknown {
     const obj: any = {};
-    message.application !== undefined &&
-      (obj.application = message.application);
+    message.application !== undefined && (obj.application = message.application);
     message.username !== undefined && (obj.username = message.username);
     return obj;
   },
@@ -369,19 +329,11 @@ export const Data = {
 };
 
 function createBaseOracleRequest(): OracleRequest {
-  return {
-    id: Long.UZERO,
-    oracleScriptId: Long.UZERO,
-    callData: undefined,
-    clientId: "",
-  };
+  return { id: Long.UZERO, oracleScriptId: Long.UZERO, callData: undefined, clientId: "" };
 }
 
 export const OracleRequest = {
-  encode(
-    message: OracleRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: OracleRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -389,10 +341,7 @@ export const OracleRequest = {
       writer.uint32(16).uint64(message.oracleScriptId);
     }
     if (message.callData !== undefined) {
-      OracleRequest_CallData.encode(
-        message.callData,
-        writer.uint32(26).fork()
-      ).ldelim();
+      OracleRequest_CallData.encode(message.callData, writer.uint32(26).fork()).ldelim();
     }
     if (message.clientId !== "") {
       writer.uint32(34).string(message.clientId);
@@ -414,10 +363,7 @@ export const OracleRequest = {
           message.oracleScriptId = reader.uint64() as Long;
           break;
         case 3:
-          message.callData = OracleRequest_CallData.decode(
-            reader,
-            reader.uint32()
-          );
+          message.callData = OracleRequest_CallData.decode(reader, reader.uint32());
           break;
         case 4:
           message.clientId = reader.string();
@@ -432,47 +378,32 @@ export const OracleRequest = {
 
   fromJSON(object: any): OracleRequest {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
-      oracleScriptId: isSet(object.oracleScriptId)
-        ? Long.fromString(object.oracleScriptId)
-        : Long.UZERO,
-      callData: isSet(object.callData)
-        ? OracleRequest_CallData.fromJSON(object.callData)
-        : undefined,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      oracleScriptId: isSet(object.oracleScriptId) ? Long.fromValue(object.oracleScriptId) : Long.UZERO,
+      callData: isSet(object.callData) ? OracleRequest_CallData.fromJSON(object.callData) : undefined,
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
     };
   },
 
   toJSON(message: OracleRequest): unknown {
     const obj: any = {};
-    message.id !== undefined &&
-      (obj.id = (message.id || Long.UZERO).toString());
-    message.oracleScriptId !== undefined &&
-      (obj.oracleScriptId = (message.oracleScriptId || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.oracleScriptId !== undefined && (obj.oracleScriptId = (message.oracleScriptId || Long.UZERO).toString());
     message.callData !== undefined &&
-      (obj.callData = message.callData
-        ? OracleRequest_CallData.toJSON(message.callData)
-        : undefined);
+      (obj.callData = message.callData ? OracleRequest_CallData.toJSON(message.callData) : undefined);
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OracleRequest>, I>>(
-    object: I
-  ): OracleRequest {
+  fromPartial<I extends Exact<DeepPartial<OracleRequest>, I>>(object: I): OracleRequest {
     const message = createBaseOracleRequest();
-    message.id =
-      object.id !== undefined && object.id !== null
-        ? Long.fromValue(object.id)
-        : Long.UZERO;
-    message.oracleScriptId =
-      object.oracleScriptId !== undefined && object.oracleScriptId !== null
-        ? Long.fromValue(object.oracleScriptId)
-        : Long.UZERO;
-    message.callData =
-      object.callData !== undefined && object.callData !== null
-        ? OracleRequest_CallData.fromPartial(object.callData)
-        : undefined;
+    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.UZERO;
+    message.oracleScriptId = (object.oracleScriptId !== undefined && object.oracleScriptId !== null)
+      ? Long.fromValue(object.oracleScriptId)
+      : Long.UZERO;
+    message.callData = (object.callData !== undefined && object.callData !== null)
+      ? OracleRequest_CallData.fromPartial(object.callData)
+      : undefined;
     message.clientId = object.clientId ?? "";
     return message;
   },
@@ -483,10 +414,7 @@ function createBaseOracleRequest_CallData(): OracleRequest_CallData {
 }
 
 export const OracleRequest_CallData = {
-  encode(
-    message: OracleRequest_CallData,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: OracleRequest_CallData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.application !== "") {
       writer.uint32(10).string(message.application);
     }
@@ -496,10 +424,7 @@ export const OracleRequest_CallData = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): OracleRequest_CallData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OracleRequest_CallData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracleRequest_CallData();
@@ -529,15 +454,12 @@ export const OracleRequest_CallData = {
 
   toJSON(message: OracleRequest_CallData): unknown {
     const obj: any = {};
-    message.application !== undefined &&
-      (obj.application = message.application);
+    message.application !== undefined && (obj.application = message.application);
     message.callData !== undefined && (obj.callData = message.callData);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OracleRequest_CallData>, I>>(
-    object: I
-  ): OracleRequest_CallData {
+  fromPartial<I extends Exact<DeepPartial<OracleRequest_CallData>, I>>(object: I): OracleRequest_CallData {
     const message = createBaseOracleRequest_CallData();
     message.application = object.application ?? "";
     message.callData = object.callData ?? "";
@@ -550,10 +472,7 @@ function createBaseResult(): Result {
 }
 
 export const Result = {
-  encode(
-    message: Result,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Result, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.success !== undefined) {
       Result_Success.encode(message.success, writer.uint32(10).fork()).ldelim();
     }
@@ -586,38 +505,27 @@ export const Result = {
 
   fromJSON(object: any): Result {
     return {
-      success: isSet(object.success)
-        ? Result_Success.fromJSON(object.success)
-        : undefined,
-      failed: isSet(object.failed)
-        ? Result_Failed.fromJSON(object.failed)
-        : undefined,
+      success: isSet(object.success) ? Result_Success.fromJSON(object.success) : undefined,
+      failed: isSet(object.failed) ? Result_Failed.fromJSON(object.failed) : undefined,
     };
   },
 
   toJSON(message: Result): unknown {
     const obj: any = {};
     message.success !== undefined &&
-      (obj.success = message.success
-        ? Result_Success.toJSON(message.success)
-        : undefined);
-    message.failed !== undefined &&
-      (obj.failed = message.failed
-        ? Result_Failed.toJSON(message.failed)
-        : undefined);
+      (obj.success = message.success ? Result_Success.toJSON(message.success) : undefined);
+    message.failed !== undefined && (obj.failed = message.failed ? Result_Failed.toJSON(message.failed) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Result>, I>>(object: I): Result {
     const message = createBaseResult();
-    message.success =
-      object.success !== undefined && object.success !== null
-        ? Result_Success.fromPartial(object.success)
-        : undefined;
-    message.failed =
-      object.failed !== undefined && object.failed !== null
-        ? Result_Failed.fromPartial(object.failed)
-        : undefined;
+    message.success = (object.success !== undefined && object.success !== null)
+      ? Result_Success.fromPartial(object.success)
+      : undefined;
+    message.failed = (object.failed !== undefined && object.failed !== null)
+      ? Result_Failed.fromPartial(object.failed)
+      : undefined;
     return message;
   },
 };
@@ -627,10 +535,7 @@ function createBaseResult_Success(): Result_Success {
 }
 
 export const Result_Success = {
-  encode(
-    message: Result_Success,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Result_Success, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
     }
@@ -675,9 +580,7 @@ export const Result_Success = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Result_Success>, I>>(
-    object: I
-  ): Result_Success {
+  fromPartial<I extends Exact<DeepPartial<Result_Success>, I>>(object: I): Result_Success {
     const message = createBaseResult_Success();
     message.value = object.value ?? "";
     message.signature = object.signature ?? "";
@@ -690,10 +593,7 @@ function createBaseResult_Failed(): Result_Failed {
 }
 
 export const Result_Failed = {
-  encode(
-    message: Result_Failed,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Result_Failed, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.error !== "") {
       writer.uint32(10).string(message.error);
     }
@@ -719,9 +619,7 @@ export const Result_Failed = {
   },
 
   fromJSON(object: any): Result_Failed {
-    return {
-      error: isSet(object.error) ? String(object.error) : "",
-    };
+    return { error: isSet(object.error) ? String(object.error) : "" };
   },
 
   toJSON(message: Result_Failed): unknown {
@@ -730,43 +628,24 @@ export const Result_Failed = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Result_Failed>, I>>(
-    object: I
-  ): Result_Failed {
+  fromPartial<I extends Exact<DeepPartial<Result_Failed>, I>>(object: I): Result_Failed {
     const message = createBaseResult_Failed();
     message.error = object.error ?? "";
     return message;
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

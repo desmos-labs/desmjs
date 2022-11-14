@@ -1,10 +1,10 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Params } from "../../../desmos/profiles/v3/models_params";
-import { DTagTransferRequest } from "../../../desmos/profiles/v3/models_dtag_requests";
-import { ChainLink } from "../../../desmos/profiles/v3/models_chain_links";
-import { ApplicationLink } from "../../../desmos/profiles/v3/models_app_links";
+import _m0 from "protobufjs/minimal";
+import { ApplicationLink } from "./models_app_links";
+import { ChainLink } from "./models_chain_links";
+import { DTagTransferRequest } from "./models_dtag_requests";
+import { Params } from "./models_params";
 
 /** GenesisState defines the profiles module's genesis state. */
 export interface GenesisState {
@@ -35,10 +35,7 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  encode(
-    message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.dtagTransferRequests) {
       DTagTransferRequest.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -68,22 +65,16 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.dtagTransferRequests.push(
-            DTagTransferRequest.decode(reader, reader.uint32())
-          );
+          message.dtagTransferRequests.push(DTagTransferRequest.decode(reader, reader.uint32()));
           break;
         case 2:
           message.chainLinks.push(ChainLink.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.applicationLinks.push(
-            ApplicationLink.decode(reader, reader.uint32())
-          );
+          message.applicationLinks.push(ApplicationLink.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.defaultExternalAddresses.push(
-            DefaultExternalAddressEntry.decode(reader, reader.uint32())
-          );
+          message.defaultExternalAddresses.push(DefaultExternalAddressEntry.decode(reader, reader.uint32()));
           break;
         case 5:
           message.ibcPortId = reader.string();
@@ -102,20 +93,14 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       dtagTransferRequests: Array.isArray(object?.dtagTransferRequests)
-        ? object.dtagTransferRequests.map((e: any) =>
-            DTagTransferRequest.fromJSON(e)
-          )
+        ? object.dtagTransferRequests.map((e: any) => DTagTransferRequest.fromJSON(e))
         : [],
-      chainLinks: Array.isArray(object?.chainLinks)
-        ? object.chainLinks.map((e: any) => ChainLink.fromJSON(e))
-        : [],
+      chainLinks: Array.isArray(object?.chainLinks) ? object.chainLinks.map((e: any) => ChainLink.fromJSON(e)) : [],
       applicationLinks: Array.isArray(object?.applicationLinks)
         ? object.applicationLinks.map((e: any) => ApplicationLink.fromJSON(e))
         : [],
       defaultExternalAddresses: Array.isArray(object?.defaultExternalAddresses)
-        ? object.defaultExternalAddresses.map((e: any) =>
-            DefaultExternalAddressEntry.fromJSON(e)
-          )
+        ? object.defaultExternalAddresses.map((e: any) => DefaultExternalAddressEntry.fromJSON(e))
         : [],
       ibcPortId: isSet(object.ibcPortId) ? String(object.ibcPortId) : "",
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
@@ -125,23 +110,17 @@ export const GenesisState = {
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     if (message.dtagTransferRequests) {
-      obj.dtagTransferRequests = message.dtagTransferRequests.map((e) =>
-        e ? DTagTransferRequest.toJSON(e) : undefined
-      );
+      obj.dtagTransferRequests = message.dtagTransferRequests.map((e) => e ? DTagTransferRequest.toJSON(e) : undefined);
     } else {
       obj.dtagTransferRequests = [];
     }
     if (message.chainLinks) {
-      obj.chainLinks = message.chainLinks.map((e) =>
-        e ? ChainLink.toJSON(e) : undefined
-      );
+      obj.chainLinks = message.chainLinks.map((e) => e ? ChainLink.toJSON(e) : undefined);
     } else {
       obj.chainLinks = [];
     }
     if (message.applicationLinks) {
-      obj.applicationLinks = message.applicationLinks.map((e) =>
-        e ? ApplicationLink.toJSON(e) : undefined
-      );
+      obj.applicationLinks = message.applicationLinks.map((e) => e ? ApplicationLink.toJSON(e) : undefined);
     } else {
       obj.applicationLinks = [];
     }
@@ -153,32 +132,21 @@ export const GenesisState = {
       obj.defaultExternalAddresses = [];
     }
     message.ibcPortId !== undefined && (obj.ibcPortId = message.ibcPortId);
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
-  ): GenesisState {
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
-    message.dtagTransferRequests =
-      object.dtagTransferRequests?.map((e) =>
-        DTagTransferRequest.fromPartial(e)
-      ) || [];
-    message.chainLinks =
-      object.chainLinks?.map((e) => ChainLink.fromPartial(e)) || [];
-    message.applicationLinks =
-      object.applicationLinks?.map((e) => ApplicationLink.fromPartial(e)) || [];
+    message.dtagTransferRequests = object.dtagTransferRequests?.map((e) => DTagTransferRequest.fromPartial(e)) || [];
+    message.chainLinks = object.chainLinks?.map((e) => ChainLink.fromPartial(e)) || [];
+    message.applicationLinks = object.applicationLinks?.map((e) => ApplicationLink.fromPartial(e)) || [];
     message.defaultExternalAddresses =
-      object.defaultExternalAddresses?.map((e) =>
-        DefaultExternalAddressEntry.fromPartial(e)
-      ) || [];
+      object.defaultExternalAddresses?.map((e) => DefaultExternalAddressEntry.fromPartial(e)) || [];
     message.ibcPortId = object.ibcPortId ?? "";
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
@@ -188,10 +156,7 @@ function createBaseDefaultExternalAddressEntry(): DefaultExternalAddressEntry {
 }
 
 export const DefaultExternalAddressEntry = {
-  encode(
-    message: DefaultExternalAddressEntry,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DefaultExternalAddressEntry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -204,10 +169,7 @@ export const DefaultExternalAddressEntry = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): DefaultExternalAddressEntry {
+  decode(input: _m0.Reader | Uint8Array, length?: number): DefaultExternalAddressEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDefaultExternalAddressEntry();
@@ -247,9 +209,7 @@ export const DefaultExternalAddressEntry = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DefaultExternalAddressEntry>, I>>(
-    object: I
-  ): DefaultExternalAddressEntry {
+  fromPartial<I extends Exact<DeepPartial<DefaultExternalAddressEntry>, I>>(object: I): DefaultExternalAddressEntry {
     const message = createBaseDefaultExternalAddressEntry();
     message.owner = object.owner ?? "";
     message.chainName = object.chainName ?? "";
@@ -258,34 +218,17 @@ export const DefaultExternalAddressEntry = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

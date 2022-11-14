@@ -1,15 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import {
-  PageRequest,
-  PageResponse,
-} from "../../../cosmos/base/query/v1beta1/pagination";
-import {
-  Reaction,
-  RegisteredReaction,
-  SubspaceReactionsParams,
-} from "../../../desmos/reactions/v1/models";
+import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Reaction, RegisteredReaction, SubspaceReactionsParams } from "./models";
 
 /** QueryReactionsRequest is the request type for the Query/Reactions RPC method */
 export interface QueryReactionsRequest {
@@ -113,19 +106,11 @@ export interface QueryReactionsParamsResponse {
 }
 
 function createBaseQueryReactionsRequest(): QueryReactionsRequest {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    user: "",
-    pagination: undefined,
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, user: "", pagination: undefined };
 }
 
 export const QueryReactionsRequest = {
-  encode(
-    message: QueryReactionsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryReactionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -141,10 +126,7 @@ export const QueryReactionsRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryReactionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryReactionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsRequest();
@@ -173,50 +155,35 @@ export const QueryReactionsRequest = {
 
   fromJSON(object: any): QueryReactionsRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       user: isSet(object.user) ? String(object.user) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryReactionsRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.user !== undefined && (obj.user = message.user);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryReactionsRequest>, I>>(
-    object: I
-  ): QueryReactionsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryReactionsRequest>, I>>(object: I): QueryReactionsRequest {
     const message = createBaseQueryReactionsRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.user = object.user ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -226,26 +193,17 @@ function createBaseQueryReactionsResponse(): QueryReactionsResponse {
 }
 
 export const QueryReactionsResponse = {
-  encode(
-    message: QueryReactionsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryReactionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.reactions) {
       Reaction.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryReactionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryReactionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsResponse();
@@ -268,41 +226,29 @@ export const QueryReactionsResponse = {
 
   fromJSON(object: any): QueryReactionsResponse {
     return {
-      reactions: Array.isArray(object?.reactions)
-        ? object.reactions.map((e: any) => Reaction.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      reactions: Array.isArray(object?.reactions) ? object.reactions.map((e: any) => Reaction.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryReactionsResponse): unknown {
     const obj: any = {};
     if (message.reactions) {
-      obj.reactions = message.reactions.map((e) =>
-        e ? Reaction.toJSON(e) : undefined
-      );
+      obj.reactions = message.reactions.map((e) => e ? Reaction.toJSON(e) : undefined);
     } else {
       obj.reactions = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryReactionsResponse>, I>>(
-    object: I
-  ): QueryReactionsResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryReactionsResponse>, I>>(object: I): QueryReactionsResponse {
     const message = createBaseQueryReactionsResponse();
-    message.reactions =
-      object.reactions?.map((e) => Reaction.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.reactions = object.reactions?.map((e) => Reaction.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -312,10 +258,7 @@ function createBaseQueryReactionRequest(): QueryReactionRequest {
 }
 
 export const QueryReactionRequest = {
-  encode(
-    message: QueryReactionRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryReactionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -328,10 +271,7 @@ export const QueryReactionRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryReactionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryReactionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionRequest();
@@ -357,39 +297,28 @@ export const QueryReactionRequest = {
 
   fromJSON(object: any): QueryReactionRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
     };
   },
 
   toJSON(message: QueryReactionRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.reactionId !== undefined &&
-      (obj.reactionId = Math.round(message.reactionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.reactionId !== undefined && (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryReactionRequest>, I>>(
-    object: I
-  ): QueryReactionRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryReactionRequest>, I>>(object: I): QueryReactionRequest {
     const message = createBaseQueryReactionRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.reactionId = object.reactionId ?? 0;
     return message;
   },
@@ -400,20 +329,14 @@ function createBaseQueryReactionResponse(): QueryReactionResponse {
 }
 
 export const QueryReactionResponse = {
-  encode(
-    message: QueryReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reaction !== undefined) {
       Reaction.encode(message.reaction, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionResponse();
@@ -432,30 +355,20 @@ export const QueryReactionResponse = {
   },
 
   fromJSON(object: any): QueryReactionResponse {
-    return {
-      reaction: isSet(object.reaction)
-        ? Reaction.fromJSON(object.reaction)
-        : undefined,
-    };
+    return { reaction: isSet(object.reaction) ? Reaction.fromJSON(object.reaction) : undefined };
   },
 
   toJSON(message: QueryReactionResponse): unknown {
     const obj: any = {};
-    message.reaction !== undefined &&
-      (obj.reaction = message.reaction
-        ? Reaction.toJSON(message.reaction)
-        : undefined);
+    message.reaction !== undefined && (obj.reaction = message.reaction ? Reaction.toJSON(message.reaction) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryReactionResponse>, I>>(
-    object: I
-  ): QueryReactionResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryReactionResponse>, I>>(object: I): QueryReactionResponse {
     const message = createBaseQueryReactionResponse();
-    message.reaction =
-      object.reaction !== undefined && object.reaction !== null
-        ? Reaction.fromPartial(object.reaction)
-        : undefined;
+    message.reaction = (object.reaction !== undefined && object.reaction !== null)
+      ? Reaction.fromPartial(object.reaction)
+      : undefined;
     return message;
   },
 };
@@ -465,10 +378,7 @@ function createBaseQueryRegisteredReactionsRequest(): QueryRegisteredReactionsRe
 }
 
 export const QueryRegisteredReactionsRequest = {
-  encode(
-    message: QueryRegisteredReactionsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryRegisteredReactionsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -478,10 +388,7 @@ export const QueryRegisteredReactionsRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryRegisteredReactionsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRegisteredReactionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionsRequest();
@@ -504,38 +411,29 @@ export const QueryRegisteredReactionsRequest = {
 
   fromJSON(object: any): QueryRegisteredReactionsRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryRegisteredReactionsRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryRegisteredReactionsRequest {
     const message = createBaseQueryRegisteredReactionsRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -545,26 +443,17 @@ function createBaseQueryRegisteredReactionsResponse(): QueryRegisteredReactionsR
 }
 
 export const QueryRegisteredReactionsResponse = {
-  encode(
-    message: QueryRegisteredReactionsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryRegisteredReactionsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.registeredReactions) {
       RegisteredReaction.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryRegisteredReactionsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRegisteredReactionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionsResponse();
@@ -572,9 +461,7 @@ export const QueryRegisteredReactionsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.registeredReactions.push(
-            RegisteredReaction.decode(reader, reader.uint32())
-          );
+          message.registeredReactions.push(RegisteredReaction.decode(reader, reader.uint32()));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -590,44 +477,32 @@ export const QueryRegisteredReactionsResponse = {
   fromJSON(object: any): QueryRegisteredReactionsResponse {
     return {
       registeredReactions: Array.isArray(object?.registeredReactions)
-        ? object.registeredReactions.map((e: any) =>
-            RegisteredReaction.fromJSON(e)
-          )
+        ? object.registeredReactions.map((e: any) => RegisteredReaction.fromJSON(e))
         : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryRegisteredReactionsResponse): unknown {
     const obj: any = {};
     if (message.registeredReactions) {
-      obj.registeredReactions = message.registeredReactions.map((e) =>
-        e ? RegisteredReaction.toJSON(e) : undefined
-      );
+      obj.registeredReactions = message.registeredReactions.map((e) => e ? RegisteredReaction.toJSON(e) : undefined);
     } else {
       obj.registeredReactions = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryRegisteredReactionsResponse>, I>
-  >(object: I): QueryRegisteredReactionsResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionsResponse>, I>>(
+    object: I,
+  ): QueryRegisteredReactionsResponse {
     const message = createBaseQueryRegisteredReactionsResponse();
-    message.registeredReactions =
-      object.registeredReactions?.map((e) =>
-        RegisteredReaction.fromPartial(e)
-      ) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.registeredReactions = object.registeredReactions?.map((e) => RegisteredReaction.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -637,10 +512,7 @@ function createBaseQueryRegisteredReactionRequest(): QueryRegisteredReactionRequ
 }
 
 export const QueryRegisteredReactionRequest = {
-  encode(
-    message: QueryRegisteredReactionRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryRegisteredReactionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -650,10 +522,7 @@ export const QueryRegisteredReactionRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryRegisteredReactionRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRegisteredReactionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionRequest();
@@ -676,30 +545,25 @@ export const QueryRegisteredReactionRequest = {
 
   fromJSON(object: any): QueryRegisteredReactionRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
     };
   },
 
   toJSON(message: QueryRegisteredReactionRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.reactionId !== undefined &&
-      (obj.reactionId = Math.round(message.reactionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.reactionId !== undefined && (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionRequest>, I>>(
-    object: I
+    object: I,
   ): QueryRegisteredReactionRequest {
     const message = createBaseQueryRegisteredReactionRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.reactionId = object.reactionId ?? 0;
     return message;
   },
@@ -710,23 +574,14 @@ function createBaseQueryRegisteredReactionResponse(): QueryRegisteredReactionRes
 }
 
 export const QueryRegisteredReactionResponse = {
-  encode(
-    message: QueryRegisteredReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryRegisteredReactionResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.registeredReaction !== undefined) {
-      RegisteredReaction.encode(
-        message.registeredReaction,
-        writer.uint32(10).fork()
-      ).ldelim();
+      RegisteredReaction.encode(message.registeredReaction, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryRegisteredReactionResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryRegisteredReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionResponse();
@@ -734,10 +589,7 @@ export const QueryRegisteredReactionResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.registeredReaction = RegisteredReaction.decode(
-            reader,
-            reader.uint32()
-          );
+          message.registeredReaction = RegisteredReaction.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -757,22 +609,19 @@ export const QueryRegisteredReactionResponse = {
 
   toJSON(message: QueryRegisteredReactionResponse): unknown {
     const obj: any = {};
-    message.registeredReaction !== undefined &&
-      (obj.registeredReaction = message.registeredReaction
-        ? RegisteredReaction.toJSON(message.registeredReaction)
-        : undefined);
+    message.registeredReaction !== undefined && (obj.registeredReaction = message.registeredReaction
+      ? RegisteredReaction.toJSON(message.registeredReaction)
+      : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionResponse>, I>>(
-    object: I
+    object: I,
   ): QueryRegisteredReactionResponse {
     const message = createBaseQueryRegisteredReactionResponse();
-    message.registeredReaction =
-      object.registeredReaction !== undefined &&
-      object.registeredReaction !== null
-        ? RegisteredReaction.fromPartial(object.registeredReaction)
-        : undefined;
+    message.registeredReaction = (object.registeredReaction !== undefined && object.registeredReaction !== null)
+      ? RegisteredReaction.fromPartial(object.registeredReaction)
+      : undefined;
     return message;
   },
 };
@@ -782,20 +631,14 @@ function createBaseQueryReactionsParamsRequest(): QueryReactionsParamsRequest {
 }
 
 export const QueryReactionsParamsRequest = {
-  encode(
-    message: QueryReactionsParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryReactionsParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryReactionsParamsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryReactionsParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsParamsRequest();
@@ -814,28 +657,20 @@ export const QueryReactionsParamsRequest = {
   },
 
   fromJSON(object: any): QueryReactionsParamsRequest {
-    return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-    };
+    return { subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO };
   },
 
   toJSON(message: QueryReactionsParamsRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsRequest>, I>>(
-    object: I
-  ): QueryReactionsParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsRequest>, I>>(object: I): QueryReactionsParamsRequest {
     const message = createBaseQueryReactionsParamsRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -845,23 +680,14 @@ function createBaseQueryReactionsParamsResponse(): QueryReactionsParamsResponse 
 }
 
 export const QueryReactionsParamsResponse = {
-  encode(
-    message: QueryReactionsParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryReactionsParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
-      SubspaceReactionsParams.encode(
-        message.params,
-        writer.uint32(10).fork()
-      ).ldelim();
+      SubspaceReactionsParams.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryReactionsParamsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryReactionsParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsParamsResponse();
@@ -869,10 +695,7 @@ export const QueryReactionsParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = SubspaceReactionsParams.decode(
-            reader,
-            reader.uint32()
-          );
+          message.params = SubspaceReactionsParams.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -883,30 +706,21 @@ export const QueryReactionsParamsResponse = {
   },
 
   fromJSON(object: any): QueryReactionsParamsResponse {
-    return {
-      params: isSet(object.params)
-        ? SubspaceReactionsParams.fromJSON(object.params)
-        : undefined,
-    };
+    return { params: isSet(object.params) ? SubspaceReactionsParams.fromJSON(object.params) : undefined };
   },
 
   toJSON(message: QueryReactionsParamsResponse): unknown {
     const obj: any = {};
     message.params !== undefined &&
-      (obj.params = message.params
-        ? SubspaceReactionsParams.toJSON(message.params)
-        : undefined);
+      (obj.params = message.params ? SubspaceReactionsParams.toJSON(message.params) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsResponse>, I>>(
-    object: I
-  ): QueryReactionsParamsResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsResponse>, I>>(object: I): QueryReactionsParamsResponse {
     const message = createBaseQueryReactionsParamsResponse();
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? SubspaceReactionsParams.fromPartial(object.params)
-        : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? SubspaceReactionsParams.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
@@ -918,22 +732,18 @@ export interface Query {
   /** Reaction allows to query the reaction with the given id */
   Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse>;
   /** RegisteredReactions allows to query the registered reaction of a subspace */
-  RegisteredReactions(
-    request: QueryRegisteredReactionsRequest
-  ): Promise<QueryRegisteredReactionsResponse>;
+  RegisteredReactions(request: QueryRegisteredReactionsRequest): Promise<QueryRegisteredReactionsResponse>;
   /** RegisteredReaction allows to query the registered reaction of a subspace */
-  RegisteredReaction(
-    request: QueryRegisteredReactionRequest
-  ): Promise<QueryRegisteredReactionResponse>;
+  RegisteredReaction(request: QueryRegisteredReactionRequest): Promise<QueryRegisteredReactionResponse>;
   /** ReactionsParams allows to query the reaction params of a subspace */
-  ReactionsParams(
-    request: QueryReactionsParamsRequest
-  ): Promise<QueryReactionsParamsResponse>;
+  ReactionsParams(request: QueryReactionsParamsRequest): Promise<QueryReactionsParamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "desmos.reactions.v1.Query";
     this.rpc = rpc;
     this.Reactions = this.Reactions.bind(this);
     this.Reaction = this.Reaction.bind(this);
@@ -943,107 +753,50 @@ export class QueryClientImpl implements Query {
   }
   Reactions(request: QueryReactionsRequest): Promise<QueryReactionsResponse> {
     const data = QueryReactionsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Query",
-      "Reactions",
-      data
-    );
-    return promise.then((data) =>
-      QueryReactionsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "Reactions", data);
+    return promise.then((data) => QueryReactionsResponse.decode(new _m0.Reader(data)));
   }
 
   Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse> {
     const data = QueryReactionRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Query",
-      "Reaction",
-      data
-    );
-    return promise.then((data) =>
-      QueryReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "Reaction", data);
+    return promise.then((data) => QueryReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  RegisteredReactions(
-    request: QueryRegisteredReactionsRequest
-  ): Promise<QueryRegisteredReactionsResponse> {
+  RegisteredReactions(request: QueryRegisteredReactionsRequest): Promise<QueryRegisteredReactionsResponse> {
     const data = QueryRegisteredReactionsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Query",
-      "RegisteredReactions",
-      data
-    );
-    return promise.then((data) =>
-      QueryRegisteredReactionsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "RegisteredReactions", data);
+    return promise.then((data) => QueryRegisteredReactionsResponse.decode(new _m0.Reader(data)));
   }
 
-  RegisteredReaction(
-    request: QueryRegisteredReactionRequest
-  ): Promise<QueryRegisteredReactionResponse> {
+  RegisteredReaction(request: QueryRegisteredReactionRequest): Promise<QueryRegisteredReactionResponse> {
     const data = QueryRegisteredReactionRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Query",
-      "RegisteredReaction",
-      data
-    );
-    return promise.then((data) =>
-      QueryRegisteredReactionResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "RegisteredReaction", data);
+    return promise.then((data) => QueryRegisteredReactionResponse.decode(new _m0.Reader(data)));
   }
 
-  ReactionsParams(
-    request: QueryReactionsParamsRequest
-  ): Promise<QueryReactionsParamsResponse> {
+  ReactionsParams(request: QueryReactionsParamsRequest): Promise<QueryReactionsParamsResponse> {
     const data = QueryReactionsParamsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reactions.v1.Query",
-      "ReactionsParams",
-      data
-    );
-    return promise.then((data) =>
-      QueryReactionsParamsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "ReactionsParams", data);
+    return promise.then((data) => QueryReactionsParamsResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

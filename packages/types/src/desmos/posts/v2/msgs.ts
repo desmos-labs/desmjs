@@ -1,15 +1,9 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import {
-  Entities,
-  ReplySetting,
-  PostReference,
-  replySettingFromJSON,
-  replySettingToJSON,
-} from "../../../desmos/posts/v2/models";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Entities, PostReference, ReplySetting, replySettingFromJSON, replySettingToJSON } from "./models";
 
 /** MsgCreatePost represents the message to be used to create a post. */
 export interface MsgCreatePost {
@@ -87,7 +81,8 @@ export interface MsgDeletePost {
 }
 
 /** MsgDeletePostResponse represents the Msg/DeletePost response type */
-export interface MsgDeletePostResponse {}
+export interface MsgDeletePostResponse {
+}
 
 /**
  * MsgAddPostAttachment represents the message that should be
@@ -151,7 +146,8 @@ export interface MsgAnswerPoll {
 }
 
 /** MsgAnswerPollResponse represents the MSg/AnswerPoll response type */
-export interface MsgAnswerPollResponse {}
+export interface MsgAnswerPollResponse {
+}
 
 function createBaseMsgCreatePost(): MsgCreatePost {
   return {
@@ -170,10 +166,7 @@ function createBaseMsgCreatePost(): MsgCreatePost {
 }
 
 export const MsgCreatePost = {
-  encode(
-    message: MsgCreatePost,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgCreatePost, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -248,9 +241,7 @@ export const MsgCreatePost = {
           message.replySettings = reader.int32() as any;
           break;
         case 11:
-          message.referencedPosts.push(
-            PostReference.decode(reader, reader.uint32())
-          );
+          message.referencedPosts.push(PostReference.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -262,28 +253,16 @@ export const MsgCreatePost = {
 
   fromJSON(object: any): MsgCreatePost {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       externalId: isSet(object.externalId) ? String(object.externalId) : "",
       text: isSet(object.text) ? String(object.text) : "",
-      entities: isSet(object.entities)
-        ? Entities.fromJSON(object.entities)
-        : undefined,
-      tags: Array.isArray(object?.tags)
-        ? object.tags.map((e: any) => String(e))
-        : [],
-      attachments: Array.isArray(object?.attachments)
-        ? object.attachments.map((e: any) => Any.fromJSON(e))
-        : [],
+      entities: isSet(object.entities) ? Entities.fromJSON(object.entities) : undefined,
+      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => String(e)) : [],
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromJSON(e)) : [],
       author: isSet(object.author) ? String(object.author) : "",
-      conversationId: isSet(object.conversationId)
-        ? Long.fromString(object.conversationId)
-        : Long.UZERO,
-      replySettings: isSet(object.replySettings)
-        ? replySettingFromJSON(object.replySettings)
-        : 0,
+      conversationId: isSet(object.conversationId) ? Long.fromValue(object.conversationId) : Long.UZERO,
+      replySettings: isSet(object.replySettings) ? replySettingFromJSON(object.replySettings) : 0,
       referencedPosts: Array.isArray(object?.referencedPosts)
         ? object.referencedPosts.map((e: any) => PostReference.fromJSON(e))
         : [],
@@ -292,69 +271,51 @@ export const MsgCreatePost = {
 
   toJSON(message: MsgCreatePost): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined && (obj.sectionId = Math.round(message.sectionId));
     message.externalId !== undefined && (obj.externalId = message.externalId);
     message.text !== undefined && (obj.text = message.text);
-    message.entities !== undefined &&
-      (obj.entities = message.entities
-        ? Entities.toJSON(message.entities)
-        : undefined);
+    message.entities !== undefined && (obj.entities = message.entities ? Entities.toJSON(message.entities) : undefined);
     if (message.tags) {
       obj.tags = message.tags.map((e) => e);
     } else {
       obj.tags = [];
     }
     if (message.attachments) {
-      obj.attachments = message.attachments.map((e) =>
-        e ? Any.toJSON(e) : undefined
-      );
+      obj.attachments = message.attachments.map((e) => e ? Any.toJSON(e) : undefined);
     } else {
       obj.attachments = [];
     }
     message.author !== undefined && (obj.author = message.author);
-    message.conversationId !== undefined &&
-      (obj.conversationId = (message.conversationId || Long.UZERO).toString());
-    message.replySettings !== undefined &&
-      (obj.replySettings = replySettingToJSON(message.replySettings));
+    message.conversationId !== undefined && (obj.conversationId = (message.conversationId || Long.UZERO).toString());
+    message.replySettings !== undefined && (obj.replySettings = replySettingToJSON(message.replySettings));
     if (message.referencedPosts) {
-      obj.referencedPosts = message.referencedPosts.map((e) =>
-        e ? PostReference.toJSON(e) : undefined
-      );
+      obj.referencedPosts = message.referencedPosts.map((e) => e ? PostReference.toJSON(e) : undefined);
     } else {
       obj.referencedPosts = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePost>, I>>(
-    object: I
-  ): MsgCreatePost {
+  fromPartial<I extends Exact<DeepPartial<MsgCreatePost>, I>>(object: I): MsgCreatePost {
     const message = createBaseMsgCreatePost();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.sectionId = object.sectionId ?? 0;
     message.externalId = object.externalId ?? "";
     message.text = object.text ?? "";
-    message.entities =
-      object.entities !== undefined && object.entities !== null
-        ? Entities.fromPartial(object.entities)
-        : undefined;
+    message.entities = (object.entities !== undefined && object.entities !== null)
+      ? Entities.fromPartial(object.entities)
+      : undefined;
     message.tags = object.tags?.map((e) => e) || [];
-    message.attachments =
-      object.attachments?.map((e) => Any.fromPartial(e)) || [];
+    message.attachments = object.attachments?.map((e) => Any.fromPartial(e)) || [];
     message.author = object.author ?? "";
-    message.conversationId =
-      object.conversationId !== undefined && object.conversationId !== null
-        ? Long.fromValue(object.conversationId)
-        : Long.UZERO;
+    message.conversationId = (object.conversationId !== undefined && object.conversationId !== null)
+      ? Long.fromValue(object.conversationId)
+      : Long.UZERO;
     message.replySettings = object.replySettings ?? 0;
-    message.referencedPosts =
-      object.referencedPosts?.map((e) => PostReference.fromPartial(e)) || [];
+    message.referencedPosts = object.referencedPosts?.map((e) => PostReference.fromPartial(e)) || [];
     return message;
   },
 };
@@ -364,26 +325,17 @@ function createBaseMsgCreatePostResponse(): MsgCreatePostResponse {
 }
 
 export const MsgCreatePostResponse = {
-  encode(
-    message: MsgCreatePostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgCreatePostResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.postId.isZero()) {
       writer.uint32(8).uint64(message.postId);
     }
     if (message.creationDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationDate),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationDate), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgCreatePostResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreatePostResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreatePostResponse();
@@ -394,9 +346,7 @@ export const MsgCreatePostResponse = {
           message.postId = reader.uint64() as Long;
           break;
         case 2:
-          message.creationDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -408,53 +358,34 @@ export const MsgCreatePostResponse = {
 
   fromJSON(object: any): MsgCreatePostResponse {
     return {
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
-      creationDate: isSet(object.creationDate)
-        ? fromJsonTimestamp(object.creationDate)
-        : undefined,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      creationDate: isSet(object.creationDate) ? fromJsonTimestamp(object.creationDate) : undefined,
     };
   },
 
   toJSON(message: MsgCreatePostResponse): unknown {
     const obj: any = {};
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.creationDate !== undefined &&
-      (obj.creationDate = message.creationDate.toISOString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.creationDate !== undefined && (obj.creationDate = message.creationDate.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreatePostResponse>, I>>(
-    object: I
-  ): MsgCreatePostResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreatePostResponse>, I>>(object: I): MsgCreatePostResponse {
     const message = createBaseMsgCreatePostResponse();
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.creationDate = object.creationDate ?? undefined;
     return message;
   },
 };
 
 function createBaseMsgEditPost(): MsgEditPost {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    text: "",
-    entities: undefined,
-    tags: [],
-    editor: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, text: "", entities: undefined, tags: [], editor: "" };
 }
 
 export const MsgEditPost = {
-  encode(
-    message: MsgEditPost,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgEditPost, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -511,34 +442,21 @@ export const MsgEditPost = {
 
   fromJSON(object: any): MsgEditPost {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       text: isSet(object.text) ? String(object.text) : "",
-      entities: isSet(object.entities)
-        ? Entities.fromJSON(object.entities)
-        : undefined,
-      tags: Array.isArray(object?.tags)
-        ? object.tags.map((e: any) => String(e))
-        : [],
+      entities: isSet(object.entities) ? Entities.fromJSON(object.entities) : undefined,
+      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => String(e)) : [],
       editor: isSet(object.editor) ? String(object.editor) : "",
     };
   },
 
   toJSON(message: MsgEditPost): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.text !== undefined && (obj.text = message.text);
-    message.entities !== undefined &&
-      (obj.entities = message.entities
-        ? Entities.toJSON(message.entities)
-        : undefined);
+    message.entities !== undefined && (obj.entities = message.entities ? Entities.toJSON(message.entities) : undefined);
     if (message.tags) {
       obj.tags = message.tags.map((e) => e);
     } else {
@@ -548,23 +466,18 @@ export const MsgEditPost = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgEditPost>, I>>(
-    object: I
-  ): MsgEditPost {
+  fromPartial<I extends Exact<DeepPartial<MsgEditPost>, I>>(object: I): MsgEditPost {
     const message = createBaseMsgEditPost();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.text = object.text ?? "";
-    message.entities =
-      object.entities !== undefined && object.entities !== null
-        ? Entities.fromPartial(object.entities)
-        : undefined;
+    message.entities = (object.entities !== undefined && object.entities !== null)
+      ? Entities.fromPartial(object.entities)
+      : undefined;
     message.tags = object.tags?.map((e) => e) || [];
     message.editor = object.editor ?? "";
     return message;
@@ -576,15 +489,9 @@ function createBaseMsgEditPostResponse(): MsgEditPostResponse {
 }
 
 export const MsgEditPostResponse = {
-  encode(
-    message: MsgEditPostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgEditPostResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.editDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.editDate),
-        writer.uint32(10).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.editDate), writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -597,9 +504,7 @@ export const MsgEditPostResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.editDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.editDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -610,23 +515,16 @@ export const MsgEditPostResponse = {
   },
 
   fromJSON(object: any): MsgEditPostResponse {
-    return {
-      editDate: isSet(object.editDate)
-        ? fromJsonTimestamp(object.editDate)
-        : undefined,
-    };
+    return { editDate: isSet(object.editDate) ? fromJsonTimestamp(object.editDate) : undefined };
   },
 
   toJSON(message: MsgEditPostResponse): unknown {
     const obj: any = {};
-    message.editDate !== undefined &&
-      (obj.editDate = message.editDate.toISOString());
+    message.editDate !== undefined && (obj.editDate = message.editDate.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgEditPostResponse>, I>>(
-    object: I
-  ): MsgEditPostResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgEditPostResponse>, I>>(object: I): MsgEditPostResponse {
     const message = createBaseMsgEditPostResponse();
     message.editDate = object.editDate ?? undefined;
     return message;
@@ -638,10 +536,7 @@ function createBaseMsgDeletePost(): MsgDeletePost {
 }
 
 export const MsgDeletePost = {
-  encode(
-    message: MsgDeletePost,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgDeletePost, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -680,38 +575,28 @@ export const MsgDeletePost = {
 
   fromJSON(object: any): MsgDeletePost {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgDeletePost): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeletePost>, I>>(
-    object: I
-  ): MsgDeletePost {
+  fromPartial<I extends Exact<DeepPartial<MsgDeletePost>, I>>(object: I): MsgDeletePost {
     const message = createBaseMsgDeletePost();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
   },
@@ -722,17 +607,11 @@ function createBaseMsgDeletePostResponse(): MsgDeletePostResponse {
 }
 
 export const MsgDeletePostResponse = {
-  encode(
-    _: MsgDeletePostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgDeletePostResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgDeletePostResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeletePostResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeletePostResponse();
@@ -756,28 +635,18 @@ export const MsgDeletePostResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeletePostResponse>, I>>(
-    _: I
-  ): MsgDeletePostResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDeletePostResponse>, I>>(_: I): MsgDeletePostResponse {
     const message = createBaseMsgDeletePostResponse();
     return message;
   },
 };
 
 function createBaseMsgAddPostAttachment(): MsgAddPostAttachment {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    content: undefined,
-    editor: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, content: undefined, editor: "" };
 }
 
 export const MsgAddPostAttachment = {
-  encode(
-    message: MsgAddPostAttachment,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddPostAttachment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -793,10 +662,7 @@ export const MsgAddPostAttachment = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAddPostAttachment {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddPostAttachment {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddPostAttachment();
@@ -825,12 +691,8 @@ export const MsgAddPostAttachment = {
 
   fromJSON(object: any): MsgAddPostAttachment {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
       editor: isSet(object.editor) ? String(object.editor) : "",
     };
@@ -838,32 +700,24 @@ export const MsgAddPostAttachment = {
 
   toJSON(message: MsgAddPostAttachment): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.content !== undefined &&
-      (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     message.editor !== undefined && (obj.editor = message.editor);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddPostAttachment>, I>>(
-    object: I
-  ): MsgAddPostAttachment {
+  fromPartial<I extends Exact<DeepPartial<MsgAddPostAttachment>, I>>(object: I): MsgAddPostAttachment {
     const message = createBaseMsgAddPostAttachment();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
-    message.content =
-      object.content !== undefined && object.content !== null
-        ? Any.fromPartial(object.content)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
+    message.content = (object.content !== undefined && object.content !== null)
+      ? Any.fromPartial(object.content)
+      : undefined;
     message.editor = object.editor ?? "";
     return message;
   },
@@ -874,26 +728,17 @@ function createBaseMsgAddPostAttachmentResponse(): MsgAddPostAttachmentResponse 
 }
 
 export const MsgAddPostAttachmentResponse = {
-  encode(
-    message: MsgAddPostAttachmentResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddPostAttachmentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.attachmentId !== 0) {
       writer.uint32(8).uint32(message.attachmentId);
     }
     if (message.editDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.editDate),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.editDate), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAddPostAttachmentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddPostAttachmentResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddPostAttachmentResponse();
@@ -904,9 +749,7 @@ export const MsgAddPostAttachmentResponse = {
           message.attachmentId = reader.uint32();
           break;
         case 2:
-          message.editDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.editDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -918,27 +761,19 @@ export const MsgAddPostAttachmentResponse = {
 
   fromJSON(object: any): MsgAddPostAttachmentResponse {
     return {
-      attachmentId: isSet(object.attachmentId)
-        ? Number(object.attachmentId)
-        : 0,
-      editDate: isSet(object.editDate)
-        ? fromJsonTimestamp(object.editDate)
-        : undefined,
+      attachmentId: isSet(object.attachmentId) ? Number(object.attachmentId) : 0,
+      editDate: isSet(object.editDate) ? fromJsonTimestamp(object.editDate) : undefined,
     };
   },
 
   toJSON(message: MsgAddPostAttachmentResponse): unknown {
     const obj: any = {};
-    message.attachmentId !== undefined &&
-      (obj.attachmentId = Math.round(message.attachmentId));
-    message.editDate !== undefined &&
-      (obj.editDate = message.editDate.toISOString());
+    message.attachmentId !== undefined && (obj.attachmentId = Math.round(message.attachmentId));
+    message.editDate !== undefined && (obj.editDate = message.editDate.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddPostAttachmentResponse>, I>>(
-    object: I
-  ): MsgAddPostAttachmentResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAddPostAttachmentResponse>, I>>(object: I): MsgAddPostAttachmentResponse {
     const message = createBaseMsgAddPostAttachmentResponse();
     message.attachmentId = object.attachmentId ?? 0;
     message.editDate = object.editDate ?? undefined;
@@ -947,19 +782,11 @@ export const MsgAddPostAttachmentResponse = {
 };
 
 function createBaseMsgRemovePostAttachment(): MsgRemovePostAttachment {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    attachmentId: 0,
-    editor: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, attachmentId: 0, editor: "" };
 }
 
 export const MsgRemovePostAttachment = {
-  encode(
-    message: MsgRemovePostAttachment,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgRemovePostAttachment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -975,10 +802,7 @@ export const MsgRemovePostAttachment = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgRemovePostAttachment {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemovePostAttachment {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemovePostAttachment();
@@ -1007,43 +831,30 @@ export const MsgRemovePostAttachment = {
 
   fromJSON(object: any): MsgRemovePostAttachment {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
-      attachmentId: isSet(object.attachmentId)
-        ? Number(object.attachmentId)
-        : 0,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      attachmentId: isSet(object.attachmentId) ? Number(object.attachmentId) : 0,
       editor: isSet(object.editor) ? String(object.editor) : "",
     };
   },
 
   toJSON(message: MsgRemovePostAttachment): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
-    message.attachmentId !== undefined &&
-      (obj.attachmentId = Math.round(message.attachmentId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
+    message.attachmentId !== undefined && (obj.attachmentId = Math.round(message.attachmentId));
     message.editor !== undefined && (obj.editor = message.editor);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemovePostAttachment>, I>>(
-    object: I
-  ): MsgRemovePostAttachment {
+  fromPartial<I extends Exact<DeepPartial<MsgRemovePostAttachment>, I>>(object: I): MsgRemovePostAttachment {
     const message = createBaseMsgRemovePostAttachment();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.attachmentId = object.attachmentId ?? 0;
     message.editor = object.editor ?? "";
     return message;
@@ -1055,23 +866,14 @@ function createBaseMsgRemovePostAttachmentResponse(): MsgRemovePostAttachmentRes
 }
 
 export const MsgRemovePostAttachmentResponse = {
-  encode(
-    message: MsgRemovePostAttachmentResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgRemovePostAttachmentResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.editDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.editDate),
-        writer.uint32(10).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.editDate), writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgRemovePostAttachmentResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemovePostAttachmentResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemovePostAttachmentResponse();
@@ -1079,9 +881,7 @@ export const MsgRemovePostAttachmentResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.editDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.editDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1092,22 +892,17 @@ export const MsgRemovePostAttachmentResponse = {
   },
 
   fromJSON(object: any): MsgRemovePostAttachmentResponse {
-    return {
-      editDate: isSet(object.editDate)
-        ? fromJsonTimestamp(object.editDate)
-        : undefined,
-    };
+    return { editDate: isSet(object.editDate) ? fromJsonTimestamp(object.editDate) : undefined };
   },
 
   toJSON(message: MsgRemovePostAttachmentResponse): unknown {
     const obj: any = {};
-    message.editDate !== undefined &&
-      (obj.editDate = message.editDate.toISOString());
+    message.editDate !== undefined && (obj.editDate = message.editDate.toISOString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<MsgRemovePostAttachmentResponse>, I>>(
-    object: I
+    object: I,
   ): MsgRemovePostAttachmentResponse {
     const message = createBaseMsgRemovePostAttachmentResponse();
     message.editDate = object.editDate ?? undefined;
@@ -1116,20 +911,11 @@ export const MsgRemovePostAttachmentResponse = {
 };
 
 function createBaseMsgAnswerPoll(): MsgAnswerPoll {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    pollId: 0,
-    answersIndexes: [],
-    signer: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, pollId: 0, answersIndexes: [], signer: "" };
 }
 
 export const MsgAnswerPoll = {
-  encode(
-    message: MsgAnswerPoll,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAnswerPoll, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -1189,26 +975,18 @@ export const MsgAnswerPoll = {
 
   fromJSON(object: any): MsgAnswerPoll {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       pollId: isSet(object.pollId) ? Number(object.pollId) : 0,
-      answersIndexes: Array.isArray(object?.answersIndexes)
-        ? object.answersIndexes.map((e: any) => Number(e))
-        : [],
+      answersIndexes: Array.isArray(object?.answersIndexes) ? object.answersIndexes.map((e: any) => Number(e)) : [],
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgAnswerPoll): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.pollId !== undefined && (obj.pollId = Math.round(message.pollId));
     if (message.answersIndexes) {
       obj.answersIndexes = message.answersIndexes.map((e) => Math.round(e));
@@ -1219,18 +997,14 @@ export const MsgAnswerPoll = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAnswerPoll>, I>>(
-    object: I
-  ): MsgAnswerPoll {
+  fromPartial<I extends Exact<DeepPartial<MsgAnswerPoll>, I>>(object: I): MsgAnswerPoll {
     const message = createBaseMsgAnswerPoll();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.pollId = object.pollId ?? 0;
     message.answersIndexes = object.answersIndexes?.map((e) => e) || [];
     message.signer = object.signer ?? "";
@@ -1243,17 +1017,11 @@ function createBaseMsgAnswerPollResponse(): MsgAnswerPollResponse {
 }
 
 export const MsgAnswerPollResponse = {
-  encode(
-    _: MsgAnswerPollResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgAnswerPollResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAnswerPollResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAnswerPollResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAnswerPollResponse();
@@ -1277,9 +1045,7 @@ export const MsgAnswerPollResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAnswerPollResponse>, I>>(
-    _: I
-  ): MsgAnswerPollResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAnswerPollResponse>, I>>(_: I): MsgAnswerPollResponse {
     const message = createBaseMsgAnswerPollResponse();
     return message;
   },
@@ -1294,20 +1060,18 @@ export interface Msg {
   /** DeletePost allows to delete an existing post */
   DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse>;
   /** AddPostAttachment allows to add a new attachment to a post */
-  AddPostAttachment(
-    request: MsgAddPostAttachment
-  ): Promise<MsgAddPostAttachmentResponse>;
+  AddPostAttachment(request: MsgAddPostAttachment): Promise<MsgAddPostAttachmentResponse>;
   /** RemovePostAttachment allows to remove an attachment from a post */
-  RemovePostAttachment(
-    request: MsgRemovePostAttachment
-  ): Promise<MsgRemovePostAttachmentResponse>;
+  RemovePostAttachment(request: MsgRemovePostAttachment): Promise<MsgRemovePostAttachmentResponse>;
   /** AnswerPoll allows to answer a post poll */
   AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "desmos.posts.v2.Msg";
     this.rpc = rpc;
     this.CreatePost = this.CreatePost.bind(this);
     this.EditPost = this.EditPost.bind(this);
@@ -1318,101 +1082,56 @@ export class MsgClientImpl implements Msg {
   }
   CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse> {
     const data = MsgCreatePost.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v2.Msg", "CreatePost", data);
-    return promise.then((data) =>
-      MsgCreatePostResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "CreatePost", data);
+    return promise.then((data) => MsgCreatePostResponse.decode(new _m0.Reader(data)));
   }
 
   EditPost(request: MsgEditPost): Promise<MsgEditPostResponse> {
     const data = MsgEditPost.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v2.Msg", "EditPost", data);
-    return promise.then((data) =>
-      MsgEditPostResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "EditPost", data);
+    return promise.then((data) => MsgEditPostResponse.decode(new _m0.Reader(data)));
   }
 
   DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse> {
     const data = MsgDeletePost.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v2.Msg", "DeletePost", data);
-    return promise.then((data) =>
-      MsgDeletePostResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "DeletePost", data);
+    return promise.then((data) => MsgDeletePostResponse.decode(new _m0.Reader(data)));
   }
 
-  AddPostAttachment(
-    request: MsgAddPostAttachment
-  ): Promise<MsgAddPostAttachmentResponse> {
+  AddPostAttachment(request: MsgAddPostAttachment): Promise<MsgAddPostAttachmentResponse> {
     const data = MsgAddPostAttachment.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.posts.v2.Msg",
-      "AddPostAttachment",
-      data
-    );
-    return promise.then((data) =>
-      MsgAddPostAttachmentResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "AddPostAttachment", data);
+    return promise.then((data) => MsgAddPostAttachmentResponse.decode(new _m0.Reader(data)));
   }
 
-  RemovePostAttachment(
-    request: MsgRemovePostAttachment
-  ): Promise<MsgRemovePostAttachmentResponse> {
+  RemovePostAttachment(request: MsgRemovePostAttachment): Promise<MsgRemovePostAttachmentResponse> {
     const data = MsgRemovePostAttachment.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.posts.v2.Msg",
-      "RemovePostAttachment",
-      data
-    );
-    return promise.then((data) =>
-      MsgRemovePostAttachmentResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "RemovePostAttachment", data);
+    return promise.then((data) => MsgRemovePostAttachmentResponse.decode(new _m0.Reader(data)));
   }
 
   AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse> {
     const data = MsgAnswerPoll.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v2.Msg", "AnswerPoll", data);
-    return promise.then((data) =>
-      MsgAnswerPollResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "AnswerPoll", data);
+    return promise.then((data) => MsgAnswerPollResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
