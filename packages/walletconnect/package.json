@@ -34,7 +34,7 @@
     "@cosmjs/proto-signing": "^0.29.3",
     "@cosmjs/stargate": "^0.29.3",
     "@cosmjs/tendermint-rpc": "^0.29.3",
-    "@cosmjs/utils": "^0.29.3",
+    "@cosmjs/utils": "^0.29.4",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@walletconnect/client": "^1.8.0",
     "@walletconnect/qrcode-modal": "^1.8.0",
