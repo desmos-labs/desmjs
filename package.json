@@ -38,7 +38,7 @@
   "devDependencies": {
     "@cosmjs/cosmwasm-stargate": "^0.29.3",
     "@cosmjs/crypto": "^0.29.3",
-    "@cosmjs/encoding": "^0.29.3",
+    "@cosmjs/encoding": "^0.29.4",
     "@cosmjs/proto-signing": "^0.29.3",
     "@cosmjs/utils": "^0.29.4",
     "@desmoslabs/desmjs": "workspace:packages/core",
