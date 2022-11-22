@@ -1868,7 +1868,7 @@ __metadata:
     "@types/pino": ^7.0.5
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
-    "@walletconnect/types": ^1.6.6
+    "@walletconnect/types": ^2.1.3
     "@walletconnect/utils": ^2.1.3
     babel-jest: ^29.3.1
     cosmjs-types: ^0.5.2
@@ -3159,7 +3159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/types@npm:2.1.3":
+"@walletconnect/types@npm:2.1.3, @walletconnect/types@npm:^2.1.3":
   version: 2.1.3
   resolution: "@walletconnect/types@npm:2.1.3"
   dependencies:
@@ -3172,7 +3172,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/types@npm:^1.6.6, @walletconnect/types@npm:^1.8.0":
+"@walletconnect/types@npm:^1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/types@npm:1.8.0"
   checksum: 194d615888068030183489222641332987846aa5c6bcf0a62fa60ca7a282b9f94932c49fcd2b293a859e98624fe3e7a2d3c5fb66545fe30d3391e7ac91a99e34
