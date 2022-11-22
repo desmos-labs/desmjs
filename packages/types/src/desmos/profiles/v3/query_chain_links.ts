@@ -1,11 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import {
-  PageRequest,
-  PageResponse,
-} from "../../../cosmos/base/query/v1beta1/pagination";
-import { ChainLink } from "../../../desmos/profiles/v3/models_chain_links";
+import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { ChainLink } from "./models_chain_links";
 
 /**
  * QueryChainLinksRequest represents the request that should be used in order
@@ -110,10 +107,7 @@ function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
 }
 
 export const QueryChainLinksRequest = {
-  encode(
-    message: QueryChainLinksRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryChainLinksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
@@ -129,10 +123,7 @@ export const QueryChainLinksRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryChainLinksRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChainLinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinksRequest();
@@ -164,9 +155,7 @@ export const QueryChainLinksRequest = {
       user: isSet(object.user) ? String(object.user) : "",
       chainName: isSet(object.chainName) ? String(object.chainName) : "",
       target: isSet(object.target) ? String(object.target) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -176,23 +165,18 @@ export const QueryChainLinksRequest = {
     message.chainName !== undefined && (obj.chainName = message.chainName);
     message.target !== undefined && (obj.target = message.target);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryChainLinksRequest>, I>>(
-    object: I
-  ): QueryChainLinksRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinksRequest>, I>>(object: I): QueryChainLinksRequest {
     const message = createBaseQueryChainLinksRequest();
     message.user = object.user ?? "";
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -202,26 +186,17 @@ function createBaseQueryChainLinksResponse(): QueryChainLinksResponse {
 }
 
 export const QueryChainLinksResponse = {
-  encode(
-    message: QueryChainLinksResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryChainLinksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryChainLinksResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChainLinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinksResponse();
@@ -244,40 +219,29 @@ export const QueryChainLinksResponse = {
 
   fromJSON(object: any): QueryChainLinksResponse {
     return {
-      links: Array.isArray(object?.links)
-        ? object.links.map((e: any) => ChainLink.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => ChainLink.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryChainLinksResponse): unknown {
     const obj: any = {};
     if (message.links) {
-      obj.links = message.links.map((e) =>
-        e ? ChainLink.toJSON(e) : undefined
-      );
+      obj.links = message.links.map((e) => e ? ChainLink.toJSON(e) : undefined);
     } else {
       obj.links = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryChainLinksResponse>, I>>(
-    object: I
-  ): QueryChainLinksResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinksResponse>, I>>(object: I): QueryChainLinksResponse {
     const message = createBaseQueryChainLinksResponse();
     message.links = object.links?.map((e) => ChainLink.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -287,10 +251,7 @@ function createBaseQueryChainLinkOwnersRequest(): QueryChainLinkOwnersRequest {
 }
 
 export const QueryChainLinkOwnersRequest = {
-  encode(
-    message: QueryChainLinkOwnersRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryChainLinkOwnersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
     }
@@ -303,10 +264,7 @@ export const QueryChainLinkOwnersRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryChainLinkOwnersRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChainLinkOwnersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinkOwnersRequest();
@@ -334,9 +292,7 @@ export const QueryChainLinkOwnersRequest = {
     return {
       chainName: isSet(object.chainName) ? String(object.chainName) : "",
       target: isSet(object.target) ? String(object.target) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -345,22 +301,17 @@ export const QueryChainLinkOwnersRequest = {
     message.chainName !== undefined && (obj.chainName = message.chainName);
     message.target !== undefined && (obj.target = message.target);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersRequest>, I>>(
-    object: I
-  ): QueryChainLinkOwnersRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersRequest>, I>>(object: I): QueryChainLinkOwnersRequest {
     const message = createBaseQueryChainLinkOwnersRequest();
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -370,29 +321,17 @@ function createBaseQueryChainLinkOwnersResponse(): QueryChainLinkOwnersResponse 
 }
 
 export const QueryChainLinkOwnersResponse = {
-  encode(
-    message: QueryChainLinkOwnersResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryChainLinkOwnersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.owners) {
-      QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
-        v!,
-        writer.uint32(10).fork()
-      ).ldelim();
+      QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryChainLinkOwnersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChainLinkOwnersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinkOwnersResponse();
@@ -400,12 +339,7 @@ export const QueryChainLinkOwnersResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.owners.push(
-            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.decode(
-              reader,
-              reader.uint32()
-            )
-          );
+          message.owners.push(QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.decode(reader, reader.uint32()));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -421,13 +355,9 @@ export const QueryChainLinkOwnersResponse = {
   fromJSON(object: any): QueryChainLinkOwnersResponse {
     return {
       owners: Array.isArray(object?.owners)
-        ? object.owners.map((e: any) =>
-            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromJSON(e)
-          )
+        ? object.owners.map((e: any) => QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromJSON(e))
         : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -435,32 +365,22 @@ export const QueryChainLinkOwnersResponse = {
     const obj: any = {};
     if (message.owners) {
       obj.owners = message.owners.map((e) =>
-        e
-          ? QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.toJSON(e)
-          : undefined
+        e ? QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.toJSON(e) : undefined
       );
     } else {
       obj.owners = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersResponse>, I>>(
-    object: I
-  ): QueryChainLinkOwnersResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersResponse>, I>>(object: I): QueryChainLinkOwnersResponse {
     const message = createBaseQueryChainLinkOwnersResponse();
-    message.owners =
-      object.owners?.map((e) =>
-        QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromPartial(e)
-      ) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.owners = object.owners?.map((e) => QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -472,7 +392,7 @@ function createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails(): QueryCh
 export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
   encode(
     message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -486,14 +406,10 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
+    const message = createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -530,14 +446,10 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<
-      DeepPartial<QueryChainLinkOwnersResponse_ChainLinkOwnerDetails>,
-      I
-    >
-  >(object: I): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
-    const message =
-      createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
+  fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersResponse_ChainLinkOwnerDetails>, I>>(
+    object: I,
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    const message = createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
     message.user = object.user ?? "";
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
@@ -550,10 +462,7 @@ function createBaseQueryDefaultExternalAddressesRequest(): QueryDefaultExternalA
 }
 
 export const QueryDefaultExternalAddressesRequest = {
-  encode(
-    message: QueryDefaultExternalAddressesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryDefaultExternalAddressesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -566,10 +475,7 @@ export const QueryDefaultExternalAddressesRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryDefaultExternalAddressesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDefaultExternalAddressesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDefaultExternalAddressesRequest();
@@ -597,9 +503,7 @@ export const QueryDefaultExternalAddressesRequest = {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
       chainName: isSet(object.chainName) ? String(object.chainName) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -608,22 +512,19 @@ export const QueryDefaultExternalAddressesRequest = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.chainName !== undefined && (obj.chainName = message.chainName);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryDefaultExternalAddressesRequest>, I>
-  >(object: I): QueryDefaultExternalAddressesRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryDefaultExternalAddressesRequest>, I>>(
+    object: I,
+  ): QueryDefaultExternalAddressesRequest {
     const message = createBaseQueryDefaultExternalAddressesRequest();
     message.owner = object.owner ?? "";
     message.chainName = object.chainName ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -633,26 +534,17 @@ function createBaseQueryDefaultExternalAddressesResponse(): QueryDefaultExternal
 }
 
 export const QueryDefaultExternalAddressesResponse = {
-  encode(
-    message: QueryDefaultExternalAddressesResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryDefaultExternalAddressesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryDefaultExternalAddressesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDefaultExternalAddressesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDefaultExternalAddressesResponse();
@@ -675,72 +567,46 @@ export const QueryDefaultExternalAddressesResponse = {
 
   fromJSON(object: any): QueryDefaultExternalAddressesResponse {
     return {
-      links: Array.isArray(object?.links)
-        ? object.links.map((e: any) => ChainLink.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => ChainLink.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryDefaultExternalAddressesResponse): unknown {
     const obj: any = {};
     if (message.links) {
-      obj.links = message.links.map((e) =>
-        e ? ChainLink.toJSON(e) : undefined
-      );
+      obj.links = message.links.map((e) => e ? ChainLink.toJSON(e) : undefined);
     } else {
       obj.links = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryDefaultExternalAddressesResponse>, I>
-  >(object: I): QueryDefaultExternalAddressesResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryDefaultExternalAddressesResponse>, I>>(
+    object: I,
+  ): QueryDefaultExternalAddressesResponse {
     const message = createBaseQueryDefaultExternalAddressesResponse();
     message.links = object.links?.map((e) => ChainLink.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

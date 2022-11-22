@@ -1,11 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
-import {
-  Proof,
-  ChainConfig,
-} from "../../../desmos/profiles/v3/models_chain_links";
+import { ChainConfig, Proof } from "./models_chain_links";
 
 /** MsgLinkChainAccount represents a message to link an account to a profile. */
 export interface MsgLinkChainAccount {
@@ -26,7 +23,8 @@ export interface MsgLinkChainAccount {
 }
 
 /** MsgLinkChainAccountResponse defines the Msg/LinkAccount response type. */
-export interface MsgLinkChainAccountResponse {}
+export interface MsgLinkChainAccountResponse {
+}
 
 /**
  * MsgUnlinkChainAccount represents a message to unlink an account from a
@@ -45,7 +43,8 @@ export interface MsgUnlinkChainAccount {
 }
 
 /** MsgUnlinkChainAccountResponse defines the Msg/UnlinkAccount response type. */
-export interface MsgUnlinkChainAccountResponse {}
+export interface MsgUnlinkChainAccountResponse {
+}
 
 /**
  * MsgSetDefaultExternalAddress represents the message used to set a default
@@ -64,22 +63,15 @@ export interface MsgSetDefaultExternalAddress {
  * MsgSetDefaultExternalAddressResponse represents the
  * Msg/SetDefaultExternalAddress response type
  */
-export interface MsgSetDefaultExternalAddressResponse {}
+export interface MsgSetDefaultExternalAddressResponse {
+}
 
 function createBaseMsgLinkChainAccount(): MsgLinkChainAccount {
-  return {
-    chainAddress: undefined,
-    proof: undefined,
-    chainConfig: undefined,
-    signer: "",
-  };
+  return { chainAddress: undefined, proof: undefined, chainConfig: undefined, signer: "" };
 }
 
 export const MsgLinkChainAccount = {
-  encode(
-    message: MsgLinkChainAccount,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgLinkChainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainAddress !== undefined) {
       Any.encode(message.chainAddress, writer.uint32(10).fork()).ldelim();
     }
@@ -87,10 +79,7 @@ export const MsgLinkChainAccount = {
       Proof.encode(message.proof, writer.uint32(18).fork()).ldelim();
     }
     if (message.chainConfig !== undefined) {
-      ChainConfig.encode(
-        message.chainConfig,
-        writer.uint32(26).fork()
-      ).ldelim();
+      ChainConfig.encode(message.chainConfig, writer.uint32(26).fork()).ldelim();
     }
     if (message.signer !== "") {
       writer.uint32(34).string(message.signer);
@@ -127,13 +116,9 @@ export const MsgLinkChainAccount = {
 
   fromJSON(object: any): MsgLinkChainAccount {
     return {
-      chainAddress: isSet(object.chainAddress)
-        ? Any.fromJSON(object.chainAddress)
-        : undefined,
+      chainAddress: isSet(object.chainAddress) ? Any.fromJSON(object.chainAddress) : undefined,
       proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
-      chainConfig: isSet(object.chainConfig)
-        ? ChainConfig.fromJSON(object.chainConfig)
-        : undefined,
+      chainConfig: isSet(object.chainConfig) ? ChainConfig.fromJSON(object.chainConfig) : undefined,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
@@ -141,35 +126,23 @@ export const MsgLinkChainAccount = {
   toJSON(message: MsgLinkChainAccount): unknown {
     const obj: any = {};
     message.chainAddress !== undefined &&
-      (obj.chainAddress = message.chainAddress
-        ? Any.toJSON(message.chainAddress)
-        : undefined);
-    message.proof !== undefined &&
-      (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
+      (obj.chainAddress = message.chainAddress ? Any.toJSON(message.chainAddress) : undefined);
+    message.proof !== undefined && (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
     message.chainConfig !== undefined &&
-      (obj.chainConfig = message.chainConfig
-        ? ChainConfig.toJSON(message.chainConfig)
-        : undefined);
+      (obj.chainConfig = message.chainConfig ? ChainConfig.toJSON(message.chainConfig) : undefined);
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLinkChainAccount>, I>>(
-    object: I
-  ): MsgLinkChainAccount {
+  fromPartial<I extends Exact<DeepPartial<MsgLinkChainAccount>, I>>(object: I): MsgLinkChainAccount {
     const message = createBaseMsgLinkChainAccount();
-    message.chainAddress =
-      object.chainAddress !== undefined && object.chainAddress !== null
-        ? Any.fromPartial(object.chainAddress)
-        : undefined;
-    message.proof =
-      object.proof !== undefined && object.proof !== null
-        ? Proof.fromPartial(object.proof)
-        : undefined;
-    message.chainConfig =
-      object.chainConfig !== undefined && object.chainConfig !== null
-        ? ChainConfig.fromPartial(object.chainConfig)
-        : undefined;
+    message.chainAddress = (object.chainAddress !== undefined && object.chainAddress !== null)
+      ? Any.fromPartial(object.chainAddress)
+      : undefined;
+    message.proof = (object.proof !== undefined && object.proof !== null) ? Proof.fromPartial(object.proof) : undefined;
+    message.chainConfig = (object.chainConfig !== undefined && object.chainConfig !== null)
+      ? ChainConfig.fromPartial(object.chainConfig)
+      : undefined;
     message.signer = object.signer ?? "";
     return message;
   },
@@ -180,17 +153,11 @@ function createBaseMsgLinkChainAccountResponse(): MsgLinkChainAccountResponse {
 }
 
 export const MsgLinkChainAccountResponse = {
-  encode(
-    _: MsgLinkChainAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgLinkChainAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgLinkChainAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLinkChainAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLinkChainAccountResponse();
@@ -214,9 +181,7 @@ export const MsgLinkChainAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLinkChainAccountResponse>, I>>(
-    _: I
-  ): MsgLinkChainAccountResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgLinkChainAccountResponse>, I>>(_: I): MsgLinkChainAccountResponse {
     const message = createBaseMsgLinkChainAccountResponse();
     return message;
   },
@@ -227,10 +192,7 @@ function createBaseMsgUnlinkChainAccount(): MsgUnlinkChainAccount {
 }
 
 export const MsgUnlinkChainAccount = {
-  encode(
-    message: MsgUnlinkChainAccount,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgUnlinkChainAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -243,10 +205,7 @@ export const MsgUnlinkChainAccount = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgUnlinkChainAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnlinkChainAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnlinkChainAccount();
@@ -286,9 +245,7 @@ export const MsgUnlinkChainAccount = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnlinkChainAccount>, I>>(
-    object: I
-  ): MsgUnlinkChainAccount {
+  fromPartial<I extends Exact<DeepPartial<MsgUnlinkChainAccount>, I>>(object: I): MsgUnlinkChainAccount {
     const message = createBaseMsgUnlinkChainAccount();
     message.owner = object.owner ?? "";
     message.chainName = object.chainName ?? "";
@@ -302,17 +259,11 @@ function createBaseMsgUnlinkChainAccountResponse(): MsgUnlinkChainAccountRespons
 }
 
 export const MsgUnlinkChainAccountResponse = {
-  encode(
-    _: MsgUnlinkChainAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgUnlinkChainAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgUnlinkChainAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnlinkChainAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnlinkChainAccountResponse();
@@ -336,9 +287,7 @@ export const MsgUnlinkChainAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnlinkChainAccountResponse>, I>>(
-    _: I
-  ): MsgUnlinkChainAccountResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUnlinkChainAccountResponse>, I>>(_: I): MsgUnlinkChainAccountResponse {
     const message = createBaseMsgUnlinkChainAccountResponse();
     return message;
   },
@@ -349,10 +298,7 @@ function createBaseMsgSetDefaultExternalAddress(): MsgSetDefaultExternalAddress 
 }
 
 export const MsgSetDefaultExternalAddress = {
-  encode(
-    message: MsgSetDefaultExternalAddress,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgSetDefaultExternalAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
     }
@@ -365,10 +311,7 @@ export const MsgSetDefaultExternalAddress = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgSetDefaultExternalAddress {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetDefaultExternalAddress {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetDefaultExternalAddress();
@@ -408,9 +351,7 @@ export const MsgSetDefaultExternalAddress = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSetDefaultExternalAddress>, I>>(
-    object: I
-  ): MsgSetDefaultExternalAddress {
+  fromPartial<I extends Exact<DeepPartial<MsgSetDefaultExternalAddress>, I>>(object: I): MsgSetDefaultExternalAddress {
     const message = createBaseMsgSetDefaultExternalAddress();
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
@@ -424,17 +365,11 @@ function createBaseMsgSetDefaultExternalAddressResponse(): MsgSetDefaultExternal
 }
 
 export const MsgSetDefaultExternalAddressResponse = {
-  encode(
-    _: MsgSetDefaultExternalAddressResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgSetDefaultExternalAddressResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgSetDefaultExternalAddressResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSetDefaultExternalAddressResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetDefaultExternalAddressResponse();
@@ -458,42 +393,25 @@ export const MsgSetDefaultExternalAddressResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgSetDefaultExternalAddressResponse>, I>
-  >(_: I): MsgSetDefaultExternalAddressResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSetDefaultExternalAddressResponse>, I>>(
+    _: I,
+  ): MsgSetDefaultExternalAddressResponse {
     const message = createBaseMsgSetDefaultExternalAddressResponse();
     return message;
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

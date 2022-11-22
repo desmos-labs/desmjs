@@ -1,16 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import {
-  PageRequest,
-  PageResponse,
-} from "../../../cosmos/base/query/v1beta1/pagination";
-import {
-  Post,
-  Params,
-  Attachment,
-  UserAnswer,
-} from "../../../desmos/posts/v2/models";
+import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Attachment, Params, Post, UserAnswer } from "./models";
 
 /**
  * QuerySubspacePostsRequest is the request type for the Query/SubspacePosts RPC
@@ -116,7 +108,8 @@ export interface QueryPollAnswersResponse {
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
-export interface QueryParamsRequest {}
+export interface QueryParamsRequest {
+}
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
@@ -128,10 +121,7 @@ function createBaseQuerySubspacePostsRequest(): QuerySubspacePostsRequest {
 }
 
 export const QuerySubspacePostsRequest = {
-  encode(
-    message: QuerySubspacePostsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QuerySubspacePostsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -141,10 +131,7 @@ export const QuerySubspacePostsRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QuerySubspacePostsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacePostsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacePostsRequest();
@@ -167,38 +154,27 @@ export const QuerySubspacePostsRequest = {
 
   fromJSON(object: any): QuerySubspacePostsRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QuerySubspacePostsRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySubspacePostsRequest>, I>>(
-    object: I
-  ): QuerySubspacePostsRequest {
+  fromPartial<I extends Exact<DeepPartial<QuerySubspacePostsRequest>, I>>(object: I): QuerySubspacePostsRequest {
     const message = createBaseQuerySubspacePostsRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -208,26 +184,17 @@ function createBaseQuerySubspacePostsResponse(): QuerySubspacePostsResponse {
 }
 
 export const QuerySubspacePostsResponse = {
-  encode(
-    message: QuerySubspacePostsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QuerySubspacePostsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.posts) {
       Post.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QuerySubspacePostsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacePostsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacePostsResponse();
@@ -250,38 +217,29 @@ export const QuerySubspacePostsResponse = {
 
   fromJSON(object: any): QuerySubspacePostsResponse {
     return {
-      posts: Array.isArray(object?.posts)
-        ? object.posts.map((e: any) => Post.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      posts: Array.isArray(object?.posts) ? object.posts.map((e: any) => Post.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QuerySubspacePostsResponse): unknown {
     const obj: any = {};
     if (message.posts) {
-      obj.posts = message.posts.map((e) => (e ? Post.toJSON(e) : undefined));
+      obj.posts = message.posts.map((e) => e ? Post.toJSON(e) : undefined);
     } else {
       obj.posts = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySubspacePostsResponse>, I>>(
-    object: I
-  ): QuerySubspacePostsResponse {
+  fromPartial<I extends Exact<DeepPartial<QuerySubspacePostsResponse>, I>>(object: I): QuerySubspacePostsResponse {
     const message = createBaseQuerySubspacePostsResponse();
     message.posts = object.posts?.map((e) => Post.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -291,10 +249,7 @@ function createBaseQuerySectionPostsRequest(): QuerySectionPostsRequest {
 }
 
 export const QuerySectionPostsRequest = {
-  encode(
-    message: QuerySectionPostsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QuerySectionPostsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -307,10 +262,7 @@ export const QuerySectionPostsRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QuerySectionPostsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySectionPostsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySectionPostsRequest();
@@ -336,42 +288,30 @@ export const QuerySectionPostsRequest = {
 
   fromJSON(object: any): QuerySectionPostsRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QuerySectionPostsRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined && (obj.sectionId = Math.round(message.sectionId));
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySectionPostsRequest>, I>>(
-    object: I
-  ): QuerySectionPostsRequest {
+  fromPartial<I extends Exact<DeepPartial<QuerySectionPostsRequest>, I>>(object: I): QuerySectionPostsRequest {
     const message = createBaseQuerySectionPostsRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.sectionId = object.sectionId ?? 0;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -381,26 +321,17 @@ function createBaseQuerySectionPostsResponse(): QuerySectionPostsResponse {
 }
 
 export const QuerySectionPostsResponse = {
-  encode(
-    message: QuerySectionPostsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QuerySectionPostsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.posts) {
       Post.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QuerySectionPostsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySectionPostsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySectionPostsResponse();
@@ -423,38 +354,29 @@ export const QuerySectionPostsResponse = {
 
   fromJSON(object: any): QuerySectionPostsResponse {
     return {
-      posts: Array.isArray(object?.posts)
-        ? object.posts.map((e: any) => Post.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      posts: Array.isArray(object?.posts) ? object.posts.map((e: any) => Post.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QuerySectionPostsResponse): unknown {
     const obj: any = {};
     if (message.posts) {
-      obj.posts = message.posts.map((e) => (e ? Post.toJSON(e) : undefined));
+      obj.posts = message.posts.map((e) => e ? Post.toJSON(e) : undefined);
     } else {
       obj.posts = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySectionPostsResponse>, I>>(
-    object: I
-  ): QuerySectionPostsResponse {
+  fromPartial<I extends Exact<DeepPartial<QuerySectionPostsResponse>, I>>(object: I): QuerySectionPostsResponse {
     const message = createBaseQuerySectionPostsResponse();
     message.posts = object.posts?.map((e) => Post.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -464,10 +386,7 @@ function createBaseQueryPostRequest(): QueryPostRequest {
 }
 
 export const QueryPostRequest = {
-  encode(
-    message: QueryPostRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryPostRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -500,36 +419,26 @@ export const QueryPostRequest = {
 
   fromJSON(object: any): QueryPostRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
     };
   },
 
   toJSON(message: QueryPostRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPostRequest>, I>>(
-    object: I
-  ): QueryPostRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryPostRequest>, I>>(object: I): QueryPostRequest {
     const message = createBaseQueryPostRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -539,10 +448,7 @@ function createBaseQueryPostResponse(): QueryPostResponse {
 }
 
 export const QueryPostResponse = {
-  encode(
-    message: QueryPostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryPostResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.post !== undefined) {
       Post.encode(message.post, writer.uint32(10).fork()).ldelim();
     }
@@ -568,26 +474,18 @@ export const QueryPostResponse = {
   },
 
   fromJSON(object: any): QueryPostResponse {
-    return {
-      post: isSet(object.post) ? Post.fromJSON(object.post) : undefined,
-    };
+    return { post: isSet(object.post) ? Post.fromJSON(object.post) : undefined };
   },
 
   toJSON(message: QueryPostResponse): unknown {
     const obj: any = {};
-    message.post !== undefined &&
-      (obj.post = message.post ? Post.toJSON(message.post) : undefined);
+    message.post !== undefined && (obj.post = message.post ? Post.toJSON(message.post) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPostResponse>, I>>(
-    object: I
-  ): QueryPostResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryPostResponse>, I>>(object: I): QueryPostResponse {
     const message = createBaseQueryPostResponse();
-    message.post =
-      object.post !== undefined && object.post !== null
-        ? Post.fromPartial(object.post)
-        : undefined;
+    message.post = (object.post !== undefined && object.post !== null) ? Post.fromPartial(object.post) : undefined;
     return message;
   },
 };
@@ -597,10 +495,7 @@ function createBaseQueryPostAttachmentsRequest(): QueryPostAttachmentsRequest {
 }
 
 export const QueryPostAttachmentsRequest = {
-  encode(
-    message: QueryPostAttachmentsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryPostAttachmentsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -613,10 +508,7 @@ export const QueryPostAttachmentsRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryPostAttachmentsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPostAttachmentsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPostAttachmentsRequest();
@@ -642,47 +534,32 @@ export const QueryPostAttachmentsRequest = {
 
   fromJSON(object: any): QueryPostAttachmentsRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryPostAttachmentsRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPostAttachmentsRequest>, I>>(
-    object: I
-  ): QueryPostAttachmentsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryPostAttachmentsRequest>, I>>(object: I): QueryPostAttachmentsRequest {
     const message = createBaseQueryPostAttachmentsRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -692,26 +569,17 @@ function createBaseQueryPostAttachmentsResponse(): QueryPostAttachmentsResponse 
 }
 
 export const QueryPostAttachmentsResponse = {
-  encode(
-    message: QueryPostAttachmentsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryPostAttachmentsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.attachments) {
       Attachment.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryPostAttachmentsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPostAttachmentsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPostAttachmentsResponse();
@@ -734,60 +602,39 @@ export const QueryPostAttachmentsResponse = {
 
   fromJSON(object: any): QueryPostAttachmentsResponse {
     return {
-      attachments: Array.isArray(object?.attachments)
-        ? object.attachments.map((e: any) => Attachment.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Attachment.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryPostAttachmentsResponse): unknown {
     const obj: any = {};
     if (message.attachments) {
-      obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toJSON(e) : undefined
-      );
+      obj.attachments = message.attachments.map((e) => e ? Attachment.toJSON(e) : undefined);
     } else {
       obj.attachments = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPostAttachmentsResponse>, I>>(
-    object: I
-  ): QueryPostAttachmentsResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryPostAttachmentsResponse>, I>>(object: I): QueryPostAttachmentsResponse {
     const message = createBaseQueryPostAttachmentsResponse();
-    message.attachments =
-      object.attachments?.map((e) => Attachment.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.attachments = object.attachments?.map((e) => Attachment.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
 function createBaseQueryPollAnswersRequest(): QueryPollAnswersRequest {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    pollId: 0,
-    user: "",
-    pagination: undefined,
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, pollId: 0, user: "", pagination: undefined };
 }
 
 export const QueryPollAnswersRequest = {
-  encode(
-    message: QueryPollAnswersRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryPollAnswersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -806,10 +653,7 @@ export const QueryPollAnswersRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryPollAnswersRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPollAnswersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPollAnswersRequest();
@@ -841,53 +685,38 @@ export const QueryPollAnswersRequest = {
 
   fromJSON(object: any): QueryPollAnswersRequest {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       pollId: isSet(object.pollId) ? Number(object.pollId) : 0,
       user: isSet(object.user) ? String(object.user) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryPollAnswersRequest): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.pollId !== undefined && (obj.pollId = Math.round(message.pollId));
     message.user !== undefined && (obj.user = message.user);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPollAnswersRequest>, I>>(
-    object: I
-  ): QueryPollAnswersRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryPollAnswersRequest>, I>>(object: I): QueryPollAnswersRequest {
     const message = createBaseQueryPollAnswersRequest();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.pollId = object.pollId ?? 0;
     message.user = object.user ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -897,26 +726,17 @@ function createBaseQueryPollAnswersResponse(): QueryPollAnswersResponse {
 }
 
 export const QueryPollAnswersResponse = {
-  encode(
-    message: QueryPollAnswersResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryPollAnswersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.answers) {
       UserAnswer.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryPollAnswersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryPollAnswersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPollAnswersResponse();
@@ -939,41 +759,29 @@ export const QueryPollAnswersResponse = {
 
   fromJSON(object: any): QueryPollAnswersResponse {
     return {
-      answers: Array.isArray(object?.answers)
-        ? object.answers.map((e: any) => UserAnswer.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      answers: Array.isArray(object?.answers) ? object.answers.map((e: any) => UserAnswer.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryPollAnswersResponse): unknown {
     const obj: any = {};
     if (message.answers) {
-      obj.answers = message.answers.map((e) =>
-        e ? UserAnswer.toJSON(e) : undefined
-      );
+      obj.answers = message.answers.map((e) => e ? UserAnswer.toJSON(e) : undefined);
     } else {
       obj.answers = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryPollAnswersResponse>, I>>(
-    object: I
-  ): QueryPollAnswersResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryPollAnswersResponse>, I>>(object: I): QueryPollAnswersResponse {
     const message = createBaseQueryPollAnswersResponse();
-    message.answers =
-      object.answers?.map((e) => UserAnswer.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.answers = object.answers?.map((e) => UserAnswer.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -983,10 +791,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 
 export const QueryParamsRequest = {
-  encode(
-    _: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1014,9 +819,7 @@ export const QueryParamsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    _: I
-  ): QueryParamsRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(_: I): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   },
@@ -1027,10 +830,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 
 export const QueryParamsResponse = {
-  encode(
-    message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -1056,26 +856,20 @@ export const QueryParamsResponse = {
   },
 
   fromJSON(object: any): QueryParamsResponse {
-    return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-    };
+    return { params: isSet(object.params) ? Params.fromJSON(object.params) : undefined };
   },
 
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I
-  ): QueryParamsResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(object: I): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
@@ -1083,30 +877,24 @@ export const QueryParamsResponse = {
 /** Query defines the gRPC querier service */
 export interface Query {
   /** SubspacePosts queries all the posts inside a given subspace */
-  SubspacePosts(
-    request: QuerySubspacePostsRequest
-  ): Promise<QuerySubspacePostsResponse>;
+  SubspacePosts(request: QuerySubspacePostsRequest): Promise<QuerySubspacePostsResponse>;
   /** SectionPosts queries all the posts inside a given section */
-  SectionPosts(
-    request: QuerySectionPostsRequest
-  ): Promise<QuerySectionPostsResponse>;
+  SectionPosts(request: QuerySectionPostsRequest): Promise<QuerySectionPostsResponse>;
   /** Post queries for a single post inside a given subspace */
   Post(request: QueryPostRequest): Promise<QueryPostResponse>;
   /** PostAttachments queries the attachments of the post having the given id */
-  PostAttachments(
-    request: QueryPostAttachmentsRequest
-  ): Promise<QueryPostAttachmentsResponse>;
+  PostAttachments(request: QueryPostAttachmentsRequest): Promise<QueryPostAttachmentsResponse>;
   /** PollAnswers queries the answers for the poll having the given id */
-  PollAnswers(
-    request: QueryPollAnswersRequest
-  ): Promise<QueryPollAnswersResponse>;
+  PollAnswers(request: QueryPollAnswersRequest): Promise<QueryPollAnswersResponse>;
   /** Params queries the module parameters */
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "desmos.posts.v2.Query";
     this.rpc = rpc;
     this.SubspacePosts = this.SubspacePosts.bind(this);
     this.SectionPosts = this.SectionPosts.bind(this);
@@ -1115,115 +903,58 @@ export class QueryClientImpl implements Query {
     this.PollAnswers = this.PollAnswers.bind(this);
     this.Params = this.Params.bind(this);
   }
-  SubspacePosts(
-    request: QuerySubspacePostsRequest
-  ): Promise<QuerySubspacePostsResponse> {
+  SubspacePosts(request: QuerySubspacePostsRequest): Promise<QuerySubspacePostsResponse> {
     const data = QuerySubspacePostsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.posts.v2.Query",
-      "SubspacePosts",
-      data
-    );
-    return promise.then((data) =>
-      QuerySubspacePostsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "SubspacePosts", data);
+    return promise.then((data) => QuerySubspacePostsResponse.decode(new _m0.Reader(data)));
   }
 
-  SectionPosts(
-    request: QuerySectionPostsRequest
-  ): Promise<QuerySectionPostsResponse> {
+  SectionPosts(request: QuerySectionPostsRequest): Promise<QuerySectionPostsResponse> {
     const data = QuerySectionPostsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.posts.v2.Query",
-      "SectionPosts",
-      data
-    );
-    return promise.then((data) =>
-      QuerySectionPostsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "SectionPosts", data);
+    return promise.then((data) => QuerySectionPostsResponse.decode(new _m0.Reader(data)));
   }
 
   Post(request: QueryPostRequest): Promise<QueryPostResponse> {
     const data = QueryPostRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v2.Query", "Post", data);
-    return promise.then((data) =>
-      QueryPostResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "Post", data);
+    return promise.then((data) => QueryPostResponse.decode(new _m0.Reader(data)));
   }
 
-  PostAttachments(
-    request: QueryPostAttachmentsRequest
-  ): Promise<QueryPostAttachmentsResponse> {
+  PostAttachments(request: QueryPostAttachmentsRequest): Promise<QueryPostAttachmentsResponse> {
     const data = QueryPostAttachmentsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.posts.v2.Query",
-      "PostAttachments",
-      data
-    );
-    return promise.then((data) =>
-      QueryPostAttachmentsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "PostAttachments", data);
+    return promise.then((data) => QueryPostAttachmentsResponse.decode(new _m0.Reader(data)));
   }
 
-  PollAnswers(
-    request: QueryPollAnswersRequest
-  ): Promise<QueryPollAnswersResponse> {
+  PollAnswers(request: QueryPollAnswersRequest): Promise<QueryPollAnswersResponse> {
     const data = QueryPollAnswersRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.posts.v2.Query",
-      "PollAnswers",
-      data
-    );
-    return promise.then((data) =>
-      QueryPollAnswersResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "PollAnswers", data);
+    return promise.then((data) => QueryPollAnswersResponse.decode(new _m0.Reader(data)));
   }
 
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.posts.v2.Query", "Params", data);
-    return promise.then((data) =>
-      QueryParamsResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "Params", data);
+    return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

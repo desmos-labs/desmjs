@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Duration } from "../../../google/protobuf/duration";
+import _m0 from "protobufjs/minimal";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Duration } from "../../../google/protobuf/duration";
 
 /** Params contains the parameters for the profiles module */
 export interface Params {
@@ -73,25 +73,13 @@ export interface AppLinksParams {
 }
 
 function createBaseParams(): Params {
-  return {
-    nickname: undefined,
-    dtag: undefined,
-    bio: undefined,
-    oracle: undefined,
-    appLinks: undefined,
-  };
+  return { nickname: undefined, dtag: undefined, bio: undefined, oracle: undefined, appLinks: undefined };
 }
 
 export const Params = {
-  encode(
-    message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.nickname !== undefined) {
-      NicknameParams.encode(
-        message.nickname,
-        writer.uint32(10).fork()
-      ).ldelim();
+      NicknameParams.encode(message.nickname, writer.uint32(10).fork()).ldelim();
     }
     if (message.dtag !== undefined) {
       DTagParams.encode(message.dtag, writer.uint32(18).fork()).ldelim();
@@ -103,10 +91,7 @@ export const Params = {
       OracleParams.encode(message.oracle, writer.uint32(34).fork()).ldelim();
     }
     if (message.appLinks !== undefined) {
-      AppLinksParams.encode(
-        message.appLinks,
-        writer.uint32(42).fork()
-      ).ldelim();
+      AppLinksParams.encode(message.appLinks, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -143,63 +128,41 @@ export const Params = {
 
   fromJSON(object: any): Params {
     return {
-      nickname: isSet(object.nickname)
-        ? NicknameParams.fromJSON(object.nickname)
-        : undefined,
+      nickname: isSet(object.nickname) ? NicknameParams.fromJSON(object.nickname) : undefined,
       dtag: isSet(object.dtag) ? DTagParams.fromJSON(object.dtag) : undefined,
       bio: isSet(object.bio) ? BioParams.fromJSON(object.bio) : undefined,
-      oracle: isSet(object.oracle)
-        ? OracleParams.fromJSON(object.oracle)
-        : undefined,
-      appLinks: isSet(object.appLinks)
-        ? AppLinksParams.fromJSON(object.appLinks)
-        : undefined,
+      oracle: isSet(object.oracle) ? OracleParams.fromJSON(object.oracle) : undefined,
+      appLinks: isSet(object.appLinks) ? AppLinksParams.fromJSON(object.appLinks) : undefined,
     };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.nickname !== undefined &&
-      (obj.nickname = message.nickname
-        ? NicknameParams.toJSON(message.nickname)
-        : undefined);
-    message.dtag !== undefined &&
-      (obj.dtag = message.dtag ? DTagParams.toJSON(message.dtag) : undefined);
-    message.bio !== undefined &&
-      (obj.bio = message.bio ? BioParams.toJSON(message.bio) : undefined);
-    message.oracle !== undefined &&
-      (obj.oracle = message.oracle
-        ? OracleParams.toJSON(message.oracle)
-        : undefined);
+      (obj.nickname = message.nickname ? NicknameParams.toJSON(message.nickname) : undefined);
+    message.dtag !== undefined && (obj.dtag = message.dtag ? DTagParams.toJSON(message.dtag) : undefined);
+    message.bio !== undefined && (obj.bio = message.bio ? BioParams.toJSON(message.bio) : undefined);
+    message.oracle !== undefined && (obj.oracle = message.oracle ? OracleParams.toJSON(message.oracle) : undefined);
     message.appLinks !== undefined &&
-      (obj.appLinks = message.appLinks
-        ? AppLinksParams.toJSON(message.appLinks)
-        : undefined);
+      (obj.appLinks = message.appLinks ? AppLinksParams.toJSON(message.appLinks) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
-    message.nickname =
-      object.nickname !== undefined && object.nickname !== null
-        ? NicknameParams.fromPartial(object.nickname)
-        : undefined;
-    message.dtag =
-      object.dtag !== undefined && object.dtag !== null
-        ? DTagParams.fromPartial(object.dtag)
-        : undefined;
-    message.bio =
-      object.bio !== undefined && object.bio !== null
-        ? BioParams.fromPartial(object.bio)
-        : undefined;
-    message.oracle =
-      object.oracle !== undefined && object.oracle !== null
-        ? OracleParams.fromPartial(object.oracle)
-        : undefined;
-    message.appLinks =
-      object.appLinks !== undefined && object.appLinks !== null
-        ? AppLinksParams.fromPartial(object.appLinks)
-        : undefined;
+    message.nickname = (object.nickname !== undefined && object.nickname !== null)
+      ? NicknameParams.fromPartial(object.nickname)
+      : undefined;
+    message.dtag = (object.dtag !== undefined && object.dtag !== null)
+      ? DTagParams.fromPartial(object.dtag)
+      : undefined;
+    message.bio = (object.bio !== undefined && object.bio !== null) ? BioParams.fromPartial(object.bio) : undefined;
+    message.oracle = (object.oracle !== undefined && object.oracle !== null)
+      ? OracleParams.fromPartial(object.oracle)
+      : undefined;
+    message.appLinks = (object.appLinks !== undefined && object.appLinks !== null)
+      ? AppLinksParams.fromPartial(object.appLinks)
+      : undefined;
     return message;
   },
 };
@@ -209,10 +172,7 @@ function createBaseNicknameParams(): NicknameParams {
 }
 
 export const NicknameParams = {
-  encode(
-    message: NicknameParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: NicknameParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minLength.length !== 0) {
       writer.uint32(10).bytes(message.minLength);
     }
@@ -245,31 +205,21 @@ export const NicknameParams = {
 
   fromJSON(object: any): NicknameParams {
     return {
-      minLength: isSet(object.minLength)
-        ? bytesFromBase64(object.minLength)
-        : new Uint8Array(),
-      maxLength: isSet(object.maxLength)
-        ? bytesFromBase64(object.maxLength)
-        : new Uint8Array(),
+      minLength: isSet(object.minLength) ? bytesFromBase64(object.minLength) : new Uint8Array(),
+      maxLength: isSet(object.maxLength) ? bytesFromBase64(object.maxLength) : new Uint8Array(),
     };
   },
 
   toJSON(message: NicknameParams): unknown {
     const obj: any = {};
     message.minLength !== undefined &&
-      (obj.minLength = base64FromBytes(
-        message.minLength !== undefined ? message.minLength : new Uint8Array()
-      ));
+      (obj.minLength = base64FromBytes(message.minLength !== undefined ? message.minLength : new Uint8Array()));
     message.maxLength !== undefined &&
-      (obj.maxLength = base64FromBytes(
-        message.maxLength !== undefined ? message.maxLength : new Uint8Array()
-      ));
+      (obj.maxLength = base64FromBytes(message.maxLength !== undefined ? message.maxLength : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<NicknameParams>, I>>(
-    object: I
-  ): NicknameParams {
+  fromPartial<I extends Exact<DeepPartial<NicknameParams>, I>>(object: I): NicknameParams {
     const message = createBaseNicknameParams();
     message.minLength = object.minLength ?? new Uint8Array();
     message.maxLength = object.maxLength ?? new Uint8Array();
@@ -278,18 +228,11 @@ export const NicknameParams = {
 };
 
 function createBaseDTagParams(): DTagParams {
-  return {
-    regEx: "",
-    minLength: new Uint8Array(),
-    maxLength: new Uint8Array(),
-  };
+  return { regEx: "", minLength: new Uint8Array(), maxLength: new Uint8Array() };
 }
 
 export const DTagParams = {
-  encode(
-    message: DTagParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DTagParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.regEx !== "") {
       writer.uint32(10).string(message.regEx);
     }
@@ -329,12 +272,8 @@ export const DTagParams = {
   fromJSON(object: any): DTagParams {
     return {
       regEx: isSet(object.regEx) ? String(object.regEx) : "",
-      minLength: isSet(object.minLength)
-        ? bytesFromBase64(object.minLength)
-        : new Uint8Array(),
-      maxLength: isSet(object.maxLength)
-        ? bytesFromBase64(object.maxLength)
-        : new Uint8Array(),
+      minLength: isSet(object.minLength) ? bytesFromBase64(object.minLength) : new Uint8Array(),
+      maxLength: isSet(object.maxLength) ? bytesFromBase64(object.maxLength) : new Uint8Array(),
     };
   },
 
@@ -342,19 +281,13 @@ export const DTagParams = {
     const obj: any = {};
     message.regEx !== undefined && (obj.regEx = message.regEx);
     message.minLength !== undefined &&
-      (obj.minLength = base64FromBytes(
-        message.minLength !== undefined ? message.minLength : new Uint8Array()
-      ));
+      (obj.minLength = base64FromBytes(message.minLength !== undefined ? message.minLength : new Uint8Array()));
     message.maxLength !== undefined &&
-      (obj.maxLength = base64FromBytes(
-        message.maxLength !== undefined ? message.maxLength : new Uint8Array()
-      ));
+      (obj.maxLength = base64FromBytes(message.maxLength !== undefined ? message.maxLength : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DTagParams>, I>>(
-    object: I
-  ): DTagParams {
+  fromPartial<I extends Exact<DeepPartial<DTagParams>, I>>(object: I): DTagParams {
     const message = createBaseDTagParams();
     message.regEx = object.regEx ?? "";
     message.minLength = object.minLength ?? new Uint8Array();
@@ -368,10 +301,7 @@ function createBaseBioParams(): BioParams {
 }
 
 export const BioParams = {
-  encode(
-    message: BioParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: BioParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.maxLength.length !== 0) {
       writer.uint32(26).bytes(message.maxLength);
     }
@@ -397,25 +327,17 @@ export const BioParams = {
   },
 
   fromJSON(object: any): BioParams {
-    return {
-      maxLength: isSet(object.maxLength)
-        ? bytesFromBase64(object.maxLength)
-        : new Uint8Array(),
-    };
+    return { maxLength: isSet(object.maxLength) ? bytesFromBase64(object.maxLength) : new Uint8Array() };
   },
 
   toJSON(message: BioParams): unknown {
     const obj: any = {};
     message.maxLength !== undefined &&
-      (obj.maxLength = base64FromBytes(
-        message.maxLength !== undefined ? message.maxLength : new Uint8Array()
-      ));
+      (obj.maxLength = base64FromBytes(message.maxLength !== undefined ? message.maxLength : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BioParams>, I>>(
-    object: I
-  ): BioParams {
+  fromPartial<I extends Exact<DeepPartial<BioParams>, I>>(object: I): BioParams {
     const message = createBaseBioParams();
     message.maxLength = object.maxLength ?? new Uint8Array();
     return message;
@@ -434,10 +356,7 @@ function createBaseOracleParams(): OracleParams {
 }
 
 export const OracleParams = {
-  encode(
-    message: OracleParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: OracleParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.scriptId.isZero()) {
       writer.uint32(8).uint64(message.scriptId);
     }
@@ -494,73 +413,47 @@ export const OracleParams = {
 
   fromJSON(object: any): OracleParams {
     return {
-      scriptId: isSet(object.scriptId)
-        ? Long.fromString(object.scriptId)
-        : Long.UZERO,
-      askCount: isSet(object.askCount)
-        ? Long.fromString(object.askCount)
-        : Long.UZERO,
-      minCount: isSet(object.minCount)
-        ? Long.fromString(object.minCount)
-        : Long.UZERO,
-      prepareGas: isSet(object.prepareGas)
-        ? Long.fromString(object.prepareGas)
-        : Long.UZERO,
-      executeGas: isSet(object.executeGas)
-        ? Long.fromString(object.executeGas)
-        : Long.UZERO,
-      feeAmount: Array.isArray(object?.feeAmount)
-        ? object.feeAmount.map((e: any) => Coin.fromJSON(e))
-        : [],
+      scriptId: isSet(object.scriptId) ? Long.fromValue(object.scriptId) : Long.UZERO,
+      askCount: isSet(object.askCount) ? Long.fromValue(object.askCount) : Long.UZERO,
+      minCount: isSet(object.minCount) ? Long.fromValue(object.minCount) : Long.UZERO,
+      prepareGas: isSet(object.prepareGas) ? Long.fromValue(object.prepareGas) : Long.UZERO,
+      executeGas: isSet(object.executeGas) ? Long.fromValue(object.executeGas) : Long.UZERO,
+      feeAmount: Array.isArray(object?.feeAmount) ? object.feeAmount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: OracleParams): unknown {
     const obj: any = {};
-    message.scriptId !== undefined &&
-      (obj.scriptId = (message.scriptId || Long.UZERO).toString());
-    message.askCount !== undefined &&
-      (obj.askCount = (message.askCount || Long.UZERO).toString());
-    message.minCount !== undefined &&
-      (obj.minCount = (message.minCount || Long.UZERO).toString());
-    message.prepareGas !== undefined &&
-      (obj.prepareGas = (message.prepareGas || Long.UZERO).toString());
-    message.executeGas !== undefined &&
-      (obj.executeGas = (message.executeGas || Long.UZERO).toString());
+    message.scriptId !== undefined && (obj.scriptId = (message.scriptId || Long.UZERO).toString());
+    message.askCount !== undefined && (obj.askCount = (message.askCount || Long.UZERO).toString());
+    message.minCount !== undefined && (obj.minCount = (message.minCount || Long.UZERO).toString());
+    message.prepareGas !== undefined && (obj.prepareGas = (message.prepareGas || Long.UZERO).toString());
+    message.executeGas !== undefined && (obj.executeGas = (message.executeGas || Long.UZERO).toString());
     if (message.feeAmount) {
-      obj.feeAmount = message.feeAmount.map((e) =>
-        e ? Coin.toJSON(e) : undefined
-      );
+      obj.feeAmount = message.feeAmount.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.feeAmount = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OracleParams>, I>>(
-    object: I
-  ): OracleParams {
+  fromPartial<I extends Exact<DeepPartial<OracleParams>, I>>(object: I): OracleParams {
     const message = createBaseOracleParams();
-    message.scriptId =
-      object.scriptId !== undefined && object.scriptId !== null
-        ? Long.fromValue(object.scriptId)
-        : Long.UZERO;
-    message.askCount =
-      object.askCount !== undefined && object.askCount !== null
-        ? Long.fromValue(object.askCount)
-        : Long.UZERO;
-    message.minCount =
-      object.minCount !== undefined && object.minCount !== null
-        ? Long.fromValue(object.minCount)
-        : Long.UZERO;
-    message.prepareGas =
-      object.prepareGas !== undefined && object.prepareGas !== null
-        ? Long.fromValue(object.prepareGas)
-        : Long.UZERO;
-    message.executeGas =
-      object.executeGas !== undefined && object.executeGas !== null
-        ? Long.fromValue(object.executeGas)
-        : Long.UZERO;
+    message.scriptId = (object.scriptId !== undefined && object.scriptId !== null)
+      ? Long.fromValue(object.scriptId)
+      : Long.UZERO;
+    message.askCount = (object.askCount !== undefined && object.askCount !== null)
+      ? Long.fromValue(object.askCount)
+      : Long.UZERO;
+    message.minCount = (object.minCount !== undefined && object.minCount !== null)
+      ? Long.fromValue(object.minCount)
+      : Long.UZERO;
+    message.prepareGas = (object.prepareGas !== undefined && object.prepareGas !== null)
+      ? Long.fromValue(object.prepareGas)
+      : Long.UZERO;
+    message.executeGas = (object.executeGas !== undefined && object.executeGas !== null)
+      ? Long.fromValue(object.executeGas)
+      : Long.UZERO;
     message.feeAmount = object.feeAmount?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
@@ -571,15 +464,9 @@ function createBaseAppLinksParams(): AppLinksParams {
 }
 
 export const AppLinksParams = {
-  encode(
-    message: AppLinksParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: AppLinksParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.validityDuration !== undefined) {
-      Duration.encode(
-        message.validityDuration,
-        writer.uint32(10).fork()
-      ).ldelim();
+      Duration.encode(message.validityDuration, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
@@ -604,29 +491,22 @@ export const AppLinksParams = {
 
   fromJSON(object: any): AppLinksParams {
     return {
-      validityDuration: isSet(object.validityDuration)
-        ? Duration.fromJSON(object.validityDuration)
-        : undefined,
+      validityDuration: isSet(object.validityDuration) ? Duration.fromJSON(object.validityDuration) : undefined,
     };
   },
 
   toJSON(message: AppLinksParams): unknown {
     const obj: any = {};
     message.validityDuration !== undefined &&
-      (obj.validityDuration = message.validityDuration
-        ? Duration.toJSON(message.validityDuration)
-        : undefined);
+      (obj.validityDuration = message.validityDuration ? Duration.toJSON(message.validityDuration) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AppLinksParams>, I>>(
-    object: I
-  ): AppLinksParams {
+  fromPartial<I extends Exact<DeepPartial<AppLinksParams>, I>>(object: I): AppLinksParams {
     const message = createBaseAppLinksParams();
-    message.validityDuration =
-      object.validityDuration !== undefined && object.validityDuration !== null
-        ? Duration.fromPartial(object.validityDuration)
-        : undefined;
+    message.validityDuration = (object.validityDuration !== undefined && object.validityDuration !== null)
+      ? Duration.fromPartial(object.validityDuration)
+      : undefined;
     return message;
   },
 };
@@ -635,64 +515,57 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(""));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { Any } from "../../../google/protobuf/any";
+import _m0 from "protobufjs/minimal";
 import { CompactBitArray } from "../../../cosmos/crypto/multisig/v1beta1/multisig";
+import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /** SignatureValueType specifies all the possible signature types */
@@ -73,8 +73,9 @@ export function signatureValueTypeToJSON(object: SignatureValueType): string {
       return "SIGNATURE_VALUE_TYPE_COSMOS_AMINO";
     case SignatureValueType.SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN:
       return "SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN";
+    case SignatureValueType.UNRECOGNIZED:
     default:
-      return "UNKNOWN";
+      return "UNRECOGNIZED";
   }
 }
 
@@ -167,20 +168,11 @@ export interface CosmosMultiSignature {
 }
 
 function createBaseChainLink(): ChainLink {
-  return {
-    user: "",
-    address: undefined,
-    proof: undefined,
-    chainConfig: undefined,
-    creationTime: undefined,
-  };
+  return { user: "", address: undefined, proof: undefined, chainConfig: undefined, creationTime: undefined };
 }
 
 export const ChainLink = {
-  encode(
-    message: ChainLink,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ChainLink, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
@@ -191,16 +183,10 @@ export const ChainLink = {
       Proof.encode(message.proof, writer.uint32(26).fork()).ldelim();
     }
     if (message.chainConfig !== undefined) {
-      ChainConfig.encode(
-        message.chainConfig,
-        writer.uint32(34).fork()
-      ).ldelim();
+      ChainConfig.encode(message.chainConfig, writer.uint32(34).fork()).ldelim();
     }
     if (message.creationTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationTime),
-        writer.uint32(42).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationTime), writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -225,9 +211,7 @@ export const ChainLink = {
           message.chainConfig = ChainConfig.decode(reader, reader.uint32());
           break;
         case 5:
-          message.creationTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -242,48 +226,32 @@ export const ChainLink = {
       user: isSet(object.user) ? String(object.user) : "",
       address: isSet(object.address) ? Any.fromJSON(object.address) : undefined,
       proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined,
-      chainConfig: isSet(object.chainConfig)
-        ? ChainConfig.fromJSON(object.chainConfig)
-        : undefined,
-      creationTime: isSet(object.creationTime)
-        ? fromJsonTimestamp(object.creationTime)
-        : undefined,
+      chainConfig: isSet(object.chainConfig) ? ChainConfig.fromJSON(object.chainConfig) : undefined,
+      creationTime: isSet(object.creationTime) ? fromJsonTimestamp(object.creationTime) : undefined,
     };
   },
 
   toJSON(message: ChainLink): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
-    message.address !== undefined &&
-      (obj.address = message.address ? Any.toJSON(message.address) : undefined);
-    message.proof !== undefined &&
-      (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
+    message.address !== undefined && (obj.address = message.address ? Any.toJSON(message.address) : undefined);
+    message.proof !== undefined && (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
     message.chainConfig !== undefined &&
-      (obj.chainConfig = message.chainConfig
-        ? ChainConfig.toJSON(message.chainConfig)
-        : undefined);
-    message.creationTime !== undefined &&
-      (obj.creationTime = message.creationTime.toISOString());
+      (obj.chainConfig = message.chainConfig ? ChainConfig.toJSON(message.chainConfig) : undefined);
+    message.creationTime !== undefined && (obj.creationTime = message.creationTime.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ChainLink>, I>>(
-    object: I
-  ): ChainLink {
+  fromPartial<I extends Exact<DeepPartial<ChainLink>, I>>(object: I): ChainLink {
     const message = createBaseChainLink();
     message.user = object.user ?? "";
-    message.address =
-      object.address !== undefined && object.address !== null
-        ? Any.fromPartial(object.address)
-        : undefined;
-    message.proof =
-      object.proof !== undefined && object.proof !== null
-        ? Proof.fromPartial(object.proof)
-        : undefined;
-    message.chainConfig =
-      object.chainConfig !== undefined && object.chainConfig !== null
-        ? ChainConfig.fromPartial(object.chainConfig)
-        : undefined;
+    message.address = (object.address !== undefined && object.address !== null)
+      ? Any.fromPartial(object.address)
+      : undefined;
+    message.proof = (object.proof !== undefined && object.proof !== null) ? Proof.fromPartial(object.proof) : undefined;
+    message.chainConfig = (object.chainConfig !== undefined && object.chainConfig !== null)
+      ? ChainConfig.fromPartial(object.chainConfig)
+      : undefined;
     message.creationTime = object.creationTime ?? undefined;
     return message;
   },
@@ -294,10 +262,7 @@ function createBaseChainConfig(): ChainConfig {
 }
 
 export const ChainConfig = {
-  encode(
-    message: ChainConfig,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: ChainConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -323,9 +288,7 @@ export const ChainConfig = {
   },
 
   fromJSON(object: any): ChainConfig {
-    return {
-      name: isSet(object.name) ? String(object.name) : "",
-    };
+    return { name: isSet(object.name) ? String(object.name) : "" };
   },
 
   toJSON(message: ChainConfig): unknown {
@@ -334,9 +297,7 @@ export const ChainConfig = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ChainConfig>, I>>(
-    object: I
-  ): ChainConfig {
+  fromPartial<I extends Exact<DeepPartial<ChainConfig>, I>>(object: I): ChainConfig {
     const message = createBaseChainConfig();
     message.name = object.name ?? "";
     return message;
@@ -388,35 +349,27 @@ export const Proof = {
   fromJSON(object: any): Proof {
     return {
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      signature: isSet(object.signature)
-        ? Any.fromJSON(object.signature)
-        : undefined,
+      signature: isSet(object.signature) ? Any.fromJSON(object.signature) : undefined,
       plainText: isSet(object.plainText) ? String(object.plainText) : "",
     };
   },
 
   toJSON(message: Proof): unknown {
     const obj: any = {};
-    message.pubKey !== undefined &&
-      (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.signature !== undefined &&
-      (obj.signature = message.signature
-        ? Any.toJSON(message.signature)
-        : undefined);
+    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
+    message.signature !== undefined && (obj.signature = message.signature ? Any.toJSON(message.signature) : undefined);
     message.plainText !== undefined && (obj.plainText = message.plainText);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Proof>, I>>(object: I): Proof {
     const message = createBaseProof();
-    message.pubKey =
-      object.pubKey !== undefined && object.pubKey !== null
-        ? Any.fromPartial(object.pubKey)
-        : undefined;
-    message.signature =
-      object.signature !== undefined && object.signature !== null
-        ? Any.fromPartial(object.signature)
-        : undefined;
+    message.pubKey = (object.pubKey !== undefined && object.pubKey !== null)
+      ? Any.fromPartial(object.pubKey)
+      : undefined;
+    message.signature = (object.signature !== undefined && object.signature !== null)
+      ? Any.fromPartial(object.signature)
+      : undefined;
     message.plainText = object.plainText ?? "";
     return message;
   },
@@ -427,10 +380,7 @@ function createBaseBech32Address(): Bech32Address {
 }
 
 export const Bech32Address = {
-  encode(
-    message: Bech32Address,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Bech32Address, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
     }
@@ -475,9 +425,7 @@ export const Bech32Address = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Bech32Address>, I>>(
-    object: I
-  ): Bech32Address {
+  fromPartial<I extends Exact<DeepPartial<Bech32Address>, I>>(object: I): Bech32Address {
     const message = createBaseBech32Address();
     message.value = object.value ?? "";
     message.prefix = object.prefix ?? "";
@@ -490,10 +438,7 @@ function createBaseBase58Address(): Base58Address {
 }
 
 export const Base58Address = {
-  encode(
-    message: Base58Address,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Base58Address, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
     }
@@ -519,9 +464,7 @@ export const Base58Address = {
   },
 
   fromJSON(object: any): Base58Address {
-    return {
-      value: isSet(object.value) ? String(object.value) : "",
-    };
+    return { value: isSet(object.value) ? String(object.value) : "" };
   },
 
   toJSON(message: Base58Address): unknown {
@@ -530,9 +473,7 @@ export const Base58Address = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Base58Address>, I>>(
-    object: I
-  ): Base58Address {
+  fromPartial<I extends Exact<DeepPartial<Base58Address>, I>>(object: I): Base58Address {
     const message = createBaseBase58Address();
     message.value = object.value ?? "";
     return message;
@@ -544,10 +485,7 @@ function createBaseHexAddress(): HexAddress {
 }
 
 export const HexAddress = {
-  encode(
-    message: HexAddress,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: HexAddress, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
     }
@@ -592,9 +530,7 @@ export const HexAddress = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<HexAddress>, I>>(
-    object: I
-  ): HexAddress {
+  fromPartial<I extends Exact<DeepPartial<HexAddress>, I>>(object: I): HexAddress {
     const message = createBaseHexAddress();
     message.value = object.value ?? "";
     message.prefix = object.prefix ?? "";
@@ -607,10 +543,7 @@ function createBaseSingleSignature(): SingleSignature {
 }
 
 export const SingleSignature = {
-  encode(
-    message: SingleSignature,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SingleSignature, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.valueType !== 0) {
       writer.uint32(8).int32(message.valueType);
     }
@@ -643,29 +576,20 @@ export const SingleSignature = {
 
   fromJSON(object: any): SingleSignature {
     return {
-      valueType: isSet(object.valueType)
-        ? signatureValueTypeFromJSON(object.valueType)
-        : 0,
-      signature: isSet(object.signature)
-        ? bytesFromBase64(object.signature)
-        : new Uint8Array(),
+      valueType: isSet(object.valueType) ? signatureValueTypeFromJSON(object.valueType) : 0,
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(),
     };
   },
 
   toJSON(message: SingleSignature): unknown {
     const obj: any = {};
-    message.valueType !== undefined &&
-      (obj.valueType = signatureValueTypeToJSON(message.valueType));
+    message.valueType !== undefined && (obj.valueType = signatureValueTypeToJSON(message.valueType));
     message.signature !== undefined &&
-      (obj.signature = base64FromBytes(
-        message.signature !== undefined ? message.signature : new Uint8Array()
-      ));
+      (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SingleSignature>, I>>(
-    object: I
-  ): SingleSignature {
+  fromPartial<I extends Exact<DeepPartial<SingleSignature>, I>>(object: I): SingleSignature {
     const message = createBaseSingleSignature();
     message.valueType = object.valueType ?? 0;
     message.signature = object.signature ?? new Uint8Array();
@@ -678,15 +602,9 @@ function createBaseCosmosMultiSignature(): CosmosMultiSignature {
 }
 
 export const CosmosMultiSignature = {
-  encode(
-    message: CosmosMultiSignature,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: CosmosMultiSignature, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bitArray !== undefined) {
-      CompactBitArray.encode(
-        message.bitArray,
-        writer.uint32(10).fork()
-      ).ldelim();
+      CompactBitArray.encode(message.bitArray, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.signatures) {
       Any.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -694,10 +612,7 @@ export const CosmosMultiSignature = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): CosmosMultiSignature {
+  decode(input: _m0.Reader | Uint8Array, length?: number): CosmosMultiSignature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCosmosMultiSignature();
@@ -720,41 +635,29 @@ export const CosmosMultiSignature = {
 
   fromJSON(object: any): CosmosMultiSignature {
     return {
-      bitArray: isSet(object.bitArray)
-        ? CompactBitArray.fromJSON(object.bitArray)
-        : undefined,
-      signatures: Array.isArray(object?.signatures)
-        ? object.signatures.map((e: any) => Any.fromJSON(e))
-        : [],
+      bitArray: isSet(object.bitArray) ? CompactBitArray.fromJSON(object.bitArray) : undefined,
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => Any.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: CosmosMultiSignature): unknown {
     const obj: any = {};
     message.bitArray !== undefined &&
-      (obj.bitArray = message.bitArray
-        ? CompactBitArray.toJSON(message.bitArray)
-        : undefined);
+      (obj.bitArray = message.bitArray ? CompactBitArray.toJSON(message.bitArray) : undefined);
     if (message.signatures) {
-      obj.signatures = message.signatures.map((e) =>
-        e ? Any.toJSON(e) : undefined
-      );
+      obj.signatures = message.signatures.map((e) => e ? Any.toJSON(e) : undefined);
     } else {
       obj.signatures = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CosmosMultiSignature>, I>>(
-    object: I
-  ): CosmosMultiSignature {
+  fromPartial<I extends Exact<DeepPartial<CosmosMultiSignature>, I>>(object: I): CosmosMultiSignature {
     const message = createBaseCosmosMultiSignature();
-    message.bitArray =
-      object.bitArray !== undefined && object.bitArray !== null
-        ? CompactBitArray.fromPartial(object.bitArray)
-        : undefined;
-    message.signatures =
-      object.signatures?.map((e) => Any.fromPartial(e)) || [];
+    message.bitArray = (object.bitArray !== undefined && object.bitArray !== null)
+      ? CompactBitArray.fromPartial(object.bitArray)
+      : undefined;
+    message.signatures = object.signatures?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
@@ -763,64 +666,57 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var globalThis: any = (() => {
-  if (typeof globalThis !== "undefined") return globalThis;
-  if (typeof self !== "undefined") return self;
-  if (typeof window !== "undefined") return window;
-  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
   throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  ((b64) => globalThis.Buffer.from(b64, "base64").toString("binary"));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  ((bin) => globalThis.Buffer.from(bin, "binary").toString("base64"));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(""));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

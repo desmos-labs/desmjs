@@ -1,11 +1,8 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import {
-  PageRequest,
-  PageResponse,
-} from "../../../cosmos/base/query/v1beta1/pagination";
-import { ApplicationLink } from "../../../desmos/profiles/v3/models_app_links";
+import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { ApplicationLink } from "./models_app_links";
 
 /**
  * QueryUserApplicationLinkRequest represents the request used when querying an
@@ -103,10 +100,7 @@ function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest 
 }
 
 export const QueryApplicationLinksRequest = {
-  encode(
-    message: QueryApplicationLinksRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryApplicationLinksRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
@@ -122,10 +116,7 @@ export const QueryApplicationLinksRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryApplicationLinksRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryApplicationLinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryApplicationLinksRequest();
@@ -157,36 +148,28 @@ export const QueryApplicationLinksRequest = {
       user: isSet(object.user) ? String(object.user) : "",
       application: isSet(object.application) ? String(object.application) : "",
       username: isSet(object.username) ? String(object.username) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryApplicationLinksRequest): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
-    message.application !== undefined &&
-      (obj.application = message.application);
+    message.application !== undefined && (obj.application = message.application);
     message.username !== undefined && (obj.username = message.username);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksRequest>, I>>(
-    object: I
-  ): QueryApplicationLinksRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksRequest>, I>>(object: I): QueryApplicationLinksRequest {
     const message = createBaseQueryApplicationLinksRequest();
     message.user = object.user ?? "";
     message.application = object.application ?? "";
     message.username = object.username ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -196,26 +179,17 @@ function createBaseQueryApplicationLinksResponse(): QueryApplicationLinksRespons
 }
 
 export const QueryApplicationLinksResponse = {
-  encode(
-    message: QueryApplicationLinksResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryApplicationLinksResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.links) {
       ApplicationLink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryApplicationLinksResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryApplicationLinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryApplicationLinksResponse();
@@ -238,41 +212,31 @@ export const QueryApplicationLinksResponse = {
 
   fromJSON(object: any): QueryApplicationLinksResponse {
     return {
-      links: Array.isArray(object?.links)
-        ? object.links.map((e: any) => ApplicationLink.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      links: Array.isArray(object?.links) ? object.links.map((e: any) => ApplicationLink.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryApplicationLinksResponse): unknown {
     const obj: any = {};
     if (message.links) {
-      obj.links = message.links.map((e) =>
-        e ? ApplicationLink.toJSON(e) : undefined
-      );
+      obj.links = message.links.map((e) => e ? ApplicationLink.toJSON(e) : undefined);
     } else {
       obj.links = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksResponse>, I>>(
-    object: I
+    object: I,
   ): QueryApplicationLinksResponse {
     const message = createBaseQueryApplicationLinksResponse();
-    message.links =
-      object.links?.map((e) => ApplicationLink.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.links = object.links?.map((e) => ApplicationLink.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -282,20 +246,14 @@ function createBaseQueryApplicationLinkByClientIDRequest(): QueryApplicationLink
 }
 
 export const QueryApplicationLinkByClientIDRequest = {
-  encode(
-    message: QueryApplicationLinkByClientIDRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryApplicationLinkByClientIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryApplicationLinkByClientIDRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryApplicationLinkByClientIDRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryApplicationLinkByClientIDRequest();
@@ -314,9 +272,7 @@ export const QueryApplicationLinkByClientIDRequest = {
   },
 
   fromJSON(object: any): QueryApplicationLinkByClientIDRequest {
-    return {
-      clientId: isSet(object.clientId) ? String(object.clientId) : "",
-    };
+    return { clientId: isSet(object.clientId) ? String(object.clientId) : "" };
   },
 
   toJSON(message: QueryApplicationLinkByClientIDRequest): unknown {
@@ -325,9 +281,9 @@ export const QueryApplicationLinkByClientIDRequest = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDRequest>, I>
-  >(object: I): QueryApplicationLinkByClientIDRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinkByClientIDRequest>, I>>(
+    object: I,
+  ): QueryApplicationLinkByClientIDRequest {
     const message = createBaseQueryApplicationLinkByClientIDRequest();
     message.clientId = object.clientId ?? "";
     return message;
@@ -339,20 +295,14 @@ function createBaseQueryApplicationLinkByClientIDResponse(): QueryApplicationLin
 }
 
 export const QueryApplicationLinkByClientIDResponse = {
-  encode(
-    message: QueryApplicationLinkByClientIDResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryApplicationLinkByClientIDResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.link !== undefined) {
       ApplicationLink.encode(message.link, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryApplicationLinkByClientIDResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryApplicationLinkByClientIDResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryApplicationLinkByClientIDResponse();
@@ -371,30 +321,22 @@ export const QueryApplicationLinkByClientIDResponse = {
   },
 
   fromJSON(object: any): QueryApplicationLinkByClientIDResponse {
-    return {
-      link: isSet(object.link)
-        ? ApplicationLink.fromJSON(object.link)
-        : undefined,
-    };
+    return { link: isSet(object.link) ? ApplicationLink.fromJSON(object.link) : undefined };
   },
 
   toJSON(message: QueryApplicationLinkByClientIDResponse): unknown {
     const obj: any = {};
-    message.link !== undefined &&
-      (obj.link = message.link
-        ? ApplicationLink.toJSON(message.link)
-        : undefined);
+    message.link !== undefined && (obj.link = message.link ? ApplicationLink.toJSON(message.link) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDResponse>, I>
-  >(object: I): QueryApplicationLinkByClientIDResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinkByClientIDResponse>, I>>(
+    object: I,
+  ): QueryApplicationLinkByClientIDResponse {
     const message = createBaseQueryApplicationLinkByClientIDResponse();
-    message.link =
-      object.link !== undefined && object.link !== null
-        ? ApplicationLink.fromPartial(object.link)
-        : undefined;
+    message.link = (object.link !== undefined && object.link !== null)
+      ? ApplicationLink.fromPartial(object.link)
+      : undefined;
     return message;
   },
 };
@@ -404,10 +346,7 @@ function createBaseQueryApplicationLinkOwnersRequest(): QueryApplicationLinkOwne
 }
 
 export const QueryApplicationLinkOwnersRequest = {
-  encode(
-    message: QueryApplicationLinkOwnersRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryApplicationLinkOwnersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.application !== "") {
       writer.uint32(10).string(message.application);
     }
@@ -420,10 +359,7 @@ export const QueryApplicationLinkOwnersRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryApplicationLinkOwnersRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryApplicationLinkOwnersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryApplicationLinkOwnersRequest();
@@ -451,34 +387,28 @@ export const QueryApplicationLinkOwnersRequest = {
     return {
       application: isSet(object.application) ? String(object.application) : "",
       username: isSet(object.username) ? String(object.username) : "",
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryApplicationLinkOwnersRequest): unknown {
     const obj: any = {};
-    message.application !== undefined &&
-      (obj.application = message.application);
+    message.application !== undefined && (obj.application = message.application);
     message.username !== undefined && (obj.username = message.username);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkOwnersRequest>, I>
-  >(object: I): QueryApplicationLinkOwnersRequest {
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinkOwnersRequest>, I>>(
+    object: I,
+  ): QueryApplicationLinkOwnersRequest {
     const message = createBaseQueryApplicationLinkOwnersRequest();
     message.application = object.application ?? "";
     message.username = object.username ?? "";
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -488,29 +418,17 @@ function createBaseQueryApplicationLinkOwnersResponse(): QueryApplicationLinkOwn
 }
 
 export const QueryApplicationLinkOwnersResponse = {
-  encode(
-    message: QueryApplicationLinkOwnersResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: QueryApplicationLinkOwnersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.owners) {
-      QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
-        v!,
-        writer.uint32(10).fork()
-      ).ldelim();
+      QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork()
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): QueryApplicationLinkOwnersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryApplicationLinkOwnersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryApplicationLinkOwnersResponse();
@@ -519,10 +437,7 @@ export const QueryApplicationLinkOwnersResponse = {
       switch (tag >>> 3) {
         case 1:
           message.owners.push(
-            QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.decode(
-              reader,
-              reader.uint32()
-            )
+            QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -539,15 +454,9 @@ export const QueryApplicationLinkOwnersResponse = {
   fromJSON(object: any): QueryApplicationLinkOwnersResponse {
     return {
       owners: Array.isArray(object?.owners)
-        ? object.owners.map((e: any) =>
-            QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromJSON(
-              e
-            )
-          )
+        ? object.owners.map((e: any) => QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromJSON(e))
         : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -555,36 +464,25 @@ export const QueryApplicationLinkOwnersResponse = {
     const obj: any = {};
     if (message.owners) {
       obj.owners = message.owners.map((e) =>
-        e
-          ? QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.toJSON(
-              e
-            )
-          : undefined
+        e ? QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.toJSON(e) : undefined
       );
     } else {
       obj.owners = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkOwnersResponse>, I>
-  >(object: I): QueryApplicationLinkOwnersResponse {
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinkOwnersResponse>, I>>(
+    object: I,
+  ): QueryApplicationLinkOwnersResponse {
     const message = createBaseQueryApplicationLinkOwnersResponse();
     message.owners =
-      object.owners?.map((e) =>
-        QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromPartial(
-          e
-        )
-      ) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+      object.owners?.map((e) => QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -596,7 +494,7 @@ function createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetail
 export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
   encode(
     message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -612,12 +510,11 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
 
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message =
-      createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
+    const message = createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -638,9 +535,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     return message;
   },
 
-  fromJSON(
-    object: any
-  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+  fromJSON(object: any): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     return {
       user: isSet(object.user) ? String(object.user) : "",
       application: isSet(object.application) ? String(object.application) : "",
@@ -648,25 +543,18 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     };
   },
 
-  toJSON(
-    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
-  ): unknown {
+  toJSON(message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
-    message.application !== undefined &&
-      (obj.application = message.application);
+    message.application !== undefined && (obj.application = message.application);
     message.username !== undefined && (obj.username = message.username);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<
-      DeepPartial<QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails>,
-      I
-    >
-  >(object: I): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
-    const message =
-      createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
+  fromPartial<I extends Exact<DeepPartial<QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails>, I>>(
+    object: I,
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    const message = createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
     message.user = object.user ?? "";
     message.application = object.application ?? "";
     message.username = object.username ?? "";
@@ -674,34 +562,17 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

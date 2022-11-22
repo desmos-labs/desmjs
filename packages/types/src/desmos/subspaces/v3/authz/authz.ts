@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 /**
  * GenericSubspaceAuthorization defines an authorization to perform any
@@ -21,10 +21,7 @@ function createBaseGenericSubspaceAuthorization(): GenericSubspaceAuthorization 
 }
 
 export const GenericSubspaceAuthorization = {
-  encode(
-    message: GenericSubspaceAuthorization,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: GenericSubspaceAuthorization, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.subspacesIds) {
       writer.uint64(v);
@@ -36,10 +33,7 @@ export const GenericSubspaceAuthorization = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): GenericSubspaceAuthorization {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenericSubspaceAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenericSubspaceAuthorization();
@@ -69,9 +63,7 @@ export const GenericSubspaceAuthorization = {
 
   fromJSON(object: any): GenericSubspaceAuthorization {
     return {
-      subspacesIds: Array.isArray(object?.subspacesIds)
-        ? object.subspacesIds.map((e: any) => Long.fromString(e))
-        : [],
+      subspacesIds: Array.isArray(object?.subspacesIds) ? object.subspacesIds.map((e: any) => Long.fromValue(e)) : [],
       msg: isSet(object.msg) ? String(object.msg) : "",
     };
   },
@@ -79,9 +71,7 @@ export const GenericSubspaceAuthorization = {
   toJSON(message: GenericSubspaceAuthorization): unknown {
     const obj: any = {};
     if (message.subspacesIds) {
-      obj.subspacesIds = message.subspacesIds.map((e) =>
-        (e || Long.UZERO).toString()
-      );
+      obj.subspacesIds = message.subspacesIds.map((e) => (e || Long.UZERO).toString());
     } else {
       obj.subspacesIds = [];
     }
@@ -89,45 +79,25 @@ export const GenericSubspaceAuthorization = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenericSubspaceAuthorization>, I>>(
-    object: I
-  ): GenericSubspaceAuthorization {
+  fromPartial<I extends Exact<DeepPartial<GenericSubspaceAuthorization>, I>>(object: I): GenericSubspaceAuthorization {
     const message = createBaseGenericSubspaceAuthorization();
-    message.subspacesIds =
-      object.subspacesIds?.map((e) => Long.fromValue(e)) || [];
+    message.subspacesIds = object.subspacesIds?.map((e) => Long.fromValue(e)) || [];
     message.msg = object.msg ?? "";
     return message;
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

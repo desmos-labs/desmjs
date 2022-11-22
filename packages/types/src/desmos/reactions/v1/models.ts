@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 
 /** Reaction contains the data of a single post reaction */
@@ -85,20 +85,11 @@ export interface RegisteredReactionValueParams {
 }
 
 function createBaseReaction(): Reaction {
-  return {
-    subspaceId: Long.UZERO,
-    postId: Long.UZERO,
-    id: 0,
-    value: undefined,
-    author: "",
-  };
+  return { subspaceId: Long.UZERO, postId: Long.UZERO, id: 0, value: undefined, author: "" };
 }
 
 export const Reaction = {
-  encode(
-    message: Reaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Reaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -149,12 +140,8 @@ export const Reaction = {
 
   fromJSON(object: any): Reaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      postId: isSet(object.postId)
-        ? Long.fromString(object.postId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
       id: isSet(object.id) ? Number(object.id) : 0,
       value: isSet(object.value) ? Any.fromJSON(object.value) : undefined,
       author: isSet(object.author) ? String(object.author) : "",
@@ -163,32 +150,24 @@ export const Reaction = {
 
   toJSON(message: Reaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.postId !== undefined &&
-      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined && (obj.postId = (message.postId || Long.UZERO).toString());
     message.id !== undefined && (obj.id = Math.round(message.id));
-    message.value !== undefined &&
-      (obj.value = message.value ? Any.toJSON(message.value) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Any.toJSON(message.value) : undefined);
     message.author !== undefined && (obj.author = message.author);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Reaction>, I>>(object: I): Reaction {
     const message = createBaseReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.postId =
-      object.postId !== undefined && object.postId !== null
-        ? Long.fromValue(object.postId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.postId = (object.postId !== undefined && object.postId !== null)
+      ? Long.fromValue(object.postId)
+      : Long.UZERO;
     message.id = object.id ?? 0;
-    message.value =
-      object.value !== undefined && object.value !== null
-        ? Any.fromPartial(object.value)
-        : undefined;
+    message.value = (object.value !== undefined && object.value !== null) ? Any.fromPartial(object.value) : undefined;
     message.author = object.author ?? "";
     return message;
   },
@@ -199,20 +178,14 @@ function createBaseRegisteredReactionValue(): RegisteredReactionValue {
 }
 
 export const RegisteredReactionValue = {
-  encode(
-    message: RegisteredReactionValue,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: RegisteredReactionValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.registeredReactionId !== 0) {
       writer.uint32(8).uint32(message.registeredReactionId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): RegisteredReactionValue {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RegisteredReactionValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisteredReactionValue();
@@ -231,23 +204,16 @@ export const RegisteredReactionValue = {
   },
 
   fromJSON(object: any): RegisteredReactionValue {
-    return {
-      registeredReactionId: isSet(object.registeredReactionId)
-        ? Number(object.registeredReactionId)
-        : 0,
-    };
+    return { registeredReactionId: isSet(object.registeredReactionId) ? Number(object.registeredReactionId) : 0 };
   },
 
   toJSON(message: RegisteredReactionValue): unknown {
     const obj: any = {};
-    message.registeredReactionId !== undefined &&
-      (obj.registeredReactionId = Math.round(message.registeredReactionId));
+    message.registeredReactionId !== undefined && (obj.registeredReactionId = Math.round(message.registeredReactionId));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RegisteredReactionValue>, I>>(
-    object: I
-  ): RegisteredReactionValue {
+  fromPartial<I extends Exact<DeepPartial<RegisteredReactionValue>, I>>(object: I): RegisteredReactionValue {
     const message = createBaseRegisteredReactionValue();
     message.registeredReactionId = object.registeredReactionId ?? 0;
     return message;
@@ -259,10 +225,7 @@ function createBaseFreeTextValue(): FreeTextValue {
 }
 
 export const FreeTextValue = {
-  encode(
-    message: FreeTextValue,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FreeTextValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.text !== "") {
       writer.uint32(10).string(message.text);
     }
@@ -288,9 +251,7 @@ export const FreeTextValue = {
   },
 
   fromJSON(object: any): FreeTextValue {
-    return {
-      text: isSet(object.text) ? String(object.text) : "",
-    };
+    return { text: isSet(object.text) ? String(object.text) : "" };
   },
 
   toJSON(message: FreeTextValue): unknown {
@@ -299,9 +260,7 @@ export const FreeTextValue = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<FreeTextValue>, I>>(
-    object: I
-  ): FreeTextValue {
+  fromPartial<I extends Exact<DeepPartial<FreeTextValue>, I>>(object: I): FreeTextValue {
     const message = createBaseFreeTextValue();
     message.text = object.text ?? "";
     return message;
@@ -313,10 +272,7 @@ function createBaseRegisteredReaction(): RegisteredReaction {
 }
 
 export const RegisteredReaction = {
-  encode(
-    message: RegisteredReaction,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: RegisteredReaction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -361,39 +317,27 @@ export const RegisteredReaction = {
 
   fromJSON(object: any): RegisteredReaction {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       id: isSet(object.id) ? Number(object.id) : 0,
-      shorthandCode: isSet(object.shorthandCode)
-        ? String(object.shorthandCode)
-        : "",
-      displayValue: isSet(object.displayValue)
-        ? String(object.displayValue)
-        : "",
+      shorthandCode: isSet(object.shorthandCode) ? String(object.shorthandCode) : "",
+      displayValue: isSet(object.displayValue) ? String(object.displayValue) : "",
     };
   },
 
   toJSON(message: RegisteredReaction): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.id !== undefined && (obj.id = Math.round(message.id));
-    message.shorthandCode !== undefined &&
-      (obj.shorthandCode = message.shorthandCode);
-    message.displayValue !== undefined &&
-      (obj.displayValue = message.displayValue);
+    message.shorthandCode !== undefined && (obj.shorthandCode = message.shorthandCode);
+    message.displayValue !== undefined && (obj.displayValue = message.displayValue);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<RegisteredReaction>, I>>(
-    object: I
-  ): RegisteredReaction {
+  fromPartial<I extends Exact<DeepPartial<RegisteredReaction>, I>>(object: I): RegisteredReaction {
     const message = createBaseRegisteredReaction();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.id = object.id ?? 0;
     message.shorthandCode = object.shorthandCode ?? "";
     message.displayValue = object.displayValue ?? "";
@@ -402,40 +346,24 @@ export const RegisteredReaction = {
 };
 
 function createBaseSubspaceReactionsParams(): SubspaceReactionsParams {
-  return {
-    subspaceId: Long.UZERO,
-    registeredReaction: undefined,
-    freeText: undefined,
-  };
+  return { subspaceId: Long.UZERO, registeredReaction: undefined, freeText: undefined };
 }
 
 export const SubspaceReactionsParams = {
-  encode(
-    message: SubspaceReactionsParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: SubspaceReactionsParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
     if (message.registeredReaction !== undefined) {
-      RegisteredReactionValueParams.encode(
-        message.registeredReaction,
-        writer.uint32(18).fork()
-      ).ldelim();
+      RegisteredReactionValueParams.encode(message.registeredReaction, writer.uint32(18).fork()).ldelim();
     }
     if (message.freeText !== undefined) {
-      FreeTextValueParams.encode(
-        message.freeText,
-        writer.uint32(26).fork()
-      ).ldelim();
+      FreeTextValueParams.encode(message.freeText, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): SubspaceReactionsParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SubspaceReactionsParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubspaceReactionsParams();
@@ -446,16 +374,10 @@ export const SubspaceReactionsParams = {
           message.subspaceId = reader.uint64() as Long;
           break;
         case 2:
-          message.registeredReaction = RegisteredReactionValueParams.decode(
-            reader,
-            reader.uint32()
-          );
+          message.registeredReaction = RegisteredReactionValueParams.decode(reader, reader.uint32());
           break;
         case 3:
-          message.freeText = FreeTextValueParams.decode(
-            reader,
-            reader.uint32()
-          );
+          message.freeText = FreeTextValueParams.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -467,50 +389,36 @@ export const SubspaceReactionsParams = {
 
   fromJSON(object: any): SubspaceReactionsParams {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       registeredReaction: isSet(object.registeredReaction)
         ? RegisteredReactionValueParams.fromJSON(object.registeredReaction)
         : undefined,
-      freeText: isSet(object.freeText)
-        ? FreeTextValueParams.fromJSON(object.freeText)
-        : undefined,
+      freeText: isSet(object.freeText) ? FreeTextValueParams.fromJSON(object.freeText) : undefined,
     };
   },
 
   toJSON(message: SubspaceReactionsParams): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.registeredReaction !== undefined &&
-      (obj.registeredReaction = message.registeredReaction
-        ? RegisteredReactionValueParams.toJSON(message.registeredReaction)
-        : undefined);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.registeredReaction !== undefined && (obj.registeredReaction = message.registeredReaction
+      ? RegisteredReactionValueParams.toJSON(message.registeredReaction)
+      : undefined);
     message.freeText !== undefined &&
-      (obj.freeText = message.freeText
-        ? FreeTextValueParams.toJSON(message.freeText)
-        : undefined);
+      (obj.freeText = message.freeText ? FreeTextValueParams.toJSON(message.freeText) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SubspaceReactionsParams>, I>>(
-    object: I
-  ): SubspaceReactionsParams {
+  fromPartial<I extends Exact<DeepPartial<SubspaceReactionsParams>, I>>(object: I): SubspaceReactionsParams {
     const message = createBaseSubspaceReactionsParams();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.registeredReaction =
-      object.registeredReaction !== undefined &&
-      object.registeredReaction !== null
-        ? RegisteredReactionValueParams.fromPartial(object.registeredReaction)
-        : undefined;
-    message.freeText =
-      object.freeText !== undefined && object.freeText !== null
-        ? FreeTextValueParams.fromPartial(object.freeText)
-        : undefined;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.registeredReaction = (object.registeredReaction !== undefined && object.registeredReaction !== null)
+      ? RegisteredReactionValueParams.fromPartial(object.registeredReaction)
+      : undefined;
+    message.freeText = (object.freeText !== undefined && object.freeText !== null)
+      ? FreeTextValueParams.fromPartial(object.freeText)
+      : undefined;
     return message;
   },
 };
@@ -520,10 +428,7 @@ function createBaseFreeTextValueParams(): FreeTextValueParams {
 }
 
 export const FreeTextValueParams = {
-  encode(
-    message: FreeTextValueParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: FreeTextValueParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
@@ -571,15 +476,12 @@ export const FreeTextValueParams = {
   toJSON(message: FreeTextValueParams): unknown {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.maxLength !== undefined &&
-      (obj.maxLength = Math.round(message.maxLength));
+    message.maxLength !== undefined && (obj.maxLength = Math.round(message.maxLength));
     message.regEx !== undefined && (obj.regEx = message.regEx);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<FreeTextValueParams>, I>>(
-    object: I
-  ): FreeTextValueParams {
+  fromPartial<I extends Exact<DeepPartial<FreeTextValueParams>, I>>(object: I): FreeTextValueParams {
     const message = createBaseFreeTextValueParams();
     message.enabled = object.enabled ?? false;
     message.maxLength = object.maxLength ?? 0;
@@ -593,20 +495,14 @@ function createBaseRegisteredReactionValueParams(): RegisteredReactionValueParam
 }
 
 export const RegisteredReactionValueParams = {
-  encode(
-    message: RegisteredReactionValueParams,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: RegisteredReactionValueParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): RegisteredReactionValueParams {
+  decode(input: _m0.Reader | Uint8Array, length?: number): RegisteredReactionValueParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisteredReactionValueParams();
@@ -625,9 +521,7 @@ export const RegisteredReactionValueParams = {
   },
 
   fromJSON(object: any): RegisteredReactionValueParams {
-    return {
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-    };
+    return { enabled: isSet(object.enabled) ? Boolean(object.enabled) : false };
   },
 
   toJSON(message: RegisteredReactionValueParams): unknown {
@@ -637,7 +531,7 @@ export const RegisteredReactionValueParams = {
   },
 
   fromPartial<I extends Exact<DeepPartial<RegisteredReactionValueParams>, I>>(
-    object: I
+    object: I,
   ): RegisteredReactionValueParams {
     const message = createBaseRegisteredReactionValueParams();
     message.enabled = object.enabled ?? false;
@@ -645,34 +539,17 @@ export const RegisteredReactionValueParams = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

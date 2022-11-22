@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
@@ -32,21 +32,11 @@ export interface Pictures {
 }
 
 function createBaseProfile(): Profile {
-  return {
-    account: undefined,
-    dtag: "",
-    nickname: "",
-    bio: "",
-    pictures: undefined,
-    creationDate: undefined,
-  };
+  return { account: undefined, dtag: "", nickname: "", bio: "", pictures: undefined, creationDate: undefined };
 }
 
 export const Profile = {
-  encode(
-    message: Profile,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Profile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
     }
@@ -63,10 +53,7 @@ export const Profile = {
       Pictures.encode(message.pictures, writer.uint32(42).fork()).ldelim();
     }
     if (message.creationDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationDate),
-        writer.uint32(50).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationDate), writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -94,9 +81,7 @@ export const Profile = {
           message.pictures = Pictures.decode(reader, reader.uint32());
           break;
         case 6:
-          message.creationDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -112,44 +97,33 @@ export const Profile = {
       dtag: isSet(object.dtag) ? String(object.dtag) : "",
       nickname: isSet(object.nickname) ? String(object.nickname) : "",
       bio: isSet(object.bio) ? String(object.bio) : "",
-      pictures: isSet(object.pictures)
-        ? Pictures.fromJSON(object.pictures)
-        : undefined,
-      creationDate: isSet(object.creationDate)
-        ? fromJsonTimestamp(object.creationDate)
-        : undefined,
+      pictures: isSet(object.pictures) ? Pictures.fromJSON(object.pictures) : undefined,
+      creationDate: isSet(object.creationDate) ? fromJsonTimestamp(object.creationDate) : undefined,
     };
   },
 
   toJSON(message: Profile): unknown {
     const obj: any = {};
-    message.account !== undefined &&
-      (obj.account = message.account ? Any.toJSON(message.account) : undefined);
+    message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
     message.dtag !== undefined && (obj.dtag = message.dtag);
     message.nickname !== undefined && (obj.nickname = message.nickname);
     message.bio !== undefined && (obj.bio = message.bio);
-    message.pictures !== undefined &&
-      (obj.pictures = message.pictures
-        ? Pictures.toJSON(message.pictures)
-        : undefined);
-    message.creationDate !== undefined &&
-      (obj.creationDate = message.creationDate.toISOString());
+    message.pictures !== undefined && (obj.pictures = message.pictures ? Pictures.toJSON(message.pictures) : undefined);
+    message.creationDate !== undefined && (obj.creationDate = message.creationDate.toISOString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Profile>, I>>(object: I): Profile {
     const message = createBaseProfile();
-    message.account =
-      object.account !== undefined && object.account !== null
-        ? Any.fromPartial(object.account)
-        : undefined;
+    message.account = (object.account !== undefined && object.account !== null)
+      ? Any.fromPartial(object.account)
+      : undefined;
     message.dtag = object.dtag ?? "";
     message.nickname = object.nickname ?? "";
     message.bio = object.bio ?? "";
-    message.pictures =
-      object.pictures !== undefined && object.pictures !== null
-        ? Pictures.fromPartial(object.pictures)
-        : undefined;
+    message.pictures = (object.pictures !== undefined && object.pictures !== null)
+      ? Pictures.fromPartial(object.pictures)
+      : undefined;
     message.creationDate = object.creationDate ?? undefined;
     return message;
   },
@@ -160,10 +134,7 @@ function createBasePictures(): Pictures {
 }
 
 export const Pictures = {
-  encode(
-    message: Pictures,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Pictures, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.profile !== "") {
       writer.uint32(10).string(message.profile);
     }
@@ -216,34 +187,17 @@ export const Pictures = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 /**
  * MsgCreateRelationship represents a message to create a relationship
@@ -19,7 +19,8 @@ export interface MsgCreateRelationship {
  * MsgCreateRelationshipResponse defines the Msg/CreateRelationship response
  * type.
  */
-export interface MsgCreateRelationshipResponse {}
+export interface MsgCreateRelationshipResponse {
+}
 
 /**
  * MsgDeleteRelationship represents a message to delete the relationship
@@ -38,7 +39,8 @@ export interface MsgDeleteRelationship {
  * MsgDeleteRelationshipResponse defines the Msg/DeleteRelationship response
  * type.
  */
-export interface MsgDeleteRelationshipResponse {}
+export interface MsgDeleteRelationshipResponse {
+}
 
 /**
  * MsgBlockUser represents a message to block another user specifying an
@@ -56,7 +58,8 @@ export interface MsgBlockUser {
 }
 
 /** MsgBlockUserResponse defines the Msg/BlockUser response type. */
-export interface MsgBlockUserResponse {}
+export interface MsgBlockUserResponse {
+}
 
 /** MsgUnblockUser represents a message to unblock a previously blocked user. */
 export interface MsgUnblockUser {
@@ -69,17 +72,15 @@ export interface MsgUnblockUser {
 }
 
 /** MsgUnblockUserResponse defines the Msg/UnblockUser response type. */
-export interface MsgUnblockUserResponse {}
+export interface MsgUnblockUserResponse {
+}
 
 function createBaseMsgCreateRelationship(): MsgCreateRelationship {
   return { signer: "", counterparty: "", subspaceId: Long.UZERO };
 }
 
 export const MsgCreateRelationship = {
-  encode(
-    message: MsgCreateRelationship,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgCreateRelationship, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signer !== "") {
       writer.uint32(10).string(message.signer);
     }
@@ -92,10 +93,7 @@ export const MsgCreateRelationship = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgCreateRelationship {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateRelationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateRelationship();
@@ -122,35 +120,26 @@ export const MsgCreateRelationship = {
   fromJSON(object: any): MsgCreateRelationship {
     return {
       signer: isSet(object.signer) ? String(object.signer) : "",
-      counterparty: isSet(object.counterparty)
-        ? String(object.counterparty)
-        : "",
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      counterparty: isSet(object.counterparty) ? String(object.counterparty) : "",
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgCreateRelationship): unknown {
     const obj: any = {};
     message.signer !== undefined && (obj.signer = message.signer);
-    message.counterparty !== undefined &&
-      (obj.counterparty = message.counterparty);
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateRelationship>, I>>(
-    object: I
-  ): MsgCreateRelationship {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateRelationship>, I>>(object: I): MsgCreateRelationship {
     const message = createBaseMsgCreateRelationship();
     message.signer = object.signer ?? "";
     message.counterparty = object.counterparty ?? "";
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -160,17 +149,11 @@ function createBaseMsgCreateRelationshipResponse(): MsgCreateRelationshipRespons
 }
 
 export const MsgCreateRelationshipResponse = {
-  encode(
-    _: MsgCreateRelationshipResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgCreateRelationshipResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgCreateRelationshipResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateRelationshipResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateRelationshipResponse();
@@ -194,9 +177,7 @@ export const MsgCreateRelationshipResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateRelationshipResponse>, I>>(
-    _: I
-  ): MsgCreateRelationshipResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateRelationshipResponse>, I>>(_: I): MsgCreateRelationshipResponse {
     const message = createBaseMsgCreateRelationshipResponse();
     return message;
   },
@@ -207,10 +188,7 @@ function createBaseMsgDeleteRelationship(): MsgDeleteRelationship {
 }
 
 export const MsgDeleteRelationship = {
-  encode(
-    message: MsgDeleteRelationship,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgDeleteRelationship, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.signer !== "") {
       writer.uint32(10).string(message.signer);
     }
@@ -223,10 +201,7 @@ export const MsgDeleteRelationship = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgDeleteRelationship {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteRelationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteRelationship();
@@ -253,35 +228,26 @@ export const MsgDeleteRelationship = {
   fromJSON(object: any): MsgDeleteRelationship {
     return {
       signer: isSet(object.signer) ? String(object.signer) : "",
-      counterparty: isSet(object.counterparty)
-        ? String(object.counterparty)
-        : "",
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      counterparty: isSet(object.counterparty) ? String(object.counterparty) : "",
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgDeleteRelationship): unknown {
     const obj: any = {};
     message.signer !== undefined && (obj.signer = message.signer);
-    message.counterparty !== undefined &&
-      (obj.counterparty = message.counterparty);
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationship>, I>>(
-    object: I
-  ): MsgDeleteRelationship {
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationship>, I>>(object: I): MsgDeleteRelationship {
     const message = createBaseMsgDeleteRelationship();
     message.signer = object.signer ?? "";
     message.counterparty = object.counterparty ?? "";
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -291,17 +257,11 @@ function createBaseMsgDeleteRelationshipResponse(): MsgDeleteRelationshipRespons
 }
 
 export const MsgDeleteRelationshipResponse = {
-  encode(
-    _: MsgDeleteRelationshipResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgDeleteRelationshipResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgDeleteRelationshipResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteRelationshipResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteRelationshipResponse();
@@ -325,9 +285,7 @@ export const MsgDeleteRelationshipResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationshipResponse>, I>>(
-    _: I
-  ): MsgDeleteRelationshipResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationshipResponse>, I>>(_: I): MsgDeleteRelationshipResponse {
     const message = createBaseMsgDeleteRelationshipResponse();
     return message;
   },
@@ -338,10 +296,7 @@ function createBaseMsgBlockUser(): MsgBlockUser {
 }
 
 export const MsgBlockUser = {
-  encode(
-    message: MsgBlockUser,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgBlockUser, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blocker !== "") {
       writer.uint32(10).string(message.blocker);
     }
@@ -389,9 +344,7 @@ export const MsgBlockUser = {
       blocker: isSet(object.blocker) ? String(object.blocker) : "",
       blocked: isSet(object.blocked) ? String(object.blocked) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
     };
   },
 
@@ -400,22 +353,18 @@ export const MsgBlockUser = {
     message.blocker !== undefined && (obj.blocker = message.blocker);
     message.blocked !== undefined && (obj.blocked = message.blocked);
     message.reason !== undefined && (obj.reason = message.reason);
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBlockUser>, I>>(
-    object: I
-  ): MsgBlockUser {
+  fromPartial<I extends Exact<DeepPartial<MsgBlockUser>, I>>(object: I): MsgBlockUser {
     const message = createBaseMsgBlockUser();
     message.blocker = object.blocker ?? "";
     message.blocked = object.blocked ?? "";
     message.reason = object.reason ?? "";
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -425,17 +374,11 @@ function createBaseMsgBlockUserResponse(): MsgBlockUserResponse {
 }
 
 export const MsgBlockUserResponse = {
-  encode(
-    _: MsgBlockUserResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgBlockUserResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgBlockUserResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBlockUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBlockUserResponse();
@@ -459,9 +402,7 @@ export const MsgBlockUserResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBlockUserResponse>, I>>(
-    _: I
-  ): MsgBlockUserResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgBlockUserResponse>, I>>(_: I): MsgBlockUserResponse {
     const message = createBaseMsgBlockUserResponse();
     return message;
   },
@@ -472,10 +413,7 @@ function createBaseMsgUnblockUser(): MsgUnblockUser {
 }
 
 export const MsgUnblockUser = {
-  encode(
-    message: MsgUnblockUser,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgUnblockUser, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blocker !== "") {
       writer.uint32(10).string(message.blocker);
     }
@@ -516,9 +454,7 @@ export const MsgUnblockUser = {
     return {
       blocker: isSet(object.blocker) ? String(object.blocker) : "",
       blocked: isSet(object.blocked) ? String(object.blocked) : "",
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
     };
   },
 
@@ -526,21 +462,17 @@ export const MsgUnblockUser = {
     const obj: any = {};
     message.blocker !== undefined && (obj.blocker = message.blocker);
     message.blocked !== undefined && (obj.blocked = message.blocked);
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnblockUser>, I>>(
-    object: I
-  ): MsgUnblockUser {
+  fromPartial<I extends Exact<DeepPartial<MsgUnblockUser>, I>>(object: I): MsgUnblockUser {
     const message = createBaseMsgUnblockUser();
     message.blocker = object.blocker ?? "";
     message.blocked = object.blocked ?? "";
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -550,17 +482,11 @@ function createBaseMsgUnblockUserResponse(): MsgUnblockUserResponse {
 }
 
 export const MsgUnblockUserResponse = {
-  encode(
-    _: MsgUnblockUserResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgUnblockUserResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgUnblockUserResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnblockUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnblockUserResponse();
@@ -584,9 +510,7 @@ export const MsgUnblockUserResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnblockUserResponse>, I>>(
-    _: I
-  ): MsgUnblockUserResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgUnblockUserResponse>, I>>(_: I): MsgUnblockUserResponse {
     const message = createBaseMsgUnblockUserResponse();
     return message;
   },
@@ -595,13 +519,9 @@ export const MsgUnblockUserResponse = {
 /** Msg defines the relationships Msg service. */
 export interface Msg {
   /** CreateRelationship defines a method for creating a new relationship */
-  CreateRelationship(
-    request: MsgCreateRelationship
-  ): Promise<MsgCreateRelationshipResponse>;
+  CreateRelationship(request: MsgCreateRelationship): Promise<MsgCreateRelationshipResponse>;
   /** DeleteRelationship defines a method for deleting a relationship */
-  DeleteRelationship(
-    request: MsgDeleteRelationship
-  ): Promise<MsgDeleteRelationshipResponse>;
+  DeleteRelationship(request: MsgDeleteRelationship): Promise<MsgDeleteRelationshipResponse>;
   /** BlockUser defines a method for blocking a user */
   BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse>;
   /** UnblockUser defines a method for unblocking a user */
@@ -610,102 +530,55 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "desmos.relationships.v1.Msg";
     this.rpc = rpc;
     this.CreateRelationship = this.CreateRelationship.bind(this);
     this.DeleteRelationship = this.DeleteRelationship.bind(this);
     this.BlockUser = this.BlockUser.bind(this);
     this.UnblockUser = this.UnblockUser.bind(this);
   }
-  CreateRelationship(
-    request: MsgCreateRelationship
-  ): Promise<MsgCreateRelationshipResponse> {
+  CreateRelationship(request: MsgCreateRelationship): Promise<MsgCreateRelationshipResponse> {
     const data = MsgCreateRelationship.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "CreateRelationship",
-      data
-    );
-    return promise.then((data) =>
-      MsgCreateRelationshipResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "CreateRelationship", data);
+    return promise.then((data) => MsgCreateRelationshipResponse.decode(new _m0.Reader(data)));
   }
 
-  DeleteRelationship(
-    request: MsgDeleteRelationship
-  ): Promise<MsgDeleteRelationshipResponse> {
+  DeleteRelationship(request: MsgDeleteRelationship): Promise<MsgDeleteRelationshipResponse> {
     const data = MsgDeleteRelationship.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "DeleteRelationship",
-      data
-    );
-    return promise.then((data) =>
-      MsgDeleteRelationshipResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "DeleteRelationship", data);
+    return promise.then((data) => MsgDeleteRelationshipResponse.decode(new _m0.Reader(data)));
   }
 
   BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse> {
     const data = MsgBlockUser.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "BlockUser",
-      data
-    );
-    return promise.then((data) =>
-      MsgBlockUserResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "BlockUser", data);
+    return promise.then((data) => MsgBlockUserResponse.decode(new _m0.Reader(data)));
   }
 
   UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse> {
     const data = MsgUnblockUser.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "UnblockUser",
-      data
-    );
-    return promise.then((data) =>
-      MsgUnblockUserResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "UnblockUser", data);
+    return promise.then((data) => MsgUnblockUserResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

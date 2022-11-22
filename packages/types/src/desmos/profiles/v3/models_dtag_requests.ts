@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 /** DTagTransferRequest represent a DTag transfer request between two users */
 export interface DTagTransferRequest {
@@ -23,10 +23,7 @@ function createBaseDTagTransferRequest(): DTagTransferRequest {
 }
 
 export const DTagTransferRequest = {
-  encode(
-    message: DTagTransferRequest,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: DTagTransferRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.dtagToTrade !== "") {
       writer.uint32(10).string(message.dtagToTrade);
     }
@@ -73,16 +70,13 @@ export const DTagTransferRequest = {
 
   toJSON(message: DTagTransferRequest): unknown {
     const obj: any = {};
-    message.dtagToTrade !== undefined &&
-      (obj.dtagToTrade = message.dtagToTrade);
+    message.dtagToTrade !== undefined && (obj.dtagToTrade = message.dtagToTrade);
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DTagTransferRequest>, I>>(
-    object: I
-  ): DTagTransferRequest {
+  fromPartial<I extends Exact<DeepPartial<DTagTransferRequest>, I>>(object: I): DTagTransferRequest {
     const message = createBaseDTagTransferRequest();
     message.dtagToTrade = object.dtagToTrade ?? "";
     message.sender = object.sender ?? "";
@@ -91,34 +85,17 @@ export const DTagTransferRequest = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

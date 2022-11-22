@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
 /** Subspace contains all the data of a Desmos subspace */
@@ -63,22 +63,11 @@ export interface UserPermission {
 }
 
 function createBaseSubspace(): Subspace {
-  return {
-    id: Long.UZERO,
-    name: "",
-    description: "",
-    treasury: "",
-    owner: "",
-    creator: "",
-    creationTime: undefined,
-  };
+  return { id: Long.UZERO, name: "", description: "", treasury: "", owner: "", creator: "", creationTime: undefined };
 }
 
 export const Subspace = {
-  encode(
-    message: Subspace,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Subspace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -98,10 +87,7 @@ export const Subspace = {
       writer.uint32(50).string(message.creator);
     }
     if (message.creationTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationTime),
-        writer.uint32(58).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationTime), writer.uint32(58).fork()).ldelim();
     }
     return writer;
   },
@@ -132,9 +118,7 @@ export const Subspace = {
           message.creator = reader.string();
           break;
         case 7:
-          message.creationTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -146,39 +130,31 @@ export const Subspace = {
 
   fromJSON(object: any): Subspace {
     return {
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
       treasury: isSet(object.treasury) ? String(object.treasury) : "",
       owner: isSet(object.owner) ? String(object.owner) : "",
       creator: isSet(object.creator) ? String(object.creator) : "",
-      creationTime: isSet(object.creationTime)
-        ? fromJsonTimestamp(object.creationTime)
-        : undefined,
+      creationTime: isSet(object.creationTime) ? fromJsonTimestamp(object.creationTime) : undefined,
     };
   },
 
   toJSON(message: Subspace): unknown {
     const obj: any = {};
-    message.id !== undefined &&
-      (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     message.treasury !== undefined && (obj.treasury = message.treasury);
     message.owner !== undefined && (obj.owner = message.owner);
     message.creator !== undefined && (obj.creator = message.creator);
-    message.creationTime !== undefined &&
-      (obj.creationTime = message.creationTime.toISOString());
+    message.creationTime !== undefined && (obj.creationTime = message.creationTime.toISOString());
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Subspace>, I>>(object: I): Subspace {
     const message = createBaseSubspace();
-    message.id =
-      object.id !== undefined && object.id !== null
-        ? Long.fromValue(object.id)
-        : Long.UZERO;
+    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.UZERO;
     message.name = object.name ?? "";
     message.description = object.description ?? "";
     message.treasury = object.treasury ?? "";
@@ -190,20 +166,11 @@ export const Subspace = {
 };
 
 function createBaseSection(): Section {
-  return {
-    subspaceId: Long.UZERO,
-    id: 0,
-    parentId: 0,
-    name: "",
-    description: "",
-  };
+  return { subspaceId: Long.UZERO, id: 0, parentId: 0, name: "", description: "" };
 }
 
 export const Section = {
-  encode(
-    message: Section,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Section, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -254,9 +221,7 @@ export const Section = {
 
   fromJSON(object: any): Section {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       id: isSet(object.id) ? Number(object.id) : 0,
       parentId: isSet(object.parentId) ? Number(object.parentId) : 0,
       name: isSet(object.name) ? String(object.name) : "",
@@ -266,23 +231,19 @@ export const Section = {
 
   toJSON(message: Section): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.id !== undefined && (obj.id = Math.round(message.id));
-    message.parentId !== undefined &&
-      (obj.parentId = Math.round(message.parentId));
+    message.parentId !== undefined && (obj.parentId = Math.round(message.parentId));
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<Section>, I>>(object: I): Section {
     const message = createBaseSection();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.id = object.id ?? 0;
     message.parentId = object.parentId ?? 0;
     message.name = object.name ?? "";
@@ -292,21 +253,11 @@ export const Section = {
 };
 
 function createBaseUserGroup(): UserGroup {
-  return {
-    subspaceId: Long.UZERO,
-    sectionId: 0,
-    id: 0,
-    name: "",
-    description: "",
-    permissions: [],
-  };
+  return { subspaceId: Long.UZERO, sectionId: 0, id: 0, name: "", description: "", permissions: [] };
 }
 
 export const UserGroup = {
-  encode(
-    message: UserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UserGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -363,29 +314,22 @@ export const UserGroup = {
 
   fromJSON(object: any): UserGroup {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       id: isSet(object.id) ? Number(object.id) : 0,
       name: isSet(object.name) ? String(object.name) : "",
       description: isSet(object.description) ? String(object.description) : "",
-      permissions: Array.isArray(object?.permissions)
-        ? object.permissions.map((e: any) => String(e))
-        : [],
+      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: UserGroup): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined && (obj.sectionId = Math.round(message.sectionId));
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     if (message.permissions) {
       obj.permissions = message.permissions.map((e) => e);
     } else {
@@ -394,14 +338,11 @@ export const UserGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UserGroup>, I>>(
-    object: I
-  ): UserGroup {
+  fromPartial<I extends Exact<DeepPartial<UserGroup>, I>>(object: I): UserGroup {
     const message = createBaseUserGroup();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.sectionId = object.sectionId ?? 0;
     message.id = object.id ?? 0;
     message.name = object.name ?? "";
@@ -416,10 +357,7 @@ function createBaseUserPermission(): UserPermission {
 }
 
 export const UserPermission = {
-  encode(
-    message: UserPermission,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UserPermission, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -464,23 +402,17 @@ export const UserPermission = {
 
   fromJSON(object: any): UserPermission {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       sectionId: isSet(object.sectionId) ? Number(object.sectionId) : 0,
       user: isSet(object.user) ? String(object.user) : "",
-      permissions: Array.isArray(object?.permissions)
-        ? object.permissions.map((e: any) => String(e))
-        : [],
+      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: UserPermission): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.sectionId !== undefined &&
-      (obj.sectionId = Math.round(message.sectionId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.sectionId !== undefined && (obj.sectionId = Math.round(message.sectionId));
     message.user !== undefined && (obj.user = message.user);
     if (message.permissions) {
       obj.permissions = message.permissions.map((e) => e);
@@ -490,14 +422,11 @@ export const UserPermission = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UserPermission>, I>>(
-    object: I
-  ): UserPermission {
+  fromPartial<I extends Exact<DeepPartial<UserPermission>, I>>(object: I): UserPermission {
     const message = createBaseUserPermission();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.sectionId = object.sectionId ?? 0;
     message.user = object.user ?? "";
     message.permissions = object.permissions?.map((e) => e) || [];
@@ -505,34 +434,17 @@ export const UserPermission = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 
@@ -37,7 +37,8 @@ export interface MsgDeleteReport {
 }
 
 /** MsgDeleteReportResponse represents the Msg/DeleteReport response type */
-export interface MsgDeleteReportResponse {}
+export interface MsgDeleteReportResponse {
+}
 
 /**
  * MsgSupportStandardReason represents the message to be used when wanting to
@@ -96,23 +97,15 @@ export interface MsgRemoveReason {
 }
 
 /** MsgRemoveReasonResponse represents the Msg/RemoveReason response type */
-export interface MsgRemoveReasonResponse {}
+export interface MsgRemoveReasonResponse {
+}
 
 function createBaseMsgCreateReport(): MsgCreateReport {
-  return {
-    subspaceId: Long.UZERO,
-    reasonsIds: [],
-    message: "",
-    reporter: "",
-    target: undefined,
-  };
+  return { subspaceId: Long.UZERO, reasonsIds: [], message: "", reporter: "", target: undefined };
 }
 
 export const MsgCreateReport = {
-  encode(
-    message: MsgCreateReport,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgCreateReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -172,12 +165,8 @@ export const MsgCreateReport = {
 
   fromJSON(object: any): MsgCreateReport {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      reasonsIds: Array.isArray(object?.reasonsIds)
-        ? object.reasonsIds.map((e: any) => Number(e))
-        : [],
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      reasonsIds: Array.isArray(object?.reasonsIds) ? object.reasonsIds.map((e: any) => Number(e)) : [],
       message: isSet(object.message) ? String(object.message) : "",
       reporter: isSet(object.reporter) ? String(object.reporter) : "",
       target: isSet(object.target) ? Any.fromJSON(object.target) : undefined,
@@ -186,8 +175,7 @@ export const MsgCreateReport = {
 
   toJSON(message: MsgCreateReport): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     if (message.reasonsIds) {
       obj.reasonsIds = message.reasonsIds.map((e) => Math.round(e));
     } else {
@@ -195,26 +183,21 @@ export const MsgCreateReport = {
     }
     message.message !== undefined && (obj.message = message.message);
     message.reporter !== undefined && (obj.reporter = message.reporter);
-    message.target !== undefined &&
-      (obj.target = message.target ? Any.toJSON(message.target) : undefined);
+    message.target !== undefined && (obj.target = message.target ? Any.toJSON(message.target) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateReport>, I>>(
-    object: I
-  ): MsgCreateReport {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateReport>, I>>(object: I): MsgCreateReport {
     const message = createBaseMsgCreateReport();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.reasonsIds = object.reasonsIds?.map((e) => e) || [];
     message.message = object.message ?? "";
     message.reporter = object.reporter ?? "";
-    message.target =
-      object.target !== undefined && object.target !== null
-        ? Any.fromPartial(object.target)
-        : undefined;
+    message.target = (object.target !== undefined && object.target !== null)
+      ? Any.fromPartial(object.target)
+      : undefined;
     return message;
   },
 };
@@ -224,26 +207,17 @@ function createBaseMsgCreateReportResponse(): MsgCreateReportResponse {
 }
 
 export const MsgCreateReportResponse = {
-  encode(
-    message: MsgCreateReportResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgCreateReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.reportId.isZero()) {
       writer.uint32(8).uint64(message.reportId);
     }
     if (message.creationDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.creationDate),
-        writer.uint32(18).fork()
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.creationDate), writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgCreateReportResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateReportResponse();
@@ -254,9 +228,7 @@ export const MsgCreateReportResponse = {
           message.reportId = reader.uint64() as Long;
           break;
         case 2:
-          message.creationDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32())
-          );
+          message.creationDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -268,32 +240,23 @@ export const MsgCreateReportResponse = {
 
   fromJSON(object: any): MsgCreateReportResponse {
     return {
-      reportId: isSet(object.reportId)
-        ? Long.fromString(object.reportId)
-        : Long.UZERO,
-      creationDate: isSet(object.creationDate)
-        ? fromJsonTimestamp(object.creationDate)
-        : undefined,
+      reportId: isSet(object.reportId) ? Long.fromValue(object.reportId) : Long.UZERO,
+      creationDate: isSet(object.creationDate) ? fromJsonTimestamp(object.creationDate) : undefined,
     };
   },
 
   toJSON(message: MsgCreateReportResponse): unknown {
     const obj: any = {};
-    message.reportId !== undefined &&
-      (obj.reportId = (message.reportId || Long.UZERO).toString());
-    message.creationDate !== undefined &&
-      (obj.creationDate = message.creationDate.toISOString());
+    message.reportId !== undefined && (obj.reportId = (message.reportId || Long.UZERO).toString());
+    message.creationDate !== undefined && (obj.creationDate = message.creationDate.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateReportResponse>, I>>(
-    object: I
-  ): MsgCreateReportResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgCreateReportResponse>, I>>(object: I): MsgCreateReportResponse {
     const message = createBaseMsgCreateReportResponse();
-    message.reportId =
-      object.reportId !== undefined && object.reportId !== null
-        ? Long.fromValue(object.reportId)
-        : Long.UZERO;
+    message.reportId = (object.reportId !== undefined && object.reportId !== null)
+      ? Long.fromValue(object.reportId)
+      : Long.UZERO;
     message.creationDate = object.creationDate ?? undefined;
     return message;
   },
@@ -304,10 +267,7 @@ function createBaseMsgDeleteReport(): MsgDeleteReport {
 }
 
 export const MsgDeleteReport = {
-  encode(
-    message: MsgDeleteReport,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgDeleteReport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -346,38 +306,28 @@ export const MsgDeleteReport = {
 
   fromJSON(object: any): MsgDeleteReport {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      reportId: isSet(object.reportId)
-        ? Long.fromString(object.reportId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      reportId: isSet(object.reportId) ? Long.fromValue(object.reportId) : Long.UZERO,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgDeleteReport): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.reportId !== undefined &&
-      (obj.reportId = (message.reportId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.reportId !== undefined && (obj.reportId = (message.reportId || Long.UZERO).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteReport>, I>>(
-    object: I
-  ): MsgDeleteReport {
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteReport>, I>>(object: I): MsgDeleteReport {
     const message = createBaseMsgDeleteReport();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
-    message.reportId =
-      object.reportId !== undefined && object.reportId !== null
-        ? Long.fromValue(object.reportId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
+    message.reportId = (object.reportId !== undefined && object.reportId !== null)
+      ? Long.fromValue(object.reportId)
+      : Long.UZERO;
     message.signer = object.signer ?? "";
     return message;
   },
@@ -388,17 +338,11 @@ function createBaseMsgDeleteReportResponse(): MsgDeleteReportResponse {
 }
 
 export const MsgDeleteReportResponse = {
-  encode(
-    _: MsgDeleteReportResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgDeleteReportResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgDeleteReportResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteReportResponse();
@@ -422,9 +366,7 @@ export const MsgDeleteReportResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeleteReportResponse>, I>>(
-    _: I
-  ): MsgDeleteReportResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgDeleteReportResponse>, I>>(_: I): MsgDeleteReportResponse {
     const message = createBaseMsgDeleteReportResponse();
     return message;
   },
@@ -435,10 +377,7 @@ function createBaseMsgSupportStandardReason(): MsgSupportStandardReason {
 }
 
 export const MsgSupportStandardReason = {
-  encode(
-    message: MsgSupportStandardReason,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgSupportStandardReason, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -451,10 +390,7 @@ export const MsgSupportStandardReason = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgSupportStandardReason {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSupportStandardReason {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSupportStandardReason();
@@ -480,34 +416,25 @@ export const MsgSupportStandardReason = {
 
   fromJSON(object: any): MsgSupportStandardReason {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
-      standardReasonId: isSet(object.standardReasonId)
-        ? Number(object.standardReasonId)
-        : 0,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
+      standardReasonId: isSet(object.standardReasonId) ? Number(object.standardReasonId) : 0,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgSupportStandardReason): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.standardReasonId !== undefined &&
-      (obj.standardReasonId = Math.round(message.standardReasonId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.standardReasonId !== undefined && (obj.standardReasonId = Math.round(message.standardReasonId));
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSupportStandardReason>, I>>(
-    object: I
-  ): MsgSupportStandardReason {
+  fromPartial<I extends Exact<DeepPartial<MsgSupportStandardReason>, I>>(object: I): MsgSupportStandardReason {
     const message = createBaseMsgSupportStandardReason();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.standardReasonId = object.standardReasonId ?? 0;
     message.signer = object.signer ?? "";
     return message;
@@ -519,20 +446,14 @@ function createBaseMsgSupportStandardReasonResponse(): MsgSupportStandardReasonR
 }
 
 export const MsgSupportStandardReasonResponse = {
-  encode(
-    message: MsgSupportStandardReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgSupportStandardReasonResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reasonsIds !== 0) {
       writer.uint32(8).uint32(message.reasonsIds);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgSupportStandardReasonResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSupportStandardReasonResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSupportStandardReasonResponse();
@@ -551,21 +472,18 @@ export const MsgSupportStandardReasonResponse = {
   },
 
   fromJSON(object: any): MsgSupportStandardReasonResponse {
-    return {
-      reasonsIds: isSet(object.reasonsIds) ? Number(object.reasonsIds) : 0,
-    };
+    return { reasonsIds: isSet(object.reasonsIds) ? Number(object.reasonsIds) : 0 };
   },
 
   toJSON(message: MsgSupportStandardReasonResponse): unknown {
     const obj: any = {};
-    message.reasonsIds !== undefined &&
-      (obj.reasonsIds = Math.round(message.reasonsIds));
+    message.reasonsIds !== undefined && (obj.reasonsIds = Math.round(message.reasonsIds));
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgSupportStandardReasonResponse>, I>
-  >(object: I): MsgSupportStandardReasonResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgSupportStandardReasonResponse>, I>>(
+    object: I,
+  ): MsgSupportStandardReasonResponse {
     const message = createBaseMsgSupportStandardReasonResponse();
     message.reasonsIds = object.reasonsIds ?? 0;
     return message;
@@ -577,10 +495,7 @@ function createBaseMsgAddReason(): MsgAddReason {
 }
 
 export const MsgAddReason = {
-  encode(
-    message: MsgAddReason,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddReason, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -625,9 +540,7 @@ export const MsgAddReason = {
 
   fromJSON(object: any): MsgAddReason {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       title: isSet(object.title) ? String(object.title) : "",
       description: isSet(object.description) ? String(object.description) : "",
       signer: isSet(object.signer) ? String(object.signer) : "",
@@ -636,23 +549,18 @@ export const MsgAddReason = {
 
   toJSON(message: MsgAddReason): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddReason>, I>>(
-    object: I
-  ): MsgAddReason {
+  fromPartial<I extends Exact<DeepPartial<MsgAddReason>, I>>(object: I): MsgAddReason {
     const message = createBaseMsgAddReason();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.signer = object.signer ?? "";
@@ -665,20 +573,14 @@ function createBaseMsgAddReasonResponse(): MsgAddReasonResponse {
 }
 
 export const MsgAddReasonResponse = {
-  encode(
-    message: MsgAddReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgAddReasonResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.reasonId !== 0) {
       writer.uint32(8).uint32(message.reasonId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgAddReasonResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddReasonResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddReasonResponse();
@@ -697,21 +599,16 @@ export const MsgAddReasonResponse = {
   },
 
   fromJSON(object: any): MsgAddReasonResponse {
-    return {
-      reasonId: isSet(object.reasonId) ? Number(object.reasonId) : 0,
-    };
+    return { reasonId: isSet(object.reasonId) ? Number(object.reasonId) : 0 };
   },
 
   toJSON(message: MsgAddReasonResponse): unknown {
     const obj: any = {};
-    message.reasonId !== undefined &&
-      (obj.reasonId = Math.round(message.reasonId));
+    message.reasonId !== undefined && (obj.reasonId = Math.round(message.reasonId));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddReasonResponse>, I>>(
-    object: I
-  ): MsgAddReasonResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgAddReasonResponse>, I>>(object: I): MsgAddReasonResponse {
     const message = createBaseMsgAddReasonResponse();
     message.reasonId = object.reasonId ?? 0;
     return message;
@@ -723,10 +620,7 @@ function createBaseMsgRemoveReason(): MsgRemoveReason {
 }
 
 export const MsgRemoveReason = {
-  encode(
-    message: MsgRemoveReason,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: MsgRemoveReason, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
@@ -765,9 +659,7 @@ export const MsgRemoveReason = {
 
   fromJSON(object: any): MsgRemoveReason {
     return {
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
       reasonId: isSet(object.reasonId) ? Number(object.reasonId) : 0,
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
@@ -775,22 +667,17 @@ export const MsgRemoveReason = {
 
   toJSON(message: MsgRemoveReason): unknown {
     const obj: any = {};
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-    message.reasonId !== undefined &&
-      (obj.reasonId = Math.round(message.reasonId));
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.reasonId !== undefined && (obj.reasonId = Math.round(message.reasonId));
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveReason>, I>>(
-    object: I
-  ): MsgRemoveReason {
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveReason>, I>>(object: I): MsgRemoveReason {
     const message = createBaseMsgRemoveReason();
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     message.reasonId = object.reasonId ?? 0;
     message.signer = object.signer ?? "";
     return message;
@@ -802,17 +689,11 @@ function createBaseMsgRemoveReasonResponse(): MsgRemoveReasonResponse {
 }
 
 export const MsgRemoveReasonResponse = {
-  encode(
-    _: MsgRemoveReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(_: MsgRemoveReasonResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number
-  ): MsgRemoveReasonResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveReasonResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveReasonResponse();
@@ -836,9 +717,7 @@ export const MsgRemoveReasonResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveReasonResponse>, I>>(
-    _: I
-  ): MsgRemoveReasonResponse {
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveReasonResponse>, I>>(_: I): MsgRemoveReasonResponse {
     const message = createBaseMsgRemoveReasonResponse();
     return message;
   },
@@ -854,9 +733,7 @@ export interface Msg {
    * SupportStandardReason allows to support one of the reasons present inside
    * the module params
    */
-  SupportStandardReason(
-    request: MsgSupportStandardReason
-  ): Promise<MsgSupportStandardReasonResponse>;
+  SupportStandardReason(request: MsgSupportStandardReason): Promise<MsgSupportStandardReasonResponse>;
   /** AddReason allows to add a new supported reporting reason */
   AddReason(request: MsgAddReason): Promise<MsgAddReasonResponse>;
   /** RemoveReason allows to remove a supported reporting reason */
@@ -865,7 +742,9 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "desmos.reports.v1.Msg";
     this.rpc = rpc;
     this.CreateReport = this.CreateReport.bind(this);
     this.DeleteReport = this.DeleteReport.bind(this);
@@ -875,103 +754,50 @@ export class MsgClientImpl implements Msg {
   }
   CreateReport(request: MsgCreateReport): Promise<MsgCreateReportResponse> {
     const data = MsgCreateReport.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Msg",
-      "CreateReport",
-      data
-    );
-    return promise.then((data) =>
-      MsgCreateReportResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "CreateReport", data);
+    return promise.then((data) => MsgCreateReportResponse.decode(new _m0.Reader(data)));
   }
 
   DeleteReport(request: MsgDeleteReport): Promise<MsgDeleteReportResponse> {
     const data = MsgDeleteReport.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Msg",
-      "DeleteReport",
-      data
-    );
-    return promise.then((data) =>
-      MsgDeleteReportResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "DeleteReport", data);
+    return promise.then((data) => MsgDeleteReportResponse.decode(new _m0.Reader(data)));
   }
 
-  SupportStandardReason(
-    request: MsgSupportStandardReason
-  ): Promise<MsgSupportStandardReasonResponse> {
+  SupportStandardReason(request: MsgSupportStandardReason): Promise<MsgSupportStandardReasonResponse> {
     const data = MsgSupportStandardReason.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Msg",
-      "SupportStandardReason",
-      data
-    );
-    return promise.then((data) =>
-      MsgSupportStandardReasonResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "SupportStandardReason", data);
+    return promise.then((data) => MsgSupportStandardReasonResponse.decode(new _m0.Reader(data)));
   }
 
   AddReason(request: MsgAddReason): Promise<MsgAddReasonResponse> {
     const data = MsgAddReason.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Msg",
-      "AddReason",
-      data
-    );
-    return promise.then((data) =>
-      MsgAddReasonResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "AddReason", data);
+    return promise.then((data) => MsgAddReasonResponse.decode(new _m0.Reader(data)));
   }
 
   RemoveReason(request: MsgRemoveReason): Promise<MsgRemoveReasonResponse> {
     const data = MsgRemoveReason.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Msg",
-      "RemoveReason",
-      data
-    );
-    return promise.then((data) =>
-      MsgRemoveReasonResponse.decode(new _m0.Reader(data))
-    );
+    const promise = this.rpc.request(this.service, "RemoveReason", data);
+    return promise.then((data) => MsgRemoveReasonResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

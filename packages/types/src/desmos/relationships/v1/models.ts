@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
+import _m0 from "protobufjs/minimal";
 
 /**
  * Relationship is the struct of a relationship.
@@ -41,10 +41,7 @@ function createBaseRelationship(): Relationship {
 }
 
 export const Relationship = {
-  encode(
-    message: Relationship,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Relationship, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
@@ -84,35 +81,26 @@ export const Relationship = {
   fromJSON(object: any): Relationship {
     return {
       creator: isSet(object.creator) ? String(object.creator) : "",
-      counterparty: isSet(object.counterparty)
-        ? String(object.counterparty)
-        : "",
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      counterparty: isSet(object.counterparty) ? String(object.counterparty) : "",
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
     };
   },
 
   toJSON(message: Relationship): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
-    message.counterparty !== undefined &&
-      (obj.counterparty = message.counterparty);
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty);
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Relationship>, I>>(
-    object: I
-  ): Relationship {
+  fromPartial<I extends Exact<DeepPartial<Relationship>, I>>(object: I): Relationship {
     const message = createBaseRelationship();
     message.creator = object.creator ?? "";
     message.counterparty = object.counterparty ?? "";
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -122,10 +110,7 @@ function createBaseUserBlock(): UserBlock {
 }
 
 export const UserBlock = {
-  encode(
-    message: UserBlock,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: UserBlock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.blocker !== "") {
       writer.uint32(10).string(message.blocker);
     }
@@ -173,9 +158,7 @@ export const UserBlock = {
       blocker: isSet(object.blocker) ? String(object.blocker) : "",
       blocked: isSet(object.blocked) ? String(object.blocked) : "",
       reason: isSet(object.reason) ? String(object.reason) : "",
-      subspaceId: isSet(object.subspaceId)
-        ? Long.fromString(object.subspaceId)
-        : Long.UZERO,
+      subspaceId: isSet(object.subspaceId) ? Long.fromValue(object.subspaceId) : Long.UZERO,
     };
   },
 
@@ -184,54 +167,33 @@ export const UserBlock = {
     message.blocker !== undefined && (obj.blocker = message.blocker);
     message.blocked !== undefined && (obj.blocked = message.blocked);
     message.reason !== undefined && (obj.reason = message.reason);
-    message.subspaceId !== undefined &&
-      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.subspaceId !== undefined && (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<UserBlock>, I>>(
-    object: I
-  ): UserBlock {
+  fromPartial<I extends Exact<DeepPartial<UserBlock>, I>>(object: I): UserBlock {
     const message = createBaseUserBlock();
     message.blocker = object.blocker ?? "";
     message.blocked = object.blocked ?? "";
     message.reason = object.reason ?? "";
-    message.subspaceId =
-      object.subspaceId !== undefined && object.subspaceId !== null
-        ? Long.fromValue(object.subspaceId)
-        : Long.UZERO;
+    message.subspaceId = (object.subspaceId !== undefined && object.subspaceId !== null)
+      ? Long.fromValue(object.subspaceId)
+      : Long.UZERO;
     return message;
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

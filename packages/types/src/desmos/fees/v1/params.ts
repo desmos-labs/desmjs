@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Long from "long";
-import * as _m0 from "protobufjs/minimal";
-import { MinFee } from "../../../desmos/fees/v1/min_fee";
+import _m0 from "protobufjs/minimal";
+import { MinFee } from "./min_fee";
 
 /** Params contains the parameters for the fees module */
 export interface Params {
@@ -13,10 +13,7 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  encode(
-    message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
-  ): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minFees) {
       MinFee.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -42,19 +39,13 @@ export const Params = {
   },
 
   fromJSON(object: any): Params {
-    return {
-      minFees: Array.isArray(object?.minFees)
-        ? object.minFees.map((e: any) => MinFee.fromJSON(e))
-        : [],
-    };
+    return { minFees: Array.isArray(object?.minFees) ? object.minFees.map((e: any) => MinFee.fromJSON(e)) : [] };
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
     if (message.minFees) {
-      obj.minFees = message.minFees.map((e) =>
-        e ? MinFee.toJSON(e) : undefined
-      );
+      obj.minFees = message.minFees.map((e) => e ? MinFee.toJSON(e) : undefined);
     } else {
       obj.minFees = [];
     }
@@ -68,34 +59,17 @@ export const Params = {
   },
 };
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P>>,
-        never
-      >;
+type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
