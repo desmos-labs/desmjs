@@ -1810,7 +1810,7 @@ __metadata:
     "@cosmjs/amino": ^0.29.4
     "@cosmjs/crypto": ^0.29.4
     "@cosmjs/encoding": ^0.29.4
-    "@cosmjs/math": ^0.29.3
+    "@cosmjs/math": ^0.29.4
     "@cosmjs/proto-signing": ^0.29.4
     "@cosmjs/stargate": ^0.29.4
     "@cosmjs/tendermint-rpc": ^0.29.3
@@ -1856,7 +1856,7 @@ __metadata:
     "@cosmjs/amino": ^0.29.4
     "@cosmjs/crypto": ^0.29.4
     "@cosmjs/encoding": ^0.29.4
-    "@cosmjs/math": ^0.29.3
+    "@cosmjs/math": ^0.29.4
     "@cosmjs/proto-signing": ^0.29.4
     "@cosmjs/stargate": ^0.29.4
     "@cosmjs/tendermint-rpc": ^0.29.3
@@ -1892,7 +1892,7 @@ __metadata:
     "@cosmjs/cosmwasm-stargate": ^0.29.3
     "@cosmjs/crypto": ^0.29.4
     "@cosmjs/encoding": ^0.29.4
-    "@cosmjs/math": ^0.29.3
+    "@cosmjs/math": ^0.29.4
     "@cosmjs/proto-signing": ^0.29.4
     "@cosmjs/stargate": ^0.29.4
     "@cosmjs/tendermint-rpc": ^0.29.3
