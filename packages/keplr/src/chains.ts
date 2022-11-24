@@ -2,7 +2,6 @@ import { ChainInfo } from "@keplr-wallet/types";
 import {
   ChainInfo as DesmJSChainInfo,
   DesmosBech32Config,
-  DesmosGasPriceStep,
   getChainId,
 } from "@desmoslabs/desmjs";
 
@@ -26,7 +25,6 @@ export async function setupChainInfo(
     currencies: chain.currencies,
     feeCurrencies: chain.feeCurrencies,
     stakeCurrency: chain.stakeCurrency,
-    gasPriceStep: DesmosGasPriceStep,
     features: [...DesmosBaseFeatures],
   };
 }
