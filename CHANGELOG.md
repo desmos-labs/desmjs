@@ -1,5 +1,10 @@
+## Version 4.6.3
+### Features
+- Updated Desmos to `4.6.3`
+- Added `getPubKeyRawBytes` utility method to get the public key raw bytes from a `SignatureResult` instance
+
 ## Version 4.6.2
-### Feartures
+### Features
 - Bumped `@cosmjs` to `0.29.3`
 
 ## Version 4.6.1
