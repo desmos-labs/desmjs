@@ -1,4 +1,4 @@
-import { ChainInfo } from "@keplr-wallet/types";
+import { ChainInfo, FeeCurrency } from "@keplr-wallet/types";
 import {
   ChainInfo as DesmJSChainInfo,
   DesmosBech32Config,
@@ -24,9 +24,13 @@ export async function setupChainInfo(
     bip44: chain.bip44,
     bech32Config: DesmosBech32Config,
     currencies: chain.currencies,
-    feeCurrencies: chain.feeCurrencies,
+    feeCurrencies: chain.feeCurrencies.map(currency => {
+      return {
+        ...currency,
+        gasPriceStep: DesmosGasPriceStep,
+      }
+    }),
     stakeCurrency: chain.stakeCurrency,
-    gasPriceStep: DesmosGasPriceStep,
     features: [...DesmosBaseFeatures],
   };
 }
