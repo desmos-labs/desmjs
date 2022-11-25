@@ -21,8 +21,15 @@ import {
   testUser1,
   testUser2,
 } from "./testutils";
-import { getSignatureBytes, getSignedBytes } from "./signatureresult";
 import {
+  getPubKeyBytes,
+  getPubKeyRawBytes,
+  getSignatureBytes,
+  getSignedBytes,
+  SignatureResult,
+} from "./signatureresult";
+import {
+  MsgAuthenticateEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgSaveProfileEncodeObject,
 } from "./encodeobjects";
@@ -51,6 +58,38 @@ describe("DesmosClient", () => {
     );
     return [signer, client];
   }
+
+  describe("SignatureResult utils", () => {
+    async function getSignatureResult(): Promise<SignatureResult> {
+      const [signer, client] = await getSignerAndClient();
+      const accounts = await signer.getAccounts();
+      const { address } = accounts[0];
+      const msg: MsgAuthenticateEncodeObject = {
+        typeUrl: "/desmjs.v1.MsgAuthenticate",
+        value: {
+          user: address,
+          nonce: Uint8Array.of(),
+        },
+      };
+
+      return client.signTx(address, [msg], {
+        gas: "0",
+        amount: [],
+      });
+    }
+
+    it("test getPubKeyRawBytes", async () => {
+      const result = await getSignatureResult();
+      const rawPubKeyBytes = getPubKeyRawBytes(result);
+      expect(rawPubKeyBytes.length).toBe(33);
+    });
+
+    it("test getPubKeyBytes", async () => {
+      const result = await getSignatureResult();
+      const pubKeyBytes = getPubKeyBytes(result);
+      expect(pubKeyBytes).not.toBeNull();
+    });
+  });
 
   describe("Transaction signing", () => {
     /**

@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-walletconnect",
-  "version": "4.6.2",
+  "version": "4.6.3",
   "description": "WalletConnect integration for DesmJS",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>",
@@ -55,7 +55,7 @@
     "babel-jest": "^29.3.1",
     "jest": "^29.3.1",
     "ts-jest": "^29.0.3",
-    "ts-proto": "^1.132.0",
+    "ts-proto": "^1.133.0",
     "typescript": "^4.9.3"
   }
 }

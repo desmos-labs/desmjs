@@ -1617,7 +1617,7 @@ __metadata:
     jest: ^29.3.1
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.132.0
+    ts-proto: ^1.133.0
     typescript: ^4.9.3
   languageName: unknown
   linkType: soft
@@ -1630,7 +1630,7 @@ __metadata:
     "@types/node": ^18.11.9
     long: ^4.0.0
     protobufjs: ^7.1.2
-    ts-proto: ^1.132.0
+    ts-proto: ^1.133.0
     ts-protoc-gen: ^0.15.0
     typescript: ^4.9.3
   languageName: unknown
@@ -1666,7 +1666,7 @@ __metadata:
     jest: ^29.3.1
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.132.0
+    ts-proto: ^1.133.0
     typescript: ^4.9.3
   languageName: unknown
   linkType: soft
@@ -1698,7 +1698,7 @@ __metadata:
     jest: ^29.3.1
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.132.0
+    ts-proto: ^1.133.0
     typescript: ^4.9.3
   languageName: unknown
   linkType: soft
@@ -4110,7 +4110,7 @@ __metadata:
     prettier: ^2.8.0
     pretty-quick: ^3.1.3
     ts-jest: ^29.0.3
-    ts-proto: ^1.132.0
+    ts-proto: ^1.133.0
     tsc: ^2.0.4
     typescript: ^4.9.3
   languageName: unknown
@@ -8192,9 +8192,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-proto@npm:^1.132.0":
-  version: 1.132.0
-  resolution: "ts-proto@npm:1.132.0"
+"ts-proto@npm:^1.133.0":
+  version: 1.133.0
+  resolution: "ts-proto@npm:1.133.0"
   dependencies:
     "@types/object-hash": ^1.3.0
     dataloader: ^1.4.0
@@ -8204,7 +8204,7 @@ __metadata:
     ts-proto-descriptors: 1.7.1
   bin:
     protoc-gen-ts_proto: protoc-gen-ts_proto
-  checksum: 485850d813be50cfc740f5b90c9f7b99015bc16d79636277d150a719f7e01d7d54b2bcc654d631f821fe03fad1fc9af5ff88cdf6b16eed7fba68d580abdb80e7
+  checksum: 01b089bda90bac8dfcce2be5d9d555a8e538283c61bfc933e029e72a200ac2b4fd27fb8759d8ae6c05857998360b5cf34affad0ca8d76d18217e9909d12f7976
   languageName: node
   linkType: hard
 

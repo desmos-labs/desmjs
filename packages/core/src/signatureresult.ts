@@ -47,6 +47,13 @@ export function isStdSignDoc(value: StdSignDoc | SignDoc): value is StdSignDoc {
 }
 
 /**
+ * Returns the public key raw bytes, trimming the 2 bytes prefix that is usually present inside the key value.
+ */
+export function getPubKeyRawBytes(result: SignatureResult): Uint8Array {
+  return result.pubKey.value.slice(2);
+}
+
+/**
  * Returns the public key bytes associated with the given result.
  */
 export function getPubKeyBytes(result: SignatureResult): Uint8Array {
