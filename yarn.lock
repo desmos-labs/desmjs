@@ -1606,7 +1606,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": ^0.29.4
     "@cosmjs/utils": ^0.29.4
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.11.20
+    "@keplr-wallet/types": 0.11.21
     "@types/jest": ^29.2.3
     "@types/long": ^4.0.1
     "@types/node": ^18.11.9
@@ -2104,14 +2104,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.11.20":
-  version: 0.11.20
-  resolution: "@keplr-wallet/types@npm:0.11.20"
+"@keplr-wallet/types@npm:0.11.21":
+  version: 0.11.21
+  resolution: "@keplr-wallet/types@npm:0.11.21"
   dependencies:
     axios: ^0.27.2
     long: ^4.0.0
     secretjs: 0.17.7
-  checksum: 3d87a49393d7990e772014d9d623601e833cdf7a484a589c17fb31e2681abfa6eabd088c4d2681f19cd18403e3755d687fce2816a0279c034fb39d522a098c19
+  checksum: 74369d238c992ec2649140dfdccac125e999803c468937985dc8fc8f4d2043a996cb36334099ad0de3b6a7688183f0af79058e179bdfefd2575138d04f31d5d8
   languageName: node
   linkType: hard
 
