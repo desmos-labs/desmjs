@@ -225,6 +225,7 @@ export class WalletConnectSigner extends Signer {
       throw e
     }
 
+    this.qrCodeModalController.close();
     this.subscribeToEvents();
     this.updateStatus(SignerStatus.Connected);
   }

@@ -10,6 +10,36 @@ import {StdSignDoc} from "@cosmjs/amino";
 import {AuthInfo, SignDoc, TxBody} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import Long from "long";
 
+class MockQrCodeModalController implements QrCodeModalController {
+  private _closed: boolean;
+  private readonly onOpen: (uri: string, onClose: () => void) => void;
+
+  private closeCb: (() => void) | undefined;
+
+  constructor(onOpen: (uri: string, onClose: () => void) => void) {
+    this._closed = true;
+    this.onOpen = onOpen;
+    this.closeCb = undefined;
+  }
+
+  get isClosed(): boolean {
+    return this._closed;
+  }
+
+  open(uri: string, onClose: () => void) {
+    this._closed = false;
+    this.closeCb = onClose;
+    this.onOpen(uri, onClose);
+  }
+
+  close() {
+    this._closed = true;
+    if (this.closeCb !== undefined) {
+      this.closeCb()
+    }
+  }
+}
+
 async function mockWalletWalletConnectClient(signMode: SigningMode): Promise<{walletClient: SignClient, signer: Signer}> {
   const signer = await OfflineSignerAdapter.generate(signMode);
   const walletClient = await SignClient.init({
@@ -149,15 +179,10 @@ async function mockDAppWalletConnectClient(): Promise<SignClient> {
   });
 }
 
-function mockQrCodeController(walletClient: SignClient): QrCodeModalController {
-  return {
-    open(uri: string, _: () => void) {
-      // Simulate QRCode scan from the wallet
-      walletClient.pair({uri});
-    },
-    close() {
-    }
-  }
+function mockQrCodeController(walletClient: SignClient): MockQrCodeModalController {
+  return new MockQrCodeModalController((uri, _) => {
+    walletClient.pair({uri});
+  })
 }
 
 describe("WalletConnectSigner", () => {
@@ -167,16 +192,18 @@ describe("WalletConnectSigner", () => {
     // Prepare the SignClient used from a Wallet
     const {walletClient, signer} = await mockWalletWalletConnectClient(SigningMode.DIRECT);
     const dappClient = await mockDAppWalletConnectClient();
+    const qrCodeController = mockQrCodeController(walletClient);
 
     const walletConnectSigner = new WalletConnectSigner(dappClient, {
       chain: 'desmos:desmos-mainnet',
       signingMode: signer.signingMode,
-      qrCodeModalController: mockQrCodeController(walletClient),
+      qrCodeModalController: qrCodeController,
     });
     await walletConnectSigner.connect();
 
     expect(walletConnectSigner.status).toBe(SignerStatus.Connected);
     expect(dappClient.session.values).toHaveLength(1);
+    expect(qrCodeController.isClosed).toBe(true);
   });
 
   it("Reconnect successfully", async () => {
