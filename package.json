@@ -27,6 +27,7 @@
     "packages/core",
     "packages/types",
     "packages/walletconnect",
+    "packages/walletconnect-v2",
     "packages/keplr"
   ],
   "scripts": {
