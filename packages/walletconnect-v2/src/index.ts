@@ -1,4 +1,4 @@
-import WalletConnect from "@walletconnect/sign-client";
+import SignClient from "@walletconnect/sign-client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
 
 export * from "./decode";
@@ -9,4 +9,4 @@ export * from "./signer";
 export * from "./types";
 
 // Export the WalletConnect types
-export { WalletConnect, QRCodeModal };
+export { SignClient, QRCodeModal };
