@@ -41,13 +41,9 @@ export class WalletConnectSigner extends Signer {
 
   private readonly qrCodeModalController: QrCodeModalController
 
-  private readonly sessionUpdateListener = (params: SignClientTypes.EventArguments["session_update"]) => {
-    console.log("WalletConnectSigner.sessionUpdateListener", params);
-  }
-
-  private readonly sessionDeleteListener = (params: SignClientTypes.EventArguments["session_delete"]) => {
-    console.log("WalletConnectSigner.sessionDeleteListener", params);
+  private readonly sessionDeleteListener = (_: SignClientTypes.EventArguments["session_delete"]) => {
     this.updateStatus(SignerStatus.Disconnecting);
+    this.unsubscribeEvents()
     this.clearSessionDependentResources();
     this.updateStatus(SignerStatus.NotConnected);
   }
@@ -68,8 +64,6 @@ export class WalletConnectSigner extends Signer {
    * @private
    */
   private subscribeToEvents() {
-    // Subscribe to the session update event
-    this.client.on("session_update", this.sessionUpdateListener);
     // Subscript to disconnect session
     this.client.on("session_delete", this.sessionDeleteListener);
   }
@@ -239,9 +233,9 @@ export class WalletConnectSigner extends Signer {
     }
 
     this.updateStatus(SignerStatus.Disconnecting);
-    try {
-      this.unsubscribeEvents();
+    this.unsubscribeEvents();
 
+    try {
       await this.client.disconnect({
         topic: this.walletConnectSession!.topic,
         reason: getSdkError("USER_DISCONNECTED")
