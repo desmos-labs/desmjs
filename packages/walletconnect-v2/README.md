@@ -15,6 +15,6 @@ by signing transactions through a [WalletConnect v2](https://walletconnect.com) 
 
 In order to run the unit-tests of this package you need a WalletConnect project id. 
 Such id can be obtained from the [WalletConnect cloud](https://cloud.walletconnect.com/).  
-After obtaining the project id copy the `.example.test.env` to `.test.env` and place
-the obtained project id into the `WC_PROJECT_ID` variable.  
-After having prepared the `.test.env` file you can run `yarn run unit-tests` to execute the unit tests.
+Once you have such id you need to: 
+1. copy the `.example.test.env` to `.test.env`, and place the obtained project id into the `WC_PROJECT_ID` variable.  
+2. run  `yarn run unit-tests`
