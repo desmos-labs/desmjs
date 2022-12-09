@@ -35,3 +35,6 @@ yarn-error.log*
 scripts/desmos
 # Ignore desmos home
 scripts/.desmos
+
+# Ignore .test.env
+**/.test.env
