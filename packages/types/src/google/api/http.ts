@@ -245,23 +245,23 @@ export interface HttpRule {
    */
   selector: string;
   /** Used for listing and getting information about resources. */
-  get:
+  get?:
     | string
     | undefined;
   /** Used for updating a resource. */
-  put:
+  put?:
     | string
     | undefined;
   /** Used for creating a resource. */
-  post:
+  post?:
     | string
     | undefined;
   /** Used for deleting a resource. */
-  delete:
+  delete?:
     | string
     | undefined;
   /** Used for updating a resource. */
-  patch:
+  patch?:
     | string
     | undefined;
   /**
