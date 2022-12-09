@@ -38,10 +38,10 @@ jobs:
           yarn workspace @desmoslabs/desmjs integration-tests
 
       - name: Prepare WalletConnect unit tests env variables
-        run: |
-          echo "WC_PROJECT_ID=$WC_PROJECT_ID" >> ./packages/walletconnect-v2/.test.env
         env:
           WC_PROJECT_ID: ${{secrets.WC_PROJECT_ID}}
+        run: |
+          echo "WC_PROJECT_ID=$WC_PROJECT_ID" >> ./packages/walletconnect-v2/.test.env
 
       - name: Run WalletConnect signer unit tests
         run: yarn workspace @desmoslabs/desmjs-walletconnect-v2 unit-tests
