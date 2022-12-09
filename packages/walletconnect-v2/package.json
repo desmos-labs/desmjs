@@ -27,10 +27,10 @@
     "unit-tests": "jest --forceExit \".*unit.spec.ts\""
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.29.4",
-    "@cosmjs/encoding": "^0.29.4",
-    "@cosmjs/proto-signing": "^0.29.4",
-    "@cosmjs/utils": "^0.29.4",
+    "@cosmjs/amino": "^0.29.5",
+    "@cosmjs/encoding": "^0.29.5",
+    "@cosmjs/proto-signing": "^0.29.5",
+    "@cosmjs/utils": "^0.29.5",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@walletconnect/qrcode-modal": "^1.8.0",
     "@walletconnect/sign-client": "^2.1.4",
@@ -53,6 +53,6 @@
     "lokijs": "^1.5.12",
     "ts-jest": "^29.0.3",
     "ts-proto": "^1.135.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.4"
   }
 }
