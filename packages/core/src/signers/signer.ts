@@ -10,6 +10,7 @@ import {
 } from "@cosmjs/amino";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { SignerNotConnected } from "./errors";
+import {Observer, ObserverManager} from "../utils/observermanager";
 
 /**
  * Represents the various signing modes that can be supported by signers.
@@ -32,7 +33,7 @@ export enum SignerStatus {
 /**
  * Represents a generic method that receives updates for new Signer status values.
  */
-export type SignerObserver = (newStatus: SignerStatus) => void;
+export type SignerObserver = Observer<SignerStatus>;
 
 /**
  * Represents a remote signer.
@@ -42,7 +43,7 @@ export abstract class Signer
 {
   private signerStatus: SignerStatus;
 
-  private observers: SignerObserver[] = [];
+  private observerManager: ObserverManager<SignerStatus>;
 
   /**
    * Builds a new Signer instance.
@@ -51,6 +52,7 @@ export abstract class Signer
    */
   protected constructor(status: SignerStatus) {
     this.signerStatus = status;
+    this.observerManager = new ObserverManager<SignerStatus>();
   }
 
   /**
@@ -60,7 +62,7 @@ export abstract class Signer
    */
   protected updateStatus(newStatus: SignerStatus) {
     this.signerStatus = newStatus;
-    this.observers.forEach((o) => o(newStatus));
+    this.observerManager.emit(newStatus);
   }
 
   /**
@@ -78,7 +80,7 @@ export abstract class Signer
    * @param observer - The observer to be called.
    */
   public addStatusListener(observer: SignerObserver) {
-    this.observers.push(observer);
+    this.observerManager.addObserver(observer);
   }
 
   /**
@@ -86,10 +88,7 @@ export abstract class Signer
    * @param observer - The observer to be removed.
    */
   public removeStatusListener(observer: SignerObserver) {
-    const index = this.observers.indexOf(observer);
-    if (index >= 0) {
-      this.observers.splice(index, 1);
-    }
+    this.observerManager.removeObserver(observer);
   }
 
   /**
