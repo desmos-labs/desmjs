@@ -2,12 +2,15 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  globals: {
-    "ts-jest": {
-      tsconfig: "./tsconfig.json",
-    },
-  },
   moduleNameMapper: {
     "^@desmoslabs/desmjs-types/(.*)$": "<rootDir>/../types/build/$1",
+  },
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: "./tsconfig.json",
+      },
+    ],
   },
 };
