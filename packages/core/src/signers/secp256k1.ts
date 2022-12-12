@@ -2,7 +2,7 @@ import {Signer, SignerStatus, SigningMode} from "./signer";
 import {AccountData, AminoSignResponse, Secp256k1Wallet, StdSignDoc} from "@cosmjs/amino";
 import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {DirectSecp256k1Wallet, DirectSignResponse} from "@cosmjs/proto-signing";
-import {Observer, ObserverManager} from "../utils/observermanager";
+import {Observer, ObserverManager} from "../utils";
 import {fromHex} from "@cosmjs/encoding";
 
 
