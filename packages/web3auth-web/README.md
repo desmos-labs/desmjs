@@ -14,3 +14,4 @@ See the [Web3Auth docs](https://web3auth.io/docs/sdk/web/modal/) for more detail
 | Package version |        Desmos version         | 
 |:---------------:|:-----------------------------:|
 |     `4.6.x`     |           `v4.6.x`            |
+|     `4.7.x`     |           `v4.7.x`            |

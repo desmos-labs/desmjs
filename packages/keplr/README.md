@@ -13,3 +13,4 @@ by signing transactions through a [Keplr](https://www.keplr.app/) client.
 |     `4.4.x`     |    `v4.4.x`    |
 |     `4.5.x`     |    `v4.5.x`    |
 |     `4.6.x`     |    `v4.6.x`    |
+|     `4.7.x`     |    `v4.7.x`    |
