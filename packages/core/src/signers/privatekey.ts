@@ -214,7 +214,7 @@ export class PrivateKeySigner extends Signer {
           }
         });
 
-      // We support just Secp256k1 at the moment, build the correct signer from the key.
+      // We support only Secp256k1 keys at the moment, build the correct signer from the key.
       if (this.signMode === SigningMode.AMINO) {
         this.aminoSigner = await Secp256k1Wallet.fromKey(
           this._privateKey.key,
