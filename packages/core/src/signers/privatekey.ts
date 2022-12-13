@@ -148,7 +148,7 @@ export class PrivateKeySigner extends Signer {
   private keyProvider: PrivateKeyProvider;
   private readonly signMode: SigningMode;
   private currentAccount?: AccountData;
-  private privateKey?: PrivateKey;
+  private _privateKey?: PrivateKey;
   private aminoSigner?: Secp256k1Wallet;
   private directSigner?: DirectSecp256k1Wallet;
 
@@ -172,7 +172,7 @@ export class PrivateKeySigner extends Signer {
     this.aminoSigner = undefined;
     this.directSigner = undefined;
     this.currentAccount = undefined;
-    this.privateKey = undefined;
+    this._privateKey = undefined;
   }
 
   async connect(): Promise<void> {
@@ -183,7 +183,7 @@ export class PrivateKeySigner extends Signer {
     this.updateStatus(SignerStatus.Connecting);
     try {
       await this.keyProvider.connect();
-      this.privateKey = await this.keyProvider.getPrivateKey()
+      this._privateKey = await this.keyProvider.getPrivateKey()
         .then(privateKey => {
           switch (privateKey.type) {
             case PrivateKeyType.Secp256k1:
@@ -195,10 +195,10 @@ export class PrivateKeySigner extends Signer {
 
       // We support just Secp256k1 at the moment, build the correct signer from the key.
       if (this.signMode === SigningMode.AMINO) {
-        this.aminoSigner = await Secp256k1Wallet.fromKey(this.privateKey.key, "desmos");
+        this.aminoSigner = await Secp256k1Wallet.fromKey(this._privateKey.key, "desmos");
         this.currentAccount = (await this.aminoSigner.getAccounts())[0];
       } else {
-        this.directSigner = await DirectSecp256k1Wallet.fromKey(this.privateKey.key, "desmos");
+        this.directSigner = await DirectSecp256k1Wallet.fromKey(this._privateKey.key, "desmos");
         this.currentAccount = (await this.directSigner.getAccounts())[0];
       }
       this.updateStatus(SignerStatus.Connected);
@@ -261,6 +261,14 @@ export class PrivateKeySigner extends Signer {
 
   get signingMode(): SigningMode {
     return this.signMode;
+  }
+
+  get privateKey(): PrivateKey {
+    if (this._privateKey === undefined) {
+      throw new Error("can't get private key, check that the signer is connected");
+    }
+
+    return this._privateKey;
   }
 
   private static keyProviderStatusToSignerStatus(status: PrivateKeyProviderStatus): SignerStatus {
