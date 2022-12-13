@@ -1,7 +1,7 @@
 export type Observer<T> = (newStatus: T) => any;
 
 /**
- * Class that manages a set of observer that are notified when a new
+ * Class that manages a set of observers that are notified when a new
  * even is emitted.
  */
 export class ObserverManager<T> {
