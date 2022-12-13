@@ -5,7 +5,6 @@ export type Observer<T> = (newStatus: T) => any;
  * even is emitted.
  */
 export class ObserverManager<T> {
-
   private observers: Observer<T>[];
 
   constructor() {
@@ -40,7 +39,6 @@ export class ObserverManager<T> {
     }
   }
 
-
   /**
    * Notifies the observers.
    * @param newStatus - The emitted event.
@@ -48,5 +46,4 @@ export class ObserverManager<T> {
   public emit(newStatus: T) {
     this.observers.forEach((o) => o(newStatus));
   }
-
 }

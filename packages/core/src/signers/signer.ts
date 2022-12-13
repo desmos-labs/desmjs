@@ -10,7 +10,7 @@ import {
 } from "@cosmjs/amino";
 import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { SignerNotConnected } from "./errors";
-import {Observer, ObserverManager} from "../utils/observermanager";
+import { Observer, ObserverManager } from "../utils/observermanager";
 
 /**
  * Represents the various signing modes that can be supported by signers.

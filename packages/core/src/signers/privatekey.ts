@@ -1,10 +1,18 @@
-import {Signer, SignerStatus, SigningMode} from "./signer";
-import {AccountData, AminoSignResponse, Secp256k1Wallet, StdSignDoc} from "@cosmjs/amino";
-import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import {DirectSecp256k1Wallet, DirectSignResponse} from "@cosmjs/proto-signing";
-import {Observer, ObserverManager} from "../utils";
-import {fromHex} from "@cosmjs/encoding";
-
+// eslint-disable-next-line max-classes-per-file
+import {
+  AccountData,
+  AminoSignResponse,
+  Secp256k1Wallet,
+  StdSignDoc,
+} from "@cosmjs/amino";
+import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import {
+  DirectSecp256k1Wallet,
+  DirectSignResponse,
+} from "@cosmjs/proto-signing";
+import { fromHex } from "@cosmjs/encoding";
+import { Observer, ObserverManager } from "../utils";
+import { Signer, SignerStatus, SigningMode } from "./signer";
 
 /**
  * Enum that represents the connection status of a PrivateKeyProvider.
@@ -24,24 +32,26 @@ export enum PrivateKeyType {
 }
 
 export interface PrivateKey {
-  type: PrivateKeyType,
-  key: Uint8Array,
+  type: PrivateKeyType;
+  key: Uint8Array;
 }
 
 /**
  * Class that represents a secp256k1 key provider.
  */
 export abstract class PrivateKeyProvider {
+  private observerManager: ObserverManager<PrivateKeyProviderStatus> =
+    new ObserverManager();
 
-  private observerManager: ObserverManager<PrivateKeyProviderStatus> = new ObserverManager();
-  protected keyProviderStatus: PrivateKeyProviderStatus = PrivateKeyProviderStatus.NotConnected;
+  protected keyProviderStatus: PrivateKeyProviderStatus =
+    PrivateKeyProviderStatus.NotConnected;
 
   public addStatusListener(observer: Observer<PrivateKeyProviderStatus>) {
-    this.observerManager.addObserver(observer)
+    this.observerManager.addObserver(observer);
   }
 
   public removeStatusListener(observer: Observer<PrivateKeyProviderStatus>) {
-    this.observerManager.addObserver(observer)
+    this.observerManager.addObserver(observer);
   }
 
   protected updateStatus(newStatus: PrivateKeyProviderStatus) {
@@ -81,7 +91,6 @@ export abstract class PrivateKeyProvider {
  * from an in memory private key.
  */
 export class Secp256k1KeyProvider extends PrivateKeyProvider {
-
   private readonly privateKey: Uint8Array;
 
   /**
@@ -93,7 +102,7 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
     if (typeof privateKey === "string") {
       this.privateKey = fromHex(privateKey as string);
     } else if (privateKey instanceof Uint8Array) {
-      this.privateKey = privateKey
+      this.privateKey = privateKey;
     } else {
       throw new Error("invalid private key format");
     }
@@ -120,10 +129,9 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
 
     return {
       type: PrivateKeyType.Secp256k1,
-      key: this.privateKey
+      key: this.privateKey,
     };
   }
-
 }
 
 /**
@@ -131,8 +139,9 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
  * to sign a transaction.
  */
 export class PrivateKeySigner extends Signer {
-
-  private keyProviderStatusListener: Observer<PrivateKeyProviderStatus> = (newStatus) => {
+  private keyProviderStatusListener: Observer<PrivateKeyProviderStatus> = (
+    newStatus
+  ) => {
     switch (newStatus) {
       case PrivateKeyProviderStatus.Disconnecting:
         this.updateStatus(SignerStatus.Disconnecting);
@@ -142,14 +151,22 @@ export class PrivateKeySigner extends Signer {
         this.clearSessionFields();
         this.updateStatus(SignerStatus.NotConnected);
         break;
+
+      default:
+        break;
     }
-  }
+  };
 
   private keyProvider: PrivateKeyProvider;
+
   private readonly signMode: SigningMode;
+
   private currentAccount?: AccountData;
+
   private _privateKey?: PrivateKey;
+
   private aminoSigner?: Secp256k1Wallet;
+
   private directSigner?: DirectSecp256k1Wallet;
 
   /**
@@ -157,7 +174,10 @@ export class PrivateKeySigner extends Signer {
    * @param privateKey - Hex encoded private key or the private key bytes.
    * @param signMode - Signer signing mode.
    */
-  static fromSecp256k1(privateKey: string | Uint8Array, signMode: SigningMode): PrivateKeySigner {
+  static fromSecp256k1(
+    privateKey: string | Uint8Array,
+    signMode: SigningMode
+  ): PrivateKeySigner {
     return new PrivateKeySigner(new Secp256k1KeyProvider(privateKey), signMode);
   }
 
@@ -183,8 +203,9 @@ export class PrivateKeySigner extends Signer {
     this.updateStatus(SignerStatus.Connecting);
     try {
       await this.keyProvider.connect();
-      this._privateKey = await this.keyProvider.getPrivateKey()
-        .then(privateKey => {
+      this._privateKey = await this.keyProvider
+        .getPrivateKey()
+        .then((privateKey) => {
           switch (privateKey.type) {
             case PrivateKeyType.Secp256k1:
               return privateKey;
@@ -195,11 +216,17 @@ export class PrivateKeySigner extends Signer {
 
       // We support just Secp256k1 at the moment, build the correct signer from the key.
       if (this.signMode === SigningMode.AMINO) {
-        this.aminoSigner = await Secp256k1Wallet.fromKey(this._privateKey.key, "desmos");
-        this.currentAccount = (await this.aminoSigner.getAccounts())[0];
+        this.aminoSigner = await Secp256k1Wallet.fromKey(
+          this._privateKey.key,
+          "desmos"
+        );
+        [this.currentAccount] = await this.aminoSigner.getAccounts();
       } else {
-        this.directSigner = await DirectSecp256k1Wallet.fromKey(this._privateKey.key, "desmos");
-        this.currentAccount = (await this.directSigner.getAccounts())[0];
+        this.directSigner = await DirectSecp256k1Wallet.fromKey(
+          this._privateKey.key,
+          "desmos"
+        );
+        [this.currentAccount] = await this.directSigner.getAccounts();
       }
       this.updateStatus(SignerStatus.Connected);
     } catch (e) {
@@ -215,7 +242,7 @@ export class PrivateKeySigner extends Signer {
     this.updateStatus(SignerStatus.Disconnecting);
     this.clearSessionFields();
     try {
-      await this.keyProvider.disconnect()
+      await this.keyProvider.disconnect();
       this.updateStatus(SignerStatus.NotConnected);
     } catch (e) {
       this.updateStatus(SignerStatus.NotConnected);
@@ -224,22 +251,24 @@ export class PrivateKeySigner extends Signer {
   }
 
   async getAccounts(): Promise<readonly AccountData[]> {
-    this.assertConnected()
+    this.assertConnected();
 
     if (this.signMode === SigningMode.AMINO) {
       return this.aminoSigner!.getAccounts();
-    } else {
-      return this.directSigner!.getAccounts();
     }
+    return this.directSigner!.getAccounts();
   }
 
   async getCurrentAccount(): Promise<AccountData | undefined> {
     this.assertConnected();
 
-    return this.currentAccount
+    return this.currentAccount;
   }
 
-  async signAmino(signerAddress: string, signDoc: StdSignDoc): Promise<AminoSignResponse> {
+  async signAmino(
+    signerAddress: string,
+    signDoc: StdSignDoc
+  ): Promise<AminoSignResponse> {
     this.assertConnected();
 
     if (this.aminoSigner === undefined) {
@@ -249,7 +278,10 @@ export class PrivateKeySigner extends Signer {
     return this.aminoSigner.signAmino(signerAddress, signDoc);
   }
 
-  async signDirect(signerAddress: string, signDoc: SignDoc): Promise<DirectSignResponse> {
+  async signDirect(
+    signerAddress: string,
+    signDoc: SignDoc
+  ): Promise<DirectSignResponse> {
     this.assertConnected();
 
     if (this.directSigner === undefined) {
@@ -265,13 +297,17 @@ export class PrivateKeySigner extends Signer {
 
   get privateKey(): PrivateKey {
     if (this._privateKey === undefined) {
-      throw new Error("can't get private key, check that the signer is connected");
+      throw new Error(
+        "can't get private key, check that the signer is connected"
+      );
     }
 
     return this._privateKey;
   }
 
-  private static keyProviderStatusToSignerStatus(status: PrivateKeyProviderStatus): SignerStatus {
+  private static keyProviderStatusToSignerStatus(
+    status: PrivateKeyProviderStatus
+  ): SignerStatus {
     switch (status) {
       case PrivateKeyProviderStatus.NotConnected:
         return SignerStatus.NotConnected;
@@ -281,6 +317,8 @@ export class PrivateKeySigner extends Signer {
         return SignerStatus.Connected;
       case PrivateKeyProviderStatus.Disconnecting:
         return SignerStatus.Disconnecting;
+      default:
+        throw new Error(`unknown status PrivateKeyProviderStatus: ${status}`);
     }
   }
 }
