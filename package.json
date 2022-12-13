@@ -28,6 +28,7 @@
     "packages/types",
     "packages/walletconnect",
     "packages/walletconnect-v2",
+    "packages/web3auth-web",
     "packages/keplr"
   ],
   "scripts": {
