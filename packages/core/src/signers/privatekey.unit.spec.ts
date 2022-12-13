@@ -1,13 +1,20 @@
-import {RawSecp256k1KeyProvider, Secp256k1KeyProvider, Secp256k1KeyProviderStatus, Secp256k1Signer} from "./secp256k1";
+import {
+  PrivateKey,
+  PrivateKeyProvider,
+  PrivateKeyProviderStatus,
+  PrivateKeySigner,
+  PrivateKeyType,
+  Secp256k1KeyProvider
+} from "./privatekey";
 import {SignerStatus, SigningMode} from "./signer";
-import {fromHex} from "@cosmjs/encoding";
 import {AuthInfo, TxBody} from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import Long from "long";
+import {fromHex} from "@cosmjs/encoding";
 
 const TEST_PRIVATE_KEY = "038542da515a6bc278030cf8e8102a7ddee2b535cd649421315361218463bc6e";
 
-function mockConnectFailingSecp256k1KeyProvider(): Secp256k1KeyProvider {
-  return new class extends Secp256k1KeyProvider {
+function mockConnectFailingSecp256k1KeyProvider(): PrivateKeyProvider {
+  return new class extends PrivateKeyProvider {
     connect(): Promise<void> {
       throw new Error("connection failed");
     }
@@ -16,32 +23,35 @@ function mockConnectFailingSecp256k1KeyProvider(): Secp256k1KeyProvider {
       return Promise.resolve(undefined);
     }
 
-    getSecp256k1PrivateKey(): Promise<Uint8Array> {
+    getPrivateKey(): Promise<PrivateKey> {
       throw new Error("not implemented");
     }
   }
 }
 
-function mockDisconnectFailingSecp256k1KeyProvider(): Secp256k1KeyProvider {
-  return new class extends Secp256k1KeyProvider {
+function mockDisconnectFailingSecp256k1KeyProvider(): PrivateKeyProvider {
+  return new class extends PrivateKeyProvider {
     async connect(): Promise<void> {
-      this.updateStatus(Secp256k1KeyProviderStatus.Connecting);
-      this.updateStatus(Secp256k1KeyProviderStatus.Connected);
+      this.updateStatus(PrivateKeyProviderStatus.Connecting);
+      this.updateStatus(PrivateKeyProviderStatus.Connected);
     }
 
     disconnect(): Promise<void> {
-      this.updateStatus(Secp256k1KeyProviderStatus.Disconnecting);
+      this.updateStatus(PrivateKeyProviderStatus.Disconnecting);
       throw new Error("disconnect fail");
     }
 
-    async getSecp256k1PrivateKey(): Promise<Uint8Array> {
-      return fromHex(TEST_PRIVATE_KEY);
+    async getPrivateKey(): Promise<PrivateKey> {
+      return {
+        type: PrivateKeyType.Secp256k1,
+        key: fromHex(TEST_PRIVATE_KEY),
+      };
     }
   }
 }
 
-function mockFailingGetPrivateKeySecp256k1KeyProvider(): Secp256k1KeyProvider {
-  return new class extends Secp256k1KeyProvider {
+function mockFailingGetPrivateKeySecp256k1KeyProvider(): PrivateKeyProvider {
+  return new class extends PrivateKeyProvider {
     connect(): Promise<void> {
       return Promise.resolve();
     }
@@ -50,34 +60,34 @@ function mockFailingGetPrivateKeySecp256k1KeyProvider(): Secp256k1KeyProvider {
       return Promise.resolve();
     }
 
-    getSecp256k1PrivateKey(): Promise<Uint8Array> {
+    getPrivateKey(): Promise<PrivateKey> {
       throw new Error("can't get private key");
     }
   }
 }
 
-function mockSecp256k1KeyProvider(): Secp256k1KeyProvider {
-  return new RawSecp256k1KeyProvider(TEST_PRIVATE_KEY);
+function mockSecp256k1KeyProvider(): PrivateKeyProvider {
+  return new Secp256k1KeyProvider(TEST_PRIVATE_KEY);
 }
 
 describe("PrivateKeySigner", () => {
 
   it("Fail to connect to key provider", async () => {
-    const signer = new Secp256k1Signer(mockConnectFailingSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockConnectFailingSecp256k1KeyProvider(), SigningMode.DIRECT);
     await expect(signer.connect()).rejects
       .toHaveProperty("message", "connection failed");
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
 
   it("Fail to get private key", async () => {
-    const signer = new Secp256k1Signer(mockFailingGetPrivateKeySecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockFailingGetPrivateKeySecp256k1KeyProvider(), SigningMode.DIRECT);
     await expect(signer.connect()).rejects
       .toHaveProperty("message", "can't get private key");
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
 
   it("connect successfully", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
     await signer.connect();
     expect(signer.status).toBe(SignerStatus.Connected);
     const accounts = await signer.getAccounts();
@@ -85,7 +95,7 @@ describe("PrivateKeySigner", () => {
   });
 
   it("disconnect fail", async () => {
-    const signer = new Secp256k1Signer(mockDisconnectFailingSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockDisconnectFailingSecp256k1KeyProvider(), SigningMode.DIRECT);
     await signer.connect();
     await expect(signer.disconnect()).rejects
       .toHaveProperty("message", "disconnect fail");
@@ -93,14 +103,14 @@ describe("PrivateKeySigner", () => {
   });
 
   it("disconnect successfully", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
     await signer.connect();
     await signer.disconnect();
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
 
   it("get current account successfully", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
     await signer.connect();
     const accounts = await signer.getAccounts();
     const currentAccount = await signer.getCurrentAccount();
@@ -109,7 +119,7 @@ describe("PrivateKeySigner", () => {
   });
 
   it("sign direct successfully", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
     const signResult = await signer.signDirect(currentAccount!.address, {
@@ -131,7 +141,7 @@ describe("PrivateKeySigner", () => {
   });
 
   it("sign amino from direct error", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.DIRECT);
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
     await expect(signer.signAmino(currentAccount!.address, {
@@ -149,7 +159,7 @@ describe("PrivateKeySigner", () => {
   });
 
   it("sign amino successfully", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.AMINO);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.AMINO);
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
     const signResult = await signer.signAmino(currentAccount!.address, {
@@ -169,7 +179,7 @@ describe("PrivateKeySigner", () => {
   });
 
   it("sign direct from amino error", async () => {
-    const signer = new Secp256k1Signer(mockSecp256k1KeyProvider(), SigningMode.AMINO);
+    const signer = new PrivateKeySigner(mockSecp256k1KeyProvider(), SigningMode.AMINO);
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
     await expect(signer.signDirect(currentAccount!.address, {

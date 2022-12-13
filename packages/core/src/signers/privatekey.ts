@@ -9,7 +9,7 @@ import {fromHex} from "@cosmjs/encoding";
 /**
  * Enum that represents the connection status of a PrivateKeyProvider.
  */
-export enum Secp256k1KeyProviderStatus {
+export enum PrivateKeyProviderStatus {
   NotConnected,
   Connecting,
   Connected,
@@ -17,33 +17,45 @@ export enum Secp256k1KeyProviderStatus {
 }
 
 /**
+ * Enum that represents the supported key types.
+ */
+export enum PrivateKeyType {
+  Secp256k1,
+}
+
+export interface PrivateKey {
+  type: PrivateKeyType,
+  key: Uint8Array,
+}
+
+/**
  * Class that represents a secp256k1 key provider.
  */
-export abstract class Secp256k1KeyProvider {
+export abstract class PrivateKeyProvider {
 
-  private observerManager: ObserverManager<Secp256k1KeyProviderStatus> = new ObserverManager();
-  protected keyProviderStatus: Secp256k1KeyProviderStatus = Secp256k1KeyProviderStatus.NotConnected;
+  private observerManager: ObserverManager<PrivateKeyProviderStatus> = new ObserverManager();
+  protected keyProviderStatus: PrivateKeyProviderStatus = PrivateKeyProviderStatus.NotConnected;
 
-  public addStatusListener(observer: Observer<Secp256k1KeyProviderStatus>) {
+  public addStatusListener(observer: Observer<PrivateKeyProviderStatus>) {
     this.observerManager.addObserver(observer)
   }
 
-  public removeStatusListener(observer: Observer<Secp256k1KeyProviderStatus>) {
+  public removeStatusListener(observer: Observer<PrivateKeyProviderStatus>) {
     this.observerManager.addObserver(observer)
   }
 
-  protected updateStatus(newStatus: Secp256k1KeyProviderStatus) {
+  protected updateStatus(newStatus: PrivateKeyProviderStatus) {
     this.keyProviderStatus = newStatus;
     this.observerManager.emit(newStatus);
   }
 
   protected assertConnected(): void {
-    if (this.status !== Secp256k1KeyProviderStatus.Connected) {
+    if (this.status !== PrivateKeyProviderStatus.Connected) {
       throw new Error("secp256k1 key provider not connected");
     }
   }
 
-  public get status(): Secp256k1KeyProviderStatus {
+  public get status(): PrivateKeyProviderStatus {
     return this.keyProviderStatus;
   }
 
@@ -61,20 +73,20 @@ export abstract class Secp256k1KeyProvider {
    * Gets the Secp256k1 private key.
    * If the key provider is not connected this function should throw an error.
    */
-  abstract getSecp256k1PrivateKey(): Promise<Uint8Array>;
+  abstract getPrivateKey(): Promise<PrivateKey>;
 }
 
 /**
  * Implementation of Secp256k1KeyProvider that provides a private key
  * from an in memory private key.
  */
-export class RawSecp256k1KeyProvider extends Secp256k1KeyProvider {
+export class Secp256k1KeyProvider extends PrivateKeyProvider {
 
   private readonly privateKey: Uint8Array;
 
   /**
    * Default constructor.
-   * @param privateKey - Hex encoded private key or raw private key.
+   * @param privateKey - Hex encoded private key or private key bytes.
    */
   constructor(privateKey: string | Uint8Array) {
     super();
@@ -88,25 +100,28 @@ export class RawSecp256k1KeyProvider extends Secp256k1KeyProvider {
   }
 
   async connect(): Promise<void> {
-    if (this.status !== Secp256k1KeyProviderStatus.NotConnected) {
+    if (this.status !== PrivateKeyProviderStatus.NotConnected) {
       return;
     }
 
-    this.updateStatus(Secp256k1KeyProviderStatus.Connected);
+    this.updateStatus(PrivateKeyProviderStatus.Connected);
   }
 
   async disconnect(): Promise<void> {
-    if (this.status !== Secp256k1KeyProviderStatus.Connected) {
+    if (this.status !== PrivateKeyProviderStatus.Connected) {
       return;
     }
 
-    this.updateStatus(Secp256k1KeyProviderStatus.NotConnected);
+    this.updateStatus(PrivateKeyProviderStatus.NotConnected);
   }
 
-  async getSecp256k1PrivateKey(): Promise<Uint8Array> {
+  async getPrivateKey(): Promise<PrivateKey> {
     this.assertConnected();
 
-    return this.privateKey;
+    return {
+      type: PrivateKeyType.Secp256k1,
+      key: this.privateKey
+    };
   }
 
 }
@@ -115,34 +130,39 @@ export class RawSecp256k1KeyProvider extends Secp256k1KeyProvider {
  * Signer that use a private key provided from a Secp256k1KeyProvider
  * to sign a transaction.
  */
-export class Secp256k1Signer extends Signer {
+export class PrivateKeySigner extends Signer {
 
-  private keyProviderStatusListener: Observer<Secp256k1KeyProviderStatus> = (newStatus) => {
+  private keyProviderStatusListener: Observer<PrivateKeyProviderStatus> = (newStatus) => {
     switch (newStatus) {
-      case Secp256k1KeyProviderStatus.Disconnecting:
+      case PrivateKeyProviderStatus.Disconnecting:
         this.updateStatus(SignerStatus.Disconnecting);
         break;
 
-      case Secp256k1KeyProviderStatus.NotConnected:
+      case PrivateKeyProviderStatus.NotConnected:
         this.clearSessionFields();
         this.updateStatus(SignerStatus.NotConnected);
         break;
     }
   }
 
-  private keyProvider: Secp256k1KeyProvider;
+  private keyProvider: PrivateKeyProvider;
   private readonly signMode: SigningMode;
   private currentAccount?: AccountData;
-  private privateKey?: Uint8Array;
+  private privateKey?: PrivateKey;
   private aminoSigner?: Secp256k1Wallet;
   private directSigner?: DirectSecp256k1Wallet;
 
-  static fromHexEncodedPrivateKey(privateKey: string, signMode: SigningMode): Secp256k1Signer {
-    return new Secp256k1Signer(new RawSecp256k1KeyProvider(privateKey), signMode);
+  /**
+   * Build the signer from a secp256k1 private key.
+   * @param privateKey - Hex encoded private key or the private key bytes.
+   * @param signMode - Signer signing mode.
+   */
+  static fromSecp256k1(privateKey: string | Uint8Array, signMode: SigningMode): PrivateKeySigner {
+    return new PrivateKeySigner(new Secp256k1KeyProvider(privateKey), signMode);
   }
 
-  constructor(provider: Secp256k1KeyProvider, signMode: SigningMode) {
-    super(Secp256k1Signer.keyProviderStatusToSignerStatus(provider.status));
+  constructor(provider: PrivateKeyProvider, signMode: SigningMode) {
+    super(PrivateKeySigner.keyProviderStatusToSignerStatus(provider.status));
     this.keyProvider = provider;
     this.keyProvider.addStatusListener(this.keyProviderStatusListener);
     this.signMode = signMode;
@@ -163,12 +183,22 @@ export class Secp256k1Signer extends Signer {
     this.updateStatus(SignerStatus.Connecting);
     try {
       await this.keyProvider.connect();
-      this.privateKey = await this.keyProvider.getSecp256k1PrivateKey();
+      this.privateKey = await this.keyProvider.getPrivateKey()
+        .then(privateKey => {
+          switch (privateKey.type) {
+            case PrivateKeyType.Secp256k1:
+              return privateKey;
+            default:
+              throw new Error("invalid private key type");
+          }
+        });
+
+      // We support just Secp256k1 at the moment, build the correct signer from the key.
       if (this.signMode === SigningMode.AMINO) {
-        this.aminoSigner = await Secp256k1Wallet.fromKey(this.privateKey, "desmos");
+        this.aminoSigner = await Secp256k1Wallet.fromKey(this.privateKey.key, "desmos");
         this.currentAccount = (await this.aminoSigner.getAccounts())[0];
       } else {
-        this.directSigner = await DirectSecp256k1Wallet.fromKey(this.privateKey, "desmos");
+        this.directSigner = await DirectSecp256k1Wallet.fromKey(this.privateKey.key, "desmos");
         this.currentAccount = (await this.directSigner.getAccounts())[0];
       }
       this.updateStatus(SignerStatus.Connected);
@@ -233,15 +263,15 @@ export class Secp256k1Signer extends Signer {
     return this.signMode;
   }
 
-  private static keyProviderStatusToSignerStatus(status: Secp256k1KeyProviderStatus): SignerStatus {
+  private static keyProviderStatusToSignerStatus(status: PrivateKeyProviderStatus): SignerStatus {
     switch (status) {
-      case Secp256k1KeyProviderStatus.NotConnected:
+      case PrivateKeyProviderStatus.NotConnected:
         return SignerStatus.NotConnected;
-      case Secp256k1KeyProviderStatus.Connecting:
+      case PrivateKeyProviderStatus.Connecting:
         return SignerStatus.Connecting;
-      case Secp256k1KeyProviderStatus.Connected:
+      case PrivateKeyProviderStatus.Connected:
         return SignerStatus.Connected;
-      case Secp256k1KeyProviderStatus.Disconnecting:
+      case PrivateKeyProviderStatus.Disconnecting:
         return SignerStatus.Disconnecting;
     }
   }
