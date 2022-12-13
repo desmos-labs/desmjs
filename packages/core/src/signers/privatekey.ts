@@ -95,7 +95,7 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
 
   /**
    * Default constructor.
-   * @param privateKey - Hex encoded private key or private key bytes.
+   * @param privateKey - Hex encoded private key, or raw private key bytes.
    */
   constructor(privateKey: string | Uint8Array) {
     super();
