@@ -135,7 +135,7 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
 }
 
 /**
- * Signer that use a private key provided from a Secp256k1KeyProvider
+ * Signer that uses a private key provided from a PrivateKeyProvider
  * to sign a transaction.
  */
 export class PrivateKeySigner extends Signer {
