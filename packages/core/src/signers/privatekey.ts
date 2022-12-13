@@ -87,7 +87,7 @@ export abstract class PrivateKeyProvider {
 }
 
 /**
- * Implementation of Secp256k1KeyProvider that provides a private key
+ * Implementation of PrivateKeyProvider that provides a private key
  * from an in memory private key.
  */
 export class Secp256k1KeyProvider extends PrivateKeyProvider {
