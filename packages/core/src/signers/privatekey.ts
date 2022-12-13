@@ -171,7 +171,7 @@ export class PrivateKeySigner extends Signer {
 
   /**
    * Build the signer from a secp256k1 private key.
-   * @param privateKey - Hex encoded private key or the private key bytes.
+   * @param privateKey - Hex encoded private key, or raw private key bytes.
    * @param signMode - Signer signing mode.
    */
   static fromSecp256k1(
