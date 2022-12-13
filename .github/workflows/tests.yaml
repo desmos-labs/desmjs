@@ -1,35 +1,55 @@
 name: Tests
-
+# Tests runs unit tests over the entire DesmJS repository.
+# This workflow is run on every pull request and push to main.
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
       - name: Setup Node 👷
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      - name: Install protobuf compiler 🔨
+      - name: Compute diff 📜
+        uses: technote-space/get-diff-action@v6.1.2
+        id: git_diff
+        with:
+          SUFFIX_FILTER: |
+            **/*.ts
+            **/*.js
+            package.json
+            yarn.lock
+
+      - name: Install Protobuf compiler 👷
+        if: env.GIT_DIFF
         run: |
           sudo apt-get update
           sudo apt-get -y install protobuf-compiler
 
       - name: Install 🔨
+        if: env.GIT_DIFF
         run: yarn install --immutable
 
       - name: Build 🔨
+        if: env.GIT_DIFF
         run: yarn build
 
-      - name: Run core unit tests
+      - name: Run core unit tests 🧪
+        if: env.GIT_DIFF
         run: yarn workspace @desmoslabs/desmjs unit-tests
 
-      - name: Run core integration tests
+      - name: Run core integration tests 🧪
+        if: env.GIT_DIFF
         run: |
           scripts/get_desmos_bin.sh 4.2.0
           scripts/spawn_test_chain.sh -b
@@ -37,11 +57,10 @@ jobs:
           scripts/setup_chain.sh
           yarn workspace @desmoslabs/desmjs integration-tests
 
-      - name: Prepare WalletConnect unit tests env variables
+      - name: Run WalletConnect v2 unit tests 🧪
         env:
           WC_PROJECT_ID: ${{secrets.WC_PROJECT_ID}}
+        if: env.GIT_DIFF
         run: |
           echo "WC_PROJECT_ID=$WC_PROJECT_ID" >> ./packages/walletconnect-v2/.test.env
-
-      - name: Run WalletConnect signer unit tests
-        run: yarn workspace @desmoslabs/desmjs-walletconnect-v2 unit-tests
+          yarn workspace @desmoslabs/desmjs-walletconnect-v2 unit-tests

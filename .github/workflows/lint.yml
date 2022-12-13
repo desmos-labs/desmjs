@@ -1,7 +1,6 @@
 name: Lint
 # Lint runs yarn lint over the entire DesmJS repository.
 # This workflow is run on every pull request and push to main.
-# The `golangci` will pass without running if no *.{ts, js} files have been changed.
 on:
   pull_request:
   push:
