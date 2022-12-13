@@ -23,7 +23,9 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "rm -rf ./build && yarn tsc"
+    "build": "rm -rf ./build && yarn tsc",
+    "lint": "eslint src --ignore-path ../../.gitignore --max-warnings 0 --ext .js,.ts",
+    "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
     "@cosmjs/amino": "^0.29.5",
