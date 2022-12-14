@@ -28,6 +28,7 @@
     "packages/types",
     "packages/walletconnect",
     "packages/walletconnect-v2",
+    "packages/web3auth-web",
     "packages/keplr"
   ],
   "scripts": {
@@ -47,7 +48,7 @@
     "@types/long": "^4.0.1",
     "@types/pino": "^7.0.5",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.0",
+    "@typescript-eslint/parser": "^5.46.1",
     "@walletconnect/jsonrpc-types": "^1.0.2",
     "eslint": "^8.29.0",
     "eslint-config-airbnb": "^19.0.4",
