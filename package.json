@@ -45,7 +45,7 @@
     "@cosmjs/utils": "^0.29.5",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
-    "@types/long": "^4.0.1",
+    "@types/long": "^5.0.0",
     "@types/pino": "^7.0.5",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
