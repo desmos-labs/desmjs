@@ -99,7 +99,7 @@ export class Web3AuthKeyProvider extends PrivateKeyProvider {
 }
 
 /**
- * Gets a Signer instance capable of sign transaction using the key received from Web3Auth.
+ * Gets a Signer instance capable of signing transactions using the key received from Web3Auth.
  * @param signingMode - The Signer signing mode.
  * @param web3auth - Web3Auth client.
  * @param params - Web3Auth params.
