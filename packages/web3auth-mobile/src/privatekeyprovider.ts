@@ -27,7 +27,7 @@ export interface Web3AuthKeyProviderParams {
   logoutParams: SdkLogoutParams;
   /**
    * If true performs the logout operation on iOS even if is not recommended.
-   * Ses here for more details https://web3auth.io/docs/sdk/react-native/usage#logout
+   * See here for more details https://web3auth.io/docs/sdk/react-native/usage#logout
    */
   triggerLogoutOnIos?: boolean;
 }
