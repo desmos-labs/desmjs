@@ -34,10 +34,10 @@
     "packages/keplr"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build",
-    "lint": "yarn workspaces foreach --topological-dev --parallel --verbose run lint",
-    "lint-fix": "yarn workspaces foreach --topological-dev --parallel --verbose run lint-fix",
-    "publish-latest": "yarn workspaces foreach --no-private exec npm publish"
+    "build": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run build",
+    "lint": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint",
+    "lint-fix": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint-fix",
+    "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec npm publish"
   },
   "devDependencies": {
     "@cosmjs/cosmwasm-stargate": "^0.29.5",
