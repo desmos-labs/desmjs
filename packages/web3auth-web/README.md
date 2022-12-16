@@ -1,6 +1,6 @@
 # @desmoslabs/desmjs-web3auth
 
-[![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-web3auth.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-web3auth)
+[![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-web3auth-web.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-web3auth-web)
 
 This package contains `Web3AuthPrivateKeyProvider` which implements `@desmoslabs/desmjs` `PrivateKeyProvider` interface
 to provide a private key that can be used in the `@desmoslabs/desmjs` `PrivateKeySigner`.  
