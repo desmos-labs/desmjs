@@ -1,0 +1,47 @@
+{
+  "name": "@desmoslabs/desmjs-web3auth-mobile",
+  "version": "4.7.0",
+  "description": "Web3Auth integration for DesmJS",
+  "contributors": [
+    "Manuel Turetta <manuel@forbole.com>"
+  ],
+  "license": "Apache-2.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/",
+    "*.md",
+    "!*.spec.*",
+    "!**/testdata/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/desmos-labs/desmjs/tree/main/packages/web3auth"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "rm -rf ./build && yarn tsc",
+    "lint": "eslint src --ignore-path ../../.gitignore --max-warnings 0 --ext .js,.ts",
+    "lint-fix": "yarn lint --fix"
+  },
+  "dependencies": {
+    "@cosmjs/encoding": "^0.29.5",
+    "@desmoslabs/desmjs": "workspace:packages/core",
+    "@web3auth/react-native-sdk": "^3.3.0",
+    "react-native": "^0.70.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/jest": "^29.2.4",
+    "@types/keccak": "^3.0.1",
+    "@types/react-native": "^0.70.6",
+    "@types/readable-stream": "^2.3.15",
+    "readable-stream": "^4.2.0",
+    "typescript": "^4.9.4"
+  }
+}
