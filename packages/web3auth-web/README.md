@@ -1,4 +1,4 @@
-# @desmoslabs/desmjs-web3auth
+# @desmoslabs/desmjs-web3auth-web
 
 [![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-web3auth-web.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-web3auth-web)
 
