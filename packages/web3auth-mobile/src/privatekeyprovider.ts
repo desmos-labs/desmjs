@@ -23,7 +23,6 @@ export interface Web3AuthKeyProviderParams {
   loginParams: Omit<SdkLoginParams, "curve">;
   /**
    * Params used to perform the logout.
-   *
    */
   logoutParams: SdkLogoutParams;
   /**
