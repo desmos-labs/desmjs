@@ -1,3 +1,6 @@
+## Version 4.7.1
+Patch version to allow the proper publication of all packages 
+
 ## Version 4.7.0
 ### Features
 - Updated Desmos to `4.7.0`
