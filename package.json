@@ -24,6 +24,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "workspaces": [
+    "docs",
     "packages/core",
     "packages/types",
     "packages/walletconnect",
