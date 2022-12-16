@@ -204,7 +204,26 @@ module.exports = {
     ],
   ],
   themes: ["@you54f/theme-github-codeblock"],
-  plugins: [],
+  plugins: [
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        entryPoints: [
+          "../packages/core",
+          "../packages/keplr",
+          "../packages/types",
+          "../packages/walletconnect",
+          "../packages/walletconnect-v2",
+          "../packages/web3auth-mobile",
+          "../packages/web3auth-web",
+        ],
+        entryPointStrategy: "packages",
+        sidebar: {
+          fullNames: true,
+        },
+      },
+    ],
+  ],
   /* i18n: { // add for localization
     defaultLocale: 'en',
     locales: ['en', 'chinese'],
