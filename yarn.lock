@@ -2014,7 +2014,7 @@ __metadata:
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.0.0
-    "@web3auth/modal": ^3.3.0
+    "@web3auth/modal": ^4.0.0
     "@web3auth/ui": ^4.0.0
     cosmjs-types: ^0.6.0
     readable-stream: ^4.2.0
@@ -3462,7 +3462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/web3.js@npm:^1.36.0, @solana/web3.js@npm:^1.69.0":
+"@solana/web3.js@npm:^1.36.0":
   version: 1.70.1
   resolution: "@solana/web3.js@npm:1.70.1"
   dependencies:
@@ -3827,7 +3827,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/torus-embed@npm:^1.38.2":
+"@toruslabs/torus-embed@npm:^1.38.3":
   version: 1.38.3
   resolution: "@toruslabs/torus-embed@npm:1.38.3"
   dependencies:
@@ -4307,7 +4307,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/client@npm:^1.8.0, @walletconnect/client@npm:~1.8.0":
+"@walletconnect/client@npm:^1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/client@npm:1.8.0"
   dependencies:
@@ -4721,65 +4721,50 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/base-evm-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/base-evm-adapter@npm:3.3.0"
+"@web3auth/base-evm-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/base-evm-adapter@npm:4.0.0"
   dependencies:
-    "@web3auth/base": ^3.3.0
+    "@web3auth/base": ^4.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: e0f2d84c33ebd13dd2881bc3295158cd3c80612f9d61e1fce98522b8a497ede40d0e625a01ef00d2f7087a2aed084dbfefcffecada86000a995239cff3b4717c
+  checksum: a6f5a2490d864e28c98bad32c0cde458b267d7205985ee25d4daf96da06e09e2ba8c1e46d95cdb20f2f21fffb26d235d541625f9d2be8e5a2d706eb27e7325fc
   languageName: node
   linkType: hard
 
-"@web3auth/base-plugin@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/base-plugin@npm:3.3.0"
+"@web3auth/base-plugin@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/base-plugin@npm:4.0.0"
   dependencies:
-    "@web3auth/base": ^3.3.0
-  checksum: bcfb4d92ffab015d2245882e658a605efe24f3a49d74e8010547e1583957565ed0b7b68be1250c856ebe6c630121149fa6d99ac109376048c7e0ddd96492020b
+    "@web3auth/base": ^4.0.0
+  checksum: b9778a82eb69f2440c698008f130993466b1ae3a7ad5048e5a7b92e1f3d7c75b9ffddde0dda3186e138258e4764dcb2fc66dae6f47143cb1e6e3e866bad948e7
   languageName: node
   linkType: hard
 
-"@web3auth/base-provider@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/base-provider@npm:3.3.0"
+"@web3auth/base-provider@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/base-provider@npm:4.0.0"
   dependencies:
     "@toruslabs/base-controllers": ^2.5.0
     "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^3.3.0
+    "@web3auth/base": ^4.0.0
     eth-rpc-errors: ^4.0.3
     json-rpc-random-id: ^1.0.1
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 354d9d96e21ec6367465c6bf8843a355248affd92446bf5b185e29e98f4f66d001abb4dbaa6460967bf7a96dd9a94ad1b162ec372babf16ecbd45d224bf548ba
+  checksum: 552fd4720275e3c1f7c54589f1d816dfcc38c3dc7349f5a92eb9f6d44f9bba4115c31ae0fa0b1f81c10767fadf9e91492a00a1635586b82d6b3d8616eca6be6b
   languageName: node
   linkType: hard
 
-"@web3auth/base-solana-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/base-solana-adapter@npm:3.3.0"
+"@web3auth/base-solana-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/base-solana-adapter@npm:4.0.0"
   dependencies:
-    "@web3auth/base": ^3.3.0
-    bs58: ^5.0.0
+    "@web3auth/base": ^4.0.0
+    bs58: ^4.0.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: b6f75dab0da323acc4bba01a3949a6c3835c6b62edb5e763577334391f865cb3ba372adb452e89c9c0a80ccdcafc4559ddc04d15bd2940efe47bca1cbf237463
-  languageName: node
-  linkType: hard
-
-"@web3auth/base@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/base@npm:3.3.0"
-  dependencies:
-    "@toruslabs/http-helpers": ^3.2.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    jwt-decode: ^3.1.2
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: ed0ba563765b1ac324641d8acfdb8048511d47e219bf6dc748fb0cbb668ecfb07c0de36164bc09a572f0300132f753b27727199c5610d56e528b4234e9e2d877
+  checksum: 7e53bb651a21ce81c7a6c14afff9329e5192ce5c330ae37771619b7bcf48f04b9615ba3a49bfe719012bc5790358dfcf5fde30ce6d7f1fdd91cb55c65fc0366a
   languageName: node
   linkType: hard
 
@@ -4799,22 +4784,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/core@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/core@npm:3.3.0"
+"@web3auth/core@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/core@npm:4.0.0"
   dependencies:
+    "@toruslabs/openlogin": ^2.10.0
     "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-plugin": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-plugin": ^4.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: a2afe4cb671ba40c505f1a21a5d1ab1f7dab89100e9a259e684501ddd3d384cc25e190ba302599f25b4ff491e6d7668726053b9e95a005f196a020f5e4d2f557
+  checksum: eada5357ac4394734c1c22beda6778372e532e8f405a4c467640494bba657fc1dccb994c03b26ff844bd0797162b2345ee4cc9d7ac2362d41201db56071fd4a4
   languageName: node
   linkType: hard
 
-"@web3auth/ethereum-provider@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/ethereum-provider@npm:3.3.0"
+"@web3auth/ethereum-provider@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/ethereum-provider@npm:4.0.0"
   dependencies:
     "@ethereumjs/common": ^3.0.1
     "@ethereumjs/tx": ^4.0.1
@@ -4824,8 +4810,8 @@ __metadata:
     "@toruslabs/http-helpers": ^3.2.0
     "@toruslabs/openlogin-jrpc": ^2.9.0
     "@walletconnect/types": ~1.8.0
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-provider": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-provider": ^4.0.0
     assert: ^2.0.0
     bignumber.js: ^9.1.1
     bn.js: ^5.2.1
@@ -4833,71 +4819,71 @@ __metadata:
     jsonschema: ^1.4.1
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: f21e2d009d7e4c23ef8be17cc59b70e755e7481c0cf363d70617a924e3d3dfabcb25205eb778fbe3bcea44521a8d91e5667e64529eb4282a6daadf507037e968
+  checksum: 51024dfc8c135ce9721f7375070b8bae6ed22cdbd85cd19a3f2d180493aed2bdb27a0b2847a0221b21bbe05d691a81e4fb860d5fc0bb3518ce2ae48970144e1e
   languageName: node
   linkType: hard
 
-"@web3auth/metamask-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/metamask-adapter@npm:3.3.0"
+"@web3auth/metamask-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/metamask-adapter@npm:4.0.0"
   dependencies:
     "@metamask/detect-provider": ^2.0.0
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-evm-adapter": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-evm-adapter": ^4.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 041bd011f8d1000405f663528581bffc2685784648a5af4f0b193580feeffb0b9ad83d4625369e8c69dc4eeb961c3dd08d053268f50a85f2b7ff01d4fffde686
+  checksum: 57a680eb04843c534be3f50555bc95067d50d32f2a10dd05f4c557c3c9a6cca6615f26d5016826c2090f24f4c8a42c5227edb37b0aaefe3e33bf1ef4ed71fe73
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/modal@npm:3.3.0"
+"@web3auth/modal@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/modal@npm:4.0.0"
   dependencies:
-    "@web3auth/base": ^3.3.0
-    "@web3auth/core": ^3.3.0
-    "@web3auth/metamask-adapter": ^3.3.0
-    "@web3auth/openlogin-adapter": ^3.3.0
-    "@web3auth/phantom-adapter": ^3.3.0
-    "@web3auth/torus-evm-adapter": ^3.3.0
-    "@web3auth/torus-solana-adapter": ^3.3.0
-    "@web3auth/ui": ^3.3.0
-    "@web3auth/wallet-connect-v1-adapter": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/core": ^4.0.0
+    "@web3auth/metamask-adapter": ^4.0.0
+    "@web3auth/openlogin-adapter": ^4.0.0
+    "@web3auth/phantom-adapter": ^4.0.0
+    "@web3auth/torus-evm-adapter": ^4.0.0
+    "@web3auth/torus-solana-adapter": ^4.0.0
+    "@web3auth/ui": ^4.0.0
+    "@web3auth/wallet-connect-v1-adapter": ^4.0.0
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 49083c7c187c9354da8403ebac6b8f22c1f13f34ce96830518003222e96491d498e8d6e8b1813481bc1fde731a04787a34b9104f8facb2df508bca2b20ffdb75
+  checksum: 784ca64f66db98249866e3ba8b4c5b9aa83e8d03558d888a4ff1ff7ebe92f89453e99f286dda2c7e920be6aa49f144599b1cc9b1f3dff9ce8bd017c3c03ed17a
   languageName: node
   linkType: hard
 
-"@web3auth/openlogin-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/openlogin-adapter@npm:3.3.0"
+"@web3auth/openlogin-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/openlogin-adapter@npm:4.0.0"
   dependencies:
     "@toruslabs/openlogin": ^2.10.0
     "@toruslabs/openlogin-ed25519": ^2.0.0
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-provider": ^3.3.0
-    "@web3auth/ethereum-provider": ^3.3.0
-    "@web3auth/solana-provider": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-provider": ^4.0.0
+    "@web3auth/ethereum-provider": ^4.0.0
+    "@web3auth/solana-provider": ^4.0.0
     lodash.merge: ^4.6.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: fc52c220e7d7e0bab6338f36e74af109af950f1ed8657a4990e48095be7ab68629b95d273a268fdb968605a8a5c3adf03f3ba869e02bbf780d9b2095fec468de
+  checksum: 46629b8e7853f6a952e328928b5df0c09848014b4246f56d4bf94a1aaeb1596d5505085b431712f1d40362899f0d0c78ca9c4ee1f4eea38215ba061a7980265c
   languageName: node
   linkType: hard
 
-"@web3auth/phantom-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/phantom-adapter@npm:3.3.0"
+"@web3auth/phantom-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/phantom-adapter@npm:4.0.0"
   dependencies:
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-provider": ^3.3.0
-    "@web3auth/base-solana-adapter": ^3.3.0
-    "@web3auth/solana-provider": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-provider": ^4.0.0
+    "@web3auth/base-solana-adapter": ^4.0.0
+    "@web3auth/solana-provider": ^4.0.0
     bn.js: ^5.2.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 1e68a1327911ba3bcddde20801e0783b2216e17cd8bbfc5134662a2f1f9957ae9e604e19dba9e4deaa57f664fd16081be010f3259ddc880540e4a06afffdeef2
+  checksum: e64f9d13f54a72caf61612ff40f367280b63f1a1f2b98164975f8589b6d255f4e18ccfead73f4b00d3c7d8d7e587b60de2cf0313c0e33b74064cd9cee3df4d8a
   languageName: node
   linkType: hard
 
@@ -4916,74 +4902,51 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/solana-provider@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/solana-provider@npm:3.3.0"
+"@web3auth/solana-provider@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/solana-provider@npm:4.0.0"
   dependencies:
-    "@solana/web3.js": ^1.69.0
     "@toruslabs/base-controllers": ^2.5.0
     "@toruslabs/openlogin-jrpc": ^2.9.0
     "@toruslabs/tweetnacl-js": ^1.0.3
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-provider": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-provider": ^4.0.0
     bn.js: ^5.2.1
     bs58: ^4.0.1
     eth-rpc-errors: ^4.0.3
     json-rpc-random-id: ^1.0.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: c5f95282dadf0113333526a65aa654a44ed5b9d9fe0f8e0858627504719a6a23ed7bef485b7fb56274dbd82302c333643564394df4a1257e0ed2a92613b4adca
+    "@solana/web3.js": ^1.x
+  checksum: e63e6ee8715de3d268bdee6faa88cb63177e14a79a3455dcc68601baa18b1de1d25348fc0587655998f68940760f1916770edf3174f731f899d10799e0ed50ad
   languageName: node
   linkType: hard
 
-"@web3auth/torus-evm-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/torus-evm-adapter@npm:3.3.0"
+"@web3auth/torus-evm-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/torus-evm-adapter@npm:4.0.0"
   dependencies:
-    "@toruslabs/torus-embed": ^1.38.2
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-evm-adapter": ^3.3.0
+    "@toruslabs/torus-embed": ^1.38.3
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-evm-adapter": ^4.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 3bf5efc242985d5498ecc55671464978cdd6792461a8f130e94994da939907cdad48e3099187247af358e6729d43daf11c006a35b68e26013f1d1a206f3ecc88
+  checksum: 04b498f59d07c9428d7fff00717cea10b239e031996beb94ff3f1452e6baca20a7374a6984bbf499e507629a3f95acac97f3038f86376e7faf334ebee6fba31f
   languageName: node
   linkType: hard
 
-"@web3auth/torus-solana-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/torus-solana-adapter@npm:3.3.0"
+"@web3auth/torus-solana-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/torus-solana-adapter@npm:4.0.0"
   dependencies:
     "@toruslabs/solana-embed": ^0.3.2
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-provider": ^3.3.0
-    "@web3auth/base-solana-adapter": ^3.3.0
-    "@web3auth/solana-provider": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-provider": ^4.0.0
+    "@web3auth/base-solana-adapter": ^4.0.0
+    "@web3auth/solana-provider": ^4.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 3a77a1db82924ff50ad65773dd592e01f4a92565eb030037d4188ebb27c7c5be3affd7ffa39a698bad40f6e4a74699b090239ab46596c7e52f9bfec110ef473e
-  languageName: node
-  linkType: hard
-
-"@web3auth/ui@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/ui@npm:3.3.0"
-  dependencies:
-    "@toruslabs/openlogin": ^2.10.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^3.3.0
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    i18next: ^22.0.8
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    qr.js: ^0.0.0
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-i18next: ^12.0.0
-    react-qr-code: ^2.0.8
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: 2589440ec775b2d26a8bde5d62b4248cd055d97a81daa1ab074281f915175caf06f95f08399739d2dfe39418e90af29fc411bc3180295864255c1b0710fa219f
+  checksum: 8f42a2367f4f6135bbc82da724a0109700f785135bf76d5fe858ac34df0fd5af1652c13f50020ccaa64ae0edeff9da9114bf1dd4b63dcb01914292623ba5b73f
   languageName: node
   linkType: hard
 
@@ -5010,18 +4973,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/wallet-connect-v1-adapter@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@web3auth/wallet-connect-v1-adapter@npm:3.3.0"
+"@web3auth/wallet-connect-v1-adapter@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@web3auth/wallet-connect-v1-adapter@npm:4.0.0"
   dependencies:
-    "@walletconnect/client": ~1.8.0
-    "@walletconnect/types": ~1.8.0
-    "@web3auth/base": ^3.3.0
-    "@web3auth/base-evm-adapter": ^3.3.0
-    "@web3auth/ethereum-provider": ^3.3.0
+    "@web3auth/base": ^4.0.0
+    "@web3auth/base-evm-adapter": ^4.0.0
+    "@web3auth/ethereum-provider": ^4.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 0d337ff77aeacd8e05d32c94894670ce0e31050fc4f277dd289a5062eee60d5b366e49e6ee4e0b3c22344e19407d5407fd0aa94b8649303c7fa3853e6a61cc64
+    "@walletconnect/client": ~1.x
+    "@walletconnect/types": ~1.x
+  checksum: 8b3640145df1482f715d392a48960787c9b616e0b9214bd57d84e05c773cadd6207e626b6d1d2d2284972ee8ad7a396e24b798cef642d940ad1af1a2dcd39e42
   languageName: node
   linkType: hard
 
@@ -5638,13 +5601,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"base-x@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "base-x@npm:4.0.0"
-  checksum: b25db9e07eb1998472a20557c7f00c797dc0595f79df95155ab74274e7fa98b9f2659b3ee547ac8773666b7f69540656793aeb97ad2b1ceccdb6fa5faaf69ac0
-  languageName: node
-  linkType: hard
-
 "base64-js@npm:^1.0.2, base64-js@npm:^1.1.2, base64-js@npm:^1.3.0, base64-js@npm:^1.3.1":
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
@@ -5881,15 +5837,6 @@ __metadata:
   dependencies:
     base-x: ^3.0.2
   checksum: b3c5365bb9e0c561e1a82f1a2d809a1a692059fae016be233a6127ad2f50a6b986467c3a50669ce4c18929dcccb297c5909314dd347a25a68c21b68eb3e95ac2
-  languageName: node
-  linkType: hard
-
-"bs58@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "bs58@npm:5.0.0"
-  dependencies:
-    base-x: ^4.0.0
-  checksum: 2475cb0684e07077521aac718e604a13e0f891d58cff923d437a2f7e9e28703ab39fce9f84c7c703ab369815a675f11e3bd394d38643bfe8969fbe42e6833d45
   languageName: node
   linkType: hard
 
@@ -8570,7 +8517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.0.8, i18next@npm:^22.4.3":
+"i18next@npm:^22.4.3":
   version: 22.4.5
   resolution: "i18next@npm:22.4.5"
   dependencies:
@@ -10255,7 +10202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -11874,17 +11821,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
-  version: 15.8.1
-  resolution: "prop-types@npm:15.8.1"
-  dependencies:
-    loose-envify: ^1.4.0
-    object-assign: ^4.1.1
-    react-is: ^16.13.1
-  checksum: c056d3f1c057cb7ff8344c645450e14f088a915d078dcda795041765047fa080d38e5d626560ccaac94a4e16e3aa15f3557c1a9a8d1174530955e992c675e459
-  languageName: node
-  linkType: hard
-
 "protobufjs@npm:6.11.3, protobufjs@npm:^6.11.3, protobufjs@npm:^6.8.8, protobufjs@npm:~6.11.2, protobufjs@npm:~6.11.3":
   version: 6.11.3
   resolution: "protobufjs@npm:6.11.3"
@@ -11967,13 +11903,6 @@ __metadata:
   version: 2.1.1
   resolution: "punycode@npm:2.1.1"
   checksum: 823bf443c6dd14f669984dea25757b37993f67e8d94698996064035edd43bed8a5a17a9f12e439c2b35df1078c6bec05a6c86e336209eb1061e8025c481168e8
-  languageName: node
-  linkType: hard
-
-"qr.js@npm:0.0.0, qr.js@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "qr.js@npm:0.0.0"
-  checksum: 5ac6c393967bdeaa660e7fd3a501a25eb538c1f6008a4d30ab2b97bbe520e5c236530090773f1578aa0a523cdaa6923c866615e21143f9e7cd22abd41c789b69
   languageName: node
   linkType: hard
 
@@ -12064,19 +11993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
-  version: 18.2.0
-  resolution: "react-dom@npm:18.2.0"
-  dependencies:
-    loose-envify: ^1.1.0
-    scheduler: ^0.23.0
-  peerDependencies:
-    react: ^18.2.0
-  checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
-  languageName: node
-  linkType: hard
-
-"react-i18next@npm:^12.0.0, react-i18next@npm:^12.1.1":
+"react-i18next@npm:^12.1.1":
   version: 12.1.1
   resolution: "react-i18next@npm:12.1.1"
   dependencies:
@@ -12098,13 +12015,6 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: e72d0ba81b5922759e4aff17e0252bd29988f9642ed817f56b25a3e217e13eea8a7f2322af99a06edb779da12d5d636e9fda473d620df9a3da0df2a74141d53e
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^16.13.1":
-  version: 16.13.1
-  resolution: "react-is@npm:16.13.1"
-  checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
   languageName: node
   linkType: hard
 
@@ -12189,22 +12099,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-qr-code@npm:^2.0.8":
-  version: 2.0.10
-  resolution: "react-qr-code@npm:2.0.10"
-  dependencies:
-    prop-types: ^15.8.1
-    qr.js: 0.0.0
-  peerDependencies:
-    react: ^16.x || ^17.x || ^18.x
-    react-native-svg: "*"
-  peerDependenciesMeta:
-    react-native-svg:
-      optional: true
-  checksum: 6126bc3e0a0506f1c3699bbcb349edab36d6f089b31d3bfef330a9437b903fb64e8c2c756892662c4ea20a2ec74fd8a0f3622e78643d2a3669565bbb708031d2
-  languageName: node
-  linkType: hard
-
 "react-qrcode-logo@npm:^2.8.0":
   version: 2.8.0
   resolution: "react-qrcode-logo@npm:2.8.0"
@@ -12234,15 +12128,6 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 6052c7e3e9627485120ebd8257f128aad8f56386fe8d42374b7743eac1be457c33506d153c7886b4e32923c0c352d402ab805ef9ca02dbcd8393b2bdeb6e5af8
-  languageName: node
-  linkType: hard
-
-"react@npm:^18.2.0":
-  version: 18.2.0
-  resolution: "react@npm:18.2.0"
-  dependencies:
-    loose-envify: ^1.1.0
-  checksum: 88e38092da8839b830cda6feef2e8505dec8ace60579e46aa5490fc3dc9bba0bd50336507dc166f43e3afc1c42939c09fe33b25fae889d6f402721dcd78fca1b
   languageName: node
   linkType: hard
 
@@ -12718,15 +12603,6 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: a8ef5cab769c020cd6382ad9ecc3f72dbde56a50a36639b3a42ad9c11f7724f03700bcad373044059b8067d4a6365154dc7c0ca8027ef20ff4900cf58a0fc2c5
-  languageName: node
-  linkType: hard
-
-"scheduler@npm:^0.23.0":
-  version: 0.23.0
-  resolution: "scheduler@npm:0.23.0"
-  dependencies:
-    loose-envify: ^1.1.0
-  checksum: d79192eeaa12abef860c195ea45d37cbf2bbf5f66e3c4dcd16f54a7da53b17788a70d109ee3d3dde1a0fd50e6a8fc171f4300356c5aee4fc0171de526bf35f8a
   languageName: node
   linkType: hard
 
