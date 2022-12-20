@@ -1885,7 +1885,7 @@ __metadata:
     "@keplr-wallet/types": 0.11.25
     "@types/jest": ^29.2.4
     "@types/long": ^4.0.1
-    "@types/node": ^18.11.15
+    "@types/node": ^18.11.17
     "@types/pino": ^7.0.5
     babel-jest: ^29.3.1
     cosmjs-types: ^0.5.2
@@ -1903,7 +1903,7 @@ __metadata:
   resolution: "@desmoslabs/desmjs-types@workspace:packages/types"
   dependencies:
     "@types/long": ^4.0.1
-    "@types/node": ^18.11.15
+    "@types/node": ^18.11.17
     long: ^4.0.0
     protobufjs: ^7.1.2
     ts-proto: ^1.136.1
@@ -1926,7 +1926,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.2.4
     "@types/long": ^4.0.1
-    "@types/node": ^18.11.15
+    "@types/node": ^18.11.17
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.1.4
@@ -1962,7 +1962,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.2.4
     "@types/long": ^4.0.1
-    "@types/node": ^18.11.15
+    "@types/node": ^18.11.17
     "@types/pino": ^7.0.5
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
@@ -2041,7 +2041,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.2.4
     "@types/long": ^4.0.1
-    "@types/node": ^18.11.15
+    "@types/node": ^18.11.17
     "@types/pino": ^7.0.5
     babel-jest: ^29.3.1
     cosmjs-types: ^0.5.2
@@ -4025,10 +4025,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.15":
-  version: 18.11.15
-  resolution: "@types/node@npm:18.11.15"
-  checksum: cae8692a5cee0316f93ee0342237eb921f70c51afb37c661c711a925a4642654ae7e404c5a80899d481c0cfaff3a6891ef04bacd330a2e72734192bfc91dc2d8
+"@types/node@npm:^18.11.17":
+  version: 18.11.17
+  resolution: "@types/node@npm:18.11.17"
+  checksum: 1933afd068d5c75c068c6c4df6d10edb3b0b2bb6503d544e2f0496ac007c90596e6a5e284a8ef032451bc16f871b7e46719d7d2bea60e9b25d13a77d52161cac
   languageName: node
   linkType: hard
 
