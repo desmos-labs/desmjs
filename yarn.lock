@@ -2015,7 +2015,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.0.0
     "@web3auth/modal": ^4.0.0
-    "@web3auth/ui": ^4.0.0
+    "@web3auth/ui": ^4.1.0
     cosmjs-types: ^0.6.0
     readable-stream: ^4.2.0
     typescript: ^4.9.4
@@ -5030,6 +5030,29 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: 5905d259bf6018172a9376e2340c9291a46852ec0f5a2c38ab88cc22bd5a171ee8e3528e1103470f4dd1090e62a2c586f32c5d195498cbb2f4c74def630698be
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@web3auth/ui@npm:4.1.0"
+  dependencies:
+    "@toruslabs/openlogin": ^2.10.0
+    "@toruslabs/openlogin-jrpc": ^2.9.0
+    "@web3auth/base": ^4.0.0
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^22.4.3
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^12.1.1
+    react-qrcode-logo: ^2.8.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: f225dfa5a528ab5b064850437e802bf6dcf6b8e82924a8cac0c7f59cbcdc5bb1b685d1cf3ad4d7e8dbf67a2459ce6e2e7cc4005bdb29308fdbd6bbf4576007b9
   languageName: node
   linkType: hard
 
