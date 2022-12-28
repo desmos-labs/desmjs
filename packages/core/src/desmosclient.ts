@@ -64,8 +64,8 @@ function createDefaultRegistry(): Registry {
 
 /**
  * Creates a SignerInfo instance from the data given.
- * @param signers: List of accounts that have signed a transaction.
- * @param signMode: Signing mode used while signing the transaction
+ * @param signers - List of accounts that have signed a transaction.
+ * @param signMode - Signing mode used while signing the transaction
  */
 function makeSignerInfos(
   signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
@@ -280,7 +280,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   /**
    * Returns the account having the given address reading them from the signer.
-   * @param address {String}: Address of the account to be searched for.
+   * @param address - Address of the account to be searched for.
    * @private
    */
   private async getAccountFromSigner(address: string): Promise<AccountData> {
@@ -378,7 +378,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   /**
    * Encode the given message objects into Amino messages.
-   * @param msgs: Messages to be encoded.
+   * @param msgs - Messages to be encoded.
    */
   public encodeToAmino(msgs: readonly EncodeObject[]): AminoMsg[] {
     return msgs.map((msg) => this.types.toAmino(msg));
@@ -546,5 +546,13 @@ export class DesmosClient extends SigningCosmWasmClient {
       }),
     };
     return this.signAndBroadcast(senderAddress, [transferMsg], fee, memo);
+  }
+
+  /**
+   * Gets a DesmosQueryClient that can be used to query the data from the chain.
+   * NOTE: This method will throw an Error if the Client is not connected.
+   */
+  public get querier(): DesmosQueryClient {
+    return this.forceGetQueryClient();
   }
 }
