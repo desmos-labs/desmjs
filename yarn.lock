@@ -2015,7 +2015,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.0.0
     "@web3auth/modal": ^4.1.1
-    "@web3auth/ui": ^4.1.0
+    "@web3auth/ui": ^4.1.1
     cosmjs-types: ^0.6.0
     readable-stream: ^4.2.0
     typescript: ^4.9.4
@@ -4973,29 +4973,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: 5bcdb17b8dc6f38912abae8d8e677b8e6f121e18bfd4dc5daa74f789c50b2db4d1e83cd6b77fb0aedbe7c344c07b283b56b6a5daab06874b9314729bfa9de8e7
-  languageName: node
-  linkType: hard
-
-"@web3auth/ui@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@web3auth/ui@npm:4.1.0"
-  dependencies:
-    "@toruslabs/openlogin": ^2.10.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^4.0.0
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    copy-to-clipboard: ^3.3.3
-    i18next: ^22.4.3
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    react-i18next: ^12.1.1
-    react-qrcode-logo: ^2.8.0
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    react: ^18.x
-    react-dom: ^18.x
-  checksum: f225dfa5a528ab5b064850437e802bf6dcf6b8e82924a8cac0c7f59cbcdc5bb1b685d1cf3ad4d7e8dbf67a2459ce6e2e7cc4005bdb29308fdbd6bbf4576007b9
   languageName: node
   linkType: hard
 
@@ -8563,15 +8540,6 @@ __metadata:
   dependencies:
     ms: ^2.0.0
   checksum: 9c7a74a2827f9294c009266c82031030eae811ca87b0da3dceb8d6071b9bde22c9f3daef0469c3c533cc67a97d8a167cd9fc0389350e5f415f61a79b171ded16
-  languageName: node
-  linkType: hard
-
-"i18next@npm:^22.4.3":
-  version: 22.4.5
-  resolution: "i18next@npm:22.4.5"
-  dependencies:
-    "@babel/runtime": ^7.20.6
-  checksum: 37942b6ef1dcc9a6451fda9ed18d9ecc55954bd40b615b6f9b27772ae70a8cb2b140344de75fd02069ca72f8e337ba9f2ebca162170e33cc0af55ea42169ebf7
   languageName: node
   linkType: hard
 
