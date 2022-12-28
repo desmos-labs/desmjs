@@ -27,7 +27,7 @@ Here an example that uses the `connect` method to connect to the Desmos mainnet:
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs"
 
-const client = DesmosClient.connect('https://rpc.mainnet.desmos.network:443');
+const client = DesmosClient.connect('https://rpc.mainnet.desmos.network');
 ```
 
 ### Instantiating with connectWithSigner
@@ -41,7 +41,7 @@ const mnemonic = "" // Replace with your mnemonic
 // To sign tx in amino mode use SigningMode.AMINO
 const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, mnemonic);
 
-const client = DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network:443', signer, {
+const client = DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
   // Common gas price in the Desmos mainnet.
   gasPrice: "0.01udsm",
 });
