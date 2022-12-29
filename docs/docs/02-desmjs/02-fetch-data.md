@@ -3,18 +3,18 @@
 ## Overview
 
 To fetch data from the chain you need to have a properly initialized `DesmosClient`.  
-Then with the [`querier`](../api/classes/desmoslabs_desmjs.DesmosClient.md#querier) method you can get
-a [`DesmosQueryClient`](../api/modules/desmoslabs_desmjs.md#desmosqueryclient)
+Then with the [`querier`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#querier) method you can get
+a [`DesmosQueryClient`](docs/api/modules/desmoslabs_desmjs.md#desmosqueryclient)
 that exposes the methods to query the data.
 
 Here you can find the functions exposed from `DesmosQueryClient` divided by modules:
 
-* [Profile](../api/interfaces/desmoslabs_desmjs.ProfilesExtension.md)
-* [Relationships](../api/interfaces/desmoslabs_desmjs.RelationshipsExtension.md)
-* [Subspaces](../api/interfaces/desmoslabs_desmjs.SubspacesExtension.md)
-* [Posts](../api/interfaces/desmoslabs_desmjs.PostsExtension.md)
-* [Reactions](../api/interfaces/desmoslabs_desmjs.ReactionsExtension.md)
-* [Reports](../api/interfaces/desmoslabs_desmjs.ReportsExtension.md)
+* [Profile](docs/api/interfaces/desmoslabs_desmjs.ProfilesExtension.md)
+* [Relationships](docs/api/interfaces/desmoslabs_desmjs.RelationshipsExtension.md)
+* [Subspaces](docs/api/interfaces/desmoslabs_desmjs.SubspacesExtension.md)
+* [Posts](docs/api/interfaces/desmoslabs_desmjs.PostsExtension.md)
+* [Reactions](docs/api/interfaces/desmoslabs_desmjs.ReactionsExtension.md)
+* [Reports](docs/api/interfaces/desmoslabs_desmjs.ReportsExtension.md)
 
 **NOTE** Fetching data directly from the chain can be to slow for certain use cases. For such
 cases we provide some GraphQL endpoint to query the data from the chain. Here you can find the

@@ -12,8 +12,8 @@ yarn add @desmoslabs/desmjs @desmoslabs/desmjs-types
 
 To instantiate the client you have two options:
 
-1. [`connect`](../api/classes/desmoslabs_desmjs.DesmosClient.md#connect) if you need to just fetch data from the chain; 
-2. [`connectWithSigner`](../api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) if you need to perform operations.
+1. [`connect`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connect) if you need to just fetch data from the chain; 
+2. [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) if you need to perform operations.
 
 The RPC endpoints required from `connect` and `connectWithSigner` can be found here:
 

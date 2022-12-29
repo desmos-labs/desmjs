@@ -220,6 +220,7 @@ module.exports = {
         entryPointStrategy: "packages",
         sidebar: {
           fullNames: true,
+          position: 99,
         },
       },
     ],
