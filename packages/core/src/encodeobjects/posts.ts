@@ -7,6 +7,14 @@ import {
   MsgRemovePostAttachment,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
 import { EncodeObject } from "@cosmjs/proto-signing";
+import {
+  MsgAddPostAttachmentTypeUrl,
+  MsgAnswerPollTypeUrl,
+  MsgCreatePostTypeUrl,
+  MsgDeletePostTypeUrl,
+  MsgEditPostTypeUrl,
+  MsgRemovePostAttachmentTypeUrl,
+} from "../const";
 
 export interface MsgCreatePostEncodeObject extends EncodeObject {
   readonly typeUrl: "/desmos.posts.v2.MsgCreatePost";
@@ -17,8 +25,7 @@ export function isMsgCreatePostEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgCreatePostEncodeObject {
   return (
-    (encodeObject as MsgCreatePostEncodeObject).typeUrl ===
-    "/desmos.posts.v2.MsgCreatePost"
+    (encodeObject as MsgCreatePostEncodeObject).typeUrl === MsgCreatePostTypeUrl
   );
 }
 
@@ -31,8 +38,7 @@ export function isMsgEditPostEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgEditPostEncodeObject {
   return (
-    (encodeObject as MsgEditPostEncodeObject).typeUrl ===
-    "/desmos.posts.v2.MsgEditPost"
+    (encodeObject as MsgEditPostEncodeObject).typeUrl === MsgEditPostTypeUrl
   );
 }
 
@@ -45,8 +51,7 @@ export function isMsgDeletePostEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgDeletePostEncodeObject {
   return (
-    (encodeObject as MsgDeletePostEncodeObject).typeUrl ===
-    "/desmos.posts.v2.MsgDeletePost"
+    (encodeObject as MsgDeletePostEncodeObject).typeUrl === MsgDeletePostTypeUrl
   );
 }
 
@@ -60,7 +65,7 @@ export function isMsgAddPostAttachmentEncodeObject(
 ): encodeObject is MsgAddPostAttachmentEncodeObject {
   return (
     (encodeObject as MsgAddPostAttachmentEncodeObject).typeUrl ===
-    "/desmos.posts.v2.MsgAddPostAttachment"
+    MsgAddPostAttachmentTypeUrl
   );
 }
 
@@ -74,7 +79,7 @@ export function isMsgRemovePostAttachmentEncodeObject(
 ): encodeObject is MsgRemovePostAttachmentEncodeObject {
   return (
     (encodeObject as MsgRemovePostAttachmentEncodeObject).typeUrl ===
-    "/desmos.posts.v2.MsgRemovePostAttachment"
+    MsgRemovePostAttachmentTypeUrl
   );
 }
 
@@ -87,7 +92,6 @@ export function isMsgAnswerPollEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgAnswerPollEncodeObject {
   return (
-    (encodeObject as MsgAnswerPollEncodeObject).typeUrl ===
-    "/desmos.posts.v2.MsgAnswerPoll"
+    (encodeObject as MsgAnswerPollEncodeObject).typeUrl === MsgAnswerPollTypeUrl
   );
 }

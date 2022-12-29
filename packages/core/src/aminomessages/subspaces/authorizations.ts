@@ -3,12 +3,13 @@ import { Any } from "cosmjs-types/google/protobuf/any";
 import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/authz/authz";
 import Long from "long";
 import { AminoGenericSubspaceAuthorization } from "./messages";
+import { GenericSubspaceAuthorizationTypeUrl } from "../../const";
 
 export function genericSubspaceAuthorizationToAny(
   authorization: GenericSubspaceAuthorization
 ): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization",
+    typeUrl: GenericSubspaceAuthorizationTypeUrl,
     value: GenericSubspaceAuthorization.encode(authorization).finish(),
   });
 }

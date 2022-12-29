@@ -5,14 +5,20 @@ import {
   MsgDeleteRelationship,
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
+import {
+  MsgBlockUserTypeUrl,
+  MsgCreateRelationshipTypeUrl,
+  MsgDeleteRelationshipTypeUrl,
+  MsgUnblockUserTypeUrl,
+} from "../../const";
 
 export const relationshipsRegistryTypes: ReadonlyArray<
   [string, GeneratedType]
 > = [
-  ["/desmos.relationships.v1.MsgCreateRelationship", MsgCreateRelationship],
-  ["/desmos.relationships.v1.MsgDeleteRelationship", MsgDeleteRelationship],
-  ["/desmos.relationships.v1.MsgBlockUser", MsgBlockUser],
-  ["/desmos.relationships.v1.MsgUnblockUser", MsgUnblockUser],
+  [MsgCreateRelationshipTypeUrl, MsgCreateRelationship],
+  [MsgDeleteRelationshipTypeUrl, MsgDeleteRelationship],
+  [MsgBlockUserTypeUrl, MsgBlockUser],
+  [MsgUnblockUserTypeUrl, MsgUnblockUser],
 ];
 
 export default relationshipsRegistryTypes;

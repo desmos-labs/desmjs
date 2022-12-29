@@ -2,12 +2,13 @@ import { AminoConverters } from "@cosmjs/stargate";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { StakeAuthorization } from "cosmjs-types/cosmos/staking/v1beta1/authz";
 import { AminoStakeAuthorization } from "./messages";
+import { StakeAuthorizationTypeUrl } from "../../../const";
 
 export function stakeAuthorizationToAny(
   authorization: StakeAuthorization
 ): Any {
   return Any.fromPartial({
-    typeUrl: "/cosmos.bank.v1beta1.StakeAuthorization",
+    typeUrl: StakeAuthorizationTypeUrl,
     value: StakeAuthorization.encode(authorization).finish(),
   });
 }

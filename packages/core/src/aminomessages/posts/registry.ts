@@ -7,14 +7,22 @@ import {
   MsgRemovePostAttachment,
   MsgAnswerPoll,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+import {
+  MsgAddPostAttachmentTypeUrl,
+  MsgAnswerPollTypeUrl,
+  MsgCreatePostTypeUrl,
+  MsgDeletePostTypeUrl,
+  MsgEditPostTypeUrl,
+  MsgRemovePostAttachmentTypeUrl,
+} from "../../const";
 
 export const postsRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
-  ["/desmos.posts.v2.MsgCreatePost", MsgCreatePost],
-  ["/desmos.posts.v2.MsgEditPost", MsgEditPost],
-  ["/desmos.posts.v2.MsgDeletePost", MsgDeletePost],
-  ["/desmos.posts.v2.MsgAddPostAttachment", MsgAddPostAttachment],
-  ["/desmos.posts.v2.MsgRemovePostAttachment", MsgRemovePostAttachment],
-  ["/desmos.posts.v2.MsgAnswerPoll", MsgAnswerPoll],
+  [MsgCreatePostTypeUrl, MsgCreatePost],
+  [MsgEditPostTypeUrl, MsgEditPost],
+  [MsgDeletePostTypeUrl, MsgDeletePost],
+  [MsgAddPostAttachmentTypeUrl, MsgAddPostAttachment],
+  [MsgRemovePostAttachmentTypeUrl, MsgRemovePostAttachment],
+  [MsgAnswerPollTypeUrl, MsgAnswerPoll],
 ];
 
 export default postsRegistryTypes;

@@ -30,19 +30,23 @@ import {
   AminoMsgSetReactionsParams,
 } from "./messages";
 import { isAminoConverter } from "../../types";
+import {
+  FreeTextValueTypeUrl,
+  RegisteredReactionValueTypeUrl,
+} from "../../const";
 
 export function convertRegisteredReactionValueToAny(
   value: RegisteredReactionValue
 ): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.reactions.v1.RegisteredReactionValue",
+    typeUrl: RegisteredReactionValueTypeUrl,
     value: RegisteredReactionValue.encode(value).finish(),
   });
 }
 
 export function convertFreeTextValueToAny(value: FreeTextValue): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.reactions.v1.FreeTextValue",
+    typeUrl: FreeTextValueTypeUrl,
     value: FreeTextValue.encode(value).finish(),
   });
 }

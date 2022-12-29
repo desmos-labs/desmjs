@@ -5,6 +5,12 @@ import {
   MsgDeleteRelationship,
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
+import {
+  MsgBlockUserTypeUrl,
+  MsgCreateRelationshipTypeUrl,
+  MsgDeleteRelationshipTypeUrl,
+  MsgUnblockUserTypeUrl,
+} from "../const";
 
 export interface MsgCreateRelationshipEncodeObject extends EncodeObject {
   typeUrl: "/desmos.relationships.v1.MsgCreateRelationship";
@@ -16,7 +22,7 @@ export function isMsgCreateRelationshipEncodeObject(
 ): encodeObject is MsgCreateRelationshipEncodeObject {
   return (
     (encodeObject as MsgCreateRelationshipEncodeObject).typeUrl ===
-    "/desmos.relationships.v1.MsgCreateRelationship"
+    MsgCreateRelationshipTypeUrl
   );
 }
 
@@ -30,7 +36,7 @@ export function isMsgDeleteRelationshipEncodeObject(
 ): encodeObject is MsgDeleteRelationshipEncodeObject {
   return (
     (encodeObject as MsgDeleteRelationshipEncodeObject).typeUrl ===
-    "/desmos.relationships.v1.MsgDeleteRelationship"
+    MsgDeleteRelationshipTypeUrl
   );
 }
 
@@ -43,8 +49,7 @@ export function isMsgBlockUserEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgBlockUserEncodeObject {
   return (
-    (encodeObject as MsgBlockUserEncodeObject).typeUrl ===
-    "/desmos.relationships.v1.MsgBlockUser"
+    (encodeObject as MsgBlockUserEncodeObject).typeUrl === MsgBlockUserTypeUrl
   );
 }
 
@@ -58,6 +63,6 @@ export function isMsgUnblockUserEncodeObject(
 ): encodeObject is MsgUnblockUserEncodeObject {
   return (
     (encodeObject as MsgUnblockUserEncodeObject).typeUrl ===
-    "/desmos.relationships.v1.MsgUnblockUser"
+    MsgUnblockUserTypeUrl
   );
 }

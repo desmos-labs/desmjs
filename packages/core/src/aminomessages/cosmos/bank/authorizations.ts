@@ -2,10 +2,11 @@ import { AminoConverters } from "@cosmjs/stargate";
 import { SendAuthorization } from "cosmjs-types/cosmos/bank/v1beta1/authz";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { AminoSendAuthorization } from "./messages";
+import { SendAuthorizationTypeUrl } from "../../../const";
 
 export function sendAuthorizationToAny(authorization: SendAuthorization): Any {
   return Any.fromPartial({
-    typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+    typeUrl: SendAuthorizationTypeUrl,
     value: SendAuthorization.encode(authorization).finish(),
   });
 }

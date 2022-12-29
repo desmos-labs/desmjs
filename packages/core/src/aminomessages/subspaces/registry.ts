@@ -17,34 +17,43 @@ import {
   MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/authz/authz";
+import {
+  GenericSubspaceAuthorizationTypeUrl,
+  MsgAddUserToUserGroupTypeUrl,
+  MsgCreateSectionTypeUrl,
+  MsgCreateSubspaceTypeUrl,
+  MsgCreateUserGroupTypeUrl,
+  MsgDeleteSectionTypeUrl,
+  MsgDeleteSubspaceTypeUrl,
+  MsgDeleteUserGroupTypeUrl,
+  MsgEditSectionTypeUrl,
+  MsgEditSubspaceTypeUrl,
+  MsgEditUserGroupTypeUrl,
+  MsgMoveSectionTypeUrl,
+  MsgMoveUserGroupTypeUrl,
+  MsgRemoveUserFromUserGroupTypeUrl,
+  MsgSetUserGroupPermissionsTypeUrl,
+  MsgSetUserPermissionsTypeUrl,
+} from "../../const";
 
 export const subspacesRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
-  [
-    "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization",
-    GenericSubspaceAuthorization,
-  ],
+  [GenericSubspaceAuthorizationTypeUrl, GenericSubspaceAuthorization],
 
-  ["/desmos.subspaces.v3.MsgCreateSubspace", MsgCreateSubspace],
-  ["/desmos.subspaces.v3.MsgEditSubspace", MsgEditSubspace],
-  ["/desmos.subspaces.v3.MsgDeleteSubspace", MsgDeleteSubspace],
-  ["/desmos.subspaces.v3.MsgCreateSection", MsgCreateSection],
-  ["/desmos.subspaces.v3.MsgEditSection", MsgEditSection],
-  ["/desmos.subspaces.v3.MsgMoveSection", MsgMoveSection],
-  ["/desmos.subspaces.v3.MsgDeleteSection", MsgDeleteSection],
-  ["/desmos.subspaces.v3.MsgCreateUserGroup", MsgCreateUserGroup],
-  ["/desmos.subspaces.v3.MsgEditUserGroup", MsgEditUserGroup],
-  ["/desmos.subspaces.v3.MsgMoveUserGroup", MsgMoveUserGroup],
-  [
-    "/desmos.subspaces.v3.MsgSetUserGroupPermissions",
-    MsgSetUserGroupPermissions,
-  ],
-  ["/desmos.subspaces.v3.MsgDeleteUserGroup", MsgDeleteUserGroup],
-  ["/desmos.subspaces.v3.MsgAddUserToUserGroup", MsgAddUserToUserGroup],
-  [
-    "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup",
-    MsgRemoveUserFromUserGroup,
-  ],
-  ["/desmos.subspaces.v3.MsgSetUserPermissions", MsgSetUserPermissions],
+  [MsgCreateSubspaceTypeUrl, MsgCreateSubspace],
+  [MsgEditSubspaceTypeUrl, MsgEditSubspace],
+  [MsgDeleteSubspaceTypeUrl, MsgDeleteSubspace],
+  [MsgCreateSectionTypeUrl, MsgCreateSection],
+  [MsgEditSectionTypeUrl, MsgEditSection],
+  [MsgMoveSectionTypeUrl, MsgMoveSection],
+  [MsgDeleteSectionTypeUrl, MsgDeleteSection],
+  [MsgCreateUserGroupTypeUrl, MsgCreateUserGroup],
+  [MsgEditUserGroupTypeUrl, MsgEditUserGroup],
+  [MsgMoveUserGroupTypeUrl, MsgMoveUserGroup],
+  [MsgSetUserGroupPermissionsTypeUrl, MsgSetUserGroupPermissions],
+  [MsgDeleteUserGroupTypeUrl, MsgDeleteUserGroup],
+  [MsgAddUserToUserGroupTypeUrl, MsgAddUserToUserGroup],
+  [MsgRemoveUserFromUserGroupTypeUrl, MsgRemoveUserFromUserGroup],
+  [MsgSetUserPermissionsTypeUrl, MsgSetUserPermissions],
 ];
 
 export default subspacesRegistryTypes;

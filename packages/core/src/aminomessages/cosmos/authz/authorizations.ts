@@ -3,12 +3,13 @@ import { GenericAuthorization } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 import { AminoConverters } from "@cosmjs/stargate";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { AminoGenericAuthorization } from "./messages";
+import { GenericAuthorizationTypeUrl } from "../../../const";
 
 export function genericAuthorizationToAny(
   authorization: GenericAuthorization
 ): Any {
   return Any.fromPartial({
-    typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
+    typeUrl: GenericAuthorizationTypeUrl,
     value: GenericAuthorization.encode(authorization).finish(),
   });
 }

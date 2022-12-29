@@ -54,6 +54,13 @@ import {
   AminoSignature,
   AminoSingleSignature,
 } from "./types";
+import {
+  Base58AddressTypeUrl,
+  Bech32AddressTypeUrl,
+  CosmosMultiSignatureTypeUrl,
+  HexAddressTypeUrl,
+  SingleSignatureTypeUrl,
+} from "../../const";
 
 function assertDefinedAndNotNull(object?: any, message?: string) {
   if (object === undefined || object === null) {
@@ -84,7 +91,7 @@ function omitDefault<T extends string | number | Long>(
 }
 
 function convertAddressData(address: Any): AminoAddressData {
-  if (address.typeUrl === "/desmos.profiles.v3.Bech32Address") {
+  if (address.typeUrl === Bech32AddressTypeUrl) {
     const bech32Address = Bech32Address.decode(address.value);
     return {
       type: "desmos/Bech32Address",
@@ -95,7 +102,7 @@ function convertAddressData(address: Any): AminoAddressData {
     };
   }
 
-  if (address.typeUrl === "/desmos.profiles.v3.Base58Address") {
+  if (address.typeUrl === Base58AddressTypeUrl) {
     const base58Address = Base58Address.decode(address.value);
     return {
       type: "desmos/Base58Address",
@@ -105,7 +112,7 @@ function convertAddressData(address: Any): AminoAddressData {
     };
   }
 
-  if (address.typeUrl === "/desmos.profiles.v3.HexAddress") {
+  if (address.typeUrl === HexAddressTypeUrl) {
     const hexAddress = HexAddress.decode(address.value);
     return {
       type: "desmos/HexAddress",
@@ -121,21 +128,21 @@ function convertAddressData(address: Any): AminoAddressData {
 
 export function bech32AddressToAny(address: Bech32Address): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.profiles.v3.Bech32Address",
+    typeUrl: Bech32AddressTypeUrl,
     value: Bech32Address.encode(address).finish(),
   });
 }
 
 export function base58AddressToAny(address: Base58Address): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.profiles.v3.Base58Address",
+    typeUrl: Base58AddressTypeUrl,
     value: Base58Address.encode(address).finish(),
   });
 }
 
 export function hexAddressToAny(address: HexAddress): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.profiles.v3.HexAddress",
+    typeUrl: HexAddressTypeUrl,
     value: HexAddress.encode(address).finish(),
   });
 }
@@ -188,7 +195,7 @@ function convertAminoCompactBitArray(value: string): CompactBitArray {
 }
 
 function convertSignatureData(signatureData: Any): AminoSignature {
-  if (signatureData.typeUrl === "/desmos.profiles.v3.SingleSignature") {
+  if (signatureData.typeUrl === SingleSignatureTypeUrl) {
     const data = SingleSignature.decode(signatureData.value);
     return {
       type: "desmos/SingleSignature",
@@ -199,7 +206,7 @@ function convertSignatureData(signatureData: Any): AminoSignature {
     };
   }
 
-  if (signatureData.typeUrl === "/desmos.profiles.v3.CosmosMultiSignature") {
+  if (signatureData.typeUrl === CosmosMultiSignatureTypeUrl) {
     const data = CosmosMultiSignature.decode(signatureData.value);
     const signatures = data.signatures.map(convertSignatureData);
     return {
@@ -216,7 +223,7 @@ function convertSignatureData(signatureData: Any): AminoSignature {
 
 export function singleSignatureToAny(signature: SingleSignature): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.profiles.v3.SingleSignature",
+    typeUrl: SingleSignatureTypeUrl,
     value: SingleSignature.encode(signature).finish(),
   });
 }
@@ -225,7 +232,7 @@ export function cosmosMultiSignatureToAny(
   signature: CosmosMultiSignature
 ): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.profiles.v3.CosmosMultiSignature",
+    typeUrl: CosmosMultiSignatureTypeUrl,
     value: CosmosMultiSignature.encode(signature).finish(),
   });
 }
