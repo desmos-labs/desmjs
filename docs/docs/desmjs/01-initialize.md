@@ -35,7 +35,7 @@ const client = DesmosClient.connect('https://rpc.mainnet.desmos.network');
 Here an example that uses `connectWithSigner` method to perform operations on the Desmos mainnet:
 
 ```js
-import { DesmosClient, OfflineSignerAdapter, SigningMode } from "@desmoslabs/desmjs"
+import { DesmosClient, GasPrice, OfflineSignerAdapter, SigningMode } from "@desmoslabs/desmjs"
 
 const mnemonic = "" // Replace with your mnemonic
 // To sign tx in amino mode use SigningMode.AMINO
@@ -43,7 +43,7 @@ const signer = await OfflineSignerAdapter.fromMnemonic(SigningMode.DIRECT, mnemo
 
 const client = DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
   // Common gas price in the Desmos mainnet.
-  gasPrice: "0.01udsm",
+  gasPrice: GasPrice.fromString("0.01udsm"),
 });
 ```
 
