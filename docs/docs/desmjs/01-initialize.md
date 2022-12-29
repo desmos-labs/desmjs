@@ -5,7 +5,7 @@ This package provides the `DesmsoClient` class together with other utilities tha
 To install desmjs run the following command:
 
 ```shell
-yarn add @desmoslabs/desmjs
+yarn add @desmoslabs/desmjs @desmoslabs/desmjs-types
 ```
 
 ## Instantiating the DesmosClient
