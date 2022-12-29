@@ -1893,7 +1893,7 @@ __metadata:
     jest: ^29.3.1
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.136.1
+    ts-proto: ^1.137.0
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -1906,7 +1906,7 @@ __metadata:
     "@types/node": ^18.11.18
     long: ^4.0.0
     protobufjs: ^7.1.2
-    ts-proto: ^1.136.1
+    ts-proto: ^1.137.0
     ts-protoc-gen: ^0.15.0
     typescript: ^4.9.4
   languageName: unknown
@@ -1939,7 +1939,7 @@ __metadata:
     lokijs: ^1.5.12
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.136.1
+    ts-proto: ^1.137.0
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -1974,7 +1974,7 @@ __metadata:
     jest: ^29.3.1
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.136.1
+    ts-proto: ^1.137.0
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -2049,7 +2049,7 @@ __metadata:
     jest: ^29.3.1
     long: ^4.0.0
     ts-jest: ^29.0.3
-    ts-proto: ^1.136.1
+    ts-proto: ^1.137.0
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -6821,7 +6821,7 @@ __metadata:
     prettier: ^2.8.1
     pretty-quick: ^3.1.3
     ts-jest: ^29.0.3
-    ts-proto: ^1.136.1
+    ts-proto: ^1.137.0
     tsc: ^2.0.4
     typescript: ^4.9.4
   languageName: unknown
@@ -13598,9 +13598,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-proto@npm:^1.136.1":
-  version: 1.136.1
-  resolution: "ts-proto@npm:1.136.1"
+"ts-proto@npm:^1.137.0":
+  version: 1.137.0
+  resolution: "ts-proto@npm:1.137.0"
   dependencies:
     "@types/object-hash": ^1.3.0
     case-anything: ^2.1.10
@@ -13611,7 +13611,7 @@ __metadata:
     ts-proto-descriptors: 1.7.1
   bin:
     protoc-gen-ts_proto: protoc-gen-ts_proto
-  checksum: c1a1ba74e8c088741b05da3dee226661c77c0ebd76ff194c04168158134785becb50c3c31b5f19ab1265b4369de5b4526d45079e42f12c48d5fd5a5337d10ce1
+  checksum: dc72608a0e3c1074409b9dab6f47f8bd22334614d52042bfd6760601254fef4e73f2aaf62e9638b4a56313644ee0894f1fe27c448fc4b22505436bb28c14a074
   languageName: node
   linkType: hard
 
