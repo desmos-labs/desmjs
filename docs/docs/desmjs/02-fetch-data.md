@@ -1,5 +1,7 @@
 # Fetch data from the chain
 
+## Overview
+
 To fetch data from the chain you need to have a properly initialized `DesmosClient`.  
 Then with the [`querier`](../api/classes/desmoslabs_desmjs.DesmosClient.md#querier) method you can get
 a [`DesmosQueryClient`](../api/modules/desmoslabs_desmjs.md#desmosqueryclient)
