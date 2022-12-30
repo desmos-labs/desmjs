@@ -42,7 +42,7 @@ If you need to just sign a list of messages that needs to be sent later you can 
 
 ## Signers
 
-The `@desmoslabs/desmjs` provides a set of signers that cane be used, here you can find the list:
+The `@desmoslabs/desmjs` provides a set of signers that can be used, here you can find the list:
 
 1. [`OfflineSignerAdapter`](docs/api/classes/desmoslabs_desmjs.OfflineSignerAdapter.md): This can be used to create
 a signer from a 12/24 words mnemonic or any signer that implements the `@cosmjs/OfflineAminoSigner` or 
