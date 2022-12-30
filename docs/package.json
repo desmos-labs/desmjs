@@ -5,13 +5,14 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "NODE_OPTIONS=--max_old_space_size=4096 docusaurus start",
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 docusaurus build",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 docusaurus build && echo $DOCS_DOMAIN > build/CNAME",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
+    "write-cname": "",
     "typecheck": "tsc"
   },
   "dependencies": {
