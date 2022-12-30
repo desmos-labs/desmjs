@@ -36,6 +36,10 @@ export class KeplrSigner extends Signer {
 
   private keplrChainInfo: ChainInfo | undefined;
 
+  private readonly onKeystoreChange = () => {
+    this.handleKeyStoreChange();
+  };
+
   constructor(keplrClient: Keplr, options: KeplrSignerOptions) {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
@@ -49,9 +53,7 @@ export class KeplrSigner extends Signer {
    */
   private subscribeToEvents() {
     // Subscribe to the Keplr Storage event
-    window.addEventListener("keplr_keystorechange", () =>
-      this.handleKeyStoreChange()
-    );
+    window.addEventListener("keplr_keystorechange", this.onKeystoreChange);
   }
 
   /**
@@ -60,9 +62,7 @@ export class KeplrSigner extends Signer {
    */
   private unsubscribeFromEvents() {
     // Unsubscribe from the Keplr Storage event
-    window.removeEventListener("keplr_keystorechange", () =>
-      this.handleKeyStoreChange()
-    );
+    window.removeEventListener("keplr_keystorechange", this.onKeystoreChange);
   }
 
   /**
