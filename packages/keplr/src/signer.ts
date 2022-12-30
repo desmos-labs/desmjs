@@ -127,14 +127,13 @@ export class KeplrSigner extends Signer {
    */
   async disconnect(): Promise<void> {
     if (this.status !== SignerStatus.Connected) {
-      return Promise.resolve();
+      return;
     }
 
     this.updateStatus(SignerStatus.Disconnecting);
     this.accountData = undefined;
     this.unsubscribeFromEvents();
     this.updateStatus(SignerStatus.NotConnected);
-    return Promise.resolve();
   }
 
   /**
