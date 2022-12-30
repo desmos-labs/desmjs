@@ -26,8 +26,11 @@ jobs:
           cache-dependency-path: |
             yarn.lock
 
+      - name: Install 🔨
+        run: yarn install --immutable
+
       - name: Build 🔧
-        run: yarn install
+        run: yarn build-docs
 
       - name: Deploy preview to Netlify 🚀
         id: deploy-preview
