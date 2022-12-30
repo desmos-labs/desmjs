@@ -33,7 +33,7 @@ jobs:
         id: deploy-preview
         uses: nwtgck/actions-netlify@v2.0
         with:
-          publish-dir: ./docs/output
+          publish-dir: ./docs/build
           deploy-message: "Deploy from GitHub Actions"
           enable-commit-comment: false
           enable-pull-request-comment: false
