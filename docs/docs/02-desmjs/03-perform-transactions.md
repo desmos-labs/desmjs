@@ -2,43 +2,77 @@
 
 ## Overview
 
-In order to be able to perform transaction you need to have a `DesmosClient` instance
-initialized with a `Signer` through the 
-[`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function.  
+In order to be able to perform transaction you need to do the following operations:
+1. Instantiate an instance of [`Signer`](docs/api/classes/desmoslabs_desmjs.Signer.md);
+2. Instantiate a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md) with the
+[`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function;
+3. Prepare the messages that you want to perform;
+4. Sign and broadcast the messages with the
+[`signAndBroadcast`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast) method.
+
+Here is an example of code that showcase all the steps:
 
 ```js
-import { DesmosClient } from "@desmoslabs/desmjs";
+import { DesmosClient, OfflineSignerAdapter, SigningMode, GasPrice } from "@desmoslabs/desmjs";
 
 
-const signer = ...; // Your signer
+// Generate a signer with a random mnmonic. To see the available signer go to the Signers section.
+const signer = await OfflineSignerAdapter.generate(SigningMode.DIRECT, 24);
+
 const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
   // Common gas price in the Desmos mainnet.
-  gasPrice: "0.01udsm",
+  gasPrice: GasPrice.fromString("0.01udsm"),
 });
-```
 
-With a properly initialized `DesmosClient` you can use the 
-[`signAndBroadcast`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast) method to sign the messages
-and broadcast it to the chain.  
+// Get the signer address from the signer.
+const [signerAddress] = await signer.getAccounts();
 
-```js
-// Address of who is performing the transaction, can be obtained from the Signer with the getAccounts method.
-const signerAddress = "desmos..." 
+// Save profile message
+const saveProfile: MsgSaveProfileEncodeObject = {
+  typeUrl: "/desmos.profiles.v3.MsgSaveProfile",
+  value: {
+    creator: signerAddress,
+    bio: "The price of all saiyans",
+    dtag: "vegeta",
+    nickname: "Vegeta",
+    coverPicture: "https://ipfs.io/ipfs/<CID>",
+    profilePicture: "https://ipfs.io/ipfs/<CID>",
+  }
+};
 
-// Message to be sent to the chain.
-const messages: EncodeObject[] = []
+const createPost: MsgCreatePostEncodeObject = {
+  typeUrl: "/desmos.posts.v2.MsgCreatePost",
+  value: MsgCreatePost.fromPartial({
+    subspaceId: Long.fromNumber(1),
+    author: signerAddress,
+    text: "post content",
+    replySettings: ReplySetting.REPLY_SETTING_EVERYONE
+  })
+};
 
-// Fee paid to perform the operations, if == "auto" the fees will be automatically estimaed.
+// Message to be sent to the chain, they will be executed sequentialy from first to last.
+const messages: EncodeObject[] = [saveProfile, createPost];
+
+// Fee paid to perform the operations.
 const fees: number | StdFee | "auto" = "auto";
 
-// Optional memo that will be attached to the transaction
+// Optional memo that can be attached to the transaction, max lengh 256 characters.
 const memo: string | undefined = undefined;
 
-await client.signandbroadcast(signerAddress, messages, "auto", memo);
+await client.signandbroadcast(signerAddress, messages, fees, memo);
 ```
 
-If you need to just sign a list of messages that needs to be sent later you can use the 
-[`sign`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#sign) method.
+### Automatic fees estimation
+
+The `DesmosClient` class can estimate the fees for you before broadcasting the messages.  
+To enable this feature you must provide the `gasPrice` through the `options` 
+param of [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner).  
+
+With this feature enabled you can pass one of the following values as a `fee` param of 
+[`signandbroadcast`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast):
+* `"auto"`: To automatically estimated the fees based on the messages that you want to broadcast;
+* a `number`: Multiplication factor used to estimate the gas and fees from the provided messages. When using `"auto"` this
+value is `1.3` so the gas used to compute the fees is equal to 1.3 * estimated gas from messages.
 
 ## Signers
 
@@ -46,7 +80,7 @@ The `@desmoslabs/desmjs` provides a set of signers that can be used, here you ca
 
 1. [`OfflineSignerAdapter`](docs/api/classes/desmoslabs_desmjs.OfflineSignerAdapter.md): This can be used to create
 a signer from a 12/24 words mnemonic or any signer that implements the `@cosmjs/OfflineAminoSigner` or 
-`@cosmjs/OfflineDirectSigner`
+`@cosmjs/OfflineDirectSigner`;
 2. [`PrivateKeySigner`](docs/api/classes/desmoslabs_desmjs.PrivateKeySigner.md): This can be used to create 
 a signer from a private key.
 

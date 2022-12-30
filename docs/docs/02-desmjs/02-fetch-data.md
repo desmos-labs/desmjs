@@ -23,7 +23,7 @@ endpoints for the [Mainnet](https://github.com/desmos-labs/mainnet#graphql) and
 
 ## Examples
 
-Here are some example that showcase how query data from the chain.
+Here are some example that showcase how to query data from the chain.
 
 ### Fetch a Desmos profile
 

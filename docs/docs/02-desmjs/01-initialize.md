@@ -32,7 +32,7 @@ const client = DesmosClient.connect('https://rpc.mainnet.desmos.network');
 
 ### Instantiating with connectWithSigner
 
-Here an example that uses `connectWithSigner` method to perform operations on the Desmos mainnet:
+Here an example that uses `connectWithSigner` method to connect to the Desmos mainnet:
 
 ```js
 import { DesmosClient, GasPrice, OfflineSignerAdapter, SigningMode } from "@desmoslabs/desmjs"
