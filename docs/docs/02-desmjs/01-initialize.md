@@ -1,4 +1,10 @@
-# Initialization
+---
+sidebar_label: "Initialize"
+---
+
+# DesmJS
+
+## Installation
 
 This package provides the `DesmsoClient` class together with other utilities that can be used to interact with chain.  
 
