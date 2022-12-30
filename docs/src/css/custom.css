@@ -52,14 +52,10 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 
 :root .tabs-container {
   border-radius: 5px;
-  border-top: 1px solid var(--ifm-color-primary);
-  border-bottom: 1px solid var(--ifm-color-primary);
-  border-left: 1px solid var(--ifm-color-primary);
-  border-right: 1px solid var(--ifm-color-primary);
 }
 
 :root .tabs li {
-  border-bottom-width: 1px;
+  border-bottom-width: 3px;
 }
 
 div[role='tabpanel'] {

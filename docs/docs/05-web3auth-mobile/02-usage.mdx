@@ -1,0 +1,144 @@
+---
+sidebar_label: "Usage"
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+---
+
+# Usage Web3Auth mobile Signer
+
+Here you can find how to create an instance of
+[`PrivateKeySigner`](docs/api/classes/desmoslabs_desmjs.PrivateKeySigner.md) that obtain the private key
+through [Web3Auth](https://web3auth.io/docs/sdk/react-native/initialize) with
+[`Web3AuthKeyProvider`](docs/api/classes/desmoslabs_desmjs_web3auth_mobile.Web3AuthKeyProvider.md)
+
+## Initialize the Web3Auth client
+
+<Tabs
+defaultValue="expo"
+values={[
+{ label: "Expo General", value: "expo" },
+{ label: "Bare General", value: "bare" },
+{ label: "Expo Custom Auth", value: "expocustom" },
+{ label: "Bare Custom Auth", value: "barecustom" },
+]}
+>
+
+<TabItem value="expo">
+
+```js
+import * as WebBrowser from "expo-web-browser";
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+
+const resolvedRedirectUrl =
+  Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
+    ? Linking.createURL("web3auth", {})
+    : Linking.createURL("web3auth", { scheme: scheme });
+
+const clientId = "YOUR WEB3AUTH CLIENT ID";
+
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+});
+```
+
+</TabItem>
+
+<TabItem value="bare">
+
+```js
+import * as WebBrowser from "@toruslabs/react-native-web-browser";
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+
+const scheme = "web3authrnbareauth0example"; // Or your desired app redirection scheme
+const resolvedRedirectUrl = `${scheme}://openlogin`;
+
+const clientId = "YOUR WEB3AUTH CLIENT ID";
+
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+});
+```
+
+</TabItem>
+
+<TabItem value="expocustom">
+
+```js
+import * as WebBrowser from "expo-web-browser";
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+
+const resolvedRedirectUrl =
+  Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
+    ? Linking.createURL("web3auth", {})
+    : Linking.createURL("web3auth", { scheme: scheme });
+
+const clientId = "YOUR WEB3AUTH CLIENT ID";
+
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+  loginConfig: {
+    jwt: {
+      name: "Web3Auth-Auth0-JWT",
+      verifier: "web3auth-auth0-example", // Verifier's name from Web3Auth Dashboard
+      typeOfLogin: "jwt",
+      clientId: "294QRkchfq2YaXUbPri7D6PH7xzHgQMT", // Auth0 Client ID
+    },
+  },
+});
+```
+
+</TabItem>
+
+<TabItem value="barecustom">
+
+```js
+import * as WebBrowser from "@toruslabs/react-native-web-browser";
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+
+const scheme = "web3authrnbareauth0example"; // Or your desired app redirection scheme
+const resolvedRedirectUrl = `${scheme}://openlogin`;
+
+const clientId = "YOUR WEB3AUTH CLIENT ID";
+
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+  loginConfig: {
+    jwt: {
+      name: "Web3Auth-Auth0-JWT",
+      verifier: "web3auth-auth0-example", // Verifier's name from Web3Auth Dashboard
+      typeOfLogin: "jwt",
+      clientId: "294QRkchfq2YaXUbPri7D6PH7xzHgQMT", // Auth0 Client ID
+    },
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
+## Build the signer
+
+With the `Web3Auth` instance you can now instantiate a `Signer` capable of sign transactions
+with the private key obtained from `Web3Auth`.
+
+```ts
+import { web3authSigner, SigningMode } from "@desmoslabs/desmjs-web3auth-mobile";
+import { LOGIN_PROVIDER } from "@web3auth/react-native-sdk";
+
+
+const signer = web3authSigner(web3auth, {
+  // login provider that will be used to obtain the private key.
+  loginProvider: LOGIN_PROVIDER.GOOGLE,
+  // resolvedRedirectUrl declared on the previous section.
+  redirectUrl: resolvedRedirectUrl,
+}, SigningMode.DIRECT);
+
+await signer.connect();
+```
