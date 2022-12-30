@@ -9,6 +9,7 @@ import {
 export const DesmosBaseFeatures = [
   "stargate",
   "ibc-transfer",
+  "cosmwasm",
   "no-legacy-stdTx",
   "ibc-go",
 ];
