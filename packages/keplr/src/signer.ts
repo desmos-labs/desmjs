@@ -1,10 +1,5 @@
 import { AccountData, DirectSignResponse } from "@cosmjs/proto-signing";
-import {
-  ChainInfo,
-  Keplr,
-  KeplrSignOptions,
-  Window as KeplrWindow,
-} from "@keplr-wallet/types";
+import { ChainInfo, Keplr, Window as KeplrWindow } from "@keplr-wallet/types";
 import {
   ChainInfo as DesmJSChainInfo,
   DesmosMainnet,
@@ -25,7 +20,6 @@ declare global {
 export interface KeplrSignerOptions {
   signingMode: SigningMode;
   chainInfo: DesmJSChainInfo;
-  signOptions: KeplrSignOptions;
 }
 
 /**
