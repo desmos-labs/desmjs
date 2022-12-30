@@ -36,7 +36,10 @@ jobs:
       - name: Install 🔨
         run: yarn install --immutable
 
-      - name: Build 🔧
+      - name: Build packages 🔧
+        run: yarn build
+
+      - name: Build docs 🔧
         run: yarn build-docs
 
       - name: Prepare docs folder 🔧
