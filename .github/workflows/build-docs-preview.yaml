@@ -18,6 +18,11 @@ jobs:
           fetch-depth: 0
           path: "."
 
+      - name: Setup Protoc 👷
+        uses: arduino/setup-protoc@v1
+        with:
+          version: "3.x"
+
       - name: Setup Node.js 🔧
         uses: actions/setup-node@v3
         with:
