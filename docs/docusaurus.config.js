@@ -44,7 +44,7 @@ module.exports = {
   url: "https://desmjs.desmos.network",
   baseUrl: "/",
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenMarkdownLinks: "throw",
   onDuplicateRoutes: "warn",
   favicon: "img/favicon.ico",
   organizationName: "desmos-labs", // Usually your GitHub org/user name.
