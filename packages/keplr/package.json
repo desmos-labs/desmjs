@@ -29,25 +29,17 @@
   },
   "dependencies": {
     "@cosmjs/amino": "^0.29.5",
-    "@cosmjs/crypto": "^0.29.5",
-    "@cosmjs/encoding": "^0.29.5",
-    "@cosmjs/math": "^0.29.5",
     "@cosmjs/proto-signing": "^0.29.5",
-    "@cosmjs/stargate": "^0.29.5",
-    "@cosmjs/tendermint-rpc": "^0.29.5",
     "@cosmjs/utils": "^0.29.5",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@keplr-wallet/types": "0.11.29",
-    "cosmjs-types": "^0.5.2",
-    "cosmos-wallet": "^1.2.0",
-    "long": "^4.0.0"
+    "cosmjs-types": "^0.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.18.6",
     "@types/jest": "^29.2.4",
-    "@types/long": "^4.0.1",
     "@types/node": "^18.11.18",
     "@types/pino": "^7.0.5",
     "babel-jest": "^29.3.1",
