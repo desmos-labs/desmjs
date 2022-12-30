@@ -25,12 +25,10 @@ export async function setupChainInfo(
     bip44: chain.bip44,
     bech32Config: DesmosBech32Config,
     currencies: chain.currencies,
-    feeCurrencies: chain.feeCurrencies.map((currency) => {
-      return {
-        ...currency,
-        gasPriceStep: DesmosGasPriceStep,
-      };
-    }),
+    feeCurrencies: chain.feeCurrencies.map((currency) => ({
+      ...currency,
+      gasPriceStep: DesmosGasPriceStep,
+    })),
     stakeCurrency: chain.stakeCurrency,
     features: [...DesmosBaseFeatures],
   };
