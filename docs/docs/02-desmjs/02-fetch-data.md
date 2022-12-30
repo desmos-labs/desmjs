@@ -5,7 +5,7 @@
 To fetch data from the chain you need to have a properly initialized `DesmosClient`.  
 Then with the [`querier`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#querier) method you can get
 a [`DesmosQueryClient`](docs/api/modules/desmoslabs_desmjs.md#desmosqueryclient)
-that exposes the methods to query the data.
+that exposes the methods to query the chain.
 
 Here you can find the functions exposed from `DesmosQueryClient` divided by modules:
 
@@ -23,7 +23,7 @@ endpoints for the [Mainnet](https://github.com/desmos-labs/mainnet#graphql) and
 
 ## Examples
 
-Here are some example that showcase how to query data from the chain.
+Here are some examples that showcase how to query data from the chain.
 
 ### Fetch a Desmos profile
 
@@ -33,10 +33,9 @@ Here an example that showcase how to query a Desmos profile from the chain:
 import { DesmosClient } from "@desmoslabs/desmjs";
 
 const client = await DesmosClient.connect("https://rpc.mainnet.desmos.network");
-const querier = client.querier;
 
 // Get the profile by address
-const profile = await querier.profiles.profile("desmos...");
+const profile = await client.querier.profiles.profile("desmos...");
 ```
 
 ### Fetch relationships created from a user

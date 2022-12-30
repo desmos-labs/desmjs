@@ -2,7 +2,7 @@
 
 ## Overview
 
-In order to be able to perform transaction you need to do the following operations:
+In order to be able to perform transactions you need to do the following steps:
 1. Instantiate an instance of [`Signer`](docs/api/classes/desmoslabs_desmjs.Signer.md);
 2. Instantiate a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md) with the
 [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function;
@@ -40,6 +40,7 @@ const saveProfile: MsgSaveProfileEncodeObject = {
   }
 };
 
+// Message to create a post inside a subspace
 const createPost: MsgCreatePostEncodeObject = {
   typeUrl: "/desmos.posts.v2.MsgCreatePost",
   value: MsgCreatePost.fromPartial({
@@ -68,11 +69,15 @@ The `DesmosClient` class can estimate the fees for you before broadcasting the m
 To enable this feature you must provide the `gasPrice` through the `options` 
 param of [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner).  
 
-With this feature enabled you can pass one of the following values as a `fee` param of 
+To compute the fees the `DesmosClient` will first estimate the amount of gas required asking the chain to simulate
+an execution with the messages that you want to execute and then will multiply that value for `gasPrice`.
+The resulting fees then will be `gasPrice` * estimated gas.
+
+When you enable this feature you can pass one of the following values as a `fee` param of 
 [`signandbroadcast`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast):
 * `"auto"`: To automatically estimated the fees based on the messages that you want to broadcast;
 * a `number`: Multiplication factor used to estimate the gas and fees from the provided messages. When using `"auto"` this
-value is `1.3` so the gas used to compute the fees is equal to 1.3 * estimated gas from messages.
+value is `1.3` so the gas used to compute the fees is equal to 1.3 \* estimated gas.
 
 ## Signers
 
@@ -210,7 +215,7 @@ Remove a previously created reason
 
 ## Examples
 
-Here are some example that showcase how to interact with the various Desmos modules.
+Here are some examples that showcase how to interact with the various Desmos modules.
 
 ### Create a profile
 

@@ -143,3 +143,38 @@ const signer = web3authSigner(web3auth, {
 
 await signer.connect();
 ```
+
+## Use the signer
+
+After the signer is connected you can construct a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
+with the [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
+start to perform [transactions](docs/02-desmjs/03-perform-transactions.md).
+
+```js
+import { DesmosClient, SigningMode, GasPrice } from "@desmoslabs/desmjs";
+import { web3authSigner } from "@desmoslabs/desmjs-web3auth-mobile";
+import { LOGIN_PROVIDER } from "@web3auth/react-native-sdk";
+
+const signer = web3authSigner(web3auth, {
+  // login provider that will be used to obtain the private key.
+  loginProvider: LOGIN_PROVIDER.GOOGLE,
+  // resolvedRedirectUrl declared on the previous section.
+  redirectUrl: resolvedRedirectUrl
+}, SigningMode.DIRECT);
+
+// Connect to the signer
+await signer.connect();
+
+const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
+  // Common gas price in the Desmos mainnet.
+  gasPrice: GasPrice.fromString("0.01udsm")
+});
+
+// Use the client to perform operations...
+```
+
+## Terminate session
+
+When you have finished to perform the operations or if the user want to disconnect from your app you can
+call the [`disconnect`](docs/api/classes/desmoslabs_desmjs.Signer.md#disconnect) method
+to terminate the session.
