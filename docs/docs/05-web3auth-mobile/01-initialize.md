@@ -17,3 +17,8 @@ yarn add @desmoslabs/desmjs-web3auth-mobile
 
 After installing `@desmoslabs/desmjs-web3auth-mobile` you can follow 
 the [Web3Auth documentation](https://web3auth.io/docs/sdk/react-native/) to set Web3Auth in your project.
+
+## Get Web3Auth Client Id
+
+After setting up the project you need to get a Web3Auth client id. You can find how to 
+get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-client-id).
