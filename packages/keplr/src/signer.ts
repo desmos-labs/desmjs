@@ -1,10 +1,5 @@
 import { AccountData, DirectSignResponse } from "@cosmjs/proto-signing";
-import {
-  ChainInfo,
-  Keplr,
-  KeplrSignOptions,
-  Window as KeplrWindow,
-} from "@keplr-wallet/types";
+import { ChainInfo, Keplr, Window as KeplrWindow } from "@keplr-wallet/types";
 import {
   ChainInfo as DesmJSChainInfo,
   DesmosMainnet,
@@ -25,7 +20,6 @@ declare global {
 export interface KeplrSignerOptions {
   signingMode: SigningMode;
   chainInfo: DesmJSChainInfo;
-  signOptions: KeplrSignOptions;
 }
 
 /**
@@ -42,6 +36,10 @@ export class KeplrSigner extends Signer {
 
   private keplrChainInfo: ChainInfo | undefined;
 
+  private readonly onKeystoreChange = () => {
+    this.handleKeyStoreChange();
+  };
+
   constructor(keplrClient: Keplr, options: KeplrSignerOptions) {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
@@ -55,9 +53,7 @@ export class KeplrSigner extends Signer {
    */
   private subscribeToEvents() {
     // Subscribe to the Keplr Storage event
-    window.addEventListener("keplr_keystorechange", () =>
-      this.handleKeyStoreChange()
-    );
+    window.addEventListener("keplr_keystorechange", this.onKeystoreChange);
   }
 
   /**
@@ -66,9 +62,7 @@ export class KeplrSigner extends Signer {
    */
   private unsubscribeFromEvents() {
     // Unsubscribe from the Keplr Storage event
-    window.removeEventListener("keplr_keystorechange", () =>
-      this.handleKeyStoreChange()
-    );
+    window.removeEventListener("keplr_keystorechange", this.onKeystoreChange);
   }
 
   /**
@@ -127,14 +121,13 @@ export class KeplrSigner extends Signer {
    */
   async disconnect(): Promise<void> {
     if (this.status !== SignerStatus.Connected) {
-      return Promise.resolve();
+      return;
     }
 
     this.updateStatus(SignerStatus.Disconnecting);
     this.accountData = undefined;
     this.unsubscribeFromEvents();
     this.updateStatus(SignerStatus.NotConnected);
-    return Promise.resolve();
   }
 
   /**
