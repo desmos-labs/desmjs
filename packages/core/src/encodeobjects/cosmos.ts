@@ -4,6 +4,12 @@ import {
   MsgGrantAllowance,
   MsgRevokeAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import {
+  MsgGrantAllowanceTypeUrl,
+  MsgGrantTypeUrl,
+  MsgRevokeAllowanceTypeUrl,
+  MsgRevokeTypeUrl,
+} from "../const";
 
 export interface MsgGrantEncodeObject extends EncodeObject {
   readonly typeUrl: "/cosmos.authz.v1beta1.MsgGrant";
@@ -13,10 +19,7 @@ export interface MsgGrantEncodeObject extends EncodeObject {
 export function isMsgGrantEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgGrantEncodeObject {
-  return (
-    (encodeObject as MsgGrantEncodeObject).typeUrl ===
-    "/cosmos.authz.v1beta1.MsgGrant"
-  );
+  return (encodeObject as MsgGrantEncodeObject).typeUrl === MsgGrantTypeUrl;
 }
 
 export interface MsgRevokeEncodeObject extends EncodeObject {
@@ -27,10 +30,7 @@ export interface MsgRevokeEncodeObject extends EncodeObject {
 export function isMsgRevoke(
   encodeObject: EncodeObject
 ): encodeObject is MsgRevokeEncodeObject {
-  return (
-    (encodeObject as MsgRevokeEncodeObject).typeUrl ===
-    "/cosmos.authz.v1beta1.MsgRevoke"
-  );
+  return (encodeObject as MsgRevokeEncodeObject).typeUrl === MsgRevokeTypeUrl;
 }
 
 export interface MsgGrantAllowanceEncodeObject extends EncodeObject {
@@ -43,7 +43,7 @@ export function isMsgGrantAllowance(
 ): encodeObject is MsgGrantAllowanceEncodeObject {
   return (
     (encodeObject as MsgGrantAllowanceEncodeObject).typeUrl ===
-    "/cosmos.feegrant.v1beta1.MsgGrantAllowance"
+    MsgGrantAllowanceTypeUrl
   );
 }
 
@@ -57,6 +57,6 @@ export function isMsgRevokeAllowance(
 ): encodeObject is MsgRevokeAllowanceEncodeObject {
   return (
     (encodeObject as MsgRevokeAllowanceEncodeObject).typeUrl ===
-    "/cosmos.feegrant.v1beta1.MsgRevokeAllowance"
+    MsgRevokeAllowanceTypeUrl
   );
 }

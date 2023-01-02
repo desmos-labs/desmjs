@@ -25,6 +25,7 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import { AminoAttachment, AminoEntities, AminoMedia, AminoPoll } from "./types";
+import { MediaTypeUrl, PollTypeUrl } from "../../const";
 
 /**
  * Converts the given `Poll` into an `Any` instance so that it can be used within `MsgCreatePost` and `MsgAddPostAttachment`.
@@ -32,7 +33,7 @@ import { AminoAttachment, AminoEntities, AminoMedia, AminoPoll } from "./types";
  */
 export function pollToAny(poll: Poll): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.posts.v2.Poll",
+    typeUrl: PollTypeUrl,
     value: Poll.encode(poll).finish(),
   });
 }
@@ -43,7 +44,7 @@ export function pollToAny(poll: Poll): Any {
  */
 export function mediaToAny(media: Media): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.posts.v2.Media",
+    typeUrl: MediaTypeUrl,
     value: Media.encode(media).finish(),
   });
 }

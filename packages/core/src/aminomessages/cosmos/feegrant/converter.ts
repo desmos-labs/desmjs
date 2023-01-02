@@ -17,6 +17,11 @@ import {
   AminoPeriodicAllowance,
   AminoMsgRevokeAllowance,
 } from "./messages";
+import {
+  AllowedMsgAllowanceTypeUrl,
+  BasicAllowanceTypeUrl,
+  PeriodicAllowanceTypeUrl,
+} from "../../../const";
 
 function basicAllowanceToAmino(value: BasicAllowance): AminoBasicAllowance {
   return {
@@ -91,11 +96,11 @@ function allowedMsgAllowanceFromAmino(
 
 function allowanceToAmino(any: Any): AminoMsg {
   switch (any.typeUrl) {
-    case "/cosmos.feegrant.v1beta1.BasicAllowance":
+    case BasicAllowanceTypeUrl:
       return basicAllowanceToAmino(BasicAllowance.decode(any.value));
-    case "/cosmos.feegrant.v1beta1.PeriodicAllowance":
+    case PeriodicAllowanceTypeUrl:
       return periodicAllowanceToAmino(PeriodicAllowance.decode(any.value));
-    case "/cosmos.feegrant.v1beta1.AllowedMsgAllowance":
+    case AllowedMsgAllowanceTypeUrl:
       return allowedMsgAllowanceToAmino(AllowedMsgAllowance.decode(any.value));
 
     default:
@@ -107,7 +112,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
   switch (allowance.type) {
     case "cosmos-sdk/BasicAllowance":
       return Any.fromPartial({
-        typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance",
+        typeUrl: BasicAllowanceTypeUrl,
         value: BasicAllowance.encode(
           basicAllowanceFromAmino(allowance.value)
         ).finish(),
@@ -115,7 +120,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
 
     case "cosmos-sdk/PeriodicAllowance":
       return Any.fromPartial({
-        typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance",
+        typeUrl: PeriodicAllowanceTypeUrl,
         value: PeriodicAllowance.encode(
           periodicAllowanceFromAmino(allowance.value)
         ).finish(),
@@ -123,7 +128,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
 
     case "cosmos-sdk/AllowedMsgAllowance":
       return Any.fromPartial({
-        typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance",
+        typeUrl: AllowedMsgAllowanceTypeUrl,
         value: PeriodicAllowance.encode(
           periodicAllowanceFromAmino(allowance.value)
         ).finish(),

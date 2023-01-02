@@ -2,11 +2,12 @@ import { AminoConverters, AminoTypes } from "@cosmjs/stargate";
 import { MsgGrant, MsgRevoke } from "cosmjs-types/cosmos/authz/v1beta1/tx";
 import { Grant } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 import { Timestamp } from "cosmjs-types/google/protobuf/timestamp";
+import { AminoConverter } from "@cosmjs/stargate/build/aminotypes";
 import { AminoGrant, AminoMsgGrant, AminoMsgRevoke } from "./messages";
 import { createAuthzAuthorizationConverters } from "./authorizations";
-import { createBankAuthorizationConverters } from "../bank/authorizations";
-import { createSubspacesAuthorizationConverters } from "../../subspaces/authorizations";
-import createStakeAuthorizationConverters from "../staking/authorizations";
+import { createBankAuthorizationConverters } from "../bank";
+import { createSubspacesAuthorizationConverters } from "../../subspaces";
+import { createStakeAuthorizationConverters } from "../staking";
 
 const authorizationTypes = new AminoTypes({
   ...createAuthzAuthorizationConverters(),
@@ -79,7 +80,7 @@ export function createAuthzConverters(): AminoConverters {
           grantee: msg.grantee,
         }),
     },
-  };
+  } as Record<string, AminoConverter>;
 }
 
 export default createAuthzConverters;

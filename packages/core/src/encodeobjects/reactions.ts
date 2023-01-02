@@ -7,6 +7,14 @@ import {
   MsgRemoveRegisteredReaction,
   MsgSetReactionsParams,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/msgs";
+import {
+  MsgAddReactionTypeUrl,
+  MsgAddRegisteredReactionTypeUrl,
+  MsgEditRegisteredReactionTypeUrl,
+  MsgRemoveReactionTypeUrl,
+  MsgRemoveRegisteredReactionTypeUrl,
+  MsgSetReactionsParamsTypeUrl,
+} from "../const";
 
 export interface MsgAddReactionEncodeObject extends EncodeObject {
   readonly typeUrl: "/desmos.reactions.v1.MsgAddReaction";
@@ -18,7 +26,7 @@ export function isMsgAddReactionEncodeObject(
 ): encodeObject is MsgAddReactionEncodeObject {
   return (
     (encodeObject as MsgAddReactionEncodeObject).typeUrl ===
-    "/desmos.reactions.v1.MsgAddReaction"
+    MsgAddReactionTypeUrl
   );
 }
 
@@ -32,7 +40,7 @@ export function isMsgRemoveReactionEncodeObject(
 ): encodeObject is MsgRemoveReactionEncodeObject {
   return (
     (encodeObject as MsgRemoveReactionEncodeObject).typeUrl ===
-    "/desmos.reactions.v1.MsgRemoveReaction"
+    MsgRemoveReactionTypeUrl
   );
 }
 
@@ -46,7 +54,7 @@ export function isMsgAddRegisteredReactionEncodeObject(
 ): encodeObject is MsgAddRegisteredReactionEncodeObject {
   return (
     (encodeObject as MsgAddRegisteredReactionEncodeObject).typeUrl ===
-    "/desmos.reactions.v1.MsgAddRegisteredReaction"
+    MsgAddRegisteredReactionTypeUrl
   );
 }
 
@@ -60,7 +68,7 @@ export function isMsgEditRegisteredReactionEncodeObject(
 ): encodeObject is MsgEditRegisteredReactionEncodeObject {
   return (
     (encodeObject as MsgEditRegisteredReactionEncodeObject).typeUrl ===
-    "/desmos.reactions.v1.MsgEditRegisteredReaction"
+    MsgEditRegisteredReactionTypeUrl
   );
 }
 
@@ -74,7 +82,7 @@ export function isMsgRemoveRegisteredReactionEncodeObject(
 ): encodeObject is MsgRemoveRegisteredReactionEncodeObject {
   return (
     (encodeObject as MsgRemoveRegisteredReactionEncodeObject).typeUrl ===
-    "/desmos.reactions.v1.MsgRemoveRegisteredReaction"
+    MsgRemoveRegisteredReactionTypeUrl
   );
 }
 
@@ -88,6 +96,6 @@ export function isMsgSetReactionsParamsEncodeObject(
 ): encodeObject is MsgSetReactionsParamsEncodeObject {
   return (
     (encodeObject as MsgSetReactionsParamsEncodeObject).typeUrl ===
-    "/desmos.reactions.v1.MsgSetReactionsParams"
+    MsgSetReactionsParamsTypeUrl
   );
 }

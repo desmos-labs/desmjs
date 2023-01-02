@@ -16,6 +16,23 @@ import {
   MsgMoveSection,
   MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
+import {
+  MsgAddUserToUserGroupTypeUrl,
+  MsgCreateSectionTypeUrl,
+  MsgCreateSubspaceTypeUrl,
+  MsgCreateUserGroupTypeUrl,
+  MsgDeleteSectionTypeUrl,
+  MsgDeleteSubspaceTypeUrl,
+  MsgDeleteUserGroupTypeUrl,
+  MsgEditSectionTypeUrl,
+  MsgEditSubspaceTypeUrl,
+  MsgEditUserGroupTypeUrl,
+  MsgMoveSectionTypeUrl,
+  MsgMoveUserGroupTypeUrl,
+  MsgRemoveUserFromUserGroupTypeUrl,
+  MsgSetUserGroupPermissionsTypeUrl,
+  MsgSetUserPermissionsTypeUrl,
+} from "../const";
 
 export interface MsgCreateSubspaceEncodeObject extends EncodeObject {
   readonly typeUrl: "/desmos.subspaces.v3.MsgCreateSubspace";
@@ -27,7 +44,7 @@ export function isMsgCreateSubspaceEncodeObject(
 ): encodeObject is MsgCreateSubspaceEncodeObject {
   return (
     (encodeObject as MsgCreateSubspaceEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgCreateSubspace"
+    MsgCreateSubspaceTypeUrl
   );
 }
 
@@ -41,7 +58,7 @@ export function isMsgEditSubspaceEncodeObject(
 ): encodeObject is MsgEditSubspaceEncodeObject {
   return (
     (encodeObject as MsgEditSubspaceEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgEditSubspace"
+    MsgEditSubspaceTypeUrl
   );
 }
 
@@ -55,7 +72,7 @@ export function isMsgDeleteSubspaceEncodeObject(
 ): encodeObject is MsgDeleteSubspaceEncodeObject {
   return (
     (encodeObject as MsgDeleteSubspaceEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgDeleteSubspace"
+    MsgDeleteSubspaceTypeUrl
   );
 }
 
@@ -69,7 +86,7 @@ export function isMsgCreateSectionEncodeObject(
 ): encodeObject is MsgCreateSectionEncodeObject {
   return (
     (encodeObject as MsgCreateSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgCreateSection"
+    MsgCreateSectionTypeUrl
   );
 }
 
@@ -83,7 +100,7 @@ export function isMsgEditSectionEncodeObject(
 ): encodeObject is MsgEditSectionEncodeObject {
   return (
     (encodeObject as MsgEditSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgEditSection"
+    MsgEditSectionTypeUrl
   );
 }
 
@@ -97,7 +114,7 @@ export function isMsgMoveSectionEncodeObject(
 ): encodeObject is MsgMoveSectionEncodeObject {
   return (
     (encodeObject as MsgMoveSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgMoveSection"
+    MsgMoveSectionTypeUrl
   );
 }
 
@@ -111,7 +128,7 @@ export function isMsgDeleteSectionEncodeObject(
 ): encodeObject is MsgDeleteSectionEncodeObject {
   return (
     (encodeObject as MsgDeleteSectionEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgDeleteSection"
+    MsgDeleteSectionTypeUrl
   );
 }
 
@@ -125,7 +142,7 @@ export function isMsgCreateUserGroupEncodeObject(
 ): encodeObject is MsgCreateUserGroupEncodeObject {
   return (
     (encodeObject as MsgCreateUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgCreateUserGroup"
+    MsgCreateUserGroupTypeUrl
   );
 }
 
@@ -139,7 +156,7 @@ export function isMsgEditUserGroupEncodeObject(
 ): encodeObject is MsgEditUserGroupEncodeObject {
   return (
     (encodeObject as MsgEditUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgEditUserGroup"
+    MsgEditUserGroupTypeUrl
   );
 }
 
@@ -153,7 +170,7 @@ export function isMsgMoveUserGroupEncodeObject(
 ): encodeObject is MsgMoveUserGroupEncodeObject {
   return (
     (encodeObject as MsgMoveUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgMoveUserGroup"
+    MsgMoveUserGroupTypeUrl
   );
 }
 
@@ -167,7 +184,7 @@ export function isMsgSetUserGroupPermissionsEncodeObject(
 ): encodeObject is MsgSetUserGroupPermissionsEncodeObject {
   return (
     (encodeObject as MsgSetUserGroupPermissionsEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgSetUserGroupPermissions"
+    MsgSetUserGroupPermissionsTypeUrl
   );
 }
 
@@ -181,7 +198,7 @@ export function isMsgDeleteUserGroupEncodeObject(
 ): encodeObject is MsgDeleteUserGroupEncodeObject {
   return (
     (encodeObject as MsgDeleteUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgDeleteUserGroup"
+    MsgDeleteUserGroupTypeUrl
   );
 }
 
@@ -195,7 +212,7 @@ export function isMsgAddUserToUserGroupEncodeObject(
 ): encodeObject is MsgAddUserToUserGroupEncodeObject {
   return (
     (encodeObject as MsgAddUserToUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgAddUserToUserGroup"
+    MsgAddUserToUserGroupTypeUrl
   );
 }
 
@@ -209,7 +226,7 @@ export function isMsgRemoveUserFromUserGroupEncodeObject(
 ): encodeObject is MsgRemoveUserFromUserGroupEncodeObject {
   return (
     (encodeObject as MsgRemoveUserFromUserGroupEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup"
+    MsgRemoveUserFromUserGroupTypeUrl
   );
 }
 
@@ -223,6 +240,6 @@ export function isMsgSetUserPermissionsEncodeObject(
 ): encodeObject is MsgSetUserPermissionsEncodeObject {
   return (
     (encodeObject as MsgSetUserPermissionsEncodeObject).typeUrl ===
-    "/desmos.subspaces.v3.MsgSetUserPermissions"
+    MsgSetUserPermissionsTypeUrl
   );
 }

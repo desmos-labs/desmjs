@@ -17,6 +17,18 @@ import {
   MsgDeleteProfile,
   MsgSaveProfile,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
+import {
+  MsgAcceptDTagTransferRequestTypeUrl,
+  MsgCancelDTagTransferRequestTypeUrl,
+  MsgDeleteProfileTypeUrl,
+  MsgLinkApplicationTypeUrl,
+  MsgLinkChainAccountTypeUrl,
+  MsgRefuseDTagTransferRequestTypeUrl,
+  MsgRequestDTagTransferTypeUrl,
+  MsgSaveProfileTypeUrl,
+  MsgUnlinkApplicationTypeUrl,
+  MsgUnlinkChainAccountTypeUrl,
+} from "../const";
 
 export interface MsgLinkApplicationEncodeObject extends EncodeObject {
   typeUrl: "/desmos.profiles.v3.MsgLinkApplication";
@@ -28,7 +40,7 @@ export function isMsgLinkApplicationEncodeObject(
 ): encodeObject is MsgLinkApplicationEncodeObject {
   return (
     (encodeObject as MsgLinkApplicationEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgLinkApplication"
+    MsgLinkApplicationTypeUrl
   );
 }
 
@@ -42,7 +54,7 @@ export function isMsgUnlinkApplicationEncodeObject(
 ): encodeObject is MsgUnlinkApplicationEncodeObject {
   return (
     (encodeObject as MsgUnlinkApplicationEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgUnlinkApplication"
+    MsgUnlinkApplicationTypeUrl
   );
 }
 
@@ -56,7 +68,7 @@ export function isMsgLinkChainAccountEncodeObject(
 ): encodeObject is MsgLinkChainAccountEncodeObject {
   return (
     (encodeObject as MsgLinkChainAccountEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgLinkChainAccount"
+    MsgLinkChainAccountTypeUrl
   );
 }
 
@@ -70,7 +82,7 @@ export function isMsgUnlinkChainAccountEncodeObject(
 ): encodeObject is MsgUnlinkChainAccountEncodeObject {
   return (
     (encodeObject as MsgUnlinkChainAccountEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgUnlinkChainAccount"
+    MsgUnlinkChainAccountTypeUrl
   );
 }
 
@@ -84,7 +96,7 @@ export function isMsgRequestDTagTransferEncodeObject(
 ): encodeObject is MsgRequestDTagTransferEncodeObject {
   return (
     (encodeObject as MsgRequestDTagTransferEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgRequestDTagTransfer"
+    MsgRequestDTagTransferTypeUrl
   );
 }
 
@@ -98,7 +110,7 @@ export function isMsgCancelDTagTransferRequestEncodeObject(
 ): encodeObject is MsgCancelDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgCancelDTagTransferRequestEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgCancelDTagTransferRequest"
+    MsgCancelDTagTransferRequestTypeUrl
   );
 }
 
@@ -111,8 +123,8 @@ export function isMsgAcceptDTagTransferRequestEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgAcceptDTagTransferRequestEncodeObject {
   return (
-    (encodeObject as MsgAcceptDTagTransferRequestEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgAcceptDTagTransferRequest"
+    MsgAcceptDTagTransferRequestTypeUrl ===
+    (encodeObject as MsgAcceptDTagTransferRequestEncodeObject).typeUrl
   );
 }
 
@@ -126,7 +138,7 @@ export function isMsgRefuseDTagTransferRequestEncodeObject(
 ): encodeObject is MsgRefuseDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgRefuseDTagTransferRequestEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgRefuseDTagTransferRequest"
+    MsgRefuseDTagTransferRequestTypeUrl
   );
 }
 
@@ -140,7 +152,7 @@ export function isMsgSaveProfileEncodeObject(
 ): encodeObject is MsgSaveProfileEncodeObject {
   return (
     (encodeObject as MsgSaveProfileEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgSaveProfile"
+    MsgSaveProfileTypeUrl
   );
 }
 
@@ -154,6 +166,6 @@ export function isMsgDeleteProfileEncodeObject(
 ): encodeObject is MsgDeleteProfileEncodeObject {
   return (
     (encodeObject as MsgDeleteProfileEncodeObject).typeUrl ===
-    "/desmos.profiles.v3.MsgDeleteProfile"
+    MsgDeleteProfileTypeUrl
   );
 }

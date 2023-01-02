@@ -22,17 +22,18 @@ import {
   AminoMsgSupportStandardReason,
 } from "./messages";
 import { isAminoConverter } from "../../types";
+import { PostTargetTypeUrl, UserTargetTypeUrl } from "../../const";
 
 export function convertUserTargetToAny(target: UserTarget): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.reports.v1.UserTarget",
+    typeUrl: UserTargetTypeUrl,
     value: UserTarget.encode(target).finish(),
   });
 }
 
 export function convertPostTargetToAny(target: PostTarget): Any {
   return Any.fromPartial({
-    typeUrl: "/desmos.reports.v1.PostTarget",
+    typeUrl: PostTargetTypeUrl,
     value: PostTarget.encode(target).finish(),
   });
 }

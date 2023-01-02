@@ -17,27 +17,30 @@ import {
   MsgDeleteProfile,
   MsgSaveProfile,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
+import {
+  MsgAcceptDTagTransferRequestTypeUrl,
+  MsgCancelDTagTransferRequestTypeUrl,
+  MsgDeleteProfileTypeUrl,
+  MsgLinkApplicationTypeUrl,
+  MsgLinkChainAccountTypeUrl,
+  MsgRefuseDTagTransferRequestTypeUrl,
+  MsgRequestDTagTransferTypeUrl,
+  MsgSaveProfileTypeUrl,
+  MsgUnlinkApplicationTypeUrl,
+  MsgUnlinkChainAccountTypeUrl,
+} from "../../const";
 
 export const profilesRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
-  ["/desmos.profiles.v3.MsgLinkApplication", MsgLinkApplication],
-  ["/desmos.profiles.v3.MsgUnlinkApplication", MsgUnlinkApplication],
-  ["/desmos.profiles.v3.MsgLinkChainAccount", MsgLinkChainAccount],
-  ["/desmos.profiles.v3.MsgUnlinkChainAccount", MsgUnlinkChainAccount],
-  ["/desmos.profiles.v3.MsgRequestDTagTransfer", MsgRequestDTagTransfer],
-  [
-    "/desmos.profiles.v3.MsgCancelDTagTransferRequest",
-    MsgCancelDTagTransferRequest,
-  ],
-  [
-    "/desmos.profiles.v3.MsgAcceptDTagTransferRequest",
-    MsgAcceptDTagTransferRequest,
-  ],
-  [
-    "/desmos.profiles.v3.MsgRefuseDTagTransferRequest",
-    MsgRefuseDTagTransferRequest,
-  ],
-  ["/desmos.profiles.v3.MsgSaveProfile", MsgSaveProfile],
-  ["/desmos.profiles.v3.MsgDeleteProfile", MsgDeleteProfile],
+  [MsgLinkApplicationTypeUrl, MsgLinkApplication],
+  [MsgUnlinkApplicationTypeUrl, MsgUnlinkApplication],
+  [MsgLinkChainAccountTypeUrl, MsgLinkChainAccount],
+  [MsgUnlinkChainAccountTypeUrl, MsgUnlinkChainAccount],
+  [MsgRequestDTagTransferTypeUrl, MsgRequestDTagTransfer],
+  [MsgCancelDTagTransferRequestTypeUrl, MsgCancelDTagTransferRequest],
+  [MsgAcceptDTagTransferRequestTypeUrl, MsgAcceptDTagTransferRequest],
+  [MsgRefuseDTagTransferRequestTypeUrl, MsgRefuseDTagTransferRequest],
+  [MsgSaveProfileTypeUrl, MsgSaveProfile],
+  [MsgDeleteProfileTypeUrl, MsgDeleteProfile],
 ];
 
 export default profilesRegistryTypes;

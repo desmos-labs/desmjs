@@ -6,6 +6,13 @@ import {
   MsgRemoveReason,
   MsgSupportStandardReason,
 } from "@desmoslabs/desmjs-types/desmos/reports/v1/msgs";
+import {
+  MsgAddReasonTypeUrl,
+  MsgCreateReportTypeUrl,
+  MsgDeleteReportTypeUrl,
+  MsgRemoveReasonTypeUrl,
+  MsgSupportStandardReasonTypeUrl,
+} from "../const";
 
 export interface MsgCreateReportEncodeObject extends EncodeObject {
   readonly typeUrl: "/desmos.reports.v1.MsgCreateReport";
@@ -17,7 +24,7 @@ export function isMsgCreateReportEncodeObject(
 ): encodeObject is MsgCreateReportEncodeObject {
   return (
     (encodeObject as MsgCreateReportEncodeObject).typeUrl ===
-    "/desmos.reports.v1.MsgCreateReport"
+    MsgCreateReportTypeUrl
   );
 }
 
@@ -31,7 +38,7 @@ export function isMsgDeleteReportEncodeObject(
 ): encodeObject is MsgDeleteReportEncodeObject {
   return (
     (encodeObject as MsgDeleteReportEncodeObject).typeUrl ===
-    "/desmos.reports.v1.MsgDeleteReport"
+    MsgDeleteReportTypeUrl
   );
 }
 
@@ -45,7 +52,7 @@ export function isMsgSupportStandardReasonEncodeObject(
 ): encodeObject is MsgSupportStandardReasonEncodeObject {
   return (
     (encodeObject as MsgSupportStandardReasonEncodeObject).typeUrl ===
-    "/desmos.reports.v1.MsgSupportStandardReason"
+    MsgSupportStandardReasonTypeUrl
   );
 }
 
@@ -58,8 +65,7 @@ export function isMsgAddReasonEncodeObject(
   encodeObject: EncodeObject
 ): encodeObject is MsgAddReasonEncodeObject {
   return (
-    (encodeObject as MsgAddReasonEncodeObject).typeUrl ===
-    "/desmos.reports.v1.MsgAddReason"
+    (encodeObject as MsgAddReasonEncodeObject).typeUrl === MsgAddReasonTypeUrl
   );
 }
 
@@ -73,6 +79,6 @@ export function isMsgRemoveReasonEncodeObject(
 ): encodeObject is MsgRemoveReasonEncodeObject {
   return (
     (encodeObject as MsgRemoveReasonEncodeObject).typeUrl ===
-    "/desmos.reports.v1.MsgRemoveReason"
+    MsgRemoveReasonTypeUrl
   );
 }

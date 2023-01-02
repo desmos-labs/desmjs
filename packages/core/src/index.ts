@@ -1,4 +1,5 @@
 export * from "./aminomessages";
+export * from "./const";
 export * from "./encodeobjects";
 export * from "./queries";
 export * from "./signers";
