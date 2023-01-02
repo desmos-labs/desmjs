@@ -1,3 +1,10 @@
+## Version 4.7.2
+### Features
+- Added a `querier` method inside `DesmosClient` to expose the gRPC querier
+- Added constantsProto URL  to define Protobuf type URLs 
+- Added the option to provide a custom address prefix inside `PrivateKeySigner`
+- Added the support for CosmWasm inside `KeplrSigner`
+
 ## Version 4.7.1
 Patch version to allow the proper publication of all packages 
 
