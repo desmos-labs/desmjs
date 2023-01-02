@@ -135,6 +135,20 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
 }
 
 /**
+ * Options to customize some parameters of PrivateKeySigner.
+ */
+export interface PrivateKeySignerOptions {
+  /**
+   * Signer signing mode.
+   */
+  signMode: SigningMode;
+  /**
+   * Prefix used to generate the bech32 address.
+   */
+  prefix?: string;
+}
+
+/**
  * Signer that uses a private key provided from a PrivateKeyProvider
  * to sign a transaction.
  */
@@ -161,6 +175,8 @@ export class PrivateKeySigner extends Signer {
 
   private readonly signMode: SigningMode;
 
+  private readonly prefix: string;
+
   private currentAccount?: AccountData;
 
   private _privateKey?: PrivateKey;
@@ -172,20 +188,21 @@ export class PrivateKeySigner extends Signer {
   /**
    * Build the signer from a secp256k1 private key.
    * @param privateKey - Hex encoded private key, or raw private key bytes.
-   * @param signMode - Signer signing mode.
+   * @param options - Signer options.
    */
   static fromSecp256k1(
     privateKey: string | Uint8Array,
-    signMode: SigningMode
+    options: PrivateKeySignerOptions
   ): PrivateKeySigner {
-    return new PrivateKeySigner(new Secp256k1KeyProvider(privateKey), signMode);
+    return new PrivateKeySigner(new Secp256k1KeyProvider(privateKey), options);
   }
 
-  constructor(provider: PrivateKeyProvider, signMode: SigningMode) {
+  constructor(provider: PrivateKeyProvider, options: PrivateKeySignerOptions) {
     super(PrivateKeySigner.keyProviderStatusToSignerStatus(provider.status));
     this.keyProvider = provider;
     this.keyProvider.addStatusListener(this.keyProviderStatusListener);
-    this.signMode = signMode;
+    this.signMode = options.signMode;
+    this.prefix = options?.prefix ?? "desmos";
   }
 
   private clearSessionFields() {
@@ -218,13 +235,13 @@ export class PrivateKeySigner extends Signer {
       if (this.signMode === SigningMode.AMINO) {
         this.aminoSigner = await Secp256k1Wallet.fromKey(
           this._privateKey.key,
-          "desmos"
+          this.prefix
         );
         [this.currentAccount] = await this.aminoSigner.getAccounts();
       } else {
         this.directSigner = await DirectSecp256k1Wallet.fromKey(
           this._privateKey.key,
-          "desmos"
+          this.prefix
         );
         [this.currentAccount] = await this.directSigner.getAccounts();
       }

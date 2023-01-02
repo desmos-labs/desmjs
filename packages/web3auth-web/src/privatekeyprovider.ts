@@ -5,7 +5,7 @@ import {
   PrivateKeyProviderStatus,
   PrivateKeySigner,
   PrivateKeyType,
-  SigningMode,
+  PrivateKeySignerOptions,
 } from "@desmoslabs/desmjs";
 import { fromHex } from "@cosmjs/encoding";
 import { ADAPTER_EVENTS, WALLET_ADAPTER_TYPE } from "@web3auth/base";
@@ -118,17 +118,17 @@ export class Web3AuthPrivateKeyProvider extends PrivateKeyProvider {
 
 /**
  * Gets a Signer instance capable of sign transaction using the key received from Web3Auth.
- * @param signingMode - The Signer signing mode.
+ * @param signerOptions - The Signer options.
  * @param web3auth - Web3Auth client.
  * @param options - Extra Web3Auth options.
  */
 export function web3AuthSigner(
-  signingMode: SigningMode,
+  signerOptions: PrivateKeySignerOptions,
   web3auth: Web3Auth,
   options?: Web3AuthPrivateKeyProviderOptions
 ): PrivateKeySigner {
   return new PrivateKeySigner(
     new Web3AuthPrivateKeyProvider(web3auth, options),
-    signingMode
+    signerOptions
   );
 }
