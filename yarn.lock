@@ -1878,7 +1878,7 @@ __metadata:
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.11.30
-    "@types/jest": ^29.2.4
+    "@types/jest": ^29.2.5
     "@types/node": ^18.11.18
     "@types/pino": ^7.0.5
     babel-jest: ^29.3.1
@@ -1916,7 +1916,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.2.4
+    "@types/jest": ^29.2.5
     "@types/long": ^4.0.1
     "@types/node": ^18.11.18
     "@types/pino": ^7.0.5
@@ -1952,7 +1952,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": ^0.29.5
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.2.4
+    "@types/jest": ^29.2.5
     "@types/long": ^4.0.1
     "@types/node": ^18.11.18
     "@types/pino": ^7.0.5
@@ -1980,7 +1980,7 @@ __metadata:
     "@babel/preset-typescript": ^7.18.6
     "@cosmjs/encoding": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.2.4
+    "@types/jest": ^29.2.5
     "@types/keccak": ^3.0.1
     "@types/react-native": ^0.70.6
     "@types/readable-stream": ^2.3.15
@@ -2002,7 +2002,7 @@ __metadata:
     "@cosmjs/encoding": ^0.29.5
     "@cosmjs/proto-signing": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.2.4
+    "@types/jest": ^29.2.5
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.0.0
@@ -2031,7 +2031,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": ^0.29.5
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs-types": "workspace:packages/types"
-    "@types/jest": ^29.2.4
+    "@types/jest": ^29.2.5
     "@types/long": ^4.0.1
     "@types/node": ^18.11.18
     "@types/pino": ^7.0.5
@@ -3953,13 +3953,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.2.4":
-  version: 29.2.4
-  resolution: "@types/jest@npm:29.2.4"
+"@types/jest@npm:^29.2.5":
+  version: 29.2.5
+  resolution: "@types/jest@npm:29.2.5"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: 9deb4756fe1b438d41ff1aae7d6c216c9e49e5fe60f539f8edb6698ffeb530ff7b25d37e223439b03602ca3a7397c9c2e53e1a39c7bd616353472fce0cc04107
+  checksum: d668470f00ec4cb8b8457f1fd90f7358fad8f22d74b85006dad6be522d6b9bf10f49f597e88d1d1a518d211c1b65be32a1f27f0e49ce0658d110a9206b8ea310
   languageName: node
   linkType: hard
 
