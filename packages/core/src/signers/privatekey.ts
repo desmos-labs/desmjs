@@ -31,6 +31,9 @@ export enum PrivateKeyType {
   Secp256k1,
 }
 
+/**
+ * Interface representing a private key.
+ */
 export interface PrivateKey {
   type: PrivateKeyType;
   key: Uint8Array;
@@ -139,10 +142,6 @@ export class Secp256k1KeyProvider extends PrivateKeyProvider {
  */
 export interface PrivateKeySignerOptions {
   /**
-   * Signer signing mode.
-   */
-  signMode: SigningMode;
-  /**
    * Prefix used to generate the bech32 address.
    */
   prefix?: string;
@@ -188,20 +187,30 @@ export class PrivateKeySigner extends Signer {
   /**
    * Build the signer from a secp256k1 private key.
    * @param privateKey - Hex encoded private key, or raw private key bytes.
+   * @param signingMode - Hex encoded private key, or raw private key bytes.
    * @param options - Signer options.
    */
   static fromSecp256k1(
     privateKey: string | Uint8Array,
-    options: PrivateKeySignerOptions
+    signingMode: SigningMode,
+    options?: PrivateKeySignerOptions
   ): PrivateKeySigner {
-    return new PrivateKeySigner(new Secp256k1KeyProvider(privateKey), options);
+    return new PrivateKeySigner(
+      new Secp256k1KeyProvider(privateKey),
+      signingMode,
+      options
+    );
   }
 
-  constructor(provider: PrivateKeyProvider, options: PrivateKeySignerOptions) {
+  constructor(
+    provider: PrivateKeyProvider,
+    signingMode: SigningMode,
+    options?: PrivateKeySignerOptions
+  ) {
     super(PrivateKeySigner.keyProviderStatusToSignerStatus(provider.status));
     this.keyProvider = provider;
     this.keyProvider.addStatusListener(this.keyProviderStatusListener);
-    this.signMode = options.signMode;
+    this.signMode = signingMode;
     this.prefix = options?.prefix ?? "desmos";
   }
 
