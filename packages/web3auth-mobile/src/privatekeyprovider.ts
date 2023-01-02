@@ -2,10 +2,7 @@ import {
   PrivateKey,
   PrivateKeyProvider,
   PrivateKeyProviderStatus,
-  PrivateKeySigner,
   PrivateKeyType,
-  Signer,
-  PrivateKeySignerOptions,
 } from "@desmoslabs/desmjs";
 import Web3Auth, {
   SdkLoginParams,
@@ -96,21 +93,4 @@ export class Web3AuthKeyProvider extends PrivateKeyProvider {
 
     return this.privateKey;
   }
-}
-
-/**
- * Gets a Signer instance capable of signing transactions using the key received from Web3Auth.
- * @param signerOptions - The signer options.
- * @param web3auth - Web3Auth client.
- * @param params - Web3Auth params.
- */
-export function web3authSigner(
-  signerOptions: PrivateKeySignerOptions,
-  web3auth: Web3Auth,
-  params: Web3AuthKeyProviderParams
-): Signer {
-  return new PrivateKeySigner(
-    new Web3AuthKeyProvider(web3auth, params),
-    signerOptions
-  );
 }
