@@ -65,7 +65,7 @@ await signer.connect();
 
 ### Reconnect to a session
 
-To reconnect to a previously established session you can call the 
+To reconnect to a previously established session, you can call the 
 [`connectToSession`](docs/api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connecttosession)
 method.
 
