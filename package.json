@@ -24,6 +24,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "workspaces": [
+    "docs",
     "packages/core",
     "packages/types",
     "packages/walletconnect",
@@ -33,10 +34,11 @@
     "packages/keplr"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach --topological-dev --parallel --verbose run build",
-    "lint": "yarn workspaces foreach --topological-dev --parallel --verbose run lint",
-    "lint-fix": "yarn workspaces foreach --topological-dev --parallel --verbose run lint-fix",
-    "publish-latest": "yarn workspaces foreach --no-private exec npm publish"
+    "build": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run build",
+    "build-docs": "DOCS_DOMAIN=desmjs.desmos.network yarn workspace desmjs-documentation build",
+    "lint": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint",
+    "lint-fix": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint-fix",
+    "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec npm publish"
   },
   "devDependencies": {
     "@cosmjs/cosmwasm-stargate": "^0.29.5",
@@ -66,5 +68,5 @@
     "tsc": "^2.0.4",
     "typescript": "^4.9.4"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.2.4"
 }
