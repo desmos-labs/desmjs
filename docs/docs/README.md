@@ -11,7 +11,8 @@ DesmJS is a collection of packages that allows developers to create DApp or wall
 with the Desmos chain.  
 
 Inside this documentation you will find all the instructions in order to:
-* Create an instance of [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md);
-* How to use the various `Signer` implementations;
-* How to query the chain;
-* How to perform transactions.
+
+* create an instance of [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
+* use the various `Signer` implementations
+* query the chain
+* perform transactions
