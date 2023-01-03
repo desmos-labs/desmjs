@@ -24,7 +24,7 @@ const customController: QrCodeModalController = {
 };
 ```
 
-With the custom `QrCodeModalController` now you can pass it as `qrCodeController` inside the `options` field of
+With the custom `QrCodeModalController`, now you can pass it as `qrCodeController` inside the `options` field of
 [`WalletConnectSigner`](docs/api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#constructor).
 
 ```js
