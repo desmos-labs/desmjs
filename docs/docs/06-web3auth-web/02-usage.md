@@ -33,7 +33,7 @@ const openloginAdapter = new OpenloginAdapter({
 
 ## Initialize the Signer
 
-With the `OpenloginAdapter` instance you can now instantiate a `Signer` capable of sign transactions
+With the `OpenloginAdapter` instance, you can now instantiate a `Signer` capable of sign transactions
 with the private key obtained from `Web3Auth`.
 Here is an example that showcase how to create it:
 
