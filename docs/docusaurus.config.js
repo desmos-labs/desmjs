@@ -164,11 +164,6 @@ module.exports = {
           ],
         },
       ],
-      logo: {
-        alt: "Desmos Logo",
-        src: "assets/logo.png",
-        href: "https://www.desmos.network",
-      },
       copyright: `Copyright © ${new Date().getFullYear()} Desmos Network`,
     },
   },
