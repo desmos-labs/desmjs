@@ -63,7 +63,7 @@ await signer.connect();
 
 ## Use the signer
 
-After the signer is connected you can construct a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
+After the signer is connected, you can construct a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
 with the [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
 start to perform [transactions](docs/02-desmjs/03-perform-transactions.md).
 
