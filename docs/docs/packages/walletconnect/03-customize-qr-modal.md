@@ -5,7 +5,7 @@ sidebar_label: "Customize QR Code UI"
 # Customize The QR Code UI
 
 To customize the UI that present the QR code to the user, you can create an object that implements the
-[`QrCodeModalController`](docs/api/interfaces/desmoslabs_desmjs_walletconnect_v2.QrCodeModalController.md)
+[`QrCodeModalController`](../../api/interfaces/desmoslabs_desmjs_walletconnect_v2.QrCodeModalController.md)
 interface.
 
 ```js
@@ -25,7 +25,7 @@ const customController: QrCodeModalController = {
 ```
 
 With the custom `QrCodeModalController`, now you can pass it as `qrCodeController` inside the `options` field of
-[`WalletConnectSigner`](docs/api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#constructor).
+[`WalletConnectSigner`](../../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#constructor).
 
 ```js
 import { WalletConnectSigner } from "@desmoslabs/desmjs-walletconnect-v2";

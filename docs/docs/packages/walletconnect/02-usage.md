@@ -5,11 +5,11 @@ sidebar_label: "Usage"
 # Usage WalletConnect v2 Signer
 
 Here you can find how to create an instance of 
-[`WalletConnectSigner`](docs/api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md).
+[`WalletConnectSigner`](../../api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md).
 
 ## Initialize WalletConnect SignClient
 
-Before creating the [`WalletConnectSigner`](docs/api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md)
+Before creating the [`WalletConnectSigner`](../../api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md)
 you must create an instance of the WalletConnect `SignClient`.  
 To initialize a `SignClient` instance you need a [Project Id](https://docs.walletconnect.com/2.0/cloud/relay) that 
 can be obtained from [walletconnect.com](https://walletconnect.com).
@@ -32,7 +32,7 @@ const signClient = await SignClient.init({
 ## Initialize the WalletConnectSigner
 
 With a proper initialized `SignClient` instance you can create a 
-[`WalletConnectSigner`](docs/api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md).
+[`WalletConnectSigner`](../../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md).
 
 ```js
 import { WalletConnectSigner, QRCodeModal } from "@desmoslabs/desmjs-walletconnect-v2";
@@ -56,7 +56,7 @@ connection.
 ### Create a new connection
 
 To create a new connection you can call the 
-[`connect`](docs/api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connect) method.  
+[`connect`](../../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connect) method.  
 This will show to the user a QR code that can be scanned from a wallet to connect to your DApp.
 
 ```js
@@ -66,7 +66,7 @@ await signer.connect();
 ### Reconnect to a session
 
 To reconnect to a previously established session, you can call the 
-[`connectToSession`](docs/api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connecttosession)
+[`connectToSession`](../../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connecttosession)
 method.
 
 ```js
@@ -86,9 +86,9 @@ await signer.connectToSession(sessions[0]);
 
 ## Use the signer
 
-After the signer is connected, you can construct a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
-with the [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
-start to perform [transactions](docs/02-desmjs/03-perform-transactions.md).
+After the signer is connected, you can construct a [`DesmosClient`](../../api/classes/desmoslabs_desmjs.DesmosClient.md)
+with the [`connectWithSigner`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
+start to perform [transactions](../core/03-perform-transactions.md).
 
 ```js
 import { DesmosClient, OfflineSignerAdapter, SigningMode, GasPrice } from "@desmoslabs/desmjs";
@@ -109,5 +109,5 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
 ## Terminate session
 
 When you have finished to perform the operations or if the user want to disconnect from your app, you can
-call the [`disconnect`](docs/api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md#disconnect)
+call the [`disconnect`](../../api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md#disconnect)
 method to terminate the WalletConnect session.

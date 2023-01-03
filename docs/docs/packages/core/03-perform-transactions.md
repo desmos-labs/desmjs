@@ -3,12 +3,12 @@
 ## Overview
 
 In order to be able to perform transactions you need to do the following steps:
-1. Instantiate an instance of [`Signer`](docs/api/classes/desmoslabs_desmjs.Signer.md);
-2. Instantiate a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md) with the
-[`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function;
+1. Instantiate an instance of [`Signer`](../../api/classes/desmoslabs_desmjs.Signer.md);
+2. Instantiate a [`DesmosClient`](../../api/classes/desmoslabs_desmjs.DesmosClient.md) with the
+[`connectWithSigner`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function;
 3. Prepare the messages that you want to perform;
 4. Sign and broadcast the messages with the
-[`signAndBroadcast`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast) method.
+[`signAndBroadcast`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast) method.
 
 Here is an example of code that showcase all the steps:
 
@@ -67,14 +67,14 @@ await client.signandbroadcast(signerAddress, messages, fees, memo);
 
 The `DesmosClient` class can estimate the fees for you before broadcasting the messages.  
 To enable this feature you must provide the `gasPrice` through the `options` 
-param of [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner).  
+param of [`connectWithSigner`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner).  
 
 To compute the fees the `DesmosClient` will first estimate the amount of gas required asking the chain to simulate
 an execution with the messages that you want to execute and then will multiply that value for `gasPrice`.
 The resulting fees then will be `gasPrice` * estimated gas.
 
 When you enable this feature you can pass one of the following values as a `fee` param of 
-[`signandbroadcast`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast):
+[`signandbroadcast`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#signandbroadcast):
 * `"auto"`: To automatically estimated the fees based on the messages that you want to broadcast;
 * a `number`: Multiplication factor used to estimate the gas and fees from the provided messages. When using `"auto"` this
 value is `1.3` so the gas used to compute the fees is equal to 1.3 \* estimated gas.
@@ -83,14 +83,14 @@ value is `1.3` so the gas used to compute the fees is equal to 1.3 \* estimated 
 
 The `@desmoslabs/desmjs` provides a set of signers that can be used, here you can find the list:
 
-1. [`OfflineSignerAdapter`](docs/api/classes/desmoslabs_desmjs.OfflineSignerAdapter.md): This can be used to create
+1. [`OfflineSignerAdapter`](../../api/classes/desmoslabs_desmjs.OfflineSignerAdapter.md): This can be used to create
 a signer from a 12/24 words mnemonic or any signer that implements the `@cosmjs/OfflineAminoSigner` or 
 `@cosmjs/OfflineDirectSigner`;
-2. [`PrivateKeySigner`](docs/api/classes/desmoslabs_desmjs.PrivateKeySigner.md): This can be used to create 
+2. [`PrivateKeySigner`](../../api/classes/desmoslabs_desmjs.PrivateKeySigner.md): This can be used to create 
 a signer from a private key.
 
 If none of this signer meet your needs you can implement a custom signer by extending the 
-[`Signer`](docs/api/classes/desmoslabs_desmjs.Signer.md) class.  
+[`Signer`](../../api/classes/desmoslabs_desmjs.Signer.md) class.  
 For references on how to implement a custom `Signer` you can take a look inside the demsjs 
 [GitHub repo](https://github.com/desmos-labs/desmjs/tree/main/packages).  
 Some worth to take a look are:
@@ -105,112 +105,112 @@ Here is the list of messages that can be sent divided by module:
 
 ### Profiles
 
-* [MsgSaveProfileEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgSaveProfileEncodeObject.md): 
+* [MsgSaveProfileEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgSaveProfileEncodeObject.md): 
 Creates/updates the user's Desmos profile.
-* [MsgDeleteProfileEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeleteProfileEncodeObject.md): 
+* [MsgDeleteProfileEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeleteProfileEncodeObject.md): 
 Deletes the user's Desmos profile.
-* [MsgLinkApplicationEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgLinkApplicationEncodeObject.md): 
+* [MsgLinkApplicationEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgLinkApplicationEncodeObject.md): 
 Link a centralized application to the user's Desmos profile
-* [MsgUnlinkApplicationEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgUnlinkApplicationEncodeObject.md): 
+* [MsgUnlinkApplicationEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgUnlinkApplicationEncodeObject.md): 
 Unlink a centralized application from the user's Desmos profile
-* [MsgLinkChainAccountEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgLinkChainAccountEncodeObject.md): 
+* [MsgLinkChainAccountEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgLinkChainAccountEncodeObject.md): 
 Link an external blockchain address to the user's Desmos profile
-* [MsgUnlinkChainAccountEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgUnlinkChainAccountEncodeObject.md):
+* [MsgUnlinkChainAccountEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgUnlinkChainAccountEncodeObject.md):
 Unlink an external blockchain address from the user's Desmos profile
-* [MsgRequestDTagTransferEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRequestDTagTransferEncodeObject.md):
+* [MsgRequestDTagTransferEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRequestDTagTransferEncodeObject.md):
 Create a DTag transfer request
-* [MsgAcceptDTagTransferRequestEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAcceptDTagTransferRequestEncodeObject.md):
+* [MsgAcceptDTagTransferRequestEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAcceptDTagTransferRequestEncodeObject.md):
 Accept a DTag transfer request
-* [MsgRefuseDTagTransferRequestEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRefuseDTagTransferRequestEncodeObject.md):
+* [MsgRefuseDTagTransferRequestEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRefuseDTagTransferRequestEncodeObject.md):
 Refuse a DTag transfer request
-* [MsgCancelDTagTransferRequestEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCancelDTagTransferRequestEncodeObject.md):
+* [MsgCancelDTagTransferRequestEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCancelDTagTransferRequestEncodeObject.md):
 Cancel a DTag transfer initiate from the user
 
 ### Relationships
 
-* [MsgCreateRelationshipEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCreateRelationshipEncodeObject.md):
+* [MsgCreateRelationshipEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCreateRelationshipEncodeObject.md):
 Create a relationship between two users (A follow B)
-* [MsgDeleteRelationshipEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeleteRelationshipEncodeObject.md):
+* [MsgDeleteRelationshipEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeleteRelationshipEncodeObject.md):
 Delete a relationship between two users (A unfollow B)
-* [MsgBlockUserEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgBlockUserEncodeObject.md): 
+* [MsgBlockUserEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgBlockUserEncodeObject.md): 
 Block a user
-* [MsgUnblockUserEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgUnblockUserEncodeObject.md):
+* [MsgUnblockUserEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgUnblockUserEncodeObject.md):
 Unblock a user
 
 ### Subspaces
 
-* [MsgCreateSubspaceEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCreateSubspaceEncodeObject.md):
+* [MsgCreateSubspaceEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCreateSubspaceEncodeObject.md):
 Creates a subspace
-* [MsgEditSubspaceEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgEditSubspaceEncodeObject.md):
+* [MsgEditSubspaceEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgEditSubspaceEncodeObject.md):
 Edit a previously created subspace
-* [MsgDeleteSubspaceEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeleteSubspaceEncodeObject.md):
+* [MsgDeleteSubspaceEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeleteSubspaceEncodeObject.md):
 Delete a subspace
-* [MsgCreateSectionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCreateSectionEncodeObject.md):
+* [MsgCreateSectionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCreateSectionEncodeObject.md):
 Create a new section
-* [MsgDeleteSectionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeleteSectionEncodeObject.md):
+* [MsgDeleteSectionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeleteSectionEncodeObject.md):
 Delete a section
-* [MsgEditSectionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgEditSectionEncodeObject.md):
+* [MsgEditSectionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgEditSectionEncodeObject.md):
 Edit a previously created section
-* [MsgMoveSectionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgMoveSectionEncodeObject.md):
+* [MsgMoveSectionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgMoveSectionEncodeObject.md):
 Move a section to another section
-* [MsgCreateUserGroupEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCreateUserGroupEncodeObject.md):
+* [MsgCreateUserGroupEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCreateUserGroupEncodeObject.md):
 Create a user group
-* [MsgEditUserGroupEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgEditUserGroupEncodeObject.md):
+* [MsgEditUserGroupEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgEditUserGroupEncodeObject.md):
 Edit a previously created user group
-* [MsgDeleteUserGroupEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeleteUserGroupEncodeObject.md):
+* [MsgDeleteUserGroupEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeleteUserGroupEncodeObject.md):
 Delete a user group
-* [MsgMoveUserGroupEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgMoveUserGroupEncodeObject.md):
+* [MsgMoveUserGroupEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgMoveUserGroupEncodeObject.md):
 Move a user group to another section
-* [MsgAddUserToUserGroupEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAddUserToUserGroupEncodeObject.md): 
+* [MsgAddUserToUserGroupEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAddUserToUserGroupEncodeObject.md): 
 Add a user to a user group
-* [MsgRemoveUserFromUserGroupEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRemoveUserFromUserGroupEncodeObject.md): 
+* [MsgRemoveUserFromUserGroupEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRemoveUserFromUserGroupEncodeObject.md): 
 Remove a user from a user group
-* [MsgSetUserPermissionsEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgSetUserPermissionsEncodeObject.md):
+* [MsgSetUserPermissionsEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgSetUserPermissionsEncodeObject.md):
 Set the permissions of a user inside a subspace
-* [MsgSetUserGroupPermissionsEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgSetUserGroupPermissionsEncodeObject.md):
+* [MsgSetUserGroupPermissionsEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgSetUserGroupPermissionsEncodeObject.md):
 Set the permissions that all members of a group will inherit
 
 ### Posts
 
-* [MsgCreatePostEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCreatePostEncodeObject.md):
+* [MsgCreatePostEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCreatePostEncodeObject.md):
 Create a new post
-* [MsgDeletePostEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeletePostEncodeObject.md):
+* [MsgDeletePostEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeletePostEncodeObject.md):
 Delete a post
-* [MsgEditPostEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgEditPostEncodeObject.md):
+* [MsgEditPostEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgEditPostEncodeObject.md):
 Edit a previously created post
-* [MsgAddPostAttachmentEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAddPostAttachmentEncodeObject.md):
+* [MsgAddPostAttachmentEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAddPostAttachmentEncodeObject.md):
 Add an attachment to a post
-* [MsgRemovePostAttachmentEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRemovePostAttachmentEncodeObject.md):
+* [MsgRemovePostAttachmentEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRemovePostAttachmentEncodeObject.md):
 Remove an attachment from a post
-* [MsgAnswerPollEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAnswerPollEncodeObject.md):
+* [MsgAnswerPollEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAnswerPollEncodeObject.md):
 Answer a poll
 
 ### Reactions
 
-* [MsgAddReactionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAddReactionEncodeObject.md):
+* [MsgAddReactionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAddReactionEncodeObject.md):
 Add a reaction to a post
-* [MsgRemoveReactionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRemoveReactionEncodeObject.md):
+* [MsgRemoveReactionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRemoveReactionEncodeObject.md):
 Remove a reaction from a post
-* [MsgAddRegisteredReactionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAddRegisteredReactionEncodeObject.md):
+* [MsgAddRegisteredReactionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAddRegisteredReactionEncodeObject.md):
 Register a new supported reaction for a subspace
-* [MsgRemoveRegisteredReactionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRemoveRegisteredReactionEncodeObject.md):
+* [MsgRemoveRegisteredReactionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRemoveRegisteredReactionEncodeObject.md):
 Remove a registered reaction from a subspace
-* [MsgEditRegisteredReactionEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgEditRegisteredReactionEncodeObject.md):
+* [MsgEditRegisteredReactionEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgEditRegisteredReactionEncodeObject.md):
 Edit a previously registered reaction
-* [MsgSetReactionsParamsEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgSetReactionsParamsEncodeObject.md):
+* [MsgSetReactionsParamsEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgSetReactionsParamsEncodeObject.md):
 Set the reactions params for a subspace
 
 ### Reports
 
-* [MsgCreateReportEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgCreateReportEncodeObject.md):
+* [MsgCreateReportEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgCreateReportEncodeObject.md):
 Create a report inside a subspace
-* [MsgDeleteReportEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgDeleteReportEncodeObject.md):
+* [MsgDeleteReportEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgDeleteReportEncodeObject.md):
 Delete a previously created report from a subspace
-* [MsgSupportStandardReasonEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgSupportStandardReasonEncodeObject.md):
+* [MsgSupportStandardReasonEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgSupportStandardReasonEncodeObject.md):
 Support one reason from the module params
-* [MsgAddReasonEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgAddReasonEncodeObject.md):
+* [MsgAddReasonEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgAddReasonEncodeObject.md):
 Add a new supported reason to a subspace
-* [MsgRemoveReasonEncodeObject](docs/api/interfaces/desmoslabs_desmjs.MsgRemoveReasonEncodeObject.md):
+* [MsgRemoveReasonEncodeObject](../../api/interfaces/desmoslabs_desmjs.MsgRemoveReasonEncodeObject.md):
 Remove a previously created reason
 
 ## Examples

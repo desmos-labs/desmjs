@@ -1,6 +1,8 @@
 ---
 slug: /
 sidebar_label: "Introduction"
+id: "intro"
+sidebar_position: 1
 ---
 
 # DesmJS

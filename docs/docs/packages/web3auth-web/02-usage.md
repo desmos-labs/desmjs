@@ -5,9 +5,9 @@ sidebar_label: "Usage"
 # Web3Auth Web Signer
 
 Here you can find how to create an instance of
-[`PrivateKeySigner`](docs/api/classes/desmoslabs_desmjs.PrivateKeySigner.md) that obtain the private key
+[`PrivateKeySigner`](../../api/classes/desmoslabs_desmjs.PrivateKeySigner.md) that obtain the private key
 through [Web3Auth](https://web3auth.io/docs/sdk/web/modal/initialize) with
-[`Web3AuthKeyProvider`](docs/api/classes/desmoslabs_desmjs_web3auth_web.Web3AuthPrivateKeyProvider.md).
+[`Web3AuthKeyProvider`](../../api/classes/desmoslabs_desmjs_web3auth_web.Web3AuthPrivateKeyProvider.md).
 
 ## Initialize OpenLoginAdapter
 
@@ -60,12 +60,11 @@ const signer = web3AuthSigner(SigningMode.DIRECT, {
 await signer.connect();
 ```
 
-
 ## Use the signer
 
-After the signer is connected, you can construct a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
-with the [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
-start to perform [transactions](docs/02-desmjs/03-perform-transactions.md).
+After the signer is connected, you can construct a [`DesmosClient`](../../api/classes/desmoslabs_desmjs.DesmosClient.md)
+with the [`connectWithSigner`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
+start to perform [transactions](../core/03-perform-transactions.md).
 
 ```js
 import { SigningMode, DesmosClient, GasPrice } from "@desmoslabs/desmjs";
@@ -100,5 +99,5 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
 ## Terminate session
 
 When you have finished to perform the operations or if the user want to disconnect from your app, you can
-call the [`disconnect`](docs/api/classes/desmoslabs_desmjs.Signer.md#disconnect) method
+call the [`disconnect`](../../api/classes/desmoslabs_desmjs.Signer.md#disconnect) method
 to terminate the session.

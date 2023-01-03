@@ -4,7 +4,7 @@ sidebar_label: "Usage"
 
 # Usage KeplrSigner
 
-Here you can find how to create an instance of [`KeplrSigner`](docs/api/classes/desmoslabs_desmjs_keplr.KeplrSigner.md).
+Here you can find how to create an instance of [`KeplrSigner`](../../api/classes/desmoslabs_desmjs_keplr.KeplrSigner.md).
 
 ## Initialize KeplrSigner
 
@@ -33,9 +33,9 @@ await signer.connect();
 
 ## Use the signer
 
-After the signer is connected you can construct a [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
-with the [`connectWithSigner`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
-start to perform [transactions](docs/02-desmjs/03-perform-transactions.md).
+After the signer is connected you can construct a [`DesmosClient`](../../api/classes/desmoslabs_desmjs.DesmosClient.md)
+with the [`connectWithSigner`](../../api/classes/desmoslabs_desmjs.DesmosClient.md#connectwithsigner) function and
+start to perform [transactions](../core/03-perform-transactions.md).
 
 ```js
 import { DesmosClient, DesmosChains, SigningMode, GasPrice } from "@desmoslabs/desmjs";
@@ -68,5 +68,5 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
 ## Terminate session
 
 When you have finished to perform the operations or if the user want to disconnect from your app you can
-call the [`disconnect`](docs/api/classes/desmoslabs_desmjs_keplr.KeplrSigner.md#disconnect) method 
+call the [`disconnect`](../../api/classes/desmoslabs_desmjs_keplr.KeplrSigner.md#disconnect) method 
 to terminate the session.

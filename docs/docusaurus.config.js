@@ -46,7 +46,7 @@ module.exports = {
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "throw",
   onDuplicateRoutes: "warn",
-  favicon: "img/favicon.ico",
+  favicon: "assets/favicon.ico",
   organizationName: "desmos-labs", // Usually your GitHub org/user name.
   projectName: "desmjs", // Usually your repo name.
   webpack: {
@@ -84,17 +84,17 @@ module.exports = {
     },
     navbar: {
       logo: {
-        alt: "Desmos logo",
-        src: "img/logo.png",
-        srcDark: "img/logo.png",
-        href: "https://desmjs.desmos.network",
+        alt: "Desmos Logo",
+        src: "assets/logo.png",
+        srcDark: "assets/logo.png",
+        href: "https://desmos.network",
       },
       items: [
         {
           type: "doc",
           docId: "intro", // open page of section
           position: "left",
-          label: "Documentation",
+          label: "DesmJS Documentation",
         },
         // {to: '/blog', label: 'Blog', position: 'left'}, to add extra sections
         {
@@ -166,7 +166,7 @@ module.exports = {
       ],
       logo: {
         alt: "Desmos Logo",
-        src: "img/logo.png",
+        src: "assets/logo.png",
         href: "https://www.desmos.network",
       },
       copyright: `Copyright © ${new Date().getFullYear()} Desmos Network`,
