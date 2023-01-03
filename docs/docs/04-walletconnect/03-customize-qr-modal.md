@@ -4,7 +4,7 @@ sidebar_label: "Customize QR Code UI"
 
 # Customize The QR Code UI
 
-To customize the UI that present the QR code to the user you can create an object that implements the
+To customize the UI that present the QR code to the user, you can create an object that implements the
 [`QrCodeModalController`](docs/api/interfaces/desmoslabs_desmjs_walletconnect_v2.QrCodeModalController.md)
 interface.
 
