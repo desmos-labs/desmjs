@@ -11,7 +11,7 @@ through [Web3Auth](https://web3auth.io/docs/sdk/web/modal/initialize) with
 
 ## Initialize OpenLoginAdapter
 
-To support the login with different method we use the `OpenLoginAdapter` plugin.
+To support the login with different method, we use the `OpenLoginAdapter` plugin.
 Here is an example that showcase how to initialize it:
 
 ```ts
