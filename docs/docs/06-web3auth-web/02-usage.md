@@ -99,6 +99,6 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
 
 ## Terminate session
 
-When you have finished to perform the operations or if the user want to disconnect from your app you can
+When you have finished to perform the operations or if the user want to disconnect from your app, you can
 call the [`disconnect`](docs/api/classes/desmoslabs_desmjs.Signer.md#disconnect) method
 to terminate the session.
