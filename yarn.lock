@@ -2462,7 +2462,7 @@ __metadata:
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.0.0
-    "@web3auth/modal": ^4.2.0
+    "@web3auth/modal": ^4.2.1
     "@web3auth/ui": ^4.2.1
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
@@ -6494,9 +6494,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "@web3auth/modal@npm:4.2.0"
+"@web3auth/modal@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "@web3auth/modal@npm:4.2.1"
   dependencies:
     "@web3auth/base": ^4.0.0
     "@web3auth/core": ^4.0.0
@@ -6505,11 +6505,11 @@ __metadata:
     "@web3auth/phantom-adapter": ^4.2.0
     "@web3auth/torus-evm-adapter": ^4.2.0
     "@web3auth/torus-solana-adapter": ^4.2.0
-    "@web3auth/ui": ^4.1.1
+    "@web3auth/ui": ^4.2.1
     "@web3auth/wallet-connect-v1-adapter": ^4.2.0
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 0d00852fb672e895147fa66c3bc220de44f92de60044c141e14734330278400a776b08dca81df7725016779adee42e2d9af7ea14e64623cc38130a935063934f
+  checksum: 6a7b8e05822285c2511a51f43c9bf0b71eafbe724fa23d16701dea73c8085662c73944a3539526cea77438996fa5dfab18f58cbdc7ec0ee207a4ba4b9c0677a7
   languageName: node
   linkType: hard
 
@@ -6605,29 +6605,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: a8a0b7b45cd24dc3ba00dddc8e58aedbb744997a1c0c67c1273cf086dbdec36b400625546a4711bce1332c0ea0b573abdae17344e453add7fb9da85659321f2a
-  languageName: node
-  linkType: hard
-
-"@web3auth/ui@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "@web3auth/ui@npm:4.1.1"
-  dependencies:
-    "@toruslabs/openlogin": ^2.10.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^4.0.0
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    copy-to-clipboard: ^3.3.3
-    i18next: ^22.4.6
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    react-i18next: ^12.1.1
-    react-qrcode-logo: ^2.8.0
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    react: ^18.x
-    react-dom: ^18.x
-  checksum: 51b8c4500edf62005eee686744b866f398c4a587c0c6e05315eacb54005b09fb71f18ffa3092bc773c0ba00479d983fadbe4d90ed6114b0cb2a99f014bf0ad16
   languageName: node
   linkType: hard
 
