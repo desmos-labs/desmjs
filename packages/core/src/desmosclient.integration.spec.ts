@@ -1,6 +1,6 @@
 import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
-import { MsgSendEncodeObject, StdFee } from "@cosmjs/stargate";
+import { MsgSendEncodeObject, SignerData, StdFee } from "@cosmjs/stargate";
 import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {
   Bech32Address,
@@ -442,6 +442,27 @@ describe("DesmosClient", () => {
         },
         "auto"
       );
+    });
+    it("test offline client signTx", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const fee: StdFee = {
+        gas: "0",
+        amount: [],
+      };
+      const signerData: SignerData = {
+        accountNumber: 0,
+        chainId: "test-chain",
+        sequence: 0,
+      };
+
+      await client.signTx(testUser1.address0, msgs, fee, undefined, signerData);
     });
   });
 });

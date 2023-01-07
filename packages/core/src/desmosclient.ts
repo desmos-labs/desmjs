@@ -45,15 +45,15 @@ import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,
   profileFromAny,
-  setupProfilesExtension,
   setupAuthzExtension,
-  setupRelationshipsExtension,
-  setupSubspacesExtension,
-  setupPostsExtension,
-  setupSupplyExtension,
   setupFeesExtension,
+  setupPostsExtension,
+  setupProfilesExtension,
   setupReactionsExtension,
+  setupRelationshipsExtension,
   setupReportsExtension,
+  setupSubspacesExtension,
+  setupSupplyExtension,
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
 import { SignatureResult } from "./signatureresult";
@@ -119,7 +119,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   private types: AminoTypes;
 
-  private options: Options;
+  private readonly options: Options;
 
   public static override async connect(
     endpoint: string,
@@ -138,8 +138,21 @@ export class DesmosClient extends SigningCosmWasmClient {
     return new DesmosClient(tmClient, options, signer);
   }
 
+  /**
+   * Creates a client in offline mode.
+   *
+   * When you try to use online functionality with such client, an
+   * exception will be raised.
+   */
+  public static override async offline(
+    signer: Signer,
+    options: Options = {}
+  ): Promise<DesmosClient> {
+    return new DesmosClient(undefined, options, signer);
+  }
+
   protected constructor(
-    client: Tendermint34Client,
+    client: Tendermint34Client | undefined,
     options: Options,
     signer: Signer = new NoOpSigner()
   ) {
