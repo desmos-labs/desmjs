@@ -358,9 +358,8 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   /**
    * Estimates the transaction fees should be used in order to broadcast a transaction containing the given details.
-   * @private
    */
-  private async estimateTxFee(
+  public async estimateTxFee(
     signerAddress: string,
     messages: readonly EncodeObject[],
     memo: string
