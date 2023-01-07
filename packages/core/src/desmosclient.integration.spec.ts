@@ -462,7 +462,9 @@ describe("DesmosClient", () => {
         sequence: 0,
       };
 
-      await client.signTx(testUser1.address0, msgs, fee, undefined, signerData);
+      await expect(
+        client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
+      ).resolves.toBeDefined();
     });
   });
 });
