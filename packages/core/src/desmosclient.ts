@@ -326,6 +326,18 @@ export class DesmosClient extends SigningCosmWasmClient {
     explicitSignerData?: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
+    if (this.getQueryClient() === undefined) {
+      if (fee === "auto") {
+        throw new Error(
+          "can't sign transaction in offline mode with fee === auto"
+        );
+      } else if (explicitSignerData === undefined) {
+        throw new Error(
+          "can't sign transaction in offline mode without explicitSignerData"
+        );
+      }
+    }
+
     // Get the transaction fees based on the given value
     const txFee =
       fee !== "auto"

@@ -466,5 +466,48 @@ describe("DesmosClient", () => {
         client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
       ).resolves.toBeDefined();
     });
+    it("test offline client throw with fee === auto", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const signerData: SignerData = {
+        accountNumber: 0,
+        chainId: "test-chain",
+        sequence: 0,
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, "auto", undefined, signerData)
+      ).rejects.toHaveProperty(
+        "message",
+        "can't sign transaction in offline mode with fee === auto"
+      );
+    });
+    it("test offline client signTx throw without signerData", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const fee: StdFee = {
+        gas: "0",
+        amount: [],
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, fee)
+      ).rejects.toHaveProperty(
+        "message",
+        "can't sign transaction in offline mode without explicitSignerData"
+      );
+    });
   });
 });
