@@ -488,7 +488,8 @@ describe("DesmosClient", () => {
         "can't sign transaction in offline mode with fee === auto"
       );
     });
-    it("test offline client signTx throw without signerData", async () => {
+    
+    it("test offline client signTx throws erorr without signerData", async () => {
       const signer = await OfflineSignerAdapter.fromMnemonic(
         SigningMode.DIRECT,
         testUser1.mnemonic
