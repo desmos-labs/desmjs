@@ -15,11 +15,6 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - name: Setup Node 👷
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
       - name: Compute diff 📜
         uses: technote-space/get-diff-action@v6.1.2
         id: git_diff
@@ -29,6 +24,12 @@ jobs:
             **/*.js
             package.json
             yarn.lock
+
+      - name: Setup Node 👷
+        if: env.GIT_DIFF
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Install Protobuf compiler 👷
         if: env.GIT_DIFF
