@@ -30,6 +30,9 @@ jobs:
         id: git_diff
         with:
           PATTERNS: +docs/**/*
+          FILES: |
+            package.json
+            yarn.lock
 
       - name: Setup Protoc 👷
         if: env.GIT_DIFF
