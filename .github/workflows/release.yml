@@ -2,7 +2,6 @@ name: Release
 # Release workflow builds the binaries for a release, and then publishes them to NPM.
 
 on:
-  pull_request:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
