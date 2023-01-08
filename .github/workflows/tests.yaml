@@ -19,11 +19,10 @@ jobs:
         uses: technote-space/get-diff-action@v6.1.2
         id: git_diff
         with:
-          SUFFIX_FILTER: |
-            **/*.ts
-            **/*.js
+          PATTERNS: +**/*.{js,ts}
+          FILES: |
             package.json
-            yarn.lock
+            yarn.lock   
 
       - name: Setup Node 👷
         if: env.GIT_DIFF
