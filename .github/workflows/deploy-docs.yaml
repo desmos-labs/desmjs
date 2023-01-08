@@ -25,12 +25,23 @@ jobs:
           fetch-depth: 0
           path: "."
 
+      - name: Compute diff 📜
+        uses: technote-space/get-diff-action@v6.1.2
+        id: git_diff
+        with:
+          PATTERNS: +docs/**/*
+          FILES: |
+            package.json
+            yarn.lock
+
       - name: Setup Protoc 👷
+        if: env.GIT_DIFF
         uses: arduino/setup-protoc@v1
         with:
           version: "3.x"
 
       - name: Setup Node.js 🔧
+        if: env.GIT_DIFF
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
@@ -39,18 +50,23 @@ jobs:
             yarn.lock
 
       - name: Install 🔨
+        if: env.GIT_DIFF
         run: yarn install --immutable
 
       - name: Build packages 🔧
+        if: env.GIT_DIFF
         run: yarn build
 
       - name: Build docs 🔧
+        if: env.GIT_DIFF
         run: yarn build-docs
 
       - name: Prepare docs folder 🔧
+        if: env.GIT_DIFF
         run: mv docs/build ~/output
 
       - name: Deploy 🚀
+        if: env.GIT_DIFF
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
