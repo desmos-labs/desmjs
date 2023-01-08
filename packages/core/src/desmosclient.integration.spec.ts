@@ -466,7 +466,7 @@ describe("DesmosClient", () => {
         client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
       ).resolves.toBeDefined();
     });
-    it("test offline client throw with fee === auto", async () => {
+    it("test offline client throws error with fee === auto", async () => {
       const signer = await OfflineSignerAdapter.fromMnemonic(
         SigningMode.DIRECT,
         testUser1.mnemonic
