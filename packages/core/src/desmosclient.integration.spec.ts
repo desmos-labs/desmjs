@@ -1,6 +1,6 @@
 import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
-import { MsgSendEncodeObject, StdFee } from "@cosmjs/stargate";
+import { MsgSendEncodeObject, SignerData, StdFee } from "@cosmjs/stargate";
 import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {
   Bech32Address,
@@ -247,6 +247,77 @@ describe("DesmosClient", () => {
 
       const result = await profileClient.signTx(profileAddress, [msg], "auto");
       expect(result.txRaw.signatures).toHaveLength(1);
+    });
+  });
+
+  describe("Offline client", () => {
+    it("test offline client signs transaction properly", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const fee: StdFee = {
+        gas: "0",
+        amount: [],
+      };
+      const signerData: SignerData = {
+        accountNumber: 0,
+        chainId: "test-chain",
+        sequence: 0,
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
+      ).resolves.toBeDefined();
+    });
+
+    it("test offline client throws error with fee === auto", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const signerData: SignerData = {
+        accountNumber: 0,
+        chainId: "test-chain",
+        sequence: 0,
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, "auto", undefined, signerData)
+      ).rejects.toHaveProperty(
+        "message",
+        "can't sign transaction in offline mode with fee === auto"
+      );
+    });
+
+    it("test offline client signTx throws error without signerData", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const fee: StdFee = {
+        gas: "0",
+        amount: [],
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, fee)
+      ).rejects.toHaveProperty(
+        "message",
+        "can't sign transaction in offline mode without explicitSignerData"
+      );
     });
   });
 
