@@ -24,15 +24,15 @@ jobs:
             .js
 
       - name: Setup Node 👷
+        if: env.GIT_DIFF
         uses: actions/setup-node@v3
         with:
           node-version: 16
-        if: "env.GIT_DIFF != ''"
 
       - name: Install 🔨
+        if: env.GIT_DIFF
         run: yarn install --immutable
-        if: "env.GIT_DIFF != ''"
 
       - name: Run lint ✅
+        if: env.GIT_DIFF
         run: yarn lint
-        if: "env.GIT_DIFF != ''"
