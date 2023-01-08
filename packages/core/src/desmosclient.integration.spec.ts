@@ -250,6 +250,77 @@ describe("DesmosClient", () => {
     });
   });
 
+  describe("Offline client", () => {
+    it("test offline client signs transaction properly", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const fee: StdFee = {
+        gas: "0",
+        amount: [],
+      };
+      const signerData: SignerData = {
+        accountNumber: 0,
+        chainId: "test-chain",
+        sequence: 0,
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
+      ).resolves.toBeDefined();
+    });
+
+    it("test offline client throws error with fee === auto", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const signerData: SignerData = {
+        accountNumber: 0,
+        chainId: "test-chain",
+        sequence: 0,
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, "auto", undefined, signerData)
+      ).rejects.toHaveProperty(
+        "message",
+        "can't sign transaction in offline mode with fee === auto"
+      );
+    });
+
+    it("test offline client signTx throws error without signerData", async () => {
+      const signer = await OfflineSignerAdapter.fromMnemonic(
+        SigningMode.DIRECT,
+        testUser1.mnemonic
+      );
+
+      const client = await DesmosClient.offline(signer);
+
+      const msgs: EncodeObject[] = [];
+      const fee: StdFee = {
+        gas: "0",
+        amount: [],
+      };
+
+      await expect(
+        client.signTx(testUser1.address0, msgs, fee)
+      ).rejects.toHaveProperty(
+        "message",
+        "can't sign transaction in offline mode without explicitSignerData"
+      );
+    });
+  });
+
   describe("CosmWasm", () => {
     async function getTestContractAddress(
       client: DesmosClient
@@ -441,73 +512,6 @@ describe("DesmosClient", () => {
           },
         },
         "auto"
-      );
-    });
-    it("test offline client signTx", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-
-      const client = await DesmosClient.offline(signer);
-
-      const msgs: EncodeObject[] = [];
-      const fee: StdFee = {
-        gas: "0",
-        amount: [],
-      };
-      const signerData: SignerData = {
-        accountNumber: 0,
-        chainId: "test-chain",
-        sequence: 0,
-      };
-
-      await expect(
-        client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
-      ).resolves.toBeDefined();
-    });
-    it("test offline client throws error with fee === auto", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-
-      const client = await DesmosClient.offline(signer);
-
-      const msgs: EncodeObject[] = [];
-      const signerData: SignerData = {
-        accountNumber: 0,
-        chainId: "test-chain",
-        sequence: 0,
-      };
-
-      await expect(
-        client.signTx(testUser1.address0, msgs, "auto", undefined, signerData)
-      ).rejects.toHaveProperty(
-        "message",
-        "can't sign transaction in offline mode with fee === auto"
-      );
-    });
-    
-    it("test offline client signTx throws erorr without signerData", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-
-      const client = await DesmosClient.offline(signer);
-
-      const msgs: EncodeObject[] = [];
-      const fee: StdFee = {
-        gas: "0",
-        amount: [],
-      };
-
-      await expect(
-        client.signTx(testUser1.address0, msgs, fee)
-      ).rejects.toHaveProperty(
-        "message",
-        "can't sign transaction in offline mode without explicitSignerData"
       );
     });
   });
