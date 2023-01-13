@@ -3,7 +3,10 @@ import { GenericAuthorization } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 import { AminoConverters } from "@cosmjs/stargate";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { AminoGenericAuthorization } from "./messages";
-import { GenericAuthorizationTypeUrl } from "../../../const";
+import {
+  GenericAuthorizationAminoType,
+  GenericAuthorizationTypeUrl,
+} from "../../../const";
 
 export function genericAuthorizationToAny(
   authorization: GenericAuthorization
@@ -16,8 +19,8 @@ export function genericAuthorizationToAny(
 
 export function createAuthzAuthorizationConverters(): AminoConverters {
   return {
-    "/cosmos.authz.v1beta1.GenericAuthorization": {
-      aminoType: "cosmos-sdk/GenericAuthorization",
+    [GenericAuthorizationTypeUrl]: {
+      aminoType: GenericAuthorizationAminoType,
       toAmino: (
         authorization: Any["value"]
       ): AminoGenericAuthorization["value"] => {

@@ -1,7 +1,13 @@
 import { AminoMsg } from "@cosmjs/amino";
+import {
+  MsgBlockUserAminoType,
+  MsgCreateRelationshipAminoType,
+  MsgDeleteRelationshipAminoType,
+  MsgUnblockUserAminoType,
+} from "../../const";
 
 export interface AminoMsgCreateRelationship extends AminoMsg {
-  readonly type: "desmos/MsgCreateRelationship";
+  readonly type: typeof MsgCreateRelationshipAminoType;
   readonly value: {
     signer: string;
     counterparty: string;
@@ -10,7 +16,7 @@ export interface AminoMsgCreateRelationship extends AminoMsg {
 }
 
 export interface AminoMsgDeleteRelationship extends AminoMsg {
-  readonly type: "desmos/MsgDeleteRelationship";
+  readonly type: typeof MsgDeleteRelationshipAminoType;
   readonly value: {
     signer: string;
     counterparty: string;
@@ -19,7 +25,7 @@ export interface AminoMsgDeleteRelationship extends AminoMsg {
 }
 
 export interface AminoMsgBlockUser extends AminoMsg {
-  readonly type: "desmos/MsgBlockUser";
+  readonly type: typeof MsgBlockUserAminoType;
   readonly value: {
     blocker: string;
     blocked: string;
@@ -29,7 +35,7 @@ export interface AminoMsgBlockUser extends AminoMsg {
 }
 
 export interface AminoMsgUnblockUser extends AminoMsg {
-  readonly type: "desmos/MsgUnblockUser";
+  readonly type: typeof MsgUnblockUserAminoType;
   readonly value: {
     blocker: string;
     blocked: string;

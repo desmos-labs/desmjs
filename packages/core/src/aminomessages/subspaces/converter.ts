@@ -1,47 +1,79 @@
 import { AminoConverters } from "@cosmjs/stargate";
 import {
   MsgAddUserToUserGroup,
+  MsgCreateSection,
   MsgCreateSubspace,
   MsgCreateUserGroup,
+  MsgDeleteSection,
   MsgDeleteSubspace,
   MsgDeleteUserGroup,
+  MsgEditSection,
   MsgEditSubspace,
   MsgEditUserGroup,
+  MsgMoveSection,
+  MsgMoveUserGroup,
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
-  MsgCreateSection,
-  MsgEditSection,
-  MsgMoveSection,
-  MsgDeleteSection,
-  MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import Long from "long";
 import {
   AminoMsgAddUserToUserGroup,
+  AminoMsgCreateSection,
   AminoMsgCreateSubspace,
   AminoMsgCreateUserGroup,
+  AminoMsgDeleteSection,
   AminoMsgDeleteSubspace,
   AminoMsgDeleteUserGroup,
+  AminoMsgEditSection,
   AminoMsgEditSubspace,
   AminoMsgEditUserGroup,
+  AminoMsgMoveSection,
+  AminoMsgMoveUserGroup,
   AminoMsgRemoveUserFromUserGroup,
   AminoMsgSetUserGroupPermissions,
   AminoMsgSetUserPermissions,
-  AminoMsgCreateSection,
-  AminoMsgEditSection,
-  AminoMsgMoveSection,
-  AminoMsgDeleteSection,
-  AminoMsgMoveUserGroup,
 } from "./messages";
+import {
+  MsgAddUserToUserGroupAminoType,
+  MsgAddUserToUserGroupTypeUrl,
+  MsgCreateSectionAminoType,
+  MsgCreateSectionTypeUrl,
+  MsgCreateSubspaceAminoType,
+  MsgCreateSubspaceTypeUrl,
+  MsgCreateUserGroupAminoType,
+  MsgCreateUserGroupTypeUrl,
+  MsgDeleteSectionAminoType,
+  MsgDeleteSectionTypeUrl,
+  MsgDeleteSubspaceAminoType,
+  MsgDeleteSubspaceTypeUrl,
+  MsgDeleteUserGroupAminoType,
+  MsgDeleteUserGroupTypeUrl,
+  MsgEditSectionAminoType,
+  MsgEditSectionTypeUrl,
+  MsgEditSubspaceAminoType,
+  MsgEditSubspaceTypeUrl,
+  MsgEditUserGroupAminoType,
+  MsgEditUserGroupTypeUrl,
+  MsgMoveSectionAminoType,
+  MsgMoveSectionTypeUrl,
+  MsgMoveUserGroupAminoType,
+  MsgMoveUserGroupTypeUrl,
+  MsgRemoveUserFromUserGroupAminoType,
+  MsgRemoveUserFromUserGroupTypeUrl,
+  MsgSetUserGroupPermissionsAminoType,
+  MsgSetUserGroupPermissionsTypeUrl,
+  MsgSetUserPermissionsAminoType,
+  MsgSetUserPermissionsTypeUrl,
+} from "../../const";
 
 /**
  * Creates all the Amino converters for the subspaces messages.
  */
 export function createSubspacesConverters(): AminoConverters {
   return {
-    "/desmos.subspaces.v3.MsgCreateRelationships": {
-      aminoType: "desmos/MsgCreateRelationships",
+    [MsgCreateSubspaceTypeUrl]: {
+      aminoType: MsgCreateSubspaceAminoType,
       toAmino: (msg: MsgCreateSubspace): AminoMsgCreateSubspace["value"] => ({
         name: msg.name,
         description: msg.description,
@@ -57,8 +89,8 @@ export function createSubspacesConverters(): AminoConverters {
         owner: msg.owner,
       }),
     },
-    "/desmos.subspaces.v3.MsgEditSubspace": {
-      aminoType: "desmos/MsgEditSubspace",
+    [MsgEditSubspaceTypeUrl]: {
+      aminoType: MsgEditSubspaceAminoType,
       toAmino: (msg: MsgEditSubspace): AminoMsgEditSubspace["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         name: msg.name,
@@ -76,8 +108,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgDeleteSubspace": {
-      aminoType: "desmos/MsgDeleteSubspace",
+    [MsgDeleteSubspaceTypeUrl]: {
+      aminoType: MsgDeleteSubspaceAminoType,
       toAmino: (msg: MsgDeleteSubspace): AminoMsgDeleteSubspace["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         signer: msg.signer,
@@ -87,8 +119,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgCreateSection": {
-      aminoType: "desmos/MsgCreateSection",
+    [MsgCreateSectionTypeUrl]: {
+      aminoType: MsgCreateSectionAminoType,
       toAmino: (msg: MsgCreateSection): AminoMsgCreateSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         name: msg.name,
@@ -104,8 +136,8 @@ export function createSubspacesConverters(): AminoConverters {
         creator: msg.creator,
       }),
     },
-    "/desmos.subspaces.v3.MsgEditSection": {
-      aminoType: "desmos/MsgEditSection",
+    [MsgEditSectionTypeUrl]: {
+      aminoType: MsgEditSectionAminoType,
       toAmino: (msg: MsgEditSection): AminoMsgEditSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
@@ -121,8 +153,8 @@ export function createSubspacesConverters(): AminoConverters {
         editor: msg.editor,
       }),
     },
-    "/desmos.subspaces.v3.MsgMoveSection": {
-      aminoType: "desmos/MsgMoveSection",
+    [MsgMoveSectionTypeUrl]: {
+      aminoType: MsgMoveSectionAminoType,
       toAmino: (msg: MsgMoveSection): AminoMsgMoveSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
@@ -136,8 +168,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgDeleteSection": {
-      aminoType: "desmos/MsgDeleteSection",
+    [MsgDeleteSectionTypeUrl]: {
+      aminoType: MsgDeleteSectionAminoType,
       toAmino: (msg: MsgDeleteSection): AminoMsgDeleteSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
@@ -149,8 +181,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgCreateUserGroup": {
-      aminoType: "desmos/MsgCreateUserGroup",
+    [MsgCreateUserGroupTypeUrl]: {
+      aminoType: MsgCreateUserGroupAminoType,
       toAmino: (msg: MsgCreateUserGroup): AminoMsgCreateUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
@@ -172,8 +204,8 @@ export function createSubspacesConverters(): AminoConverters {
         creator: msg.creator,
       }),
     },
-    "/desmos.subspaces.v3.MsgEditUserGroup": {
-      aminoType: "desmos/MsgEditUserGroup",
+    [MsgEditUserGroupTypeUrl]: {
+      aminoType: MsgEditUserGroupAminoType,
       toAmino: (msg: MsgEditUserGroup): AminoMsgEditUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
@@ -189,8 +221,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgMoveUserGroup": {
-      aminoType: "desmos/MsgMoveUserGroup",
+    [MsgMoveUserGroupTypeUrl]: {
+      aminoType: MsgMoveUserGroupAminoType,
       toAmino: (msg: MsgMoveUserGroup): AminoMsgMoveUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
@@ -204,8 +236,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgSetUserGroupPermissions": {
-      aminoType: "desmos/MsgSetUserGroupPermissions",
+    [MsgSetUserGroupPermissionsTypeUrl]: {
+      aminoType: MsgSetUserGroupPermissionsAminoType,
       toAmino: (
         msg: MsgSetUserGroupPermissions
       ): AminoMsgSetUserGroupPermissions["value"] => ({
@@ -223,8 +255,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgDeleteUserGroup": {
-      aminoType: "desmos/MsgDeleteUserGroup",
+    [MsgDeleteUserGroupTypeUrl]: {
+      aminoType: MsgDeleteUserGroupAminoType,
       toAmino: (msg: MsgDeleteUserGroup): AminoMsgDeleteUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         group_id: msg.groupId,
@@ -238,8 +270,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgAddUserToUserGroup": {
-      aminoType: "desmos/MsgAddUserToUserGroup",
+    [MsgAddUserToUserGroupTypeUrl]: {
+      aminoType: MsgAddUserToUserGroupAminoType,
       toAmino: (
         msg: MsgAddUserToUserGroup
       ): AminoMsgAddUserToUserGroup["value"] => ({
@@ -257,8 +289,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup": {
-      aminoType: "desmos/MsgRemoveUserFromUserGroup",
+    [MsgRemoveUserFromUserGroupTypeUrl]: {
+      aminoType: MsgRemoveUserFromUserGroupAminoType,
       toAmino: (
         msg: MsgRemoveUserFromUserGroup
       ): AminoMsgRemoveUserFromUserGroup["value"] => ({
@@ -276,8 +308,8 @@ export function createSubspacesConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.subspaces.v3.MsgSetUserPermissions": {
-      aminoType: "desmos/MsgSetUserPermissions",
+    [MsgSetUserPermissionsTypeUrl]: {
+      aminoType: MsgSetUserPermissionsAminoType,
       toAmino: (
         msg: MsgSetUserPermissions
       ): AminoMsgSetUserPermissions["value"] => ({

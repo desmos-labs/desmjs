@@ -1,8 +1,15 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { AminoReportTarget } from "./types";
+import {
+  MsgAddReasonAminoType,
+  MsgCreateReportAminoType,
+  MsgDeleteReportAminoType,
+  MsgRemoveReasonAminoType,
+  MsgSupportStandardReasonAminoType,
+} from "../../const";
 
 export interface AminoMsgCreateReport extends AminoMsg {
-  readonly type: "desmos/MsgCreateReport";
+  readonly type: typeof MsgCreateReportAminoType;
   readonly value: {
     subspace_id: string;
     reasons_ids: number[];
@@ -13,7 +20,7 @@ export interface AminoMsgCreateReport extends AminoMsg {
 }
 
 export interface AminoMsgDeleteReport extends AminoMsg {
-  readonly type: "desmos/MsgDeleteReport";
+  readonly type: typeof MsgDeleteReportAminoType;
   readonly value: {
     subspace_id: string;
     report_id: string;
@@ -22,7 +29,7 @@ export interface AminoMsgDeleteReport extends AminoMsg {
 }
 
 export interface AminoMsgSupportStandardReason extends AminoMsg {
-  readonly type: "desmos/MsgSupportStandardReason";
+  readonly type: typeof MsgSupportStandardReasonAminoType;
   readonly value: {
     subspace_id: string;
     standard_reason_id: number;
@@ -31,7 +38,7 @@ export interface AminoMsgSupportStandardReason extends AminoMsg {
 }
 
 export interface AminoMsgAddReason extends AminoMsg {
-  readonly type: "desmos/MsgAddReason";
+  readonly type: typeof MsgAddReasonAminoType;
   readonly value: {
     subspace_id: string;
     title: string;
@@ -41,7 +48,7 @@ export interface AminoMsgAddReason extends AminoMsg {
 }
 
 export interface AminoMsgRemoveReason extends AminoMsg {
-  readonly type: "desmos/MsgRemoveReason";
+  readonly type: typeof MsgRemoveReasonAminoType;
   readonly value: {
     subspace_id: string;
     reason_id: number;

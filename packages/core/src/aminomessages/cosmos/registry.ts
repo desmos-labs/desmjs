@@ -12,25 +12,37 @@ import {
   MsgGrantAllowance,
   MsgRevokeAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import {
+  AllowedMsgAllowanceTypeUrl,
+  BasicAllowanceTypeUrl,
+  GenericAuthorizationTypeUrl,
+  MsgGrantAllowanceTypeUrl,
+  MsgGrantTypeUrl,
+  MsgRevokeAllowanceTypeUrl,
+  MsgRevokeTypeUrl,
+  PeriodicAllowanceTypeUrl,
+  StakeAuthorizationTypeUrl,
+} from "../../const";
+import SendAuthorizationTypeUrl from "../../const/cosmos/bank";
 
 export const cosmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   // x/authz
-  ["/cosmos.authz.v1beta1.GenericAuthorization", GenericAuthorization],
-  ["/cosmos.authz.v1beta1.MsgGrant", MsgGrant],
-  ["/cosmos.authz.v1beta1.MsgRevoke", MsgRevoke],
+  [GenericAuthorizationTypeUrl, GenericAuthorization],
+  [MsgGrantTypeUrl, MsgGrant],
+  [MsgRevokeTypeUrl, MsgRevoke],
 
   // x/bank
-  ["/cosmos.bank.v1beta1.SendAuthorization", SendAuthorization],
+  [SendAuthorizationTypeUrl, SendAuthorization],
 
   // x/feegrant
-  ["/cosmos.feegrant.v1beta1.BasicAllowance", BasicAllowance],
-  ["/cosmos.feegrant.v1beta1.PeriodicAllowance", PeriodicAllowance],
-  ["/cosmos.feegrant.v1beta1.AllowedMsgAllowance", AllowedMsgAllowance],
-  ["/cosmos.feegrant.v1beta1.MsgGrantAllowance", MsgGrantAllowance],
-  ["/cosmos.feegrant.v1beta1.MsgRevokeAllowance", MsgRevokeAllowance],
+  [BasicAllowanceTypeUrl, BasicAllowance],
+  [PeriodicAllowanceTypeUrl, PeriodicAllowance],
+  [AllowedMsgAllowanceTypeUrl, AllowedMsgAllowance],
+  [MsgGrantAllowanceTypeUrl, MsgGrantAllowance],
+  [MsgRevokeAllowanceTypeUrl, MsgRevokeAllowance],
 
   // x/staking
-  ["/cosmos.staking.v1beta1.StakeAuthorization", StakeAuthorization],
+  [StakeAuthorizationTypeUrl, StakeAuthorization],
 ];
 
 export default cosmosRegistryTypes;

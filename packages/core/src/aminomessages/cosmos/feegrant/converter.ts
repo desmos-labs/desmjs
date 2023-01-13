@@ -14,18 +14,25 @@ import {
   AminoAllowedMsgAllowance,
   AminoBasicAllowance,
   AminoMsgGrantAllowance,
-  AminoPeriodicAllowance,
   AminoMsgRevokeAllowance,
+  AminoPeriodicAllowance,
 } from "./messages";
 import {
+  AllowedMsgAllowanceAminoType,
   AllowedMsgAllowanceTypeUrl,
+  BasicAllowanceAminoType,
   BasicAllowanceTypeUrl,
+  MsgGrantAllowanceAminoType,
+  MsgGrantAllowanceTypeUrl,
+  MsgRevokeAllowanceAminoType,
+  MsgRevokeAllowanceTypeUrl,
+  PeriodicAllowanceAminoType,
   PeriodicAllowanceTypeUrl,
 } from "../../../const";
 
 function basicAllowanceToAmino(value: BasicAllowance): AminoBasicAllowance {
   return {
-    type: "cosmos-sdk/BasicAllowance",
+    type: BasicAllowanceAminoType,
     value: {
       spend_limit: value.spendLimit,
       expiration: value.expiration,
@@ -46,7 +53,7 @@ function periodicAllowanceToAmino(
   value: PeriodicAllowance
 ): AminoPeriodicAllowance {
   return {
-    type: "cosmos-sdk/AminoPeriodicAllowance",
+    type: PeriodicAllowanceAminoType,
     value: {
       basic: value.basic ? basicAllowanceToAmino(value.basic) : undefined,
       period: value.period,
@@ -73,7 +80,7 @@ function allowedMsgAllowanceToAmino(
   value: AllowedMsgAllowance
 ): AminoAllowedMsgAllowance {
   return {
-    type: "cosmos-sdk/AminoAllowedMsgAllowance",
+    type: AllowedMsgAllowanceAminoType,
     value: {
       allowance: value.allowance
         ? allowanceToAmino(value.allowance)
@@ -110,7 +117,7 @@ function allowanceToAmino(any: Any): AminoMsg {
 
 function allowanceFromAmino(allowance: AminoMsg): Any {
   switch (allowance.type) {
-    case "cosmos-sdk/BasicAllowance":
+    case BasicAllowanceAminoType:
       return Any.fromPartial({
         typeUrl: BasicAllowanceTypeUrl,
         value: BasicAllowance.encode(
@@ -118,7 +125,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
         ).finish(),
       });
 
-    case "cosmos-sdk/PeriodicAllowance":
+    case PeriodicAllowanceAminoType:
       return Any.fromPartial({
         typeUrl: PeriodicAllowanceTypeUrl,
         value: PeriodicAllowance.encode(
@@ -126,7 +133,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
         ).finish(),
       });
 
-    case "cosmos-sdk/AllowedMsgAllowance":
+    case AllowedMsgAllowanceAminoType:
       return Any.fromPartial({
         typeUrl: AllowedMsgAllowanceTypeUrl,
         value: PeriodicAllowance.encode(
@@ -141,21 +148,21 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
 
 export function createFeegrantConverters(): AminoConverters {
   return {
-    "/cosmos.feegrant.v1beta1.BasicAllowance": {
-      aminoType: "cosmos-sdk/BasicAllowance",
+    [BasicAllowanceTypeUrl]: {
+      aminoType: BasicAllowanceAminoType,
       toAmino: (value: BasicAllowance): AminoBasicAllowance["value"] =>
         basicAllowanceToAmino(value).value,
       fromAmino: (value: AminoBasicAllowance["value"]) =>
         basicAllowanceFromAmino(value),
     },
-    "/cosmos.feegrant.v1beta1.PeriodicAllowance": {
-      aminoType: "cosmos-sdk/PeriodicAllowance",
+    [PeriodicAllowanceTypeUrl]: {
+      aminoType: PeriodicAllowanceAminoType,
       toAmino: (value: PeriodicAllowance): AminoPeriodicAllowance["value"] =>
         periodicAllowanceToAmino(value).value,
       fromAmino: periodicAllowanceFromAmino,
     },
-    "/cosmos.feegrant.v1beta1.AllowedMsgAllowance": {
-      aminoType: "cosmos-sdk/AllowedMsgAllowance",
+    [AllowedMsgAllowanceTypeUrl]: {
+      aminoType: AllowedMsgAllowanceAminoType,
       toAmino: (
         value: AllowedMsgAllowance
       ): AminoAllowedMsgAllowance["value"] =>
@@ -164,8 +171,8 @@ export function createFeegrantConverters(): AminoConverters {
         value: AminoAllowedMsgAllowance["value"]
       ): AllowedMsgAllowance => allowedMsgAllowanceFromAmino(value),
     },
-    "/cosmos.feegrant.v1beta1.MsgGrantAllowance": {
-      aminoType: "cosmos-sdk/MsgGrantAllowance",
+    [MsgGrantAllowanceTypeUrl]: {
+      aminoType: MsgGrantAllowanceAminoType,
       toAmino: (msg: MsgGrantAllowance): AminoMsgGrantAllowance["value"] => ({
         allowance: msg.allowance ? allowanceToAmino(msg.allowance) : undefined,
         granter: msg.granter,
@@ -180,8 +187,8 @@ export function createFeegrantConverters(): AminoConverters {
             : undefined,
         }),
     },
-    "/cosmos.feegrant.v1beta1.MsgRevokeAllowance": {
-      aminoType: "cosmos-sdk/MsgRevokeAllowance",
+    [MsgRevokeAllowanceTypeUrl]: {
+      aminoType: MsgRevokeAllowanceAminoType,
       toAmino: (msg: MsgRevokeAllowance): AminoMsgRevokeAllowance["value"] => ({
         granter: msg.granter,
         grantee: msg.grantee,

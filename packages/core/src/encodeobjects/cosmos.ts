@@ -34,7 +34,7 @@ export function isMsgRevoke(
 }
 
 export interface MsgGrantAllowanceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
+  readonly typeUrl: typeof MsgGrantAllowanceTypeUrl;
   readonly value: MsgGrantAllowance;
 }
 
@@ -48,7 +48,7 @@ export function isMsgGrantAllowance(
 }
 
 export interface MsgRevokeAllowanceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
+  readonly typeUrl: typeof MsgRevokeAllowanceTypeUrl;
   readonly value: MsgRevokeAllowance;
 }
 

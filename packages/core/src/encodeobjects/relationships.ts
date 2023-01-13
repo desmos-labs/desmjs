@@ -13,7 +13,7 @@ import {
 } from "../const";
 
 export interface MsgCreateRelationshipEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.relationships.v1.MsgCreateRelationship";
+  readonly typeUrl: typeof MsgCreateRelationshipTypeUrl;
   readonly value: MsgCreateRelationship;
 }
 
@@ -27,7 +27,7 @@ export function isMsgCreateRelationshipEncodeObject(
 }
 
 export interface MsgDeleteRelationshipEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.relationships.v1.MsgDeleteRelationship";
+  readonly typeUrl: typeof MsgDeleteRelationshipTypeUrl;
   readonly value: MsgDeleteRelationship;
 }
 
@@ -41,7 +41,7 @@ export function isMsgDeleteRelationshipEncodeObject(
 }
 
 export interface MsgBlockUserEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.relationships.v1.MsgBlockUser";
+  readonly typeUrl: typeof MsgBlockUserTypeUrl;
   readonly value: MsgBlockUser;
 }
 
@@ -54,7 +54,7 @@ export function isMsgBlockUserEncodeObject(
 }
 
 export interface MsgUnblockUserEncodeObject extends EncodeObject {
-  typeUrl: "/desmos.relationships.v1.MsgUnblockUser";
+  readonly typeUrl: typeof MsgUnblockUserTypeUrl;
   readonly value: MsgUnblockUser;
 }
 

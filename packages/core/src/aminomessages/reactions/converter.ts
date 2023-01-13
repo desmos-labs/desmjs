@@ -31,7 +31,21 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import {
+  FreeTextValueAminoType,
   FreeTextValueTypeUrl,
+  MsgAddReactionAminoType,
+  MsgAddReactionTypeUrl,
+  MsgAddRegisteredReactionAminoType,
+  MsgAddRegisteredReactionTypeUrl,
+  MsgEditRegisteredReactionAminoType,
+  MsgEditRegisteredReactionTypeUrl,
+  MsgRemoveReactionAminoType,
+  MsgRemoveReactionTypeUrl,
+  MsgRemoveRegisteredReactionAminoType,
+  MsgRemoveRegisteredReactionTypeUrl,
+  MsgSetReactionsParamsAminoType,
+  MsgSetReactionsParamsTypeUrl,
+  RegisteredReactionValueAminoType,
   RegisteredReactionValueTypeUrl,
 } from "../../const";
 
@@ -52,8 +66,8 @@ export function convertFreeTextValueToAny(value: FreeTextValue): Any {
 }
 
 export const reactionValueConverters: AminoConverters = {
-  "/desmos.reactions.v1.RegisteredReactionValue": {
-    aminoType: "desmos/RegisteredReactionValue",
+  [RegisteredReactionValueTypeUrl]: {
+    aminoType: RegisteredReactionValueAminoType,
     toAmino: (msg: Any): AminoRegisteredReaction["value"] => {
       const reaction = RegisteredReactionValue.decode(msg.value);
       return {
@@ -67,8 +81,8 @@ export const reactionValueConverters: AminoConverters = {
         })
       ),
   },
-  "/desmos.reactions.v1.FreeTextValue": {
-    aminoType: "desmos/FreeTextValue",
+  [FreeTextValueTypeUrl]: {
+    aminoType: FreeTextValueAminoType,
     toAmino: (msg: Any): AminoFreeTextReaction["value"] => {
       const reaction = FreeTextValue.decode(msg.value);
       return {
@@ -125,8 +139,8 @@ export function convertFreeTextValueParamsFromAmino(
  */
 export function createReactionsConverters(): AminoConverters {
   return {
-    "/desmos.reactions.v1.MsgAddReaction": {
-      aminoType: "desmos/MsgAddReaction",
+    [MsgAddReactionTypeUrl]: {
+      aminoType: MsgAddReactionAminoType,
       toAmino: (msg: MsgAddReaction): AminoMsgAddReaction["value"] => {
         assertDefinedAndNotNull(msg.value, "reaction value not defined");
         return {
@@ -143,8 +157,8 @@ export function createReactionsConverters(): AminoConverters {
         user: msg.user,
       }),
     },
-    "/desmos.reactions.v1.MsgRemoveReaction": {
-      aminoType: "desmos/MsgRemoveReaction",
+    [MsgRemoveReactionTypeUrl]: {
+      aminoType: MsgRemoveReactionAminoType,
       toAmino: (msg: MsgRemoveReaction): AminoMsgRemoveReaction["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         post_id: msg.postId.toString(),
@@ -158,8 +172,8 @@ export function createReactionsConverters(): AminoConverters {
         user: msg.user,
       }),
     },
-    "/desmos.reactions.v1.MsgAddRegisteredReaction": {
-      aminoType: "desmos/MsgAddRegisteredReaction",
+    [MsgAddRegisteredReactionTypeUrl]: {
+      aminoType: MsgAddRegisteredReactionAminoType,
       toAmino: (
         msg: MsgAddRegisteredReaction
       ): AminoMsgAddRegisteredReaction["value"] => ({
@@ -177,8 +191,8 @@ export function createReactionsConverters(): AminoConverters {
         user: msg.user,
       }),
     },
-    "/desmos.reactions.v1.MsgEditRegisteredReaction": {
-      aminoType: "desmos/MsgEditRegisteredReaction",
+    [MsgEditRegisteredReactionTypeUrl]: {
+      aminoType: MsgEditRegisteredReactionAminoType,
       toAmino: (
         msg: MsgEditRegisteredReaction
       ): AminoMsgEditRegisteredReaction["value"] => ({
@@ -198,8 +212,8 @@ export function createReactionsConverters(): AminoConverters {
         user: msg.user,
       }),
     },
-    "/desmos.reactions.v1.MsgRemoveRegisteredReaction": {
-      aminoType: "desmos/MsgRemoveRegisteredReaction",
+    [MsgRemoveRegisteredReactionTypeUrl]: {
+      aminoType: MsgRemoveRegisteredReactionAminoType,
       toAmino: (
         msg: MsgRemoveRegisteredReaction
       ): AminoMsgRemoveRegisteredReaction["value"] => ({
@@ -215,8 +229,8 @@ export function createReactionsConverters(): AminoConverters {
         user: msg.user,
       }),
     },
-    "/desmos.reactions.v1.MsgSetReactionsParams": {
-      aminoType: "desmos/MsgSetReactionsParams",
+    [MsgSetReactionsParamsTypeUrl]: {
+      aminoType: MsgSetReactionsParamsAminoType,
       toAmino: (
         msg: MsgSetReactionsParams
       ): AminoMsgSetReactionsParams["value"] => ({

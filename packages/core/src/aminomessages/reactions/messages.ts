@@ -1,9 +1,17 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { RegisteredReactionValueParams } from "@desmoslabs/desmjs-types/build/desmos/reactions/v1/models";
 import { AminoFreeTextValueParams, AminoReaction } from "./types";
+import {
+  MsgAddReactionAminoType,
+  MsgAddRegisteredReactionAminoType,
+  MsgEditRegisteredReactionAminoType,
+  MsgRemoveReactionAminoType,
+  MsgRemoveRegisteredReactionAminoType,
+  MsgSetReactionsParamsAminoType,
+} from "../../const";
 
 export interface AminoMsgAddReaction extends AminoMsg {
-  readonly type: "desmos/MsgAddReaction";
+  readonly type: typeof MsgAddReactionAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;
@@ -13,7 +21,7 @@ export interface AminoMsgAddReaction extends AminoMsg {
 }
 
 export interface AminoMsgRemoveReaction extends AminoMsg {
-  readonly type: "desmos/MsgRemoveReaction";
+  readonly type: typeof MsgRemoveReactionAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;
@@ -23,7 +31,7 @@ export interface AminoMsgRemoveReaction extends AminoMsg {
 }
 
 export interface AminoMsgAddRegisteredReaction extends AminoMsg {
-  readonly type: "desmos/MsgAddRegisteredReaction";
+  readonly type: typeof MsgAddRegisteredReactionAminoType;
   readonly value: {
     subspace_id: string;
     shorthand_code: string;
@@ -33,7 +41,7 @@ export interface AminoMsgAddRegisteredReaction extends AminoMsg {
 }
 
 export interface AminoMsgEditRegisteredReaction extends AminoMsg {
-  readonly type: "desmos/MsgEditRegisteredReaction";
+  readonly type: typeof MsgEditRegisteredReactionAminoType;
   readonly value: {
     subspace_id: string;
     registered_reaction_id: number;
@@ -44,7 +52,7 @@ export interface AminoMsgEditRegisteredReaction extends AminoMsg {
 }
 
 export interface AminoMsgRemoveRegisteredReaction extends AminoMsg {
-  readonly type: "desmos/MsgRemoveRegisteredReaction";
+  readonly type: typeof MsgRemoveRegisteredReactionAminoType;
   readonly value: {
     subspace_id: string;
     registered_reaction_id: number;
@@ -53,7 +61,7 @@ export interface AminoMsgRemoveRegisteredReaction extends AminoMsg {
 }
 
 export interface AminoMsgSetReactionsParams extends AminoMsg {
-  readonly type: "desmos/MsgSetReactionsParams";
+  readonly type: typeof MsgSetReactionsParamsAminoType;
   readonly value: {
     subspace_id: string;
     registered_reaction?: RegisteredReactionValueParams;

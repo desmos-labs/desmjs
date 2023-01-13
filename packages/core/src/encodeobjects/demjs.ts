@@ -3,7 +3,7 @@ import { MsgAuthenticate } from "@desmoslabs/desmjs-types/desmjs/msgs";
 import { MsgAuthenticateTypeUrl } from "../const";
 
 export interface MsgAuthenticateEncodeObject extends EncodeObject {
-  typeUrl: "/desmjs.v1.MsgAuthenticate";
+  typeUrl: typeof MsgAuthenticateTypeUrl;
   readonly value: MsgAuthenticate;
 }
 

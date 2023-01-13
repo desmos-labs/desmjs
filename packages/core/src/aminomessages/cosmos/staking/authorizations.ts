@@ -2,7 +2,10 @@ import { AminoConverters } from "@cosmjs/stargate";
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { StakeAuthorization } from "cosmjs-types/cosmos/staking/v1beta1/authz";
 import { AminoStakeAuthorization } from "./messages";
-import { StakeAuthorizationTypeUrl } from "../../../const";
+import {
+  StakeAuthorizationAminoType,
+  StakeAuthorizationTypeUrl,
+} from "../../../const";
 
 export function stakeAuthorizationToAny(
   authorization: StakeAuthorization
@@ -15,8 +18,8 @@ export function stakeAuthorizationToAny(
 
 export function createStakeAuthorizationConverters(): AminoConverters {
   return {
-    "/cosmos.bank.v1beta1.StakeAuthorization": {
-      aminoType: "cosmos-sdk/StakeAuthorization",
+    [StakeAuthorizationTypeUrl]: {
+      aminoType: StakeAuthorizationAminoType,
       toAmino: (
         authorization: Any["value"]
       ): AminoStakeAuthorization["value"] => {
