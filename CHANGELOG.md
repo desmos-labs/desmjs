@@ -1,3 +1,11 @@
+## Version 4.7.3
+### Features
+- Added the ability to create an offline `DesmosClient` to sign transactions faster
+- Added utility functions to `@desmoslabs/desmjs-walletconnect-v2` to decode WalletConnect requests easily
+
+### Chore
+- Replaced hardcoded Protobuf and Amino type values with constants
+
 ## Version 4.7.2
 ### Features
 - Added a `querier` method inside `DesmosClient` to expose the gRPC querier
