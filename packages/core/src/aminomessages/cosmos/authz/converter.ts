@@ -8,6 +8,12 @@ import { createAuthzAuthorizationConverters } from "./authorizations";
 import { createBankAuthorizationConverters } from "../bank";
 import { createSubspacesAuthorizationConverters } from "../../subspaces";
 import { createStakeAuthorizationConverters } from "../staking";
+import {
+  MsgGrantAminoTpe,
+  MsgGrantTypeUrl,
+  MsgRevokeAminoType,
+  MsgRevokeTypeUrl,
+} from "../../../const";
 
 const authorizationTypes = new AminoTypes({
   ...createAuthzAuthorizationConverters(),
@@ -54,8 +60,8 @@ function convertAminoGrant(grant: AminoGrant): Grant {
 export function createAuthzConverters(): AminoConverters {
   return {
     // Authz types
-    "/cosmos.authz.v1beta1.MsgGrant": {
-      aminoType: "cosmos-sdk/MsgGrant",
+    [MsgGrantTypeUrl]: {
+      aminoType: MsgGrantAminoTpe,
       toAmino: (value: MsgGrant): AminoMsgGrant["value"] => ({
         grant: value.grant ? convertGrant(value.grant) : undefined,
         granter: value.granter,
@@ -68,8 +74,8 @@ export function createAuthzConverters(): AminoConverters {
           grantee: msg.grantee,
         }),
     },
-    "/cosmos.authz.v1beta1.MsgRevoke": {
-      aminoType: "cosmos-sdk/MsgRevoke",
+    [MsgRevokeTypeUrl]: {
+      aminoType: MsgRevokeAminoType,
       toAmino: (value: MsgRevoke): AminoMsgRevoke["value"] => ({
         granter: value.granter,
         grantee: value.grantee,

@@ -1,4 +1,3 @@
 export const StakeAuthorizationTypeUrl =
   "/cosmos.bank.v1beta1.StakeAuthorization";
-
-export default StakeAuthorizationTypeUrl;
+export const StakeAuthorizationAminoType = "cosmos-sdk/StakeAuthorization";

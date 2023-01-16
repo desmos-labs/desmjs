@@ -12,14 +12,24 @@ import {
   AminoMsgDeleteRelationship,
   AminoMsgUnblockUser,
 } from "./messages";
+import {
+  MsgBlockUserAminoType,
+  MsgBlockUserTypeUrl,
+  MsgCreateRelationshipAminoType,
+  MsgCreateRelationshipTypeUrl,
+  MsgDeleteRelationshipAminoType,
+  MsgDeleteRelationshipTypeUrl,
+  MsgUnblockUserAminoType,
+  MsgUnblockUserTypeUrl,
+} from "../../const";
 
 /**
  * Creates all the Amino converters for the relationships messages.
  */
 export function createRelationshipsConverters(): AminoConverters {
   return {
-    "/desmos.relationships.v1.MsgCreateRelationship": {
-      aminoType: "desmos/MsgCreateRelationship",
+    [MsgCreateRelationshipTypeUrl]: {
+      aminoType: MsgCreateRelationshipAminoType,
       toAmino: (
         msg: MsgCreateRelationship
       ): AminoMsgCreateRelationship["value"] => ({
@@ -35,8 +45,8 @@ export function createRelationshipsConverters(): AminoConverters {
         subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
-    "/desmos.relationships.v1.MsgDeleteRelationship": {
-      aminoType: "desmos/MsgDeleteRelationship",
+    [MsgDeleteRelationshipTypeUrl]: {
+      aminoType: MsgDeleteRelationshipAminoType,
       toAmino: (
         msg: MsgDeleteRelationship
       ): AminoMsgDeleteRelationship["value"] => ({
@@ -52,8 +62,8 @@ export function createRelationshipsConverters(): AminoConverters {
         subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
-    "/desmos.relationships.v1.MsgBlockUser": {
-      aminoType: "desmos/MsgBlockUser",
+    [MsgBlockUserTypeUrl]: {
+      aminoType: MsgBlockUserAminoType,
       toAmino: (msg: MsgBlockUser): AminoMsgBlockUser["value"] => ({
         blocker: msg.blocker,
         blocked: msg.blocked,
@@ -67,8 +77,8 @@ export function createRelationshipsConverters(): AminoConverters {
         subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
-    "/desmos.relationships.v1.MsgUnblockUser": {
-      aminoType: "desmos/MsgUnblockUser",
+    [MsgUnblockUserTypeUrl]: {
+      aminoType: MsgUnblockUserAminoType,
       toAmino: (msg: MsgUnblockUser): AminoMsgUnblockUser["value"] => ({
         blocker: msg.blocker,
         blocked: msg.blocked,

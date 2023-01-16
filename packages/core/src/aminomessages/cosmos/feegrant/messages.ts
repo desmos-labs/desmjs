@@ -1,9 +1,16 @@
 import { AminoMsg, Coin } from "@cosmjs/amino";
 import { Timestamp } from "cosmjs-types/google/protobuf/timestamp";
 import { Duration } from "cosmjs-types/google/protobuf/duration";
+import {
+  AllowedMsgAllowanceAminoType,
+  BasicAllowanceAminoType,
+  MsgGrantAllowanceAminoType,
+  MsgRevokeAllowanceAminoType,
+  PeriodicAllowanceAminoType,
+} from "../../../const";
 
 export interface AminoBasicAllowance extends AminoMsg {
-  readonly type: "cosmos-sdk/BasicAllowance";
+  readonly type: typeof BasicAllowanceAminoType;
   readonly value: {
     spend_limit: Coin[];
     expiration?: Timestamp;
@@ -11,7 +18,7 @@ export interface AminoBasicAllowance extends AminoMsg {
 }
 
 export interface AminoPeriodicAllowance extends AminoMsg {
-  readonly type: "cosmos-sdk/AminoPeriodicAllowance";
+  readonly type: typeof PeriodicAllowanceAminoType;
   readonly value: {
     basic?: AminoBasicAllowance;
     period?: Duration;
@@ -22,7 +29,7 @@ export interface AminoPeriodicAllowance extends AminoMsg {
 }
 
 export interface AminoAllowedMsgAllowance extends AminoMsg {
-  readonly type: "cosmos-sdk/AminoAllowedMsgAllowance";
+  readonly type: typeof AllowedMsgAllowanceAminoType;
   readonly value: {
     allowance?: AminoMsg;
     allowed_messages: string[];
@@ -30,7 +37,7 @@ export interface AminoAllowedMsgAllowance extends AminoMsg {
 }
 
 export interface AminoMsgGrantAllowance extends AminoMsg {
-  readonly type: "cosmos-sdk/MsgGrantAllowance";
+  readonly type: typeof MsgGrantAllowanceAminoType;
   readonly value: {
     granter: string;
     grantee: string;
@@ -39,7 +46,7 @@ export interface AminoMsgGrantAllowance extends AminoMsg {
 }
 
 export interface AminoMsgRevokeAllowance extends AminoMsg {
-  readonly type: "cosmos-sdk/MsgRevokeAllowance";
+  readonly type: typeof MsgRevokeAllowanceAminoType;
   readonly value: {
     granter: string;
     grantee: string;

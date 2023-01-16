@@ -1,8 +1,20 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { AminoAddressData } from "./types";
+import {
+  MsgAcceptDTagTransferRequestAminoType,
+  MsgCancelDTagTransferRequestAminoType,
+  MsgDeleteProfileAminoType,
+  MsgLinkApplicationAminoType,
+  MsgLinkChainAccountAminoType,
+  MsgRefuseDTagTransferRequestAminoType,
+  MsgRequestDTagTransferAminoType,
+  MsgSaveProfileAminoType,
+  MsgUnlinkApplicationAminoType,
+  MsgUnlinkChainAccountAminoType,
+} from "../../const";
 
 export interface AminoMsgSaveProfile extends AminoMsg {
-  readonly type: "desmos/MsgSaveProfile";
+  readonly type: typeof MsgSaveProfileAminoType;
   readonly value: {
     creator: string;
     dtag: string;
@@ -14,14 +26,14 @@ export interface AminoMsgSaveProfile extends AminoMsg {
 }
 
 export interface AminoMsgDeleteProfile extends AminoMsg {
-  readonly type: "desmos/MsgDeleteProfile";
+  readonly type: typeof MsgDeleteProfileAminoType;
   readonly value: {
     creator: string;
   };
 }
 
 export interface AminoMsgRequestDTagTransfer extends AminoMsg {
-  readonly type: "desmos/MsgRequestDTagTransfer";
+  readonly type: typeof MsgRequestDTagTransferAminoType;
   readonly value: {
     receiver: string;
     sender: string;
@@ -29,7 +41,7 @@ export interface AminoMsgRequestDTagTransfer extends AminoMsg {
 }
 
 export interface AminoMsgAcceptDTagTransferRequest extends AminoMsg {
-  readonly type: "desmos/AminoMsgAcceptDTagTransferRequest";
+  readonly type: typeof MsgAcceptDTagTransferRequestAminoType;
   readonly value: {
     new_dtag: string;
     sender: string;
@@ -38,7 +50,7 @@ export interface AminoMsgAcceptDTagTransferRequest extends AminoMsg {
 }
 
 export interface AminoMsgRefuseDTagTransferRequest extends AminoMsg {
-  readonly type: "desmos/AminoMsgRefuseDTagTransferRequest";
+  readonly type: typeof MsgRefuseDTagTransferRequestAminoType;
   readonly value: {
     sender: string;
     receiver: string;
@@ -46,7 +58,7 @@ export interface AminoMsgRefuseDTagTransferRequest extends AminoMsg {
 }
 
 export interface AminoMsgCancelDTagTransferRequest extends AminoMsg {
-  readonly type: "desmos/AminoMsgCancelDTagTransferRequest";
+  readonly type: typeof MsgCancelDTagTransferRequestAminoType;
   readonly value: {
     sender: string;
     receiver: string;
@@ -54,7 +66,7 @@ export interface AminoMsgCancelDTagTransferRequest extends AminoMsg {
 }
 
 export interface AminoMsgLinkApplication extends AminoMsg {
-  readonly type: "desmos/MsgLinkApplication";
+  readonly type: typeof MsgLinkApplicationAminoType;
   readonly value: {
     sender: string;
     link_data: {
@@ -73,7 +85,7 @@ export interface AminoMsgLinkApplication extends AminoMsg {
 }
 
 export interface AminoMsgUnlinkApplication extends AminoMsg {
-  readonly type: "desmos/MsgUnlinkApplication";
+  readonly type: typeof MsgUnlinkApplicationAminoType;
   readonly value: {
     signer: string;
     application: string;
@@ -82,7 +94,7 @@ export interface AminoMsgUnlinkApplication extends AminoMsg {
 }
 
 export interface AminoMsgLinkChainAccount extends AminoMsg {
-  readonly type: "desmos/MsgLinkChainAccount";
+  readonly type: typeof MsgLinkChainAccountAminoType;
   readonly value: {
     signer: string;
     chain_address: AminoAddressData;
@@ -101,7 +113,7 @@ export interface AminoMsgLinkChainAccount extends AminoMsg {
 }
 
 export interface AminoMsgUnlinkChainAccount extends AminoMsg {
-  readonly type: "desmos/MsgUnlinkChainAccount";
+  readonly type: typeof MsgUnlinkChainAccountAminoType;
   readonly value: {
     chain_name: string;
     owner: string;

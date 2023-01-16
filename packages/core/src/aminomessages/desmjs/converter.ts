@@ -1,11 +1,14 @@
 import { AminoConverters } from "@cosmjs/stargate";
 import { MsgAuthenticate } from "@desmoslabs/desmjs-types/desmjs/msgs";
 import { AminoMsgAuthenticate } from "./messages";
+import MsgAuthenticateTypeUrl, {
+  MsgAuthenticateAminoType,
+} from "../../const/desmjs";
 
 export function createDesmJSConverters(): AminoConverters {
   return {
-    "/desmjs.v1.MsgAuthenticate": {
-      aminoType: "desmjs/MsgAuthenticate",
+    [MsgAuthenticateTypeUrl]: {
+      aminoType: MsgAuthenticateAminoType,
       toAmino: (value: MsgAuthenticate): AminoMsgAuthenticate["value"] => ({
         user: value.user,
         nonce: value.nonce,

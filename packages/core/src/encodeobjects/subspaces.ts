@@ -1,20 +1,20 @@
 import { EncodeObject } from "@cosmjs/proto-signing";
 import {
   MsgAddUserToUserGroup,
+  MsgCreateSection,
   MsgCreateSubspace,
   MsgCreateUserGroup,
+  MsgDeleteSection,
   MsgDeleteSubspace,
   MsgDeleteUserGroup,
+  MsgEditSection,
   MsgEditSubspace,
   MsgEditUserGroup,
+  MsgMoveSection,
+  MsgMoveUserGroup,
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
-  MsgCreateSection,
-  MsgDeleteSection,
-  MsgEditSection,
-  MsgMoveSection,
-  MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import {
   MsgAddUserToUserGroupTypeUrl,
@@ -35,7 +35,7 @@ import {
 } from "../const";
 
 export interface MsgCreateSubspaceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgCreateSubspace";
+  readonly typeUrl: typeof MsgCreateSubspaceTypeUrl;
   readonly value: MsgCreateSubspace;
 }
 
@@ -49,7 +49,7 @@ export function isMsgCreateSubspaceEncodeObject(
 }
 
 export interface MsgEditSubspaceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgEditSubspace";
+  readonly typeUrl: typeof MsgEditSubspaceTypeUrl;
   readonly value: MsgEditSubspace;
 }
 
@@ -63,7 +63,7 @@ export function isMsgEditSubspaceEncodeObject(
 }
 
 export interface MsgDeleteSubspaceEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspace";
+  readonly typeUrl: typeof MsgDeleteSubspaceTypeUrl;
   readonly value: MsgDeleteSubspace;
 }
 
@@ -77,7 +77,7 @@ export function isMsgDeleteSubspaceEncodeObject(
 }
 
 export interface MsgCreateSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgCreateSection";
+  readonly typeUrl: typeof MsgCreateSectionTypeUrl;
   readonly value: MsgCreateSection;
 }
 
@@ -91,7 +91,7 @@ export function isMsgCreateSectionEncodeObject(
 }
 
 export interface MsgEditSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgEditSection";
+  readonly typeUrl: typeof MsgEditSectionTypeUrl;
   readonly value: MsgEditSection;
 }
 
@@ -105,7 +105,7 @@ export function isMsgEditSectionEncodeObject(
 }
 
 export interface MsgMoveSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgMoveSection";
+  readonly typeUrl: typeof MsgMoveSectionTypeUrl;
   readonly value: MsgMoveSection;
 }
 
@@ -119,7 +119,7 @@ export function isMsgMoveSectionEncodeObject(
 }
 
 export interface MsgDeleteSectionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgDeleteSection";
+  readonly typeUrl: typeof MsgDeleteSectionTypeUrl;
   readonly value: MsgDeleteSection;
 }
 
@@ -133,7 +133,7 @@ export function isMsgDeleteSectionEncodeObject(
 }
 
 export interface MsgCreateUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroup";
+  readonly typeUrl: typeof MsgCreateUserGroupTypeUrl;
   readonly value: MsgCreateUserGroup;
 }
 
@@ -147,7 +147,7 @@ export function isMsgCreateUserGroupEncodeObject(
 }
 
 export interface MsgEditUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgEditUserGroup";
+  readonly typeUrl: typeof MsgEditUserGroupTypeUrl;
   readonly value: MsgEditUserGroup;
 }
 
@@ -161,7 +161,7 @@ export function isMsgEditUserGroupEncodeObject(
 }
 
 export interface MsgMoveUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroup";
+  readonly typeUrl: typeof MsgMoveUserGroupTypeUrl;
   readonly value: MsgMoveUserGroup;
 }
 
@@ -175,7 +175,7 @@ export function isMsgMoveUserGroupEncodeObject(
 }
 
 export interface MsgSetUserGroupPermissionsEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissions";
+  readonly typeUrl: typeof MsgSetUserGroupPermissionsTypeUrl;
   readonly value: MsgSetUserGroupPermissions;
 }
 
@@ -189,7 +189,7 @@ export function isMsgSetUserGroupPermissionsEncodeObject(
 }
 
 export interface MsgDeleteUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroup";
+  readonly typeUrl: typeof MsgDeleteUserGroupTypeUrl;
   readonly value: MsgDeleteUserGroup;
 }
 
@@ -203,7 +203,7 @@ export function isMsgDeleteUserGroupEncodeObject(
 }
 
 export interface MsgAddUserToUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroup";
+  readonly typeUrl: typeof MsgAddUserToUserGroupTypeUrl;
   readonly value: MsgAddUserToUserGroup;
 }
 
@@ -217,7 +217,7 @@ export function isMsgAddUserToUserGroupEncodeObject(
 }
 
 export interface MsgRemoveUserFromUserGroupEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup";
+  readonly typeUrl: typeof MsgRemoveUserFromUserGroupTypeUrl;
   readonly value: MsgRemoveUserFromUserGroup;
 }
 
@@ -231,7 +231,7 @@ export function isMsgRemoveUserFromUserGroupEncodeObject(
 }
 
 export interface MsgSetUserPermissionsEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissions";
+  readonly typeUrl: typeof MsgSetUserPermissionsTypeUrl;
   readonly value: MsgSetUserPermissions;
 }
 

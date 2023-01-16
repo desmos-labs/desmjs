@@ -3,7 +3,10 @@ import { Any } from "cosmjs-types/google/protobuf/any";
 import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/authz/authz";
 import Long from "long";
 import { AminoGenericSubspaceAuthorization } from "./messages";
-import { GenericSubspaceAuthorizationTypeUrl } from "../../const";
+import {
+  GenericSubspaceAuthorizationAminoType,
+  GenericSubspaceAuthorizationTypeUrl,
+} from "../../const";
 
 export function genericSubspaceAuthorizationToAny(
   authorization: GenericSubspaceAuthorization
@@ -16,8 +19,8 @@ export function genericSubspaceAuthorizationToAny(
 
 export function createSubspacesAuthorizationConverters(): AminoConverters {
   return {
-    "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization": {
-      aminoType: "desmos/GenericSubspaceAuthorization",
+    [GenericSubspaceAuthorizationTypeUrl]: {
+      aminoType: GenericSubspaceAuthorizationAminoType,
       toAmino: (
         authorization: Any["value"]
       ): AminoGenericSubspaceAuthorization["value"] => {
