@@ -78,9 +78,10 @@ export class DecodeResult<T> {
 
   /**
    * Maps the current value using the provided mapFunc.
-   * If this DecodeResult is error the mapFunc we return a new DecodeResult
+   * If this DecodeResult is error the mapFunc will return a new DecodeResult
    * with the previous error.
-   * @param mapFunc
+   * @param mapFunc - Function that converts the [DecodeResult] value to
+   * the new one
    */
   public map<M>(mapFunc: (value: T) => M): DecodeResult<M> {
     if (this.isError()) {
@@ -248,20 +249,20 @@ export function decodeDirectSignRequest(
     return DecodeResult.error("error while decoding authInfo");
   }
 
-  let typesWithDecodeResult: [string, EncodeObject | undefined][];
-  try {
-    typesWithDecodeResult = txBody.messages.map((msg) => {
-      return [
-        msg.typeUrl,
-        {
-          typeUrl: msg.typeUrl,
-          value: registry.decode(msg),
-        } as EncodeObject,
-      ];
+  const typesWithDecodeResult: [string, EncodeObject | undefined][] =
+    txBody.messages.map((msg) => {
+      try {
+        return [
+          msg.typeUrl,
+          {
+            typeUrl: msg.typeUrl,
+            value: registry.decode(msg),
+          } as EncodeObject,
+        ];
+      } catch (e) {
+        return [msg.typeUrl, undefined];
+      }
     });
-  } catch (e) {
-    return DecodeResult.error(`error while decoding messages: ${e}`);
-  }
 
   const failedTypes = typesWithDecodeResult
     .filter(([, decoded]) => decoded === undefined)
@@ -314,7 +315,6 @@ export function decodeAminoSignRequest(
   }
 
   const { signDoc, signerAddress } = paramsDecodeResult.value;
-
   const aminoConverter = new AminoTypes(createDesmosTypes("desmos"));
   const typesWithDecodeResult: [string, EncodeObject | undefined][] =
     signDoc.msgs.map((msg) => {
@@ -329,6 +329,7 @@ export function decodeAminoSignRequest(
   const failedTypes = typesWithDecodeResult
     .filter(([, decoded]) => decoded === undefined)
     .map(([type]) => type);
+
   if (failedTypes.length > 0) {
     return DecodeResult.error(`failed to decode ${failedTypes.join(",")}`);
   }
