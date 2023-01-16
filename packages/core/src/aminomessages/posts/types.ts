@@ -5,6 +5,7 @@ import {
   PostReferenceType,
   TextTag,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+import { MediaAminoType, PollAminoType } from "../../const";
 
 export interface AminoEntities {
   readonly hashtags: TextTag[];
@@ -22,7 +23,7 @@ export interface AminoUrl {
 export interface AminoAttachment extends AminoMsg {}
 
 export interface AminoPoll extends AminoAttachment {
-  readonly type: "desmos/Poll";
+  readonly type: typeof PollAminoType;
   readonly value: {
     question: string;
     provided_answers: Poll_ProvidedAnswer[];
@@ -34,7 +35,7 @@ export interface AminoPoll extends AminoAttachment {
 }
 
 export interface AminoMedia extends AminoAttachment {
-  readonly type: "desmos/Media";
+  readonly type: typeof MediaAminoType;
   readonly value: {
     uri: string;
     mime_type: string;

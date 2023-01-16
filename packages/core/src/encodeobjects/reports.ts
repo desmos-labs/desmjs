@@ -15,7 +15,7 @@ import {
 } from "../const";
 
 export interface MsgCreateReportEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.MsgCreateReport";
+  readonly typeUrl: typeof MsgCreateReportTypeUrl;
   readonly value: MsgCreateReport;
 }
 
@@ -29,7 +29,7 @@ export function isMsgCreateReportEncodeObject(
 }
 
 export interface MsgDeleteReportEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.MsgDeleteReport";
+  readonly typeUrl: typeof MsgDeleteReportTypeUrl;
   readonly value: MsgDeleteReport;
 }
 
@@ -43,7 +43,7 @@ export function isMsgDeleteReportEncodeObject(
 }
 
 export interface MsgSupportStandardReasonEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.MsgSupportStandardReason";
+  readonly typeUrl: typeof MsgSupportStandardReasonTypeUrl;
   readonly value: MsgSupportStandardReason;
 }
 
@@ -57,7 +57,7 @@ export function isMsgSupportStandardReasonEncodeObject(
 }
 
 export interface MsgAddReasonEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.MsgAddReason";
+  readonly typeUrl: typeof MsgAddReasonTypeUrl;
   readonly value: MsgAddReason;
 }
 
@@ -70,7 +70,7 @@ export function isMsgAddReasonEncodeObject(
 }
 
 export interface MsgRemoveReasonEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reports.v1.MsgRemoveReason";
+  readonly typeUrl: typeof MsgRemoveReasonTypeUrl;
   readonly value: MsgRemoveReason;
 }
 

@@ -1,9 +1,17 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import { AminoAttachment, AminoEntities, AminoPostReference } from "./types";
+import {
+  MsgAddPostAttachmentAminoType,
+  MsgAnswerPollAminoType,
+  MsgCreatePostAminoType,
+  MsgDeletePostAminoType,
+  MsgEditPostAminoType,
+  MsgRemovePostAttachmentAminoType,
+} from "../../const";
 
 export interface AminoMsgCreatePost extends AminoMsg {
-  readonly type: "desmos/MsgCreatePost";
+  readonly type: typeof MsgCreatePostAminoType;
   readonly value: {
     subspace_id: string;
     section_id: number;
@@ -20,7 +28,7 @@ export interface AminoMsgCreatePost extends AminoMsg {
 }
 
 export interface AminoMsgEditPost extends AminoMsg {
-  readonly type: "desmos/MsgEditPost";
+  readonly type: typeof MsgEditPostAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;
@@ -32,7 +40,7 @@ export interface AminoMsgEditPost extends AminoMsg {
 }
 
 export interface AminoMsgDeletePost extends AminoMsg {
-  readonly type: "desmos/MsgDeletePost";
+  readonly type: typeof MsgDeletePostAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;
@@ -41,7 +49,7 @@ export interface AminoMsgDeletePost extends AminoMsg {
 }
 
 export interface AminoMsgAddPostAttachment extends AminoMsg {
-  readonly type: "desmos/MsgAddPostAttachment";
+  readonly type: typeof MsgAddPostAttachmentAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;
@@ -51,7 +59,7 @@ export interface AminoMsgAddPostAttachment extends AminoMsg {
 }
 
 export interface AminoMsgRemovePostAttachment extends AminoMsg {
-  readonly type: "desmos/MsgRemovePostAttachment";
+  readonly type: typeof MsgRemovePostAttachmentAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;
@@ -61,7 +69,7 @@ export interface AminoMsgRemovePostAttachment extends AminoMsg {
 }
 
 export interface AminoMsgAnswerPoll extends AminoMsg {
-  readonly type: "desmos/MsgAnswerPoll";
+  readonly type: typeof MsgAnswerPollAminoType;
   readonly value: {
     subspace_id: string;
     post_id: string;

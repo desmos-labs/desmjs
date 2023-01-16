@@ -49,16 +49,41 @@ import {
   AminoAddressData,
   AminoBase58Address,
   AminoBech32Address,
-  AminoHexAddress,
   AminoCosmosMultiSignature,
+  AminoHexAddress,
   AminoSignature,
   AminoSingleSignature,
 } from "./types";
 import {
+  Base58AddressAminoType,
   Base58AddressTypeUrl,
+  Bech32AddressAminoType,
   Bech32AddressTypeUrl,
+  CosmosMultiSignatureAminoType,
   CosmosMultiSignatureTypeUrl,
+  HexAddressAminoType,
   HexAddressTypeUrl,
+  MsgAcceptDTagTransferRequestAminoType,
+  MsgAcceptDTagTransferRequestTypeUrl,
+  MsgCancelDTagTransferRequestAminoType,
+  MsgCancelDTagTransferRequestTypeUrl,
+  MsgDeleteProfileAminoType,
+  MsgDeleteProfileTypeUrl,
+  MsgLinkApplicationAminoType,
+  MsgLinkApplicationTypeUrl,
+  MsgLinkChainAccountAminoType,
+  MsgLinkChainAccountTypeUrl,
+  MsgRefuseDTagTransferRequestAminoType,
+  MsgRefuseDTagTransferRequestTypeUrl,
+  MsgRequestDTagTransferAminoType,
+  MsgRequestDTagTransferTypeUrl,
+  MsgSaveProfileAminoType,
+  MsgSaveProfileTypeUrl,
+  MsgUnlinkApplicationAminoType,
+  MsgUnlinkApplicationTypeUrl,
+  MsgUnlinkChainAccountAminoType,
+  MsgUnlinkChainAccountTypeUrl,
+  SingleSignatureAminoType,
   SingleSignatureTypeUrl,
 } from "../../const";
 
@@ -94,7 +119,7 @@ function convertAddressData(address: Any): AminoAddressData {
   if (address.typeUrl === Bech32AddressTypeUrl) {
     const bech32Address = Bech32Address.decode(address.value);
     return {
-      type: "desmos/Bech32Address",
+      type: Bech32AddressAminoType,
       value: {
         prefix: bech32Address.prefix,
         value: bech32Address.value,
@@ -105,7 +130,7 @@ function convertAddressData(address: Any): AminoAddressData {
   if (address.typeUrl === Base58AddressTypeUrl) {
     const base58Address = Base58Address.decode(address.value);
     return {
-      type: "desmos/Base58Address",
+      type: Base58AddressAminoType,
       value: {
         value: base58Address.value,
       },
@@ -115,7 +140,7 @@ function convertAddressData(address: Any): AminoAddressData {
   if (address.typeUrl === HexAddressTypeUrl) {
     const hexAddress = HexAddress.decode(address.value);
     return {
-      type: "desmos/HexAddress",
+      type: HexAddressAminoType,
       value: {
         prefix: hexAddress.prefix,
         values: hexAddress.value,
@@ -148,17 +173,17 @@ export function hexAddressToAny(address: HexAddress): Any {
 }
 
 function convertAminoAddressData(address: AminoAddressData): Any {
-  if (address.type === "desmos/Bech32Address") {
+  if (address.type === Bech32AddressAminoType) {
     const addressData = address.value as AminoBech32Address["value"];
     return bech32AddressToAny(addressData);
   }
 
-  if (address.type === "desmos/Base58Address") {
+  if (address.type === Base58AddressAminoType) {
     const addressData = address.value as AminoBase58Address["value"];
     return base58AddressToAny(addressData);
   }
 
-  if (address.type === "desmos/HexAddress") {
+  if (address.type === HexAddressAminoType) {
     const addressData = address.value as AminoHexAddress["value"];
     return hexAddressToAny(addressData);
   }
@@ -198,7 +223,7 @@ function convertSignatureData(signatureData: Any): AminoSignature {
   if (signatureData.typeUrl === SingleSignatureTypeUrl) {
     const data = SingleSignature.decode(signatureData.value);
     return {
-      type: "desmos/SingleSignature",
+      type: SingleSignatureAminoType,
       value: {
         mode: SignatureValueType[data.valueType],
         signature: toBase64(data.signature),
@@ -210,7 +235,7 @@ function convertSignatureData(signatureData: Any): AminoSignature {
     const data = CosmosMultiSignature.decode(signatureData.value);
     const signatures = data.signatures.map(convertSignatureData);
     return {
-      type: "desmos/CosmosMultiSignature",
+      type: CosmosMultiSignatureAminoType,
       value: {
         bit_array: convertCompactBitArray(data.bitArray),
         signatures,
@@ -238,7 +263,7 @@ export function cosmosMultiSignatureToAny(
 }
 
 function convertAminoSignature(signature: AminoSignature): Any {
-  if (signature.type === "desmos/SingleSignature") {
+  if (signature.type === SingleSignatureAminoType) {
     const signatureData = signature.value as AminoSingleSignature["value"];
     return singleSignatureToAny(
       SingleSignature.fromPartial({
@@ -248,7 +273,7 @@ function convertAminoSignature(signature: AminoSignature): Any {
     );
   }
 
-  if (signature.type === "desmos/CosmosMultiSignature") {
+  if (signature.type === CosmosMultiSignatureAminoType) {
     const signatureData = signature.value as AminoCosmosMultiSignature["value"];
     return cosmosMultiSignatureToAny(
       CosmosMultiSignature.fromPartial({
@@ -267,8 +292,8 @@ function convertAminoSignature(signature: AminoSignature): Any {
 export function createProfilesConverters(): AminoConverters {
   return {
     // Profiles module
-    "/desmos.profiles.v3.MsgSaveProfile": {
-      aminoType: "desmos/MsgSaveProfile",
+    [MsgSaveProfileTypeUrl]: {
+      aminoType: MsgSaveProfileAminoType,
       toAmino: (value: MsgSaveProfile): AminoMsgSaveProfile["value"] => ({
         bio: value.bio,
         creator: value.creator,
@@ -286,8 +311,8 @@ export function createProfilesConverters(): AminoConverters {
         coverPicture: msg.cover_picture ?? "",
       }),
     },
-    "/desmos.profiles.v3.MsgDeleteProfile": {
-      aminoType: "desmos/MsgDeleteProfile",
+    [MsgDeleteProfileTypeUrl]: {
+      aminoType: MsgDeleteProfileAminoType,
       toAmino: (value: MsgDeleteProfile): AminoMsgDeleteProfile["value"] => ({
         creator: value.creator,
       }),
@@ -295,8 +320,8 @@ export function createProfilesConverters(): AminoConverters {
         creator: msg.creator,
       }),
     },
-    "/desmos.profiles.v3.MsgRequestDTagTransfer": {
-      aminoType: "desmos/MsgRequestDTagTransfer",
+    [MsgRequestDTagTransferTypeUrl]: {
+      aminoType: MsgRequestDTagTransferAminoType,
       toAmino: ({
         receiver,
         sender,
@@ -312,8 +337,8 @@ export function createProfilesConverters(): AminoConverters {
         sender,
       }),
     },
-    "/desmos.profiles.v3.MsgAcceptDTagTransferRequest": {
-      aminoType: "desmos/MsgAcceptDTagTransferRequest",
+    [MsgAcceptDTagTransferRequestTypeUrl]: {
+      aminoType: MsgAcceptDTagTransferRequestAminoType,
       toAmino: ({
         newDtag,
         sender,
@@ -333,8 +358,8 @@ export function createProfilesConverters(): AminoConverters {
         receiver,
       }),
     },
-    "/desmos.profiles.v3.MsgRefuseDTagTransferRequest": {
-      aminoType: "desmos/MsgRefuseDTagTransferRequest",
+    [MsgRefuseDTagTransferRequestTypeUrl]: {
+      aminoType: MsgRefuseDTagTransferRequestAminoType,
       toAmino: ({
         sender,
         receiver,
@@ -350,8 +375,8 @@ export function createProfilesConverters(): AminoConverters {
         receiver,
       }),
     },
-    "/desmos.profiles.v3.MsgCancelDTagTransferRequest": {
-      aminoType: "desmos/MsgCancelDTagTransferRequest",
+    [MsgCancelDTagTransferRequestTypeUrl]: {
+      aminoType: MsgCancelDTagTransferRequestAminoType,
       toAmino: ({
         sender,
         receiver,
@@ -367,8 +392,8 @@ export function createProfilesConverters(): AminoConverters {
         receiver,
       }),
     },
-    "/desmos.profiles.v3.MsgLinkApplication": {
-      aminoType: "desmos/MsgLinkApplication",
+    [MsgLinkApplicationTypeUrl]: {
+      aminoType: MsgLinkApplicationAminoType,
       toAmino: (msg: MsgLinkApplication): AminoMsgLinkApplication["value"] => ({
         sender: msg.sender,
         link_data: {
@@ -416,8 +441,8 @@ export function createProfilesConverters(): AminoConverters {
         timeoutTimestamp: Long.fromString(msg.timeout_timestamp || "0", true),
       }),
     },
-    "/desmos.profiles.v3.MsgUnlinkApplication": {
-      aminoType: "desmos/MsgUnlinkApplication",
+    [MsgUnlinkApplicationTypeUrl]: {
+      aminoType: MsgUnlinkApplicationAminoType,
       toAmino: (
         msg: MsgUnlinkApplication
       ): AminoMsgUnlinkApplication["value"] => ({
@@ -433,8 +458,8 @@ export function createProfilesConverters(): AminoConverters {
         username: msg.username,
       }),
     },
-    "/desmos.profiles.v3.MsgLinkChainAccount": {
-      aminoType: "desmos/MsgLinkChainAccount",
+    [MsgLinkChainAccountTypeUrl]: {
+      aminoType: MsgLinkChainAccountAminoType,
       toAmino: (
         msg: MsgLinkChainAccount
       ): AminoMsgLinkChainAccount["value"] => {
@@ -464,7 +489,7 @@ export function createProfilesConverters(): AminoConverters {
       fromAmino: (
         msg: AminoMsgLinkChainAccount["value"]
       ): MsgLinkChainAccount => {
-        if (msg.chain_address.type !== "desmos/Bech32Address") {
+        if (msg.chain_address.type !== Bech32AddressAminoType) {
           throw new Error(
             `Invalid chain_address type "${msg.chain_address.type}"`
           );
@@ -489,8 +514,8 @@ export function createProfilesConverters(): AminoConverters {
         };
       },
     },
-    "/desmos.profiles.v3.MsgUnlinkChainAccount": {
-      aminoType: "desmos/MsgUnlinkChainAccount",
+    [MsgUnlinkChainAccountTypeUrl]: {
+      aminoType: MsgUnlinkChainAccountAminoType,
       toAmino: (
         msg: MsgUnlinkChainAccount
       ): AminoMsgUnlinkChainAccount["value"] => ({

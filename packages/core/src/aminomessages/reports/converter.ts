@@ -22,7 +22,22 @@ import {
   AminoMsgSupportStandardReason,
 } from "./messages";
 import { isAminoConverter } from "../../types";
-import { PostTargetTypeUrl, UserTargetTypeUrl } from "../../const";
+import {
+  MsgAddReasonAminoType,
+  MsgAddReasonTypeUrl,
+  MsgCreateReportAminoType,
+  MsgCreateReportTypeUrl,
+  MsgDeleteReportAminoType,
+  MsgDeleteReportTypeUrl,
+  MsgRemoveReasonAminoType,
+  MsgRemoveReasonTypeUrl,
+  MsgSupportStandardReasonAminoType,
+  MsgSupportStandardReasonTypeUrl,
+  PostTargetAminoType,
+  PostTargetTypeUrl,
+  UserTargetAminoType,
+  UserTargetTypeUrl,
+} from "../../const";
 
 export function convertUserTargetToAny(target: UserTarget): Any {
   return Any.fromPartial({
@@ -39,8 +54,8 @@ export function convertPostTargetToAny(target: PostTarget): Any {
 }
 
 export const reportTargetConverters: AminoConverters = {
-  "/desmos.reports.v1.UserTarget": {
-    aminoType: "desmos/UserTarget",
+  [UserTargetTypeUrl]: {
+    aminoType: UserTargetAminoType,
     toAmino: (msg: Any): AminoUserTarget["value"] => {
       const target = UserTarget.decode(msg.value);
       return {
@@ -54,8 +69,8 @@ export const reportTargetConverters: AminoConverters = {
         })
       ),
   },
-  "/desmos.reports.v1.PostTarget": {
-    aminoType: "desmos/PostTarget",
+  [PostTargetTypeUrl]: {
+    aminoType: PostTargetAminoType,
     toAmino: (msg: Any): AminoPostTarget["value"] => {
       const target = PostTarget.decode(msg.value);
       return {
@@ -92,8 +107,8 @@ export function convertReportTargetFromAmino(target: AminoReportTarget): Any {
  */
 export function createReportsConverters(): AminoConverters {
   return {
-    "/desmos.reports.v1.MsgCreateReport": {
-      aminoType: "desmos/MsgCreateReport",
+    [MsgCreateReportTypeUrl]: {
+      aminoType: MsgCreateReportAminoType,
       toAmino: (msg: MsgCreateReport): AminoMsgCreateReport["value"] => {
         assertDefinedAndNotNull(msg.target, "report target not defined");
         return {
@@ -112,8 +127,8 @@ export function createReportsConverters(): AminoConverters {
         target: convertReportTargetFromAmino(msg.target),
       }),
     },
-    "/desmos.reports.v1.MsgDeleteReport": {
-      aminoType: "desmos/MsgDeleteReport",
+    [MsgDeleteReportTypeUrl]: {
+      aminoType: MsgDeleteReportAminoType,
       toAmino: (msg: MsgDeleteReport): AminoMsgDeleteReport["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         report_id: msg.reportId.toString(),
@@ -125,8 +140,8 @@ export function createReportsConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.reports.v1.MsgSupportStandardReason": {
-      aminoType: "desmos/MsgSupportStandardReason",
+    [MsgSupportStandardReasonTypeUrl]: {
+      aminoType: MsgSupportStandardReasonAminoType,
       toAmino: (
         msg: MsgSupportStandardReason
       ): AminoMsgSupportStandardReason["value"] => ({
@@ -142,8 +157,8 @@ export function createReportsConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.reports.v1.MsgAddReason": {
-      aminoType: "desmos/MsgAddReason",
+    [MsgAddReasonTypeUrl]: {
+      aminoType: MsgAddReasonAminoType,
       toAmino: (msg: MsgAddReason): AminoMsgAddReason["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         title: msg.title,
@@ -157,8 +172,8 @@ export function createReportsConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.reports.v1.MsgRemoveReason": {
-      aminoType: "desmos/MsgRemoveReason",
+    [MsgRemoveReasonTypeUrl]: {
+      aminoType: MsgRemoveReasonAminoType,
       toAmino: (msg: MsgRemoveReason): AminoMsgRemoveReason["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         reason_id: msg.reasonId,

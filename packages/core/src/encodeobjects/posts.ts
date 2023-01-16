@@ -17,7 +17,7 @@ import {
 } from "../const";
 
 export interface MsgCreatePostEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.posts.v2.MsgCreatePost";
+  readonly typeUrl: typeof MsgCreatePostTypeUrl;
   readonly value: MsgCreatePost;
 }
 
@@ -30,7 +30,7 @@ export function isMsgCreatePostEncodeObject(
 }
 
 export interface MsgEditPostEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.posts.v2.MsgEditPost";
+  readonly typeUrl: typeof MsgEditPostTypeUrl;
   readonly value: MsgEditPost;
 }
 
@@ -43,7 +43,7 @@ export function isMsgEditPostEncodeObject(
 }
 
 export interface MsgDeletePostEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.posts.v2.MsgDeletePost";
+  readonly typeUrl: typeof MsgDeletePostTypeUrl;
   readonly value: MsgDeletePost;
 }
 
@@ -56,7 +56,7 @@ export function isMsgDeletePostEncodeObject(
 }
 
 export interface MsgAddPostAttachmentEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.posts.v2.MsgAddPostAttachment";
+  readonly typeUrl: typeof MsgAddPostAttachmentTypeUrl;
   readonly value: MsgAddPostAttachment;
 }
 
@@ -70,7 +70,7 @@ export function isMsgAddPostAttachmentEncodeObject(
 }
 
 export interface MsgRemovePostAttachmentEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.posts.v2.MsgRemovePostAttachment";
+  readonly typeUrl: typeof MsgRemovePostAttachmentTypeUrl;
   readonly value: MsgRemovePostAttachment;
 }
 
@@ -84,7 +84,7 @@ export function isMsgRemovePostAttachmentEncodeObject(
 }
 
 export interface MsgAnswerPollEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.posts.v2.MsgAnswerPoll";
+  readonly typeUrl: typeof MsgAnswerPollTypeUrl;
   readonly value: MsgAnswerPoll;
 }
 

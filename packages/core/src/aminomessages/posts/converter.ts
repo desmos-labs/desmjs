@@ -25,7 +25,24 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import { AminoAttachment, AminoEntities, AminoMedia, AminoPoll } from "./types";
-import { MediaTypeUrl, PollTypeUrl } from "../../const";
+import {
+  MediaAminoType,
+  MediaTypeUrl,
+  MsgAddPostAttachmentAminoType,
+  MsgAddPostAttachmentTypeUrl,
+  MsgAnswerPollAminoType,
+  MsgAnswerPollTypeUrl,
+  MsgCreatePostAminoType,
+  MsgCreatePostTypeUrl,
+  MsgDeletePostAminoType,
+  MsgDeletePostTypeUrl,
+  MsgEditPostAminoType,
+  MsgEditPostTypeUrl,
+  MsgRemovePostAttachmentAminoType,
+  MsgRemovePostAttachmentTypeUrl,
+  PollAminoType,
+  PollTypeUrl,
+} from "../../const";
 
 /**
  * Converts the given `Poll` into an `Any` instance so that it can be used within `MsgCreatePost` and `MsgAddPostAttachment`.
@@ -50,8 +67,8 @@ export function mediaToAny(media: Media): Any {
 }
 
 export const attachmentConverters: AminoConverters = {
-  "/desmos.posts.v2.Poll": {
-    aminoType: "desmos/Poll",
+  [PollTypeUrl]: {
+    aminoType: PollAminoType,
     toAmino: (msg: Any): AminoPoll["value"] => {
       const poll = Poll.decode(msg.value);
       return {
@@ -75,8 +92,8 @@ export const attachmentConverters: AminoConverters = {
         })
       ),
   },
-  "/desmos.posts.v2.Media": {
-    aminoType: "desmos/Media",
+  [MediaTypeUrl]: {
+    aminoType: MediaAminoType,
     toAmino: (msg: Any): AminoMedia["value"] => {
       const media = Media.decode(msg.value);
       return {
@@ -141,8 +158,8 @@ function convertEntitiesFromAmino(entities: AminoEntities): Entities {
  */
 export function createPostsConverters(): AminoConverters {
   return {
-    "/desmos.posts.v2.MsgCreatePost": {
-      aminoType: "desmos/MsgCreatePost",
+    [MsgCreatePostTypeUrl]: {
+      aminoType: MsgCreatePostAminoType,
       toAmino: (msg: MsgCreatePost): AminoMsgCreatePost["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         section_id: msg.sectionId,
@@ -182,8 +199,8 @@ export function createPostsConverters(): AminoConverters {
         })),
       }),
     },
-    "/desmos.posts.v2.MsgEditPost": {
-      aminoType: "desmos/MsgEditPost",
+    [MsgEditPostTypeUrl]: {
+      aminoType: MsgEditPostAminoType,
       toAmino: (msg: MsgEditPost): AminoMsgEditPost["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         post_id: msg.postId.toString(),
@@ -205,8 +222,8 @@ export function createPostsConverters(): AminoConverters {
         editor: msg.editor,
       }),
     },
-    "/desmos.posts.v2.MsgDeletePost": {
-      aminoType: "desmos/MsgDeletePost",
+    [MsgDeletePostTypeUrl]: {
+      aminoType: MsgDeletePostAminoType,
       toAmino: (msg: MsgDeletePost): AminoMsgDeletePost["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         post_id: msg.postId.toString(),
@@ -218,8 +235,8 @@ export function createPostsConverters(): AminoConverters {
         signer: msg.signer,
       }),
     },
-    "/desmos.posts.v2.MsgAddPostAttachment": {
-      aminoType: "desmos/MsgAddPostAttachment",
+    [MsgAddPostAttachmentTypeUrl]: {
+      aminoType: MsgAddPostAttachmentAminoType,
       toAmino: (
         msg: MsgAddPostAttachment
       ): AminoMsgAddPostAttachment["value"] => {
@@ -240,8 +257,8 @@ export function createPostsConverters(): AminoConverters {
         editor: msg.editor,
       }),
     },
-    "/desmos.posts.v2.MsgRemovePostAttachment": {
-      aminoType: "desmos/MsgRemovePostAttachment",
+    [MsgRemovePostAttachmentTypeUrl]: {
+      aminoType: MsgRemovePostAttachmentAminoType,
       toAmino: (
         msg: MsgRemovePostAttachment
       ): AminoMsgRemovePostAttachment["value"] => ({
@@ -259,8 +276,8 @@ export function createPostsConverters(): AminoConverters {
         editor: msg.editor,
       }),
     },
-    "/desmos.posts.v2.MsgAnswerPoll": {
-      aminoType: "desmos/MsgAnswerPoll",
+    [MsgAnswerPollTypeUrl]: {
+      aminoType: MsgAnswerPollAminoType,
       toAmino: (msg: MsgAnswerPoll): AminoMsgAnswerPoll["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         post_id: msg.postId.toString(),

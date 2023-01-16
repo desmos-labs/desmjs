@@ -17,7 +17,7 @@ import {
 } from "../const";
 
 export interface MsgAddReactionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reactions.v1.MsgAddReaction";
+  readonly typeUrl: typeof MsgAddReactionTypeUrl;
   readonly value: MsgAddReaction;
 }
 
@@ -31,7 +31,7 @@ export function isMsgAddReactionEncodeObject(
 }
 
 export interface MsgRemoveReactionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reactions.v1.MsgRemoveReaction";
+  readonly typeUrl: typeof MsgRemoveReactionTypeUrl;
   readonly value: MsgRemoveReaction;
 }
 
@@ -45,7 +45,7 @@ export function isMsgRemoveReactionEncodeObject(
 }
 
 export interface MsgAddRegisteredReactionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reactions.v1.MsgAddRegisteredReaction";
+  readonly typeUrl: typeof MsgAddRegisteredReactionTypeUrl;
   readonly value: MsgAddRegisteredReaction;
 }
 
@@ -59,7 +59,7 @@ export function isMsgAddRegisteredReactionEncodeObject(
 }
 
 export interface MsgEditRegisteredReactionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reactions.v1.MsgEditRegisteredReaction";
+  readonly typeUrl: typeof MsgEditRegisteredReactionTypeUrl;
   readonly value: MsgEditRegisteredReaction;
 }
 
@@ -73,7 +73,7 @@ export function isMsgEditRegisteredReactionEncodeObject(
 }
 
 export interface MsgRemoveRegisteredReactionEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reactions.v1.MsgRemoveRegisteredReaction";
+  readonly typeUrl: typeof MsgRemoveRegisteredReactionTypeUrl;
   readonly value: MsgRemoveRegisteredReaction;
 }
 
@@ -87,7 +87,7 @@ export function isMsgRemoveRegisteredReactionEncodeObject(
 }
 
 export interface MsgSetReactionsParamsEncodeObject extends EncodeObject {
-  readonly typeUrl: "/desmos.reactions.v1.MsgSetReactionsParams";
+  readonly typeUrl: typeof MsgSetReactionsParamsTypeUrl;
   readonly value: MsgSetReactionsParams;
 }
 

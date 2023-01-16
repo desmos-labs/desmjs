@@ -1,7 +1,12 @@
 import { AminoMsg } from "@cosmjs/amino";
+import {
+  GenericAuthorizationAminoType,
+  MsgGrantAminoTpe,
+  MsgRevokeAminoType,
+} from "../../../const";
 
 export interface AminoGenericAuthorization extends AminoMsg {
-  readonly type: "cosmos-sdk/GenericAuthorization";
+  readonly type: typeof GenericAuthorizationAminoType;
   readonly value: {
     readonly msg: string;
   };
@@ -13,7 +18,7 @@ export interface AminoGrant {
 }
 
 export interface AminoMsgGrant extends AminoMsg {
-  readonly type: "cosmos-sdk/MsgGrant";
+  readonly type: typeof MsgGrantAminoTpe;
   readonly value: {
     readonly grant?: AminoGrant;
     readonly grantee: string;
@@ -22,7 +27,7 @@ export interface AminoMsgGrant extends AminoMsg {
 }
 
 export interface AminoMsgRevoke extends AminoMsg {
-  readonly type: "cosmos-sdk/MsgRevoke";
+  readonly type: typeof MsgRevokeAminoType;
   readonly value: {
     readonly grantee: string;
     readonly granter: string;

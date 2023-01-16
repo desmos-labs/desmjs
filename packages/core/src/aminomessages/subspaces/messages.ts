@@ -1,7 +1,25 @@
 import { AminoMsg } from "@cosmjs/amino";
+import {
+  GenericSubspaceAuthorizationAminoType,
+  MsgAddUserToUserGroupAminoType,
+  MsgCreateSectionAminoType,
+  MsgCreateSubspaceAminoType,
+  MsgCreateUserGroupAminoType,
+  MsgDeleteSectionAminoType,
+  MsgDeleteSubspaceAminoType,
+  MsgDeleteUserGroupAminoType,
+  MsgEditSectionAminoType,
+  MsgEditSubspaceAminoType,
+  MsgEditUserGroupAminoType,
+  MsgMoveSectionAminoType,
+  MsgMoveUserGroupAminoType,
+  MsgRemoveUserFromUserGroupAminoType,
+  MsgSetUserGroupPermissionsAminoType,
+  MsgSetUserPermissionsAminoType,
+} from "../../const";
 
 export interface AminoGenericSubspaceAuthorization extends AminoMsg {
-  readonly type: "desmos/GenericSubspaceAuthorization";
+  readonly type: typeof GenericSubspaceAuthorizationAminoType;
   readonly value: {
     subspaces_ids: string[];
     msg: string;
@@ -9,7 +27,7 @@ export interface AminoGenericSubspaceAuthorization extends AminoMsg {
 }
 
 export interface AminoMsgCreateSubspace extends AminoMsg {
-  readonly type: "desmos/MsgCreateSubspace";
+  readonly type: typeof MsgCreateSubspaceAminoType;
   readonly value: {
     name: string;
     description: string;
@@ -20,7 +38,7 @@ export interface AminoMsgCreateSubspace extends AminoMsg {
 }
 
 export interface AminoMsgEditSubspace extends AminoMsg {
-  readonly type: "desmos/MsgEditSubspace";
+  readonly type: typeof MsgEditSubspaceAminoType;
   readonly value: {
     subspace_id: string;
     name: string;
@@ -32,7 +50,7 @@ export interface AminoMsgEditSubspace extends AminoMsg {
 }
 
 export interface AminoMsgDeleteSubspace extends AminoMsg {
-  readonly type: "desmos/MsgDeleteSubspace";
+  readonly type: typeof MsgDeleteSubspaceAminoType;
   readonly value: {
     subspace_id: string;
     signer: string;
@@ -40,7 +58,7 @@ export interface AminoMsgDeleteSubspace extends AminoMsg {
 }
 
 export interface AminoMsgCreateSection extends AminoMsg {
-  readonly type: "desmos/MsgCreateSection";
+  readonly type: typeof MsgCreateSectionAminoType;
   readonly value: {
     subspace_id: string;
     name: string;
@@ -51,7 +69,7 @@ export interface AminoMsgCreateSection extends AminoMsg {
 }
 
 export interface AminoMsgEditSection extends AminoMsg {
-  readonly type: "desmos/MsgEditSection";
+  readonly type: typeof MsgEditSectionAminoType;
   readonly value: {
     subspace_id: string;
     section_id: number;
@@ -62,7 +80,7 @@ export interface AminoMsgEditSection extends AminoMsg {
 }
 
 export interface AminoMsgMoveSection extends AminoMsg {
-  readonly type: "desmos/MsgMoveSection";
+  readonly type: typeof MsgMoveSectionAminoType;
   readonly value: {
     subspace_id: string;
     section_id: number;
@@ -72,7 +90,7 @@ export interface AminoMsgMoveSection extends AminoMsg {
 }
 
 export interface AminoMsgDeleteSection extends AminoMsg {
-  readonly type: "desmos/MsgDeleteSection";
+  readonly type: typeof MsgDeleteSectionAminoType;
   readonly value: {
     subspace_id: string;
     section_id: number;
@@ -81,7 +99,7 @@ export interface AminoMsgDeleteSection extends AminoMsg {
 }
 
 export interface AminoMsgCreateUserGroup extends AminoMsg {
-  readonly type: "desmos/MsgCreateUserGroup";
+  readonly type: typeof MsgCreateUserGroupAminoType;
   readonly value: {
     subspace_id: string;
     section_id: number;
@@ -94,7 +112,7 @@ export interface AminoMsgCreateUserGroup extends AminoMsg {
 }
 
 export interface AminoMsgEditUserGroup extends AminoMsg {
-  readonly type: "desmos/MsgEditUserGroup";
+  readonly type: typeof MsgEditUserGroupAminoType;
   readonly value: {
     subspace_id: string;
     group_id: number;
@@ -105,7 +123,7 @@ export interface AminoMsgEditUserGroup extends AminoMsg {
 }
 
 export interface AminoMsgMoveUserGroup extends AminoMsg {
-  readonly type: "desmos/MsgMoveUserGroup";
+  readonly type: typeof MsgMoveUserGroupAminoType;
   readonly value: {
     subspace_id: string;
     group_id: number;
@@ -115,7 +133,7 @@ export interface AminoMsgMoveUserGroup extends AminoMsg {
 }
 
 export interface AminoMsgSetUserGroupPermissions extends AminoMsg {
-  readonly type: "desmos/MsgSetUserGroupPermissions";
+  readonly type: typeof MsgSetUserGroupPermissionsAminoType;
   readonly value: {
     subspace_id: string;
     group_id: number;
@@ -125,7 +143,7 @@ export interface AminoMsgSetUserGroupPermissions extends AminoMsg {
 }
 
 export interface AminoMsgDeleteUserGroup extends AminoMsg {
-  readonly type: "desmos/MsgDeleteUserGroup";
+  readonly type: typeof MsgDeleteUserGroupAminoType;
   readonly value: {
     subspace_id: string;
     group_id: number;
@@ -134,7 +152,7 @@ export interface AminoMsgDeleteUserGroup extends AminoMsg {
 }
 
 export interface AminoMsgAddUserToUserGroup extends AminoMsg {
-  readonly type: "desmos/MsgAddUserToUserGroup";
+  readonly type: typeof MsgAddUserToUserGroupAminoType;
   readonly value: {
     subspace_id: string;
     group_id: number;
@@ -144,7 +162,7 @@ export interface AminoMsgAddUserToUserGroup extends AminoMsg {
 }
 
 export interface AminoMsgRemoveUserFromUserGroup extends AminoMsg {
-  readonly type: "desmos/MsgRemoveUserFromUserGroup";
+  readonly type: typeof MsgRemoveUserFromUserGroupAminoType;
   readonly value: {
     subspace_id: string;
     group_id: number;
@@ -154,7 +172,7 @@ export interface AminoMsgRemoveUserFromUserGroup extends AminoMsg {
 }
 
 export interface AminoMsgSetUserPermissions extends AminoMsg {
-  readonly type: "desmos/MsgSetUserPermissions";
+  readonly type: typeof MsgSetUserPermissionsAminoType;
   readonly value: {
     subspace_id: string;
     section_id: number;
