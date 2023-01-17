@@ -4,12 +4,27 @@ import {
   MsgGrantAllowance,
   MsgRevokeAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import { MsgMultiSend } from "cosmjs-types/cosmos/bank/v1beta1/tx";
 import {
   MsgGrantAllowanceTypeUrl,
   MsgGrantTypeUrl,
+  MsgMultiSendTypeUrl,
   MsgRevokeAllowanceTypeUrl,
   MsgRevokeTypeUrl,
 } from "../const";
+
+export interface MsgMultiSendEncodeObject extends EncodeObject {
+  readonly typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend";
+  readonly value: MsgMultiSend;
+}
+
+export function isMsgMultiSendEncodeObject(
+  encodeObject: EncodeObject
+): encodeObject is MsgMultiSendEncodeObject {
+  return (
+    (encodeObject as MsgMultiSendEncodeObject).typeUrl === MsgMultiSendTypeUrl
+  );
+}
 
 export interface MsgGrantEncodeObject extends EncodeObject {
   readonly typeUrl: "/cosmos.authz.v1beta1.MsgGrant";
