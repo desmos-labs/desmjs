@@ -22,8 +22,8 @@ import {
   MsgRevokeTypeUrl,
   PeriodicAllowanceTypeUrl,
   StakeAuthorizationTypeUrl,
+  SendAuthorizationTypeUrl,
 } from "../../const";
-import SendAuthorizationTypeUrl from "../../const/cosmos/bank";
 
 export const cosmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   // x/authz
