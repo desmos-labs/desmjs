@@ -1,7 +1,7 @@
 import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { MsgSendEncodeObject, SignerData, StdFee } from "@cosmjs/stargate";
-import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { AuthInfo, SignDoc, TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {
   Bech32Address,
   ChainConfig,
@@ -31,20 +31,42 @@ import {
 import {
   MsgAuthenticateEncodeObject,
   MsgLinkChainAccountEncodeObject,
+  MsgMultiSendEncodeObject,
   MsgSaveProfileEncodeObject,
 } from "./encodeobjects";
 import {
   bech32AddressToAny,
   singleSignatureToAny,
 } from "./aminomessages/profiles";
+import { MsgMultiSendTypeUrl } from "./const";
 
 describe("DesmosClient", () => {
   jest.setTimeout(30000);
 
   /**
    * Builds a Signer and DesmosClient instance based on a test mnemonic.
+   * The returned signer will sign transactions using the AMINO signing mode.
    */
-  async function getSignerAndClient(): Promise<[Signer, DesmosClient]> {
+  async function getAminoSignerAndClient(): Promise<[Signer, DesmosClient]> {
+    const signer = await OfflineSignerAdapter.fromMnemonic(
+      SigningMode.AMINO,
+      testUser1.mnemonic
+    );
+    const client = await DesmosClient.connectWithSigner(
+      TEST_CHAIN_URL,
+      signer,
+      {
+        gasPrice: defaultGasPrice,
+      }
+    );
+    return [signer, client];
+  }
+
+  /**
+   * Builds a Signer and DesmosClient instance based on a test mnemonic.
+   * The returned signer will sign transactions using the DIRECT signing mode.
+   */
+  async function getDirectSignerAndClient(): Promise<[Signer, DesmosClient]> {
     const signer = await OfflineSignerAdapter.fromMnemonic(
       SigningMode.DIRECT,
       testUser1.mnemonic
@@ -61,7 +83,7 @@ describe("DesmosClient", () => {
 
   describe("SignatureResult utils", () => {
     async function getSignatureResult(): Promise<SignatureResult> {
-      const [signer, client] = await getSignerAndClient();
+      const [signer, client] = await getDirectSignerAndClient();
       const accounts = await signer.getAccounts();
       const { address } = accounts[0];
       const msg: MsgAuthenticateEncodeObject = {
@@ -98,7 +120,7 @@ describe("DesmosClient", () => {
     async function buildTestMsg(): Promise<
       [Signer, DesmosClient, EncodeObject]
     > {
-      const [signer, client] = await getSignerAndClient();
+      const [signer, client] = await getDirectSignerAndClient();
 
       const accounts = await signer.getAccounts();
       const { address } = accounts[0];
@@ -152,7 +174,7 @@ describe("DesmosClient", () => {
       expect(authInfo.fee?.amount).toHaveLength(1);
     });
 
-    it("test chain connection", async () => {
+    it("test MsgLinkChainAccount", async () => {
       // Setup the client associated to the external wallet
       const externalSigner = await OfflineSignerAdapter.fromMnemonic(
         SigningMode.AMINO,
@@ -248,6 +270,53 @@ describe("DesmosClient", () => {
       const result = await profileClient.signTx(profileAddress, [msg], "auto");
       expect(result.txRaw.signatures).toHaveLength(1);
     });
+
+    it("test MsgMultiSend", async () => {
+      const [signer, client] = await getAminoSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const msg: MsgMultiSendEncodeObject = {
+        typeUrl: MsgMultiSendTypeUrl,
+        value: {
+          inputs: [
+            {
+              address,
+              coins: [
+                {
+                  amount: "2000",
+                  denom: defaultGasPrice.denom,
+                },
+              ],
+            },
+          ],
+          outputs: [
+            {
+              address,
+              coins: [
+                {
+                  amount: "1000",
+                  denom: defaultGasPrice.denom,
+                },
+              ],
+            },
+            {
+              address: "desmos1fjuwp09jt6nq0jxasanze6p968unwtkgzzptad",
+              coins: [
+                {
+                  amount: "1000",
+                  denom: defaultGasPrice.denom,
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      const signedTx = await client.signTx(address, [msg], "auto", "Test memo");
+      const txBytes = TxRaw.encode(signedTx.txRaw).finish();
+      const broadcastTx = await client.broadcastTx(txBytes);
+      expect(broadcastTx.code).toBe(0);
+    });
   });
 
   describe("Offline client", () => {
@@ -330,14 +399,14 @@ describe("DesmosClient", () => {
     }
 
     it("test getCodes", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
     });
 
     it("test getCodeDetails", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       const codes = await client.getCodes();
       expect(codes.length).toBe(1);
@@ -346,7 +415,7 @@ describe("DesmosClient", () => {
     });
 
     it("test getContracts", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       // Get contract codes
       const codes = await client.getCodes();
@@ -360,7 +429,7 @@ describe("DesmosClient", () => {
     });
 
     it("test getContract", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       // Gets the list of instantiated contracts
       const contracts = await client.getContracts(1);
@@ -371,7 +440,7 @@ describe("DesmosClient", () => {
     });
 
     it("test getContractCodeHistory", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       // Gets the list of instantiated contracts
       const contracts = await client.getContracts(1);
@@ -382,7 +451,7 @@ describe("DesmosClient", () => {
     });
 
     it("test queryContractSmart", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       const testContract = await getTestContractAddress(client);
 
@@ -419,7 +488,7 @@ describe("DesmosClient", () => {
     });
 
     it("test initialize", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       await client.instantiate(
         testUser1.address0,
@@ -431,7 +500,7 @@ describe("DesmosClient", () => {
     });
 
     it("test updateAdmin", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       const response = await client.instantiate(
         testUser1.address0,
@@ -484,7 +553,7 @@ describe("DesmosClient", () => {
     });
 
     it("test execute", async () => {
-      const [, client] = await getSignerAndClient();
+      const [, client] = await getDirectSignerAndClient();
 
       const testContract = await getTestContractAddress(client);
 
