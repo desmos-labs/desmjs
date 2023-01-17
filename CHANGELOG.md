@@ -1,3 +1,7 @@
+## Version 4.7.4
+### Features
+- Added missing `MsgMultiSendEncodeObject`
+
 ## Version 4.7.3
 ### Features
 - Added the ability to create an offline `DesmosClient` to sign transactions faster
