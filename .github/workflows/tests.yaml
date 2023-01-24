@@ -19,7 +19,7 @@ jobs:
         uses: technote-space/get-diff-action@v6.1.2
         id: git_diff
         with:
-          PATTERNS: +**/*.{js,ts}
+          PATTERNS: +**/*.+(js|ts|tsx)
           FILES: |
             package.json
             yarn.lock   
