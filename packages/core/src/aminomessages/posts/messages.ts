@@ -17,7 +17,7 @@ export interface AminoMsgCreatePost extends AminoMsg {
     section_id: number;
     external_id: string;
     text: string;
-    entities?: AminoEntities;
+    entities: AminoEntities | null;
     tags: string[];
     attachments: AminoAttachment[];
     author: string;
@@ -33,7 +33,7 @@ export interface AminoMsgEditPost extends AminoMsg {
     subspace_id: string;
     post_id: string;
     text: string;
-    entities?: AminoEntities;
+    entities: AminoEntities | null;
     tags: string[];
     editor: string;
   };

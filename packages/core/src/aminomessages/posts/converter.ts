@@ -11,6 +11,8 @@ import {
   Entities,
   Media,
   Poll,
+  TextTag,
+  Url,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
@@ -24,7 +26,14 @@ import {
   AminoMsgRemovePostAttachment,
 } from "./messages";
 import { isAminoConverter } from "../../types";
-import { AminoAttachment, AminoEntities, AminoMedia, AminoPoll } from "./types";
+import {
+  AminoAttachment,
+  AminoEntities,
+  AminoMedia,
+  AminoPoll,
+  AminoTextTag,
+  AminoUrl,
+} from "./types";
 import {
   MediaAminoType,
   MediaTypeUrl,
@@ -127,29 +136,53 @@ function convertAttachmentFromAmino(attachment: AminoAttachment): Any {
   return converter.fromAmino(attachment);
 }
 
+function convertTextTagToAmino(textTag: TextTag): AminoTextTag {
+  return {
+    tag: textTag.tag,
+    start: textTag.start.toString(),
+    end: textTag.end.toString(),
+  };
+}
+
+function convertUrlToAmino(url: Url): AminoUrl {
+  return {
+    start: url.start.toString(),
+    end: url.end.toString(),
+    url: url.url,
+    display_url: url.displayUrl,
+  };
+}
+
 function convertEntitiesToAmino(entities: Entities): AminoEntities {
   return {
-    hashtags: entities.hashtags,
-    mentions: entities.mentions,
-    urls: entities.urls.map((url) => ({
-      start: url.start.toString(),
-      end: url.end.toString(),
-      url: url.url,
-      display_url: url.displayUrl,
-    })),
+    hashtags: entities.hashtags.map(convertTextTagToAmino),
+    mentions: entities.mentions.map(convertTextTagToAmino),
+    urls: entities.urls.map(convertUrlToAmino),
+  };
+}
+
+function convertTextTagFromAmino(textTag: AminoTextTag): TextTag {
+  return {
+    tag: textTag.tag,
+    start: Long.fromString(textTag.start),
+    end: Long.fromString(textTag.end),
+  };
+}
+
+function convertUrlFromAmino(url: AminoUrl): Url {
+  return {
+    start: Long.fromString(url.start),
+    end: Long.fromString(url.end),
+    url: url.url,
+    displayUrl: url.display_url,
   };
 }
 
 function convertEntitiesFromAmino(entities: AminoEntities): Entities {
   return {
-    hashtags: entities.hashtags,
-    mentions: entities.mentions,
-    urls: entities.urls.map((url) => ({
-      start: Long.fromString(url.start),
-      end: Long.fromString(url.end),
-      url: url.url,
-      displayUrl: url.display_url,
-    })),
+    hashtags: entities.hashtags.map(convertTextTagFromAmino),
+    mentions: entities.mentions.map(convertTextTagFromAmino),
+    urls: entities.urls.map(convertUrlFromAmino),
   };
 }
 
@@ -165,9 +198,7 @@ export function createPostsConverters(): AminoConverters {
         section_id: msg.sectionId,
         external_id: msg.externalId,
         text: msg.text,
-        entities: msg.entities
-          ? convertEntitiesToAmino(msg.entities)
-          : undefined,
+        entities: msg.entities ? convertEntitiesToAmino(msg.entities) : null,
         tags: msg.tags,
         attachments: msg.attachments.map(convertAttachmentToAmino),
         author: msg.author,
@@ -205,9 +236,7 @@ export function createPostsConverters(): AminoConverters {
         subspace_id: msg.subspaceId.toString(),
         post_id: msg.postId.toString(),
         text: msg.text,
-        entities: msg.entities
-          ? convertEntitiesToAmino(msg.entities)
-          : undefined,
+        entities: msg.entities ? convertEntitiesToAmino(msg.entities) : null,
         tags: msg.tags,
         editor: msg.editor,
       }),

@@ -3,13 +3,18 @@ import {
   Poll_ProvidedAnswer,
   PollTallyResults,
   PostReferenceType,
-  TextTag,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import { MediaAminoType, PollAminoType } from "../../const";
 
+export interface AminoTextTag {
+  start: string;
+  end: string;
+  tag: string;
+}
+
 export interface AminoEntities {
-  readonly hashtags: TextTag[];
-  readonly mentions: TextTag[];
+  readonly hashtags: AminoTextTag[];
+  readonly mentions: AminoTextTag[];
   readonly urls: AminoUrl[];
 }
 
