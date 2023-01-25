@@ -12,10 +12,10 @@ export interface AminoMsgCreateReport extends AminoMsg {
   readonly type: typeof MsgCreateReportAminoType;
   readonly value: {
     subspace_id: string;
-    reasons_ids: number[];
-    message: string;
-    reporter: string;
     target: AminoReportTarget;
+    reasons_ids: number[];
+    message: string | undefined; // Undefined if empty
+    reporter: string;
   };
 }
 
@@ -42,7 +42,7 @@ export interface AminoMsgAddReason extends AminoMsg {
   readonly value: {
     subspace_id: string;
     title: string;
-    description: string;
+    description: string | undefined; // Undefined if empty
     signer: string;
   };
 }

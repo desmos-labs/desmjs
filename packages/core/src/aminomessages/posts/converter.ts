@@ -52,6 +52,14 @@ import {
   PollAminoType,
   PollTypeUrl,
 } from "../../const";
+import {
+  fromOmitEmptyArray,
+  fromOmitEmptyNumber,
+  fromOmitEmptyString,
+  omitEmptyArray,
+  omitEmptyNumber,
+  omitEmptyString,
+} from "../utils";
 
 /**
  * Converts the given `Poll` into an `Any` instance so that it can be used within `MsgCreatePost` and `MsgAddPostAttachment`.
@@ -195,35 +203,46 @@ export function createPostsConverters(): AminoConverters {
       aminoType: MsgCreatePostAminoType,
       toAmino: (msg: MsgCreatePost): AminoMsgCreatePost["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        section_id: msg.sectionId,
-        external_id: msg.externalId,
-        text: msg.text,
-        entities: msg.entities ? convertEntitiesToAmino(msg.entities) : null,
-        tags: msg.tags,
-        attachments: msg.attachments.map(convertAttachmentToAmino),
+        section_id: omitEmptyNumber(msg.sectionId),
+        external_id: omitEmptyString(msg.externalId),
+        text: omitEmptyString(msg.text),
+        entities: msg.entities
+          ? convertEntitiesToAmino(msg.entities)
+          : undefined,
+        tags: omitEmptyArray(msg.tags),
+        attachments: omitEmptyArray(
+          msg.attachments.map(convertAttachmentToAmino)
+        ),
         author: msg.author,
-        conversation_id: msg.conversationId.toString(),
+        conversation_id: msg.conversationId.gt(0)
+          ? msg.conversationId.toString()
+          : undefined,
         reply_settings: msg.replySettings,
-        referenced_posts: msg.referencedPosts?.map((reference) => ({
-          type: reference.type,
-          post_id: reference.postId.toString(),
-          position: reference.position.toString(),
-        })),
+        referenced_posts:
+          msg.referencedPosts.length > 0
+            ? msg.referencedPosts.map((reference) => ({
+                type: reference.type,
+                post_id: reference.postId.toString(),
+                position: reference.position.toString(),
+              }))
+            : null,
       }),
       fromAmino: (msg: AminoMsgCreatePost["value"]): MsgCreatePost => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        sectionId: msg.section_id,
-        externalId: msg.external_id,
-        text: msg.text,
+        sectionId: fromOmitEmptyNumber(msg.section_id),
+        externalId: fromOmitEmptyString(msg.external_id),
+        text: fromOmitEmptyString(msg.text),
         entities: msg.entities
           ? convertEntitiesFromAmino(msg.entities)
           : undefined,
-        tags: msg.tags,
-        attachments: msg.attachments.map(convertAttachmentFromAmino),
+        tags: fromOmitEmptyArray(msg.tags),
+        attachments: fromOmitEmptyArray(msg.attachments).map(
+          convertAttachmentFromAmino
+        ),
         author: msg.author,
-        conversationId: Long.fromString(msg.conversation_id),
+        conversationId: Long.fromString(msg.conversation_id ?? "0"),
         replySettings: msg.reply_settings,
-        referencedPosts: msg.referenced_posts.map((reference) => ({
+        referencedPosts: (msg.referenced_posts ?? []).map((reference) => ({
           type: reference.type,
           postId: Long.fromString(reference.post_id),
           position: Long.fromString(reference.position),
@@ -235,19 +254,21 @@ export function createPostsConverters(): AminoConverters {
       toAmino: (msg: MsgEditPost): AminoMsgEditPost["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         post_id: msg.postId.toString(),
-        text: msg.text,
-        entities: msg.entities ? convertEntitiesToAmino(msg.entities) : null,
-        tags: msg.tags,
+        text: omitEmptyString(msg.text),
+        entities: msg.entities
+          ? convertEntitiesToAmino(msg.entities)
+          : undefined,
+        tags: omitEmptyArray(msg.tags),
         editor: msg.editor,
       }),
       fromAmino: (msg: AminoMsgEditPost["value"]): MsgEditPost => ({
         subspaceId: Long.fromString(msg.subspace_id),
         postId: Long.fromString(msg.post_id),
-        text: msg.text,
+        text: fromOmitEmptyString(msg.text),
         entities: msg.entities
           ? convertEntitiesFromAmino(msg.entities)
           : undefined,
-        tags: msg.tags,
+        tags: fromOmitEmptyArray(msg.tags),
         editor: msg.editor,
       }),
     },

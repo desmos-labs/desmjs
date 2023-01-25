@@ -50,3 +50,5 @@ export const MsgLinkChainAccountAminoType = "desmos/MsgLinkChainAccount";
 export const MsgUnlinkChainAccountTypeUrl =
   "/desmos.profiles.v3.MsgUnlinkChainAccount";
 export const MsgUnlinkChainAccountAminoType = "desmos/MsgUnlinkChainAccount";
+
+export const DoNotModify = "[do-not-modify]";

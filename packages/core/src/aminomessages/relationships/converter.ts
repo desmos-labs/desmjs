@@ -22,6 +22,7 @@ import {
   MsgUnblockUserAminoType,
   MsgUnblockUserTypeUrl,
 } from "../../const";
+import { fromOmitEmptyString, omitEmptyString } from "../utils";
 
 /**
  * Creates all the Amino converters for the relationships messages.
@@ -67,13 +68,13 @@ export function createRelationshipsConverters(): AminoConverters {
       toAmino: (msg: MsgBlockUser): AminoMsgBlockUser["value"] => ({
         blocker: msg.blocker,
         blocked: msg.blocked,
-        reason: msg.reason,
+        reason: omitEmptyString(msg.reason),
         subspace_id: msg.subspaceId.toString(),
       }),
       fromAmino: (msg: AminoMsgBlockUser["value"]): MsgBlockUser => ({
         blocker: msg.blocker,
         blocked: msg.blocked,
-        reason: msg.reason,
+        reason: fromOmitEmptyString(msg.reason),
         subspaceId: Long.fromString(msg.subspace_id),
       }),
     },
