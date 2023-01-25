@@ -1,3 +1,7 @@
+## Version 4.7.5
+### Bug fixes
+- Fixed Amino converters not working properly
+
 ## Version 4.7.4
 ### Features
 - Added missing `MsgMultiSendEncodeObject`
