@@ -38,6 +38,7 @@ import {
   UserTargetAminoType,
   UserTargetTypeUrl,
 } from "../../const";
+import { fromOmitEmptyString, omitEmptyString } from "../utils";
 
 export function convertUserTargetToAny(target: UserTarget): Any {
   return Any.fromPartial({
@@ -113,18 +114,18 @@ export function createReportsConverters(): AminoConverters {
         assertDefinedAndNotNull(msg.target, "report target not defined");
         return {
           subspace_id: msg.subspaceId.toString(),
-          reasons_ids: msg.reasonsIds,
-          message: msg.message,
-          reporter: msg.reporter,
           target: convertReportTargetToAmino(msg.target),
+          reasons_ids: msg.reasonsIds,
+          message: omitEmptyString(msg.message),
+          reporter: msg.reporter,
         };
       },
       fromAmino: (msg: AminoMsgCreateReport["value"]): MsgCreateReport => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        reasonsIds: msg.reasons_ids,
-        message: msg.message,
-        reporter: msg.reporter,
         target: convertReportTargetFromAmino(msg.target),
+        reasonsIds: msg.reasons_ids,
+        message: fromOmitEmptyString(msg.message),
+        reporter: msg.reporter,
       }),
     },
     [MsgDeleteReportTypeUrl]: {
@@ -162,13 +163,13 @@ export function createReportsConverters(): AminoConverters {
       toAmino: (msg: MsgAddReason): AminoMsgAddReason["value"] => ({
         subspace_id: msg.subspaceId.toString(),
         title: msg.title,
-        description: msg.description,
+        description: omitEmptyString(msg.description),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgAddReason["value"]): MsgAddReason => ({
         subspaceId: Long.fromString(msg.subspace_id),
         title: msg.title,
-        description: msg.description,
+        description: fromOmitEmptyString(msg.description),
         signer: msg.signer,
       }),
     },

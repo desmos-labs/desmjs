@@ -66,6 +66,14 @@ import {
   MsgSetUserPermissionsAminoType,
   MsgSetUserPermissionsTypeUrl,
 } from "../../const";
+import {
+  fromOmitEmptyArray,
+  fromOmitEmptyNumber,
+  fromOmitEmptyString,
+  omitEmptyArray,
+  omitEmptyNumber,
+  omitEmptyString,
+} from "../utils";
 
 /**
  * Creates all the Amino converters for the subspaces messages.
@@ -76,35 +84,35 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgCreateSubspaceAminoType,
       toAmino: (msg: MsgCreateSubspace): AminoMsgCreateSubspace["value"] => ({
         name: msg.name,
-        description: msg.description,
-        treasury: msg.treasury,
+        description: omitEmptyString(msg.description),
+        treasury: omitEmptyString(msg.treasury),
+        owner: omitEmptyString(msg.owner),
         creator: msg.creator,
-        owner: msg.owner,
       }),
       fromAmino: (msg: AminoMsgCreateSubspace["value"]): MsgCreateSubspace => ({
         name: msg.name,
-        description: msg.description,
-        treasury: msg.treasury,
+        description: fromOmitEmptyString(msg.description),
+        treasury: fromOmitEmptyString(msg.treasury),
+        owner: fromOmitEmptyString(msg.owner),
         creator: msg.creator,
-        owner: msg.owner,
       }),
     },
     [MsgEditSubspaceTypeUrl]: {
       aminoType: MsgEditSubspaceAminoType,
       toAmino: (msg: MsgEditSubspace): AminoMsgEditSubspace["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        name: msg.name,
-        description: msg.description,
-        treasury: msg.treasury,
-        owner: msg.owner,
+        name: omitEmptyString(msg.name),
+        description: omitEmptyString(msg.description),
+        treasury: omitEmptyString(msg.treasury),
+        owner: omitEmptyString(msg.owner),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgEditSubspace["value"]): MsgEditSubspace => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        name: msg.name,
-        description: msg.description,
-        treasury: msg.treasury,
-        owner: msg.owner,
+        name: fromOmitEmptyString(msg.name),
+        description: fromOmitEmptyString(msg.description),
+        treasury: fromOmitEmptyString(msg.treasury),
+        owner: fromOmitEmptyString(msg.owner),
         signer: msg.signer,
       }),
     },
@@ -123,16 +131,16 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgCreateSectionAminoType,
       toAmino: (msg: MsgCreateSection): AminoMsgCreateSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        name: msg.name,
-        description: msg.description,
-        parent_id: msg.parentId,
+        name: omitEmptyString(msg.name),
+        description: omitEmptyString(msg.description),
+        parent_id: omitEmptyNumber(msg.parentId),
         creator: msg.creator,
       }),
       fromAmino: (msg: AminoMsgCreateSection["value"]): MsgCreateSection => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        name: msg.name,
-        description: msg.description,
-        parentId: msg.parent_id,
+        name: fromOmitEmptyString(msg.name),
+        description: fromOmitEmptyString(msg.description),
+        parentId: fromOmitEmptyNumber(msg.parent_id),
         creator: msg.creator,
       }),
     },
@@ -140,16 +148,16 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgEditSectionAminoType,
       toAmino: (msg: MsgEditSection): AminoMsgEditSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        section_id: msg.sectionId,
-        name: msg.name,
-        description: msg.description,
+        section_id: omitEmptyNumber(msg.sectionId),
+        name: omitEmptyString(msg.name),
+        description: omitEmptyString(msg.description),
         editor: msg.editor,
       }),
       fromAmino: (msg: AminoMsgEditSection["value"]): MsgEditSection => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        sectionId: msg.section_id,
-        name: msg.name,
-        description: msg.description,
+        sectionId: fromOmitEmptyNumber(msg.section_id),
+        name: fromOmitEmptyString(msg.name),
+        description: fromOmitEmptyString(msg.description),
         editor: msg.editor,
       }),
     },
@@ -157,14 +165,14 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgMoveSectionAminoType,
       toAmino: (msg: MsgMoveSection): AminoMsgMoveSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        section_id: msg.sectionId,
-        new_parent_id: msg.newParentId,
+        section_id: omitEmptyNumber(msg.sectionId),
+        new_parent_id: omitEmptyNumber(msg.newParentId),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgMoveSection["value"]): MsgMoveSection => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        sectionId: msg.section_id,
-        newParentId: msg.new_parent_id,
+        sectionId: fromOmitEmptyNumber(msg.section_id),
+        newParentId: fromOmitEmptyNumber(msg.new_parent_id),
         signer: msg.signer,
       }),
     },
@@ -172,12 +180,12 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgDeleteSectionAminoType,
       toAmino: (msg: MsgDeleteSection): AminoMsgDeleteSection["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        section_id: msg.sectionId,
+        section_id: omitEmptyNumber(msg.sectionId),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgDeleteSection["value"]): MsgDeleteSection => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        sectionId: msg.section_id,
+        sectionId: fromOmitEmptyNumber(msg.section_id),
         signer: msg.signer,
       }),
     },
@@ -185,22 +193,22 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgCreateUserGroupAminoType,
       toAmino: (msg: MsgCreateUserGroup): AminoMsgCreateUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        section_id: msg.sectionId,
-        name: msg.name,
-        description: msg.description,
-        default_permissions: msg.defaultPermissions,
-        initial_members: msg.initialMembers,
+        section_id: omitEmptyNumber(msg.sectionId),
+        name: omitEmptyString(msg.name),
+        description: omitEmptyString(msg.description),
+        default_permissions: omitEmptyArray(msg.defaultPermissions),
+        initial_members: omitEmptyArray(msg.initialMembers),
         creator: msg.creator,
       }),
       fromAmino: (
         msg: AminoMsgCreateUserGroup["value"]
       ): MsgCreateUserGroup => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        sectionId: msg.section_id,
-        name: msg.name,
-        description: msg.description,
-        defaultPermissions: msg.default_permissions,
-        initialMembers: msg.initial_members,
+        sectionId: fromOmitEmptyNumber(msg.section_id),
+        name: fromOmitEmptyString(msg.name),
+        description: fromOmitEmptyString(msg.description),
+        defaultPermissions: fromOmitEmptyArray(msg.default_permissions),
+        initialMembers: fromOmitEmptyArray(msg.initial_members),
         creator: msg.creator,
       }),
     },
@@ -208,16 +216,16 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgEditUserGroupAminoType,
       toAmino: (msg: MsgEditUserGroup): AminoMsgEditUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        group_id: msg.groupId,
-        name: msg.name,
-        description: msg.description,
+        group_id: omitEmptyNumber(msg.groupId),
+        name: omitEmptyString(msg.name),
+        description: omitEmptyString(msg.description),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgEditUserGroup["value"]): MsgEditUserGroup => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        groupId: msg.group_id,
-        name: msg.name,
-        description: msg.description,
+        groupId: fromOmitEmptyNumber(msg.group_id),
+        name: fromOmitEmptyString(msg.name),
+        description: fromOmitEmptyString(msg.description),
         signer: msg.signer,
       }),
     },
@@ -225,14 +233,14 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgMoveUserGroupAminoType,
       toAmino: (msg: MsgMoveUserGroup): AminoMsgMoveUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        group_id: msg.groupId,
-        new_section_id: msg.newSectionId,
+        group_id: omitEmptyNumber(msg.groupId),
+        new_section_id: omitEmptyNumber(msg.newSectionId),
         signer: msg.signer,
       }),
       fromAmino: (msg: AminoMsgMoveUserGroup["value"]): MsgMoveUserGroup => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        groupId: msg.group_id,
-        newSectionId: msg.new_section_id,
+        groupId: fromOmitEmptyNumber(msg.group_id),
+        newSectionId: fromOmitEmptyNumber(msg.new_section_id),
         signer: msg.signer,
       }),
     },
@@ -242,16 +250,16 @@ export function createSubspacesConverters(): AminoConverters {
         msg: MsgSetUserGroupPermissions
       ): AminoMsgSetUserGroupPermissions["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        group_id: msg.groupId,
-        permissions: msg.permissions,
+        group_id: omitEmptyNumber(msg.groupId),
+        permissions: omitEmptyArray(msg.permissions),
         signer: msg.signer,
       }),
       fromAmino: (
         msg: AminoMsgSetUserGroupPermissions["value"]
       ): MsgSetUserGroupPermissions => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        groupId: msg.group_id,
-        permissions: msg.permissions,
+        groupId: fromOmitEmptyNumber(msg.group_id),
+        permissions: fromOmitEmptyArray(msg.permissions),
         signer: msg.signer,
       }),
     },
@@ -259,14 +267,14 @@ export function createSubspacesConverters(): AminoConverters {
       aminoType: MsgDeleteUserGroupAminoType,
       toAmino: (msg: MsgDeleteUserGroup): AminoMsgDeleteUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        group_id: msg.groupId,
+        group_id: omitEmptyNumber(msg.groupId),
         signer: msg.signer,
       }),
       fromAmino: (
         msg: AminoMsgDeleteUserGroup["value"]
       ): MsgDeleteUserGroup => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        groupId: msg.group_id,
+        groupId: fromOmitEmptyNumber(msg.group_id),
         signer: msg.signer,
       }),
     },
@@ -276,7 +284,7 @@ export function createSubspacesConverters(): AminoConverters {
         msg: MsgAddUserToUserGroup
       ): AminoMsgAddUserToUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        group_id: msg.groupId,
+        group_id: omitEmptyNumber(msg.groupId),
         user: msg.user,
         signer: msg.signer,
       }),
@@ -284,7 +292,7 @@ export function createSubspacesConverters(): AminoConverters {
         msg: AminoMsgAddUserToUserGroup["value"]
       ): MsgAddUserToUserGroup => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        groupId: msg.group_id,
+        groupId: fromOmitEmptyNumber(msg.group_id),
         user: msg.user,
         signer: msg.signer,
       }),
@@ -295,7 +303,7 @@ export function createSubspacesConverters(): AminoConverters {
         msg: MsgRemoveUserFromUserGroup
       ): AminoMsgRemoveUserFromUserGroup["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        group_id: msg.groupId,
+        group_id: omitEmptyNumber(msg.groupId),
         user: msg.user,
         signer: msg.signer,
       }),
@@ -303,7 +311,7 @@ export function createSubspacesConverters(): AminoConverters {
         msg: AminoMsgRemoveUserFromUserGroup["value"]
       ): MsgRemoveUserFromUserGroup => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        groupId: msg.group_id,
+        groupId: fromOmitEmptyNumber(msg.group_id),
         user: msg.user,
         signer: msg.signer,
       }),
@@ -314,18 +322,18 @@ export function createSubspacesConverters(): AminoConverters {
         msg: MsgSetUserPermissions
       ): AminoMsgSetUserPermissions["value"] => ({
         subspace_id: msg.subspaceId.toString(),
-        section_id: msg.sectionId,
+        section_id: omitEmptyNumber(msg.sectionId),
         user: msg.user,
-        permissions: msg.permissions,
+        permissions: omitEmptyArray(msg.permissions),
         signer: msg.signer,
       }),
       fromAmino: (
         msg: AminoMsgSetUserPermissions["value"]
       ): MsgSetUserPermissions => ({
         subspaceId: Long.fromString(msg.subspace_id),
-        sectionId: msg.section_id,
+        sectionId: fromOmitEmptyNumber(msg.section_id),
         user: msg.user,
-        permissions: msg.permissions,
+        permissions: fromOmitEmptyArray(msg.permissions),
         signer: msg.signer,
       }),
     },

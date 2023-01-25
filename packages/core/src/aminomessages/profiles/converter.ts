@@ -86,6 +86,7 @@ import {
   SingleSignatureAminoType,
   SingleSignatureTypeUrl,
 } from "../../const";
+import { fromOmitEmptyString, omitEmptyString } from "../utils";
 
 function assertDefinedAndNotNull(object?: any, message?: string) {
   if (object === undefined || object === null) {
@@ -295,20 +296,20 @@ export function createProfilesConverters(): AminoConverters {
     [MsgSaveProfileTypeUrl]: {
       aminoType: MsgSaveProfileAminoType,
       toAmino: (value: MsgSaveProfile): AminoMsgSaveProfile["value"] => ({
-        bio: value.bio,
-        creator: value.creator,
         dtag: value.dtag,
-        nickname: value.nickname,
-        profile_picture: value.profilePicture,
-        cover_picture: value.coverPicture,
+        bio: omitEmptyString(value.bio),
+        nickname: omitEmptyString(value.nickname),
+        profile_picture: omitEmptyString(value.profilePicture),
+        cover_picture: omitEmptyString(value.coverPicture),
+        creator: value.creator,
       }),
       fromAmino: (msg: AminoMsgSaveProfile["value"]): MsgSaveProfile => ({
         dtag: msg.dtag,
+        nickname: fromOmitEmptyString(msg.nickname),
+        bio: fromOmitEmptyString(msg.bio),
+        profilePicture: fromOmitEmptyString(msg.profile_picture),
+        coverPicture: fromOmitEmptyString(msg.cover_picture),
         creator: msg.creator,
-        nickname: msg.nickname ?? "",
-        bio: msg.bio ?? "",
-        profilePicture: msg.profile_picture ?? "",
-        coverPicture: msg.cover_picture ?? "",
       }),
     },
     [MsgDeleteProfileTypeUrl]: {

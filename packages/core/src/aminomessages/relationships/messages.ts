@@ -29,7 +29,7 @@ export interface AminoMsgBlockUser extends AminoMsg {
   readonly value: {
     blocker: string;
     blocked: string;
-    reason: string;
+    reason: string | undefined; // Undefined if empty
     subspace_id: string;
   };
 }

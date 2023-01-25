@@ -18,10 +18,10 @@ export interface AminoMsgSaveProfile extends AminoMsg {
   readonly value: {
     creator: string;
     dtag: string;
-    nickname?: string;
-    bio?: string;
-    profile_picture?: string;
-    cover_picture?: string;
+    nickname: string | undefined; // Undefined if empty
+    bio: string | undefined; // Undefined if empty
+    profile_picture: string | undefined; // Undefined if empty
+    cover_picture: string | undefined; // Undefined if empty
   };
 }
 

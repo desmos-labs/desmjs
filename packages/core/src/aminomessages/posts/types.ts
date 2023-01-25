@@ -1,15 +1,16 @@
 import { AminoMsg } from "@cosmjs/amino";
-import {
-  Poll_ProvidedAnswer,
-  PollTallyResults,
-  PostReferenceType,
-  TextTag,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+import { PostReferenceType } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import { MediaAminoType, PollAminoType } from "../../const";
 
+export interface AminoTextTag {
+  start: string;
+  end: string;
+  tag: string;
+}
+
 export interface AminoEntities {
-  readonly hashtags: TextTag[];
-  readonly mentions: TextTag[];
+  readonly hashtags: AminoTextTag[];
+  readonly mentions: AminoTextTag[];
   readonly urls: AminoUrl[];
 }
 
@@ -17,24 +18,45 @@ export interface AminoUrl {
   readonly start: string;
   readonly end: string;
   readonly url: string;
-  readonly display_url: string;
+  readonly display_url: string | undefined; // Undefined if empty
 }
 
-export interface AminoAttachment extends AminoMsg {}
+export interface AminoAttachment {
+  readonly subspace_id: string | undefined;
+  readonly post_id: string | undefined;
+  readonly id: number | undefined;
+  readonly content: AminoContent | undefined;
+}
 
-export interface AminoPoll extends AminoAttachment {
+export interface AminoPollProvidedAnswer {
+  readonly text: string | undefined; // Undefined if empty
+  readonly attachments: AminoAttachment[] | undefined; // Undefined if empty
+}
+
+export interface AminoPollTallyResultAnswerResult {
+  readonly answer_index: number;
+  readonly votes: string;
+}
+
+export interface AminoPollTallyResults {
+  readonly results: AminoPollTallyResultAnswerResult[];
+}
+
+export interface AminoContent extends AminoMsg {}
+
+export interface AminoPoll extends AminoContent {
   readonly type: typeof PollAminoType;
   readonly value: {
     question: string;
-    provided_answers: Poll_ProvidedAnswer[];
+    provided_answers: AminoPollProvidedAnswer[];
     end_date?: Date;
     allows_multiple_answers: boolean;
     allows_answer_edits: boolean;
-    final_tally_results?: PollTallyResults;
+    final_tally_results?: AminoPollTallyResults;
   };
 }
 
-export interface AminoMedia extends AminoAttachment {
+export interface AminoMedia extends AminoContent {
   readonly type: typeof MediaAminoType;
   readonly value: {
     uri: string;

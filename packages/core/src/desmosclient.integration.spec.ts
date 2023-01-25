@@ -13,6 +13,8 @@ import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
 import { MsgSaveProfile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
 import { EncodeObject } from "@cosmjs/proto-signing";
+import Long from "long";
+import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
 import {
@@ -30,6 +32,8 @@ import {
 } from "./signatureresult";
 import {
   MsgAuthenticateEncodeObject,
+  MsgCreatePostEncodeObject,
+  MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
   MsgSaveProfileEncodeObject,
@@ -38,7 +42,13 @@ import {
   bech32AddressToAny,
   singleSignatureToAny,
 } from "./aminomessages/profiles";
-import { MsgMultiSendTypeUrl } from "./const";
+import {
+  DoNotModify,
+  MsgCreatePostTypeUrl,
+  MsgCreateSubspaceTypeUrl,
+  MsgMultiSendTypeUrl,
+  MsgSaveProfileTypeUrl,
+} from "./const";
 
 describe("DesmosClient", () => {
   jest.setTimeout(30000);
@@ -316,6 +326,61 @@ describe("DesmosClient", () => {
       const txBytes = TxRaw.encode(signedTx.txRaw).finish();
       const broadcastTx = await client.broadcastTx(txBytes);
       expect(broadcastTx.code).toBe(0);
+    });
+
+    it("test MsgCreatePost", async () => {
+      const [signer, client] = await getAminoSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      // Create a profile (required to create a post)
+      const msgSaveProfile: MsgSaveProfileEncodeObject = {
+        typeUrl: MsgSaveProfileTypeUrl,
+        value: {
+          dtag: "TestUser",
+          nickname: "Test user",
+          bio: DoNotModify,
+          profilePicture: DoNotModify,
+          coverPicture: DoNotModify,
+          creator: address,
+        },
+      };
+      await client.signAndBroadcast(address, [msgSaveProfile], "auto");
+      await sleep(5000);
+
+      // Create a subspace
+      // Ignore any error if the subspace already exists
+      const msgCreateSubspace: MsgCreateSubspaceEncodeObject = {
+        typeUrl: MsgCreateSubspaceTypeUrl,
+        value: {
+          name: "Test Subspace",
+          description: "Test subspaces",
+          treasury: "",
+          owner: address,
+          creator: address,
+        },
+      };
+      await client.signAndBroadcast(address, [msgCreateSubspace], "auto");
+      await sleep(5000);
+
+      // Create a post
+      const msg: MsgCreatePostEncodeObject = {
+        typeUrl: MsgCreatePostTypeUrl,
+        value: {
+          subspaceId: Long.fromNumber(1),
+          sectionId: 0,
+          externalId: "",
+          text: "This is a test post",
+          entities: undefined,
+          tags: [],
+          attachments: [],
+          author: address,
+          conversationId: Long.fromNumber(0),
+          replySettings: 1,
+          referencedPosts: [],
+        },
+      };
+      const result = await client.signAndBroadcast(address, [msg], "auto");
+      expect(result.code).toBe(0);
     });
   });
 
