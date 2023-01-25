@@ -11,6 +11,9 @@ import {
   Entities,
   Media,
   Poll,
+  Poll_ProvidedAnswer,
+  PollTallyResults,
+  PollTallyResults_AnswerResult,
   TextTag,
   Url,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
@@ -27,10 +30,13 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import {
-  AminoAttachment,
+  AminoContent,
   AminoEntities,
   AminoMedia,
   AminoPoll,
+  AminoPollProvidedAnswer,
+  AminoPollTallyResultAnswerResult,
+  AminoPollTallyResults,
   AminoTextTag,
   AminoUrl,
 } from "./types";
@@ -83,6 +89,76 @@ export function mediaToAny(media: Media): Any {
   });
 }
 
+function convertPollProvidedAnswerToAmino(
+  answer: Poll_ProvidedAnswer
+): AminoPollProvidedAnswer {
+  return {
+    text: omitEmptyString(answer.text),
+    attachments: answer.attachments.map((attachment) => ({
+      id: omitEmptyNumber(attachment.id),
+      post_id: attachment.postId.gt(0)
+        ? attachment.postId.toString()
+        : undefined,
+      subspace_id: attachment.subspaceId.gt(0)
+        ? attachment.subspaceId.toString()
+        : undefined,
+      content: attachment.content
+        ? convertContentToAmino(attachment.content)
+        : undefined,
+    })),
+  };
+}
+
+function convertPollTallyResultAnswerResultToAmino(
+  result: PollTallyResults_AnswerResult
+): AminoPollTallyResultAnswerResult {
+  return {
+    answer_index: result.answerIndex,
+    votes: result.votes.toString(),
+  };
+}
+
+function convertPollTallyResultsToAmino(
+  results: PollTallyResults
+): AminoPollTallyResults {
+  return {
+    results: results.results.map(convertPollTallyResultAnswerResultToAmino),
+  };
+}
+
+function convertPollTallyResultAnswerResultFromAmino(
+  result: AminoPollTallyResultAnswerResult
+): PollTallyResults_AnswerResult {
+  return {
+    answerIndex: result.answer_index,
+    votes: Long.fromString(result.votes),
+  };
+}
+
+function convertPollTallyResultsFromAmino(
+  results: AminoPollTallyResults
+): PollTallyResults {
+  return {
+    results: results.results.map(convertPollTallyResultAnswerResultFromAmino),
+  };
+}
+
+function convertPollProvidedAnswerFromAmino(
+  answer: AminoPollProvidedAnswer
+): Poll_ProvidedAnswer {
+  return {
+    text: fromOmitEmptyString(answer.text),
+    attachments: fromOmitEmptyArray(answer.attachments).map((attachment) => ({
+      id: fromOmitEmptyNumber(attachment.id),
+      postId: Long.fromString(attachment.post_id ?? "0"),
+      subspaceId: Long.fromString(attachment.subspace_id ?? "0"),
+      content: attachment.content
+        ? convertContentFromAmino(attachment.content)
+        : undefined,
+    })),
+  };
+}
+
 export const attachmentConverters: AminoConverters = {
   [PollTypeUrl]: {
     aminoType: PollAminoType,
@@ -90,22 +166,30 @@ export const attachmentConverters: AminoConverters = {
       const poll = Poll.decode(msg.value);
       return {
         question: poll.question,
-        provided_answers: poll.providedAnswers,
+        provided_answers: poll.providedAnswers.map(
+          convertPollProvidedAnswerToAmino
+        ),
         end_date: poll.endDate,
         allows_multiple_answers: poll.allowsMultipleAnswers,
         allows_answer_edits: poll.allowsAnswerEdits,
-        final_tally_results: poll.finalTallyResults,
+        final_tally_results: poll.finalTallyResults
+          ? convertPollTallyResultsToAmino(poll.finalTallyResults)
+          : undefined,
       };
     },
     fromAmino: (msg: AminoPoll["value"]): Any =>
       pollToAny(
         Poll.fromPartial({
           question: msg.question,
-          providedAnswers: msg.provided_answers,
+          providedAnswers: msg.provided_answers.map(
+            convertPollProvidedAnswerFromAmino
+          ),
           endDate: msg.end_date,
           allowsMultipleAnswers: msg.allows_multiple_answers,
           allowsAnswerEdits: msg.allows_answer_edits,
-          finalTallyResults: msg.final_tally_results,
+          finalTallyResults: msg.final_tally_results
+            ? convertPollTallyResultsFromAmino(msg.final_tally_results)
+            : undefined,
         })
       ),
   },
@@ -128,20 +212,9 @@ export const attachmentConverters: AminoConverters = {
   },
 };
 
-function convertAttachmentToAmino(attachment: Any): AminoAttachment {
-  const converter = attachmentConverters[attachment.typeUrl] as AminoConverter;
-  return {
-    type: converter.aminoType,
-    value: converter.toAmino(attachment),
-  };
-}
-
-function convertAttachmentFromAmino(attachment: AminoAttachment): Any {
-  const matches = Object.entries(attachmentConverters)
-    .filter(isAminoConverter)
-    .filter(([, { aminoType }]) => aminoType === attachment.type);
-  const [, converter] = matches[0];
-  return converter.fromAmino(attachment);
+function convertContentToAmino(content: Any): AminoContent {
+  const match = attachmentConverters[content.typeUrl] as AminoConverter;
+  return match.toAmino(content);
 }
 
 function convertTextTagToAmino(textTag: TextTag): AminoTextTag {
@@ -157,7 +230,7 @@ function convertUrlToAmino(url: Url): AminoUrl {
     start: url.start.toString(),
     end: url.end.toString(),
     url: url.url,
-    display_url: url.displayUrl,
+    display_url: omitEmptyString(url.displayUrl),
   };
 }
 
@@ -167,6 +240,14 @@ function convertEntitiesToAmino(entities: Entities): AminoEntities {
     mentions: entities.mentions.map(convertTextTagToAmino),
     urls: entities.urls.map(convertUrlToAmino),
   };
+}
+
+function convertContentFromAmino(attachment: AminoContent): Any {
+  const matches = Object.entries(attachmentConverters)
+    .filter(isAminoConverter)
+    .filter(([, { aminoType }]) => aminoType === attachment.type);
+  const [, converter] = matches[0];
+  return converter.fromAmino(attachment);
 }
 
 function convertTextTagFromAmino(textTag: AminoTextTag): TextTag {
@@ -182,7 +263,7 @@ function convertUrlFromAmino(url: AminoUrl): Url {
     start: Long.fromString(url.start),
     end: Long.fromString(url.end),
     url: url.url,
-    displayUrl: url.display_url,
+    displayUrl: fromOmitEmptyString(url.display_url),
   };
 }
 
@@ -210,9 +291,7 @@ export function createPostsConverters(): AminoConverters {
           ? convertEntitiesToAmino(msg.entities)
           : undefined,
         tags: omitEmptyArray(msg.tags),
-        attachments: omitEmptyArray(
-          msg.attachments.map(convertAttachmentToAmino)
-        ),
+        attachments: omitEmptyArray(msg.attachments.map(convertContentToAmino)),
         author: msg.author,
         conversation_id: msg.conversationId.gt(0)
           ? msg.conversationId.toString()
@@ -237,7 +316,7 @@ export function createPostsConverters(): AminoConverters {
           : undefined,
         tags: fromOmitEmptyArray(msg.tags),
         attachments: fromOmitEmptyArray(msg.attachments).map(
-          convertAttachmentFromAmino
+          convertContentFromAmino
         ),
         author: msg.author,
         conversationId: Long.fromString(msg.conversation_id ?? "0"),
@@ -294,7 +373,7 @@ export function createPostsConverters(): AminoConverters {
         return {
           subspace_id: msg.subspaceId.toString(),
           post_id: msg.postId.toString(),
-          content: convertAttachmentToAmino(msg.content),
+          content: convertContentToAmino(msg.content),
           editor: msg.editor,
         };
       },
@@ -303,7 +382,7 @@ export function createPostsConverters(): AminoConverters {
       ): MsgAddPostAttachment => ({
         subspaceId: Long.fromString(msg.subspace_id),
         postId: Long.fromString(msg.post_id),
-        content: convertAttachmentFromAmino(msg.content),
+        content: convertContentFromAmino(msg.content),
         editor: msg.editor,
       }),
     },
