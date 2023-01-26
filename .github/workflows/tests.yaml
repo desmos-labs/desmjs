@@ -20,7 +20,7 @@ jobs:
         id: git_diff
         with:
           PATTERNS: |
-            +**/*.+(js|ts|tsx)
+            **/*.+(js|ts|tsx)
           FILES: |
             package.json
             yarn.lock   
