@@ -72,7 +72,6 @@ import {
   omitEmptyNumber,
   omitEmptyString,
   omitZeroLong,
-  undefinedToNull,
   serializeDate,
   deserializeDate,
   omitFalse,
@@ -262,9 +261,13 @@ function convertEntitiesToAmino(
 ): AminoEntities | undefined {
   return entities
     ? {
-        hashtags: undefinedToNull(entities.hashtags.map(convertTextTagToAmino)),
-        mentions: undefinedToNull(entities.mentions.map(convertTextTagToAmino)),
-        urls: undefinedToNull(entities.urls.map(convertUrlToAmino)),
+        hashtags: nullIfEmptyArray(
+          entities.hashtags.map(convertTextTagToAmino)
+        ),
+        mentions: nullIfEmptyArray(
+          entities.mentions.map(convertTextTagToAmino)
+        ),
+        urls: nullIfEmptyArray(entities.urls.map(convertUrlToAmino)),
       }
     : undefined;
 }

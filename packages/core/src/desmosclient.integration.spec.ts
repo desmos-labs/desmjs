@@ -51,7 +51,7 @@ import {
 } from "./const";
 
 describe("DesmosClient", () => {
-  jest.setTimeout(30000);
+  jest.setTimeout(60 * 1000);
 
   /**
    * Builds a Signer and DesmosClient instance based on a test mnemonic.
@@ -362,21 +362,69 @@ describe("DesmosClient", () => {
       await client.signAndBroadcast(address, [msgCreateSubspace], "auto");
       await sleep(5000);
 
-      // Create a post
-      const msg: MsgCreatePostEncodeObject = {
-        typeUrl: MsgCreatePostTypeUrl,
+      // Create a first post
+      const msgCreatePost = {
+        typeUrl: "/desmos.posts.v2.MsgCreatePost",
         value: {
           subspaceId: Long.fromNumber(1),
           sectionId: 0,
           externalId: "",
           text: "This is a test post",
-          entities: undefined,
+          entities: {
+            hashtags: [],
+            mentions: [],
+            urls: [
+              {
+                displayUrl: "IPFS",
+                start: Long.fromNumber(4),
+                end: Long.fromNumber(5),
+                url: "http://scripta.network/logo.svg",
+              },
+            ],
+          },
           tags: [],
           attachments: [],
           author: address,
           conversationId: Long.fromNumber(0),
           replySettings: 1,
           referencedPosts: [],
+        },
+      };
+      await client.signAndBroadcast(address, [msgCreatePost], "auto");
+      await sleep(5000);
+
+      // Create a post
+      const msg = {
+        typeUrl: "/desmos.posts.v2.MsgCreatePost",
+        value: {
+          subspaceId: Long.fromNumber(1),
+          sectionId: 0,
+          externalId: "",
+          text: "This is a test post",
+          entities: {
+            hashtags: [],
+            mentions: [],
+            urls: [
+              {
+                displayUrl: "IPFS",
+                start: Long.fromNumber(4),
+                end: Long.fromNumber(5),
+                url: "http://scripta.network/logo.svg",
+              },
+            ],
+          },
+          tags: [],
+          attachments: [],
+          author: address,
+          conversationId: Long.fromNumber(0),
+          replySettings: 1,
+          referencedPosts: [
+            {
+              position: Long.fromNumber(0),
+              postId: Long.fromNumber(1),
+              type: 1,
+            },
+          ],
         },
       };
       const result = await client.signAndBroadcast(address, [msg], "auto");

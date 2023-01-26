@@ -65,7 +65,7 @@ describe("Posts converter", () => {
           },
         }),
         expectedJsonSerialized:
-          '{"author":"desmos1dhd97uxuzelyhgxhzzq02uu746dkxy6lh93xul","entities":{"hashtags":[],"mentions":[],"urls":[]},"referenced_posts":null,"reply_settings":1,"subspace_id":"8"}',
+          '{"author":"desmos1dhd97uxuzelyhgxhzzq02uu746dkxy6lh93xul","entities":{"hashtags":null,"mentions":null,"urls":null},"referenced_posts":null,"reply_settings":1,"subspace_id":"8"}',
       },
       {
         name: "only urls",
@@ -94,7 +94,7 @@ describe("Posts converter", () => {
           },
         }),
         expectedJsonSerialized:
-          '{"author":"desmos1dhd97uxuzelyhgxhzzq02uu746dkxy6lh93xul","entities":{"hashtags":[],"mentions":[],"urls":[{"display_url":"IPFS","end":"1","start":"1","url":"https://url.com/a"},{"display_url":"IPFS","end":"1","url":"https://url.com/a"}]},"referenced_posts":null,"reply_settings":1,"subspace_id":"8"}',
+          '{"author":"desmos1dhd97uxuzelyhgxhzzq02uu746dkxy6lh93xul","entities":{"hashtags":null,"mentions":null,"urls":[{"display_url":"IPFS","end":"1","start":"1","url":"https://url.com/a"},{"display_url":"IPFS","end":"1","url":"https://url.com/a"}]},"referenced_posts":null,"reply_settings":1,"subspace_id":"8"}',
       },
       {
         name: "complete message",
