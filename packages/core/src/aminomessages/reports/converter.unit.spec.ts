@@ -1,6 +1,7 @@
 import {
   MsgCreateReport,
   MsgDeleteReport,
+  MsgSupportStandardReason,
 } from "@desmoslabs/desmjs-types/desmos/reports/v1/msgs";
 import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
@@ -9,7 +10,11 @@ import {
   createReportsConverters,
   userTargetToAny,
 } from "./converter";
-import { MsgCreateReportTypeUrl, MsgDeleteReportTypeUrl } from "../../const";
+import {
+  MsgCreateReportTypeUrl,
+  MsgDeleteReportTypeUrl,
+  MsgSupportStandardReasonTypeUrl,
+} from "../../const";
 
 describe("Reports converter", () => {
   const converters = createReportsConverters();
@@ -81,6 +86,29 @@ describe("Reports converter", () => {
         },
         expectedJsonSerialized:
           '{"report_id":"1","signer":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgSupportStandardReason", () => {
+    const testData: ConverterTestData<MsgSupportStandardReason>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgSupportStandardReasonTypeUrl,
+        msg: MsgSupportStandardReason.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgSupportStandardReasonTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          standardReasonId: 1,
+          signer: "cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47",
+        },
+        expectedJsonSerialized:
+          '{"signer":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","standard_reason_id":1,"subspace_id":"1"}',
       },
     ];
     executeTests(testData);

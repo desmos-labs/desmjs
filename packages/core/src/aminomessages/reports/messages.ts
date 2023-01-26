@@ -31,9 +31,9 @@ export interface AminoMsgDeleteReport extends AminoMsg {
 export interface AminoMsgSupportStandardReason extends AminoMsg {
   readonly type: typeof MsgSupportStandardReasonAminoType;
   readonly value: {
-    subspace_id: string;
-    standard_reason_id: number;
-    signer: string;
+    subspace_id: string | undefined; // Undefined if zero
+    standard_reason_id: number | undefined; // Undefined if zero
+    signer: string | undefined; // Undefined if empty
   };
 }
 
