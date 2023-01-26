@@ -4,6 +4,7 @@ import {
   MsgCreatePost,
   MsgDeletePost,
   MsgEditPost,
+  MsgRemovePostAttachment,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
 import {
   PostReferenceType,
@@ -16,6 +17,7 @@ import {
   MsgCreatePostTypeUrl,
   MsgDeletePostTypeUrl,
   MsgEditPostTypeUrl,
+  MsgRemovePostAttachmentTypeUrl,
 } from "../../const";
 
 interface TestData<T> {
@@ -291,6 +293,30 @@ describe("Posts converter", () => {
         },
         expectedJsonSerialized:
           '{"content":{"type":"desmos/Media","value":{"mime_type":"image/png","uri":"ftp://user:password@example.com/image.png"}},"editor":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","post_id":"1","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgRemovePostAttachment", () => {
+    const testData: TestData<MsgRemovePostAttachment>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgRemovePostAttachmentTypeUrl,
+        msg: MsgRemovePostAttachment.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgRemovePostAttachmentTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          postId: Long.fromNumber(1),
+          attachmentId: 1,
+          editor: "cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd",
+        },
+        expectedJsonSerialized:
+          '{"attachment_id":1,"editor":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","post_id":"1","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

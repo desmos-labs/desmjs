@@ -61,10 +61,10 @@ export interface AminoMsgAddPostAttachment extends AminoMsg {
 export interface AminoMsgRemovePostAttachment extends AminoMsg {
   readonly type: typeof MsgRemovePostAttachmentAminoType;
   readonly value: {
-    subspace_id: string;
-    post_id: string;
-    attachment_id: number;
-    editor: string;
+    subspace_id: string | undefined; // Undefined if zero
+    post_id: string | undefined; // Undefined if zero
+    attachment_id: number | undefined; // Undefined if zero
+    editor: string | undefined; // Undefined if zero
   };
 }
 

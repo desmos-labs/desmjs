@@ -417,18 +417,18 @@ export function createPostsConverters(): AminoConverters {
       toAmino: (
         msg: MsgRemovePostAttachment
       ): AminoMsgRemovePostAttachment["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        attachment_id: msg.attachmentId,
-        editor: msg.editor,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        attachment_id: omitEmptyNumber(msg.attachmentId),
+        editor: omitEmptyString(msg.editor),
       }),
       fromAmino: (
         msg: AminoMsgRemovePostAttachment["value"]
       ): MsgRemovePostAttachment => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        attachmentId: msg.attachment_id,
-        editor: msg.editor,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        attachmentId: fromOmitEmptyNumber(msg.attachment_id),
+        editor: fromOmitEmptyString(msg.editor),
       }),
     },
     [MsgAnswerPollTypeUrl]: {
