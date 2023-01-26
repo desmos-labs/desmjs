@@ -82,10 +82,10 @@ export interface AminoMsgEditSection extends AminoMsg {
 export interface AminoMsgMoveSection extends AminoMsg {
   readonly type: typeof MsgMoveSectionAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     section_id: number | undefined; // Undefined if zero
     new_parent_id: number | undefined; // Undefined if zero
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 

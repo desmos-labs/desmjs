@@ -16,7 +16,7 @@ import {
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
-import Long from "long";
+import Long, { fromString } from "long";
 import {
   AminoMsgAddUserToUserGroup,
   AminoMsgCreateSection,
@@ -166,16 +166,16 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgMoveSectionTypeUrl]: {
       aminoType: MsgMoveSectionAminoType,
       toAmino: (msg: MsgMoveSection): AminoMsgMoveSection["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         section_id: omitEmptyNumber(msg.sectionId),
         new_parent_id: omitEmptyNumber(msg.newParentId),
-        signer: msg.signer,
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgMoveSection["value"]): MsgMoveSection => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         sectionId: fromOmitEmptyNumber(msg.section_id),
         newParentId: fromOmitEmptyNumber(msg.new_parent_id),
-        signer: msg.signer,
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgDeleteSectionTypeUrl]: {
