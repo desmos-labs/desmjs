@@ -8,6 +8,7 @@ import {
   MsgEditSubspace,
   MsgEditUserGroup,
   MsgMoveSection,
+  MsgMoveUserGroup,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
@@ -22,6 +23,7 @@ import {
   MsgEditSubspaceTypeUrl,
   MsgEditUserGroupTypeUrl,
   MsgMoveSectionTypeUrl,
+  MsgMoveUserGroupTypeUrl,
 } from "../../const";
 
 describe("Subspaces converter", () => {
@@ -250,6 +252,30 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"description":"Description","group_id":1,"name":"Group","signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgMoveUserGroup", () => {
+    const testData: ConverterTestData<MsgMoveUserGroup>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgMoveUserGroupTypeUrl,
+        msg: MsgMoveUserGroup.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgMoveUserGroupTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          groupId: 1,
+          newSectionId: 2,
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"group_id":1,"new_section_id":2,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

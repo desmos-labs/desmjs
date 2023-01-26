@@ -125,10 +125,10 @@ export interface AminoMsgEditUserGroup extends AminoMsg {
 export interface AminoMsgMoveUserGroup extends AminoMsg {
   readonly type: typeof MsgMoveUserGroupAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     group_id: number | undefined; // Undefined if zero
     new_section_id: number | undefined; // Undefined if zero
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 
