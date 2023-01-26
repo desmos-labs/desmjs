@@ -38,16 +38,23 @@ import {
   UserTargetAminoType,
   UserTargetTypeUrl,
 } from "../../const";
-import { fromOmitEmptyString, omitEmptyString } from "../utils";
+import {
+  fromOmitEmptyArray,
+  fromOmitEmptyString,
+  fromOmitZeroLong,
+  omitEmptyArray,
+  omitEmptyString,
+  omitZeroLong,
+} from "../utils";
 
-export function convertUserTargetToAny(target: UserTarget): Any {
+export function userTargetToAny(target: UserTarget): Any {
   return Any.fromPartial({
     typeUrl: UserTargetTypeUrl,
     value: UserTarget.encode(target).finish(),
   });
 }
 
-export function convertPostTargetToAny(target: PostTarget): Any {
+export function postTargetToAny(target: PostTarget): Any {
   return Any.fromPartial({
     typeUrl: PostTargetTypeUrl,
     value: PostTarget.encode(target).finish(),
@@ -60,13 +67,13 @@ export const reportTargetConverters: AminoConverters = {
     toAmino: (msg: Any): AminoUserTarget["value"] => {
       const target = UserTarget.decode(msg.value);
       return {
-        user: target.user,
+        user: omitEmptyString(target.user),
       };
     },
     fromAmino: (msg: AminoUserTarget["value"]): Any =>
-      convertUserTargetToAny(
+      userTargetToAny(
         UserTarget.fromPartial({
-          user: msg.user,
+          user: fromOmitEmptyString(msg.user),
         })
       ),
   },
@@ -75,13 +82,13 @@ export const reportTargetConverters: AminoConverters = {
     toAmino: (msg: Any): AminoPostTarget["value"] => {
       const target = PostTarget.decode(msg.value);
       return {
-        post_id: target.postId.toString(),
+        post_id: omitZeroLong(target.postId),
       };
     },
     fromAmino: (msg: AminoPostTarget["value"]): Any =>
-      convertPostTargetToAny(
+      postTargetToAny(
         PostTarget.fromPartial({
-          postId: Long.fromString(msg.post_id),
+          postId: fromOmitZeroLong(msg.post_id),
         })
       ),
   },
@@ -113,19 +120,19 @@ export function createReportsConverters(): AminoConverters {
       toAmino: (msg: MsgCreateReport): AminoMsgCreateReport["value"] => {
         assertDefinedAndNotNull(msg.target, "report target not defined");
         return {
-          subspace_id: msg.subspaceId.toString(),
+          subspace_id: omitZeroLong(msg.subspaceId),
           target: convertReportTargetToAmino(msg.target),
-          reasons_ids: msg.reasonsIds,
+          reasons_ids: omitEmptyArray(msg.reasonsIds),
           message: omitEmptyString(msg.message),
-          reporter: msg.reporter,
+          reporter: omitEmptyString(msg.reporter),
         };
       },
       fromAmino: (msg: AminoMsgCreateReport["value"]): MsgCreateReport => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         target: convertReportTargetFromAmino(msg.target),
-        reasonsIds: msg.reasons_ids,
+        reasonsIds: fromOmitEmptyArray(msg.reasons_ids),
         message: fromOmitEmptyString(msg.message),
-        reporter: msg.reporter,
+        reporter: fromOmitEmptyString(msg.reporter),
       }),
     },
     [MsgDeleteReportTypeUrl]: {

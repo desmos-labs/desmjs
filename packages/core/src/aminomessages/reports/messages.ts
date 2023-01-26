@@ -11,11 +11,11 @@ import {
 export interface AminoMsgCreateReport extends AminoMsg {
   readonly type: typeof MsgCreateReportAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     target: AminoReportTarget;
-    reasons_ids: number[];
+    reasons_ids: number[] | undefined; // Undefined if empty
     message: string | undefined; // Undefined if empty
-    reporter: string;
+    reporter: string | undefined; // Undefined if empty
   };
 }
 
