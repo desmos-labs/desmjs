@@ -1,4 +1,5 @@
 import {
+  MsgCreateSection,
   MsgCreateSubspace,
   MsgDeleteSubspace,
   MsgEditSubspace,
@@ -7,6 +8,7 @@ import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
 import createSubspacesConverters from "./converter";
 import {
+  MsgCreateSectionTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgDeleteSubspaceTypeUrl,
   MsgEditSubspaceTypeUrl,
@@ -89,6 +91,31 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgCreateSection", () => {
+    const testData: ConverterTestData<MsgCreateSection>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgCreateSectionTypeUrl,
+        msg: MsgCreateSection.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgCreateSectionTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          name: "Test section",
+          description: "This is a test section",
+          parentId: 1,
+          creator: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"creator":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","description":"This is a test section","name":"Test section","parent_id":1,"subspace_id":"1"}',
       },
     ];
     executeTests(testData);

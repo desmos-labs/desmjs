@@ -132,18 +132,18 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgCreateSectionTypeUrl]: {
       aminoType: MsgCreateSectionAminoType,
       toAmino: (msg: MsgCreateSection): AminoMsgCreateSection["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         name: omitEmptyString(msg.name),
         description: omitEmptyString(msg.description),
         parent_id: omitEmptyNumber(msg.parentId),
-        creator: msg.creator,
+        creator: omitEmptyString(msg.creator),
       }),
       fromAmino: (msg: AminoMsgCreateSection["value"]): MsgCreateSection => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         name: fromOmitEmptyString(msg.name),
         description: fromOmitEmptyString(msg.description),
         parentId: fromOmitEmptyNumber(msg.parent_id),
-        creator: msg.creator,
+        creator: fromOmitEmptyString(msg.creator),
       }),
     },
     [MsgEditSectionTypeUrl]: {
