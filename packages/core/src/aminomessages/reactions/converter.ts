@@ -185,18 +185,18 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgAddRegisteredReaction
       ): AminoMsgAddRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        shorthand_code: msg.shorthandCode,
-        display_value: msg.displayValue,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        shorthand_code: omitEmptyString(msg.shorthandCode),
+        display_value: omitEmptyString(msg.displayValue),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgAddRegisteredReaction["value"]
       ): MsgAddRegisteredReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        shorthandCode: msg.shorthand_code,
-        displayValue: msg.display_value,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        shorthandCode: fromOmitEmptyString(msg.shorthand_code),
+        displayValue: fromOmitEmptyString(msg.display_value),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgEditRegisteredReactionTypeUrl]: {

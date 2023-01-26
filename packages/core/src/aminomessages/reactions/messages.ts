@@ -33,10 +33,10 @@ export interface AminoMsgRemoveReaction extends AminoMsg {
 export interface AminoMsgAddRegisteredReaction extends AminoMsg {
   readonly type: typeof MsgAddRegisteredReactionAminoType;
   readonly value: {
-    subspace_id: string;
-    shorthand_code: string;
-    display_value: string;
-    user: string;
+    subspace_id: string | undefined; // Undefined if zero
+    shorthand_code: string | undefined; // Undefined if empty
+    display_value: string | undefined; // Undefined if empty
+    user: string | undefined; // Undefined if empty
   };
 }
 
