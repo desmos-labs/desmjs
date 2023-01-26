@@ -48,8 +48,14 @@ import {
   RegisteredReactionValueAminoType,
   RegisteredReactionValueTypeUrl,
 } from "../../const";
+import {
+  fromOmitEmptyString,
+  fromOmitZeroLong,
+  omitEmptyString,
+  omitZeroLong,
+} from "../utils";
 
-export function convertRegisteredReactionValueToAny(
+export function registeredReactionValueToAny(
   value: RegisteredReactionValue
 ): Any {
   return Any.fromPartial({
@@ -58,7 +64,7 @@ export function convertRegisteredReactionValueToAny(
   });
 }
 
-export function convertFreeTextValueToAny(value: FreeTextValue): Any {
+export function freeTextReactionValueToAny(value: FreeTextValue): Any {
   return Any.fromPartial({
     typeUrl: FreeTextValueTypeUrl,
     value: FreeTextValue.encode(value).finish(),
@@ -75,7 +81,7 @@ export const reactionValueConverters: AminoConverters = {
       };
     },
     fromAmino: (msg: AminoRegisteredReaction["value"]): Any =>
-      convertRegisteredReactionValueToAny(
+      registeredReactionValueToAny(
         RegisteredReactionValue.fromPartial({
           registeredReactionId: msg.registered_reaction_id,
         })
@@ -90,7 +96,7 @@ export const reactionValueConverters: AminoConverters = {
       };
     },
     fromAmino: (msg: AminoFreeTextReaction["value"]): Any =>
-      convertFreeTextValueToAny(
+      freeTextReactionValueToAny(
         FreeTextValue.fromPartial({
           text: msg.text,
         })
@@ -144,17 +150,17 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (msg: MsgAddReaction): AminoMsgAddReaction["value"] => {
         assertDefinedAndNotNull(msg.value, "reaction value not defined");
         return {
-          subspace_id: msg.subspaceId.toString(),
-          post_id: msg.postId.toString(),
+          subspace_id: omitZeroLong(msg.subspaceId),
+          post_id: omitZeroLong(msg.postId),
           value: convertReactionValueToAmino(msg.value),
-          user: msg.user,
+          user: omitEmptyString(msg.user),
         };
       },
       fromAmino: (msg: AminoMsgAddReaction["value"]): MsgAddReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
         value: convertReactionFromAmino(msg.value),
-        user: msg.user,
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgRemoveReactionTypeUrl]: {

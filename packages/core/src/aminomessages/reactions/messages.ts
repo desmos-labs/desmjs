@@ -13,10 +13,10 @@ import {
 export interface AminoMsgAddReaction extends AminoMsg {
   readonly type: typeof MsgAddReactionAminoType;
   readonly value: {
-    subspace_id: string;
-    post_id: string;
+    subspace_id: string | undefined; // Undefined if zero
+    post_id: string | undefined; // Undefined if zero
     value: AminoReaction;
-    user: string;
+    user: string | undefined; // Undefined if empty
   };
 }
 
