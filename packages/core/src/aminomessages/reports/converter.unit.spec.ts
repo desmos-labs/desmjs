@@ -1,4 +1,5 @@
 import {
+  MsgAddReason,
   MsgCreateReport,
   MsgDeleteReport,
   MsgSupportStandardReason,
@@ -11,6 +12,7 @@ import {
   userTargetToAny,
 } from "./converter";
 import {
+  MsgAddReasonTypeUrl,
   MsgCreateReportTypeUrl,
   MsgDeleteReportTypeUrl,
   MsgSupportStandardReasonTypeUrl,
@@ -109,6 +111,30 @@ describe("Reports converter", () => {
         },
         expectedJsonSerialized:
           '{"signer":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","standard_reason_id":1,"subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgAddReason", () => {
+    const testData: ConverterTestData<MsgAddReason>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgAddReasonTypeUrl,
+        msg: MsgAddReason.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgAddReasonTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          title: "Spam",
+          description: "This post is spam or the user is a spammer",
+          signer: "cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47",
+        },
+        expectedJsonSerialized:
+          '{"description":"This post is spam or the user is a spammer","signer":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","subspace_id":"1","title":"Spam"}',
       },
     ];
     executeTests(testData);

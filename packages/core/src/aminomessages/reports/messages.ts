@@ -40,10 +40,10 @@ export interface AminoMsgSupportStandardReason extends AminoMsg {
 export interface AminoMsgAddReason extends AminoMsg {
   readonly type: typeof MsgAddReasonAminoType;
   readonly value: {
-    subspace_id: string;
-    title: string;
+    subspace_id: string | undefined; // Undefined if zero
+    title: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 

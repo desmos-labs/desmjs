@@ -170,16 +170,16 @@ export function createReportsConverters(): AminoConverters {
     [MsgAddReasonTypeUrl]: {
       aminoType: MsgAddReasonAminoType,
       toAmino: (msg: MsgAddReason): AminoMsgAddReason["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        title: msg.title,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        title: omitEmptyString(msg.title),
         description: omitEmptyString(msg.description),
-        signer: msg.signer,
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgAddReason["value"]): MsgAddReason => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        title: msg.title,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        title: fromOmitEmptyString(msg.title),
         description: fromOmitEmptyString(msg.description),
-        signer: msg.signer,
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgRemoveReasonTypeUrl]: {
