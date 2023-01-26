@@ -2,6 +2,7 @@ import {
   MsgAddReason,
   MsgCreateReport,
   MsgDeleteReport,
+  MsgRemoveReason,
   MsgSupportStandardReason,
 } from "@desmoslabs/desmjs-types/desmos/reports/v1/msgs";
 import Long from "long";
@@ -15,6 +16,7 @@ import {
   MsgAddReasonTypeUrl,
   MsgCreateReportTypeUrl,
   MsgDeleteReportTypeUrl,
+  MsgRemoveReasonTypeUrl,
   MsgSupportStandardReasonTypeUrl,
 } from "../../const";
 
@@ -135,6 +137,29 @@ describe("Reports converter", () => {
         },
         expectedJsonSerialized:
           '{"description":"This post is spam or the user is a spammer","signer":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","subspace_id":"1","title":"Spam"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgRemoveReason", () => {
+    const testData: ConverterTestData<MsgRemoveReason>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgRemoveReasonTypeUrl,
+        msg: MsgRemoveReason.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgRemoveReasonTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          reasonId: 1,
+          signer: "cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47",
+        },
+        expectedJsonSerialized:
+          '{"reason_id":1,"signer":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

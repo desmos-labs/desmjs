@@ -50,8 +50,8 @@ export interface AminoMsgAddReason extends AminoMsg {
 export interface AminoMsgRemoveReason extends AminoMsg {
   readonly type: typeof MsgRemoveReasonAminoType;
   readonly value: {
-    subspace_id: string;
-    reason_id: number;
-    signer: string;
+    subspace_id: string | undefined; // Undefined if zero
+    reason_id: number | undefined; // Undefined if zero
+    signer: string | undefined; // Undefined if empty
   };
 }
