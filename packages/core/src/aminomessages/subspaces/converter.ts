@@ -16,7 +16,6 @@ import {
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
-import Long, { fromString } from "long";
 import {
   AminoMsgAddUserToUserGroup,
   AminoMsgCreateSection,
