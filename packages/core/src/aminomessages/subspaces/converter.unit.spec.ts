@@ -1,4 +1,5 @@
 import {
+  MsgAddUserToUserGroup,
   MsgCreateSection,
   MsgCreateSubspace,
   MsgCreateUserGroup,
@@ -16,6 +17,7 @@ import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
 import createSubspacesConverters from "./converter";
 import {
+  MsgAddUserToUserGroupTypeUrl,
   MsgCreateSectionTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgCreateUserGroupTypeUrl,
@@ -327,6 +329,30 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"group_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgAddUserToUserGroup", () => {
+    const testData: ConverterTestData<MsgAddUserToUserGroup>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgAddUserToUserGroupTypeUrl,
+        msg: MsgAddUserToUserGroup.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgAddUserToUserGroupTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          groupId: 1,
+          user: "cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53",
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"group_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1","user":"cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53"}',
       },
     ];
     executeTests(testData);
