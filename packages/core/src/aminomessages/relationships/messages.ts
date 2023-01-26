@@ -9,9 +9,9 @@ import {
 export interface AminoMsgCreateRelationship extends AminoMsg {
   readonly type: typeof MsgCreateRelationshipAminoType;
   readonly value: {
-    signer: string;
-    counterparty: string;
-    subspace_id: string;
+    signer: string | undefined; // Undefined if empty
+    counterparty: string | undefined; // Undefined if empty
+    subspace_id: string | undefined; // Undefined if zero
   };
 }
 
