@@ -11,6 +11,7 @@ import {
   MsgEditUserGroup,
   MsgMoveSection,
   MsgMoveUserGroup,
+  MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import Long from "long";
@@ -29,6 +30,7 @@ import {
   MsgEditUserGroupTypeUrl,
   MsgMoveSectionTypeUrl,
   MsgMoveUserGroupTypeUrl,
+  MsgRemoveUserFromUserGroupTypeUrl,
   MsgSetUserGroupPermissionsTypeUrl,
 } from "../../const";
 
@@ -345,6 +347,30 @@ describe("Subspaces converter", () => {
       {
         name: "complete message",
         typeUrl: MsgAddUserToUserGroupTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          groupId: 1,
+          user: "cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53",
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"group_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1","user":"cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgRemoveUserFromUserGroup", () => {
+    const testData: ConverterTestData<MsgRemoveUserFromUserGroup>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgRemoveUserFromUserGroupTypeUrl,
+        msg: MsgRemoveUserFromUserGroup.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgRemoveUserFromUserGroupTypeUrl,
         msg: {
           subspaceId: Long.fromNumber(1),
           groupId: 1,

@@ -164,10 +164,10 @@ export interface AminoMsgAddUserToUserGroup extends AminoMsg {
 export interface AminoMsgRemoveUserFromUserGroup extends AminoMsg {
   readonly type: typeof MsgRemoveUserFromUserGroupAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     group_id: number | undefined; // Undefined if zero
-    user: string;
-    signer: string;
+    user: string | undefined; // Undefined if empty
+    signer: string | undefined; // Undefined if empy
   };
 }
 
