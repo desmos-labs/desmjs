@@ -1,5 +1,6 @@
 import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
+  MsgBlockUser,
   MsgCreateRelationship,
   MsgDeleteRelationship,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
@@ -7,6 +8,7 @@ import Long from "long";
 import createPostsConverters from "../posts/converter";
 import createRelationshipsConverters from "./converter";
 import {
+  MsgBlockUserTypeUrl,
   MsgCreateRelationshipTypeUrl,
   MsgDeleteRelationshipTypeUrl,
 } from "../../const";
@@ -83,6 +85,30 @@ describe("Relationships converter", () => {
         },
         expectedJsonSerialized:
           '{"counterparty":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","signer":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgBlockUser", () => {
+    const testData: TestData<MsgBlockUser>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgBlockUserTypeUrl,
+        msg: MsgBlockUser.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgBlockUserTypeUrl,
+        msg: {
+          blocker: "cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns",
+          blocked: "cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47",
+          reason: "reason",
+          subspaceId: Long.fromNumber(1),
+        },
+        expectedJsonSerialized:
+          '{"blocked":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","blocker":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","reason":"reason","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

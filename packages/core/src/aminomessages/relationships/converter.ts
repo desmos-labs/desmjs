@@ -71,16 +71,16 @@ export function createRelationshipsConverters(): AminoConverters {
     [MsgBlockUserTypeUrl]: {
       aminoType: MsgBlockUserAminoType,
       toAmino: (msg: MsgBlockUser): AminoMsgBlockUser["value"] => ({
-        blocker: msg.blocker,
-        blocked: msg.blocked,
+        blocker: omitEmptyString(msg.blocker),
+        blocked: omitEmptyString(msg.blocked),
         reason: omitEmptyString(msg.reason),
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
       }),
       fromAmino: (msg: AminoMsgBlockUser["value"]): MsgBlockUser => ({
-        blocker: msg.blocker,
-        blocked: msg.blocked,
+        blocker: fromOmitEmptyString(msg.blocker),
+        blocked: fromOmitEmptyString(msg.blocked),
         reason: fromOmitEmptyString(msg.reason),
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
       }),
     },
     [MsgUnblockUserTypeUrl]: {

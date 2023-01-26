@@ -27,10 +27,10 @@ export interface AminoMsgDeleteRelationship extends AminoMsg {
 export interface AminoMsgBlockUser extends AminoMsg {
   readonly type: typeof MsgBlockUserAminoType;
   readonly value: {
-    blocker: string;
-    blocked: string;
+    blocker: string | undefined; // Undefined if empty
+    blocked: string | undefined; // Undefined if empty
     reason: string | undefined; // Undefined if empty
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
   };
 }
 
