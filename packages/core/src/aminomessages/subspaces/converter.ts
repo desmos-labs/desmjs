@@ -83,18 +83,18 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgCreateSubspaceTypeUrl]: {
       aminoType: MsgCreateSubspaceAminoType,
       toAmino: (msg: MsgCreateSubspace): AminoMsgCreateSubspace["value"] => ({
-        name: msg.name,
+        name: omitEmptyString(msg.name),
         description: omitEmptyString(msg.description),
         treasury: omitEmptyString(msg.treasury),
         owner: omitEmptyString(msg.owner),
-        creator: msg.creator,
+        creator: omitEmptyString(msg.creator),
       }),
       fromAmino: (msg: AminoMsgCreateSubspace["value"]): MsgCreateSubspace => ({
-        name: msg.name,
+        name: fromOmitEmptyString(msg.name),
         description: fromOmitEmptyString(msg.description),
         treasury: fromOmitEmptyString(msg.treasury),
         owner: fromOmitEmptyString(msg.owner),
-        creator: msg.creator,
+        creator: fromOmitEmptyString(msg.creator),
       }),
     },
     [MsgEditSubspaceTypeUrl]: {

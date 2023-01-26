@@ -29,11 +29,11 @@ export interface AminoGenericSubspaceAuthorization extends AminoMsg {
 export interface AminoMsgCreateSubspace extends AminoMsg {
   readonly type: typeof MsgCreateSubspaceAminoType;
   readonly value: {
-    name: string;
+    name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
     treasury: string | undefined; // Undefined if empty
     owner: string | undefined; // Undefined if empty
-    creator: string;
+    creator: string | undefined; // Undefined if empty
   };
 }
 
