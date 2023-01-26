@@ -174,10 +174,10 @@ export interface AminoMsgRemoveUserFromUserGroup extends AminoMsg {
 export interface AminoMsgSetUserPermissions extends AminoMsg {
   readonly type: typeof MsgSetUserPermissionsAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     section_id: number | undefined; // Undefined if zero
-    user: string;
+    user: string | undefined; // Undefined if empty
     permissions: string[] | undefined; // Undefined if empty
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }

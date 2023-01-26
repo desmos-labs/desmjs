@@ -323,20 +323,20 @@ export function createSubspacesConverters(): AminoConverters {
       toAmino: (
         msg: MsgSetUserPermissions
       ): AminoMsgSetUserPermissions["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         section_id: omitEmptyNumber(msg.sectionId),
-        user: msg.user,
+        user: omitEmptyString(msg.user),
         permissions: omitEmptyArray(msg.permissions),
-        signer: msg.signer,
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (
         msg: AminoMsgSetUserPermissions["value"]
       ): MsgSetUserPermissions => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         sectionId: fromOmitEmptyNumber(msg.section_id),
-        user: msg.user,
+        user: fromOmitEmptyString(msg.user),
         permissions: fromOmitEmptyArray(msg.permissions),
-        signer: msg.signer,
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
   };

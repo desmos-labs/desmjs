@@ -13,6 +13,7 @@ import {
   MsgMoveUserGroup,
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
+  MsgSetUserPermissions,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
@@ -32,6 +33,7 @@ import {
   MsgMoveUserGroupTypeUrl,
   MsgRemoveUserFromUserGroupTypeUrl,
   MsgSetUserGroupPermissionsTypeUrl,
+  MsgSetUserPermissionsTypeUrl,
 } from "../../const";
 
 describe("Subspaces converter", () => {
@@ -379,6 +381,31 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"group_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1","user":"cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgSetUserPermissions", () => {
+    const testData: ConverterTestData<MsgSetUserPermissions>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgSetUserPermissionsTypeUrl,
+        msg: MsgSetUserPermissions.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgSetUserPermissionsTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          sectionId: 1,
+          user: "cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53",
+          permissions: ["EDIT_SUBSPACE"],
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"permissions":["EDIT_SUBSPACE"],"section_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1","user":"cosmos1x5pjlvufs4znnhhkwe8v4tw3kz30f3lxgwza53"}',
       },
     ];
     executeTests(testData);
