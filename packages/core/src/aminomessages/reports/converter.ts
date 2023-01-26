@@ -40,9 +40,11 @@ import {
 } from "../../const";
 import {
   fromOmitEmptyArray,
+  fromOmitEmptyNumber,
   fromOmitEmptyString,
   fromOmitZeroLong,
   omitEmptyArray,
+  omitEmptyNumber,
   omitEmptyString,
   omitZeroLong,
 } from "../utils";
@@ -138,14 +140,14 @@ export function createReportsConverters(): AminoConverters {
     [MsgDeleteReportTypeUrl]: {
       aminoType: MsgDeleteReportAminoType,
       toAmino: (msg: MsgDeleteReport): AminoMsgDeleteReport["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        report_id: msg.reportId.toString(),
-        signer: msg.signer,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        report_id: omitZeroLong(msg.reportId),
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgDeleteReport["value"]): MsgDeleteReport => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        reportId: Long.fromString(msg.report_id),
-        signer: msg.signer,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        reportId: fromOmitZeroLong(msg.report_id),
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgSupportStandardReasonTypeUrl]: {

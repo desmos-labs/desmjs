@@ -22,9 +22,9 @@ export interface AminoMsgCreateReport extends AminoMsg {
 export interface AminoMsgDeleteReport extends AminoMsg {
   readonly type: typeof MsgDeleteReportAminoType;
   readonly value: {
-    subspace_id: string;
-    report_id: string;
-    signer: string;
+    subspace_id: string | undefined; // Undefined if zero
+    report_id: string | undefined; // Undefined if zero
+    signer: string | undefined; // Undefined if empty
   };
 }
 
