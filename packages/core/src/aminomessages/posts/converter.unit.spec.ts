@@ -1,4 +1,3 @@
-import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
   MsgAddPostAttachment,
   MsgAnswerPoll,

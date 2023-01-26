@@ -1,4 +1,3 @@
-import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
   MsgBlockUser,
   MsgCreateRelationship,
@@ -6,7 +5,6 @@ import {
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
 import Long from "long";
-import createPostsConverters from "../posts/converter";
 import createRelationshipsConverters from "./converter";
 import {
   MsgBlockUserTypeUrl,

@@ -15,7 +15,6 @@ import {
   RegisteredReactionValue,
   RegisteredReactionValueParams,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/models";
-import Long from "long";
 import {
   AminoFreeTextReaction,
   AminoFreeTextValueParams,

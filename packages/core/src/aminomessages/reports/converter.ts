@@ -12,7 +12,6 @@ import {
   PostTarget,
   UserTarget,
 } from "@desmoslabs/desmjs-types/desmos/reports/v1/models";
-import Long from "long";
 import { AminoPostTarget, AminoReportTarget, AminoUserTarget } from "./types";
 import {
   AminoMsgAddReason,

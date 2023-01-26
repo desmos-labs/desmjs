@@ -1,5 +1,4 @@
 import Long from "long";
-import { fromRfc3339, toRfc3339 } from "@cosmjs/encoding";
 import {
   fromRfc3339WithNanoseconds,
   toRfc3339WithNanoseconds,

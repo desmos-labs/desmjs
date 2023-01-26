@@ -1,5 +1,4 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { RegisteredReactionValueParams } from "@desmoslabs/desmjs-types/build/desmos/reactions/v1/models";
 import {
   AminoFreeTextValueParams,
   AminoReaction,

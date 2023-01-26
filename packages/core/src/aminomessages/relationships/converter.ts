@@ -5,7 +5,6 @@ import {
   MsgDeleteRelationship,
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
-import Long from "long";
 import {
   AminoMsgBlockUser,
   AminoMsgCreateRelationship,
