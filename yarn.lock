@@ -2356,7 +2356,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.11.34
+    "@keplr-wallet/types": 0.11.37
     "@types/jest": ^29.4.0
     "@types/node": ^18.11.18
     "@types/pino": ^7.0.5
@@ -2403,7 +2403,7 @@ __metadata:
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.3.1
     "@walletconnect/types": ^2.1.4
-    "@walletconnect/utils": ^2.3.1
+    "@walletconnect/utils": ^2.3.2
     babel-jest: ^29.4.0
     cosmjs-types: ^0.5.2
     dotenv: ^16.0.3
@@ -2439,7 +2439,7 @@ __metadata:
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^2.3.1
+    "@walletconnect/utils": ^2.3.2
     babel-jest: ^29.4.0
     cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.2.0
@@ -2487,7 +2487,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.2.4
     "@web3auth/modal": ^4.2.3
-    "@web3auth/ui": ^4.2.3
+    "@web3auth/ui": ^4.2.4
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
     typescript: ^4.9.4
@@ -3992,13 +3992,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.11.34":
-  version: 0.11.34
-  resolution: "@keplr-wallet/types@npm:0.11.34"
+"@keplr-wallet/types@npm:0.11.37":
+  version: 0.11.37
+  resolution: "@keplr-wallet/types@npm:0.11.37"
   dependencies:
     axios: ^0.27.2
     long: ^4.0.0
-  checksum: ccb557106f1cdf16bc88892ac2c391a7201f85b5085dc2518228244ef90f89ad03223f5f2f356cd286ceaf14e3c503695ce451be8932d8dcbe75f3037637edbe
+  checksum: b0f59fad5217928c158035552f1ce4e3817c7b9e439312eaa667690dd35712729b377b964f995ee07faf46ec585155c1c9473eac3b691c764b05a98430f22207
   languageName: node
   linkType: hard
 
@@ -6408,6 +6408,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/types@npm:2.3.2":
+  version: 2.3.2
+  resolution: "@walletconnect/types@npm:2.3.2"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.0
+    "@walletconnect/jsonrpc-types": ^1.0.2
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    events: ^3.3.0
+  checksum: 375ac13508d84aba947bfaf6f265f520f3f1c67ff80db81dbcdd07a30fe9ac137972bc7b30a3a73559511c57475d1c828c1701ba0f6faa656033ff72be38a3f6
+  languageName: node
+  linkType: hard
+
 "@walletconnect/types@npm:^1.6.6, @walletconnect/types@npm:^1.8.0, @walletconnect/types@npm:~1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/types@npm:1.8.0"
@@ -6429,7 +6443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.3.1, @walletconnect/utils@npm:^2.3.1":
+"@walletconnect/utils@npm:2.3.1":
   version: 2.3.1
   resolution: "@walletconnect/utils@npm:2.3.1"
   dependencies:
@@ -6464,6 +6478,29 @@ __metadata:
     js-sha3: 0.8.0
     query-string: 6.13.5
   checksum: 41b21fc6cb29c0714579dac8da988c14985fc0fcc0c5f02979e72509f42bf658e3ca8ea22ac4a50a9753d26b630d38a6b5fec84131a9eff0b78318b809b203dd
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "@walletconnect/utils@npm:2.3.2"
+  dependencies:
+    "@stablelib/chacha20poly1305": 1.0.1
+    "@stablelib/hkdf": 1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha256": 1.0.1
+    "@stablelib/x25519": ^1.0.3
+    "@walletconnect/jsonrpc-utils": ^1.0.4
+    "@walletconnect/relay-api": ^1.0.7
+    "@walletconnect/safe-json": ^1.0.1
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.3.2
+    "@walletconnect/window-getters": ^1.0.1
+    "@walletconnect/window-metadata": ^1.0.1
+    detect-browser: 5.3.0
+    query-string: 7.1.1
+    uint8arrays: 3.1.0
+  checksum: fdac3b544cf0eea1505e85adf1ea00035547b5f83813c9b5cc21ae4a7ce0b4a3cd02b3a88cd884ad57ecd76cc840c94a1145ea4be0c59c5f88fc19a65c385f3d
   languageName: node
   linkType: hard
 
@@ -6767,6 +6804,29 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: b283ee1370574a2bce80ee940d1739b7c4a3d3c6584b6e77239189ba3b7a0a7ef3f7867c20cf5f49d596b00bb58f901fc2b26338fb21bf0726395f2d62ea4d52
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^4.2.4":
+  version: 4.2.4
+  resolution: "@web3auth/ui@npm:4.2.4"
+  dependencies:
+    "@toruslabs/openlogin": ^2.12.0
+    "@toruslabs/openlogin-jrpc": ^2.9.0
+    "@web3auth/base": ^4.2.4
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^22.4.9
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^12.1.4
+    react-qrcode-logo: ^2.8.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: 1cde9d5580f2c92f5183481554de545d3b41c6ea4467646ae72f1ee5da569bbc2f882011519871ac0379d2693e02456b190feb17b88b0153be5979d5f2607b2c
   languageName: node
   linkType: hard
 
