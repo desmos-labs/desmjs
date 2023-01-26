@@ -49,8 +49,10 @@ import {
   RegisteredReactionValueTypeUrl,
 } from "../../const";
 import {
+  fromOmitEmptyNumber,
   fromOmitEmptyString,
   fromOmitZeroLong,
+  omitEmptyNumber,
   omitEmptyString,
   omitZeroLong,
 } from "../utils";
@@ -166,16 +168,16 @@ export function createReactionsConverters(): AminoConverters {
     [MsgRemoveReactionTypeUrl]: {
       aminoType: MsgRemoveReactionAminoType,
       toAmino: (msg: MsgRemoveReaction): AminoMsgRemoveReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        reaction_id: msg.reactionId,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        reaction_id: omitEmptyNumber(msg.reactionId),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (msg: AminoMsgRemoveReaction["value"]): MsgRemoveReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        reactionId: msg.reaction_id,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        reactionId: fromOmitEmptyNumber(msg.reaction_id),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgAddRegisteredReactionTypeUrl]: {
