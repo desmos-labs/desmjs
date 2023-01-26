@@ -4,6 +4,7 @@ import {
   MsgAddRegisteredReaction,
   MsgEditRegisteredReaction,
   MsgRemoveReaction,
+  MsgRemoveRegisteredReaction,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/msgs";
 import Long from "long";
 import createPostsConverters from "../posts/converter";
@@ -16,6 +17,7 @@ import {
   MsgAddRegisteredReactionTypeUrl,
   MsgEditRegisteredReactionTypeUrl,
   MsgRemoveReactionTypeUrl,
+  MsgRemoveRegisteredReactionTypeUrl,
 } from "../../const";
 
 interface TestData<T> {
@@ -161,6 +163,29 @@ describe("Reactions converter", () => {
         },
         expectedJsonSerialized:
           '{"display_value":"https://example.com?images=hello.png","registered_reaction_id":1,"shorthand_code":":hello:","subspace_id":"1","user":"cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgRemoveRegisteredReaction", () => {
+    const testData: TestData<MsgRemoveRegisteredReaction>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgRemoveRegisteredReactionTypeUrl,
+        msg: MsgRemoveRegisteredReaction.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "compelte message",
+        typeUrl: MsgRemoveRegisteredReactionTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          registeredReactionId: 1,
+          user: "cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc",
+        },
+        expectedJsonSerialized:
+          '{"registered_reaction_id":1,"subspace_id":"1","user":"cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc"}',
       },
     ];
     executeTests(testData);

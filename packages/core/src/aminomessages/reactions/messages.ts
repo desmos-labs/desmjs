@@ -54,9 +54,9 @@ export interface AminoMsgEditRegisteredReaction extends AminoMsg {
 export interface AminoMsgRemoveRegisteredReaction extends AminoMsg {
   readonly type: typeof MsgRemoveRegisteredReactionAminoType;
   readonly value: {
-    subspace_id: string;
-    registered_reaction_id: number;
-    user: string;
+    subspace_id: string | undefined; // Undefined if zero
+    registered_reaction_id: number | undefined; // Undefined if zero
+    user: string | undefined; // Undefined if empty
   };
 }
 

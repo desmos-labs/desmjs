@@ -225,16 +225,16 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgRemoveRegisteredReaction
       ): AminoMsgRemoveRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        registered_reaction_id: msg.registeredReactionId,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        registered_reaction_id: omitEmptyNumber(msg.registeredReactionId),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgRemoveRegisteredReaction["value"]
       ): MsgRemoveRegisteredReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        registeredReactionId: msg.registered_reaction_id,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        registeredReactionId: fromOmitEmptyNumber(msg.registered_reaction_id),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgSetReactionsParamsTypeUrl]: {
