@@ -101,13 +101,13 @@ export interface AminoMsgDeleteSection extends AminoMsg {
 export interface AminoMsgCreateUserGroup extends AminoMsg {
   readonly type: typeof MsgCreateUserGroupAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     section_id: number | undefined; // Undefined if zero
     name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
     default_permissions: string[] | undefined; // Undefined if empty
     initial_members: string[] | undefined; // Undefined if empty
-    creator: string;
+    creator: string | undefined; // Undefined if empty
   };
 }
 

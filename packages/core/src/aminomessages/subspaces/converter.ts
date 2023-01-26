@@ -194,24 +194,24 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgCreateUserGroupTypeUrl]: {
       aminoType: MsgCreateUserGroupAminoType,
       toAmino: (msg: MsgCreateUserGroup): AminoMsgCreateUserGroup["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         section_id: omitEmptyNumber(msg.sectionId),
         name: omitEmptyString(msg.name),
         description: omitEmptyString(msg.description),
         default_permissions: omitEmptyArray(msg.defaultPermissions),
         initial_members: omitEmptyArray(msg.initialMembers),
-        creator: msg.creator,
+        creator: omitEmptyString(msg.creator),
       }),
       fromAmino: (
         msg: AminoMsgCreateUserGroup["value"]
       ): MsgCreateUserGroup => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         sectionId: fromOmitEmptyNumber(msg.section_id),
         name: fromOmitEmptyString(msg.name),
         description: fromOmitEmptyString(msg.description),
         defaultPermissions: fromOmitEmptyArray(msg.default_permissions),
         initialMembers: fromOmitEmptyArray(msg.initial_members),
-        creator: msg.creator,
+        creator: fromOmitEmptyString(msg.creator),
       }),
     },
     [MsgEditUserGroupTypeUrl]: {
