@@ -40,12 +40,12 @@ export interface AminoMsgCreateSubspace extends AminoMsg {
 export interface AminoMsgEditSubspace extends AminoMsg {
   readonly type: typeof MsgEditSubspaceAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
     treasury: string | undefined; // Undefined if empty
     owner: string | undefined; // Undefined if empty
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 

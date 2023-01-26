@@ -70,9 +70,11 @@ import {
   fromOmitEmptyArray,
   fromOmitEmptyNumber,
   fromOmitEmptyString,
+  fromOmitZeroLong,
   omitEmptyArray,
   omitEmptyNumber,
   omitEmptyString,
+  omitZeroLong,
 } from "../utils";
 
 /**
@@ -100,20 +102,20 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgEditSubspaceTypeUrl]: {
       aminoType: MsgEditSubspaceAminoType,
       toAmino: (msg: MsgEditSubspace): AminoMsgEditSubspace["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         name: omitEmptyString(msg.name),
         description: omitEmptyString(msg.description),
         treasury: omitEmptyString(msg.treasury),
         owner: omitEmptyString(msg.owner),
-        signer: msg.signer,
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgEditSubspace["value"]): MsgEditSubspace => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         name: fromOmitEmptyString(msg.name),
         description: fromOmitEmptyString(msg.description),
         treasury: fromOmitEmptyString(msg.treasury),
         owner: fromOmitEmptyString(msg.owner),
-        signer: msg.signer,
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgDeleteSubspaceTypeUrl]: {

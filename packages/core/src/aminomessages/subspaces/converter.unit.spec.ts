@@ -1,7 +1,11 @@
-import { MsgCreateSubspace } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
+import {
+  MsgCreateSubspace,
+  MsgEditSubspace,
+} from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
+import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
 import createSubspacesConverters from "./converter";
-import { MsgCreateSubspaceTypeUrl } from "../../const";
+import { MsgCreateSubspaceTypeUrl, MsgEditSubspaceTypeUrl } from "../../const";
 
 describe("Subspaces converter", () => {
   const converters = createSubspacesConverters();
@@ -32,6 +36,32 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"creator":"cosmos1qzskhrcjnkdz2ln4yeafzsdwht8ch08j4wed69","description":"This is a test subspace","name":"Test subspace","owner":"cosmos1lv3e0l66rr68k5l74mnrv4j9kyny6cz27pvnez","treasury":"cosmos1dkan28w7t65xe3fr44wxr4v86wnwuwh5tun2w2"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgEditSubspace", () => {
+    const testData: ConverterTestData<MsgEditSubspace>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgEditSubspaceTypeUrl,
+        msg: MsgEditSubspace.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgEditSubspaceTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          name: "This is a new name",
+          description: "This is a new description",
+          treasury: "cosmos1dkan28w7t65xe3fr44wxr4v86wnwuwh5tun2w2",
+          owner: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"description":"This is a new description","name":"This is a new name","owner":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1","treasury":"cosmos1dkan28w7t65xe3fr44wxr4v86wnwuwh5tun2w2"}',
       },
     ];
     executeTests(testData);
