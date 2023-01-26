@@ -19,26 +19,19 @@ import {
   MsgRemoveRegisteredReactionTypeUrl,
   MsgSetReactionsParamsTypeUrl,
 } from "../../const";
-import { runConverterTest } from "../testutils";
-
-interface TestData<T> {
-  readonly name: string;
-  readonly typeUrl: string;
-  readonly msg: T;
-  readonly expectedJsonSerialized: string;
-}
+import { ConverterTestData, runConverterTest } from "../testutils";
 
 describe("Reactions converter", () => {
   const converters = createReactionsConverters();
 
-  function executeTests(data: TestData<any>[]) {
+  function executeTests(data: ConverterTestData<any>[]) {
     data.forEach((test) => {
       it(test.name, runConverterTest(converters, test));
     });
   }
 
   describe("MsgAddPostReaction", () => {
-    const testData: TestData<MsgAddReaction>[] = [
+    const testData: ConverterTestData<MsgAddReaction>[] = [
       {
         name: "empty message",
         typeUrl: MsgAddReactionTypeUrl,
@@ -86,7 +79,7 @@ describe("Reactions converter", () => {
   });
 
   describe("MsgRemoveReaction", () => {
-    const testData: TestData<MsgRemoveReaction>[] = [
+    const testData: ConverterTestData<MsgRemoveReaction>[] = [
       {
         name: "empty message",
         typeUrl: MsgRemoveReactionTypeUrl,
@@ -110,7 +103,7 @@ describe("Reactions converter", () => {
   });
 
   describe("MsgAddRegisteredReaction", () => {
-    const testData: TestData<MsgAddRegisteredReaction>[] = [
+    const testData: ConverterTestData<MsgAddRegisteredReaction>[] = [
       {
         name: "empty message",
         typeUrl: MsgAddRegisteredReactionTypeUrl,
@@ -134,7 +127,7 @@ describe("Reactions converter", () => {
   });
 
   describe("MsgEditRegisteredReaction", () => {
-    const testData: TestData<MsgEditRegisteredReaction>[] = [
+    const testData: ConverterTestData<MsgEditRegisteredReaction>[] = [
       {
         name: "empty message",
         typeUrl: MsgEditRegisteredReactionTypeUrl,
@@ -159,7 +152,7 @@ describe("Reactions converter", () => {
   });
 
   describe("MsgRemoveRegisteredReaction", () => {
-    const testData: TestData<MsgRemoveRegisteredReaction>[] = [
+    const testData: ConverterTestData<MsgRemoveRegisteredReaction>[] = [
       {
         name: "empty message",
         typeUrl: MsgRemoveRegisteredReactionTypeUrl,
@@ -182,7 +175,7 @@ describe("Reactions converter", () => {
   });
 
   describe("MsgSetReactionsParams", () => {
-    const testData: TestData<MsgSetReactionsParams>[] = [
+    const testData: ConverterTestData<MsgSetReactionsParams>[] = [
       {
         name: "empty message",
         typeUrl: MsgSetReactionsParamsTypeUrl,

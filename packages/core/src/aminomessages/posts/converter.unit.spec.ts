@@ -20,26 +20,19 @@ import {
   MsgEditPostTypeUrl,
   MsgRemovePostAttachmentTypeUrl,
 } from "../../const";
-import { runConverterTest } from "../testutils";
-
-interface TestData<T> {
-  readonly name: string;
-  readonly typeUrl: string;
-  readonly msg: T;
-  readonly expectedJsonSerialized: string;
-}
+import { ConverterTestData, runConverterTest } from "../testutils";
 
 describe("Posts converter", () => {
   const converters = createPostsConverters();
 
-  function executeTests(data: TestData<any>[]) {
+  function executeTests(data: ConverterTestData<any>[]) {
     data.forEach((test) => {
       it(test.name, runConverterTest(converters, test));
     });
   }
 
   describe("MsgCreatePost", () => {
-    const testData: TestData<MsgCreatePost>[] = [
+    const testData: ConverterTestData<MsgCreatePost>[] = [
       {
         name: "empty message",
         typeUrl: MsgCreatePostTypeUrl,
@@ -178,7 +171,7 @@ describe("Posts converter", () => {
   });
 
   describe("MsgEditPost", () => {
-    const testData: TestData<MsgEditPost>[] = [
+    const testData: ConverterTestData<MsgEditPost>[] = [
       {
         name: "empty message",
         typeUrl: MsgEditPostTypeUrl,
@@ -227,7 +220,7 @@ describe("Posts converter", () => {
   });
 
   describe("MsgDeletePost", () => {
-    const testData: TestData<MsgDeletePost>[] = [
+    const testData: ConverterTestData<MsgDeletePost>[] = [
       {
         name: "empty message",
         typeUrl: MsgDeletePostTypeUrl,
@@ -250,7 +243,7 @@ describe("Posts converter", () => {
   });
 
   describe("MsgAddPostAttachment", () => {
-    const testData: TestData<MsgAddPostAttachment>[] = [
+    const testData: ConverterTestData<MsgAddPostAttachment>[] = [
       {
         name: "empty message",
         typeUrl: MsgAddPostAttachmentTypeUrl,
@@ -286,7 +279,7 @@ describe("Posts converter", () => {
   });
 
   describe("MsgRemovePostAttachment", () => {
-    const testData: TestData<MsgRemovePostAttachment>[] = [
+    const testData: ConverterTestData<MsgRemovePostAttachment>[] = [
       {
         name: "empty message",
         typeUrl: MsgRemovePostAttachmentTypeUrl,
@@ -310,7 +303,7 @@ describe("Posts converter", () => {
   });
 
   describe("MsgAnswerPoll", () => {
-    const testData: TestData<MsgAnswerPoll>[] = [
+    const testData: ConverterTestData<MsgAnswerPoll>[] = [
       {
         name: "empty message",
         typeUrl: MsgAnswerPollTypeUrl,
