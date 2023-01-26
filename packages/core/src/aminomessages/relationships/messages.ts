@@ -37,8 +37,8 @@ export interface AminoMsgBlockUser extends AminoMsg {
 export interface AminoMsgUnblockUser extends AminoMsg {
   readonly type: typeof MsgUnblockUserAminoType;
   readonly value: {
-    blocker: string;
-    blocked: string;
-    subspace_id: string;
+    blocker: string | undefined; // Undefined if empty
+    blocked: string | undefined; // Undefined if empty
+    subspace_id: string | undefined; // Undefined if zero
   };
 }
