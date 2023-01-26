@@ -1,11 +1,16 @@
 import {
   MsgCreateSubspace,
+  MsgDeleteSubspace,
   MsgEditSubspace,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import Long from "long";
 import { ConverterTestData, runConverterTest } from "../testutils";
 import createSubspacesConverters from "./converter";
-import { MsgCreateSubspaceTypeUrl, MsgEditSubspaceTypeUrl } from "../../const";
+import {
+  MsgCreateSubspaceTypeUrl,
+  MsgDeleteSubspaceTypeUrl,
+  MsgEditSubspaceTypeUrl,
+} from "../../const";
 
 describe("Subspaces converter", () => {
   const converters = createSubspacesConverters();
@@ -62,6 +67,28 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"description":"This is a new description","name":"This is a new name","owner":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1","treasury":"cosmos1dkan28w7t65xe3fr44wxr4v86wnwuwh5tun2w2"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgDeleteSubspace", () => {
+    const testData: ConverterTestData<MsgDeleteSubspace>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgDeleteSubspaceTypeUrl,
+        msg: MsgDeleteSubspace.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgDeleteSubspaceTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

@@ -121,12 +121,12 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgDeleteSubspaceTypeUrl]: {
       aminoType: MsgDeleteSubspaceAminoType,
       toAmino: (msg: MsgDeleteSubspace): AminoMsgDeleteSubspace["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        signer: msg.signer,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgDeleteSubspace["value"]): MsgDeleteSubspace => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        signer: msg.signer,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgCreateSectionTypeUrl]: {

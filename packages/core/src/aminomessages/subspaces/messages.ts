@@ -52,8 +52,8 @@ export interface AminoMsgEditSubspace extends AminoMsg {
 export interface AminoMsgDeleteSubspace extends AminoMsg {
   readonly type: typeof MsgDeleteSubspaceAminoType;
   readonly value: {
-    subspace_id: string;
-    signer: string;
+    subspace_id: string | undefined; // Undefined if zero
+    signer: string | undefined; // Undefined if empty
   };
 }
 
