@@ -1,6 +1,10 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { RegisteredReactionValueParams } from "@desmoslabs/desmjs-types/build/desmos/reactions/v1/models";
-import { AminoFreeTextValueParams, AminoReaction } from "./types";
+import {
+  AminoFreeTextValueParams,
+  AminoReaction,
+  AminoRegisteredReactionValueParams,
+} from "./types";
 import {
   MsgAddReactionAminoType,
   MsgAddRegisteredReactionAminoType,
@@ -63,9 +67,9 @@ export interface AminoMsgRemoveRegisteredReaction extends AminoMsg {
 export interface AminoMsgSetReactionsParams extends AminoMsg {
   readonly type: typeof MsgSetReactionsParamsAminoType;
   readonly value: {
-    subspace_id: string;
-    registered_reaction?: RegisteredReactionValueParams;
-    free_text?: AminoFreeTextValueParams;
-    user: string;
+    subspace_id: string | undefined; // Undefined if zero
+    registered_reaction: AminoRegisteredReactionValueParams;
+    free_text: AminoFreeTextValueParams;
+    user: string | undefined; // Undefined if empty
   };
 }

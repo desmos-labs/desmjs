@@ -5,6 +5,7 @@ import {
   MsgEditRegisteredReaction,
   MsgRemoveReaction,
   MsgRemoveRegisteredReaction,
+  MsgSetReactionsParams,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/msgs";
 import Long from "long";
 import createPostsConverters from "../posts/converter";
@@ -18,6 +19,7 @@ import {
   MsgEditRegisteredReactionTypeUrl,
   MsgRemoveReactionTypeUrl,
   MsgRemoveRegisteredReactionTypeUrl,
+  MsgSetReactionsParamsTypeUrl,
 } from "../../const";
 
 interface TestData<T> {
@@ -186,6 +188,36 @@ describe("Reactions converter", () => {
         },
         expectedJsonSerialized:
           '{"registered_reaction_id":1,"subspace_id":"1","user":"cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgSetReactionsParams", () => {
+    const testData: TestData<MsgSetReactionsParams>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgSetReactionsParamsTypeUrl,
+        msg: MsgSetReactionsParams.fromPartial({}),
+        expectedJsonSerialized: '{"free_text":{},"registered_reaction":{}}',
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgSetReactionsParamsTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          registeredReaction: {
+            enabled: true,
+          },
+          freeText: {
+            enabled: true,
+            maxLength: 100,
+            regEx: "[a-zA-Z]",
+          },
+          user: "cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc",
+        },
+        expectedJsonSerialized:
+          '{"free_text":{"enabled":true,"max_length":100,"reg_ex":"[a-zA-Z]"},"registered_reaction":{"enabled":true},"subspace_id":"1","user":"cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc"}',
       },
     ];
     executeTests(testData);

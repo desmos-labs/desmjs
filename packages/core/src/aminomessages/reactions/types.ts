@@ -20,8 +20,12 @@ export interface AminoFreeTextReaction extends AminoReaction {
   };
 }
 
+export interface AminoRegisteredReactionValueParams {
+  readonly enabled: boolean | undefined; // Undefined if false
+}
+
 export interface AminoFreeTextValueParams {
-  readonly enabled: boolean;
-  readonly max_length: number;
-  readonly reg_ex: string;
+  readonly enabled: boolean | undefined; // Undefined if false
+  readonly max_length: number | undefined; // Undefined if zero
+  readonly reg_ex: string | undefined; // Undefined if empty
 }

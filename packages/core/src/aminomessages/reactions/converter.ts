@@ -13,6 +13,7 @@ import {
   FreeTextValue,
   FreeTextValueParams,
   RegisteredReactionValue,
+  RegisteredReactionValueParams,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/models";
 import Long from "long";
 import {
@@ -20,6 +21,7 @@ import {
   AminoFreeTextValueParams,
   AminoReaction,
   AminoRegisteredReaction,
+  AminoRegisteredReactionValueParams,
 } from "./types";
 import {
   AminoMsgAddReaction,
@@ -51,9 +53,11 @@ import {
 import {
   fromOmitEmptyNumber,
   fromOmitEmptyString,
+  fromOmitFalse,
   fromOmitZeroLong,
   omitEmptyNumber,
   omitEmptyString,
+  omitFalse,
   omitZeroLong,
 } from "../utils";
 
@@ -122,13 +126,29 @@ export function convertReactionFromAmino(value: AminoReaction): Any {
   return converter.fromAmino(value);
 }
 
+export function convertRegisteredReactionValueParamsToAmino(
+  params: RegisteredReactionValueParams | undefined
+): AminoRegisteredReactionValueParams {
+  return {
+    enabled: omitFalse(params?.enabled || false),
+  };
+}
+
+export function convertRegisteredReactionValueParamsFromAmino(
+  params: AminoRegisteredReactionValueParams
+): RegisteredReactionValueParams {
+  return {
+    enabled: fromOmitFalse(params.enabled),
+  };
+}
+
 export function convertFreeTextValueParamsToAmino(
-  params: FreeTextValueParams
+  params: FreeTextValueParams | undefined
 ): AminoFreeTextValueParams {
   return {
-    enabled: params.enabled,
-    max_length: params.maxLength,
-    reg_ex: params.regEx,
+    enabled: omitFalse(params?.enabled || false),
+    max_length: omitEmptyNumber(params?.maxLength || 0),
+    reg_ex: omitEmptyString(params?.regEx || ""),
   };
 }
 
@@ -136,9 +156,9 @@ export function convertFreeTextValueParamsFromAmino(
   params: AminoFreeTextValueParams
 ): FreeTextValueParams {
   return {
-    enabled: params.enabled,
-    maxLength: params.max_length,
-    regEx: params.reg_ex,
+    enabled: fromOmitFalse(params.enabled),
+    maxLength: fromOmitEmptyNumber(params.max_length),
+    regEx: fromOmitEmptyString(params.reg_ex),
   };
 }
 
@@ -242,22 +262,22 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgSetReactionsParams
       ): AminoMsgSetReactionsParams["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        registered_reaction: msg.registeredReaction,
-        free_text: msg.freeText
-          ? convertFreeTextValueParamsToAmino(msg.freeText)
-          : undefined,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        registered_reaction: convertRegisteredReactionValueParamsToAmino(
+          msg.registeredReaction
+        ),
+        free_text: convertFreeTextValueParamsToAmino(msg.freeText),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgSetReactionsParams["value"]
       ): MsgSetReactionsParams => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        registeredReaction: msg.registered_reaction,
-        freeText: msg.free_text
-          ? convertFreeTextValueParamsFromAmino(msg.free_text)
-          : undefined,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        registeredReaction: convertRegisteredReactionValueParamsFromAmino(
+          msg.registered_reaction
+        ),
+        freeText: convertFreeTextValueParamsFromAmino(msg.free_text),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
   };
