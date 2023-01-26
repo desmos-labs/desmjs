@@ -397,19 +397,19 @@ export function createPostsConverters(): AminoConverters {
       ): AminoMsgAddPostAttachment["value"] => {
         assertDefinedAndNotNull(msg.content, "attachment content not defined");
         return {
-          subspace_id: msg.subspaceId.toString(),
-          post_id: msg.postId.toString(),
+          subspace_id: omitZeroLong(msg.subspaceId),
+          post_id: omitZeroLong(msg.postId),
           content: convertContentToAmino(msg.content),
-          editor: msg.editor,
+          editor: omitEmptyString(msg.editor),
         };
       },
       fromAmino: (
         msg: AminoMsgAddPostAttachment["value"]
       ): MsgAddPostAttachment => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
         content: convertContentFromAmino(msg.content),
-        editor: msg.editor,
+        editor: fromOmitEmptyString(msg.editor),
       }),
     },
     [MsgRemovePostAttachmentTypeUrl]: {

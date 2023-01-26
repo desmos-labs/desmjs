@@ -1,5 +1,6 @@
 import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
+  MsgAddPostAttachment,
   MsgCreatePost,
   MsgDeletePost,
   MsgEditPost,
@@ -11,6 +12,7 @@ import {
 import Long from "long";
 import createPostsConverters, { mediaToAny, pollToAny } from "./converter";
 import {
+  MsgAddPostAttachmentTypeUrl,
   MsgCreatePostTypeUrl,
   MsgDeletePostTypeUrl,
   MsgEditPostTypeUrl,
@@ -183,7 +185,6 @@ describe("Posts converter", () => {
           '{"attachments":[{"type":"desmos/Media","value":{"mime_type":"image/png","uri":"ftp://user:password@example.com/image.png"}},{"type":"desmos/Poll","value":{"end_date":"2020-01-01T12:00:00Z","provided_answers":[{"attachments":null,"text":"Cat"},{"attachments":null,"text":"Dog"}],"question":"What animal is best?"}}],"author":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","conversation_id":"1","entities":{"hashtags":[{"end":"3","start":"1","tag":"tag"}],"mentions":[{"end":"6","start":"4","tag":"tag"}],"urls":[{"display_url":"Display URL","end":"9","start":"7","url":"URL"}]},"external_id":"External ID","referenced_posts":[{"post_id":"1","type":2}],"reply_settings":1,"section_id":1,"subspace_id":"1","tags":["general"],"text":"This is a text"}',
       },
     ];
-
     executeTests(testData);
   });
 
@@ -233,7 +234,6 @@ describe("Posts converter", () => {
           '{"editor":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","entities":{"hashtags":[{"end":"3","start":"1","tag":"tag"}],"mentions":[{"end":"6","start":"4","tag":"tag"}],"urls":[{"display_url":"Display URL","end":"9","start":"7","url":"URL"}]},"post_id":"1","subspace_id":"1","tags":["general"],"text":"Edited text"}',
       },
     ];
-
     executeTests(testData);
   });
 
@@ -257,7 +257,42 @@ describe("Posts converter", () => {
           '{"post_id":"1","signer":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","subspace_id":"1"}',
       },
     ];
+    executeTests(testData);
+  });
 
+  describe("MsgAddPostAttachment", () => {
+    const testData: TestData<MsgAddPostAttachment>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgAddPostAttachmentTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(0),
+          postId: Long.fromNumber(0),
+          content: mediaToAny({
+            uri: "ftp://user:password@example.com/image.png",
+            mimeType: "image/png",
+          }),
+          editor: "",
+        },
+        expectedJsonSerialized:
+          '{"content":{"type":"desmos/Media","value":{"mime_type":"image/png","uri":"ftp://user:password@example.com/image.png"}}}',
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgAddPostAttachmentTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          postId: Long.fromNumber(1),
+          content: mediaToAny({
+            uri: "ftp://user:password@example.com/image.png",
+            mimeType: "image/png",
+          }),
+          editor: "cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd",
+        },
+        expectedJsonSerialized:
+          '{"content":{"type":"desmos/Media","value":{"mime_type":"image/png","uri":"ftp://user:password@example.com/image.png"}},"editor":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","post_id":"1","subspace_id":"1"}',
+      },
+    ];
     executeTests(testData);
   });
 });
