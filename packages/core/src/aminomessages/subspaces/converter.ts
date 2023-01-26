@@ -181,14 +181,14 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgDeleteSectionTypeUrl]: {
       aminoType: MsgDeleteSectionAminoType,
       toAmino: (msg: MsgDeleteSection): AminoMsgDeleteSection["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         section_id: omitEmptyNumber(msg.sectionId),
-        signer: msg.signer,
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgDeleteSection["value"]): MsgDeleteSection => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         sectionId: fromOmitEmptyNumber(msg.section_id),
-        signer: msg.signer,
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgCreateUserGroupTypeUrl]: {

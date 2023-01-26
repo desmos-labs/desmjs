@@ -1,6 +1,7 @@
 import {
   MsgCreateSection,
   MsgCreateSubspace,
+  MsgDeleteSection,
   MsgDeleteSubspace,
   MsgEditSection,
   MsgEditSubspace,
@@ -12,6 +13,7 @@ import createSubspacesConverters from "./converter";
 import {
   MsgCreateSectionTypeUrl,
   MsgCreateSubspaceTypeUrl,
+  MsgDeleteSectionTypeUrl,
   MsgDeleteSubspaceTypeUrl,
   MsgEditSectionTypeUrl,
   MsgEditSubspaceTypeUrl,
@@ -169,6 +171,29 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"new_parent_id":1,"section_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgDeleteSection", () => {
+    const testData: ConverterTestData<MsgDeleteSection>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgDeleteSectionTypeUrl,
+        msg: MsgDeleteSection.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgDeleteSectionTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          sectionId: 1,
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"section_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

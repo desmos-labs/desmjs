@@ -92,9 +92,9 @@ export interface AminoMsgMoveSection extends AminoMsg {
 export interface AminoMsgDeleteSection extends AminoMsg {
   readonly type: typeof MsgDeleteSectionAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     section_id: number | undefined; // Undefined if zero
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 
