@@ -363,8 +363,8 @@ describe("DesmosClient", () => {
       await sleep(5000);
 
       // Create a first post
-      const msgCreatePost = {
-        typeUrl: "/desmos.posts.v2.MsgCreatePost",
+      const msgCreatePost: MsgCreatePostEncodeObject = {
+        typeUrl: MsgCreatePostTypeUrl,
         value: {
           subspaceId: Long.fromNumber(1),
           sectionId: 0,
@@ -394,8 +394,8 @@ describe("DesmosClient", () => {
       await sleep(5000);
 
       // Create a post
-      const msg = {
-        typeUrl: "/desmos.posts.v2.MsgCreatePost",
+      const msg: MsgCreatePostEncodeObject = {
+        typeUrl: MsgCreatePostTypeUrl,
         value: {
           subspaceId: Long.fromNumber(1),
           sectionId: 0,
