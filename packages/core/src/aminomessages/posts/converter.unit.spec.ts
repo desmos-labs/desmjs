@@ -1,6 +1,7 @@
 import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
   MsgAddPostAttachment,
+  MsgAnswerPoll,
   MsgCreatePost,
   MsgDeletePost,
   MsgEditPost,
@@ -14,6 +15,7 @@ import Long from "long";
 import createPostsConverters, { mediaToAny, pollToAny } from "./converter";
 import {
   MsgAddPostAttachmentTypeUrl,
+  MsgAnswerPollTypeUrl,
   MsgCreatePostTypeUrl,
   MsgDeletePostTypeUrl,
   MsgEditPostTypeUrl,
@@ -317,6 +319,31 @@ describe("Posts converter", () => {
         },
         expectedJsonSerialized:
           '{"attachment_id":1,"editor":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","post_id":"1","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgAnswerPoll", () => {
+    const testData: TestData<MsgAnswerPoll>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgAnswerPollTypeUrl,
+        msg: MsgAnswerPoll.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgAnswerPollTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          postId: Long.fromNumber(1),
+          pollId: 1,
+          answersIndexes: [1, 2, 3],
+          signer: "cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd",
+        },
+        expectedJsonSerialized:
+          '{"answers_indexes":[1,2,3],"poll_id":1,"post_id":"1","signer":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","subspace_id":"1"}',
       },
     ];
     executeTests(testData);

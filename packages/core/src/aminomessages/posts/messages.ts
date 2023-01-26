@@ -64,17 +64,17 @@ export interface AminoMsgRemovePostAttachment extends AminoMsg {
     subspace_id: string | undefined; // Undefined if zero
     post_id: string | undefined; // Undefined if zero
     attachment_id: number | undefined; // Undefined if zero
-    editor: string | undefined; // Undefined if zero
+    editor: string | undefined; // Undefined if empty
   };
 }
 
 export interface AminoMsgAnswerPoll extends AminoMsg {
   readonly type: typeof MsgAnswerPollAminoType;
   readonly value: {
-    subspace_id: string;
-    post_id: string;
-    poll_id: number;
-    answers_indexes: number[];
-    signer: string;
+    subspace_id: string | undefined; // Undefined if zero
+    post_id: string | undefined; // Undefined if zero
+    poll_id: number | undefined; // Undefined if zero
+    answers_indexes: number[] | undefined; // Undefined if empty
+    signer: string | undefined; // Undefined if empty
   };
 }

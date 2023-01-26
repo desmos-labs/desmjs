@@ -434,18 +434,18 @@ export function createPostsConverters(): AminoConverters {
     [MsgAnswerPollTypeUrl]: {
       aminoType: MsgAnswerPollAminoType,
       toAmino: (msg: MsgAnswerPoll): AminoMsgAnswerPoll["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        poll_id: msg.pollId,
-        answers_indexes: msg.answersIndexes,
-        signer: msg.signer,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        poll_id: omitEmptyNumber(msg.pollId),
+        answers_indexes: omitEmptyArray(msg.answersIndexes),
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgAnswerPoll["value"]): MsgAnswerPoll => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        pollId: msg.poll_id,
-        answersIndexes: msg.answers_indexes,
-        signer: msg.signer,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        pollId: fromOmitEmptyNumber(msg.poll_id),
+        answersIndexes: fromOmitEmptyArray(msg.answers_indexes),
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
   };
