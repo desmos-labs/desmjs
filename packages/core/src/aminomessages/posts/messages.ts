@@ -42,9 +42,9 @@ export interface AminoMsgEditPost extends AminoMsg {
 export interface AminoMsgDeletePost extends AminoMsg {
   readonly type: typeof MsgDeletePostAminoType;
   readonly value: {
-    subspace_id: string;
-    post_id: string;
-    signer: string;
+    subspace_id: string | undefined; // Undefined if zero
+    post_id: string | undefined; // Undefined if zero
+    signer: string | undefined; // Undefined if empty
   };
 }
 

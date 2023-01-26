@@ -1,6 +1,7 @@
 import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
   MsgCreatePost,
+  MsgDeletePost,
   MsgEditPost,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
 import {
@@ -9,7 +10,11 @@ import {
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import Long from "long";
 import createPostsConverters, { mediaToAny, pollToAny } from "./converter";
-import { MsgCreatePostTypeUrl, MsgEditPostTypeUrl } from "../../const";
+import {
+  MsgCreatePostTypeUrl,
+  MsgDeletePostTypeUrl,
+  MsgEditPostTypeUrl,
+} from "../../const";
 
 interface TestData<T> {
   readonly name: string;
@@ -226,6 +231,30 @@ describe("Posts converter", () => {
         },
         expectedJsonSerialized:
           '{"editor":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","entities":{"hashtags":[{"end":"3","start":"1","tag":"tag"}],"mentions":[{"end":"6","start":"4","tag":"tag"}],"urls":[{"display_url":"Display URL","end":"9","start":"7","url":"URL"}]},"post_id":"1","subspace_id":"1","tags":["general"],"text":"Edited text"}',
+      },
+    ];
+
+    executeTests(testData);
+  });
+
+  describe("MsgDeletePost", () => {
+    const testData: TestData<MsgDeletePost>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgDeletePostTypeUrl,
+        msg: MsgDeletePost.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgDeletePostTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          postId: Long.fromNumber(1),
+          signer: "cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd",
+        },
+        expectedJsonSerialized:
+          '{"post_id":"1","signer":"cosmos13t6y2nnugtshwuy0zkrq287a95lyy8vzleaxmd","subspace_id":"1"}',
       },
     ];
 

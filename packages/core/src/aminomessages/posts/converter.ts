@@ -380,14 +380,14 @@ export function createPostsConverters(): AminoConverters {
     [MsgDeletePostTypeUrl]: {
       aminoType: MsgDeletePostAminoType,
       toAmino: (msg: MsgDeletePost): AminoMsgDeletePost["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        signer: msg.signer,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgDeletePost["value"]): MsgDeletePost => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        signer: msg.signer,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgAddPostAttachmentTypeUrl]: {
