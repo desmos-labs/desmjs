@@ -2,6 +2,7 @@ import {
   MsgCreateSection,
   MsgCreateSubspace,
   MsgDeleteSubspace,
+  MsgEditSection,
   MsgEditSubspace,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import Long from "long";
@@ -11,6 +12,7 @@ import {
   MsgCreateSectionTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgDeleteSubspaceTypeUrl,
+  MsgEditSectionTypeUrl,
   MsgEditSubspaceTypeUrl,
 } from "../../const";
 
@@ -116,6 +118,31 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"creator":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","description":"This is a test section","name":"Test section","parent_id":1,"subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgEditSection", () => {
+    const testData: ConverterTestData<MsgEditSection>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgEditSectionTypeUrl,
+        msg: MsgEditSection.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgEditSectionTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          sectionId: 1,
+          name: "Test section",
+          description: "This is a test section",
+          editor: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"description":"This is a test section","editor":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","name":"Test section","section_id":1,"subspace_id":"1"}',
       },
     ];
     executeTests(testData);

@@ -71,11 +71,11 @@ export interface AminoMsgCreateSection extends AminoMsg {
 export interface AminoMsgEditSection extends AminoMsg {
   readonly type: typeof MsgEditSectionAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     section_id: number | undefined; // Undefined if zero
     name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
-    editor: string;
+    editor: string | undefined; // Undefined if empty
   };
 }
 
