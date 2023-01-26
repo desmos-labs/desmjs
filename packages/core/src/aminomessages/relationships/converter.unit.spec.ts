@@ -1,9 +1,15 @@
 import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
-import { MsgCreateRelationship } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
+import {
+  MsgCreateRelationship,
+  MsgDeleteRelationship,
+} from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
 import Long from "long";
 import createPostsConverters from "../posts/converter";
 import createRelationshipsConverters from "./converter";
-import { MsgCreateRelationshipTypeUrl } from "../../const";
+import {
+  MsgCreateRelationshipTypeUrl,
+  MsgDeleteRelationshipTypeUrl,
+} from "../../const";
 
 interface TestData<T> {
   readonly name: string;
@@ -47,6 +53,29 @@ describe("Relationships converter", () => {
       {
         name: "complete message",
         typeUrl: MsgCreateRelationshipTypeUrl,
+        msg: {
+          signer: "cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns",
+          counterparty: "cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47",
+          subspaceId: Long.fromNumber(1),
+        },
+        expectedJsonSerialized:
+          '{"counterparty":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","signer":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgDeleteRelationship", () => {
+    const testData: TestData<MsgDeleteRelationship>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgDeleteRelationshipTypeUrl,
+        msg: MsgDeleteRelationship.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgDeleteRelationshipTypeUrl,
         msg: {
           signer: "cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns",
           counterparty: "cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47",

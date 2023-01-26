@@ -18,9 +18,9 @@ export interface AminoMsgCreateRelationship extends AminoMsg {
 export interface AminoMsgDeleteRelationship extends AminoMsg {
   readonly type: typeof MsgDeleteRelationshipAminoType;
   readonly value: {
-    signer: string;
-    counterparty: string;
-    subspace_id: string;
+    signer: string | undefined; // Undefined if empty
+    counterparty: string | undefined; // Undefined if empty
+    subspace_id: string | undefined; // Undefined if zero
   };
 }
 

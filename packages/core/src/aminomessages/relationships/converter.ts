@@ -56,16 +56,16 @@ export function createRelationshipsConverters(): AminoConverters {
       toAmino: (
         msg: MsgDeleteRelationship
       ): AminoMsgDeleteRelationship["value"] => ({
-        signer: msg.signer,
-        counterparty: msg.counterparty,
-        subspace_id: msg.subspaceId.toString(),
+        signer: omitEmptyString(msg.signer),
+        counterparty: omitEmptyString(msg.counterparty),
+        subspace_id: omitZeroLong(msg.subspaceId),
       }),
       fromAmino: (
         msg: AminoMsgDeleteRelationship["value"]
       ): MsgDeleteRelationship => ({
-        signer: msg.signer,
-        counterparty: msg.counterparty,
-        subspaceId: Long.fromString(msg.subspace_id),
+        signer: fromOmitEmptyString(msg.signer),
+        counterparty: fromOmitEmptyString(msg.counterparty),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
       }),
     },
     [MsgBlockUserTypeUrl]: {
