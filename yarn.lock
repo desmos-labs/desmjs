@@ -2485,7 +2485,7 @@ __metadata:
     "@types/jest": ^29.4.0
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
-    "@web3auth/base": ^4.2.2
+    "@web3auth/base": ^4.2.4
     "@web3auth/modal": ^4.2.3
     "@web3auth/ui": ^4.2.3
     cosmjs-types: ^0.6.0
@@ -5221,6 +5221,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "@toruslabs/openlogin@npm:2.12.0"
+  dependencies:
+    "@toruslabs/eccrypto": ^1.1.8
+    "@toruslabs/http-helpers": ^3.2.0
+    "@toruslabs/openlogin-jrpc": ^2.9.0
+    "@toruslabs/openlogin-utils": ^2.1.0
+    lodash.merge: ^4.6.2
+    loglevel: ^1.8.1
+    pump: ^3.0.0
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 2ec7f96157c035ad8fcf62fb1ae6cd5f86f7a17e0cbdee30e1b39291ff5b2705d99526e43a326bcf4cca0a5f7bb97ca71972873cbebfbdbdc78d537f68529f40
+  languageName: node
+  linkType: hard
+
 "@toruslabs/solana-embed@npm:^0.3.2":
   version: 0.3.2
   resolution: "@toruslabs/solana-embed@npm:0.3.2"
@@ -6545,6 +6562,22 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: ea6d01b60d8d1a69c248eab7a6b2f999534bc8b45f79865a09bc7adfcadb1cdebe2de1fc57541376e5d3eff3cccbf3a512f0ae27e9e0421b468a43b8ec77cd9e
+  languageName: node
+  linkType: hard
+
+"@web3auth/base@npm:^4.2.4":
+  version: 4.2.4
+  resolution: "@web3auth/base@npm:4.2.4"
+  dependencies:
+    "@toruslabs/http-helpers": ^3.2.0
+    "@toruslabs/openlogin": ^2.12.0
+    "@toruslabs/openlogin-jrpc": ^2.9.0
+    jwt-decode: ^3.1.2
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: 3b8b26b1c3e6e5a60643fb723f37708cae700a23f5ce841d30c6ff2491b00f0ed839eaa2208bbc2f1bb59d28df8e29ee663c3ef4cdc18c6008af8ce86cfcc3dd
   languageName: node
   linkType: hard
 
