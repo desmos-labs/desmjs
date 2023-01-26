@@ -135,10 +135,10 @@ export interface AminoMsgMoveUserGroup extends AminoMsg {
 export interface AminoMsgSetUserGroupPermissions extends AminoMsg {
   readonly type: typeof MsgSetUserGroupPermissionsAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     group_id: number | undefined; // Undefined if empty
     permissions: string[] | undefined; // Undefined if empty
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 
