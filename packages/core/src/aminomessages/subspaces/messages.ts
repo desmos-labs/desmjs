@@ -145,9 +145,9 @@ export interface AminoMsgSetUserGroupPermissions extends AminoMsg {
 export interface AminoMsgDeleteUserGroup extends AminoMsg {
   readonly type: typeof MsgDeleteUserGroupAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     group_id: number | undefined; // Undefined if zero
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 

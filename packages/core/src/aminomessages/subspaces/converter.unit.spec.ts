@@ -4,6 +4,7 @@ import {
   MsgCreateUserGroup,
   MsgDeleteSection,
   MsgDeleteSubspace,
+  MsgDeleteUserGroup,
   MsgEditSection,
   MsgEditSubspace,
   MsgEditUserGroup,
@@ -20,6 +21,7 @@ import {
   MsgCreateUserGroupTypeUrl,
   MsgDeleteSectionTypeUrl,
   MsgDeleteSubspaceTypeUrl,
+  MsgDeleteUserGroupTypeUrl,
   MsgEditSectionTypeUrl,
   MsgEditSubspaceTypeUrl,
   MsgEditUserGroupTypeUrl,
@@ -302,6 +304,29 @@ describe("Subspaces converter", () => {
         },
         expectedJsonSerialized:
           '{"group_id":1,"permissions":["EDIT_SUBSPACE"],"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgDeleteUserGroup", () => {
+    const testData: ConverterTestData<MsgDeleteUserGroup>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgDeleteUserGroupTypeUrl,
+        msg: MsgDeleteUserGroup.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgDeleteUserGroupTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          groupId: 1,
+          signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
+        },
+        expectedJsonSerialized:
+          '{"group_id":1,"signer":"cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5","subspace_id":"1"}',
       },
     ];
     executeTests(testData);
