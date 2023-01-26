@@ -204,20 +204,20 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgEditRegisteredReaction
       ): AminoMsgEditRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        registered_reaction_id: msg.registeredReactionId,
-        shorthand_code: msg.shorthandCode,
-        display_value: msg.displayValue,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        registered_reaction_id: omitEmptyNumber(msg.registeredReactionId),
+        shorthand_code: omitEmptyString(msg.shorthandCode),
+        display_value: omitEmptyString(msg.displayValue),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgEditRegisteredReaction["value"]
       ): MsgEditRegisteredReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        registeredReactionId: msg.registered_reaction_id,
-        shorthandCode: msg.shorthand_code,
-        displayValue: msg.display_value,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        registeredReactionId: fromOmitEmptyNumber(msg.registered_reaction_id),
+        shorthandCode: fromOmitEmptyString(msg.shorthand_code),
+        displayValue: fromOmitEmptyString(msg.display_value),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgRemoveRegisteredReactionTypeUrl]: {

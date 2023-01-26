@@ -43,11 +43,11 @@ export interface AminoMsgAddRegisteredReaction extends AminoMsg {
 export interface AminoMsgEditRegisteredReaction extends AminoMsg {
   readonly type: typeof MsgEditRegisteredReactionAminoType;
   readonly value: {
-    subspace_id: string;
-    registered_reaction_id: number;
-    shorthand_code: string;
-    display_value: string;
-    user: string;
+    subspace_id: string | undefined; // Undefined if zero
+    registered_reaction_id: number | undefined; // Undefined if zero
+    shorthand_code: string | undefined; // Undefined if empty
+    display_value: string | undefined; // Undefined if empty
+    user: string | undefined; // Undefined if empty
   };
 }
 

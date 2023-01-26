@@ -2,6 +2,7 @@ import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
   MsgAddReaction,
   MsgAddRegisteredReaction,
+  MsgEditRegisteredReaction,
   MsgRemoveReaction,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/msgs";
 import Long from "long";
@@ -13,6 +14,7 @@ import createReactionsConverters, {
 import {
   MsgAddReactionTypeUrl,
   MsgAddRegisteredReactionTypeUrl,
+  MsgEditRegisteredReactionTypeUrl,
   MsgRemoveReactionTypeUrl,
 } from "../../const";
 
@@ -134,6 +136,31 @@ describe("Reactions converter", () => {
         },
         expectedJsonSerialized:
           '{"display_value":"https://example.com?images=hello.png","shorthand_code":":hello:","subspace_id":"1","user":"cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc"}',
+      },
+    ];
+    executeTests(testData);
+  });
+
+  describe("MsgEditRegisteredReaction", () => {
+    const testData: TestData<MsgEditRegisteredReaction>[] = [
+      {
+        name: "empty message",
+        typeUrl: MsgEditRegisteredReactionTypeUrl,
+        msg: MsgEditRegisteredReaction.fromPartial({}),
+        expectedJsonSerialized: "{}",
+      },
+      {
+        name: "complete message",
+        typeUrl: MsgEditRegisteredReactionTypeUrl,
+        msg: {
+          subspaceId: Long.fromNumber(1),
+          registeredReactionId: 1,
+          shorthandCode: ":hello:",
+          displayValue: "https://example.com?images=hello.png",
+          user: "cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc",
+        },
+        expectedJsonSerialized:
+          '{"display_value":"https://example.com?images=hello.png","registered_reaction_id":1,"shorthand_code":":hello:","subspace_id":"1","user":"cosmos1qewk97fp49vzssrfnc997jpztc5nzr7xsd8zdc"}',
       },
     ];
     executeTests(testData);
