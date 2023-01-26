@@ -21,6 +21,7 @@ import {
   MsgEditPostTypeUrl,
   MsgRemovePostAttachmentTypeUrl,
 } from "../../const";
+import { runConverterTest } from "../testutils";
 
 interface TestData<T> {
   readonly name: string;
@@ -34,22 +35,7 @@ describe("Posts converter", () => {
 
   function executeTests(data: TestData<any>[]) {
     data.forEach((test) => {
-      it(test.name, () => {
-        const converter = converters[test.typeUrl];
-        if (!converter || converter === "not_supported_by_chain") {
-          fail(`Cannot find converter for msg with type url ${test.typeUrl}`);
-        }
-
-        // Check toAmino conversion
-        const aminoConverted = converter.toAmino(test.msg);
-        expect(sortedJsonStringify(aminoConverted)).toBe(
-          test.expectedJsonSerialized
-        );
-
-        // Check fromAmino conversion
-        // const directConverted = converter.fromAmino(aminoConverted);
-        // expect(directConverted).toStrictEqual(test.msg);
-      });
+      it(test.name, runConverterTest(converters, test));
     });
   }
 

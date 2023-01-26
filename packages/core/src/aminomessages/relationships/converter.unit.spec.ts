@@ -14,40 +14,19 @@ import {
   MsgDeleteRelationshipTypeUrl,
   MsgUnblockUserTypeUrl,
 } from "../../const";
-
-interface TestData<T> {
-  readonly name: string;
-  readonly typeUrl: string;
-  readonly msg: T;
-  readonly expectedJsonSerialized: string;
-}
+import { runConverterTest, ConverterTestData } from "../testutils";
 
 describe("Relationships converter", () => {
   const converters = createRelationshipsConverters();
 
-  function executeTests(data: TestData<any>[]) {
+  function executeTests(data: ConverterTestData<any>[]) {
     data.forEach((test) => {
-      it(test.name, () => {
-        const converter = converters[test.typeUrl];
-        if (!converter || converter === "not_supported_by_chain") {
-          fail(`Cannot find converter for msg with type url ${test.typeUrl}`);
-        }
-
-        // Check toAmino conversion
-        const aminoConverted = converter.toAmino(test.msg);
-        expect(sortedJsonStringify(aminoConverted)).toBe(
-          test.expectedJsonSerialized
-        );
-
-        // Check fromAmino conversion
-        // const directConverted = converter.fromAmino(aminoConverted);
-        // expect(directConverted).toStrictEqual(test.msg);
-      });
+      it(test.name, runConverterTest(converters, test));
     });
   }
 
   describe("MsgCreateRelationship", () => {
-    const testData: TestData<MsgCreateRelationship>[] = [
+    const testData: ConverterTestData<MsgCreateRelationship>[] = [
       {
         name: "empty message",
         typeUrl: MsgCreateRelationshipTypeUrl,
@@ -70,7 +49,7 @@ describe("Relationships converter", () => {
   });
 
   describe("MsgDeleteRelationship", () => {
-    const testData: TestData<MsgDeleteRelationship>[] = [
+    const testData: ConverterTestData<MsgDeleteRelationship>[] = [
       {
         name: "empty message",
         typeUrl: MsgDeleteRelationshipTypeUrl,
@@ -93,7 +72,7 @@ describe("Relationships converter", () => {
   });
 
   describe("MsgBlockUser", () => {
-    const testData: TestData<MsgBlockUser>[] = [
+    const testData: ConverterTestData<MsgBlockUser>[] = [
       {
         name: "empty message",
         typeUrl: MsgBlockUserTypeUrl,
@@ -117,7 +96,7 @@ describe("Relationships converter", () => {
   });
 
   describe("MsgUnblockUser", () => {
-    const testData: TestData<MsgUnblockUser>[] = [
+    const testData: ConverterTestData<MsgUnblockUser>[] = [
       {
         name: "empty message",
         typeUrl: MsgUnblockUserTypeUrl,

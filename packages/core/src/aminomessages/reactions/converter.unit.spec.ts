@@ -1,4 +1,3 @@
-import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import {
   MsgAddReaction,
   MsgAddRegisteredReaction,
@@ -8,7 +7,6 @@ import {
   MsgSetReactionsParams,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/msgs";
 import Long from "long";
-import createPostsConverters from "../posts/converter";
 import createReactionsConverters, {
   freeTextReactionValueToAny,
   registeredReactionValueToAny,
@@ -21,6 +19,7 @@ import {
   MsgRemoveRegisteredReactionTypeUrl,
   MsgSetReactionsParamsTypeUrl,
 } from "../../const";
+import { runConverterTest } from "../testutils";
 
 interface TestData<T> {
   readonly name: string;
@@ -34,18 +33,7 @@ describe("Reactions converter", () => {
 
   function executeTests(data: TestData<any>[]) {
     data.forEach((test) => {
-      it(test.name, () => {
-        const converter = converters[test.typeUrl];
-        if (!converter || converter === "not_supported_by_chain") {
-          fail(`Cannot find converter for msg with type url ${test.typeUrl}`);
-        }
-
-        // Check toAmino conversion
-        const aminoConverted = converter.toAmino(test.msg);
-        expect(sortedJsonStringify(aminoConverted)).toBe(
-          test.expectedJsonSerialized
-        );
-      });
+      it(test.name, runConverterTest(converters, test));
     });
   }
 
