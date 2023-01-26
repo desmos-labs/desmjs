@@ -13,7 +13,7 @@ import {
 export interface AminoMsgCreatePost extends AminoMsg {
   readonly type: typeof MsgCreatePostAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if 0
     section_id: number | undefined; // Undefined if 0
     external_id: string | undefined; // Undefined if empty
     text: string | undefined; // Undefined if empty
@@ -21,21 +21,21 @@ export interface AminoMsgCreatePost extends AminoMsg {
     tags: string[] | undefined; // Undefined if empty
     attachments: AminoContent[] | undefined; // Undefined if empty
     conversation_id: string | undefined; // Undefined if 0
-    reply_settings: ReplySetting;
+    reply_settings: ReplySetting | undefined; // Undefined if zero
     referenced_posts: AminoPostReference[] | null; // Null if empty
-    author: string;
+    author: string | undefined; // Undefined if empty
   };
 }
 
 export interface AminoMsgEditPost extends AminoMsg {
   readonly type: typeof MsgEditPostAminoType;
   readonly value: {
-    subspace_id: string;
-    post_id: string;
+    subspace_id: string | undefined; // Undefined if empty
+    post_id: string | undefined; // Undefined if empty
     text: string | undefined; // Undefined if empty
     entities: AminoEntities | undefined; // Undefined if empty
     tags: string[] | undefined; // Undefined if empty
-    editor: string;
+    editor: string | undefined; // Undefined if empty
   };
 }
 
