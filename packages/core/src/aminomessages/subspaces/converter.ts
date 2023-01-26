@@ -217,18 +217,18 @@ export function createSubspacesConverters(): AminoConverters {
     [MsgEditUserGroupTypeUrl]: {
       aminoType: MsgEditUserGroupAminoType,
       toAmino: (msg: MsgEditUserGroup): AminoMsgEditUserGroup["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         group_id: omitEmptyNumber(msg.groupId),
         name: omitEmptyString(msg.name),
         description: omitEmptyString(msg.description),
-        signer: msg.signer,
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgEditUserGroup["value"]): MsgEditUserGroup => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         groupId: fromOmitEmptyNumber(msg.group_id),
         name: fromOmitEmptyString(msg.name),
         description: fromOmitEmptyString(msg.description),
-        signer: msg.signer,
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgMoveUserGroupTypeUrl]: {

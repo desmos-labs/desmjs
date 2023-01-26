@@ -114,11 +114,11 @@ export interface AminoMsgCreateUserGroup extends AminoMsg {
 export interface AminoMsgEditUserGroup extends AminoMsg {
   readonly type: typeof MsgEditUserGroupAminoType;
   readonly value: {
-    subspace_id: string;
+    subspace_id: string | undefined; // Undefined if zero
     group_id: number | undefined; // Undefined if zero
     name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
-    signer: string;
+    signer: string | undefined; // Undefined if empty
   };
 }
 
