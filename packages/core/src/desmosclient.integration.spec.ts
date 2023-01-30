@@ -31,8 +31,12 @@ import {
   SignatureResult,
 } from "./signatureresult";
 import {
+  MsgAddReactionEncodeObject,
+  MsgAddReasonEncodeObject,
+  MsgAddRegisteredReactionEncodeObject,
   MsgAuthenticateEncodeObject,
   MsgCreatePostEncodeObject,
+  MsgCreateReportEncodeObject,
   MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
@@ -42,9 +46,15 @@ import {
   bech32AddressToAny,
   singleSignatureToAny,
 } from "./aminomessages/profiles";
+import { postTargetToAny } from "./aminomessages/reports";
+import { registeredReactionValueToAny } from "./aminomessages/reactions";
 import {
   DoNotModify,
+  MsgAddReactionTypeUrl,
+  MsgAddReasonTypeUrl,
+  MsgAddRegisteredReactionTypeUrl,
   MsgCreatePostTypeUrl,
+  MsgCreateReportTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgMultiSendTypeUrl,
   MsgSaveProfileTypeUrl,
@@ -429,6 +439,73 @@ describe("DesmosClient", () => {
       };
       const result = await client.signAndBroadcast(address, [msg], "auto");
       expect(result.code).toBe(0);
+    });
+
+    it("test MsgCreateReport", async () => {
+      const [signer, client] = await getAminoSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      // Create a report reason
+      const msgAddReasons: MsgAddReasonEncodeObject = {
+        typeUrl: MsgAddReasonTypeUrl,
+        value: {
+          signer: address,
+          subspaceId: Long.fromNumber(1),
+          description: "Test reason",
+          title: "Test reason",
+        },
+      };
+      await client.signAndBroadcast(address, [msgAddReasons], "auto");
+      await sleep(5000);
+
+      // report a post
+      const msgCreateReport: MsgCreateReportEncodeObject = {
+        typeUrl: MsgCreateReportTypeUrl,
+        value: {
+          subspaceId: Long.fromNumber(1),
+          message: "This is a test report",
+          reasonsIds: [1],
+          reporter: address,
+          target: postTargetToAny({
+            postId: Long.fromNumber(1),
+          }),
+        },
+      };
+      await client.signAndBroadcast(address, [msgCreateReport], "auto");
+      await sleep(5000);
+    });
+
+    it("test MsgAddReaction", async () => {
+      const [signer, client] = await getAminoSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      // Create a registered reaction for the subspace
+      const msgRegisterReaction: MsgAddRegisteredReactionEncodeObject = {
+        typeUrl: MsgAddRegisteredReactionTypeUrl,
+        value: {
+          user: address,
+          subspaceId: Long.fromNumber(1),
+          displayValue: "like",
+          shorthandCode: "like",
+        },
+      };
+      await client.signAndBroadcast(address, [msgRegisterReaction], "auto");
+      await sleep(5000);
+
+      // React to a post
+      const msgAddReaction: MsgAddReactionEncodeObject = {
+        typeUrl: MsgAddReactionTypeUrl,
+        value: {
+          subspaceId: Long.fromNumber(1),
+          postId: Long.fromNumber(1),
+          user: address,
+          value: registeredReactionValueToAny({
+            registeredReactionId: 1,
+          }),
+        },
+      };
+      await client.signAndBroadcast(address, [msgAddReaction], "auto");
+      await sleep(5000);
     });
   });
 

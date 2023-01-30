@@ -85,10 +85,10 @@ export const reactionValueConverters: AminoConverters = {
         registered_reaction_id: reaction.registeredReactionId,
       };
     },
-    fromAmino: (msg: AminoRegisteredReaction["value"]): Any =>
+    fromAmino: (msg: AminoRegisteredReaction): Any =>
       registeredReactionValueToAny(
         RegisteredReactionValue.fromPartial({
-          registeredReactionId: msg.registered_reaction_id,
+          registeredReactionId: msg.value.registered_reaction_id,
         })
       ),
   },
@@ -100,10 +100,10 @@ export const reactionValueConverters: AminoConverters = {
         text: reaction.text,
       };
     },
-    fromAmino: (msg: AminoFreeTextReaction["value"]): Any =>
+    fromAmino: (msg: AminoFreeTextReaction): Any =>
       freeTextReactionValueToAny(
         FreeTextValue.fromPartial({
-          text: msg.text,
+          text: msg.value.text,
         })
       ),
   },
