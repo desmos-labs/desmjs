@@ -29,7 +29,8 @@ jobs:
         uses: technote-space/get-diff-action@v6.1.2
         id: git_diff
         with:
-          PATTERNS: +docs/**/*
+          PATTERNS: |
+            docs/**/*.*
           FILES: |
             package.json
             yarn.lock
