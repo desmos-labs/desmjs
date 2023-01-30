@@ -24,16 +24,21 @@ import {
   CosmosMultiSignature,
   HexAddress,
   Proof,
-  SignatureValueType,
   signatureValueTypeFromJSON,
   SingleSignature,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
 import { Any } from "cosmjs-types/google/protobuf/any";
-import { fromBase64, toBase64 } from "@cosmjs/encoding";
-import { PubKey } from "cosmjs-types/cosmos/crypto/secp256k1/keys";
+import { fromBase64 } from "@cosmjs/encoding";
+import { PubKey as Secp256k1PubKey } from "cosmjs-types/cosmos/crypto/secp256k1/keys";
+import { PubKey as Ed25519PubKey } from "cosmjs-types/cosmos/crypto/ed25519/keys";
 import Long from "long";
 import { CompactBitArray } from "@desmoslabs/desmjs-types/cosmos/crypto/multisig/v1beta1/multisig";
+import { Height } from "cosmjs-types/ibc/core/client/v1/client";
+import { Data } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_app_links";
+import { Ed25519Pubkey, Secp256k1Pubkey } from "@cosmjs/amino";
 import {
+  AminoChainConfig,
+  AminoLinkData,
   AminoMsgAcceptDTagTransferRequest,
   AminoMsgCancelDTagTransferRequest,
   AminoMsgDeleteProfile,
@@ -44,6 +49,9 @@ import {
   AminoMsgSaveProfile,
   AminoMsgUnlinkApplication,
   AminoMsgUnlinkChainAccount,
+  AminoProof,
+  AminoPubKey,
+  AminoTimeoutHeight,
 } from "./messages";
 import {
   AminoAddressData,
@@ -51,7 +59,7 @@ import {
   AminoBech32Address,
   AminoCosmosMultiSignature,
   AminoHexAddress,
-  AminoSignature,
+  AminoSignatureData,
   AminoSingleSignature,
 } from "./types";
 import {
@@ -86,71 +94,78 @@ import {
   SingleSignatureAminoType,
   SingleSignatureTypeUrl,
 } from "../../const";
-import { fromOmitEmptyString, omitEmptyString } from "../utils";
+import {
+  fromBase64UndefinedIfEmpty,
+  fromNullIfEmptyArray,
+  fromOmitEmptyString,
+  fromOmitZeroLong,
+  nullIfEmptyArray,
+  omitEmptyNumber,
+  omitEmptyString,
+  omitZeroLong,
+  toBase64NullIfEmpty,
+  toBase64UndefinedIfEmpty,
+} from "../utils";
 
-function assertDefinedAndNotNull(object?: any, message?: string) {
+function assertDefinedAndNotNull<T>(
+  object?: T,
+  message?: string
+): asserts object is T {
   if (object === undefined || object === null) {
     throw new Error(message);
   }
 }
 
-/**
- * Replace default type values with `undefined`
- * @returns `undefined` if it is the default type value, the original value otherwise
- */
-function omitDefault<T extends string | number | Long>(
-  input: T
-): T | undefined {
-  if (typeof input === "string") {
-    return input === "" ? undefined : input;
-  }
+// --------------------------------------------------------------------------------------------------------------------
+// --- MsgLinkApplication inner types converters
+// --------------------------------------------------------------------------------------------------------------------
 
-  if (typeof input === "number") {
-    return input === 0 ? undefined : input;
-  }
-
-  if (Long.isLong(input)) {
-    return input.isZero() ? undefined : input;
-  }
-
-  throw new Error(`Got unsupported type '${typeof input}'`);
+function convertLinkDataToAmino(data: Data | undefined): AminoLinkData {
+  return {
+    application: omitEmptyString(data?.application || ""),
+    username: omitEmptyString(data?.username || ""),
+  };
 }
 
-function convertAddressData(address: Any): AminoAddressData {
-  if (address.typeUrl === Bech32AddressTypeUrl) {
-    const bech32Address = Bech32Address.decode(address.value);
-    return {
-      type: Bech32AddressAminoType,
-      value: {
-        prefix: bech32Address.prefix,
-        value: bech32Address.value,
-      },
-    };
+function convertLinkDataFromAmino(data: AminoLinkData): Data | undefined {
+  if (!data.username && !data.application) {
+    return undefined;
   }
-
-  if (address.typeUrl === Base58AddressTypeUrl) {
-    const base58Address = Base58Address.decode(address.value);
-    return {
-      type: Base58AddressAminoType,
-      value: {
-        value: base58Address.value,
-      },
-    };
-  }
-
-  if (address.typeUrl === HexAddressTypeUrl) {
-    const hexAddress = HexAddress.decode(address.value);
-    return {
-      type: HexAddressAminoType,
-      value: {
-        prefix: hexAddress.prefix,
-        values: hexAddress.value,
-      },
-    };
-  }
-
-  throw new Error(`Unsupported address type: ${address.typeUrl}`);
+  return {
+    application: fromOmitEmptyString(data.application),
+    username: fromOmitEmptyString(data.username),
+  };
 }
+
+function convertTimeoutHeightToAmino(
+  timeout: Height | undefined
+): AminoTimeoutHeight {
+  return {
+    revision_height: omitZeroLong(
+      timeout?.revisionHeight || Long.fromNumber(0)
+    ),
+    revision_number: omitZeroLong(
+      timeout?.revisionNumber || Long.fromNumber(0)
+    ),
+  };
+}
+
+function convertTimeoutHeightFromAmino(
+  timeout: AminoTimeoutHeight
+): Height | undefined {
+  if (!timeout.revision_number && !timeout.revision_height) {
+    return undefined;
+  }
+
+  return {
+    revisionHeight: fromOmitZeroLong(timeout.revision_height),
+    revisionNumber: fromOmitZeroLong(timeout.revision_number),
+  };
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+// --- Address data converters
+// --------------------------------------------------------------------------------------------------------------------
 
 export function bech32AddressToAny(address: Bech32Address): Any {
   return Any.fromPartial({
@@ -173,28 +188,78 @@ export function hexAddressToAny(address: HexAddress): Any {
   });
 }
 
-function convertAminoAddressData(address: AminoAddressData): Any {
+function convertAddressDataToAmino(address: Any): AminoAddressData {
+  if (address.typeUrl === Bech32AddressTypeUrl) {
+    const bech32Address = Bech32Address.decode(address.value);
+    return {
+      type: Bech32AddressAminoType,
+      value: {
+        prefix: omitEmptyString(bech32Address.prefix),
+        value: omitEmptyString(bech32Address.value),
+      },
+    };
+  }
+
+  if (address.typeUrl === Base58AddressTypeUrl) {
+    const base58Address = Base58Address.decode(address.value);
+    return {
+      type: Base58AddressAminoType,
+      value: {
+        value: omitEmptyString(base58Address.value),
+      },
+    };
+  }
+
+  if (address.typeUrl === HexAddressTypeUrl) {
+    const hexAddress = HexAddress.decode(address.value);
+    return {
+      type: HexAddressAminoType,
+      value: {
+        prefix: omitEmptyString(hexAddress.prefix),
+        values: omitEmptyString(hexAddress.value),
+      },
+    };
+  }
+
+  throw new Error(`Unsupported address type: ${address.typeUrl}`);
+}
+
+function convertAddressDataFromAmino(address: AminoAddressData): Any {
   if (address.type === Bech32AddressAminoType) {
     const addressData = address.value as AminoBech32Address["value"];
-    return bech32AddressToAny(addressData);
+    return bech32AddressToAny({
+      value: fromOmitEmptyString(addressData.value),
+      prefix: fromOmitEmptyString(addressData.prefix),
+    });
   }
 
   if (address.type === Base58AddressAminoType) {
     const addressData = address.value as AminoBase58Address["value"];
-    return base58AddressToAny(addressData);
+    return base58AddressToAny({
+      value: fromOmitEmptyString(addressData.value),
+    });
   }
 
   if (address.type === HexAddressAminoType) {
     const addressData = address.value as AminoHexAddress["value"];
-    return hexAddressToAny(addressData);
+    return hexAddressToAny({
+      value: fromOmitEmptyString(addressData.value),
+      prefix: fromOmitEmptyString(addressData.prefix),
+    });
   }
 
   throw new Error(`Unsupported address type: ${address.type}`);
 }
 
-function convertCompactBitArray(array: CompactBitArray | undefined): string {
+// --------------------------------------------------------------------------------------------------------------------
+// --- Compact bit array converters
+// --------------------------------------------------------------------------------------------------------------------
+
+function convertCompactBitArrayToAmino(
+  array: CompactBitArray | undefined
+): string | null {
   if (!array) {
-    return "null";
+    return null;
   }
 
   let bits = "";
@@ -207,7 +272,16 @@ function convertCompactBitArray(array: CompactBitArray | undefined): string {
   return bits;
 }
 
-function convertAminoCompactBitArray(value: string): CompactBitArray {
+function convertCompactBitArrayFromAmino(
+  value: string | undefined
+): CompactBitArray {
+  if (!value) {
+    return {
+      elems: Uint8Array.of(),
+      extraBitsStored: 0,
+    };
+  }
+
   const elements = new Uint8Array(value.length);
   for (let i = 0; i < value.length; i += 1) {
     // eslint-disable-next-line no-bitwise
@@ -220,32 +294,9 @@ function convertAminoCompactBitArray(value: string): CompactBitArray {
   };
 }
 
-function convertSignatureData(signatureData: Any): AminoSignature {
-  if (signatureData.typeUrl === SingleSignatureTypeUrl) {
-    const data = SingleSignature.decode(signatureData.value);
-    return {
-      type: SingleSignatureAminoType,
-      value: {
-        mode: SignatureValueType[data.valueType],
-        signature: toBase64(data.signature),
-      },
-    };
-  }
-
-  if (signatureData.typeUrl === CosmosMultiSignatureTypeUrl) {
-    const data = CosmosMultiSignature.decode(signatureData.value);
-    const signatures = data.signatures.map(convertSignatureData);
-    return {
-      type: CosmosMultiSignatureAminoType,
-      value: {
-        bit_array: convertCompactBitArray(data.bitArray),
-        signatures,
-      },
-    };
-  }
-
-  throw new Error(`Unsupported signature type: ${signatureData}`);
-}
+// --------------------------------------------------------------------------------------------------------------------
+// --- Signature data converters
+// --------------------------------------------------------------------------------------------------------------------
 
 export function singleSignatureToAny(signature: SingleSignature): Any {
   return Any.fromPartial({
@@ -263,12 +314,39 @@ export function cosmosMultiSignatureToAny(
   });
 }
 
-function convertAminoSignature(signature: AminoSignature): Any {
+function convertSignatureDataToAmino(signatureData: Any): AminoSignatureData {
+  if (signatureData.typeUrl === SingleSignatureTypeUrl) {
+    const data = SingleSignature.decode(signatureData.value);
+    return {
+      type: SingleSignatureAminoType,
+      value: {
+        signature: toBase64UndefinedIfEmpty(data.signature),
+        value_type: omitEmptyNumber(data.valueType),
+      },
+    } as AminoSingleSignature;
+  }
+
+  if (signatureData.typeUrl === CosmosMultiSignatureTypeUrl) {
+    const data = CosmosMultiSignature.decode(signatureData.value);
+    const signatures = data.signatures.map(convertSignatureDataToAmino);
+    return {
+      type: CosmosMultiSignatureAminoType,
+      value: {
+        bit_array: convertCompactBitArrayToAmino(data.bitArray),
+        signatures: nullIfEmptyArray(signatures),
+      },
+    } as AminoCosmosMultiSignature;
+  }
+
+  throw new Error(`Unsupported signature type: ${signatureData}`);
+}
+
+function convertSignatureDataFromAmino(signature: AminoSignatureData): Any {
   if (signature.type === SingleSignatureAminoType) {
     const signatureData = signature.value as AminoSingleSignature["value"];
     return singleSignatureToAny(
       SingleSignature.fromPartial({
-        signature: fromBase64(signatureData.signature),
+        signature: fromBase64UndefinedIfEmpty(signatureData.signature),
         valueType: signatureValueTypeFromJSON(signatureData.value_type),
       })
     );
@@ -278,14 +356,108 @@ function convertAminoSignature(signature: AminoSignature): Any {
     const signatureData = signature.value as AminoCosmosMultiSignature["value"];
     return cosmosMultiSignatureToAny(
       CosmosMultiSignature.fromPartial({
-        signatures: signatureData.signatures.map(convertAminoSignature),
-        bitArray: convertAminoCompactBitArray(signatureData.bit_array),
+        bitArray: convertCompactBitArrayFromAmino(signatureData.bit_array),
+        signatures: fromNullIfEmptyArray(signatureData.signatures).map(
+          convertSignatureDataFromAmino
+        ),
       })
     );
   }
 
   throw new Error(`Unsupported signature type: ${signature}`);
 }
+
+// --------------------------------------------------------------------------------------------------------------------
+// --- MsgLinkChainAccount inner types converters
+// --------------------------------------------------------------------------------------------------------------------
+
+function convertChainConfigToAmino(
+  config: ChainConfig | undefined
+): AminoChainConfig {
+  return {
+    name: omitEmptyString(config?.name || ""),
+  };
+}
+
+function convertChainConfigFromAmino(
+  config: AminoChainConfig
+): ChainConfig | undefined {
+  if (!config.name) {
+    return undefined;
+  }
+
+  return {
+    name: fromOmitEmptyString(config.name),
+  };
+}
+
+function convertPubKeyToAmino(pubKey: Any): AminoPubKey {
+  if (pubKey.typeUrl === "/cosmos.crypto.secp256k1.PubKey") {
+    const secp256k1Key = Secp256k1PubKey.decode(pubKey.value);
+    return {
+      type: "tendermint/PubKeySecp256k1",
+      value: toBase64NullIfEmpty(secp256k1Key.key),
+    };
+  }
+
+  if (pubKey.typeUrl === "/cosmos.crypto.ed25519.PubKey") {
+    const ed25519PubKey = Ed25519PubKey.decode(pubKey.value);
+    return {
+      type: "tendermint/PubKeyEd25519",
+      value: toBase64NullIfEmpty(ed25519PubKey.key),
+    };
+  }
+
+  throw new Error(`Unrecognized pub key type: ${pubKey.typeUrl}`);
+}
+
+function convertProofToAmino(proof: Proof): AminoProof {
+  assertDefinedAndNotNull(proof.pubKey, "pub key not defined");
+  assertDefinedAndNotNull(proof.signature, "signature not defined");
+  return {
+    signature: convertSignatureDataToAmino(proof.signature),
+    plain_text: omitEmptyString(proof.plainText),
+    pub_key: convertPubKeyToAmino(proof.pubKey),
+  };
+}
+
+export function secp256k1PubKeyToAny(pubKey: Secp256k1Pubkey): Any {
+  return Any.fromPartial({
+    typeUrl: "/cosmos.crypto.secp256k1.PubKey",
+    value: fromBase64(pubKey.value),
+  });
+}
+
+export function ed25519PubKeyToAny(pubKey: Ed25519Pubkey): Any {
+  return Any.fromPartial({
+    typeUrl: "/cosmos.crypto.ed25519.PubKey",
+    value: fromBase64(pubKey.value),
+  });
+}
+
+function convertPubKeyFromAmino(pubKey: AminoPubKey): Any {
+  if (pubKey.type === "tendermint/PubKeySecp256k1") {
+    return secp256k1PubKeyToAny(pubKey as Secp256k1Pubkey);
+  }
+
+  if (pubKey.type === "tendermint/PubKeyEd25519") {
+    return ed25519PubKeyToAny(pubKey as Ed25519Pubkey);
+  }
+
+  throw new Error(`Unsupported key type: ${pubKey.type}`);
+}
+
+function convertProofFromAmino(proof: AminoProof): Proof {
+  return Proof.fromPartial({
+    signature: convertSignatureDataFromAmino(proof.signature),
+    plainText: fromOmitEmptyString(proof.plain_text),
+    pubKey: convertPubKeyFromAmino(proof.pub_key),
+  });
+}
+
+// --------------------------------------------------------------------------------------------------------------------
+// --- Messages converters
+// --------------------------------------------------------------------------------------------------------------------
 
 /**
  * Creates all the Amino converters for the profiles messages.
@@ -296,150 +468,114 @@ export function createProfilesConverters(): AminoConverters {
     [MsgSaveProfileTypeUrl]: {
       aminoType: MsgSaveProfileAminoType,
       toAmino: (value: MsgSaveProfile): AminoMsgSaveProfile["value"] => ({
-        dtag: value.dtag,
+        dtag: omitEmptyString(value.dtag),
         bio: omitEmptyString(value.bio),
         nickname: omitEmptyString(value.nickname),
         profile_picture: omitEmptyString(value.profilePicture),
         cover_picture: omitEmptyString(value.coverPicture),
-        creator: value.creator,
+        creator: omitEmptyString(value.creator),
       }),
       fromAmino: (msg: AminoMsgSaveProfile["value"]): MsgSaveProfile => ({
-        dtag: msg.dtag,
+        dtag: fromOmitEmptyString(msg.dtag),
         nickname: fromOmitEmptyString(msg.nickname),
         bio: fromOmitEmptyString(msg.bio),
         profilePicture: fromOmitEmptyString(msg.profile_picture),
         coverPicture: fromOmitEmptyString(msg.cover_picture),
-        creator: msg.creator,
+        creator: fromOmitEmptyString(msg.creator),
       }),
     },
     [MsgDeleteProfileTypeUrl]: {
       aminoType: MsgDeleteProfileAminoType,
       toAmino: (value: MsgDeleteProfile): AminoMsgDeleteProfile["value"] => ({
-        creator: value.creator,
+        creator: omitEmptyString(value.creator),
       }),
       fromAmino: (msg: AminoMsgDeleteProfile["value"]): MsgDeleteProfile => ({
-        creator: msg.creator,
+        creator: fromOmitEmptyString(msg.creator),
       }),
     },
     [MsgRequestDTagTransferTypeUrl]: {
       aminoType: MsgRequestDTagTransferAminoType,
-      toAmino: ({
-        receiver,
-        sender,
-      }: MsgRequestDTagTransfer): AminoMsgRequestDTagTransfer["value"] => ({
-        receiver,
-        sender,
+      toAmino: (
+        value: MsgRequestDTagTransfer
+      ): AminoMsgRequestDTagTransfer["value"] => ({
+        receiver: omitEmptyString(value.receiver),
+        sender: omitEmptyString(value.sender),
       }),
-      fromAmino: ({
-        receiver,
-        sender,
-      }: AminoMsgRequestDTagTransfer["value"]): MsgRequestDTagTransfer => ({
-        receiver,
-        sender,
+      fromAmino: (
+        msg: AminoMsgRequestDTagTransfer["value"]
+      ): MsgRequestDTagTransfer => ({
+        receiver: fromOmitEmptyString(msg.receiver),
+        sender: fromOmitEmptyString(msg.sender),
       }),
     },
     [MsgAcceptDTagTransferRequestTypeUrl]: {
       aminoType: MsgAcceptDTagTransferRequestAminoType,
-      toAmino: ({
-        newDtag,
-        sender,
-        receiver,
-      }: MsgAcceptDTagTransferRequest): AminoMsgAcceptDTagTransferRequest["value"] => ({
-        new_dtag: newDtag,
-        sender,
-        receiver,
+      toAmino: (
+        value: MsgAcceptDTagTransferRequest
+      ): AminoMsgAcceptDTagTransferRequest["value"] => ({
+        new_dtag: omitEmptyString(value.newDtag),
+        sender: omitEmptyString(value.sender),
+        receiver: omitEmptyString(value.receiver),
       }),
-      fromAmino: ({
-        new_dtag,
-        sender,
-        receiver,
-      }: AminoMsgAcceptDTagTransferRequest["value"]): MsgAcceptDTagTransferRequest => ({
-        newDtag: new_dtag,
-        sender,
-        receiver,
+      fromAmino: (
+        msg: AminoMsgAcceptDTagTransferRequest["value"]
+      ): MsgAcceptDTagTransferRequest => ({
+        newDtag: fromOmitEmptyString(msg.new_dtag),
+        sender: fromOmitEmptyString(msg.sender),
+        receiver: fromOmitEmptyString(msg.receiver),
       }),
     },
     [MsgRefuseDTagTransferRequestTypeUrl]: {
       aminoType: MsgRefuseDTagTransferRequestAminoType,
-      toAmino: ({
-        sender,
-        receiver,
-      }: MsgRefuseDTagTransferRequest): AminoMsgRefuseDTagTransferRequest["value"] => ({
-        sender,
-        receiver,
+      toAmino: (
+        value: MsgRefuseDTagTransferRequest
+      ): AminoMsgRefuseDTagTransferRequest["value"] => ({
+        sender: omitEmptyString(value.sender),
+        receiver: omitEmptyString(value.receiver),
       }),
-      fromAmino: ({
-        sender,
-        receiver,
-      }: AminoMsgRefuseDTagTransferRequest["value"]): MsgRefuseDTagTransferRequest => ({
-        sender,
-        receiver,
+      fromAmino: (
+        msg: AminoMsgRefuseDTagTransferRequest["value"]
+      ): MsgRefuseDTagTransferRequest => ({
+        sender: fromOmitEmptyString(msg.sender),
+        receiver: fromOmitEmptyString(msg.receiver),
       }),
     },
     [MsgCancelDTagTransferRequestTypeUrl]: {
       aminoType: MsgCancelDTagTransferRequestAminoType,
-      toAmino: ({
-        sender,
-        receiver,
-      }: MsgCancelDTagTransferRequest): AminoMsgCancelDTagTransferRequest["value"] => ({
-        sender,
-        receiver,
+      toAmino: (
+        value: MsgCancelDTagTransferRequest
+      ): AminoMsgCancelDTagTransferRequest["value"] => ({
+        sender: omitEmptyString(value.sender),
+        receiver: omitEmptyString(value.receiver),
       }),
-      fromAmino: ({
-        sender,
-        receiver,
-      }: AminoMsgCancelDTagTransferRequest["value"]): MsgCancelDTagTransferRequest => ({
-        sender,
-        receiver,
+      fromAmino: (
+        msg: AminoMsgCancelDTagTransferRequest["value"]
+      ): MsgCancelDTagTransferRequest => ({
+        sender: fromOmitEmptyString(msg.sender),
+        receiver: fromOmitEmptyString(msg.receiver),
       }),
     },
     [MsgLinkApplicationTypeUrl]: {
       aminoType: MsgLinkApplicationAminoType,
       toAmino: (msg: MsgLinkApplication): AminoMsgLinkApplication["value"] => ({
-        sender: msg.sender,
-        link_data: {
-          application: msg.linkData!.application,
-          username: msg.linkData!.username,
-        },
-        call_data: msg.callData,
-        source_channel: msg.sourceChannel,
-        source_port: msg.sourcePort,
-        timeout_height: msg.timeoutHeight
-          ? {
-              revision_height: omitDefault(
-                msg.timeoutHeight.revisionHeight
-              )?.toString(),
-              revision_number: omitDefault(
-                msg.timeoutHeight.revisionNumber
-              )?.toString(),
-            }
-          : {},
-        timeout_timestamp: omitDefault(msg.timeoutTimestamp)?.toString(),
+        sender: omitEmptyString(msg.sender),
+        link_data: convertLinkDataToAmino(msg.linkData),
+        call_data: omitEmptyString(msg.callData),
+        source_channel: omitEmptyString(msg.sourceChannel),
+        source_port: omitEmptyString(msg.sourcePort),
+        timeout_height: convertTimeoutHeightToAmino(msg.timeoutHeight),
+        timeout_timestamp: omitZeroLong(msg.timeoutTimestamp),
       }),
       fromAmino: (
         msg: AminoMsgLinkApplication["value"]
       ): MsgLinkApplication => ({
-        sender: msg.sender,
-        linkData: {
-          application: msg.link_data.application,
-          username: msg.link_data.username,
-        },
-        callData: msg.call_data,
-        sourceChannel: msg.source_channel,
-        sourcePort: msg.source_port,
-        timeoutHeight: msg.timeout_height
-          ? {
-              revisionHeight: Long.fromString(
-                msg.timeout_height.revision_height || "0",
-                true
-              ),
-              revisionNumber: Long.fromString(
-                msg.timeout_height.revision_number || "0",
-                true
-              ),
-            }
-          : undefined,
-        timeoutTimestamp: Long.fromString(msg.timeout_timestamp || "0", true),
+        sender: fromOmitEmptyString(msg.sender),
+        linkData: convertLinkDataFromAmino(msg.link_data),
+        callData: fromOmitEmptyString(msg.call_data),
+        sourceChannel: fromOmitEmptyString(msg.source_channel),
+        sourcePort: fromOmitEmptyString(msg.source_port),
+        timeoutHeight: convertTimeoutHeightFromAmino(msg.timeout_height),
+        timeoutTimestamp: fromOmitZeroLong(msg.timeout_timestamp),
       }),
     },
     [MsgUnlinkApplicationTypeUrl]: {
@@ -447,16 +583,16 @@ export function createProfilesConverters(): AminoConverters {
       toAmino: (
         msg: MsgUnlinkApplication
       ): AminoMsgUnlinkApplication["value"] => ({
-        signer: msg.signer,
-        application: msg.application,
-        username: msg.username,
+        signer: omitEmptyString(msg.signer),
+        application: omitEmptyString(msg.application),
+        username: omitEmptyString(msg.username),
       }),
       fromAmino: (
         msg: AminoMsgUnlinkApplication["value"]
       ): MsgUnlinkApplication => ({
-        signer: msg.signer,
-        application: msg.application,
-        username: msg.username,
+        signer: fromOmitEmptyString(msg.signer),
+        application: fromOmitEmptyString(msg.application),
+        username: fromOmitEmptyString(msg.username),
       }),
     },
     [MsgLinkChainAccountTypeUrl]: {
@@ -466,70 +602,38 @@ export function createProfilesConverters(): AminoConverters {
       ): AminoMsgLinkChainAccount["value"] => {
         assertDefinedAndNotNull(msg.chainAddress, "chain address not defined");
         assertDefinedAndNotNull(msg.proof, "proof not defined");
-        assertDefinedAndNotNull(msg.proof!.pubKey, "pub key not defined");
-        assertDefinedAndNotNull(msg.proof!.signature, "signature not defined");
         assertDefinedAndNotNull(msg.chainConfig, "chain config not defined");
-
-        const pubKey = PubKey.decode(msg.proof!.pubKey!.value);
         return {
-          signer: msg.signer,
-          chain_address: convertAddressData(msg.chainAddress!),
-          chain_config: {
-            name: msg.chainConfig!.name,
-          },
-          proof: {
-            pub_key: {
-              type: "tendermint/PubKeySecp256k1",
-              value: toBase64(pubKey.key),
-            },
-            signature: convertSignatureData(msg.proof!.signature!),
-            plain_text: msg.proof!.plainText,
-          },
+          chain_address: convertAddressDataToAmino(msg.chainAddress),
+          chain_config: convertChainConfigToAmino(msg.chainConfig),
+          proof: convertProofToAmino(msg.proof),
+          signer: omitEmptyString(msg.signer),
         };
       },
       fromAmino: (
         msg: AminoMsgLinkChainAccount["value"]
-      ): MsgLinkChainAccount => {
-        if (msg.chain_address.type !== Bech32AddressAminoType) {
-          throw new Error(
-            `Invalid chain_address type "${msg.chain_address.type}"`
-          );
-        }
-
-        return {
-          signer: msg.signer,
-          chainAddress: convertAminoAddressData(msg.chain_address),
-          chainConfig: ChainConfig.fromPartial({
-            name: msg.chain_config.name,
-          }),
-          proof: Proof.fromPartial({
-            signature: convertAminoSignature(msg.proof.signature),
-            plainText: msg.proof.plain_text,
-            pubKey: {
-              typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-              value: PubKey.encode({
-                key: fromBase64(msg.proof.pub_key.value),
-              }).finish(),
-            },
-          }),
-        };
-      },
+      ): MsgLinkChainAccount => ({
+        chainAddress: convertAddressDataFromAmino(msg.chain_address),
+        chainConfig: convertChainConfigFromAmino(msg.chain_config),
+        proof: convertProofFromAmino(msg.proof),
+        signer: fromOmitEmptyString(msg.signer),
+      }),
     },
     [MsgUnlinkChainAccountTypeUrl]: {
       aminoType: MsgUnlinkChainAccountAminoType,
       toAmino: (
         msg: MsgUnlinkChainAccount
       ): AminoMsgUnlinkChainAccount["value"] => ({
-        chain_name: msg.chainName,
-        owner: msg.owner,
-        target: msg.target,
+        chain_name: omitEmptyString(msg.chainName),
+        owner: omitEmptyString(msg.owner),
+        target: omitEmptyString(msg.target),
       }),
       fromAmino: (
         msg: AminoMsgUnlinkChainAccount["value"]
       ): MsgUnlinkChainAccount => ({
-        chainName: msg.chain_name,
-        owner: msg.owner,
-        target: msg.target,
+        chainName: fromOmitEmptyString(msg.chain_name),
+        owner: fromOmitEmptyString(msg.owner),
+        target: fromOmitEmptyString(msg.target),
       }),
     },
   };
