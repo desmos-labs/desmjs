@@ -13,13 +13,14 @@ import {
   FreeTextValue,
   FreeTextValueParams,
   RegisteredReactionValue,
+  RegisteredReactionValueParams,
 } from "@desmoslabs/desmjs-types/desmos/reactions/v1/models";
-import Long from "long";
 import {
   AminoFreeTextReaction,
   AminoFreeTextValueParams,
   AminoReaction,
   AminoRegisteredReaction,
+  AminoRegisteredReactionValueParams,
 } from "./types";
 import {
   AminoMsgAddReaction,
@@ -48,8 +49,18 @@ import {
   RegisteredReactionValueAminoType,
   RegisteredReactionValueTypeUrl,
 } from "../../const";
+import {
+  fromOmitEmptyNumber,
+  fromOmitEmptyString,
+  fromOmitFalse,
+  fromOmitZeroLong,
+  omitEmptyNumber,
+  omitEmptyString,
+  omitFalse,
+  omitZeroLong,
+} from "../utils";
 
-export function convertRegisteredReactionValueToAny(
+export function registeredReactionValueToAny(
   value: RegisteredReactionValue
 ): Any {
   return Any.fromPartial({
@@ -58,7 +69,7 @@ export function convertRegisteredReactionValueToAny(
   });
 }
 
-export function convertFreeTextValueToAny(value: FreeTextValue): Any {
+export function freeTextReactionValueToAny(value: FreeTextValue): Any {
   return Any.fromPartial({
     typeUrl: FreeTextValueTypeUrl,
     value: FreeTextValue.encode(value).finish(),
@@ -74,10 +85,10 @@ export const reactionValueConverters: AminoConverters = {
         registered_reaction_id: reaction.registeredReactionId,
       };
     },
-    fromAmino: (msg: AminoRegisteredReaction["value"]): Any =>
-      convertRegisteredReactionValueToAny(
+    fromAmino: (msg: AminoRegisteredReaction): Any =>
+      registeredReactionValueToAny(
         RegisteredReactionValue.fromPartial({
-          registeredReactionId: msg.registered_reaction_id,
+          registeredReactionId: msg.value.registered_reaction_id,
         })
       ),
   },
@@ -89,10 +100,10 @@ export const reactionValueConverters: AminoConverters = {
         text: reaction.text,
       };
     },
-    fromAmino: (msg: AminoFreeTextReaction["value"]): Any =>
-      convertFreeTextValueToAny(
+    fromAmino: (msg: AminoFreeTextReaction): Any =>
+      freeTextReactionValueToAny(
         FreeTextValue.fromPartial({
-          text: msg.text,
+          text: msg.value.text,
         })
       ),
   },
@@ -114,13 +125,29 @@ export function convertReactionFromAmino(value: AminoReaction): Any {
   return converter.fromAmino(value);
 }
 
+export function convertRegisteredReactionValueParamsToAmino(
+  params: RegisteredReactionValueParams | undefined
+): AminoRegisteredReactionValueParams {
+  return {
+    enabled: omitFalse(params?.enabled || false),
+  };
+}
+
+export function convertRegisteredReactionValueParamsFromAmino(
+  params: AminoRegisteredReactionValueParams
+): RegisteredReactionValueParams {
+  return {
+    enabled: fromOmitFalse(params.enabled),
+  };
+}
+
 export function convertFreeTextValueParamsToAmino(
-  params: FreeTextValueParams
+  params: FreeTextValueParams | undefined
 ): AminoFreeTextValueParams {
   return {
-    enabled: params.enabled,
-    max_length: params.maxLength,
-    reg_ex: params.regEx,
+    enabled: omitFalse(params?.enabled || false),
+    max_length: omitEmptyNumber(params?.maxLength || 0),
+    reg_ex: omitEmptyString(params?.regEx || ""),
   };
 }
 
@@ -128,9 +155,9 @@ export function convertFreeTextValueParamsFromAmino(
   params: AminoFreeTextValueParams
 ): FreeTextValueParams {
   return {
-    enabled: params.enabled,
-    maxLength: params.max_length,
-    regEx: params.reg_ex,
+    enabled: fromOmitFalse(params.enabled),
+    maxLength: fromOmitEmptyNumber(params.max_length),
+    regEx: fromOmitEmptyString(params.reg_ex),
   };
 }
 
@@ -144,32 +171,32 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (msg: MsgAddReaction): AminoMsgAddReaction["value"] => {
         assertDefinedAndNotNull(msg.value, "reaction value not defined");
         return {
-          subspace_id: msg.subspaceId.toString(),
-          post_id: msg.postId.toString(),
+          subspace_id: omitZeroLong(msg.subspaceId),
+          post_id: omitZeroLong(msg.postId),
           value: convertReactionValueToAmino(msg.value),
-          user: msg.user,
+          user: omitEmptyString(msg.user),
         };
       },
       fromAmino: (msg: AminoMsgAddReaction["value"]): MsgAddReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
         value: convertReactionFromAmino(msg.value),
-        user: msg.user,
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgRemoveReactionTypeUrl]: {
       aminoType: MsgRemoveReactionAminoType,
       toAmino: (msg: MsgRemoveReaction): AminoMsgRemoveReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        reaction_id: msg.reactionId,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        reaction_id: omitEmptyNumber(msg.reactionId),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (msg: AminoMsgRemoveReaction["value"]): MsgRemoveReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        reactionId: msg.reaction_id,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        reactionId: fromOmitEmptyNumber(msg.reaction_id),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgAddRegisteredReactionTypeUrl]: {
@@ -177,18 +204,18 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgAddRegisteredReaction
       ): AminoMsgAddRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        shorthand_code: msg.shorthandCode,
-        display_value: msg.displayValue,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        shorthand_code: omitEmptyString(msg.shorthandCode),
+        display_value: omitEmptyString(msg.displayValue),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgAddRegisteredReaction["value"]
       ): MsgAddRegisteredReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        shorthandCode: msg.shorthand_code,
-        displayValue: msg.display_value,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        shorthandCode: fromOmitEmptyString(msg.shorthand_code),
+        displayValue: fromOmitEmptyString(msg.display_value),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgEditRegisteredReactionTypeUrl]: {
@@ -196,20 +223,20 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgEditRegisteredReaction
       ): AminoMsgEditRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        registered_reaction_id: msg.registeredReactionId,
-        shorthand_code: msg.shorthandCode,
-        display_value: msg.displayValue,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        registered_reaction_id: omitEmptyNumber(msg.registeredReactionId),
+        shorthand_code: omitEmptyString(msg.shorthandCode),
+        display_value: omitEmptyString(msg.displayValue),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgEditRegisteredReaction["value"]
       ): MsgEditRegisteredReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        registeredReactionId: msg.registered_reaction_id,
-        shorthandCode: msg.shorthand_code,
-        displayValue: msg.display_value,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        registeredReactionId: fromOmitEmptyNumber(msg.registered_reaction_id),
+        shorthandCode: fromOmitEmptyString(msg.shorthand_code),
+        displayValue: fromOmitEmptyString(msg.display_value),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgRemoveRegisteredReactionTypeUrl]: {
@@ -217,16 +244,16 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgRemoveRegisteredReaction
       ): AminoMsgRemoveRegisteredReaction["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        registered_reaction_id: msg.registeredReactionId,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        registered_reaction_id: omitEmptyNumber(msg.registeredReactionId),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgRemoveRegisteredReaction["value"]
       ): MsgRemoveRegisteredReaction => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        registeredReactionId: msg.registered_reaction_id,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        registeredReactionId: fromOmitEmptyNumber(msg.registered_reaction_id),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
     [MsgSetReactionsParamsTypeUrl]: {
@@ -234,22 +261,22 @@ export function createReactionsConverters(): AminoConverters {
       toAmino: (
         msg: MsgSetReactionsParams
       ): AminoMsgSetReactionsParams["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        registered_reaction: msg.registeredReaction,
-        free_text: msg.freeText
-          ? convertFreeTextValueParamsToAmino(msg.freeText)
-          : undefined,
-        user: msg.user,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        registered_reaction: convertRegisteredReactionValueParamsToAmino(
+          msg.registeredReaction
+        ),
+        free_text: convertFreeTextValueParamsToAmino(msg.freeText),
+        user: omitEmptyString(msg.user),
       }),
       fromAmino: (
         msg: AminoMsgSetReactionsParams["value"]
       ): MsgSetReactionsParams => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        registeredReaction: msg.registered_reaction,
-        freeText: msg.free_text
-          ? convertFreeTextValueParamsFromAmino(msg.free_text)
-          : undefined,
-        user: msg.user,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        registeredReaction: convertRegisteredReactionValueParamsFromAmino(
+          msg.registered_reaction
+        ),
+        freeText: convertFreeTextValueParamsFromAmino(msg.free_text),
+        user: fromOmitEmptyString(msg.user),
       }),
     },
   };

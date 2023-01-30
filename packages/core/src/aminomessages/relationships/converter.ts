@@ -5,7 +5,6 @@ import {
   MsgDeleteRelationship,
   MsgUnblockUser,
 } from "@desmoslabs/desmjs-types/desmos/relationships/v1/msgs";
-import Long from "long";
 import {
   AminoMsgBlockUser,
   AminoMsgCreateRelationship,
@@ -22,7 +21,12 @@ import {
   MsgUnblockUserAminoType,
   MsgUnblockUserTypeUrl,
 } from "../../const";
-import { fromOmitEmptyString, omitEmptyString } from "../utils";
+import {
+  fromOmitEmptyString,
+  fromOmitZeroLong,
+  omitEmptyString,
+  omitZeroLong,
+} from "../utils";
 
 /**
  * Creates all the Amino converters for the relationships messages.
@@ -34,16 +38,16 @@ export function createRelationshipsConverters(): AminoConverters {
       toAmino: (
         msg: MsgCreateRelationship
       ): AminoMsgCreateRelationship["value"] => ({
-        signer: msg.signer,
-        counterparty: msg.counterparty,
-        subspace_id: msg.subspaceId.toString(),
+        signer: omitEmptyString(msg.signer),
+        counterparty: omitEmptyString(msg.counterparty),
+        subspace_id: omitZeroLong(msg.subspaceId),
       }),
       fromAmino: (
         msg: AminoMsgCreateRelationship["value"]
       ): MsgCreateRelationship => ({
-        signer: msg.signer,
-        counterparty: msg.counterparty,
-        subspaceId: Long.fromString(msg.subspace_id),
+        signer: fromOmitEmptyString(msg.signer),
+        counterparty: fromOmitEmptyString(msg.counterparty),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
       }),
     },
     [MsgDeleteRelationshipTypeUrl]: {
@@ -51,44 +55,44 @@ export function createRelationshipsConverters(): AminoConverters {
       toAmino: (
         msg: MsgDeleteRelationship
       ): AminoMsgDeleteRelationship["value"] => ({
-        signer: msg.signer,
-        counterparty: msg.counterparty,
-        subspace_id: msg.subspaceId.toString(),
+        signer: omitEmptyString(msg.signer),
+        counterparty: omitEmptyString(msg.counterparty),
+        subspace_id: omitZeroLong(msg.subspaceId),
       }),
       fromAmino: (
         msg: AminoMsgDeleteRelationship["value"]
       ): MsgDeleteRelationship => ({
-        signer: msg.signer,
-        counterparty: msg.counterparty,
-        subspaceId: Long.fromString(msg.subspace_id),
+        signer: fromOmitEmptyString(msg.signer),
+        counterparty: fromOmitEmptyString(msg.counterparty),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
       }),
     },
     [MsgBlockUserTypeUrl]: {
       aminoType: MsgBlockUserAminoType,
       toAmino: (msg: MsgBlockUser): AminoMsgBlockUser["value"] => ({
-        blocker: msg.blocker,
-        blocked: msg.blocked,
+        blocker: omitEmptyString(msg.blocker),
+        blocked: omitEmptyString(msg.blocked),
         reason: omitEmptyString(msg.reason),
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
       }),
       fromAmino: (msg: AminoMsgBlockUser["value"]): MsgBlockUser => ({
-        blocker: msg.blocker,
-        blocked: msg.blocked,
+        blocker: fromOmitEmptyString(msg.blocker),
+        blocked: fromOmitEmptyString(msg.blocked),
         reason: fromOmitEmptyString(msg.reason),
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
       }),
     },
     [MsgUnblockUserTypeUrl]: {
       aminoType: MsgUnblockUserAminoType,
       toAmino: (msg: MsgUnblockUser): AminoMsgUnblockUser["value"] => ({
-        blocker: msg.blocker,
-        blocked: msg.blocked,
-        subspace_id: msg.subspaceId.toString(),
+        blocker: omitEmptyString(msg.blocker),
+        blocked: omitEmptyString(msg.blocked),
+        subspace_id: omitZeroLong(msg.subspaceId),
       }),
       fromAmino: (msg: AminoMsgUnblockUser["value"]): MsgUnblockUser => ({
-        blocker: msg.blocker,
-        blocked: msg.blocked,
-        subspaceId: Long.fromString(msg.subspace_id),
+        blocker: fromOmitEmptyString(msg.blocker),
+        blocked: fromOmitEmptyString(msg.blocked),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
       }),
     },
   };

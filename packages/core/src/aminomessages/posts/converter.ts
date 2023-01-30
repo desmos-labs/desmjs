@@ -8,6 +8,7 @@ import {
   MsgRemovePostAttachment,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
 import {
+  Attachment,
   Entities,
   Media,
   Poll,
@@ -20,6 +21,7 @@ import {
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 import Long from "long";
+import { AminoMsg } from "@cosmjs/amino";
 import {
   AminoMsgAddPostAttachment,
   AminoMsgAnswerPoll,
@@ -30,6 +32,7 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import {
+  AminoAttachment,
   AminoContent,
   AminoEntities,
   AminoMedia,
@@ -59,12 +62,20 @@ import {
   PollTypeUrl,
 } from "../../const";
 import {
+  fromOmitZeroLong,
+  fromNullIfEmptyArray,
   fromOmitEmptyArray,
   fromOmitEmptyNumber,
   fromOmitEmptyString,
+  nullIfEmptyArray,
   omitEmptyArray,
   omitEmptyNumber,
   omitEmptyString,
+  omitZeroLong,
+  serializeDate,
+  deserializeDate,
+  omitFalse,
+  fromOmitFalse,
 } from "../utils";
 
 /**
@@ -89,23 +100,25 @@ export function mediaToAny(media: Media): Any {
   });
 }
 
+function convertAttachmentToAmino(attachment: Attachment): AminoAttachment {
+  return {
+    id: omitEmptyNumber(attachment.id),
+    post_id: omitZeroLong(attachment.postId),
+    subspace_id: omitZeroLong(attachment.subspaceId),
+    content: attachment.content
+      ? convertContentToAmino(attachment.content)
+      : undefined,
+  };
+}
+
 function convertPollProvidedAnswerToAmino(
   answer: Poll_ProvidedAnswer
 ): AminoPollProvidedAnswer {
   return {
     text: omitEmptyString(answer.text),
-    attachments: answer.attachments.map((attachment) => ({
-      id: omitEmptyNumber(attachment.id),
-      post_id: attachment.postId.gt(0)
-        ? attachment.postId.toString()
-        : undefined,
-      subspace_id: attachment.subspaceId.gt(0)
-        ? attachment.subspaceId.toString()
-        : undefined,
-      content: attachment.content
-        ? convertContentToAmino(attachment.content)
-        : undefined,
-    })),
+    attachments: nullIfEmptyArray(
+      answer.attachments.map(convertAttachmentToAmino)
+    ),
   };
 }
 
@@ -143,19 +156,25 @@ function convertPollTallyResultsFromAmino(
   };
 }
 
+function convertAttachmentFromAmino(attachment: AminoAttachment): Attachment {
+  return {
+    id: fromOmitEmptyNumber(attachment.id),
+    postId: Long.fromString(attachment.post_id ?? "0"),
+    subspaceId: Long.fromString(attachment.subspace_id ?? "0"),
+    content: attachment.content
+      ? convertContentFromAmino(attachment.content)
+      : undefined,
+  };
+}
+
 function convertPollProvidedAnswerFromAmino(
   answer: AminoPollProvidedAnswer
 ): Poll_ProvidedAnswer {
   return {
     text: fromOmitEmptyString(answer.text),
-    attachments: fromOmitEmptyArray(answer.attachments).map((attachment) => ({
-      id: fromOmitEmptyNumber(attachment.id),
-      postId: Long.fromString(attachment.post_id ?? "0"),
-      subspaceId: Long.fromString(attachment.subspace_id ?? "0"),
-      content: attachment.content
-        ? convertContentFromAmino(attachment.content)
-        : undefined,
-    })),
+    attachments: fromNullIfEmptyArray(answer.attachments).map(
+      convertAttachmentFromAmino
+    ),
   };
 }
 
@@ -169,9 +188,9 @@ export const attachmentConverters: AminoConverters = {
         provided_answers: poll.providedAnswers.map(
           convertPollProvidedAnswerToAmino
         ),
-        end_date: poll.endDate,
-        allows_multiple_answers: poll.allowsMultipleAnswers,
-        allows_answer_edits: poll.allowsAnswerEdits,
+        end_date: serializeDate(poll.endDate),
+        allows_multiple_answers: omitFalse(poll.allowsMultipleAnswers),
+        allows_answer_edits: omitFalse(poll.allowsAnswerEdits),
         final_tally_results: poll.finalTallyResults
           ? convertPollTallyResultsToAmino(poll.finalTallyResults)
           : undefined,
@@ -184,9 +203,9 @@ export const attachmentConverters: AminoConverters = {
           providedAnswers: msg.provided_answers.map(
             convertPollProvidedAnswerFromAmino
           ),
-          endDate: msg.end_date,
-          allowsMultipleAnswers: msg.allows_multiple_answers,
-          allowsAnswerEdits: msg.allows_answer_edits,
+          endDate: deserializeDate(msg.end_date),
+          allowsMultipleAnswers: fromOmitFalse(msg.allows_multiple_answers),
+          allowsAnswerEdits: fromOmitFalse(msg.allows_answer_edits),
           finalTallyResults: msg.final_tally_results
             ? convertPollTallyResultsFromAmino(msg.final_tally_results)
             : undefined,
@@ -214,7 +233,10 @@ export const attachmentConverters: AminoConverters = {
 
 function convertContentToAmino(content: Any): AminoContent {
   const match = attachmentConverters[content.typeUrl] as AminoConverter;
-  return match.toAmino(content);
+  return {
+    type: match.aminoType,
+    value: match.toAmino(content),
+  } as AminoMsg;
 }
 
 function convertTextTagToAmino(textTag: TextTag): AminoTextTag {
@@ -227,19 +249,27 @@ function convertTextTagToAmino(textTag: TextTag): AminoTextTag {
 
 function convertUrlToAmino(url: Url): AminoUrl {
   return {
-    start: url.start.toString(),
-    end: url.end.toString(),
-    url: url.url,
+    start: omitZeroLong(url.start),
+    end: omitZeroLong(url.end),
+    url: omitEmptyString(url.url),
     display_url: omitEmptyString(url.displayUrl),
   };
 }
 
-function convertEntitiesToAmino(entities: Entities): AminoEntities {
-  return {
-    hashtags: entities.hashtags.map(convertTextTagToAmino),
-    mentions: entities.mentions.map(convertTextTagToAmino),
-    urls: entities.urls.map(convertUrlToAmino),
-  };
+function convertEntitiesToAmino(
+  entities: Entities | undefined
+): AminoEntities | undefined {
+  return entities
+    ? {
+        hashtags: nullIfEmptyArray(
+          entities.hashtags.map(convertTextTagToAmino)
+        ),
+        mentions: nullIfEmptyArray(
+          entities.mentions.map(convertTextTagToAmino)
+        ),
+        urls: nullIfEmptyArray(entities.urls.map(convertUrlToAmino)),
+      }
+    : undefined;
 }
 
 function convertContentFromAmino(attachment: AminoContent): Any {
@@ -260,19 +290,27 @@ function convertTextTagFromAmino(textTag: AminoTextTag): TextTag {
 
 function convertUrlFromAmino(url: AminoUrl): Url {
   return {
-    start: Long.fromString(url.start),
-    end: Long.fromString(url.end),
-    url: url.url,
+    start: fromOmitZeroLong(url.start),
+    end: fromOmitZeroLong(url.end),
+    url: fromOmitEmptyString(url.url),
     displayUrl: fromOmitEmptyString(url.display_url),
   };
 }
 
-function convertEntitiesFromAmino(entities: AminoEntities): Entities {
-  return {
-    hashtags: entities.hashtags.map(convertTextTagFromAmino),
-    mentions: entities.mentions.map(convertTextTagFromAmino),
-    urls: entities.urls.map(convertUrlFromAmino),
-  };
+function convertEntitiesFromAmino(
+  entities: AminoEntities | undefined
+): Entities | undefined {
+  return entities
+    ? {
+        hashtags: fromNullIfEmptyArray(entities.hashtags).map(
+          convertTextTagFromAmino
+        ),
+        mentions: fromNullIfEmptyArray(entities.mentions).map(
+          convertTextTagFromAmino
+        ),
+        urls: fromNullIfEmptyArray(entities.urls).map(convertUrlFromAmino),
+      }
+    : undefined;
 }
 
 /**
@@ -283,85 +321,76 @@ export function createPostsConverters(): AminoConverters {
     [MsgCreatePostTypeUrl]: {
       aminoType: MsgCreatePostAminoType,
       toAmino: (msg: MsgCreatePost): AminoMsgCreatePost["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
         section_id: omitEmptyNumber(msg.sectionId),
         external_id: omitEmptyString(msg.externalId),
         text: omitEmptyString(msg.text),
-        entities: msg.entities
-          ? convertEntitiesToAmino(msg.entities)
-          : undefined,
+        entities: convertEntitiesToAmino(msg.entities),
         tags: omitEmptyArray(msg.tags),
         attachments: omitEmptyArray(msg.attachments.map(convertContentToAmino)),
-        author: msg.author,
-        conversation_id: msg.conversationId.gt(0)
-          ? msg.conversationId.toString()
-          : undefined,
-        reply_settings: msg.replySettings,
-        referenced_posts:
-          msg.referencedPosts.length > 0
-            ? msg.referencedPosts.map((reference) => ({
-                type: reference.type,
-                post_id: reference.postId.toString(),
-                position: reference.position.toString(),
-              }))
-            : null,
+        author: omitEmptyString(msg.author),
+        conversation_id: omitZeroLong(msg.conversationId),
+        reply_settings: omitEmptyNumber(msg.replySettings),
+        referenced_posts: nullIfEmptyArray(
+          msg.referencedPosts.map((reference) => ({
+            type: reference.type,
+            post_id: omitZeroLong(reference.postId),
+            position: omitZeroLong(reference.position),
+          }))
+        ),
       }),
       fromAmino: (msg: AminoMsgCreatePost["value"]): MsgCreatePost => ({
-        subspaceId: Long.fromString(msg.subspace_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
         sectionId: fromOmitEmptyNumber(msg.section_id),
         externalId: fromOmitEmptyString(msg.external_id),
         text: fromOmitEmptyString(msg.text),
-        entities: msg.entities
-          ? convertEntitiesFromAmino(msg.entities)
-          : undefined,
+        entities: convertEntitiesFromAmino(msg.entities),
         tags: fromOmitEmptyArray(msg.tags),
         attachments: fromOmitEmptyArray(msg.attachments).map(
           convertContentFromAmino
         ),
-        author: msg.author,
-        conversationId: Long.fromString(msg.conversation_id ?? "0"),
-        replySettings: msg.reply_settings,
-        referencedPosts: (msg.referenced_posts ?? []).map((reference) => ({
-          type: reference.type,
-          postId: Long.fromString(reference.post_id),
-          position: Long.fromString(reference.position),
-        })),
+        author: fromOmitEmptyString(msg.author),
+        conversationId: fromOmitZeroLong(msg.conversation_id),
+        replySettings: fromOmitEmptyNumber(msg.reply_settings),
+        referencedPosts: fromNullIfEmptyArray(msg.referenced_posts).map(
+          (reference) => ({
+            type: reference.type,
+            postId: fromOmitZeroLong(reference.post_id),
+            position: fromOmitZeroLong(reference.position),
+          })
+        ),
       }),
     },
     [MsgEditPostTypeUrl]: {
       aminoType: MsgEditPostAminoType,
       toAmino: (msg: MsgEditPost): AminoMsgEditPost["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
         text: omitEmptyString(msg.text),
-        entities: msg.entities
-          ? convertEntitiesToAmino(msg.entities)
-          : undefined,
+        entities: convertEntitiesToAmino(msg.entities),
         tags: omitEmptyArray(msg.tags),
-        editor: msg.editor,
+        editor: omitEmptyString(msg.editor),
       }),
       fromAmino: (msg: AminoMsgEditPost["value"]): MsgEditPost => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
         text: fromOmitEmptyString(msg.text),
-        entities: msg.entities
-          ? convertEntitiesFromAmino(msg.entities)
-          : undefined,
+        entities: convertEntitiesFromAmino(msg.entities),
         tags: fromOmitEmptyArray(msg.tags),
-        editor: msg.editor,
+        editor: fromOmitEmptyString(msg.editor),
       }),
     },
     [MsgDeletePostTypeUrl]: {
       aminoType: MsgDeletePostAminoType,
       toAmino: (msg: MsgDeletePost): AminoMsgDeletePost["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        signer: msg.signer,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgDeletePost["value"]): MsgDeletePost => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        signer: msg.signer,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
     [MsgAddPostAttachmentTypeUrl]: {
@@ -371,19 +400,19 @@ export function createPostsConverters(): AminoConverters {
       ): AminoMsgAddPostAttachment["value"] => {
         assertDefinedAndNotNull(msg.content, "attachment content not defined");
         return {
-          subspace_id: msg.subspaceId.toString(),
-          post_id: msg.postId.toString(),
+          subspace_id: omitZeroLong(msg.subspaceId),
+          post_id: omitZeroLong(msg.postId),
           content: convertContentToAmino(msg.content),
-          editor: msg.editor,
+          editor: omitEmptyString(msg.editor),
         };
       },
       fromAmino: (
         msg: AminoMsgAddPostAttachment["value"]
       ): MsgAddPostAttachment => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
         content: convertContentFromAmino(msg.content),
-        editor: msg.editor,
+        editor: fromOmitEmptyString(msg.editor),
       }),
     },
     [MsgRemovePostAttachmentTypeUrl]: {
@@ -391,35 +420,35 @@ export function createPostsConverters(): AminoConverters {
       toAmino: (
         msg: MsgRemovePostAttachment
       ): AminoMsgRemovePostAttachment["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        attachment_id: msg.attachmentId,
-        editor: msg.editor,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        attachment_id: omitEmptyNumber(msg.attachmentId),
+        editor: omitEmptyString(msg.editor),
       }),
       fromAmino: (
         msg: AminoMsgRemovePostAttachment["value"]
       ): MsgRemovePostAttachment => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        attachmentId: msg.attachment_id,
-        editor: msg.editor,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        attachmentId: fromOmitEmptyNumber(msg.attachment_id),
+        editor: fromOmitEmptyString(msg.editor),
       }),
     },
     [MsgAnswerPollTypeUrl]: {
       aminoType: MsgAnswerPollAminoType,
       toAmino: (msg: MsgAnswerPoll): AminoMsgAnswerPoll["value"] => ({
-        subspace_id: msg.subspaceId.toString(),
-        post_id: msg.postId.toString(),
-        poll_id: msg.pollId,
-        answers_indexes: msg.answersIndexes,
-        signer: msg.signer,
+        subspace_id: omitZeroLong(msg.subspaceId),
+        post_id: omitZeroLong(msg.postId),
+        poll_id: omitEmptyNumber(msg.pollId),
+        answers_indexes: omitEmptyArray(msg.answersIndexes),
+        signer: omitEmptyString(msg.signer),
       }),
       fromAmino: (msg: AminoMsgAnswerPoll["value"]): MsgAnswerPoll => ({
-        subspaceId: Long.fromString(msg.subspace_id),
-        postId: Long.fromString(msg.post_id),
-        pollId: msg.poll_id,
-        answersIndexes: msg.answers_indexes,
-        signer: msg.signer,
+        subspaceId: fromOmitZeroLong(msg.subspace_id),
+        postId: fromOmitZeroLong(msg.post_id),
+        pollId: fromOmitEmptyNumber(msg.poll_id),
+        answersIndexes: fromOmitEmptyArray(msg.answers_indexes),
+        signer: fromOmitEmptyString(msg.signer),
       }),
     },
   };
