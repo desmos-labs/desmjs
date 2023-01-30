@@ -71,10 +71,10 @@ export const reportTargetConverters: AminoConverters = {
         user: omitEmptyString(target.user),
       };
     },
-    fromAmino: (msg: AminoUserTarget["value"]): Any =>
+    fromAmino: (msg: AminoUserTarget): Any =>
       userTargetToAny(
         UserTarget.fromPartial({
-          user: fromOmitEmptyString(msg.user),
+          user: fromOmitEmptyString(msg.value.user),
         })
       ),
   },
@@ -86,10 +86,10 @@ export const reportTargetConverters: AminoConverters = {
         post_id: omitZeroLong(target.postId),
       };
     },
-    fromAmino: (msg: AminoPostTarget["value"]): Any =>
+    fromAmino: (msg: AminoPostTarget): Any =>
       postTargetToAny(
         PostTarget.fromPartial({
-          postId: fromOmitZeroLong(msg.post_id),
+          postId: fromOmitZeroLong(msg.value.post_id),
         })
       ),
   },
