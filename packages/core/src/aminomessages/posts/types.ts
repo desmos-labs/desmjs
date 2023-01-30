@@ -9,15 +9,15 @@ export interface AminoTextTag {
 }
 
 export interface AminoEntities {
-  readonly hashtags: AminoTextTag[];
-  readonly mentions: AminoTextTag[];
-  readonly urls: AminoUrl[];
+  readonly hashtags: AminoTextTag[] | null; // Null if empty
+  readonly mentions: AminoTextTag[] | null; // Null if empty
+  readonly urls: AminoUrl[] | null; // Null if empty
 }
 
 export interface AminoUrl {
-  readonly start: string;
-  readonly end: string;
-  readonly url: string;
+  readonly start: string | undefined; // Undefined if zero
+  readonly end: string | undefined; // Undefined if zero
+  readonly url: string | undefined; // Undefined if empty
   readonly display_url: string | undefined; // Undefined if empty
 }
 
@@ -30,7 +30,7 @@ export interface AminoAttachment {
 
 export interface AminoPollProvidedAnswer {
   readonly text: string | undefined; // Undefined if empty
-  readonly attachments: AminoAttachment[] | undefined; // Undefined if empty
+  readonly attachments: AminoAttachment[] | null; // Undefined if empty
 }
 
 export interface AminoPollTallyResultAnswerResult {
@@ -49,9 +49,9 @@ export interface AminoPoll extends AminoContent {
   readonly value: {
     question: string;
     provided_answers: AminoPollProvidedAnswer[];
-    end_date?: Date;
-    allows_multiple_answers: boolean;
-    allows_answer_edits: boolean;
+    end_date?: string;
+    allows_multiple_answers: boolean | undefined; // Undefined if false
+    allows_answer_edits: boolean | undefined; // Undefined if false
     final_tally_results?: AminoPollTallyResults;
   };
 }
@@ -66,6 +66,6 @@ export interface AminoMedia extends AminoContent {
 
 export interface AminoPostReference {
   readonly type: PostReferenceType;
-  readonly post_id: string;
-  readonly position: string;
+  readonly post_id: string | undefined;
+  readonly position: string | undefined;
 }
