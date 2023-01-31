@@ -2464,7 +2464,7 @@ __metadata:
     "@types/keccak": ^3.0.1
     "@types/react-native": ^0.71.1
     "@types/readable-stream": ^2.3.15
-    "@web3auth/react-native-sdk": ^3.4.0
+    "@web3auth/react-native-sdk": ^3.5.0
     react-native: ^0.71.1
     readable-stream: ^4.3.0
     typescript: ^4.9.4
@@ -6731,9 +6731,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/react-native-sdk@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@web3auth/react-native-sdk@npm:3.4.0"
+"@web3auth/react-native-sdk@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "@web3auth/react-native-sdk@npm:3.5.0"
   dependencies:
     base64url: ^3.0.1
     buffer: ^6.0.3
@@ -6742,7 +6742,7 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
     react-native: "*"
-  checksum: 3daa2eea95d8095e314f47eaa20649a5d1ed44339aa254658b9dfe50ca9caf75df3468a9bb537dbbe4322c35dc56c608f6819d7f2a143f52c7cd999339844010
+  checksum: f7f19ad1bc71d4c78f2bcbdb9eaf0c1ce0244765b638d92eb0a6559b1fd79459795d0325cb625f65badb28b65fb3133fd541dc41f0728a6920a4c42b2476af60
   languageName: node
   linkType: hard
 
