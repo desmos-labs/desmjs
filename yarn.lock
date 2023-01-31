@@ -6551,22 +6551,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/base@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@web3auth/base@npm:4.2.4"
-  dependencies:
-    "@toruslabs/http-helpers": ^3.2.0
-    "@toruslabs/openlogin": ^2.12.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    jwt-decode: ^3.1.2
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: 3b8b26b1c3e6e5a60643fb723f37708cae700a23f5ce841d30c6ff2491b00f0ed839eaa2208bbc2f1bb59d28df8e29ee663c3ef4cdc18c6008af8ce86cfcc3dd
-  languageName: node
-  linkType: hard
-
 "@web3auth/base@npm:^4.3.0":
   version: 4.3.0
   resolution: "@web3auth/base@npm:4.3.0"
