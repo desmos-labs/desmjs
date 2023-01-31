@@ -1,3 +1,7 @@
+## Version 4.7.6
+### Bug fixes
+- Fixed Amino messages converters not working properly
+
 ## Version 4.7.5
 ### Bug fixes
 - Fixed Amino converters not working properly
