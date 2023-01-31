@@ -66,7 +66,7 @@
     "ts-jest": "^29.0.5",
     "ts-proto": "^1.137.2",
     "tsc": "^2.0.4",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "packageManager": "yarn@3.2.4"
 }
