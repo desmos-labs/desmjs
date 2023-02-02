@@ -31,7 +31,7 @@
     "@cosmjs/encoding": "^0.29.5",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@web3auth/react-native-sdk": "^3.5.0",
-    "react-native": "^0.71.1"
+    "react-native": "^0.71.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
