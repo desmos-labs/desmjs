@@ -2824,25 +2824,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/module-type-aliases@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/module-type-aliases@npm:2.3.0"
-  dependencies:
-    "@docusaurus/react-loadable": 5.5.2
-    "@docusaurus/types": 2.3.0
-    "@types/history": ^4.7.11
-    "@types/react": "*"
-    "@types/react-router-config": "*"
-    "@types/react-router-dom": "*"
-    react-helmet-async: "*"
-    react-loadable: "npm:@docusaurus/react-loadable@5.5.2"
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: 96d9dc39d90bbec155a55403272a9c3be2603fd556c1e4da6db161e3841de671e9e219b1de153f072ab09a440f523a628c4e382ff527acd527780e7843aebe0d
-  languageName: node
-  linkType: hard
-
 "@docusaurus/module-type-aliases@npm:2.3.1":
   version: 2.3.1
   resolution: "@docusaurus/module-type-aliases@npm:2.3.1"
@@ -3149,25 +3130,6 @@ __metadata:
     fs-extra: ^10.1.0
     tslib: ^2.4.0
   checksum: dd3796be63c4c946af789c3da18ed2704a2fa90d8e752ba2b780a124dc13369ba590218afad0ac4ea2342f7331ccb9eb1be086226c950b8384978d94a15c57ad
-  languageName: node
-  linkType: hard
-
-"@docusaurus/types@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/types@npm:2.3.0"
-  dependencies:
-    "@types/history": ^4.7.11
-    "@types/react": "*"
-    commander: ^5.1.0
-    joi: ^17.6.0
-    react-helmet-async: ^1.3.0
-    utility-types: ^3.10.0
-    webpack: ^5.73.0
-    webpack-merge: ^5.8.0
-  peerDependencies:
-    react: ^16.8.4 || ^17.0.0
-    react-dom: ^16.8.4 || ^17.0.0
-  checksum: 563749b9473e35848c3e462c7e401d292dbf3f36e3ab72b5a03aebe204f1147b666953fc8e176c2024ea9c2b3a8aa7fd33f500df576afff456dea003b742c52b
   languageName: node
   linkType: hard
 
@@ -10079,7 +10041,7 @@ __metadata:
   resolution: "desmjs-documentation@workspace:docs"
   dependencies:
     "@docusaurus/core": 2.3.0
-    "@docusaurus/module-type-aliases": 2.3.0
+    "@docusaurus/module-type-aliases": 2.3.1
     "@docusaurus/preset-classic": 2.3.1
     "@mdx-js/react": ^1.6.22
     "@swc/core": ^1.3.32
