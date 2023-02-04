@@ -2486,7 +2486,7 @@ __metadata:
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.3.0
-    "@web3auth/modal": ^4.3.1
+    "@web3auth/modal": ^4.3.2
     "@web3auth/ui": ^4.3.0
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
@@ -2640,6 +2640,90 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/core@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/core@npm:2.3.1"
+  dependencies:
+    "@babel/core": ^7.18.6
+    "@babel/generator": ^7.18.7
+    "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-transform-runtime": ^7.18.6
+    "@babel/preset-env": ^7.18.6
+    "@babel/preset-react": ^7.18.6
+    "@babel/preset-typescript": ^7.18.6
+    "@babel/runtime": ^7.18.6
+    "@babel/runtime-corejs3": ^7.18.6
+    "@babel/traverse": ^7.18.8
+    "@docusaurus/cssnano-preset": 2.3.1
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/mdx-loader": 2.3.1
+    "@docusaurus/react-loadable": 5.5.2
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-common": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
+    "@slorber/static-site-generator-webpack-plugin": ^4.0.7
+    "@svgr/webpack": ^6.2.1
+    autoprefixer: ^10.4.7
+    babel-loader: ^8.2.5
+    babel-plugin-dynamic-import-node: ^2.3.3
+    boxen: ^6.2.1
+    chalk: ^4.1.2
+    chokidar: ^3.5.3
+    clean-css: ^5.3.0
+    cli-table3: ^0.6.2
+    combine-promises: ^1.1.0
+    commander: ^5.1.0
+    copy-webpack-plugin: ^11.0.0
+    core-js: ^3.23.3
+    css-loader: ^6.7.1
+    css-minimizer-webpack-plugin: ^4.0.0
+    cssnano: ^5.1.12
+    del: ^6.1.1
+    detect-port: ^1.3.0
+    escape-html: ^1.0.3
+    eta: ^2.0.0
+    file-loader: ^6.2.0
+    fs-extra: ^10.1.0
+    html-minifier-terser: ^6.1.0
+    html-tags: ^3.2.0
+    html-webpack-plugin: ^5.5.0
+    import-fresh: ^3.3.0
+    leven: ^3.1.0
+    lodash: ^4.17.21
+    mini-css-extract-plugin: ^2.6.1
+    postcss: ^8.4.14
+    postcss-loader: ^7.0.0
+    prompts: ^2.4.2
+    react-dev-utils: ^12.0.1
+    react-helmet-async: ^1.3.0
+    react-loadable: "npm:@docusaurus/react-loadable@5.5.2"
+    react-loadable-ssr-addon-v5-slorber: ^1.0.1
+    react-router: ^5.3.3
+    react-router-config: ^5.1.1
+    react-router-dom: ^5.3.3
+    rtl-detect: ^1.0.4
+    semver: ^7.3.7
+    serve-handler: ^6.1.3
+    shelljs: ^0.8.5
+    terser-webpack-plugin: ^5.3.3
+    tslib: ^2.4.0
+    update-notifier: ^5.1.0
+    url-loader: ^4.1.1
+    wait-on: ^6.0.1
+    webpack: ^5.73.0
+    webpack-bundle-analyzer: ^4.5.0
+    webpack-dev-server: ^4.9.3
+    webpack-merge: ^5.8.0
+    webpackbar: ^5.0.2
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0
+    react-dom: ^16.8.4 || ^17.0.0
+  bin:
+    docusaurus: bin/docusaurus.mjs
+  checksum: 812aecae45af3f4d02fd16e89517ca9f1ba22821a078aaa890f5797ac7e0cc0c79e7623eb999e885cf7e7652a6ffda8ff7c06dfd85ca29aaab600993c3d9980d
+  languageName: node
+  linkType: hard
+
 "@docusaurus/cssnano-preset@npm:2.3.0":
   version: 2.3.0
   resolution: "@docusaurus/cssnano-preset@npm:2.3.0"
@@ -2652,6 +2736,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/cssnano-preset@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/cssnano-preset@npm:2.3.1"
+  dependencies:
+    cssnano-preset-advanced: ^5.3.8
+    postcss: ^8.4.14
+    postcss-sort-media-queries: ^4.2.1
+    tslib: ^2.4.0
+  checksum: a3d00ce86b16caffde36734bb2f4541d2c0df5e8ab6891a78ad05bccc631a895fecb04c385626ebcb8f905510c28fa6158288585673ae96565532d4ee4b60d4f
+  languageName: node
+  linkType: hard
+
 "@docusaurus/logger@npm:2.3.0":
   version: 2.3.0
   resolution: "@docusaurus/logger@npm:2.3.0"
@@ -2659,6 +2755,16 @@ __metadata:
     chalk: ^4.1.2
     tslib: ^2.4.0
   checksum: bf668d380e35ab795c0c28c4891794519093d13ae00221fe43981be1863fdada1f2de1c46095a9c949c15c545d1ad007d1714ee8a3862042c8f75785fded6e1a
+  languageName: node
+  linkType: hard
+
+"@docusaurus/logger@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/logger@npm:2.3.1"
+  dependencies:
+    chalk: ^4.1.2
+    tslib: ^2.4.0
+  checksum: eff5f258aeac9c643431426256e3bc4515074cc3cc754fa643579ba427ba232ecace9a9579ae5af542330b22d7361892a1eaf84526983a0c821c5ca3ee895176
   languageName: node
   linkType: hard
 
@@ -2690,6 +2796,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/mdx-loader@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/mdx-loader@npm:2.3.1"
+  dependencies:
+    "@babel/parser": ^7.18.8
+    "@babel/traverse": ^7.18.8
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@mdx-js/mdx": ^1.6.22
+    escape-html: ^1.0.3
+    file-loader: ^6.2.0
+    fs-extra: ^10.1.0
+    image-size: ^1.0.1
+    mdast-util-to-string: ^2.0.0
+    remark-emoji: ^2.2.0
+    stringify-object: ^3.3.0
+    tslib: ^2.4.0
+    unified: ^9.2.2
+    unist-util-visit: ^2.0.3
+    url-loader: ^4.1.1
+    webpack: ^5.73.0
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0
+    react-dom: ^16.8.4 || ^17.0.0
+  checksum: 4a1c9ef0e8506ab4d9cb4714ff7437664e238e0f2878a5eb4a2e082897bbee7ae8d0b61ba9d45ffa820beb5ce75aa0050201db815b00c18fc136aaa4c6411c21
+  languageName: node
+  linkType: hard
+
 "@docusaurus/module-type-aliases@npm:2.3.0":
   version: 2.3.0
   resolution: "@docusaurus/module-type-aliases@npm:2.3.0"
@@ -2709,17 +2843,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-blog@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-content-blog@npm:2.3.0"
+"@docusaurus/module-type-aliases@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/module-type-aliases@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/logger": 2.3.0
-    "@docusaurus/mdx-loader": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils": 2.3.0
-    "@docusaurus/utils-common": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/react-loadable": 5.5.2
+    "@docusaurus/types": 2.3.1
+    "@types/history": ^4.7.11
+    "@types/react": "*"
+    "@types/react-router-config": "*"
+    "@types/react-router-dom": "*"
+    react-helmet-async: "*"
+    react-loadable: "npm:@docusaurus/react-loadable@5.5.2"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 74f799f81455dc8ff3e6edf07428996764014c2c7b416e6b5d160af15f00ad3aa1ab75dee5356645ec7f2ea832fb2aca6e9a32b19d64abeb9e3d57c4195f1e50
+  languageName: node
+  linkType: hard
+
+"@docusaurus/plugin-content-blog@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-content-blog@npm:2.3.1"
+  dependencies:
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/mdx-loader": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-common": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     cheerio: ^1.0.0-rc.12
     feed: ^4.2.2
     fs-extra: ^10.1.0
@@ -2732,21 +2885,21 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: e5b89196ddec47f7c282b9f5fba1d1caada0c6d44776e2f55ee5b13b440661f586bef18553d49e3b44a417982e4c799d3e18e10f60d60e90a0b8c90b8b30232a
+  checksum: abc668ceab15269f57be7f74acbec2e139b4f6b90af8771d246a9036d124b49b0d9fd4890e9566df7a4ba960f2da0316c18741eed1be0646f2b4602465219ddd
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-content-docs@npm:2.3.0"
+"@docusaurus/plugin-content-docs@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-content-docs@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/logger": 2.3.0
-    "@docusaurus/mdx-loader": 2.3.0
-    "@docusaurus/module-type-aliases": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/mdx-loader": 2.3.1
+    "@docusaurus/module-type-aliases": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     "@types/react-router-config": ^5.0.6
     combine-promises: ^1.1.0
     fs-extra: ^10.1.0
@@ -2759,132 +2912,132 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: a18bd0c7e089239819938675fd3c3f5a7447cfeae6f27dac165a34558d4b39cad8a4934736228ecf4d7dde6f28fe4e1c5ed97ba9f5cba3251f5eb4781517f413
+  checksum: bcf8d921407d11b497926a1f61a1dc8c96f82fbe5a1959cc106b082e555f8fb6f42cf9262a658acf33d9543e5eb3e778049d91f71e4a2855993dc759c845cf31
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-pages@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-content-pages@npm:2.3.0"
+"@docusaurus/plugin-content-pages@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-content-pages@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/mdx-loader": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/mdx-loader": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     fs-extra: ^10.1.0
     tslib: ^2.4.0
     webpack: ^5.73.0
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 3ff7090045929a64b87da4e5e5a57cf725e552b03569d2a0086cf79849316393948e239d58f4bea758d131224b165ceb96ab1e908e357e6e256b5e499f0d4ad6
+  checksum: 8543050ed7330f54a28c0daeef11662eed3f3a08a6d0015b1a32db3d5e9ec46f0c6a8a5a4cb3e871ce953074d60424cc418b7ffa280695294626855a7a1a146a
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-debug@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-debug@npm:2.3.0"
+"@docusaurus/plugin-debug@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-debug@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils": 2.3.1
     fs-extra: ^10.1.0
     react-json-view: ^1.21.3
     tslib: ^2.4.0
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 770cd5749730ebb3f8633f7c07b0e5248ee24c175dcb6bfc99717253fc6e16ac75d720e373a4d98ade51ca47ec69543cd7159f215961f64d41f95120efe06c76
+  checksum: e660575f900eedbeab6e222eb4f8ef6a7a49815c91a97839a4839737c0b3101698bf7c6e035cbafaa49010340010a9ec0d37270dc81a470b3bae42662c7a24b8
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-google-analytics@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-google-analytics@npm:2.3.0"
+"@docusaurus/plugin-google-analytics@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-google-analytics@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     tslib: ^2.4.0
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 2de84efb8998c36315d856ec1c7fe40af9265d078642f2984d280d9e698af45922dcc205039fbaeb30f45802d788e230fe34cd4d292d57d95f99c006b92f2e25
+  checksum: 9306ae89cd5fb8ca86fd58809d7e624f988411d8908a151e9b6d9e8d0b84e08f1e3eba46024bc4321bcaeb3e9bc38e919b0bcf561adc9d40fa97c8ffeb232888
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-google-gtag@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-google-gtag@npm:2.3.0"
+"@docusaurus/plugin-google-gtag@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-google-gtag@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     tslib: ^2.4.0
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 8d1c192163ed902498ed8ff5fef668a8ebd8fd63b3da691295a875ef96eb98e2e9b0967986dff2ea454f2094479fec2e4876d2f66c643a174df26204e4aab2a2
+  checksum: 494f0405d79aa9cb36d1ea4cf739499ad15b59fe876573ab5b304b5e84ab6ef4d428ebdc26647777b0816af452f62959b5ddb25e5bbf73c7fb3d6568258980d0
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-google-tag-manager@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-google-tag-manager@npm:2.3.0"
+"@docusaurus/plugin-google-tag-manager@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-google-tag-manager@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     tslib: ^2.4.0
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: dd9830fd4f3ee5f4ab1a8a26a055b7551084e49dd33046eb62950fa74a30d1c6371cacb10f42753ba0b32b025bdcb34abf6877dd7b7fe42e9ab86f3539634483
+  checksum: d0b2ccc212652bb4f1c1bd61420e7f235325d4f2e8de0f5b25282305f54209d05da981c1253325bcae9afbc7575bd5c246d037d2be5fbda06f2842ba8335ab47
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-sitemap@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/plugin-sitemap@npm:2.3.0"
+"@docusaurus/plugin-sitemap@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/plugin-sitemap@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/logger": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils": 2.3.0
-    "@docusaurus/utils-common": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-common": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     fs-extra: ^10.1.0
     sitemap: ^7.1.1
     tslib: ^2.4.0
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: f2ace8f5a121aa616d411dbe0211ecba5ca57ad1fceb4529f8418c4c5259cfe62a5a511332289502242e6ff04116d27ddf5a8826d16324cc1ccaacfca29b49b1
+  checksum: 667d2abbf46efffc4d20e38fe435a19392f07726446193a017306652ee9db3d478e971eefb209e1a5c243b6b82af3de72d4b975b8e74aa93bda4711ce8c309bc
   languageName: node
   linkType: hard
 
-"@docusaurus/preset-classic@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/preset-classic@npm:2.3.0"
+"@docusaurus/preset-classic@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/preset-classic@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/plugin-content-blog": 2.3.0
-    "@docusaurus/plugin-content-docs": 2.3.0
-    "@docusaurus/plugin-content-pages": 2.3.0
-    "@docusaurus/plugin-debug": 2.3.0
-    "@docusaurus/plugin-google-analytics": 2.3.0
-    "@docusaurus/plugin-google-gtag": 2.3.0
-    "@docusaurus/plugin-google-tag-manager": 2.3.0
-    "@docusaurus/plugin-sitemap": 2.3.0
-    "@docusaurus/theme-classic": 2.3.0
-    "@docusaurus/theme-common": 2.3.0
-    "@docusaurus/theme-search-algolia": 2.3.0
-    "@docusaurus/types": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/plugin-content-blog": 2.3.1
+    "@docusaurus/plugin-content-docs": 2.3.1
+    "@docusaurus/plugin-content-pages": 2.3.1
+    "@docusaurus/plugin-debug": 2.3.1
+    "@docusaurus/plugin-google-analytics": 2.3.1
+    "@docusaurus/plugin-google-gtag": 2.3.1
+    "@docusaurus/plugin-google-tag-manager": 2.3.1
+    "@docusaurus/plugin-sitemap": 2.3.1
+    "@docusaurus/theme-classic": 2.3.1
+    "@docusaurus/theme-common": 2.3.1
+    "@docusaurus/theme-search-algolia": 2.3.1
+    "@docusaurus/types": 2.3.1
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 0806924793094a4446b20d63fdc910c5ae82b2353905502f886c2a02981a4e42378b0251e38a60caf496e6e6034014096829eb51401685f747934eb83f15dcbb
+  checksum: e4128a1bcb64d5ced04a281476ec1ae2d5523040d41ed57a8f744fb83659a2a2be902e94989de69ab1e6d693ec26c60d1ef6b2fe3ec96d5af6c9b3ef58f5b0cd
   languageName: node
   linkType: hard
 
@@ -2900,22 +3053,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-classic@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/theme-classic@npm:2.3.0"
+"@docusaurus/theme-classic@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/theme-classic@npm:2.3.1"
   dependencies:
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/mdx-loader": 2.3.0
-    "@docusaurus/module-type-aliases": 2.3.0
-    "@docusaurus/plugin-content-blog": 2.3.0
-    "@docusaurus/plugin-content-docs": 2.3.0
-    "@docusaurus/plugin-content-pages": 2.3.0
-    "@docusaurus/theme-common": 2.3.0
-    "@docusaurus/theme-translations": 2.3.0
-    "@docusaurus/types": 2.3.0
-    "@docusaurus/utils": 2.3.0
-    "@docusaurus/utils-common": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/mdx-loader": 2.3.1
+    "@docusaurus/module-type-aliases": 2.3.1
+    "@docusaurus/plugin-content-blog": 2.3.1
+    "@docusaurus/plugin-content-docs": 2.3.1
+    "@docusaurus/plugin-content-pages": 2.3.1
+    "@docusaurus/theme-common": 2.3.1
+    "@docusaurus/theme-translations": 2.3.1
+    "@docusaurus/types": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-common": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     "@mdx-js/react": ^1.6.22
     clsx: ^1.2.1
     copy-text-to-clipboard: ^3.0.1
@@ -2932,20 +3085,20 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: a6206f34161aa388e36dde2f8eb9291cec34dba890a40cd7226040efd303aa322110237464016ce407a65b8a2bff755470ff6c5250b20e3a27645d8860246a65
+  checksum: 273812924fc29b2316aff554ae0302509ebeaca5aa829b58253e74d22a66e69444f1c324a2d5e8e170e6c6f27dd0d6927e6c6a22a7e0c14567ff777d04a5b0c1
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-common@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/theme-common@npm:2.3.0"
+"@docusaurus/theme-common@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/theme-common@npm:2.3.1"
   dependencies:
-    "@docusaurus/mdx-loader": 2.3.0
-    "@docusaurus/module-type-aliases": 2.3.0
-    "@docusaurus/plugin-content-blog": 2.3.0
-    "@docusaurus/plugin-content-docs": 2.3.0
-    "@docusaurus/plugin-content-pages": 2.3.0
-    "@docusaurus/utils": 2.3.0
+    "@docusaurus/mdx-loader": 2.3.1
+    "@docusaurus/module-type-aliases": 2.3.1
+    "@docusaurus/plugin-content-blog": 2.3.1
+    "@docusaurus/plugin-content-docs": 2.3.1
+    "@docusaurus/plugin-content-pages": 2.3.1
+    "@docusaurus/utils": 2.3.1
     "@types/history": ^4.7.11
     "@types/react": "*"
     "@types/react-router-config": "*"
@@ -2958,26 +3111,26 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: e38683aa8fd74599b9ccb6032af7a0ccb76144f5b3ccc4b93d423be263ca5ffb1ace42c22ce789c11ab45ae076fdf95bd36287b551edbf51d55c2e848e8a6189
+  checksum: 6b902e9e782721c3c49bcdee5d969ea1c1138ebcb03891e34f827b16f2c06f43a86d95f240a60ed084539e9b16435312a41be7bff4e724f4fb209998dd4d3a59
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-search-algolia@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/theme-search-algolia@npm:2.3.0"
+"@docusaurus/theme-search-algolia@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/theme-search-algolia@npm:2.3.1"
   dependencies:
     "@docsearch/react": ^3.1.1
-    "@docusaurus/core": 2.3.0
-    "@docusaurus/logger": 2.3.0
-    "@docusaurus/plugin-content-docs": 2.3.0
-    "@docusaurus/theme-common": 2.3.0
-    "@docusaurus/theme-translations": 2.3.0
-    "@docusaurus/utils": 2.3.0
-    "@docusaurus/utils-validation": 2.3.0
+    "@docusaurus/core": 2.3.1
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/plugin-content-docs": 2.3.1
+    "@docusaurus/theme-common": 2.3.1
+    "@docusaurus/theme-translations": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    "@docusaurus/utils-validation": 2.3.1
     algoliasearch: ^4.13.1
     algoliasearch-helper: ^3.10.0
     clsx: ^1.2.1
-    eta: ^1.12.3
+    eta: ^2.0.0
     fs-extra: ^10.1.0
     lodash: ^4.17.21
     tslib: ^2.4.0
@@ -2985,17 +3138,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 97d7314ae6c612eda1b8aa24b6d812c66a8da1030f7eea8d04c9ab8caba62bb66ec95dfcbb613f0f522fa6130e51cd41fcc7eca1c0fe50e533ccbf5aa9e2047d
+  checksum: 965303068e43b11f58d20b95bb6dfc01d5e575c2070d2730b94303bd2a1d33794075cae43bfe472f08061bd8770f14c8eb54932274e6b39f954ab34e7cfc5689
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-translations@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@docusaurus/theme-translations@npm:2.3.0"
+"@docusaurus/theme-translations@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/theme-translations@npm:2.3.1"
   dependencies:
     fs-extra: ^10.1.0
     tslib: ^2.4.0
-  checksum: df11b8a0b569a5adaec505d52cccffef1d903404232c776354035a387b56fcc7aa7d742aa0df622ccc052b61443ba134b6dcc6d3a4076aced4cd253d6cf957f6
+  checksum: dd3796be63c4c946af789c3da18ed2704a2fa90d8e752ba2b780a124dc13369ba590218afad0ac4ea2342f7331ccb9eb1be086226c950b8384978d94a15c57ad
   languageName: node
   linkType: hard
 
@@ -3018,6 +3171,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/types@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/types@npm:2.3.1"
+  dependencies:
+    "@types/history": ^4.7.11
+    "@types/react": "*"
+    commander: ^5.1.0
+    joi: ^17.6.0
+    react-helmet-async: ^1.3.0
+    utility-types: ^3.10.0
+    webpack: ^5.73.0
+    webpack-merge: ^5.8.0
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0
+    react-dom: ^16.8.4 || ^17.0.0
+  checksum: 91e52f37b97964112aa0d50ee4a6f534d7da941443af5ddc96418817c6ce532a98c73e67045ac703b582c7ed703ebb360205eec30da7f738c0105f2b3ae1a246
+  languageName: node
+  linkType: hard
+
 "@docusaurus/utils-common@npm:2.3.0":
   version: 2.3.0
   resolution: "@docusaurus/utils-common@npm:2.3.0"
@@ -3032,6 +3204,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/utils-common@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/utils-common@npm:2.3.1"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    "@docusaurus/types": "*"
+  peerDependenciesMeta:
+    "@docusaurus/types":
+      optional: true
+  checksum: 405dc5b8aba9a97b2670ba8ff3911bbdaed274edc15214ab482a7159a07ad1c9b3198835a7bee42de4e0320d42bd402ed89ae6896744a364d64d89d9f78bcfb0
+  languageName: node
+  linkType: hard
+
 "@docusaurus/utils-validation@npm:2.3.0":
   version: 2.3.0
   resolution: "@docusaurus/utils-validation@npm:2.3.0"
@@ -3042,6 +3228,19 @@ __metadata:
     js-yaml: ^4.1.0
     tslib: ^2.4.0
   checksum: 0275530f4c49a1d0269422dfbe8f7abcda94c83fb3c20d1be36f9259b16c2170f8090f30077091b02e1059b2c683726d40b19235f07250f245719159d3ecd98c
+  languageName: node
+  linkType: hard
+
+"@docusaurus/utils-validation@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/utils-validation@npm:2.3.1"
+  dependencies:
+    "@docusaurus/logger": 2.3.1
+    "@docusaurus/utils": 2.3.1
+    joi: ^17.6.0
+    js-yaml: ^4.1.0
+    tslib: ^2.4.0
+  checksum: 1e5529d1d0c4fcd9006adf2e5b545458a7dba3877563fb444dcec472f27a3d8492d4c6fb5dd1071bb6e668a13a845d74b8f6c4b6387babfa0e467a9b8b237fda
   languageName: node
   linkType: hard
 
@@ -3071,6 +3270,35 @@ __metadata:
     "@docusaurus/types":
       optional: true
   checksum: 6874bd327af99bc97bdea3fca6ce71f917b6a89fa18bbd81a2d955a33ccf1746f70960f27fc7fca557bc9e1a671a6f369e7aade28f7908727dc58e84f9ac5851
+  languageName: node
+  linkType: hard
+
+"@docusaurus/utils@npm:2.3.1":
+  version: 2.3.1
+  resolution: "@docusaurus/utils@npm:2.3.1"
+  dependencies:
+    "@docusaurus/logger": 2.3.1
+    "@svgr/webpack": ^6.2.1
+    escape-string-regexp: ^4.0.0
+    file-loader: ^6.2.0
+    fs-extra: ^10.1.0
+    github-slugger: ^1.4.0
+    globby: ^11.1.0
+    gray-matter: ^4.0.3
+    js-yaml: ^4.1.0
+    lodash: ^4.17.21
+    micromatch: ^4.0.5
+    resolve-pathname: ^3.0.0
+    shelljs: ^0.8.5
+    tslib: ^2.4.0
+    url-loader: ^4.1.1
+    webpack: ^5.73.0
+  peerDependencies:
+    "@docusaurus/types": "*"
+  peerDependenciesMeta:
+    "@docusaurus/types":
+      optional: true
+  checksum: e8bce9bbd98bf63664fcd7c0a5f8dec30dad31ed19e18d724b43189b04ecdc1174537e1d987293575ec18d421236fb92d3d39d28477e921507260a39c3f6d6d0
   languageName: node
   linkType: hard
 
@@ -5191,6 +5419,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-jrpc@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "@toruslabs/openlogin-jrpc@npm:2.13.0"
+  dependencies:
+    "@toruslabs/openlogin-utils": ^2.13.0
+    end-of-stream: ^1.4.4
+    eth-rpc-errors: ^4.0.3
+    events: ^3.3.0
+    fast-safe-stringify: ^2.1.1
+    once: ^1.4.0
+    pump: ^3.0.0
+    readable-stream: ^3.6.0
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: b572c2c94e7b317d68693e74f06b5add1c932c31729e5e2d4beb6a9625a1477fa7e2b4b5cdf3e6547534e226e6be6e401efbbd88f75a4e418bae96bacc5735e5
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin-jrpc@npm:^2.6.0, @toruslabs/openlogin-jrpc@npm:^2.9.0":
   version: 2.9.0
   resolution: "@toruslabs/openlogin-jrpc@npm:2.9.0"
@@ -5222,6 +5468,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-utils@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "@toruslabs/openlogin-utils@npm:2.13.0"
+  dependencies:
+    base64url: ^3.0.1
+    keccak: ^3.0.3
+    randombytes: ^2.1.0
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 0f5f50950809d677cd027ac8ea30f44de4d1edc6108c37c346d1e3d2ec89ead49ad6ea7b392cc3360cd3a7aa6909f414f7f0acab68a210264a60b26b3e9e7244
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin@npm:^2.12.0":
   version: 2.12.0
   resolution: "@toruslabs/openlogin@npm:2.12.0"
@@ -5236,6 +5495,23 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: 2ec7f96157c035ad8fcf62fb1ae6cd5f86f7a17e0cbdee30e1b39291ff5b2705d99526e43a326bcf4cca0a5f7bb97ca71972873cbebfbdbdc78d537f68529f40
+  languageName: node
+  linkType: hard
+
+"@toruslabs/openlogin@npm:^2.13.0":
+  version: 2.13.0
+  resolution: "@toruslabs/openlogin@npm:2.13.0"
+  dependencies:
+    "@toruslabs/eccrypto": ^1.1.8
+    "@toruslabs/http-helpers": ^3.2.0
+    "@toruslabs/openlogin-jrpc": ^2.13.0
+    "@toruslabs/openlogin-utils": ^2.13.0
+    lodash.merge: ^4.6.2
+    loglevel: ^1.8.1
+    pump: ^3.0.0
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: c2413733a73e9def1d82d4d347c582e4acc0e4fd13e8737f2973348b955df139d3d7eaefc516e0aaf1440e0f23616baf1212548f005571ee185deb56bc5e5a44
   languageName: node
   linkType: hard
 
@@ -5259,7 +5535,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/torus-embed@npm:^1.38.6":
+"@toruslabs/torus-embed@npm:^1.38.7":
   version: 1.38.7
   resolution: "@toruslabs/torus-embed@npm:1.38.7"
   dependencies:
@@ -6504,50 +6780,50 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/base-evm-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/base-evm-adapter@npm:4.3.0"
+"@web3auth/base-evm-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/base-evm-adapter@npm:4.3.2"
   dependencies:
-    "@web3auth/base": ^4.3.0
+    "@web3auth/base": ^4.3.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: dd6072d79649f34c1fdacda2c2091d8d63c6edca4ad1d6ae75ed295dbbe66aa496d3a5a8f456bb5315c135c9817393f4b77b9af57a9cbdfc42e9c09ce30dc53d
+  checksum: 6530cf967340b531669d80f792315d92f675e703bfcdd9bf92e26f0b725e3042cf6b39c84b07aeaf9fe4a70e586974db8916704595f7dc97467b245fd43dd65a
   languageName: node
   linkType: hard
 
-"@web3auth/base-plugin@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/base-plugin@npm:4.3.0"
+"@web3auth/base-plugin@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/base-plugin@npm:4.3.2"
   dependencies:
-    "@web3auth/base": ^4.3.0
-  checksum: afe827f9d682ef2b6f084f9c83596ddc6f9481305d20bdc7b567a805a73db76305b4945440a4447d32cb52e0ea24636d7d77227e61779ff716a17c9f84d94a3f
+    "@web3auth/base": ^4.3.2
+  checksum: 20df1496e25fd981706a6263e71f8d6b0111a67a56bd1e2d4a243368aac19359c1b70567af7f87db59a7e6cb834aa6f9c3bfa787f0d37a4bb559e8274320cfe2
   languageName: node
   linkType: hard
 
-"@web3auth/base-provider@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/base-provider@npm:4.3.0"
+"@web3auth/base-provider@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/base-provider@npm:4.3.2"
   dependencies:
     "@toruslabs/base-controllers": ^2.5.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^4.3.0
+    "@toruslabs/openlogin-jrpc": ^2.13.0
+    "@web3auth/base": ^4.3.2
     eth-rpc-errors: ^4.0.3
     json-rpc-random-id: ^1.0.1
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: c2dc731c305d83d12734183760feada8306f2a939d6024d6e6371853d266131d8621e508e30d757fd68cef2762f30853c52e04fa927e58bbabf9e3d46c79cf01
+  checksum: f37ab7a1a1c11dae9925954bd8607d506ae2b8c8fe3da7665dd41fea5c0b66274efef5381b16bfd8241ba41e05497d5b9301813fa9985f8d1766f3e9da99419c
   languageName: node
   linkType: hard
 
-"@web3auth/base-solana-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/base-solana-adapter@npm:4.3.0"
+"@web3auth/base-solana-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/base-solana-adapter@npm:4.3.2"
   dependencies:
-    "@web3auth/base": ^4.3.0
+    "@web3auth/base": ^4.3.2
     bs58: ^4.0.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: b0e754328585a5d0568b8e4190d90de51a9932802131a6a01277c498ad175dc57d93038077b297644e1a239400c15dada7af15c037c0dd6beb450a346310d562
+  checksum: ab50d23ffcfda5cfe39b028f514794e82802deeb6ba6db28b81fe8495e4ee3467a4ade802e800d56e4c34fdcb18e9b7d2a6d323de5fd4e61e1b643bb3aa081ad
   languageName: node
   linkType: hard
 
@@ -6567,23 +6843,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/core@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/core@npm:4.3.0"
+"@web3auth/base@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/base@npm:4.3.2"
   dependencies:
-    "@toruslabs/openlogin": ^2.12.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-plugin": ^4.3.0
+    "@toruslabs/http-helpers": ^3.2.0
+    "@toruslabs/openlogin": ^2.13.0
+    "@toruslabs/openlogin-jrpc": ^2.13.0
+    jwt-decode: ^3.1.2
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 515ed3efbca286ccaa10d1c524700777d78a57398b3d81ad791b7af833e02b7a93324b316d2e8a561f9c3e71c3e20d59b74388d6daa82f3295d34d80f2f67184
+  checksum: 197381f82705e30900d61493e314c804ccd6f464f6b296e010bbf40c1fab25b1e1d7cdef10f4dc3e7b27fe671c4b94066520ae08e9b4f97055fc3d1b118c40fe
   languageName: node
   linkType: hard
 
-"@web3auth/ethereum-provider@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/ethereum-provider@npm:4.3.0"
+"@web3auth/core@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/core@npm:4.3.2"
+  dependencies:
+    "@toruslabs/openlogin": ^2.13.0
+    "@toruslabs/openlogin-jrpc": ^2.13.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-plugin": ^4.3.2
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: a545045204f16b850d13867679a8a68d201582adc1527cfd6f1bf813c15396c8c8ba9c13e6ba68cfd0b0bf466a603396c07fcb4fe0c36d1e37636c86b83f850c
+  languageName: node
+  linkType: hard
+
+"@web3auth/ethereum-provider@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/ethereum-provider@npm:4.3.2"
   dependencies:
     "@ethereumjs/common": ^3.0.2
     "@ethereumjs/tx": ^4.0.2
@@ -6593,8 +6885,8 @@ __metadata:
     "@toruslabs/http-helpers": ^3.2.0
     "@toruslabs/openlogin-jrpc": ^2.9.0
     "@walletconnect/types": ~1.8.0
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-provider": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-provider": ^4.3.2
     assert: ^2.0.0
     bignumber.js: ^9.1.1
     bn.js: ^5.2.1
@@ -6602,71 +6894,71 @@ __metadata:
     jsonschema: ^1.4.1
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 3e0c5a7bb9fa2b9a9fbfd86e4d3e66dfbd2a40ef66e40284eb79a50262d2c3391e98acbef439c6272e88fb120462b80519ddd9bfa3e16a606a9af01771e59b02
+  checksum: 7b657dd956a89661e89079a665864f8b780cfe76cf8e689d60af8f6d4c6c218a2e60c398c00cf3239e92afc0bc9f88248d992078f6d9ab959d4dccd81a59a106
   languageName: node
   linkType: hard
 
-"@web3auth/metamask-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/metamask-adapter@npm:4.3.0"
+"@web3auth/metamask-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/metamask-adapter@npm:4.3.2"
   dependencies:
     "@metamask/detect-provider": ^2.0.0
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-evm-adapter": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-evm-adapter": ^4.3.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 358f828243189d8df2c6deec049fb41a402cda2da27164bab57c97af3ebfc1e50401cb0ee4508f53285b7128f6dc8f966850989adffb53b7b08f9dfe7ed80e74
+  checksum: 031be63e82fd69f4b771d390294ef8c561c53b8f299363ff847c3764ad9deb29f2c5ee01c39df34a8c853265973e6d9565b4892c7d84670e7335ac485c26719d
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "@web3auth/modal@npm:4.3.1"
+"@web3auth/modal@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/modal@npm:4.3.2"
   dependencies:
-    "@web3auth/base": ^4.3.0
-    "@web3auth/core": ^4.3.0
-    "@web3auth/metamask-adapter": ^4.3.0
-    "@web3auth/openlogin-adapter": ^4.3.0
-    "@web3auth/phantom-adapter": ^4.3.0
-    "@web3auth/torus-evm-adapter": ^4.3.0
-    "@web3auth/torus-solana-adapter": ^4.3.0
-    "@web3auth/ui": ^4.3.0
-    "@web3auth/wallet-connect-v1-adapter": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/core": ^4.3.2
+    "@web3auth/metamask-adapter": ^4.3.2
+    "@web3auth/openlogin-adapter": ^4.3.2
+    "@web3auth/phantom-adapter": ^4.3.2
+    "@web3auth/torus-evm-adapter": ^4.3.2
+    "@web3auth/torus-solana-adapter": ^4.3.2
+    "@web3auth/ui": ^4.3.2
+    "@web3auth/wallet-connect-v1-adapter": ^4.3.2
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 320de9511e296f8ff7c29af5dfb8d25b7ec37d496ede5376cc4e7e4550cd684f8ec76df54ab3734d203f8d73703465be92bf846b2b458f9b2aba766c7b7f0117
+  checksum: ffcb20c683642c37e9a5e8c12fbfcf064914fa891cc66475ad4c9e6d96b791343fa75e313fd616058e1cbb96a00795a2b649006a4b3f3138f01024e3d85286c8
   languageName: node
   linkType: hard
 
-"@web3auth/openlogin-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/openlogin-adapter@npm:4.3.0"
+"@web3auth/openlogin-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/openlogin-adapter@npm:4.3.2"
   dependencies:
-    "@toruslabs/openlogin": ^2.12.0
+    "@toruslabs/openlogin": ^2.13.0
     "@toruslabs/openlogin-ed25519": ^2.0.0
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-provider": ^4.3.0
-    "@web3auth/ethereum-provider": ^4.3.0
-    "@web3auth/solana-provider": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-provider": ^4.3.2
+    "@web3auth/ethereum-provider": ^4.3.2
+    "@web3auth/solana-provider": ^4.3.2
     lodash.merge: ^4.6.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: e4e75693ac287c6b59b12cc1904cf6d6d555fc90566e04af3a8ce7d8efd574d15250f3f3f853c06be1029b0488385102470307ef5446befca60766a1fb932ac3
+  checksum: 8e268d9f414a6889948893cbb4b8b6311d0023e437913db58ba97976df17ce9fc07af84879ef839ccbdc64d456e53c00e46c75f20bfcde0edc0a8d44f9e50ba8
   languageName: node
   linkType: hard
 
-"@web3auth/phantom-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/phantom-adapter@npm:4.3.0"
+"@web3auth/phantom-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/phantom-adapter@npm:4.3.2"
   dependencies:
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-provider": ^4.3.0
-    "@web3auth/base-solana-adapter": ^4.3.0
-    "@web3auth/solana-provider": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-provider": ^4.3.2
+    "@web3auth/base-solana-adapter": ^4.3.2
+    "@web3auth/solana-provider": ^4.3.2
     bn.js: ^5.2.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 16e1a2fc73d0e632a5bf015d11eea1f5df13b54036a6c1be27556f9ce64879602d82c16a11ab333f7530f4e40639b04e48a35464bb00f77abbb66722daca1cf5
+  checksum: 321dce636e8469eb3461d61bd62cf035135c9551c3de335ce57ed58b859e2b9ad2a511674d2ba86ce9339a8c0aefa1105b3c66c565a4c3099321efdd2a2ac781
   languageName: node
   linkType: hard
 
@@ -6685,15 +6977,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/solana-provider@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/solana-provider@npm:4.3.0"
+"@web3auth/solana-provider@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/solana-provider@npm:4.3.2"
   dependencies:
     "@toruslabs/base-controllers": ^2.5.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
+    "@toruslabs/openlogin-jrpc": ^2.13.0
     "@toruslabs/tweetnacl-js": ^1.0.3
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-provider": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-provider": ^4.3.2
     bn.js: ^5.2.1
     bs58: ^4.0.1
     eth-rpc-errors: ^4.0.3
@@ -6701,35 +6993,35 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
     "@solana/web3.js": ^1.x
-  checksum: e91308c77308cc165d4703e80634efb87b092901560bf63857ad8b46a98fdd99c24f4c8dfd8119c7ff9d535167119176fa2ed5d37c0387151fdeaac87d273262
+  checksum: d875d55f456002c7ae30c62bf255906f8258f0877f25b8bc2a54f9ec81995c100bbf6cdb9aa699404d38c9934c9651c0912f419f54150fe1baf2bc0298d74929
   languageName: node
   linkType: hard
 
-"@web3auth/torus-evm-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/torus-evm-adapter@npm:4.3.0"
+"@web3auth/torus-evm-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/torus-evm-adapter@npm:4.3.2"
   dependencies:
-    "@toruslabs/torus-embed": ^1.38.6
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-evm-adapter": ^4.3.0
+    "@toruslabs/torus-embed": ^1.38.7
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-evm-adapter": ^4.3.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 3ee46e3017f9dfa77e84ee7f2eb66de7a8d8adc96155bc25419496950e4aabbd6631d6d0623c892491a03cd9dfa2a41ebc4b3454c5698dd1b8127412f1887b02
+  checksum: a1bc6f8950ecbfc5445ecb7a5614c0d30f524d8d1b4a2ace514497514a47c4d7aa60fc3a123441466336f5afd13e914de8df624f9c6b1bf7cfb91f87c9231525
   languageName: node
   linkType: hard
 
-"@web3auth/torus-solana-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/torus-solana-adapter@npm:4.3.0"
+"@web3auth/torus-solana-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/torus-solana-adapter@npm:4.3.2"
   dependencies:
     "@toruslabs/solana-embed": ^0.3.2
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-provider": ^4.3.0
-    "@web3auth/base-solana-adapter": ^4.3.0
-    "@web3auth/solana-provider": ^4.3.0
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-provider": ^4.3.2
+    "@web3auth/base-solana-adapter": ^4.3.2
+    "@web3auth/solana-provider": ^4.3.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: ed500e72d7d095a25faae1ef22e104f739e89d507236501704504649690149ad687ba854d9800b355f246f5fcbc4ccff812674de8d2c092d32143ae3c6590df0
+  checksum: 2e5b9f95974896d26af8c01092ea7a5478440db00aa947a32a23bafaf461a7d7351eec4657908ea2555cc44e447fc09d747dcff73b38888ec756cc8d8c224f69
   languageName: node
   linkType: hard
 
@@ -6756,18 +7048,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/wallet-connect-v1-adapter@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/wallet-connect-v1-adapter@npm:4.3.0"
+"@web3auth/ui@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/ui@npm:4.3.2"
   dependencies:
-    "@web3auth/base": ^4.3.0
-    "@web3auth/base-evm-adapter": ^4.3.0
-    "@web3auth/ethereum-provider": ^4.3.0
+    "@toruslabs/openlogin": ^2.13.0
+    "@toruslabs/openlogin-jrpc": ^2.13.0
+    "@web3auth/base": ^4.3.2
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^22.4.9
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^12.1.5
+    react-qrcode-logo: ^2.8.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: 50208941389b4304e90bd83679b356b4f7c65eb5260628c847497580c6190334e0e9beca9bcb730a78639f14bedd036a3c2c444c69e120bfd6a79a45cf8c8e21
+  languageName: node
+  linkType: hard
+
+"@web3auth/wallet-connect-v1-adapter@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@web3auth/wallet-connect-v1-adapter@npm:4.3.2"
+  dependencies:
+    "@web3auth/base": ^4.3.2
+    "@web3auth/base-evm-adapter": ^4.3.2
+    "@web3auth/ethereum-provider": ^4.3.2
   peerDependencies:
     "@babel/runtime": ^7.x
     "@walletconnect/client": ~1.x
     "@walletconnect/types": ~1.x
-  checksum: 836344fb82b6c4638fe78628084151b1fa83748abec76e9778fe13bdfdb90a1c6380aba3d135e01624e244a04e4667b81d5836fd23dd1e7ffc85655db7641a58
+  checksum: 952a1fe34cfbd41416ae34eda511fcb789e958c15e3cee598a8295461cb1857609cb09fe6301561e872a4aff39101fe1f158a86369034e5a8f9e5aa542e5d202
   languageName: node
   linkType: hard
 
@@ -9788,7 +10103,7 @@ __metadata:
   dependencies:
     "@docusaurus/core": 2.3.0
     "@docusaurus/module-type-aliases": 2.3.0
-    "@docusaurus/preset-classic": 2.3.0
+    "@docusaurus/preset-classic": 2.3.1
     "@mdx-js/react": ^1.6.22
     "@swc/core": ^1.3.32
     "@tsconfig/docusaurus": ^1.0.5
@@ -10748,6 +11063,13 @@ __metadata:
   version: 1.12.3
   resolution: "eta@npm:1.12.3"
   checksum: 390c1cd320755cb98fd5a4a911539e8ed498fc49b82414f0023033ff606d80a34e6df0aeeb9fb0b519b318a750e6d17a72fc25f8a8c686cfc52d638e998237a1
+  languageName: node
+  linkType: hard
+
+"eta@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "eta@npm:2.0.0"
+  checksum: ab8e93af73f0d4917485976aa8fcac68e730c47e9aa54a720c21c2e9087cdcd5f984a50cf5e04d189757612df014a229fa047a437651c9eea31e0b6bf1afe56b
   languageName: node
   linkType: hard
 
@@ -14265,6 +14587,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"keccak@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "keccak@npm:3.0.3"
+  dependencies:
+    node-addon-api: ^2.0.0
+    node-gyp: latest
+    node-gyp-build: ^4.2.0
+    readable-stream: ^3.6.0
+  checksum: f08f04f5cc87013a3fc9e87262f761daff38945c86dd09c01a7f7930a15ae3e14f93b310ef821dcc83675a7b814eb1c983222399a2f263ad980251201d1b9a99
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^3.0.0":
   version: 3.1.0
   resolution: "keyv@npm:3.1.0"
@@ -17552,6 +17886,24 @@ __metadata:
     react-native:
       optional: true
   checksum: 6f0f8a47f0bf7da2c9ac383c88b6ef02446d9d1aa2609cfcc98d8a28999da85361f065fbe7f7f4af910df4e8d53af7879db4b9cd681274d582fc7bdd1b07813b
+  languageName: node
+  linkType: hard
+
+"react-i18next@npm:^12.1.5":
+  version: 12.1.5
+  resolution: "react-i18next@npm:12.1.5"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+    html-parse-stringify: ^3.0.1
+  peerDependencies:
+    i18next: ">= 19.0.0"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 90f151dfef237eee4e24d5ca6ddac45869b5025b9173b3cf0403afbc794a448d5ba429105c88e6a539cea1e8ec3f6e18df46d8bee78e7918d79305aa9ec585cb
   languageName: node
   linkType: hard
 
