@@ -2487,7 +2487,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.3.0
     "@web3auth/modal": ^4.3.2
-    "@web3auth/ui": ^4.3.0
+    "@web3auth/ui": ^4.3.2
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
     typescript: ^4.9.5
@@ -7022,29 +7022,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: 2e5b9f95974896d26af8c01092ea7a5478440db00aa947a32a23bafaf461a7d7351eec4657908ea2555cc44e447fc09d747dcff73b38888ec756cc8d8c224f69
-  languageName: node
-  linkType: hard
-
-"@web3auth/ui@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@web3auth/ui@npm:4.3.0"
-  dependencies:
-    "@toruslabs/openlogin": ^2.12.0
-    "@toruslabs/openlogin-jrpc": ^2.9.0
-    "@web3auth/base": ^4.3.0
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    copy-to-clipboard: ^3.3.3
-    i18next: ^22.4.9
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    react-i18next: ^12.1.4
-    react-qrcode-logo: ^2.8.0
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    react: ^18.x
-    react-dom: ^18.x
-  checksum: 96dd71a4b00c161a7972eb3b886f892a1e087185d13495b12331379a84b1e715a7a2f9cb2d074e1d019a2561446710ad74d7ec58cdffb3c37962e3fb1dc8319e
   languageName: node
   linkType: hard
 
@@ -17868,24 +17845,6 @@ __metadata:
     react: ^16.6.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
   checksum: 7ca7e47f8af14ea186688b512a87ab912bf6041312b297f92516341b140b3f0f8aedf5a44d226d99e69ed067b0cc106e38aeb9c9b738ffcc63d10721c844db90
-  languageName: node
-  linkType: hard
-
-"react-i18next@npm:^12.1.4":
-  version: 12.1.4
-  resolution: "react-i18next@npm:12.1.4"
-  dependencies:
-    "@babel/runtime": ^7.20.6
-    html-parse-stringify: ^3.0.1
-  peerDependencies:
-    i18next: ">= 19.0.0"
-    react: ">= 16.8.0"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 6f0f8a47f0bf7da2c9ac383c88b6ef02446d9d1aa2609cfcc98d8a28999da85361f065fbe7f7f4af910df4e8d53af7879db4b9cd681274d582fc7bdd1b07813b
   languageName: node
   linkType: hard
 
