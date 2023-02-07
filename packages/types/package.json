@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "long": "^4.0.0",
-    "protobufjs": "^7.2.1"
+    "protobufjs": "^7.2.2"
   },
   "devDependencies": {
     "@types/long": "^4.0.1",
