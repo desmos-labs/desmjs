@@ -66,6 +66,13 @@ export interface SimulateOptions {
   memo?: string;
 }
 
+export interface SignTxOptions {
+  fee?: StdFee | "auto";
+  memo?: string;
+  explicitSignerData?: SignerData;
+  feeGranter?: string;
+}
+
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
 }
@@ -281,6 +288,8 @@ export class DesmosClient extends SigningCosmWasmClient {
    * You can pass signer data (account number, sequence and chain id) explicitly instead of querying them
    * from the chain. This is needed when signing for a multisig account, but it also allows for offline signing
    * (See the SigningStargateClient.offline constructor).
+   *
+   * <b>NOTE</b>: It's recommend to use the signTx method instead of this.
    */
   override async sign(
     signerAddress: string,
@@ -289,13 +298,11 @@ export class DesmosClient extends SigningCosmWasmClient {
     memo: string,
     explicitSignerData?: SignerData
   ): Promise<TxRaw> {
-    const result = await this.signTx(
-      signerAddress,
-      messages,
+    const result = await this.signTx(signerAddress, messages, {
       fee,
       memo,
-      explicitSignerData
-    );
+      explicitSignerData,
+    });
     return result.txRaw;
   }
 
@@ -329,17 +336,15 @@ export class DesmosClient extends SigningCosmWasmClient {
   public async signTx(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    fee: StdFee | "auto",
-    memo: string = "",
-    explicitSignerData?: SignerData,
-    feeGranter?: string
+    options?: SignTxOptions
   ): Promise<SignatureResult> {
+    const fee = options?.fee ?? "auto";
     if (this.getQueryClient() === undefined) {
       if (fee === "auto") {
         throw new Error(
           "can't sign transaction in offline mode with fee === auto"
         );
-      } else if (explicitSignerData === undefined) {
+      } else if (options?.explicitSignerData === undefined) {
         throw new Error(
           "can't sign transaction in offline mode without explicitSignerData"
         );
@@ -350,11 +355,13 @@ export class DesmosClient extends SigningCosmWasmClient {
     const txFee =
       fee !== "auto"
         ? fee
-        : await this.estimateTxFee(signerAddress, messages, { memo });
+        : await this.estimateTxFee(signerAddress, messages, {
+            memo: options?.memo,
+          });
 
     // Build the signer data
     const signerData =
-      explicitSignerData ?? (await this.getSignerData(signerAddress));
+      options?.explicitSignerData ?? (await this.getSignerData(signerAddress));
 
     // Sign the data using the proper mode
     return this.txSigner.signingMode === SigningMode.DIRECT
@@ -362,17 +369,17 @@ export class DesmosClient extends SigningCosmWasmClient {
           signerAddress,
           messages,
           txFee,
-          memo,
+          options?.memo,
           signerData,
-          feeGranter
+          options?.feeGranter
         )
       : this.signTxAmino(
           signerAddress,
           messages,
           txFee,
-          memo,
+          options?.memo,
           signerData,
-          feeGranter
+          options?.feeGranter
         );
   }
 
@@ -464,7 +471,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee,
-    memo: string,
+    memo: string | undefined,
     { accountNumber, sequence, chainId }: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
@@ -533,7 +540,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee,
-    memo: string,
+    memo: string | undefined,
     { accountNumber, sequence, chainId }: SignerData,
     feeGranter?: string
   ): Promise<SignatureResult> {
