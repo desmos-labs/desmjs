@@ -17,9 +17,13 @@
     "project": "./tsconfig.json"
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "rules": {
-    "class-methods-use-this": ["off"],
+    "class-methods-use-this": [
+      "off"
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -28,6 +32,16 @@
         "ts": "never"
       }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-underscore-dangle": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      // or "error"
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
   }
 }

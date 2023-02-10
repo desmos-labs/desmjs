@@ -1,28 +1,32 @@
-import {AccountData, DirectSignResponse,} from "@cosmjs/proto-signing";
-import {SessionTypes} from "@walletconnect/types";
+import { AccountData, DirectSignResponse } from "@cosmjs/proto-signing";
+import { SessionTypes } from "@walletconnect/types";
 import WalletConnectClient from "@walletconnect/sign-client";
-import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import {AminoSignResponse, StdSignDoc} from "@cosmjs/amino";
-import {assert} from "@cosmjs/utils";
-import {Signer, SignerStatus, SigningMode} from "@desmoslabs/desmjs";
+import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
+import { assert } from "@cosmjs/utils";
+import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
 import QRCodeModal from "@walletconnect/qrcode-modal";
-import {SignClientTypes} from "@walletconnect/types/dist/types/sign-client/client";
-import {getSdkError} from "@walletconnect/utils";
-import {CosmosRPCMethods,} from "./types";
-import {rpcCosmosGetAccounts, rpcCosmosSignAmino, rpcCosmosSignDirect} from "./rpcrequests";
+import { SignClientTypes } from "@walletconnect/types/dist/types/sign-client/client";
+import { getSdkError } from "@walletconnect/utils";
+import { CosmosRPCMethods } from "./types";
+import {
+  rpcCosmosGetAccounts,
+  rpcCosmosSignAmino,
+  rpcCosmosSignDirect,
+} from "./rpcrequests";
 
 export interface QrCodeModalController {
-  open(uri: string, onCloseCb: () => void): void,
+  open(uri: string, onCloseCb: () => void): void;
 
-  close(): void,
+  close(): void;
 }
 
 export interface WalletConnectSignerOptions {
   signingMode: SigningMode;
   // The chains to which the client can connect.
   // Can be: desmos:desmos-mainnet or desmos:morpheus-apollo-4.
-  chain: string,
-  qrCodeModalController?: QrCodeModalController
+  chain: string;
+  qrCodeModalController?: QrCodeModalController;
 }
 
 /**
@@ -37,16 +41,18 @@ export class WalletConnectSigner extends Signer {
 
   private accountData: AccountData | undefined;
 
-  private walletConnectSession: SessionTypes.Struct | undefined
+  private walletConnectSession: SessionTypes.Struct | undefined;
 
-  private readonly qrCodeModalController: QrCodeModalController
+  private readonly qrCodeModalController: QrCodeModalController;
 
-  private readonly sessionDeleteListener = (_: SignClientTypes.EventArguments["session_delete"]) => {
+  private readonly sessionDeleteListener = (
+    _: SignClientTypes.EventArguments["session_delete"]
+  ) => {
     this.updateStatus(SignerStatus.Disconnecting);
-    this.unsubscribeEvents()
+    this.unsubscribeEvents();
     this.clearSessionDependentResources();
     this.updateStatus(SignerStatus.NotConnected);
-  }
+  };
 
   constructor(
     client: WalletConnectClient,
@@ -98,45 +104,56 @@ export class WalletConnectSigner extends Signer {
 
     this.updateStatus(SignerStatus.Connecting);
 
-    const desmosNamespace = session.namespaces['desmos'];
-    const desmosRequiredNamespace = session.requiredNamespaces['desmos'];
+    const desmosNamespace = session.namespaces.desmos;
+    const desmosRequiredNamespace = session.requiredNamespaces.desmos;
 
-    if (desmosNamespace === undefined || desmosRequiredNamespace === undefined) {
+    if (
+      desmosNamespace === undefined ||
+      desmosRequiredNamespace === undefined
+    ) {
       this.updateStatus(SignerStatus.NotConnected);
       throw new Error("can't find desmos namespace in the provided session");
     }
 
     if (desmosNamespace.methods.indexOf(CosmosRPCMethods.GetAccounts) === -1) {
       this.updateStatus(SignerStatus.NotConnected);
-      throw new Error(`can't find ${CosmosRPCMethods.GetAccounts} in the desmos namespace authorized methods`);
+      throw new Error(
+        `can't find ${CosmosRPCMethods.GetAccounts} in the desmos namespace authorized methods`
+      );
     }
 
     let signingMode: SigningMode;
     if (desmosNamespace.methods.indexOf(CosmosRPCMethods.SignDirect) >= 0) {
-      signingMode = SigningMode.DIRECT
-    } else if (desmosNamespace.methods.indexOf(CosmosRPCMethods.SignAmino) >= 0) {
+      signingMode = SigningMode.DIRECT;
+    } else if (
+      desmosNamespace.methods.indexOf(CosmosRPCMethods.SignAmino) >= 0
+    ) {
       signingMode = SigningMode.AMINO;
     } else {
       this.updateStatus(SignerStatus.NotConnected);
-      throw new Error(`can't find ${CosmosRPCMethods.SignDirect} or ${CosmosRPCMethods.SignAmino} in the desmos namespace authorized methods`);
+      throw new Error(
+        `can't find ${CosmosRPCMethods.SignDirect} or ${CosmosRPCMethods.SignAmino} in the desmos namespace authorized methods`
+      );
     }
 
-    const chain = desmosRequiredNamespace.chains[0];
+    const chain = desmosRequiredNamespace.chains?.at(0);
     if (chain === undefined) {
       this.updateStatus(SignerStatus.NotConnected);
       throw new Error("Can't find the chain in the desmos required namespaces");
     }
 
     // Fetch the current account
-    this.accountData = await rpcCosmosGetAccounts(this.client, session, chain)
-      .then(accounts => {
-        if (accounts.length > 0) {
-          return accounts[0];
-        } else {
-          this.updateStatus(SignerStatus.NotConnected);
-          throw new Error("Can't get accounts from the remote wallet");
-        }
-      })
+    this.accountData = await rpcCosmosGetAccounts(
+      this.client,
+      session,
+      chain
+    ).then((accounts) => {
+      if (accounts.length > 0) {
+        return accounts[0];
+      }
+      this.updateStatus(SignerStatus.NotConnected);
+      throw new Error("Can't get accounts from the remote wallet");
+    });
 
     this.walletConnectSession = session;
     this.subscribeToEvents();
@@ -168,17 +185,19 @@ export class WalletConnectSigner extends Signer {
 
     const namespaces = {
       desmos: {
-        methods: methods,
+        methods,
         chains: [this.chain],
-        events: []
-      }
-    }
+        events: [],
+      },
+    };
 
     let uri: string | undefined;
-    let approval: () => Promise<SessionTypes.Struct>
+    let approval: () => Promise<SessionTypes.Struct>;
 
     try {
-      const connectResponse = await this.client.connect({requiredNamespaces: namespaces});
+      const connectResponse = await this.client.connect({
+        requiredNamespaces: namespaces,
+      });
       uri = connectResponse.uri;
       approval = connectResponse.approval;
     } catch (e) {
@@ -198,25 +217,27 @@ export class WalletConnectSigner extends Signer {
     try {
       this.walletConnectSession = await approval();
       // Now it's connected, ask the client the information about the current account.
-      this.accountData = await rpcCosmosGetAccounts(this.client, this.walletConnectSession, this.chain)
-        .then(accounts => {
-          if (accounts.length > 0) {
-            return accounts[0]
-          } else {
-            throw new Error("can't get accounts from the remote wallet");
-          }
-        })
+      this.accountData = await rpcCosmosGetAccounts(
+        this.client,
+        this.walletConnectSession,
+        this.chain
+      ).then((accounts) => {
+        if (accounts.length > 0) {
+          return accounts[0];
+        }
+        throw new Error("can't get accounts from the remote wallet");
+      });
     } catch (e) {
       if (this.walletConnectSession !== undefined) {
         await this.client.disconnect({
           topic: this.walletConnectSession.topic,
-          reason: getSdkError("USER_DISCONNECTED")
-        })
+          reason: getSdkError("USER_DISCONNECTED"),
+        });
       }
       this.walletConnectSession = undefined;
       this.qrCodeModalController.close();
       this.updateStatus(SignerStatus.NotConnected);
-      throw e
+      throw e;
     }
 
     this.qrCodeModalController.close();
@@ -238,9 +259,10 @@ export class WalletConnectSigner extends Signer {
     try {
       await this.client.disconnect({
         topic: this.walletConnectSession!.topic,
-        reason: getSdkError("USER_DISCONNECTED")
+        reason: getSdkError("USER_DISCONNECTED"),
       });
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error("WalletConnectSigner.disconnect", e);
       throw e;
     } finally {
@@ -269,7 +291,11 @@ export class WalletConnectSigner extends Signer {
   async getAccounts(): Promise<readonly AccountData[]> {
     this.assertConnected();
 
-    return rpcCosmosGetAccounts(this.client, this.walletConnectSession!, this.chain);
+    return rpcCosmosGetAccounts(
+      this.client,
+      this.walletConnectSession!,
+      this.chain
+    );
   }
 
   /**
@@ -282,11 +308,17 @@ export class WalletConnectSigner extends Signer {
     this.assertConnected();
     assert(this.accountData);
 
-    const result = await rpcCosmosSignDirect(this.client, this.walletConnectSession!, this.chain, signerAddress, signDoc);
+    const result = await rpcCosmosSignDirect(
+      this.client,
+      this.walletConnectSession!,
+      this.chain,
+      signerAddress,
+      signDoc
+    );
 
     return {
       signed: signDoc,
-      signature: result.signature
+      signature: result.signature,
     };
   }
 
@@ -300,7 +332,13 @@ export class WalletConnectSigner extends Signer {
     this.assertConnected();
     assert(this.accountData);
 
-    const result = await rpcCosmosSignAmino(this.client, this.walletConnectSession!, this.chain, signerAddress, signDoc);
+    const result = await rpcCosmosSignAmino(
+      this.client,
+      this.walletConnectSession!,
+      this.chain,
+      signerAddress,
+      signDoc
+    );
 
     return {
       signed: signDoc,

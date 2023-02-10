@@ -1,27 +1,29 @@
-import {SignDoc} from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { toHex } from "@cosmjs/encoding";
+import { AccountData, AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
+import { DirectSignResponse } from "@cosmjs/proto-signing";
 import {
   GetAccountsRpcResponse,
   SignAminoRpcRequestParams,
   SignAminoRpcResponseParams,
   SignDirectRpcRequestParams,
-  SignDirectRpcResponseParams
+  SignDirectRpcResponseParams,
 } from "./types";
-import {toHex} from "@cosmjs/encoding";
-import {AccountData, AminoSignResponse, StdSignDoc} from "@cosmjs/amino";
-import {DirectSignResponse} from "@cosmjs/proto-signing";
 
 /**
  * Encodes the accounts to be returned as response of the cosmos_getAccounts RPC method.
  * @param accounts - Accounts to encode.
  */
-export function encodeGetAccountsRpcResponse(accounts: readonly AccountData[]): GetAccountsRpcResponse {
+export function encodeGetAccountsRpcResponse(
+  accounts: readonly AccountData[]
+): GetAccountsRpcResponse {
   return {
-    accounts: accounts.map(account => ({
+    accounts: accounts.map((account) => ({
       address: account.address,
       algo: account.algo,
-      pubkey: toHex(account.pubkey)
-    }))
-  }
+      pubkey: toHex(account.pubkey),
+    })),
+  };
 }
 
 /**
@@ -29,7 +31,10 @@ export function encodeGetAccountsRpcResponse(accounts: readonly AccountData[]): 
  * @param signerAddress - Address of who will sign the transaction.
  * @param signDoc - Transaction to be signed.
  */
-export function encodeDirectSignRpcRequestParams(signerAddress: string, signDoc: SignDoc): SignDirectRpcRequestParams{
+export function encodeDirectSignRpcRequestParams(
+  signerAddress: string,
+  signDoc: SignDoc
+): SignDirectRpcRequestParams {
   return {
     signerAddress,
     authInfoBytes: toHex(signDoc.authInfoBytes),
@@ -43,10 +48,12 @@ export function encodeDirectSignRpcRequestParams(signerAddress: string, signDoc:
  * Encodes the signature to be returned as response of the cosmos_signDirect RPC method.
  * @param signResponse - Signature to encode.
  */
-export function encodeDirectSignRpcResponse(signResponse: DirectSignResponse): SignDirectRpcResponseParams {
+export function encodeDirectSignRpcResponse(
+  signResponse: DirectSignResponse
+): SignDirectRpcResponseParams {
   return {
-    signature: signResponse.signature
-  }
+    signature: signResponse.signature,
+  };
 }
 
 /**
@@ -54,7 +61,10 @@ export function encodeDirectSignRpcResponse(signResponse: DirectSignResponse): S
  * @param signerAddress - Address of who is singing the transaction.
  * @param signDoc - Transaction to be signed.
  */
-export function encodeAminoSignRpcRequestParams(signerAddress: string, signDoc: StdSignDoc): SignAminoRpcRequestParams{
+export function encodeAminoSignRpcRequestParams(
+  signerAddress: string,
+  signDoc: StdSignDoc
+): SignAminoRpcRequestParams {
   return {
     signerAddress,
     signDoc,
@@ -65,9 +75,10 @@ export function encodeAminoSignRpcRequestParams(signerAddress: string, signDoc: 
  * Encodes the signature to be returned as response of the cosmos_signAmino RPC method.
  * @param signResponse - Signature to encode.
  */
-export function encodeAminoSignRpcResponse(signResponse: AminoSignResponse): SignAminoRpcResponseParams {
+export function encodeAminoSignRpcResponse(
+  signResponse: AminoSignResponse
+): SignAminoRpcResponseParams {
   return {
-    signature: signResponse.signature
-  }
+    signature: signResponse.signature,
+  };
 }
-
