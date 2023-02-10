@@ -83,7 +83,7 @@ export interface SignTxOptions {
    * Signer data that will be used instead of querying them from the chain.
    * This field is required when signing a transaction in offline mode.
    */
-  explicitSignerData?: SignerData;
+  signerData?: SignerData;
 }
 
 function createDefaultRegistry(): Registry {
@@ -314,7 +314,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     const result = await this.signTx(signerAddress, messages, {
       fee,
       memo,
-      explicitSignerData,
+      signerData: explicitSignerData,
     });
     return result.txRaw;
   }
@@ -357,7 +357,7 @@ export class DesmosClient extends SigningCosmWasmClient {
         throw new Error(
           "can't sign transaction in offline mode with fee === auto"
         );
-      } else if (options?.explicitSignerData === undefined) {
+      } else if (options?.signerData === undefined) {
         throw new Error(
           "can't sign transaction in offline mode without explicitSignerData"
         );
@@ -374,7 +374,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
     // Build the signer data
     const signerData =
-      options?.explicitSignerData ?? (await this.getSignerData(signerAddress));
+      options?.signerData ?? (await this.getSignerData(signerAddress));
 
     // Sign the data using the proper mode
     return this.txSigner.signingMode === SigningMode.DIRECT

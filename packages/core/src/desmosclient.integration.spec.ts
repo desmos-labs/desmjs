@@ -533,7 +533,7 @@ describe("DesmosClient", () => {
       await expect(
         client.signTx(testUser1.address0, msgs, {
           fee,
-          explicitSignerData: signerData,
+          signerData,
         })
       ).resolves.toBeDefined();
     });
@@ -555,7 +555,7 @@ describe("DesmosClient", () => {
 
       await expect(
         client.signTx(testUser1.address0, msgs, {
-          explicitSignerData: signerData,
+          signerData,
         })
       ).rejects.toHaveProperty(
         "message",
