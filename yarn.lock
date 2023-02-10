@@ -2486,7 +2486,7 @@ __metadata:
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.4.0
-    "@web3auth/modal": ^4.4.2
+    "@web3auth/modal": ^4.5.0
     "@web3auth/ui": ^4.3.2
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
@@ -4620,15 +4620,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/web3.js@npm:^1.36.0":
-  version: 1.70.1
-  resolution: "@solana/web3.js@npm:1.70.1"
+"@solana/web3.js@npm:^1.63.1":
+  version: 1.73.2
+  resolution: "@solana/web3.js@npm:1.73.2"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@noble/ed25519": ^1.7.0
     "@noble/hashes": ^1.1.2
     "@noble/secp256k1": ^1.6.3
     "@solana/buffer-layout": ^4.0.0
+    agentkeepalive: ^4.2.1
     bigint-buffer: ^1.1.5
     bn.js: ^5.0.0
     borsh: ^0.7.0
@@ -4639,7 +4640,7 @@ __metadata:
     node-fetch: 2
     rpc-websockets: ^7.5.0
     superstruct: ^0.14.2
-  checksum: 2c88e92559a5ae01cd76d9aeb8e42fe1e69d44031d6f4176053147f5a1d3da0f28849a021282b0385f6c0aa45e7575bc9af0a129528b1f1f39629fbd19b0300b
+  checksum: 7ac6a7b4c52b7676586cc61a856ac3045413f584666e3cdff4b69daeb74cbdb8f94f764bdeffa0d0998a00f88820f098c7c1b0f728e85e2ad77d586d5a6b434e
   languageName: node
   linkType: hard
 
@@ -4969,90 +4970,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-darwin-arm64@npm:1.3.32"
+"@swc/core-darwin-arm64@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-darwin-arm64@npm:1.3.34"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-darwin-x64@npm:1.3.32"
+"@swc/core-darwin-x64@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-darwin-x64@npm:1.3.34"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.32"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.34"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.32"
+"@swc/core-linux-arm64-gnu@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.34"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.32"
+"@swc/core-linux-arm64-musl@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.34"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.32"
+"@swc/core-linux-x64-gnu@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.34"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.32"
+"@swc/core-linux-x64-musl@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.34"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.32"
+"@swc/core-win32-arm64-msvc@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.34"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.32"
+"@swc/core-win32-ia32-msvc@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.34"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.32"
+"@swc/core-win32-x64-msvc@npm:1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.34"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.32":
-  version: 1.3.32
-  resolution: "@swc/core@npm:1.3.32"
+"@swc/core@npm:^1.3.34":
+  version: 1.3.34
+  resolution: "@swc/core@npm:1.3.34"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.32
-    "@swc/core-darwin-x64": 1.3.32
-    "@swc/core-linux-arm-gnueabihf": 1.3.32
-    "@swc/core-linux-arm64-gnu": 1.3.32
-    "@swc/core-linux-arm64-musl": 1.3.32
-    "@swc/core-linux-x64-gnu": 1.3.32
-    "@swc/core-linux-x64-musl": 1.3.32
-    "@swc/core-win32-arm64-msvc": 1.3.32
-    "@swc/core-win32-ia32-msvc": 1.3.32
-    "@swc/core-win32-x64-msvc": 1.3.32
+    "@swc/core-darwin-arm64": 1.3.34
+    "@swc/core-darwin-x64": 1.3.34
+    "@swc/core-linux-arm-gnueabihf": 1.3.34
+    "@swc/core-linux-arm64-gnu": 1.3.34
+    "@swc/core-linux-arm64-musl": 1.3.34
+    "@swc/core-linux-x64-gnu": 1.3.34
+    "@swc/core-linux-x64-musl": 1.3.34
+    "@swc/core-win32-arm64-msvc": 1.3.34
+    "@swc/core-win32-ia32-msvc": 1.3.34
+    "@swc/core-win32-x64-msvc": 1.3.34
   dependenciesMeta:
     "@swc/core-darwin-arm64":
       optional: true
@@ -5074,7 +5075,7 @@ __metadata:
       optional: true
     "@swc/core-win32-x64-msvc":
       optional: true
-  checksum: 61d3eeee89b2dec8d128f63051cb8808b74aea42afc444a0e6477a763b145b5a7c511eab14f5ab0a6e2fa486a99316b0428cb5e02cb11dd65003b760caf85c6e
+  checksum: a77c286b6b34d40f634ae882aac66f882cf806c165453878c31311070c46f020c607925bd454f64959504f08852b204cc37feba93fc6a3c1a64b295a9b5007d6
   languageName: node
   linkType: hard
 
@@ -5338,11 +5339,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/solana-embed@npm:^0.3.2":
-  version: 0.3.2
-  resolution: "@toruslabs/solana-embed@npm:0.3.2"
+"@toruslabs/solana-embed@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "@toruslabs/solana-embed@npm:0.3.3"
   dependencies:
-    "@solana/web3.js": ^1.36.0
+    "@solana/web3.js": ^1.63.1
     "@toruslabs/base-controllers": ^2.2.6
     "@toruslabs/http-helpers": ^3.2.0
     "@toruslabs/openlogin-jrpc": ^2.6.0
@@ -5354,7 +5355,7 @@ __metadata:
     pump: ^3.0.0
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 42a5112d80293c93201dc69d19657b2b1765dac10b0a6d8e00b0383e796290858189482007cae812456dfc358e9eafef9d6744b714a4ca7cac89df30a23ca7aa
+  checksum: 198398743024fc0af9179b2cd01eda21faf7a990fd06517017ce0fb894c76f4c0485b9307e23a0b809de9953e8fd7a9f8a39baaf853ac851df48a9be71f271f9
   languageName: node
   linkType: hard
 
@@ -6771,54 +6772,54 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "@web3auth/modal@npm:4.4.2"
+"@web3auth/modal@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@web3auth/modal@npm:4.5.0"
   dependencies:
     "@web3auth/base": ^4.4.0
     "@web3auth/core": ^4.4.0
     "@web3auth/metamask-adapter": ^4.4.0
-    "@web3auth/openlogin-adapter": ^4.4.2
-    "@web3auth/phantom-adapter": ^4.4.0
+    "@web3auth/openlogin-adapter": ^4.5.0
+    "@web3auth/phantom-adapter": ^4.5.0
     "@web3auth/torus-evm-adapter": ^4.4.0
-    "@web3auth/torus-solana-adapter": ^4.4.0
+    "@web3auth/torus-solana-adapter": ^4.5.0
     "@web3auth/ui": ^4.4.0
     "@web3auth/wallet-connect-v1-adapter": ^4.4.0
   peerDependencies:
     "@babel/runtime": 7.x
-  checksum: 73c7760c3812865a19db08744ab724e2a2e078300be54c7f3c835e1201582163ba2439fe52bce1d479f4dad6c7981afda7f41164676e1b50094f3544b4e781f8
+  checksum: 2d74f568ac777410b6e3dd903c62b589de9fb69e255d08fb7f1170b095b3b581fca30f0468a0d50737a9ab72ab724bba6f5fbd6f532a4af3fd9e7c8ed9dc4443
   languageName: node
   linkType: hard
 
-"@web3auth/openlogin-adapter@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "@web3auth/openlogin-adapter@npm:4.4.2"
+"@web3auth/openlogin-adapter@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@web3auth/openlogin-adapter@npm:4.5.0"
   dependencies:
     "@toruslabs/openlogin": ^3.0.0
     "@toruslabs/openlogin-ed25519": ^3.0.0
     "@web3auth/base": ^4.4.0
     "@web3auth/base-provider": ^4.4.0
     "@web3auth/ethereum-provider": ^4.4.0
-    "@web3auth/solana-provider": ^4.4.0
+    "@web3auth/solana-provider": ^4.5.0
     lodash.merge: ^4.6.2
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 5ed7e6a271bc33b1e7a704da1ed60df1be8e458f48e23b8ab8e77fc60688ec415d755fe3898dcd5510693983b026a90e79aa22bdd9052f65285190dc668ae65e
+  checksum: f45a701503c60a37a220e36d65f2acdeb63939fb2cb14d600c57dde45d0cf7a521f5998412e3f6dfca0a5e9929ba05eaf302a51e8050a8d32ece0fcd17bfe7ce
   languageName: node
   linkType: hard
 
-"@web3auth/phantom-adapter@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@web3auth/phantom-adapter@npm:4.4.0"
+"@web3auth/phantom-adapter@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@web3auth/phantom-adapter@npm:4.5.0"
   dependencies:
     "@web3auth/base": ^4.4.0
     "@web3auth/base-provider": ^4.4.0
     "@web3auth/base-solana-adapter": ^4.4.0
-    "@web3auth/solana-provider": ^4.4.0
+    "@web3auth/solana-provider": ^4.5.0
     bn.js: ^5.2.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: bbfa31dca2b603c9039601533ae7e677db07c554e0278b1adb6c688f91d626ba6bb021a330c01a88f00322fe93fe4df0057e8c50f15d5a854fbab876eee60783
+  checksum: b9fbb31893084f359c710fa1951deecb6347988efe4a8818a8f9a2ad8e6cb526fedb1bbe2e5c8993e9ab32ae757862792e7462c3d520d981a46b12caabd46d54
   languageName: node
   linkType: hard
 
@@ -6837,9 +6838,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/solana-provider@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@web3auth/solana-provider@npm:4.4.0"
+"@web3auth/solana-provider@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@web3auth/solana-provider@npm:4.5.0"
   dependencies:
     "@toruslabs/base-controllers": ^2.7.0
     "@toruslabs/openlogin-jrpc": ^3.0.0
@@ -6853,7 +6854,7 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
     "@solana/web3.js": ^1.x
-  checksum: 04cae6ab22d7b37a6598b7b81e77d56d15d2323eb96c49a99e50e80f084d31e8bb1f2eac64cfa3f642350f5fa86551a92c8f703665a1c4dbab3cfa25eb9c6c84
+  checksum: f4776a454098bdcb89e0030627dc78ae1cfb092e1368dd54171060cff87d202bcb8ab5870309ba67b832e526a78582c686b5a278034b4d503ffd84d2e487d0e7
   languageName: node
   linkType: hard
 
@@ -6870,18 +6871,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/torus-solana-adapter@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "@web3auth/torus-solana-adapter@npm:4.4.0"
+"@web3auth/torus-solana-adapter@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "@web3auth/torus-solana-adapter@npm:4.5.0"
   dependencies:
-    "@toruslabs/solana-embed": ^0.3.2
+    "@toruslabs/solana-embed": ^0.3.3
     "@web3auth/base": ^4.4.0
     "@web3auth/base-provider": ^4.4.0
     "@web3auth/base-solana-adapter": ^4.4.0
-    "@web3auth/solana-provider": ^4.4.0
+    "@web3auth/solana-provider": ^4.5.0
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 25021c38b3a23c8528f27ebb243db552534eb1ced9d944ae5e1af3f6595292ee7148d03c67d12d20d84126daacb61bd3411e55efbed08a7c8d067de16906841f
+  checksum: 0fc1ba87a256b49017482926684a6f2a5b69426a5c460f62e12969a6de6600473a4bdb75e96f5757aa6aca736d2f6c5064f8bcd110c9c752594e6e1075a46ba5
   languageName: node
   linkType: hard
 
@@ -9965,7 +9966,7 @@ __metadata:
     "@docusaurus/module-type-aliases": 2.3.1
     "@docusaurus/preset-classic": 2.3.1
     "@mdx-js/react": ^1.6.22
-    "@swc/core": ^1.3.32
+    "@swc/core": ^1.3.34
     "@tsconfig/docusaurus": ^1.0.5
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^1.2.1
