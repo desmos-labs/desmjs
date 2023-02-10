@@ -1,13 +1,12 @@
 import SignClient from "@walletconnect/sign-client";
-import {SessionTypes} from "@walletconnect/types";
+import { SessionTypes } from "@walletconnect/types";
+import { AccountData, AminoSignResponse } from "@cosmjs/amino";
+import { DirectSignResponse } from "@cosmjs/proto-signing";
 import {
   encodeAminoSignRpcResponse,
   encodeDirectSignRpcResponse,
-  encodeGetAccountsRpcResponse
+  encodeGetAccountsRpcResponse,
 } from "./encode";
-import {AccountData, AminoSignResponse} from "@cosmjs/amino";
-import {DirectSignResponse} from "@cosmjs/proto-signing";
-
 
 /**
  * Respond to a cosmos_getAccounts RPC request.
@@ -17,8 +16,10 @@ import {DirectSignResponse} from "@cosmjs/proto-signing";
  * @param accounts - Accounts that will be sent.
  */
 export async function rpcCosmosGetAccounts(
-  client: SignClient, session: SessionTypes.Struct,
-  requestId: number, accounts: AccountData []
+  client: SignClient,
+  session: SessionTypes.Struct,
+  requestId: number,
+  accounts: AccountData[]
 ): Promise<void> {
   return client.respond({
     topic: session.topic,
@@ -26,7 +27,7 @@ export async function rpcCosmosGetAccounts(
       id: requestId,
       jsonrpc: "2.0",
       result: encodeGetAccountsRpcResponse(accounts),
-    }
+    },
   });
 }
 
@@ -38,8 +39,10 @@ export async function rpcCosmosGetAccounts(
  * @param signResponse - Signature response that will be sent.
  */
 export async function rpcCosmosSignDirect(
-  client: SignClient, session: SessionTypes.Struct,
-  requestId: number, signResponse: DirectSignResponse
+  client: SignClient,
+  session: SessionTypes.Struct,
+  requestId: number,
+  signResponse: DirectSignResponse
 ): Promise<void> {
   return client.respond({
     topic: session.topic,
@@ -47,7 +50,7 @@ export async function rpcCosmosSignDirect(
       id: requestId,
       jsonrpc: "2.0",
       result: encodeDirectSignRpcResponse(signResponse),
-    }
+    },
   });
 }
 
@@ -59,8 +62,10 @@ export async function rpcCosmosSignDirect(
  * @param signResponse - Signature response that will be sent.
  */
 export async function rpcCosmosSignAmino(
-  client: SignClient, session: SessionTypes.Struct,
-  requestId: number, signResponse: AminoSignResponse
+  client: SignClient,
+  session: SessionTypes.Struct,
+  requestId: number,
+  signResponse: AminoSignResponse
 ): Promise<void> {
   return client.respond({
     topic: session.topic,
@@ -68,7 +73,6 @@ export async function rpcCosmosSignAmino(
       id: requestId,
       jsonrpc: "2.0",
       result: encodeAminoSignRpcResponse(signResponse),
-    }
+    },
   });
 }
-
