@@ -67,10 +67,23 @@ export interface SimulateOptions {
 }
 
 export interface SignTxOptions {
+  /**
+   * Transaction fees, if undefined will be considered to be "auto".
+   */
   fee?: StdFee | "auto";
+  /**
+   * Transaction memo.
+   */
   memo?: string;
-  explicitSignerData?: SignerData;
+  /**
+   * Optional transaction fee granter.
+   */
   feeGranter?: string;
+  /**
+   * Signer data that will be used instead of querying them from the chain.
+   * This field is required when signing a transaction in offline mode.
+   */
+  explicitSignerData?: SignerData;
 }
 
 function createDefaultRegistry(): Registry {
