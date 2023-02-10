@@ -59,6 +59,7 @@ import {
   MsgMultiSendTypeUrl,
   MsgSaveProfileTypeUrl,
 } from "./const";
+import MsgAuthenticateTypeUrl from "./const/desmjs";
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
@@ -107,14 +108,19 @@ describe("DesmosClient", () => {
       const accounts = await signer.getAccounts();
       const { address } = accounts[0];
       const msg: MsgAuthenticateEncodeObject = {
-        typeUrl: "/desmjs.v1.MsgAuthenticate",
+        typeUrl: MsgAuthenticateTypeUrl,
         value: {
           user: address,
           nonce: Uint8Array.of(),
         },
       };
 
-      return client.signTx(address, [msg]);
+      return client.signTx(address, [msg], {
+        fee: {
+          gas: "0",
+          amount: [],
+        },
+      });
     }
 
     it("test getPubKeyRawBytes", async () => {
