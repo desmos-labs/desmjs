@@ -32,6 +32,10 @@
         "ts": "never"
       }
     ],
+    // Avoid to raise errors when performing lint if one of the @desmoslabs packages has not been compiled.
+    "import/no-unresolved": [
+      2, { "ignore": ["@desmoslabs/*"] }
+    ],
     "prettier/prettier": "error",
     "no-underscore-dangle": "off",
     "@typescript-eslint/no-unused-vars": [
