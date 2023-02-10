@@ -2396,6 +2396,7 @@ __metadata:
     "@cosmjs/stargate": ^0.29.5
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
+    "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.4.0
     "@types/long": ^4.0.1
     "@types/node": ^18.13.0
