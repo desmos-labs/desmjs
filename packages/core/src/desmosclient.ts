@@ -33,7 +33,7 @@ import { SignMode } from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
 import { fromBase64 } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
-import { Int53, Uint64 } from "@cosmjs/math";
+import { Int53, Uint53, Uint64 } from "@cosmjs/math";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import {
   setupWasmExtension,
@@ -41,6 +41,8 @@ import {
 } from "@cosmjs/cosmwasm-stargate";
 import { MsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
 import { Height } from "@desmoslabs/desmjs-types/ibc/core/client/v1/client";
+import { assertDefined } from "@cosmjs/utils";
+import { Secp256k1Pubkey } from "@cosmjs/amino/build/pubkeys";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
 import {
   DesmosQueryClient,
@@ -57,6 +59,12 @@ import {
 } from "./queries";
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
 import { SignatureResult } from "./signatureresult";
+import { PublicKey } from "./types/pubkey";
+
+export interface SimulateOptions {
+  publicKey?: PublicKey;
+  memo?: string;
+}
 
 function createDefaultRegistry(): Registry {
   return new Registry(desmosRegistryTypes);
@@ -342,7 +350,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     const txFee =
       fee !== "auto"
         ? fee
-        : await this.estimateTxFee(signerAddress, messages, memo);
+        : await this.estimateTxFee(signerAddress, messages, { memo });
 
     // Build the signer data
     const signerData =
@@ -369,12 +377,52 @@ export class DesmosClient extends SigningCosmWasmClient {
   }
 
   /**
-   * Estimates the transaction fees should be used in order to broadcast a transaction containing the given details.
+   * Function to estimate the required gas to perform a transaction.
+   * @param signerAddress - Address of who is performing the transaction.
+   * @param messages - Messages of the transaction to simulate.
+   * @param options - Extra transaction simulation options.
+   */
+  public async estimateTxGas(
+    signerAddress: string,
+    messages: readonly EncodeObject[],
+    options?: SimulateOptions
+  ): Promise<number> {
+    const anyMsgs = messages.map((m) => this.registry.encodeAsAny(m));
+
+    let pubKey: Secp256k1Pubkey;
+    if (options?.publicKey === undefined) {
+      const accountFromSigner = (await this.txSigner.getAccounts()).find(
+        (account) => account.address === signerAddress
+      );
+      if (!accountFromSigner) {
+        throw new Error("Failed to retrieve account from signer");
+      }
+      pubKey = encodeSecp256k1Pubkey(accountFromSigner.pubkey);
+    } else {
+      pubKey = encodeSecp256k1Pubkey(options.publicKey.bytes);
+    }
+
+    const { sequence } = await this.getSequence(signerAddress);
+    const { gasInfo } = await this.forceGetQueryClient().tx.simulate(
+      anyMsgs,
+      options?.memo,
+      pubKey,
+      sequence
+    );
+    assertDefined(gasInfo);
+    return Uint53.fromString(gasInfo.gasUsed.toString()).toNumber();
+  }
+
+  /**
+   * Function to estimate the fees required to perform a transaction.
+   * @param signerAddress - Address of who is performing the transaction.
+   * @param messages - Messages of the transaction to simulate.
+   * @param options - Extra transaction simulation options.
    */
   public async estimateTxFee(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    memo: string
+    options?: SimulateOptions
   ): Promise<StdFee> {
     const { gasPrice } = this.options;
     if (!gasPrice) {
@@ -383,7 +431,11 @@ export class DesmosClient extends SigningCosmWasmClient {
       );
     }
 
-    const estimated = await this.simulate(signerAddress, messages, memo);
+    const estimated = await this.estimateTxGas(
+      signerAddress,
+      messages,
+      options
+    );
     const gasAdjustment = this.options.gasAdjustment || 1.5;
     const gas = Math.ceil(estimated * gasAdjustment);
     return {
