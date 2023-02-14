@@ -1,3 +1,7 @@
+## Version 4.7.7
+- Allow to simulate a tx with a `DesmosClient` without signer
+- Improve `DesmosClient#signTx` method signature
+
 ## Version 4.7.6
 ### Bug fixes
 - Fixed Amino messages converters not working properly
