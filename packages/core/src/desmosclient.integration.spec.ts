@@ -59,6 +59,7 @@ import {
   MsgMultiSendTypeUrl,
   MsgSaveProfileTypeUrl,
 } from "./const";
+import MsgAuthenticateTypeUrl from "./const/desmjs";
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
@@ -107,7 +108,7 @@ describe("DesmosClient", () => {
       const accounts = await signer.getAccounts();
       const { address } = accounts[0];
       const msg: MsgAuthenticateEncodeObject = {
-        typeUrl: "/desmjs.v1.MsgAuthenticate",
+        typeUrl: MsgAuthenticateTypeUrl,
         value: {
           user: address,
           nonce: Uint8Array.of(),
@@ -115,8 +116,10 @@ describe("DesmosClient", () => {
       };
 
       return client.signTx(address, [msg], {
-        gas: "0",
-        amount: [],
+        fee: {
+          gas: "0",
+          amount: [],
+        },
       });
     }
 
@@ -174,7 +177,10 @@ describe("DesmosClient", () => {
         ],
       };
 
-      const response = await client.signTx(address, [msg], fee, "Test memo");
+      const response = await client.signTx(address, [msg], {
+        fee,
+        memo: "Test memo",
+      });
 
       const signDoc = response.signDoc as SignDoc;
       const authInfo = AuthInfo.decode(signDoc.authInfoBytes);
@@ -186,7 +192,9 @@ describe("DesmosClient", () => {
       const [signer, client, msg] = await buildTestMsg();
       const { address } = (await signer.getAccounts())[0];
 
-      const response = await client.signTx(address, [msg], "auto", "Test memo");
+      const response = await client.signTx(address, [msg], {
+        memo: "Test memo",
+      });
 
       const signDoc = response.signDoc as SignDoc;
       const authInfo = AuthInfo.decode(signDoc.authInfoBytes);
@@ -246,8 +254,7 @@ describe("DesmosClient", () => {
       const dummySignatureResult = await externalClient.signTx(
         externalAddress,
         [],
-        { amount: [], gas: "0" },
-        profileAddress
+        { fee: { amount: [], gas: "0" }, memo: profileAddress }
       );
 
       // Build the chain config
@@ -287,7 +294,7 @@ describe("DesmosClient", () => {
         }),
       };
 
-      const result = await profileClient.signTx(profileAddress, [msg], "auto");
+      const result = await profileClient.signTx(profileAddress, [msg]);
       expect(result.txRaw.signatures).toHaveLength(1);
     });
 
@@ -332,7 +339,7 @@ describe("DesmosClient", () => {
         },
       };
 
-      const signedTx = await client.signTx(address, [msg], "auto", "Test memo");
+      const signedTx = await client.signTx(address, [msg]);
       const txBytes = TxRaw.encode(signedTx.txRaw).finish();
       const broadcastTx = await client.broadcastTx(txBytes);
       expect(broadcastTx.code).toBe(0);
@@ -530,7 +537,10 @@ describe("DesmosClient", () => {
       };
 
       await expect(
-        client.signTx(testUser1.address0, msgs, fee, undefined, signerData)
+        client.signTx(testUser1.address0, msgs, {
+          fee,
+          signerData,
+        })
       ).resolves.toBeDefined();
     });
 
@@ -550,7 +560,9 @@ describe("DesmosClient", () => {
       };
 
       await expect(
-        client.signTx(testUser1.address0, msgs, "auto", undefined, signerData)
+        client.signTx(testUser1.address0, msgs, {
+          signerData,
+        })
       ).rejects.toHaveProperty(
         "message",
         "can't sign transaction in offline mode with fee === auto"
@@ -572,7 +584,7 @@ describe("DesmosClient", () => {
       };
 
       await expect(
-        client.signTx(testUser1.address0, msgs, fee)
+        client.signTx(testUser1.address0, msgs, { fee })
       ).rejects.toHaveProperty(
         "message",
         "can't sign transaction in offline mode without explicitSignerData"
