@@ -2488,7 +2488,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.6.0
     "@web3auth/modal": ^4.5.0
-    "@web3auth/ui": ^4.3.2
+    "@web3auth/ui": ^4.6.2
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
     typescript: ^4.9.5
@@ -5214,24 +5214,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/openlogin-jrpc@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@toruslabs/openlogin-jrpc@npm:2.13.0"
-  dependencies:
-    "@toruslabs/openlogin-utils": ^2.13.0
-    end-of-stream: ^1.4.4
-    eth-rpc-errors: ^4.0.3
-    events: ^3.3.0
-    fast-safe-stringify: ^2.1.1
-    once: ^1.4.0
-    pump: ^3.0.0
-    readable-stream: ^3.6.0
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: b572c2c94e7b317d68693e74f06b5add1c932c31729e5e2d4beb6a9625a1477fa7e2b4b5cdf3e6547534e226e6be6e401efbbd88f75a4e418bae96bacc5735e5
-  languageName: node
-  linkType: hard
-
 "@toruslabs/openlogin-jrpc@npm:^2.6.0, @toruslabs/openlogin-jrpc@npm:^2.9.0":
   version: 2.9.0
   resolution: "@toruslabs/openlogin-jrpc@npm:2.9.0"
@@ -5281,19 +5263,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/openlogin-utils@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@toruslabs/openlogin-utils@npm:2.13.0"
-  dependencies:
-    base64url: ^3.0.1
-    keccak: ^3.0.3
-    randombytes: ^2.1.0
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: 0f5f50950809d677cd027ac8ea30f44de4d1edc6108c37c346d1e3d2ec89ead49ad6ea7b392cc3360cd3a7aa6909f414f7f0acab68a210264a60b26b3e9e7244
-  languageName: node
-  linkType: hard
-
 "@toruslabs/openlogin-utils@npm:^3.0.0":
   version: 3.0.0
   resolution: "@toruslabs/openlogin-utils@npm:3.0.0"
@@ -5304,23 +5273,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: de456906de3cc724d5ad8804c92037632f7271a871c6b439b64bea23a8e98ebf71d1d4fb1f10d24f1adaa4180e59f7c0682916c01e1691f8fa19123e8061924a
-  languageName: node
-  linkType: hard
-
-"@toruslabs/openlogin@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@toruslabs/openlogin@npm:2.13.0"
-  dependencies:
-    "@toruslabs/eccrypto": ^1.1.8
-    "@toruslabs/http-helpers": ^3.2.0
-    "@toruslabs/openlogin-jrpc": ^2.13.0
-    "@toruslabs/openlogin-utils": ^2.13.0
-    lodash.merge: ^4.6.2
-    loglevel: ^1.8.1
-    pump: ^3.0.0
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: c2413733a73e9def1d82d4d347c582e4acc0e4fd13e8737f2973348b955df139d3d7eaefc516e0aaf1440e0f23616baf1212548f005571ee185deb56bc5e5a44
   languageName: node
   linkType: hard
 
@@ -6678,22 +6630,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/base@npm:^4.3.2":
-  version: 4.3.2
-  resolution: "@web3auth/base@npm:4.3.2"
-  dependencies:
-    "@toruslabs/http-helpers": ^3.2.0
-    "@toruslabs/openlogin": ^2.13.0
-    "@toruslabs/openlogin-jrpc": ^2.13.0
-    jwt-decode: ^3.1.2
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: 197381f82705e30900d61493e314c804ccd6f464f6b296e010bbf40c1fab25b1e1d7cdef10f4dc3e7b27fe671c4b94066520ae08e9b4f97055fc3d1b118c40fe
-  languageName: node
-  linkType: hard
-
 "@web3auth/base@npm:^4.4.0":
   version: 4.4.0
   resolution: "@web3auth/base@npm:4.4.0"
@@ -6892,29 +6828,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/ui@npm:^4.3.2":
-  version: 4.3.2
-  resolution: "@web3auth/ui@npm:4.3.2"
-  dependencies:
-    "@toruslabs/openlogin": ^2.13.0
-    "@toruslabs/openlogin-jrpc": ^2.13.0
-    "@web3auth/base": ^4.3.2
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    copy-to-clipboard: ^3.3.3
-    i18next: ^22.4.9
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    react-i18next: ^12.1.5
-    react-qrcode-logo: ^2.8.0
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    react: ^18.x
-    react-dom: ^18.x
-  checksum: 50208941389b4304e90bd83679b356b4f7c65eb5260628c847497580c6190334e0e9beca9bcb730a78639f14bedd036a3c2c444c69e120bfd6a79a45cf8c8e21
-  languageName: node
-  linkType: hard
-
 "@web3auth/ui@npm:^4.4.0":
   version: 4.4.0
   resolution: "@web3auth/ui@npm:4.4.0"
@@ -6935,6 +6848,29 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: f9644af531925ac474dc437b54eaeb1a3f12a0af59be6a3c6127254af3610d78a1750c9ae9b94f9881661992eb310f7e3720ce6bff79e5a969a84db4f44df6e3
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^4.6.2":
+  version: 4.6.2
+  resolution: "@web3auth/ui@npm:4.6.2"
+  dependencies:
+    "@toruslabs/openlogin": ^3.1.0
+    "@toruslabs/openlogin-jrpc": ^3.0.0
+    "@web3auth/base": ^4.6.0
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^22.4.9
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^12.1.5
+    react-qrcode-logo: ^2.8.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: df1224a7feba767f919728d6a728fe01227eccd1a24958ef85b20e2fec76f802258dc17a1a52b075f4c3b86407df8f9b65b27973501a2fc58dd0ac947d0d8592
   languageName: node
   linkType: hard
 
