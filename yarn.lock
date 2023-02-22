@@ -2586,7 +2586,7 @@ __metadata:
     "@types/node": ^18.14.0
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
-    "@walletconnect/sign-client": ^2.4.4
+    "@walletconnect/sign-client": ^2.4.5
     "@walletconnect/types": ^2.4.0
     "@walletconnect/utils": ^2.4.4
     babel-jest: ^29.4.3
@@ -5155,90 +5155,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-darwin-arm64@npm:1.3.35"
+"@swc/core-darwin-arm64@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-darwin-arm64@npm:1.3.36"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-darwin-x64@npm:1.3.35"
+"@swc/core-darwin-x64@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-darwin-x64@npm:1.3.36"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.35"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.36"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.35"
+"@swc/core-linux-arm64-gnu@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.36"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.35"
+"@swc/core-linux-arm64-musl@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.36"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.35"
+"@swc/core-linux-x64-gnu@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.36"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.35"
+"@swc/core-linux-x64-musl@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.36"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.35"
+"@swc/core-win32-arm64-msvc@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.36"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.35"
+"@swc/core-win32-ia32-msvc@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.36"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.35"
+"@swc/core-win32-x64-msvc@npm:1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.36"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.35":
-  version: 1.3.35
-  resolution: "@swc/core@npm:1.3.35"
+"@swc/core@npm:^1.3.36":
+  version: 1.3.36
+  resolution: "@swc/core@npm:1.3.36"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.35
-    "@swc/core-darwin-x64": 1.3.35
-    "@swc/core-linux-arm-gnueabihf": 1.3.35
-    "@swc/core-linux-arm64-gnu": 1.3.35
-    "@swc/core-linux-arm64-musl": 1.3.35
-    "@swc/core-linux-x64-gnu": 1.3.35
-    "@swc/core-linux-x64-musl": 1.3.35
-    "@swc/core-win32-arm64-msvc": 1.3.35
-    "@swc/core-win32-ia32-msvc": 1.3.35
-    "@swc/core-win32-x64-msvc": 1.3.35
+    "@swc/core-darwin-arm64": 1.3.36
+    "@swc/core-darwin-x64": 1.3.36
+    "@swc/core-linux-arm-gnueabihf": 1.3.36
+    "@swc/core-linux-arm64-gnu": 1.3.36
+    "@swc/core-linux-arm64-musl": 1.3.36
+    "@swc/core-linux-x64-gnu": 1.3.36
+    "@swc/core-linux-x64-musl": 1.3.36
+    "@swc/core-win32-arm64-msvc": 1.3.36
+    "@swc/core-win32-ia32-msvc": 1.3.36
+    "@swc/core-win32-x64-msvc": 1.3.36
   dependenciesMeta:
     "@swc/core-darwin-arm64":
       optional: true
@@ -5260,7 +5260,7 @@ __metadata:
       optional: true
     "@swc/core-win32-x64-msvc":
       optional: true
-  checksum: 263e01904fe4f4d6cbf6deef90439d6d93f28c04252d917fc290aadde131a1716820eb488a615b3c0dbe3f48d6d7ac0f1c886e2c2acd07a72e3d99e4a245b3de
+  checksum: 36e96e86d1ab8fd84eb51e7264a7ae781ee7e507d36b9ccc028d7f31a2ccf2949f074656e34139c970196774d24d55a54c3aa5c53d04eb6e3569c71cbfed0c0d
   languageName: node
   linkType: hard
 
@@ -6310,9 +6310,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/core@npm:2.4.4":
-  version: 2.4.4
-  resolution: "@walletconnect/core@npm:2.4.4"
+"@walletconnect/core@npm:2.4.5":
+  version: 2.4.5
+  resolution: "@walletconnect/core@npm:2.4.5"
   dependencies:
     "@walletconnect/heartbeat": 1.2.0
     "@walletconnect/jsonrpc-provider": ^1.0.6
@@ -6324,13 +6324,13 @@ __metadata:
     "@walletconnect/relay-auth": ^1.0.4
     "@walletconnect/safe-json": ^1.0.1
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.4.4
-    "@walletconnect/utils": 2.4.4
+    "@walletconnect/types": 2.4.5
+    "@walletconnect/utils": 2.4.5
     events: ^3.3.0
     lodash.isequal: 4.5.0
     pino: 7.11.0
     uint8arrays: 3.1.0
-  checksum: b56bc3f8bb54985354f81de430a589a86eddf22225b82088e935455001f0786064791ed2028dea3b0347cefdec55e9795a3bab42930c777f6ce94210ddc7fbed
+  checksum: 71ab3e76a68e007d571cb3332c421ebd18f4c3a0726ff8b556b95e56aceac8b9df16835745350d4f3897d7ddfdb3fb87d1ece744e9a87035e28eebf65f9347c7
   languageName: node
   linkType: hard
 
@@ -6581,22 +6581,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/sign-client@npm:^2.4.4":
-  version: 2.4.4
-  resolution: "@walletconnect/sign-client@npm:2.4.4"
+"@walletconnect/sign-client@npm:^2.4.5":
+  version: 2.4.5
+  resolution: "@walletconnect/sign-client@npm:2.4.5"
   dependencies:
-    "@walletconnect/core": 2.4.4
+    "@walletconnect/core": 2.4.5
     "@walletconnect/events": ^1.0.1
     "@walletconnect/heartbeat": 1.2.0
     "@walletconnect/jsonrpc-provider": ^1.0.6
     "@walletconnect/jsonrpc-utils": ^1.0.4
     "@walletconnect/logger": ^2.0.1
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.4.4
-    "@walletconnect/utils": 2.4.4
+    "@walletconnect/types": 2.4.5
+    "@walletconnect/utils": 2.4.5
     events: ^3.3.0
     pino: 7.11.0
-  checksum: d8d091940f20cec900853a3ad2e25129479b3cdf6115bba90a4bc424b53e135a929b574358455e7e59a8db338ddb84baf82f7888d4796e73894fd5349077b263
+  checksum: 60ab2f910e9c8a54fdda1e445d2569f8f9bf34c763273fa54ce5d3af51037630e1c65143cc4c3e1ae9ad78c9da199994730ff3f766260f159a69c696e1c1a268
   languageName: node
   linkType: hard
 
@@ -6634,6 +6634,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/types@npm:2.4.5":
+  version: 2.4.5
+  resolution: "@walletconnect/types@npm:2.4.5"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.0
+    "@walletconnect/jsonrpc-types": ^1.0.2
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    events: ^3.3.0
+  checksum: 9050641a85d72e2fd79e06f9842438a85d2719178f142ce6576341e2e53ebb7dd74e22ccbbf241115f13560506ad55733bf7cd77459506baa8fa3d7ef6d1c98d
+  languageName: node
+  linkType: hard
+
 "@walletconnect/types@npm:^1.6.6, @walletconnect/types@npm:^1.8.0, @walletconnect/types@npm:~1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/types@npm:1.8.0"
@@ -6655,7 +6669,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.4.4, @walletconnect/utils@npm:^2.4.4":
+"@walletconnect/utils@npm:2.4.5":
+  version: 2.4.5
+  resolution: "@walletconnect/utils@npm:2.4.5"
+  dependencies:
+    "@stablelib/chacha20poly1305": 1.0.1
+    "@stablelib/hkdf": 1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha256": 1.0.1
+    "@stablelib/x25519": ^1.0.3
+    "@walletconnect/jsonrpc-utils": ^1.0.4
+    "@walletconnect/relay-api": ^1.0.7
+    "@walletconnect/safe-json": ^1.0.1
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.4.5
+    "@walletconnect/window-getters": ^1.0.1
+    "@walletconnect/window-metadata": ^1.0.1
+    detect-browser: 5.3.0
+    query-string: 7.1.1
+    uint8arrays: 3.1.0
+  checksum: 0df022a1a06057508ff4252bec242e362511829e52b5131664caf68ea3789f48577d7add6b327bf4eb355c36b745ca3f21a301dcec4c3e7e339793d01dd49a47
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:^1.8.0":
+  version: 1.8.0
+  resolution: "@walletconnect/utils@npm:1.8.0"
+  dependencies:
+    "@walletconnect/browser-utils": ^1.8.0
+    "@walletconnect/encoding": ^1.0.1
+    "@walletconnect/jsonrpc-utils": ^1.0.3
+    "@walletconnect/types": ^1.8.0
+    bn.js: 4.11.8
+    js-sha3: 0.8.0
+    query-string: 6.13.5
+  checksum: 41b21fc6cb29c0714579dac8da988c14985fc0fcc0c5f02979e72509f42bf658e3ca8ea22ac4a50a9753d26b630d38a6b5fec84131a9eff0b78318b809b203dd
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:^2.4.4":
   version: 2.4.4
   resolution: "@walletconnect/utils@npm:2.4.4"
   dependencies:
@@ -6675,21 +6727,6 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: 3.1.0
   checksum: cea884d2ad46b99bb983f8ddaa059e9fe59aa44918c3ff19ae5fd30ef57a8411b1b8d75984cf9013d810c895631dca8dca193ba9c3dc67e00a64b8c2177fd4b9
-  languageName: node
-  linkType: hard
-
-"@walletconnect/utils@npm:^1.8.0":
-  version: 1.8.0
-  resolution: "@walletconnect/utils@npm:1.8.0"
-  dependencies:
-    "@walletconnect/browser-utils": ^1.8.0
-    "@walletconnect/encoding": ^1.0.1
-    "@walletconnect/jsonrpc-utils": ^1.0.3
-    "@walletconnect/types": ^1.8.0
-    bn.js: 4.11.8
-    js-sha3: 0.8.0
-    query-string: 6.13.5
-  checksum: 41b21fc6cb29c0714579dac8da988c14985fc0fcc0c5f02979e72509f42bf658e3ca8ea22ac4a50a9753d26b630d38a6b5fec84131a9eff0b78318b809b203dd
   languageName: node
   linkType: hard
 
@@ -10021,7 +10058,7 @@ __metadata:
     "@docusaurus/module-type-aliases": 2.3.1
     "@docusaurus/preset-classic": 2.3.1
     "@mdx-js/react": ^1.6.22
-    "@swc/core": ^1.3.35
+    "@swc/core": ^1.3.36
     "@tsconfig/docusaurus": ^1.0.5
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^1.2.1
