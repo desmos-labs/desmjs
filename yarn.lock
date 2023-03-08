@@ -5199,90 +5199,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-darwin-arm64@npm:1.3.37"
+"@swc/core-darwin-arm64@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-darwin-arm64@npm:1.3.38"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-darwin-x64@npm:1.3.37"
+"@swc/core-darwin-x64@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-darwin-x64@npm:1.3.38"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.37"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.38"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.37"
+"@swc/core-linux-arm64-gnu@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.38"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.37"
+"@swc/core-linux-arm64-musl@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.38"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.37"
+"@swc/core-linux-x64-gnu@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.38"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.37"
+"@swc/core-linux-x64-musl@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.38"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.37"
+"@swc/core-win32-arm64-msvc@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.38"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.37"
+"@swc/core-win32-ia32-msvc@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.38"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.37"
+"@swc/core-win32-x64-msvc@npm:1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.38"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.37":
-  version: 1.3.37
-  resolution: "@swc/core@npm:1.3.37"
+"@swc/core@npm:^1.3.38":
+  version: 1.3.38
+  resolution: "@swc/core@npm:1.3.38"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.37
-    "@swc/core-darwin-x64": 1.3.37
-    "@swc/core-linux-arm-gnueabihf": 1.3.37
-    "@swc/core-linux-arm64-gnu": 1.3.37
-    "@swc/core-linux-arm64-musl": 1.3.37
-    "@swc/core-linux-x64-gnu": 1.3.37
-    "@swc/core-linux-x64-musl": 1.3.37
-    "@swc/core-win32-arm64-msvc": 1.3.37
-    "@swc/core-win32-ia32-msvc": 1.3.37
-    "@swc/core-win32-x64-msvc": 1.3.37
+    "@swc/core-darwin-arm64": 1.3.38
+    "@swc/core-darwin-x64": 1.3.38
+    "@swc/core-linux-arm-gnueabihf": 1.3.38
+    "@swc/core-linux-arm64-gnu": 1.3.38
+    "@swc/core-linux-arm64-musl": 1.3.38
+    "@swc/core-linux-x64-gnu": 1.3.38
+    "@swc/core-linux-x64-musl": 1.3.38
+    "@swc/core-win32-arm64-msvc": 1.3.38
+    "@swc/core-win32-ia32-msvc": 1.3.38
+    "@swc/core-win32-x64-msvc": 1.3.38
   dependenciesMeta:
     "@swc/core-darwin-arm64":
       optional: true
@@ -5304,7 +5304,7 @@ __metadata:
       optional: true
     "@swc/core-win32-x64-msvc":
       optional: true
-  checksum: 1cfa1ce8967a1d04361af076023bb50cc90bb413c347b0d7c7e86cf9b8277d05471dd2a24708a77365e527c51ddde3cd752fe49975b9e236c3abf9590e3106dd
+  checksum: c55d30e57638bcd21f788add8490c3f3e71bfe027aa5a8b153e1b1b9686ecddd6deeaaa6a6b17717c7eab4c1e2a232b465b6755b6c891506fc0d03139badfbf7
   languageName: node
   linkType: hard
 
@@ -10106,7 +10106,7 @@ __metadata:
     "@docusaurus/module-type-aliases": 2.3.1
     "@docusaurus/preset-classic": 2.3.1
     "@mdx-js/react": ^1.6.22
-    "@swc/core": ^1.3.37
+    "@swc/core": ^1.3.38
     "@tsconfig/docusaurus": ^1.0.5
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^1.2.1
@@ -10141,7 +10141,7 @@ __metadata:
     eslint-config-airbnb: ^19.0.4
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-airbnb-typescript: ^17.0.0
-    eslint-config-prettier: ^8.6.0
+    eslint-config-prettier: ^8.7.0
     eslint-plugin-import: ^2.27.5
     eslint-plugin-prettier: ^4.2.1
     jest: ^29.5.0
@@ -10839,14 +10839,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "eslint-config-prettier@npm:8.6.0"
+"eslint-config-prettier@npm:^8.7.0":
+  version: 8.7.0
+  resolution: "eslint-config-prettier@npm:8.7.0"
   peerDependencies:
     eslint: ">=7.0.0"
   bin:
     eslint-config-prettier: bin/cli.js
-  checksum: ff0d0dfc839a556355422293428637e8d35693de58dabf8638bf0b6529131a109d0b2ade77521aa6e54573bb842d7d9d322e465dd73dd61c7590fa3834c3fa81
+  checksum: b05bc7f2296ce3e0925c14147849706544870e0382d38af2352d709a6cf8521bdaff2bd8e5021f1780e570775a8ffa1d2bac28b8065d90d43a3f1f98fd26ce52
   languageName: node
   linkType: hard
 
