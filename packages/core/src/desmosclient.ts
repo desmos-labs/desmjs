@@ -184,16 +184,14 @@ export class DesmosClient extends SigningCosmWasmClient {
     options: Options,
     signer: Signer = new NoOpSigner()
   ) {
-    const prefix = options?.prefix ?? "desmos";
     const {
       registry = createDefaultRegistry(),
-      aminoTypes = new AminoTypes(createDesmosTypes(prefix)),
+      aminoTypes = new AminoTypes(createDesmosTypes()),
     } = options;
 
     super(client, signer, {
       registry,
       aminoTypes,
-      prefix: "desmos",
       accountParser: profileFromAny,
       ...options,
     });
