@@ -2520,6 +2520,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/utils@npm:^0.30.0":
+  version: 0.30.0
+  resolution: "@cosmjs/utils@npm:0.30.0"
+  checksum: e33f6911b46c4b6fd8284c6abc1ea2b79538829a3ee1aefddba8d8465036f7fb350372bc24233f1ef37f78ae48eb3d54bf569bc03532de6c784a1e60de925ddc
+  languageName: node
+  linkType: hard
+
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
   resolution: "@cspotcode/source-map-support@npm:0.8.1"
@@ -2538,7 +2545,7 @@ __metadata:
     "@babel/preset-typescript": ^7.21.0
     "@cosmjs/amino": ^0.29.5
     "@cosmjs/proto-signing": ^0.29.5
-    "@cosmjs/utils": ^0.29.5
+    "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.11.45
     "@types/jest": ^29.4.0
@@ -2578,7 +2585,7 @@ __metadata:
     "@cosmjs/encoding": ^0.29.5
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/stargate": ^0.29.5
-    "@cosmjs/utils": ^0.29.5
+    "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.4.0
@@ -2615,7 +2622,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/stargate": ^0.29.5
     "@cosmjs/tendermint-rpc": ^0.29.5
-    "@cosmjs/utils": ^0.29.5
+    "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.4.0
     "@types/long": ^4.0.1
@@ -2694,7 +2701,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/stargate": ^0.29.5
     "@cosmjs/tendermint-rpc": ^0.29.5
-    "@cosmjs/utils": ^0.29.5
+    "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.4.0
     "@types/long": ^4.0.1
@@ -10130,7 +10137,7 @@ __metadata:
     "@cosmjs/crypto": ^0.29.5
     "@cosmjs/encoding": ^0.29.5
     "@cosmjs/proto-signing": ^0.29.5
-    "@cosmjs/utils": ^0.29.5
+    "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/long": ^4.0.1

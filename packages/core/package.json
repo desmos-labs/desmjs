@@ -39,7 +39,7 @@
     "@cosmjs/proto-signing": "^0.29.5",
     "@cosmjs/stargate": "^0.29.5",
     "@cosmjs/tendermint-rpc": "^0.29.5",
-    "@cosmjs/utils": "^0.29.5",
+    "@cosmjs/utils": "^0.30.0",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "cosmjs-types": "^0.5.2",
     "cosmos-wallet": "^1.2.0",
