@@ -2393,6 +2393,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/encoding@npm:^0.30.0":
+  version: 0.30.0
+  resolution: "@cosmjs/encoding@npm:0.30.0"
+  dependencies:
+    base64-js: ^1.3.0
+    bech32: ^1.1.4
+    readonly-date: ^1.0.0
+  checksum: 18ac0fd63d336b340726f9faf65dae89ae14e13237b4831b4cc7b34d31b4b1a453b60b1220540bbaa940e994c462bbf718628ad451722f9dc1c36986d191a795
+  languageName: node
+  linkType: hard
+
 "@cosmjs/json-rpc@npm:^0.29.5":
   version: 0.29.5
   resolution: "@cosmjs/json-rpc@npm:0.29.5"
@@ -2575,7 +2586,7 @@ __metadata:
     "@babel/preset-env": ^7.20.2
     "@babel/preset-typescript": ^7.21.0
     "@cosmjs/amino": ^0.29.5
-    "@cosmjs/encoding": ^0.29.5
+    "@cosmjs/encoding": ^0.30.0
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/stargate": ^0.29.5
     "@cosmjs/utils": ^0.29.5
@@ -2610,7 +2621,7 @@ __metadata:
     "@babel/preset-typescript": ^7.21.0
     "@cosmjs/amino": ^0.29.5
     "@cosmjs/crypto": ^0.29.5
-    "@cosmjs/encoding": ^0.29.5
+    "@cosmjs/encoding": ^0.30.0
     "@cosmjs/math": ^0.29.5
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/stargate": ^0.29.5
@@ -2643,7 +2654,7 @@ __metadata:
     "@babel/core": ^7.21.0
     "@babel/preset-env": ^7.20.2
     "@babel/preset-typescript": ^7.21.0
-    "@cosmjs/encoding": ^0.29.5
+    "@cosmjs/encoding": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.4.0
     "@types/keccak": ^3.0.1
@@ -2664,7 +2675,7 @@ __metadata:
     "@babel/preset-env": ^7.20.2
     "@babel/preset-typescript": ^7.21.0
     "@cosmjs/amino": ^0.29.5
-    "@cosmjs/encoding": ^0.29.5
+    "@cosmjs/encoding": ^0.30.0
     "@cosmjs/proto-signing": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.4.0
@@ -2689,7 +2700,7 @@ __metadata:
     "@cosmjs/amino": ^0.29.5
     "@cosmjs/cosmwasm-stargate": ^0.29.5
     "@cosmjs/crypto": ^0.29.5
-    "@cosmjs/encoding": ^0.29.5
+    "@cosmjs/encoding": ^0.30.0
     "@cosmjs/math": ^0.29.5
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/stargate": ^0.29.5
@@ -10128,7 +10139,7 @@ __metadata:
   dependencies:
     "@cosmjs/cosmwasm-stargate": ^0.29.5
     "@cosmjs/crypto": ^0.29.5
-    "@cosmjs/encoding": ^0.29.5
+    "@cosmjs/encoding": ^0.30.0
     "@cosmjs/proto-signing": ^0.29.5
     "@cosmjs/utils": ^0.29.5
     "@desmoslabs/desmjs": "workspace:packages/core"
