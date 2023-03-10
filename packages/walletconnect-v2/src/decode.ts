@@ -315,7 +315,7 @@ export function decodeAminoSignRequest(
   }
 
   const { signDoc, signerAddress } = paramsDecodeResult.value;
-  const aminoConverter = new AminoTypes(createDesmosTypes("desmos"));
+  const aminoConverter = new AminoTypes(createDesmosTypes());
   const typesWithDecodeResult: [string, EncodeObject | undefined][] =
     signDoc.msgs.map((msg) => {
       try {

@@ -202,8 +202,9 @@ export class WalletConnectSigner extends Signer {
 
     // Extract the public key from the response
     const authInfo = AuthInfo.decode(authInfoBytes);
-    const pubKey = decodePubkey(authInfo.signerInfos[0].publicKey);
-    if (pubKey === null) {
+    const chainPubKey = authInfo.signerInfos[0].publicKey;
+    const pubKey = chainPubKey ? decodePubkey(chainPubKey) : undefined;
+    if (!pubKey) {
       throw new Error("The client didn't provide the public key");
     }
 
