@@ -37,12 +37,12 @@ export * from "./relationships/messages";
 export * from "./reports/messages";
 export * from "./subspaces/messages";
 
-export function createDesmosTypes(prefix: string): AminoConverters {
+export function createDesmosTypes(): AminoConverters {
   return {
     ...createBankAminoConverters(),
     ...createDistributionAminoConverters(),
     ...createGovAminoConverters(),
-    ...createStakingAminoConverters(prefix),
+    ...createStakingAminoConverters(),
     ...createIbcAminoConverters(),
     ...createVestingAminoConverters(),
 
