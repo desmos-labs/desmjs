@@ -2541,7 +2541,7 @@ __metadata:
     "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.11.46
-    "@types/jest": ^29.4.0
+    "@types/jest": ^29.4.1
     "@types/node": ^18.15.2
     "@types/pino": ^7.0.5
     babel-jest: ^29.5.0
@@ -2581,7 +2581,7 @@ __metadata:
     "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
-    "@types/jest": ^29.4.0
+    "@types/jest": ^29.4.1
     "@types/long": ^4.0.1
     "@types/node": ^18.15.2
     "@types/pino": ^7.0.5
@@ -2617,7 +2617,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": ^0.30.0
     "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.4.0
+    "@types/jest": ^29.4.1
     "@types/long": ^4.0.1
     "@types/node": ^18.15.2
     "@types/pino": ^7.0.5
@@ -2645,7 +2645,7 @@ __metadata:
     "@babel/preset-typescript": ^7.21.0
     "@cosmjs/encoding": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.4.0
+    "@types/jest": ^29.4.1
     "@types/keccak": ^3.0.1
     "@types/react-native": ^0.71.3
     "@types/readable-stream": ^2.3.15
@@ -2667,7 +2667,7 @@ __metadata:
     "@cosmjs/encoding": ^0.30.0
     "@cosmjs/proto-signing": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.4.0
+    "@types/jest": ^29.4.1
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^4.6.0
@@ -2696,7 +2696,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": ^0.30.0
     "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs-types": "workspace:packages/types"
-    "@types/jest": ^29.4.0
+    "@types/jest": ^29.4.1
     "@types/long": ^4.0.1
     "@types/node": ^18.15.2
     "@types/pino": ^7.0.5
@@ -5787,13 +5787,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.4.0":
-  version: 29.4.0
-  resolution: "@types/jest@npm:29.4.0"
+"@types/jest@npm:^29.4.1":
+  version: 29.4.1
+  resolution: "@types/jest@npm:29.4.1"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: 23760282362a252e6690314584d83a47512d4cd61663e957ed3398ecf98195fe931c45606ee2f9def12f8ed7d8aa102d492ec42d26facdaf8b78094a31e6568e
+  checksum: 75cdd1804615b663b88844eef61cb7c8104d65baf718190a1cd88ce199412dbe2ee136df3698604cc258a9a62ba7cbd7bd7712a17d8cb748909263ef56d6aac3
   languageName: node
   linkType: hard
 
