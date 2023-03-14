@@ -4,6 +4,8 @@ import {
   toRfc3339WithNanoseconds,
 } from "@cosmjs/tendermint-rpc";
 import { fromBase64, toBase64 } from "@cosmjs/encoding";
+import { Timestamp } from "@desmoslabs/desmjs-types/google/protobuf/timestamp";
+import { fromTimestamp, toTimestamp } from "@desmoslabs/desmjs-types/helpers";
 
 export function omitEmptyString(value: string): string | undefined {
   return value !== "" ? value : undefined;
@@ -47,6 +49,19 @@ export function omitZeroLong(value: Long): string | undefined {
 
 export function fromOmitZeroLong(value: string | undefined): Long {
   return Long.fromString(value ?? "0").toUnsigned();
+}
+
+export function serializeTimestamp(
+  timestamp: Timestamp | undefined
+): string | undefined {
+  return serializeDate(timestamp ? fromTimestamp(timestamp) : undefined);
+}
+
+export function deserializeTimestamp(
+  timestamp: string | undefined
+): Timestamp | undefined {
+  const deserializedDate = deserializeDate(timestamp);
+  return deserializedDate ? toTimestamp(deserializedDate) : undefined;
 }
 
 export function serializeDate(date: Date | undefined): string | undefined {

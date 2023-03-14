@@ -11,6 +11,7 @@ import {
   ReplySetting,
 } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
 import Long from "long";
+import { toTimestamp } from "@desmoslabs/desmjs-types/helpers";
 import createPostsConverters, { mediaToAny, pollToAny } from "./converter";
 import {
   MsgAddPostAttachmentTypeUrl,
@@ -148,7 +149,7 @@ describe("Posts converter", () => {
                   attachments: [],
                 },
               ],
-              endDate: new Date(Date.UTC(2020, 0, 1, 12, 0, 0, 0)),
+              endDate: toTimestamp(new Date(Date.UTC(2020, 0, 1, 12, 0, 0, 0))),
               allowsAnswerEdits: false,
               allowsMultipleAnswers: false,
               finalTallyResults: undefined,

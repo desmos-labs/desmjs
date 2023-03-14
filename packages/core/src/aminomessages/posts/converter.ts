@@ -62,20 +62,20 @@ import {
   PollTypeUrl,
 } from "../../const";
 import {
-  fromOmitZeroLong,
+  deserializeTimestamp,
   fromNullIfEmptyArray,
   fromOmitEmptyArray,
   fromOmitEmptyNumber,
   fromOmitEmptyString,
+  fromOmitFalse,
+  fromOmitZeroLong,
   nullIfEmptyArray,
   omitEmptyArray,
   omitEmptyNumber,
   omitEmptyString,
-  omitZeroLong,
-  serializeDate,
-  deserializeDate,
   omitFalse,
-  fromOmitFalse,
+  omitZeroLong,
+  serializeTimestamp,
 } from "../utils";
 
 /**
@@ -188,7 +188,7 @@ export const attachmentConverters: AminoConverters = {
         provided_answers: poll.providedAnswers.map(
           convertPollProvidedAnswerToAmino
         ),
-        end_date: serializeDate(poll.endDate),
+        end_date: serializeTimestamp(poll.endDate),
         allows_multiple_answers: omitFalse(poll.allowsMultipleAnswers),
         allows_answer_edits: omitFalse(poll.allowsAnswerEdits),
         final_tally_results: poll.finalTallyResults
@@ -203,7 +203,7 @@ export const attachmentConverters: AminoConverters = {
           providedAnswers: msg.provided_answers.map(
             convertPollProvidedAnswerFromAmino
           ),
-          endDate: deserializeDate(msg.end_date),
+          endDate: deserializeTimestamp(msg.end_date),
           allowsMultipleAnswers: fromOmitFalse(msg.allows_multiple_answers),
           allowsAnswerEdits: fromOmitFalse(msg.allows_answer_edits),
           finalTallyResults: msg.final_tally_results
