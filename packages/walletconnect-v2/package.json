@@ -36,14 +36,14 @@
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@walletconnect/qrcode-modal": "^1.8.0",
-    "@walletconnect/sign-client": "^2.4.7",
+    "@walletconnect/sign-client": "^2.4.10",
     "@walletconnect/types": "^2.4.0",
     "@walletconnect/utils": "^2.4.10",
     "cosmjs-types": "^0.5.2",
     "long": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.0",
+    "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.21.0",
     "@types/jest": "^29.4.1",
