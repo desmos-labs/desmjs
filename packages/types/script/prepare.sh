@@ -17,7 +17,7 @@ for dir in $DIRS; do
   cp -R "$SCRIPT_DIR/../build/$dir" "$SCRIPT_DIR/../."
 done
 
-for f in ${FILES[*]}; do
+for f in "${FILES[@]}"; do
   rm -rf "$SCRIPT_DIR/../$f"
   cp "$SCRIPT_DIR/../build/$f" "$SCRIPT_DIR/../."
 done
