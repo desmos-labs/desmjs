@@ -12,3 +12,9 @@
 /google/
 /ibc/
 /tendermint/
+
+# Ignore moved files
+helpers.d.ts
+helpers.js
+index.d.ts
+index.js

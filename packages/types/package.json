@@ -17,6 +17,8 @@
     "google/",
     "ibc/",
     "tendermint/",
+    "/helpers.*",
+    "/index.*",
     "*.md"
   ],
   "repository": {
