@@ -17,6 +17,12 @@ import {
   MsgLinkChainAccount,
   MsgUnlinkChainAccount,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
+import {
+  SignatureValueType,
+  SingleSignature,
+} from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
+import { fromBase64 } from "@cosmjs/encoding";
+import { PubKey as Secp256k1PubKey } from "cosmjs-types/cosmos/crypto/secp256k1/keys";
 import { ConverterTestData, runConverterTest } from "../testutils";
 import createProfilesConverters, {
   bech32AddressToAny,
@@ -66,6 +72,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"bio":"biography","cover_picture":"https://shorturl.at/cgpyF","creator":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","dtag":"monk","nickname":"nickname","profile_picture":"https://shorturl.at/adnX3"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -87,6 +94,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"creator":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -109,6 +117,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"receiver":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","sender":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -132,6 +141,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"new_dtag":"dtag","receiver":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","sender":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -154,6 +164,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"receiver":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","sender":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -176,6 +187,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"receiver":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47","sender":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -203,13 +215,14 @@ describe("Profiles converter", () => {
           sourcePort: "ibc-profiles",
           sourceChannel: "channel-0",
           timeoutHeight: {
-            revisionHeight: Long.fromNumber(1000),
-            revisionNumber: Long.fromNumber(10),
+            revisionHeight: Long.fromNumber(1000, true),
+            revisionNumber: Long.fromNumber(10, true),
           },
-          timeoutTimestamp: Long.fromNumber(15),
+          timeoutTimestamp: Long.fromNumber(15, true),
         },
         expectedJsonSerialized:
           '{"call_data":"7B22757365726E616D65223A22526963636172646F4D222C22676973745F6964223A223732306530303732333930613930316262383065353966643630643766646564227D","link_data":{"application":"twitter","username":"twitteruser"},"sender":"cosmos10nsdxxdvy9qka3zv0lzw8z9cnu6kanld8jh773","source_channel":"channel-0","source_port":"ibc-profiles","timeout_height":{"revision_height":"1000","revision_number":"10"},"timeout_timestamp":"15"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -233,6 +246,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"application":"twitter","signer":"cosmos10nsdxxdvy9qka3zv0lzw8z9cnu6kanld8jh773","username":"twitteruser"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -278,116 +292,25 @@ describe("Profiles converter", () => {
           proof: {
             pubKey: {
               typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-              value: Uint8Array.of(
-                10,
-                33,
-                3,
-                228,
-                113,
-                58,
-                171,
-                210,
-                209,
-                22,
-                29,
-                23,
-                243,
-                84,
-                223,
-                20,
-                168,
-                149,
-                249,
-                159,
-                101,
-                206,
-                216,
-                80,
-                171,
-                184,
-                126,
-                242,
-                75,
-                110,
-                112,
-                130,
-                64,
-                22,
-                55
-              ),
+              value: Secp256k1PubKey.encode(
+                Secp256k1PubKey.fromPartial({
+                  key: fromBase64(
+                    "AlM85nGILhEbOqowhCRWFnu6YJvi2iN6H6xG/rAZ3obK"
+                  ),
+                })
+              ).finish(),
             },
             signature: {
               typeUrl: "/desmos.profiles.v3.SingleSignature",
-              value: Uint8Array.of(
-                8,
-                1,
-                18,
-                64,
-                173,
-                17,
-                42,
-                187,
-                48,
-                229,
-                36,
-                12,
-                123,
-                157,
-                33,
-                180,
-                204,
-                84,
-                33,
-                215,
-                108,
-                250,
-                223,
-                205,
-                89,
-                119,
-                204,
-                162,
-                98,
-                82,
-                59,
-                95,
-                91,
-                199,
-                89,
-                69,
-                125,
-                74,
-                166,
-                213,
-                193,
-                235,
-                98,
-                35,
-                219,
-                16,
-                75,
-                71,
-                170,
-                31,
-                34,
-                36,
-                104,
-                190,
-                142,
-                181,
-                187,
-                39,
-                98,
-                185,
-                113,
-                98,
-                42,
-                197,
-                185,
-                99,
-                81,
-                181
-              ),
+              value: SingleSignature.encode(
+                SingleSignature.fromPartial({
+                  signature: fromBase64(
+                    "IiZnnZy0WzY8wlAcibijJkZIRJ2mY6HYPn3ANrs+mhh4N0K0VpTYBapxt87EmjqYSndPIYKcwX7D9Mi47whStA=="
+                  ),
+                  valueType:
+                    SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_AMINO,
+                })
+              ).finish(),
             },
             plainText: "74657874",
           },
@@ -397,7 +320,8 @@ describe("Profiles converter", () => {
           signer: "cosmos1u9hgsqfpe3snftr7p7fsyja3wtlmj2sgf2w9yl",
         },
         expectedJsonSerialized:
-          '{"chain_address":{"type":"desmos/Bech32Address","value":{"prefix":"cosmos","value":"cosmos1xmquc944hzu6n6qtljcexkuhhz76mucxtgm5x0"}},"chain_config":{"name":"cosmos"},"proof":{"plain_text":"74657874","pub_key":{"type":"tendermint/PubKeySecp256k1","value":"A+RxOqvS0RYdF/NU3xSolfmfZc7YUKu4fvJLbnCCQBY3"},"signature":{"type":"desmos/SingleSignature","value":{"signature":"rREquzDlJAx7nSG0zFQh12z6381Zd8yiYlI7X1vHWUV9SqbVwetiI9sQS0eqHyIkaL6OtbsnYrlxYirFuWNRtQ==","value_type":1}}},"signer":"cosmos1u9hgsqfpe3snftr7p7fsyja3wtlmj2sgf2w9yl"}',
+          '{"chain_address":{"type":"desmos/Bech32Address","value":{"prefix":"cosmos","value":"cosmos1xmquc944hzu6n6qtljcexkuhhz76mucxtgm5x0"}},"chain_config":{"name":"cosmos"},"proof":{"plain_text":"74657874","pub_key":{"type":"tendermint/PubKeySecp256k1","value":"AlM85nGILhEbOqowhCRWFnu6YJvi2iN6H6xG/rAZ3obK"},"signature":{"type":"desmos/SingleSignature","value":{"signature":"IiZnnZy0WzY8wlAcibijJkZIRJ2mY6HYPn3ANrs+mhh4N0K0VpTYBapxt87EmjqYSndPIYKcwX7D9Mi47whStA==","value_type":3}}},"signer":"cosmos1u9hgsqfpe3snftr7p7fsyja3wtlmj2sgf2w9yl"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);
@@ -421,6 +345,7 @@ describe("Profiles converter", () => {
         },
         expectedJsonSerialized:
           '{"chain_name":"cosmos","owner":"cosmos1cjf97gpzwmaf30pzvaargfgr884mpp5ak8f7ns","target":"cosmos1y54exmx84cqtasvjnskf9f63djuuj68p7hqf47"}',
+        testToProtobuf: true,
       },
     ];
     executeTests(testData);

@@ -9,6 +9,7 @@ export interface ConverterTestData<T> {
   readonly typeUrl: string;
   readonly msg: T;
   readonly expectedJsonSerialized: string;
+  readonly testToProtobuf?: boolean;
 }
 
 /**
@@ -29,5 +30,10 @@ export function runConverterTest(
     expect(sortedJsonStringify(aminoConverted)).toBe(
       data.expectedJsonSerialized
     );
+
+    if (data.testToProtobuf === true) {
+      const backToProtobuf = converter.fromAmino(aminoConverted);
+      expect(backToProtobuf).toEqual(data.msg);
+    }
   };
 }

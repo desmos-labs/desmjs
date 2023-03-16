@@ -424,14 +424,22 @@ function convertProofToAmino(proof: Proof): AminoProof {
 export function secp256k1PubKeyToAny(pubKey: Secp256k1Pubkey): Any {
   return Any.fromPartial({
     typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-    value: fromBase64(pubKey.value),
+    value: Secp256k1PubKey.encode(
+      Secp256k1PubKey.fromPartial({
+        key: fromBase64(pubKey.value),
+      })
+    ).finish(),
   });
 }
 
 export function ed25519PubKeyToAny(pubKey: Ed25519Pubkey): Any {
   return Any.fromPartial({
     typeUrl: "/cosmos.crypto.ed25519.PubKey",
-    value: fromBase64(pubKey.value),
+    value: Ed25519PubKey.encode(
+      Ed25519PubKey.fromPartial({
+        key: fromBase64(pubKey.value),
+      })
+    ).finish(),
   });
 }
 
