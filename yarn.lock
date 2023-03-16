@@ -3202,7 +3202,7 @@ __metadata:
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.5.1
     "@walletconnect/types": ^2.4.0
-    "@walletconnect/utils": ^2.5.0
+    "@walletconnect/utils": ^2.5.1
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     dotenv: ^16.0.3
@@ -3238,7 +3238,7 @@ __metadata:
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^2.5.0
+    "@walletconnect/utils": ^2.5.1
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.2.0
@@ -7388,7 +7388,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.5.1":
+"@walletconnect/utils@npm:2.5.1, @walletconnect/utils@npm:^2.5.1":
   version: 2.5.1
   resolution: "@walletconnect/utils@npm:2.5.1"
   dependencies:
@@ -7426,7 +7426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:^2.4.10, @walletconnect/utils@npm:^2.5.0":
+"@walletconnect/utils@npm:^2.4.10":
   version: 2.5.0
   resolution: "@walletconnect/utils@npm:2.5.0"
   dependencies:
