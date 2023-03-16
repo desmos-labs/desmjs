@@ -1,7 +1,20 @@
+# Ignore downloaded proto files
+/proto-files/
+
+# Ignore moved directories after build
+/confio/
 /cosmos/
 /cosmos_proto/
 /desmjs/
 /desmos/
+/ethermint/
 /gogoproto/
 /google/
 /ibc/
+/tendermint/
+
+# Ignore moved files
+helpers.d.ts
+helpers.js
+index.d.ts
+index.js
