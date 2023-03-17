@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { MsgSendEncodeObject, SignerData, StdFee } from "@cosmjs/stargate";
@@ -7,7 +8,7 @@ import {
   ChainConfig,
   Proof,
   SignatureValueType,
-  SingleSignature,
+  SingleSignature
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
@@ -17,18 +18,13 @@ import Long from "long";
 import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
-import {
-  defaultGasPrice,
-  TEST_CHAIN_URL,
-  testUser1,
-  testUser2,
-} from "./testutils";
+import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
   getSignatureBytes,
   getSignedBytes,
-  SignatureResult,
+  SignatureResult
 } from "./signatureresult";
 import {
   MsgAddReactionEncodeObject,
@@ -40,12 +36,9 @@ import {
   MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
-  MsgSaveProfileEncodeObject,
+  MsgSaveProfileEncodeObject
 } from "./encodeobjects";
-import {
-  bech32AddressToAny,
-  singleSignatureToAny,
-} from "./aminomessages/profiles";
+import { bech32AddressToAny, singleSignatureToAny } from "./aminomessages/profiles";
 import { postTargetToAny } from "./aminomessages/reports";
 import { registeredReactionValueToAny } from "./aminomessages/reactions";
 import {
@@ -57,7 +50,7 @@ import {
   MsgCreateReportTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgMultiSendTypeUrl,
-  MsgSaveProfileTypeUrl,
+  MsgSaveProfileTypeUrl
 } from "./const";
 import MsgAuthenticateTypeUrl from "./const/desmjs";
 
