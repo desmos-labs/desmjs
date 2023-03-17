@@ -30,7 +30,7 @@ import {
 } from "@cosmjs/amino";
 import { AuthInfo, SignerInfo, TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { SignMode } from "cosmjs-types/cosmos/tx/signing/v1beta1/signing";
-import { fromBase64 } from "@cosmjs/encoding";
+import { fromBase64, toHex } from "@cosmjs/encoding";
 import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53, Uint53, Uint64 } from "@cosmjs/math";
@@ -60,6 +60,13 @@ import {
 import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
 import { SignatureResult } from "./signatureresult";
 import { PublicKey } from "./types/pubkey";
+import {
+  AsyncBroadcastResponse,
+  BlockBroadcastResponse,
+  BroadcastMode,
+  BroadcastResponse,
+  SyncBroadcastResponse,
+} from "./types/responses";
 
 export interface SimulateOptions {
   publicKey?: PublicKey;
@@ -648,5 +655,74 @@ export class DesmosClient extends SigningCosmWasmClient {
    */
   public get querier(): DesmosQueryClient {
     return this.forceGetQueryClient();
+  }
+
+  /**
+   * Broadcast transaction to mempool and do not wait for response.
+   * @param tx - The transaction to broadcast.
+   */
+  public async broadcastTxAsync(tx: TxRaw): Promise<AsyncBroadcastResponse> {
+    const client = this.forceGetTmClient();
+    const response = await client.broadcastTxAsync({
+      tx: TxRaw.encode(tx).finish(),
+    });
+    return {
+      type: BroadcastMode.Async,
+      hash: toHex(response.hash).toUpperCase(),
+    };
+  }
+
+  /**
+   * Broadcast transaction to mempool and wait for response.
+   * @param tx - The transaction to broadcast.
+   */
+  public async broadcastTxSync(tx: TxRaw): Promise<SyncBroadcastResponse> {
+    const client = this.forceGetTmClient();
+    const response = await client.broadcastTxSync({
+      tx: TxRaw.encode(tx).finish(),
+    });
+    return {
+      type: BroadcastMode.Sync,
+      hash: toHex(response.hash).toUpperCase(),
+    };
+  }
+
+  /**
+   * Broadcast transaction to mempool and wait that is included in a block.
+   * @param tx - The transaction to broadcast.
+   */
+  public async broadcastTxBlock(tx: TxRaw): Promise<BlockBroadcastResponse> {
+    const client = this.forceGetTmClient();
+    const response = await client.broadcastTxCommit({
+      tx: TxRaw.encode(tx).finish(),
+    });
+    return {
+      type: BroadcastMode.Block,
+      height: response.height,
+      hash: toHex(response.hash).toUpperCase(),
+      checkTx: response.checkTx,
+      deliverTx: response.deliverTx,
+    };
+  }
+
+  /**
+   * Broadcast a transaction on chain.
+   * @param tx - The transaction to broadcast.
+   * @param mode - The broadcast mode.
+   */
+  public async broadcastTransaction(
+    tx: TxRaw,
+    mode: BroadcastMode
+  ): Promise<BroadcastResponse> {
+    switch (mode) {
+      case BroadcastMode.Async:
+        return this.broadcastTxAsync(tx);
+      case BroadcastMode.Sync:
+        return this.broadcastTxAsync(tx);
+      case BroadcastMode.Block:
+        return this.broadcastTxBlock(tx);
+      default:
+        throw new Error(`Unsupported broadcast mode: ${mode}`);
+    }
   }
 }

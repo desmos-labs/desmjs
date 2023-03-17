@@ -102,6 +102,24 @@ describe("DesmosClient", () => {
     return [signer, client];
   }
 
+  async function pollTx(client: DesmosClient, txHash: string): Promise<void> {
+    let timedOut = false;
+    const txPollTimeout = setTimeout(() => {
+      timedOut = true;
+    }, 60000);
+
+    while (!timedOut) {
+      const tx = await client.getTx(txHash);
+      if (tx !== null) {
+        clearTimeout(txPollTimeout);
+        return;
+      }
+      await sleep(3000);
+    }
+
+    throw new Error(`Timed out waiting for tx ${txHash}`);
+  }
+
   describe("SignatureResult utils", () => {
     async function getSignatureResult(): Promise<SignatureResult> {
       const [signer, client] = await getDirectSignerAndClient();
@@ -784,6 +802,58 @@ describe("DesmosClient", () => {
         },
         "auto"
       );
+    });
+  });
+
+  describe("Broadcast tx", () => {
+    it("test broadcast tx async", async () => {
+      const [signer, client] = await getDirectSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const signResult = await client.signTx(address, [
+        {
+          typeUrl: MsgSaveProfileTypeUrl,
+          value: {
+            dtag: "test_async",
+            creator: address,
+          },
+        } as MsgSaveProfileEncodeObject,
+      ]);
+      const response = await client.broadcastTxAsync(signResult.txRaw);
+      await pollTx(client, response.hash);
+    });
+
+    it("test broadcast tx sync", async () => {
+      const [signer, client] = await getDirectSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const signResult = await client.signTx(address, [
+        {
+          typeUrl: MsgSaveProfileTypeUrl,
+          value: {
+            dtag: "test_sync",
+            creator: address,
+          },
+        } as MsgSaveProfileEncodeObject,
+      ]);
+      const response = await client.broadcastTxSync(signResult.txRaw);
+      await pollTx(client, response.hash);
+    });
+
+    it("test broadcast tx block", async () => {
+      const [signer, client] = await getDirectSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const signResult = await client.signTx(address, [
+        {
+          typeUrl: MsgSaveProfileTypeUrl,
+          value: {
+            dtag: "test_sync",
+            creator: address,
+          },
+        } as MsgSaveProfileEncodeObject,
+      ]);
+      await client.broadcastTxBlock(signResult.txRaw);
     });
   });
 });
