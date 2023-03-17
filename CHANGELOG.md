@@ -1,6 +1,6 @@
 ## Version 4.7.8
-- Fix conversion from amino to protobuf of `MsgLinkChainAccount`
-- Replaced `ts-proto` with `telescope` to generate the Desmos messages from proto files
+- Fixed the Amino to Protobuf converter of `MsgLinkChainAccount`
+- Replaced `ts-proto` with `telescope` to generate the messages code from Profo files
 
 ## Version 4.7.7
 - Allow to simulate a tx with a `DesmosClient` without signer
