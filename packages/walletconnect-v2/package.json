@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-walletconnect-v2",
-  "version": "4.7.8",
+  "version": "4.7.9",
   "description": "WalletConnect v2 integration for DesmJS",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>"

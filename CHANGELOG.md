@@ -1,3 +1,6 @@
+## Version 4.7.9
+- Add methods to broadcast a transaction in async, sync or block mode
+
 ## Version 4.7.8
 - Fixed the Amino to Protobuf converter of `MsgLinkChainAccount`
 - Replaced `ts-proto` with `telescope` to generate the messages code from Profo files
