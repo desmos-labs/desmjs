@@ -3154,7 +3154,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.30.0
     "@cosmjs/utils": ^0.30.0
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.11.47
+    "@keplr-wallet/types": 0.11.49
     "@types/jest": ^29.5.0
     "@types/node": ^18.15.3
     "@types/pino": ^7.0.5
@@ -3261,7 +3261,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.0
     "@types/keccak": ^3.0.1
-    "@types/react-native": ^0.71.3
+    "@types/react-native": ^0.71.4
     "@types/readable-stream": ^2.3.15
     "@web3auth/react-native-sdk": ^3.5.0
     react-native: ^0.71.4
@@ -4755,13 +4755,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.11.47":
-  version: 0.11.47
-  resolution: "@keplr-wallet/types@npm:0.11.47"
+"@keplr-wallet/types@npm:0.11.49":
+  version: 0.11.49
+  resolution: "@keplr-wallet/types@npm:0.11.49"
   dependencies:
     axios: ^0.27.2
     long: ^4.0.0
-  checksum: 1b8bd20c696053f1c86557de52ec3225b393027f8d197b4ea545f6bbcdb45d0fd9bffab4b04154ac034fc5561bcd1f292ff965663004ed631d16d74876bc51c1
+  checksum: 6c53c62a1bd6f85d0abe17e395142571f5def92b99995046e76c392b446caf7dab317d15d9efd5a1b9abe8b7d8be6c4e59d8c3a1f01fde6cad902276042e55b1
   languageName: node
   linkType: hard
 
@@ -6667,12 +6667,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:^0.71.3":
-  version: 0.71.3
-  resolution: "@types/react-native@npm:0.71.3"
+"@types/react-native@npm:^0.71.4":
+  version: 0.71.4
+  resolution: "@types/react-native@npm:0.71.4"
   dependencies:
     "@types/react": "*"
-  checksum: 5ee02f9c780c630e145c1887c80d1739d59e01d45ff9e862b475538376ddd17fc605a1245fea04813593c1c0153b5f4a41247283036adcdfbf4779555f956d93
+  checksum: 74d021dfe6b5a58b75270366edb5244b123f054392c11df3001e3a4157de153dc9939d217ddbd4ce945d25a1d44df5fa84a181b74c4e247afa0c6ec6ff546631
   languageName: node
   linkType: hard
 
