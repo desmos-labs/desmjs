@@ -1,5 +1,5 @@
 export const StakeAuthorizationTypeUrl =
-  "/cosmos.bank.v1beta1.StakeAuthorization";
+  "/cosmos.staking.v1beta1.StakeAuthorization";
 export const StakeAuthorizationAminoType = "cosmos-sdk/StakeAuthorization";
 
 export const MsgCreateValidatorTypeUrl =
