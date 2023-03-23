@@ -3097,6 +3097,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/utils@npm:^0.30.1":
+  version: 0.30.1
+  resolution: "@cosmjs/utils@npm:0.30.1"
+  checksum: 64ea16cdeba64d2b346a0b45ca47059ab4297fdf5c4e5fd89ec262eec488807f49f94dcdc294628142015ce4669c4eaf7426d1f8a6538146da5601dcc484cb19
+  languageName: node
+  linkType: hard
+
 "@cosmwasm/ts-codegen@npm:0.21.1":
   version: 0.21.1
   resolution: "@cosmwasm/ts-codegen@npm:0.21.1"
@@ -3152,7 +3159,7 @@ __metadata:
     "@babel/preset-typescript": ^7.21.0
     "@cosmjs/amino": ^0.30.0
     "@cosmjs/proto-signing": ^0.30.0
-    "@cosmjs/utils": ^0.30.0
+    "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.11.49
     "@types/jest": ^29.5.0
@@ -3192,7 +3199,7 @@ __metadata:
     "@cosmjs/encoding": ^0.30.0
     "@cosmjs/proto-signing": ^0.30.0
     "@cosmjs/stargate": ^0.30.0
-    "@cosmjs/utils": ^0.30.0
+    "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.0
@@ -3229,7 +3236,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.30.0
     "@cosmjs/stargate": ^0.30.0
     "@cosmjs/tendermint-rpc": ^0.30.0
-    "@cosmjs/utils": ^0.30.0
+    "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.0
     "@types/long": ^4.0.1
@@ -3308,7 +3315,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.30.0
     "@cosmjs/stargate": ^0.30.0
     "@cosmjs/tendermint-rpc": ^0.30.0
-    "@cosmjs/utils": ^0.30.0
+    "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.0
     "@types/long": ^4.0.1
@@ -10986,7 +10993,7 @@ __metadata:
     "@cosmjs/crypto": ^0.30.0
     "@cosmjs/encoding": ^0.30.0
     "@cosmjs/proto-signing": ^0.30.0
-    "@cosmjs/utils": ^0.30.0
+    "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/long": ^4.0.1
