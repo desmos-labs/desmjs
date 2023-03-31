@@ -1,4 +1,4 @@
-import { Timestamp } from "@desmoslabs/desmjs-types/build/google/protobuf/timestamp";
+import { Timestamp } from "@desmoslabs/desmjs-types/google/protobuf/timestamp";
 import Long from "long";
 import { timestampFromDate, timestampToDate } from "./timestamp";
 

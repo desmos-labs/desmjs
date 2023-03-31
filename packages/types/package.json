@@ -35,8 +35,7 @@
     "codegen": "rm -rf ./src && ./script/codegen.js && yarn format",
     "compile-codegen": "yarn tsc",
     "generate-code": "yarn download-proto && yarn codegen && yarn compile-codegen",
-    "prepare": "./script/prepare.sh",
-    "build": "yarn generate-code && yarn prepare"
+    "build": "yarn generate-code"
   },
   "dependencies": {
     "long": "^4.0.0",
