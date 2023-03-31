@@ -3162,7 +3162,6 @@ __metadata:
     cosmjs-types: ^0.5.2
     jest: ^29.5.0
     ts-jest: ^29.0.5
-    ts-proto: ^1.137.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3210,7 +3209,6 @@ __metadata:
     lokijs: ^1.5.12
     long: ^4.0.0
     ts-jest: ^29.0.5
-    ts-proto: ^1.137.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3245,7 +3243,6 @@ __metadata:
     jest: ^29.5.0
     long: ^4.0.0
     ts-jest: ^29.0.5
-    ts-proto: ^1.137.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3320,7 +3317,6 @@ __metadata:
     jest: ^29.5.0
     long: ^4.0.0
     ts-jest: ^29.0.5
-    ts-proto: ^1.137.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -6595,13 +6591,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/object-hash@npm:^1.3.0":
-  version: 1.3.4
-  resolution: "@types/object-hash@npm:1.3.4"
-  checksum: fe4aa041427f3c69cbcf63434af6e788329b40d7208b30aa845cfc1aa6bf9b0c11b23fa33a567d85ba7f2574a95c3b4a227f4b9b9b55da1eaea68ab94b4058d9
-  languageName: node
-  linkType: hard
-
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
@@ -9475,13 +9464,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"case-anything@npm:^2.1.10":
-  version: 2.1.10
-  resolution: "case-anything@npm:2.1.10"
-  checksum: eff2769d7da178115be8ac2617ccbb850664ffd36f0a897e000d9dd5a64300141128f6a8fe024bd98ec63cc9173a72c1426bbcaac328c8a44109ce15f7c14a5e
-  languageName: node
-  linkType: hard
-
 "case@npm:1.6.3, case@npm:^1.6.3":
   version: 1.6.3
   resolution: "case@npm:1.6.3"
@@ -10661,13 +10643,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dataloader@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "dataloader@npm:1.4.0"
-  checksum: e2c93d43afde68980efc0cd9ff48e9851116e27a9687f863e02b56d46f7e7868cc762cd6dcbaf4197e1ca850a03651510c165c2ae24b8e9843fd894002ad0e20
-  languageName: node
-  linkType: hard
-
 "dayjs@npm:^1.8.15":
   version: 1.11.7
   resolution: "dayjs@npm:1.11.7"
@@ -10968,7 +10943,6 @@ __metadata:
     prettier: ^2.8.7
     pretty-quick: ^3.1.3
     ts-jest: ^29.0.5
-    ts-proto: ^1.137.2
     tsc: ^2.0.4
     typescript: ^4.9.5
   languageName: unknown
@@ -11001,15 +10975,6 @@ __metadata:
   version: 5.3.0
   resolution: "detect-browser@npm:5.3.0"
   checksum: dd6e08d55da1d9e0f22510ac79872078ae03d9dfa13c5e66c96baedc1c86567345a88f96949161f6be8f3e0fafa93bf179bdb1cd311b14f5f163112fcc70ab49
-  languageName: node
-  linkType: hard
-
-"detect-libc@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "detect-libc@npm:1.0.3"
-  bin:
-    detect-libc: ./bin/detect-libc.js
-  checksum: daaaed925ffa7889bd91d56e9624e6c8033911bb60f3a50a74a87500680652969dbaab9526d1e200a4c94acf80fc862a22131841145a0a8482d60a99c24f4a3e
   languageName: node
   linkType: hard
 
@@ -11249,15 +11214,6 @@ __metadata:
   version: 0.1.2
   resolution: "dotty@npm:0.1.2"
   checksum: 164fb116036b0e582637fdb38ac6a56758713467d1d07d05f5a841ac1b62f1f882ca1260d5fb0546941bb5f6d333d954ff0d513e45be25af7fbf73d57be313de
-  languageName: node
-  linkType: hard
-
-"dprint-node@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "dprint-node@npm:1.0.7"
-  dependencies:
-    detect-libc: ^1.0.3
-  checksum: cd29f8e2b7de334273b4f53d24072718139635408b015963bcc80829cc785a84591462585b5b569791c8b1420c5672bec7499bda70d7298c58c8a3f43796e659
   languageName: node
   linkType: hard
 
@@ -17226,13 +17182,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-hash@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "object-hash@npm:1.3.1"
-  checksum: fdcb957a2f15a9060e30655a9f683ba1fc25dfb8809a73d32e9634bec385a2f1d686c707ac1e5f69fb773bc12df03fb64c77ce3faeed83e35f4eb1946cb1989e
-  languageName: node
-  linkType: hard
-
 "object-inspect@npm:^1.12.2, object-inspect@npm:^1.9.0":
   version: 1.12.2
   resolution: "object-inspect@npm:1.12.2"
@@ -18594,7 +18543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"protobufjs@npm:^6.11.3, protobufjs@npm:^6.8.8, protobufjs@npm:~6.11.2, protobufjs@npm:~6.11.3":
+"protobufjs@npm:^6.8.8, protobufjs@npm:~6.11.2, protobufjs@npm:~6.11.3":
   version: 6.11.3
   resolution: "protobufjs@npm:6.11.3"
   dependencies:
@@ -21404,42 +21353,6 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: 090adff1302ab20bd3486e6b4799e90f97726ed39e02b39e566f8ab674fd5bd5f727f43615debbfc580d33c6d9d1c6b1b3ce7d8e3cca3e20530a145ffa232c35
-  languageName: node
-  linkType: hard
-
-"ts-poet@npm:^6.2.0":
-  version: 6.3.0
-  resolution: "ts-poet@npm:6.3.0"
-  dependencies:
-    dprint-node: ^1.0.7
-  checksum: 6e4821480e6064a5ddbfbf1eb1d534c7a5309d542588ee98337d878d61fe5cc779f9a6d69ede9fded44b0cc7f37288c569de0aecc2e8044b3f3348724b1254fb
-  languageName: node
-  linkType: hard
-
-"ts-proto-descriptors@npm:1.7.1":
-  version: 1.7.1
-  resolution: "ts-proto-descriptors@npm:1.7.1"
-  dependencies:
-    long: ^4.0.0
-    protobufjs: ^6.8.8
-  checksum: 51e6bd7aeb0527f2e5b9cf70611d653fc6b27a2aca20987217acfdd63dfc10de660c7431f378f6f1769d503fd8e4e334ed28d957b777720abc3ef02f50e7460a
-  languageName: node
-  linkType: hard
-
-"ts-proto@npm:^1.137.2":
-  version: 1.137.2
-  resolution: "ts-proto@npm:1.137.2"
-  dependencies:
-    "@types/object-hash": ^1.3.0
-    case-anything: ^2.1.10
-    dataloader: ^1.4.0
-    object-hash: ^1.3.1
-    protobufjs: ^6.11.3
-    ts-poet: ^6.2.0
-    ts-proto-descriptors: 1.7.1
-  bin:
-    protoc-gen-ts_proto: protoc-gen-ts_proto
-  checksum: ebc494996e12f4d1c36c3315c3007be9be5cb296a24627b2ffbdc17b25dd3a20494350a622eda2caf01a8ad739c357c36afc7f13a1062b926ba424212ffee23e
   languageName: node
   linkType: hard
 
