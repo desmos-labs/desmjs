@@ -3,11 +3,11 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
   moduleNameMapper: {
-    "^@desmoslabs/desmjs-types/(.*)$": "<rootDir>/../types/build/$1",
+    "^@desmoslabs/desmjs-types/(.*)$": "<rootDir>/../types/$1",
   },
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
+    "^.+\\.tsx?$": [
+      "ts-jest",
       {
         tsconfig: "./tsconfig.json",
       },
