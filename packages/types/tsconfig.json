@@ -3,11 +3,12 @@
   "compilerOptions": {
     "lib": ["ES2017", "dom"],
     "baseUrl": ".",
-    "outDir": "build",
+    "outDir": ".",
     "experimentalDecorators": true,
     "rootDir": "src"
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+  "exclude": []
 }
