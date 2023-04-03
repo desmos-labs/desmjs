@@ -3283,7 +3283,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^5.0.1
     "@web3auth/modal": ^5.0.1
-    "@web3auth/ui": ^5.0.1
+    "@web3auth/ui": ^5.1.0
     cosmjs-types: ^0.6.0
     readable-stream: ^4.3.0
     typescript: ^4.9.5
@@ -7567,6 +7567,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@web3auth/base@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@web3auth/base@npm:5.1.0"
+  dependencies:
+    "@toruslabs/http-helpers": ^3.3.0
+    "@toruslabs/openlogin": ^3.2.1
+    "@toruslabs/openlogin-jrpc": ^3.2.0
+    jwt-decode: ^3.1.2
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: 60e85b219e8d0e918f78291cf4448027807c8c878cabef5b94cc8fbadc2070fe6bb0d159a81448be2478d08785fb1a3a4f2cc962b5b9584989c8615ed59a0267
+  languageName: node
+  linkType: hard
+
 "@web3auth/ethereum-provider@npm:^5.0.1":
   version: 5.0.1
   resolution: "@web3auth/ethereum-provider@npm:5.0.1"
@@ -7760,6 +7776,30 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: 175f86fad9294cc431c85a4277c6f45854f5e52c0288d34790fc4dbfbdef0591581ddf6ab0dfc45b9613a7502839a48fec562491c9ef6eaa65813b3955e97adc
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@web3auth/ui@npm:5.1.0"
+  dependencies:
+    "@toruslabs/http-helpers": ^3.3.0
+    "@toruslabs/openlogin": ^3.2.1
+    "@toruslabs/openlogin-jrpc": ^3.2.0
+    "@web3auth/base": ^5.1.0
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^22.4.13
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^12.2.0
+    react-qrcode-logo: ^2.9.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: e7a22e9359b6e9922a9d1f8e52f7a80a490f7819a85462a2dcdece8fab3c5b0aa4285247889a19bd2aa00f0b194156d2690f52b62053d563d94aa0e6eefed052
   languageName: node
   linkType: hard
 
@@ -13647,6 +13687,15 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.20.6
   checksum: 7f68c6801eb1eff240953066841d507cb00ce3eb6e2a8a6446f9a16453aab168352a36fdfe62c88e04795b1bc0a47439b2d463ed67e1c6bf19e0fb3a57fa457a
+  languageName: node
+  linkType: hard
+
+"i18next@npm:^22.4.13":
+  version: 22.4.13
+  resolution: "i18next@npm:22.4.13"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+  checksum: a40ca4ce749854a806a01e3e60ee492f2911b1f7acb6ed338bb023211259ef8c39e914734d10197d3279941459767897ceb1989c8e24cd73730fdf211e079037
   languageName: node
   linkType: hard
 
