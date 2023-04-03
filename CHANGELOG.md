@@ -1,3 +1,6 @@
+## Version 4.7.10
+- Fix `StakeAuthorizationTypeUrl`
+
 ## Version 4.7.9
 - Add methods to broadcast a transaction in async, sync or block mode
 
