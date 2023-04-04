@@ -1501,6 +1501,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-syntax-jsx@npm:^7.21.4":
+  version: 7.21.4
+  resolution: "@babel/plugin-syntax-jsx@npm:7.21.4"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.20.2
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: bb7309402a1d4e155f32aa0cf216e1fa8324d6c4cfd248b03280028a015a10e46b6efd6565f515f8913918a3602b39255999c06046f7d4b8a5106be2165d724a
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-syntax-logical-assignment-operators@npm:^7.10.4, @babel/plugin-syntax-logical-assignment-operators@npm:^7.8.3":
   version: 7.10.4
   resolution: "@babel/plugin-syntax-logical-assignment-operators@npm:7.10.4"
@@ -2345,6 +2356,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-typescript@npm:^7.21.3":
+  version: 7.21.3
+  resolution: "@babel/plugin-transform-typescript@npm:7.21.3"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.18.6
+    "@babel/helper-create-class-features-plugin": ^7.21.0
+    "@babel/helper-plugin-utils": ^7.20.2
+    "@babel/plugin-syntax-typescript": ^7.20.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: c16fd577bf43f633deb76fca2a8527d8ae25968c8efdf327c1955472c3e0257e62992473d1ad7f9ee95379ce2404699af405ea03346055adadd3478ad0ecd117
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-unicode-escapes@npm:^7.18.10":
   version: 7.18.10
   resolution: "@babel/plugin-transform-unicode-escapes@npm:7.18.10"
@@ -2765,7 +2790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.17.12, @babel/preset-typescript@npm:^7.21.0":
+"@babel/preset-typescript@npm:^7.17.12":
   version: 7.21.0
   resolution: "@babel/preset-typescript@npm:7.21.0"
   dependencies:
@@ -2775,6 +2800,21 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 6e1f4d7294de2678fbaf36035e98847b2be432f40fe7a1204e5e45b8b05bcbe22902fe0d726e16af14de5bc08987fae28a7899871503fd661050d85f58755af6
+  languageName: node
+  linkType: hard
+
+"@babel/preset-typescript@npm:^7.21.4":
+  version: 7.21.4
+  resolution: "@babel/preset-typescript@npm:7.21.4"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.20.2
+    "@babel/helper-validator-option": ^7.21.0
+    "@babel/plugin-syntax-jsx": ^7.21.4
+    "@babel/plugin-transform-modules-commonjs": ^7.21.2
+    "@babel/plugin-transform-typescript": ^7.21.3
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 83b2f2bf7be3a970acd212177525f58bbb1f2e042b675a47d021a675ae27cf00b6b6babfaf3ae5c980592c9ed1b0712e5197796b691905d25c99f9006478ea06
   languageName: node
   linkType: hard
 
@@ -3439,19 +3479,19 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
-    "@babel/preset-typescript": ^7.21.0
+    "@babel/preset-typescript": ^7.21.4
     "@cosmjs/amino": 0.30.1
     "@cosmjs/proto-signing": 0.30.1
     "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.11.51
+    "@keplr-wallet/types": 0.11.52
     "@types/jest": ^29.5.0
     "@types/node": ^18.15.5
     "@types/pino": ^7.0.5
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     jest: ^29.5.0
-    ts-jest: ^29.0.5
+    ts-jest: ^29.1.0
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3465,7 +3505,7 @@ __metadata:
     "@types/node": ^18.15.5
     long: ^4.0.0
     prettier: ^2.8.7
-    protobufjs: ^7.2.2
+    protobufjs: ^7.2.3
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3476,7 +3516,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
-    "@babel/preset-typescript": ^7.21.0
+    "@babel/preset-typescript": ^7.21.4
     "@cosmjs/amino": 0.30.1
     "@cosmjs/encoding": 0.30.1
     "@cosmjs/proto-signing": 0.30.1
@@ -3498,7 +3538,7 @@ __metadata:
     jest: ^29.5.0
     lokijs: ^1.5.12
     long: ^4.0.0
-    ts-jest: ^29.0.5
+    ts-jest: ^29.1.0
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3509,7 +3549,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
-    "@babel/preset-typescript": ^7.21.0
+    "@babel/preset-typescript": ^7.21.4
     "@cosmjs/amino": 0.30.1
     "@cosmjs/crypto": 0.30.1
     "@cosmjs/encoding": 0.30.1
@@ -3532,7 +3572,7 @@ __metadata:
     cosmos-wallet: ^1.2.0
     jest: ^29.5.0
     long: ^4.0.0
-    ts-jest: ^29.0.5
+    ts-jest: ^29.1.0
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -3543,7 +3583,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
-    "@babel/preset-typescript": ^7.21.0
+    "@babel/preset-typescript": ^7.21.4
     "@cosmjs/encoding": 0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.0
@@ -3551,7 +3591,7 @@ __metadata:
     "@types/react-native": ^0.71.5
     "@types/readable-stream": ^2.3.15
     "@web3auth/react-native-sdk": ^3.5.0
-    react-native: ^0.71.5
+    react-native: ^0.71.6
     readable-stream: ^4.3.0
     typescript: ^4.9.5
   languageName: unknown
@@ -3563,7 +3603,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
-    "@babel/preset-typescript": ^7.21.0
+    "@babel/preset-typescript": ^7.21.4
     "@cosmjs/amino": 0.30.1
     "@cosmjs/encoding": 0.30.1
     "@cosmjs/proto-signing": 0.30.1
@@ -3586,7 +3626,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.21.4
     "@babel/preset-env": ^7.21.4
-    "@babel/preset-typescript": ^7.21.0
+    "@babel/preset-typescript": ^7.21.4
     "@cosmjs/amino": 0.30.1
     "@cosmjs/cosmwasm-stargate": 0.30.1
     "@cosmjs/crypto": 0.30.1
@@ -3606,7 +3646,7 @@ __metadata:
     cosmos-wallet: ^1.2.0
     jest: ^29.5.0
     long: ^4.0.0
-    ts-jest: ^29.0.5
+    ts-jest: ^29.1.0
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -5042,13 +5082,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.11.51":
-  version: 0.11.51
-  resolution: "@keplr-wallet/types@npm:0.11.51"
+"@keplr-wallet/types@npm:0.11.52":
+  version: 0.11.52
+  resolution: "@keplr-wallet/types@npm:0.11.52"
   dependencies:
     axios: ^0.27.2
     long: ^4.0.0
-  checksum: 41099809f4e61bb38d29c899bdf92dc6aebb4454cf5b37c26e58f40605501cd3d98b9867884ef32bc269c71ddaeee93375639cdd39d4cfce0bb09985be09c0aa
+  checksum: 97fa2408da3ec9b153327017c6c8a9ddb1cc1c0b1a77f84cdb1c0b9c20f8d03f1c139f20bedc93e53f19b4dac2b60d738f0c5d1e59787aefdf43645eddd03971
   languageName: node
   linkType: hard
 
@@ -11269,7 +11309,7 @@ __metadata:
     jest: ^29.5.0
     prettier: ^2.8.7
     pretty-quick: ^3.1.3
-    ts-jest: ^29.0.5
+    ts-jest: ^29.1.0
     tsc: ^2.0.4
     typescript: ^4.9.5
   languageName: unknown
@@ -18901,9 +18941,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"protobufjs@npm:^7.2.2":
-  version: 7.2.2
-  resolution: "protobufjs@npm:7.2.2"
+"protobufjs@npm:^7.2.3":
+  version: 7.2.3
+  resolution: "protobufjs@npm:7.2.3"
   dependencies:
     "@protobufjs/aspromise": ^1.1.2
     "@protobufjs/base64": ^1.1.2
@@ -18917,7 +18957,7 @@ __metadata:
     "@protobufjs/utf8": ^1.1.0
     "@types/node": ">=13.7.0"
     long: ^5.0.0
-  checksum: 86166e8f3e46789fa4d117ae72c17356db36bf87c0e0710d224be32e543b1c378a94e66dc2b1de5af45edfc25f56acfc7e688c50c956426a3ae97bc474f4445c
+  checksum: 9afa6de5fced0139a5180c063718508fac3ea734a9f1aceb99712367b15473a83327f91193f16b63540f9112b09a40912f5f0441a9b0d3f3c6a1c7f707d78249
   languageName: node
   linkType: hard
 
@@ -19329,9 +19369,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:^0.71.5":
-  version: 0.71.5
-  resolution: "react-native@npm:0.71.5"
+"react-native@npm:^0.71.6":
+  version: 0.71.6
+  resolution: "react-native@npm:0.71.6"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.2
@@ -19371,7 +19411,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native: cli.js
-  checksum: 56216de9cbbe5fa45fb566384e9e00202d806ea5058c1ce0b7f1649d1152406382a861b56a99fbb8652436d69808eb38cb048ee8ed36abacd12c25d21c503e6a
+  checksum: aadbd9b57dd9b10a41b60337ea1a4103e2fb2320784bf148100e807bd0a77929bdb310ea68d054165cd3c00647a3d020eecb0efb864cc7a93733b2d580e1e675
   languageName: node
   linkType: hard
 
@@ -21616,9 +21656,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^29.0.5":
-  version: 29.0.5
-  resolution: "ts-jest@npm:29.0.5"
+"ts-jest@npm:^29.1.0":
+  version: 29.1.0
+  resolution: "ts-jest@npm:29.1.0"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -21633,7 +21673,7 @@ __metadata:
     "@jest/types": ^29.0.0
     babel-jest: ^29.0.0
     jest: ^29.0.0
-    typescript: ">=4.3"
+    typescript: ">=4.3 <6"
   peerDependenciesMeta:
     "@babel/core":
       optional: true
@@ -21645,7 +21685,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: f60f129c2287f4c963d9ee2677132496c5c5a5d39c27ad234199a1140c26318a7d5bda34890ab0e30636ec42a8de28f84487c09e9dcec639c9c67812b3a38373
+  checksum: 535dc42ad523cbe1e387701fb2e448518419b515c082f09b25411f0b3dd0b854cf3e8141c316d6f4b99883aeb4a4f94159cbb1edfb06d7f77ea6229fadb2e1bf
   languageName: node
   linkType: hard
 
