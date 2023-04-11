@@ -49,7 +49,7 @@
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@types/long": "^4.0.1",
     "@types/pino": "^7.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "@walletconnect/jsonrpc-types": "^1.0.2",
     "eslint": "^8.38.0",
