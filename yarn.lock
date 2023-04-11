@@ -11300,7 +11300,7 @@ __metadata:
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
     typedoc: ^0.23.28
-    typedoc-plugin-markdown: ^3.14.0
+    typedoc-plugin-markdown: ^3.15.0
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -21886,14 +21886,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^3.14.0":
-  version: 3.14.0
-  resolution: "typedoc-plugin-markdown@npm:3.14.0"
+"typedoc-plugin-markdown@npm:^3.15.0":
+  version: 3.15.1
+  resolution: "typedoc-plugin-markdown@npm:3.15.1"
   dependencies:
     handlebars: ^4.7.7
   peerDependencies:
-    typedoc: ">=0.23.0"
-  checksum: 6205600052185b4b193ab8a253d9df5ccbc95002c948a07f9024bcd26f0f23fbcc089fda4d6b4c8f4172f4eaca2bf9c32129989f6baaace7261cf4a0e41c976b
+    typedoc: ">=0.24.0"
+  checksum: a80e43e8e8628fa6c65f44bfe20fc79b03e432e36c9a43c6dc419a0a0ec9658743ebb228cd05dd8491d2ad23e389d4903c00aef3d3de73340a86382b91db39b1
   languageName: node
   linkType: hard
 
