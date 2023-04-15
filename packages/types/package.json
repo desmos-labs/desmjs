@@ -42,7 +42,7 @@
     "protobufjs": "^7.2.3"
   },
   "devDependencies": {
-    "@osmonauts/telescope": "^0.89.0",
+    "@osmonauts/telescope": "^0.93.0",
     "@types/long": "^4.0.1",
     "@types/node": "^18.15.11",
     "prettier": "^2.8.7",
