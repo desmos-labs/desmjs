@@ -37,7 +37,7 @@
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-typescript": "^7.21.4",
-    "@types/jest": "^29.5.0",
+    "@types/jest": "^29.5.1",
     "@types/keccak": "^3.0.1",
     "@types/react-native": "^0.71.6",
     "@types/readable-stream": "^2.3.15",
