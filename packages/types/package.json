@@ -44,7 +44,7 @@
   "devDependencies": {
     "@osmonauts/telescope": "^0.94.0",
     "@types/long": "^4.0.1",
-    "@types/node": "^18.15.12",
+    "@types/node": "^18.15.13",
     "prettier": "^2.8.7",
     "typescript": "^4.9.5"
   }
