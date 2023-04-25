@@ -6827,6 +6827,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1.26.0":
+  version: 1.26.0
+  resolution: "@types/prismjs@npm:1.26.0"
+  checksum: cd5e7a6214c1f4213ec512a5fcf6d8fe37a56b813fc57ac95b5ff5ee074742bfdbd2f2730d9fd985205bf4586728e09baa97023f739e5aa1c9735a7c1ecbd11a
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -11133,7 +11140,7 @@ __metadata:
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^1.2.1
     docusaurus-plugin-typedoc: ^0.18.0
-    prism-react-renderer: ^2.0.0
+    prism-react-renderer: ^2.0.3
     react: ^18.2.0
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
@@ -18738,14 +18745,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "prism-react-renderer@npm:2.0.0"
+"prism-react-renderer@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "prism-react-renderer@npm:2.0.3"
   dependencies:
+    "@types/prismjs": ^1.26.0
     clsx: ^1.2.1
   peerDependencies:
     react: ">=16.0.0"
-  checksum: d12cd0bacc2f0e334ef55b103389985c0d058b34b03da392826968cd97153439b0d8a505b316cf80092b090c6fd038999ca0b8b20ac78c7b319f5bf17d44c48f
+  checksum: 9a981671f1f9d8ebab8d378b34f640433e27af4b495d7063121e00adc2ba54471262fdf1cff1e3f4992b805187f6c129607538b63aa6111fbfb823a62f727d05
   languageName: node
   linkType: hard
 
