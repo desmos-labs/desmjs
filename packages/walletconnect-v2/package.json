@@ -38,12 +38,12 @@
     "@walletconnect/qrcode-modal": "^1.8.0",
     "@walletconnect/sign-client": "^2.7.2",
     "@walletconnect/types": "^2.4.0",
-    "@walletconnect/utils": "^2.7.1",
+    "@walletconnect/utils": "^2.7.2",
     "cosmjs-types": "^0.5.2",
     "long": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
+    "@babel/core": "^7.21.5",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-typescript": "^7.21.5",
     "@types/jest": "^29.5.1",

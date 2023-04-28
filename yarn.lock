@@ -228,6 +228,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/compat-data@npm:^7.21.5":
+  version: 7.21.5
+  resolution: "@babel/compat-data@npm:7.21.5"
+  checksum: ba5aff547f64123c3f0898319b52ab9825dfebbb17d77dded2eabc5c70b19921c4e7bab1eca33c35daa96ba0ef6a54023ca1919b82a63c7a4064f99771922a4f
+  languageName: node
+  linkType: hard
+
 "@babel/core@npm:7.12.9":
   version: 7.12.9
   resolution: "@babel/core@npm:7.12.9"
@@ -275,7 +282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.21.4, @babel/core@npm:^7.21.4":
+"@babel/core@npm:7.21.4":
   version: 7.21.4
   resolution: "@babel/core@npm:7.21.4"
   dependencies:
@@ -387,6 +394,29 @@ __metadata:
     json5: ^2.2.2
     semver: ^6.3.0
   checksum: 62e6c3e2149a70b5c9729ef5f0d3e2e97e9dcde89fc039c8d8e3463d5d7ba9b29ee84d10faf79b61532ac1645aa62f2bd42338320617e6e3a8a4d8e2a27076e7
+  languageName: node
+  linkType: hard
+
+"@babel/core@npm:^7.21.5":
+  version: 7.21.5
+  resolution: "@babel/core@npm:7.21.5"
+  dependencies:
+    "@ampproject/remapping": ^2.2.0
+    "@babel/code-frame": ^7.21.4
+    "@babel/generator": ^7.21.5
+    "@babel/helper-compilation-targets": ^7.21.5
+    "@babel/helper-module-transforms": ^7.21.5
+    "@babel/helpers": ^7.21.5
+    "@babel/parser": ^7.21.5
+    "@babel/template": ^7.20.7
+    "@babel/traverse": ^7.21.5
+    "@babel/types": ^7.21.5
+    convert-source-map: ^1.7.0
+    debug: ^4.1.0
+    gensync: ^1.0.0-beta.2
+    json5: ^2.2.2
+    semver: ^6.3.0
+  checksum: 77ca0e6493860fb6f91cf441313c0bb464d21f8c6842cf3f1dbb083a910370e37a4c0ada35cf11ef0ebe7d0ee2d6bde2f4ee9b4caa3328e807988aa282787677
   languageName: node
   linkType: hard
 
@@ -542,6 +572,21 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0
   checksum: bf9c7d3e7e6adff9222c05d898724cd4ee91d7eb9d52222c7ad2a22955620c2872cc2d9bdf0e047df8efdb79f4e3af2a06b53f509286145feccc4d10ddc318be
+  languageName: node
+  linkType: hard
+
+"@babel/helper-compilation-targets@npm:^7.21.5":
+  version: 7.21.5
+  resolution: "@babel/helper-compilation-targets@npm:7.21.5"
+  dependencies:
+    "@babel/compat-data": ^7.21.5
+    "@babel/helper-validator-option": ^7.21.0
+    browserslist: ^4.21.3
+    lru-cache: ^5.1.1
+    semver: ^6.3.0
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 0edecb9c970ddc22ebda1163e77a7f314121bef9e483e0e0d9a5802540eed90d5855b6bf9bce03419b35b2e07c323e62d0353b153fa1ca34f17dbba897a83c25
   languageName: node
   linkType: hard
 
@@ -967,6 +1012,17 @@ __metadata:
     "@babel/traverse": ^7.20.5
     "@babel/types": ^7.20.5
   checksum: f03ec6eb2bf8dc7cdfe2569ee421fd9ba6c7bac6c862d90b608ccdd80281ebe858bc56ca175fc92b3ac50f63126b66bbd5ec86f9f361729289a20054518f1ac5
+  languageName: node
+  linkType: hard
+
+"@babel/helpers@npm:^7.21.5":
+  version: 7.21.5
+  resolution: "@babel/helpers@npm:7.21.5"
+  dependencies:
+    "@babel/template": ^7.20.7
+    "@babel/traverse": ^7.21.5
+    "@babel/types": ^7.21.5
+  checksum: a6f74b8579713988e7f5adf1a986d8b5255757632ba65b2552f0f609ead5476edb784044c7e4b18f3681ee4818ca9d08c41feb9bd4e828648c25a00deaa1f9e4
   languageName: node
   linkType: hard
 
@@ -3436,7 +3492,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-keplr@workspace:packages/keplr"
   dependencies:
-    "@babel/core": ^7.21.4
+    "@babel/core": ^7.21.5
     "@babel/preset-env": ^7.21.4
     "@babel/preset-typescript": ^7.21.5
     "@cosmjs/amino": 0.30.1
@@ -3473,7 +3529,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-walletconnect-v2@workspace:packages/walletconnect-v2"
   dependencies:
-    "@babel/core": ^7.21.4
+    "@babel/core": ^7.21.5
     "@babel/preset-env": ^7.21.4
     "@babel/preset-typescript": ^7.21.5
     "@cosmjs/amino": 0.30.1
@@ -3490,7 +3546,7 @@ __metadata:
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.7.2
     "@walletconnect/types": ^2.4.0
-    "@walletconnect/utils": ^2.7.1
+    "@walletconnect/utils": ^2.7.2
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     dotenv: ^16.0.3
@@ -3506,7 +3562,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-walletconnect@workspace:packages/walletconnect"
   dependencies:
-    "@babel/core": ^7.21.4
+    "@babel/core": ^7.21.5
     "@babel/preset-env": ^7.21.4
     "@babel/preset-typescript": ^7.21.5
     "@cosmjs/amino": 0.30.1
@@ -3525,7 +3581,7 @@ __metadata:
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^2.7.1
+    "@walletconnect/utils": ^2.7.2
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.2.0
@@ -3540,7 +3596,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-web3auth-mobile@workspace:packages/web3auth-mobile"
   dependencies:
-    "@babel/core": ^7.21.4
+    "@babel/core": ^7.21.5
     "@babel/preset-env": ^7.21.4
     "@babel/preset-typescript": ^7.21.5
     "@cosmjs/encoding": 0.30.1
@@ -3560,7 +3616,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-web3auth-web@workspace:packages/web3auth-web"
   dependencies:
-    "@babel/core": ^7.21.4
+    "@babel/core": ^7.21.5
     "@babel/preset-env": ^7.21.4
     "@babel/preset-typescript": ^7.21.5
     "@cosmjs/amino": 0.30.1
@@ -3583,7 +3639,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs@workspace:packages/core"
   dependencies:
-    "@babel/core": ^7.21.4
+    "@babel/core": ^7.21.5
     "@babel/preset-env": ^7.21.4
     "@babel/preset-typescript": ^7.21.5
     "@cosmjs/amino": 0.30.1
@@ -7694,20 +7750,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/types@npm:2.7.1":
-  version: 2.7.1
-  resolution: "@walletconnect/types@npm:2.7.1"
-  dependencies:
-    "@walletconnect/events": ^1.0.1
-    "@walletconnect/heartbeat": 1.2.1
-    "@walletconnect/jsonrpc-types": ^1.0.2
-    "@walletconnect/keyvaluestorage": ^1.0.2
-    "@walletconnect/logger": ^2.0.1
-    events: ^3.3.0
-  checksum: 988574c32bb96aa2a753cc1925e804786a358edeea50f698c5f2acaf4ff2a7e578ab49f0c3196e4b5a7ff79dcf6d31225825a9dfc00027f9271d6769870e8a5c
-  languageName: node
-  linkType: hard
-
 "@walletconnect/types@npm:2.7.2":
   version: 2.7.2
   resolution: "@walletconnect/types@npm:2.7.2"
@@ -7743,7 +7785,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.7.2":
+"@walletconnect/utils@npm:2.7.2, @walletconnect/utils@npm:^2.7.2":
   version: 2.7.2
   resolution: "@walletconnect/utils@npm:2.7.2"
   dependencies:
@@ -7801,29 +7843,6 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: ^3.1.0
   checksum: f32cd3170eff48802112831c9ac6e75410012e6b1aaba277d4e3333af138f372d38f418b8dad91b8cd80049bccd30c7dfab72444970b9c859ba76007f7875d67
-  languageName: node
-  linkType: hard
-
-"@walletconnect/utils@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "@walletconnect/utils@npm:2.7.1"
-  dependencies:
-    "@stablelib/chacha20poly1305": 1.0.1
-    "@stablelib/hkdf": 1.0.1
-    "@stablelib/random": ^1.0.2
-    "@stablelib/sha256": 1.0.1
-    "@stablelib/x25519": ^1.0.3
-    "@walletconnect/jsonrpc-utils": ^1.0.7
-    "@walletconnect/relay-api": ^1.0.9
-    "@walletconnect/safe-json": ^1.0.2
-    "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.1
-    "@walletconnect/window-getters": ^1.0.1
-    "@walletconnect/window-metadata": ^1.0.1
-    detect-browser: 5.3.0
-    query-string: 7.1.3
-    uint8arrays: ^3.1.0
-  checksum: 798bbacd8f3395417c8276676cf1a43f9ce6b25caec14da266f9f98e3a724b5f945ceedb52fa15e21e51e74e0d612e77f31ea8c758b23a148602bd0ad23a7abd
   languageName: node
   linkType: hard
 
