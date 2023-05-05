@@ -3778,7 +3778,7 @@ __metadata:
     "@types/jest": ^29.5.1
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
-    "@web3auth/base": ^5.1.0
+    "@web3auth/base": ^5.2.0
     "@web3auth/modal": ^5.1.1
     "@web3auth/ui": ^5.1.0
     cosmjs-types: ^0.6.0
@@ -8093,6 +8093,22 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: 60e85b219e8d0e918f78291cf4448027807c8c878cabef5b94cc8fbadc2070fe6bb0d159a81448be2478d08785fb1a3a4f2cc962b5b9584989c8615ed59a0267
+  languageName: node
+  linkType: hard
+
+"@web3auth/base@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@web3auth/base@npm:5.2.0"
+  dependencies:
+    "@toruslabs/http-helpers": ^3.3.0
+    "@toruslabs/openlogin": ^3.2.1
+    "@toruslabs/openlogin-jrpc": ^3.2.0
+    jwt-decode: ^3.1.2
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: 413ac7ebe1620dce2fd7cc3e14619ca52303d2b615831df87f652af95455f499aea997b58d2891d725893e55e4f5126e8ce0fac5157b27cb1fd36b7fbaaecec8
   languageName: node
   linkType: hard
 
