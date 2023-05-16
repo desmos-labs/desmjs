@@ -3653,7 +3653,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.11.62
     "@types/jest": ^29.5.1
-    "@types/node": ^20.1.3
+    "@types/node": ^20.1.4
     "@types/pino": ^7.0.5
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
@@ -3669,7 +3669,7 @@ __metadata:
   dependencies:
     "@osmonauts/telescope": ^0.94.0
     "@types/long": ^4.0.1
-    "@types/node": ^20.1.3
+    "@types/node": ^20.1.4
     long: ^4.0.0
     prettier: ^2.8.8
     protobufjs: ^7.2.3
@@ -3693,12 +3693,12 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.1
     "@types/long": ^4.0.1
-    "@types/node": ^20.1.3
+    "@types/node": ^20.1.4
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.7.3
     "@walletconnect/types": ^2.4.0
-    "@walletconnect/utils": ^2.7.3
+    "@walletconnect/utils": ^2.7.4
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     dotenv: ^16.0.3
@@ -3728,12 +3728,12 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.1
     "@types/long": ^4.0.1
-    "@types/node": ^20.1.3
+    "@types/node": ^20.1.4
     "@types/pino": ^7.0.5
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^2.7.3
+    "@walletconnect/utils": ^2.7.4
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.2.0
@@ -3755,7 +3755,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.1
     "@types/keccak": ^3.0.1
-    "@types/react-native": ^0.71.6
+    "@types/react-native": ^0.72.0
     "@types/readable-stream": ^2.3.15
     "@web3auth/react-native-sdk": ^3.5.0
     react-native: ^0.71.8
@@ -3806,7 +3806,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.1
     "@types/long": ^4.0.1
-    "@types/node": ^20.1.3
+    "@types/node": ^20.1.4
     "@types/pino": ^7.0.5
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
@@ -4113,25 +4113,6 @@ __metadata:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
   checksum: cf36bbde228a058869dfd770a85f130035a54e563b957a3cfc3191d06efdcfc272bb51b51e6225a0246b233e5d7d0ca1cb4df4b700b837aa72bbb0c9f6f6f5bd
-  languageName: node
-  linkType: hard
-
-"@docusaurus/module-type-aliases@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/module-type-aliases@npm:2.4.0"
-  dependencies:
-    "@docusaurus/react-loadable": 5.5.2
-    "@docusaurus/types": 2.4.0
-    "@types/history": ^4.7.11
-    "@types/react": "*"
-    "@types/react-router-config": "*"
-    "@types/react-router-dom": "*"
-    react-helmet-async: "*"
-    react-loadable: "npm:@docusaurus/react-loadable@5.5.2"
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: fc655d9dc77d88ba9d10abe602c9fd5533992b14de495e4f3e4caea368693a7b7e5a805fb2938287bed949900e7e3d7f94bea3c1a8727b45e19c85996965d0c7
   languageName: node
   linkType: hard
 
@@ -4442,25 +4423,6 @@ __metadata:
     fs-extra: ^10.1.0
     tslib: ^2.4.0
   checksum: cf21cd01db6426ccc29360fe9caca39e61ee5efde3796539e8292e212c25727227970f935050f294f0ab475f201720e32a1d09a7e40f2b08f56f69282f660da8
-  languageName: node
-  linkType: hard
-
-"@docusaurus/types@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/types@npm:2.4.0"
-  dependencies:
-    "@types/history": ^4.7.11
-    "@types/react": "*"
-    commander: ^5.1.0
-    joi: ^17.6.0
-    react-helmet-async: ^1.3.0
-    utility-types: ^3.10.0
-    webpack: ^5.73.0
-    webpack-merge: ^5.8.0
-  peerDependencies:
-    react: ^16.8.4 || ^17.0.0
-    react-dom: ^16.8.4 || ^17.0.0
-  checksum: 54b0cd8992269ab0508d94ce19a7fcc2b3e7c9700eb112c9b859ddac8228dcc64282c414b602ba44894be87be79eeeef730fb8e569be68b6e26453e18addcf21
   languageName: node
   linkType: hard
 
@@ -6105,6 +6067,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/virtualized-lists@npm:^0.72.4":
+  version: 0.72.4
+  resolution: "@react-native/virtualized-lists@npm:0.72.4"
+  dependencies:
+    invariant: ^2.2.4
+    nullthrows: ^1.1.1
+  peerDependencies:
+    react-native: "*"
+    react-test-renderer: 18.2.0
+  checksum: d050781d93d95f76a84915fea78fbc8c56e1e6d79e34fd23584ce63257df47e039231423740b9e5fbd8b3d8584fc1588d20eab837b6d791561af9c4d1afa0d04
+  languageName: node
+  linkType: hard
+
 "@scure/base@npm:~1.1.0":
   version: 1.1.1
   resolution: "@scure/base@npm:1.1.1"
@@ -7336,10 +7311,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.1.3":
-  version: 20.1.3
-  resolution: "@types/node@npm:20.1.3"
-  checksum: abdb593f662a079715b4e9df0c706822e49814dd641fa5a6226ab73fb931cbfc9cfd5df92e09c13dbc90dbc8fce680d29cb735b88899d661481d93e09a8df2be
+"@types/node@npm:^20.1.4":
+  version: 20.1.4
+  resolution: "@types/node@npm:20.1.4"
+  checksum: bffa6a6e92831cc805b13658c55be8e04abe3202d5e57ddd7fee4cfbe269656a1f475909a9f9514e1aff50310d0d90c516ac2c649cb6f1c77d4b1079c2fd1e88
   languageName: node
   linkType: hard
 
@@ -7415,12 +7390,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:^0.71.6":
-  version: 0.71.6
-  resolution: "@types/react-native@npm:0.71.6"
+"@types/react-native@npm:^0.72.0":
+  version: 0.72.0
+  resolution: "@types/react-native@npm:0.72.0"
   dependencies:
+    "@react-native/virtualized-lists": ^0.72.4
     "@types/react": "*"
-  checksum: 067325c549e7181c73cdf8da1cb7bdef226124d91c3f72fcc2fb8b3c98a2d184f74a16ba627e3192253103bd651e8238d0e722b93f762b3f1a3f5b96773ec7a5
+  checksum: e0e5a6154fc6f442c9a9939eeea6976a156cbb668b8b7b8f71b36ca3666bda389c117b0428cd202be015b7cf204b7621d4764d4a50ab05eca88a49764ec99406
   languageName: node
   linkType: hard
 
@@ -7634,20 +7610,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.59.5":
-  version: 5.59.5
-  resolution: "@typescript-eslint/parser@npm:5.59.5"
+"@typescript-eslint/parser@npm:^5.59.6":
+  version: 5.59.6
+  resolution: "@typescript-eslint/parser@npm:5.59.6"
   dependencies:
-    "@typescript-eslint/scope-manager": 5.59.5
-    "@typescript-eslint/types": 5.59.5
-    "@typescript-eslint/typescript-estree": 5.59.5
+    "@typescript-eslint/scope-manager": 5.59.6
+    "@typescript-eslint/types": 5.59.6
+    "@typescript-eslint/typescript-estree": 5.59.6
     debug: ^4.3.4
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: ef4122074f2c00be1dabbb3fb5534280f81b45f8de6c1a696092af5175684fea65bc002814546d06f880ea5beff2006589e2633662e92d65035437c8e2d9134c
+  checksum: 1f6e259f501e3d13f9632bd71da2cf3d11150f1276079522e8d5c392a07c3aea867c855481981fca3bf32beb6bef046ef64cdfceba8ea4150f27099e44d9a92c
   languageName: node
   linkType: hard
 
@@ -7658,6 +7634,16 @@ __metadata:
     "@typescript-eslint/types": 5.59.5
     "@typescript-eslint/visitor-keys": 5.59.5
   checksum: b3d8a5b70e741b9bef60d0a297da77e844cb744895f31fb6880fdac4c53f7c58f3e04065a7d644afb6e1dc51591285ec866eca2fbd2ad50de6b376031aaccfbd
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/scope-manager@npm:5.59.6":
+  version: 5.59.6
+  resolution: "@typescript-eslint/scope-manager@npm:5.59.6"
+  dependencies:
+    "@typescript-eslint/types": 5.59.6
+    "@typescript-eslint/visitor-keys": 5.59.6
+  checksum: 65cce7b3fc320e264ef966da9a26bb7cba014ec5a0c9c5518cb08a624d67ac6eb67dd8e2df49b33eeaaaacaf42c73f291d56f93a9d1ec82c58bd1e7e872e530b
   languageName: node
   linkType: hard
 
@@ -7685,6 +7671,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/types@npm:5.59.6":
+  version: 5.59.6
+  resolution: "@typescript-eslint/types@npm:5.59.6"
+  checksum: e898ca629d95b69f5dbfb7c9a3d28f943e5a372d37bf7efaefb41341d2d7147372cd4956b35b637e9b3a1b8555d64a5b35776650b815c4227b114513247ec2b5
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/typescript-estree@npm:5.59.5":
   version: 5.59.5
   resolution: "@typescript-eslint/typescript-estree@npm:5.59.5"
@@ -7700,6 +7693,24 @@ __metadata:
     typescript:
       optional: true
   checksum: 10a8c01ad53da115ca698668941dcb18c497035ba07faf08237bfa3ab92185bdfaf1df93562915a936b49e9f72a4cc6b10b1d9296b7cdc8c34ba0ca323c37677
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/typescript-estree@npm:5.59.6":
+  version: 5.59.6
+  resolution: "@typescript-eslint/typescript-estree@npm:5.59.6"
+  dependencies:
+    "@typescript-eslint/types": 5.59.6
+    "@typescript-eslint/visitor-keys": 5.59.6
+    debug: ^4.3.4
+    globby: ^11.1.0
+    is-glob: ^4.0.3
+    semver: ^7.3.7
+    tsutils: ^3.21.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 65b7879e8cd4ccb987c1e1fa75cd84250cb46799ba0de6cdcaec70f6700b45ae4efcebb24163ca7946152e1b12595ee58e35bfb31ea6d35b3f39deaf973d4f1a
   languageName: node
   linkType: hard
 
@@ -7728,6 +7739,16 @@ __metadata:
     "@typescript-eslint/types": 5.59.5
     eslint-visitor-keys: ^3.3.0
   checksum: 94db281ec8ea3a7ede46763aaa0d3349e035b19334fd03e2e560f89c70faebcfa937d51b53d2eaad2506b60a5d901428cc8b5a65ad8e90ca1c12a133dbe977fc
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:5.59.6":
+  version: 5.59.6
+  resolution: "@typescript-eslint/visitor-keys@npm:5.59.6"
+  dependencies:
+    "@typescript-eslint/types": 5.59.6
+    eslint-visitor-keys: ^3.3.0
+  checksum: 8f216411344f5ed618ab838fa3fc4b04f3041f33e08d9b160df4db988f496c71f934c4b0362f686ce63ecf7f5d926c67190d5116c91945c1957544728449ec6b
   languageName: node
   linkType: hard
 
@@ -8144,6 +8165,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/types@npm:2.7.4":
+  version: 2.7.4
+  resolution: "@walletconnect/types@npm:2.7.4"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.1
+    "@walletconnect/jsonrpc-types": ^1.0.2
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    events: ^3.3.0
+  checksum: 40d4d1ed3791216fe29f9210c35275fa6d44ec3d49000db1afdbe1e44a9add629c103af8354b856f5d2874dd20f39993d17cde5a3a939d0066a589c905e4568e
+  languageName: node
+  linkType: hard
+
 "@walletconnect/types@npm:^1.6.6, @walletconnect/types@npm:^1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/types@npm:1.8.0"
@@ -8165,7 +8200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.7.3, @walletconnect/utils@npm:^2.7.3":
+"@walletconnect/utils@npm:2.7.3":
   version: 2.7.3
   resolution: "@walletconnect/utils@npm:2.7.3"
   dependencies:
@@ -8223,6 +8258,29 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: ^3.1.0
   checksum: f32cd3170eff48802112831c9ac6e75410012e6b1aaba277d4e3333af138f372d38f418b8dad91b8cd80049bccd30c7dfab72444970b9c859ba76007f7875d67
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:^2.7.4":
+  version: 2.7.4
+  resolution: "@walletconnect/utils@npm:2.7.4"
+  dependencies:
+    "@stablelib/chacha20poly1305": 1.0.1
+    "@stablelib/hkdf": 1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha256": 1.0.1
+    "@stablelib/x25519": ^1.0.3
+    "@walletconnect/jsonrpc-utils": ^1.0.7
+    "@walletconnect/relay-api": ^1.0.9
+    "@walletconnect/safe-json": ^1.0.2
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.7.4
+    "@walletconnect/window-getters": ^1.0.1
+    "@walletconnect/window-metadata": ^1.0.1
+    detect-browser: 5.3.0
+    query-string: 7.1.3
+    uint8arrays: ^3.1.0
+  checksum: ab2db03eaa77d2f5511734e973b5b0d802e96bb27c9ebde292294111bd4a880cb4d37b9e633296861f4d2e332741a858b777b4c08a4fa01983898fb0122565ca
   languageName: node
   linkType: hard
 
@@ -11701,7 +11759,7 @@ __metadata:
   resolution: "desmjs-documentation@workspace:docs"
   dependencies:
     "@docusaurus/core": 2.4.0
-    "@docusaurus/module-type-aliases": 2.4.0
+    "@docusaurus/module-type-aliases": 2.4.1
     "@docusaurus/preset-classic": 2.4.1
     "@swc/core": ^1.3.58
     "@tsconfig/docusaurus": ^1.0.7
@@ -11732,7 +11790,7 @@ __metadata:
     "@types/long": ^4.0.1
     "@types/pino": ^7.0.5
     "@typescript-eslint/eslint-plugin": ^5.59.5
-    "@typescript-eslint/parser": ^5.59.5
+    "@typescript-eslint/parser": ^5.59.6
     "@walletconnect/jsonrpc-types": ^1.0.2
     eslint: ^8.40.0
     eslint-config-airbnb: ^19.0.4
