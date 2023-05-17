@@ -3696,7 +3696,7 @@ __metadata:
     "@types/node": ^20.1.4
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
-    "@walletconnect/sign-client": ^2.7.3
+    "@walletconnect/sign-client": ^2.7.4
     "@walletconnect/types": ^2.4.0
     "@walletconnect/utils": ^2.7.4
     babel-jest: ^29.5.0
@@ -3848,90 +3848,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/core@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/core@npm:2.4.0"
-  dependencies:
-    "@babel/core": ^7.18.6
-    "@babel/generator": ^7.18.7
-    "@babel/plugin-syntax-dynamic-import": ^7.8.3
-    "@babel/plugin-transform-runtime": ^7.18.6
-    "@babel/preset-env": ^7.18.6
-    "@babel/preset-react": ^7.18.6
-    "@babel/preset-typescript": ^7.18.6
-    "@babel/runtime": ^7.18.6
-    "@babel/runtime-corejs3": ^7.18.6
-    "@babel/traverse": ^7.18.8
-    "@docusaurus/cssnano-preset": 2.4.0
-    "@docusaurus/logger": 2.4.0
-    "@docusaurus/mdx-loader": 2.4.0
-    "@docusaurus/react-loadable": 5.5.2
-    "@docusaurus/utils": 2.4.0
-    "@docusaurus/utils-common": 2.4.0
-    "@docusaurus/utils-validation": 2.4.0
-    "@slorber/static-site-generator-webpack-plugin": ^4.0.7
-    "@svgr/webpack": ^6.2.1
-    autoprefixer: ^10.4.7
-    babel-loader: ^8.2.5
-    babel-plugin-dynamic-import-node: ^2.3.3
-    boxen: ^6.2.1
-    chalk: ^4.1.2
-    chokidar: ^3.5.3
-    clean-css: ^5.3.0
-    cli-table3: ^0.6.2
-    combine-promises: ^1.1.0
-    commander: ^5.1.0
-    copy-webpack-plugin: ^11.0.0
-    core-js: ^3.23.3
-    css-loader: ^6.7.1
-    css-minimizer-webpack-plugin: ^4.0.0
-    cssnano: ^5.1.12
-    del: ^6.1.1
-    detect-port: ^1.3.0
-    escape-html: ^1.0.3
-    eta: ^2.0.0
-    file-loader: ^6.2.0
-    fs-extra: ^10.1.0
-    html-minifier-terser: ^6.1.0
-    html-tags: ^3.2.0
-    html-webpack-plugin: ^5.5.0
-    import-fresh: ^3.3.0
-    leven: ^3.1.0
-    lodash: ^4.17.21
-    mini-css-extract-plugin: ^2.6.1
-    postcss: ^8.4.14
-    postcss-loader: ^7.0.0
-    prompts: ^2.4.2
-    react-dev-utils: ^12.0.1
-    react-helmet-async: ^1.3.0
-    react-loadable: "npm:@docusaurus/react-loadable@5.5.2"
-    react-loadable-ssr-addon-v5-slorber: ^1.0.1
-    react-router: ^5.3.3
-    react-router-config: ^5.1.1
-    react-router-dom: ^5.3.3
-    rtl-detect: ^1.0.4
-    semver: ^7.3.7
-    serve-handler: ^6.1.3
-    shelljs: ^0.8.5
-    terser-webpack-plugin: ^5.3.3
-    tslib: ^2.4.0
-    update-notifier: ^5.1.0
-    url-loader: ^4.1.1
-    wait-on: ^6.0.1
-    webpack: ^5.73.0
-    webpack-bundle-analyzer: ^4.5.0
-    webpack-dev-server: ^4.9.3
-    webpack-merge: ^5.8.0
-    webpackbar: ^5.0.2
-  peerDependencies:
-    react: ^16.8.4 || ^17.0.0
-    react-dom: ^16.8.4 || ^17.0.0
-  bin:
-    docusaurus: bin/docusaurus.mjs
-  checksum: 04d30e31e9c4198ce3f4a47c4f59943f357ef96a5cfa10674fd3049d4cf067c15fa0ae184383ba3e420f59a9b3077ed1cf1f373626399f0e46cea6fcf0897d7b
-  languageName: node
-  linkType: hard
-
 "@docusaurus/core@npm:2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/core@npm:2.4.1"
@@ -4016,18 +3932,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/cssnano-preset@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/cssnano-preset@npm:2.4.0"
-  dependencies:
-    cssnano-preset-advanced: ^5.3.8
-    postcss: ^8.4.14
-    postcss-sort-media-queries: ^4.2.1
-    tslib: ^2.4.0
-  checksum: b8982230ec014378a5453453df400a328a6ecdeecffb666ead5cfbeb5dc689610f0e62ee818ffcc8adc270c7c47cb818ad730c769eb8fa689dd79d4f9d448b6d
-  languageName: node
-  linkType: hard
-
 "@docusaurus/cssnano-preset@npm:2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/cssnano-preset@npm:2.4.1"
@@ -4040,16 +3944,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/logger@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/logger@npm:2.4.0"
-  dependencies:
-    chalk: ^4.1.2
-    tslib: ^2.4.0
-  checksum: 0424b77e2abaa50f20d6042ededf831157852656d1242ae9b0829b897e6f5b1e1e5ea30df599839e0ec51c72e42a5a867b136387dd5359032c735f431eddd078
-  languageName: node
-  linkType: hard
-
 "@docusaurus/logger@npm:2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/logger@npm:2.4.1"
@@ -4057,34 +3951,6 @@ __metadata:
     chalk: ^4.1.2
     tslib: ^2.4.0
   checksum: be81840f2df477ab633d8ced6fd3a512582e764a48d66b1c12bb20b5d4c717f349e254e33b00b9b53381dbdb24a3e3d0ca9b19511366244b3620fa19cc4c69dc
-  languageName: node
-  linkType: hard
-
-"@docusaurus/mdx-loader@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/mdx-loader@npm:2.4.0"
-  dependencies:
-    "@babel/parser": ^7.18.8
-    "@babel/traverse": ^7.18.8
-    "@docusaurus/logger": 2.4.0
-    "@docusaurus/utils": 2.4.0
-    "@mdx-js/mdx": ^1.6.22
-    escape-html: ^1.0.3
-    file-loader: ^6.2.0
-    fs-extra: ^10.1.0
-    image-size: ^1.0.1
-    mdast-util-to-string: ^2.0.0
-    remark-emoji: ^2.2.0
-    stringify-object: ^3.3.0
-    tslib: ^2.4.0
-    unified: ^9.2.2
-    unist-util-visit: ^2.0.3
-    url-loader: ^4.1.1
-    webpack: ^5.73.0
-  peerDependencies:
-    react: ^16.8.4 || ^17.0.0
-    react-dom: ^16.8.4 || ^17.0.0
-  checksum: 3d4e7bf6840fa7dcf4250aa5ea019f80dac6cc38e9f8b9a0515b81b6c0f6d6f4ed4103f521784e70db856aec06cff4be176ef281e1cac53afc82bc1182bbf9ad
   languageName: node
   linkType: hard
 
@@ -4445,20 +4311,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-common@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/utils-common@npm:2.4.0"
-  dependencies:
-    tslib: ^2.4.0
-  peerDependencies:
-    "@docusaurus/types": "*"
-  peerDependenciesMeta:
-    "@docusaurus/types":
-      optional: true
-  checksum: 711e61e899b133fc7cd755e6de75fd79a712eeabbd9853b9122e3929c8390e015bb9e4bca2284028e40e7a0fb2b89ef1c184f7e4149097ffd7b64821b38c11da
-  languageName: node
-  linkType: hard
-
 "@docusaurus/utils-common@npm:2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/utils-common@npm:2.4.1"
@@ -4473,19 +4325,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-validation@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/utils-validation@npm:2.4.0"
-  dependencies:
-    "@docusaurus/logger": 2.4.0
-    "@docusaurus/utils": 2.4.0
-    joi: ^17.6.0
-    js-yaml: ^4.1.0
-    tslib: ^2.4.0
-  checksum: 21a229858ed9254830b68dd08de6456dc19b68adead581f86e854ea3e55b64b9616a3bbca521e74f754c9c7bc835ca348dfe9f0949d9a8d189db5b39bcdb9f6b
-  languageName: node
-  linkType: hard
-
 "@docusaurus/utils-validation@npm:2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/utils-validation@npm:2.4.1"
@@ -4496,35 +4335,6 @@ __metadata:
     js-yaml: ^4.1.0
     tslib: ^2.4.0
   checksum: 44dc482770ea3932e68e58c0bb9503e1b3c73ce28565c438b0d68a7427ee91760ca84a5e150dfc4e04497e072fe4394050dd2af4c4ff43a227b1464e89d705a0
-  languageName: node
-  linkType: hard
-
-"@docusaurus/utils@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@docusaurus/utils@npm:2.4.0"
-  dependencies:
-    "@docusaurus/logger": 2.4.0
-    "@svgr/webpack": ^6.2.1
-    escape-string-regexp: ^4.0.0
-    file-loader: ^6.2.0
-    fs-extra: ^10.1.0
-    github-slugger: ^1.4.0
-    globby: ^11.1.0
-    gray-matter: ^4.0.3
-    js-yaml: ^4.1.0
-    lodash: ^4.17.21
-    micromatch: ^4.0.5
-    resolve-pathname: ^3.0.0
-    shelljs: ^0.8.5
-    tslib: ^2.4.0
-    url-loader: ^4.1.1
-    webpack: ^5.73.0
-  peerDependencies:
-    "@docusaurus/types": "*"
-  peerDependenciesMeta:
-    "@docusaurus/types":
-      optional: true
-  checksum: 7ba6634b6ff71bb7cc64b0eb3c6d2892a21873bce8559bcd460693a80ca0229828c04da751277cdb17c6f18e80e061322bbcd84e9b743adc96c594b43e8a2165
   languageName: node
   linkType: hard
 
@@ -7732,9 +7542,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/core@npm:2.7.3":
-  version: 2.7.3
-  resolution: "@walletconnect/core@npm:2.7.3"
+"@walletconnect/core@npm:2.7.4":
+  version: 2.7.4
+  resolution: "@walletconnect/core@npm:2.7.4"
   dependencies:
     "@walletconnect/heartbeat": 1.2.1
     "@walletconnect/jsonrpc-provider": ^1.0.12
@@ -7746,12 +7556,12 @@ __metadata:
     "@walletconnect/relay-auth": ^1.0.4
     "@walletconnect/safe-json": ^1.0.2
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.3
-    "@walletconnect/utils": 2.7.3
+    "@walletconnect/types": 2.7.4
+    "@walletconnect/utils": 2.7.4
     events: ^3.3.0
     lodash.isequal: 4.5.0
     uint8arrays: ^3.1.0
-  checksum: 6ad5d6d24e3afe644bd51163a8421dff60c7af1f26921c3b09bd927d62f2c1f3260e091426ca5890a18166731a648d93382852c14c7ab0342beb99b4aae3ad5e
+  checksum: 84715f85fcbdd3a2d117f22720f900a57804bb4e0875191f98a5f81ba4859587849a3cc08c82ce009050c5da2a8813b7898744fc32f72d57ba8a792d3fcf4d6e
   languageName: node
   linkType: hard
 
@@ -8055,20 +7865,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/sign-client@npm:^2.7.3":
-  version: 2.7.3
-  resolution: "@walletconnect/sign-client@npm:2.7.3"
+"@walletconnect/sign-client@npm:^2.7.4":
+  version: 2.7.4
+  resolution: "@walletconnect/sign-client@npm:2.7.4"
   dependencies:
-    "@walletconnect/core": 2.7.3
+    "@walletconnect/core": 2.7.4
     "@walletconnect/events": ^1.0.1
     "@walletconnect/heartbeat": 1.2.1
     "@walletconnect/jsonrpc-utils": ^1.0.7
     "@walletconnect/logger": ^2.0.1
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.3
-    "@walletconnect/utils": 2.7.3
+    "@walletconnect/types": 2.7.4
+    "@walletconnect/utils": 2.7.4
     events: ^3.3.0
-  checksum: c00d45a348df2fd1e08dcc8a4f0d33962687d6767d75cd4e862dd9fb85d7a7f211e78bc6993d74b8bf3773ea43e1f0b3045367da1fd8bc18e460d1a1de9a3378
+  checksum: 370bf68abad3d3d45343cff3c3ad7a319c914d618d772aefc107268c034f06d98719332ca62f512083f753559d6786d80898e8c4e7deda6dd8cc93a3307599e6
   languageName: node
   linkType: hard
 
@@ -8103,20 +7913,6 @@ __metadata:
     "@walletconnect/logger": ^2.0.1
     events: ^3.3.0
   checksum: 119e3e5ded0fe6ce69135f474292c690ed5aa11c9c0fd432b64315472d41154a7bd8787c657d75750ac8717bdf46a0f7996507ea6b46075c63fb4ebf573c193e
-  languageName: node
-  linkType: hard
-
-"@walletconnect/types@npm:2.7.3":
-  version: 2.7.3
-  resolution: "@walletconnect/types@npm:2.7.3"
-  dependencies:
-    "@walletconnect/events": ^1.0.1
-    "@walletconnect/heartbeat": 1.2.1
-    "@walletconnect/jsonrpc-types": ^1.0.2
-    "@walletconnect/keyvaluestorage": ^1.0.2
-    "@walletconnect/logger": ^2.0.1
-    events: ^3.3.0
-  checksum: a3c99c4cce293d7f676849eb0d2d271dc259c539bdc7d15f50a3f2c3f48a2fb6ea70b6cb7b26c2f61a6207b4a7fa9a9ce03976b4ed1a59804c48ed8c4ad6d609
   languageName: node
   linkType: hard
 
@@ -8155,9 +7951,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.7.3":
-  version: 2.7.3
-  resolution: "@walletconnect/utils@npm:2.7.3"
+"@walletconnect/utils@npm:2.7.4, @walletconnect/utils@npm:^2.7.4":
+  version: 2.7.4
+  resolution: "@walletconnect/utils@npm:2.7.4"
   dependencies:
     "@stablelib/chacha20poly1305": 1.0.1
     "@stablelib/hkdf": 1.0.1
@@ -8168,13 +7964,13 @@ __metadata:
     "@walletconnect/relay-api": ^1.0.9
     "@walletconnect/safe-json": ^1.0.2
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.3
+    "@walletconnect/types": 2.7.4
     "@walletconnect/window-getters": ^1.0.1
     "@walletconnect/window-metadata": ^1.0.1
     detect-browser: 5.3.0
     query-string: 7.1.3
     uint8arrays: ^3.1.0
-  checksum: bc7b8fd4a26270dbe984ee6545b4b7d4c7c1a0604698ed4001b26acdcb4c63c6b51e08e8bba37ffeec410fc3de7e5fe50ce5d926dbb702c8d1a35f38e201f3cb
+  checksum: ab2db03eaa77d2f5511734e973b5b0d802e96bb27c9ebde292294111bd4a880cb4d37b9e633296861f4d2e332741a858b777b4c08a4fa01983898fb0122565ca
   languageName: node
   linkType: hard
 
@@ -8213,29 +8009,6 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: ^3.1.0
   checksum: f32cd3170eff48802112831c9ac6e75410012e6b1aaba277d4e3333af138f372d38f418b8dad91b8cd80049bccd30c7dfab72444970b9c859ba76007f7875d67
-  languageName: node
-  linkType: hard
-
-"@walletconnect/utils@npm:^2.7.4":
-  version: 2.7.4
-  resolution: "@walletconnect/utils@npm:2.7.4"
-  dependencies:
-    "@stablelib/chacha20poly1305": 1.0.1
-    "@stablelib/hkdf": 1.0.1
-    "@stablelib/random": ^1.0.2
-    "@stablelib/sha256": 1.0.1
-    "@stablelib/x25519": ^1.0.3
-    "@walletconnect/jsonrpc-utils": ^1.0.7
-    "@walletconnect/relay-api": ^1.0.9
-    "@walletconnect/safe-json": ^1.0.2
-    "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.4
-    "@walletconnect/window-getters": ^1.0.1
-    "@walletconnect/window-metadata": ^1.0.1
-    detect-browser: 5.3.0
-    query-string: 7.1.3
-    uint8arrays: ^3.1.0
-  checksum: ab2db03eaa77d2f5511734e973b5b0d802e96bb27c9ebde292294111bd4a880cb4d37b9e633296861f4d2e332741a858b777b4c08a4fa01983898fb0122565ca
   languageName: node
   linkType: hard
 
@@ -11713,7 +11486,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "desmjs-documentation@workspace:docs"
   dependencies:
-    "@docusaurus/core": 2.4.0
+    "@docusaurus/core": 2.4.1
     "@docusaurus/module-type-aliases": 2.4.1
     "@docusaurus/preset-classic": 2.4.1
     "@swc/core": ^1.3.58
