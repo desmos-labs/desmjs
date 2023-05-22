@@ -3698,7 +3698,7 @@ __metadata:
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.7.5
     "@walletconnect/types": ^2.4.0
-    "@walletconnect/utils": ^2.7.5
+    "@walletconnect/utils": ^2.7.6
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     dotenv: ^16.0.3
@@ -3733,7 +3733,7 @@ __metadata:
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^2.7.5
+    "@walletconnect/utils": ^2.7.6
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.2.0
@@ -4402,10 +4402,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.40.0":
-  version: 8.40.0
-  resolution: "@eslint/js@npm:8.40.0"
-  checksum: e84936b8ebd1c8fd90e860182e95d1404006da4cbca722b14950b298aeeca102b080aa9b62c8e69f90824ec54e19f1ba79b239046223624d1414ee82e8e628ac
+"@eslint/js@npm:8.41.0":
+  version: 8.41.0
+  resolution: "@eslint/js@npm:8.41.0"
+  checksum: af013d70fe8d0429cdf5cd8b5dcc6fc384ed026c1eccb0cfe30f5849b968ab91645111373fd1b83282b38955b1bdfbe667c1a7dbda3b06cae753521223cad775
   languageName: node
   linkType: hard
 
@@ -7672,6 +7672,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/jsonrpc-types@npm:1.0.3, @walletconnect/jsonrpc-types@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@walletconnect/jsonrpc-types@npm:1.0.3"
+  dependencies:
+    keyvaluestorage-interface: ^1.0.0
+    tslib: 1.14.1
+  checksum: 26e6f1d8f4207328d3df465c36d0d67844772863dc8e9e78e6cfec417cfc359300eab049d99ea558982b3f0948f4ca26b75253bdf635ffd82ffe30a5276b790c
+  languageName: node
+  linkType: hard
+
 "@walletconnect/jsonrpc-types@npm:^1.0.1":
   version: 1.0.1
   resolution: "@walletconnect/jsonrpc-types@npm:1.0.1"
@@ -7688,16 +7698,6 @@ __metadata:
     keyvaluestorage-interface: ^1.0.0
     tslib: 1.14.1
   checksum: 6878d184bfc49e5c8190586c451895eb48a576015f0556527df81b94f52977f61d456b237c662ffbff28e972f8f18b9cc4e06f0e94eddfb9fdeed6fdb4a98c5f
-  languageName: node
-  linkType: hard
-
-"@walletconnect/jsonrpc-types@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@walletconnect/jsonrpc-types@npm:1.0.3"
-  dependencies:
-    keyvaluestorage-interface: ^1.0.0
-    tslib: 1.14.1
-  checksum: 26e6f1d8f4207328d3df465c36d0d67844772863dc8e9e78e6cfec417cfc359300eab049d99ea558982b3f0948f4ca26b75253bdf635ffd82ffe30a5276b790c
   languageName: node
   linkType: hard
 
@@ -7940,6 +7940,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/types@npm:2.7.6":
+  version: 2.7.6
+  resolution: "@walletconnect/types@npm:2.7.6"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.1
+    "@walletconnect/jsonrpc-types": 1.0.3
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    events: ^3.3.0
+  checksum: 1f26c1c1bb9bd2b29fc8bd541c35267b292de2dbf99a860afe9264413d1f5f738b408c9039e75d4e556d03f45c25f6db5a2d43421ae52ee400d2ca2c70b6f1a8
+  languageName: node
+  linkType: hard
+
 "@walletconnect/types@npm:^1.6.6, @walletconnect/types@npm:^1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/types@npm:1.8.0"
@@ -7961,7 +7975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.7.5, @walletconnect/utils@npm:^2.7.5":
+"@walletconnect/utils@npm:2.7.5":
   version: 2.7.5
   resolution: "@walletconnect/utils@npm:2.7.5"
   dependencies:
@@ -8019,6 +8033,28 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: ^3.1.0
   checksum: f32cd3170eff48802112831c9ac6e75410012e6b1aaba277d4e3333af138f372d38f418b8dad91b8cd80049bccd30c7dfab72444970b9c859ba76007f7875d67
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:^2.7.6":
+  version: 2.7.6
+  resolution: "@walletconnect/utils@npm:2.7.6"
+  dependencies:
+    "@stablelib/chacha20poly1305": 1.0.1
+    "@stablelib/hkdf": 1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha256": 1.0.1
+    "@stablelib/x25519": ^1.0.3
+    "@walletconnect/relay-api": ^1.0.9
+    "@walletconnect/safe-json": ^1.0.2
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.7.6
+    "@walletconnect/window-getters": ^1.0.1
+    "@walletconnect/window-metadata": ^1.0.1
+    detect-browser: 5.3.0
+    query-string: 7.1.3
+    uint8arrays: ^3.1.0
+  checksum: 5041e2f6fc033675e1a222ca2de5b96040d15550a7cd8f63ae5d1deb806227e06cfb75b20e900aad4b8ba66bb2436e6cccfb29861cad9190e445849c7d17043e
   languageName: node
   linkType: hard
 
@@ -11530,7 +11566,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.59.6
     "@typescript-eslint/parser": ^5.59.6
     "@walletconnect/jsonrpc-types": ^1.0.3
-    eslint: ^8.40.0
+    eslint: ^8.41.0
     eslint-config-airbnb: ^19.0.4
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-airbnb-typescript: ^17.0.0
@@ -12368,14 +12404,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.40.0":
-  version: 8.40.0
-  resolution: "eslint@npm:8.40.0"
+"eslint@npm:^8.41.0":
+  version: 8.41.0
+  resolution: "eslint@npm:8.41.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.4.0
     "@eslint/eslintrc": ^2.0.3
-    "@eslint/js": 8.40.0
+    "@eslint/js": 8.41.0
     "@humanwhocodes/config-array": ^0.11.8
     "@humanwhocodes/module-importer": ^1.0.1
     "@nodelib/fs.walk": ^1.2.8
@@ -12395,13 +12431,12 @@ __metadata:
     find-up: ^5.0.0
     glob-parent: ^6.0.2
     globals: ^13.19.0
-    grapheme-splitter: ^1.0.4
+    graphemer: ^1.4.0
     ignore: ^5.2.0
     import-fresh: ^3.0.0
     imurmurhash: ^0.1.4
     is-glob: ^4.0.0
     is-path-inside: ^3.0.3
-    js-sdsl: ^4.1.4
     js-yaml: ^4.1.0
     json-stable-stringify-without-jsonify: ^1.0.1
     levn: ^0.4.1
@@ -12414,7 +12449,7 @@ __metadata:
     text-table: ^0.2.0
   bin:
     eslint: bin/eslint.js
-  checksum: b79eba37f52f517a420eec99a80ae9f284d2cbe73afc0d4d3d4d5ed1cce0b06f21badc0374bfb7ac239efd2d49a1fd7c6111d6c3d52888521f377ba33de77e61
+  checksum: 09979a6f8451dcc508a7005b6670845c8a518376280b3fd96657a406b8b6ef29d0e480d1ba11b4eb48da93d607e0c55c9b877676fe089d09973ec152354e23b2
   languageName: node
   linkType: hard
 
@@ -13668,6 +13703,13 @@ __metadata:
   version: 1.0.4
   resolution: "grapheme-splitter@npm:1.0.4"
   checksum: 0c22ec54dee1b05cd480f78cf14f732cb5b108edc073572c4ec205df4cd63f30f8db8025afc5debc8835a8ddeacf648a1c7992fe3dcd6ad38f9a476d84906620
+  languageName: node
+  linkType: hard
+
+"graphemer@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "graphemer@npm:1.4.0"
+  checksum: bab8f0be9b568857c7bec9fda95a89f87b783546d02951c40c33f84d05bb7da3fd10f863a9beb901463669b6583173a8c8cc6d6b306ea2b9b9d5d3d943c3a673
   languageName: node
   linkType: hard
 
@@ -15882,13 +15924,6 @@ __metadata:
     "@sideway/formula": ^3.0.0
     "@sideway/pinpoint": ^2.0.0
   checksum: 767a847936cb66787256c4351ff86e1b9e8d7383cbe81a5c827064032c2a8e8b6e938baef5ad32c4035fe4c56e537bd90aa2a952be8a0658601c920cdeb4fb3c
-  languageName: node
-  linkType: hard
-
-"js-sdsl@npm:^4.1.4":
-  version: 4.1.5
-  resolution: "js-sdsl@npm:4.1.5"
-  checksum: 695f657ddc5be462b97cac4e8e60f37de28d628ee0e23016baecff0bb584a18dddb5caeac537a775030f180b5afd62133ac4481e7024c8d03a62d73e4da0713e
   languageName: node
   linkType: hard
 
