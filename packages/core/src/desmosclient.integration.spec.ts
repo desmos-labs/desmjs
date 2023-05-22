@@ -18,7 +18,7 @@ import Long from "long";
 import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
-import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
+import { defaultGasPrice, TEST_CHAIN_URL, DefaultFees, testUser1, testUser2 } from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
@@ -257,7 +257,7 @@ describe("DesmosClient", () => {
       const saveProfileResult = await profileClient.signAndBroadcast(
         profileAddress,
         [msgSaveProfile],
-        "auto"
+        DefaultFees.SaveProfile
       );
       expect(saveProfileResult.code).toBe(0);
 
@@ -372,7 +372,7 @@ describe("DesmosClient", () => {
           creator: address,
         },
       };
-      await client.signAndBroadcast(address, [msgSaveProfile], "auto");
+      await client.signAndBroadcast(address, [msgSaveProfile], DefaultFees.SaveProfile);
       await sleep(5000);
 
       // Create a subspace
@@ -386,7 +386,7 @@ describe("DesmosClient", () => {
           creator: address,
         },
       };
-      await client.signAndBroadcast(address, [msgCreateSubspace], "auto");
+      await client.signAndBroadcast(address, [msgCreateSubspace], DefaultFees.CreateSubspace);
       await sleep(5000);
 
       // Create a first post
@@ -417,7 +417,7 @@ describe("DesmosClient", () => {
           referencedPosts: [],
         },
       };
-      await client.signAndBroadcast(address, [msgCreatePost], "auto");
+      await client.signAndBroadcast(address, [msgCreatePost], DefaultFees.CreatePost);
       await sleep(5000);
 
       // Create a post
@@ -454,7 +454,7 @@ describe("DesmosClient", () => {
           ],
         },
       };
-      const result = await client.signAndBroadcast(address, [msg], "auto");
+      const result = await client.signAndBroadcast(address, [msg], DefaultFees.CreatePost);
       expect(result.code).toBe(0);
     });
 
@@ -472,7 +472,7 @@ describe("DesmosClient", () => {
           title: "Test reason",
         },
       };
-      await client.signAndBroadcast(address, [msgAddReasons], "auto");
+      await client.signAndBroadcast(address, [msgAddReasons], DefaultFees.AddReason);
       await sleep(5000);
 
       // report a post
@@ -488,7 +488,7 @@ describe("DesmosClient", () => {
           }),
         },
       };
-      await client.signAndBroadcast(address, [msgCreateReport], "auto");
+      await client.signAndBroadcast(address, [msgCreateReport], DefaultFees.CreateReport);
       await sleep(5000);
     });
 
@@ -506,7 +506,7 @@ describe("DesmosClient", () => {
           shorthandCode: "like",
         },
       };
-      await client.signAndBroadcast(address, [msgRegisterReaction], "auto");
+      await client.signAndBroadcast(address, [msgRegisterReaction], DefaultFees.RegisterReaction);
       await sleep(5000);
 
       // React to a post
@@ -521,7 +521,7 @@ describe("DesmosClient", () => {
           }),
         },
       };
-      await client.signAndBroadcast(address, [msgAddReaction], "auto");
+      await client.signAndBroadcast(address, [msgAddReaction], DefaultFees.AddReaction);
       await sleep(5000);
     });
   });
@@ -707,7 +707,7 @@ describe("DesmosClient", () => {
         1,
         {},
         "test-contract-init",
-        "auto"
+        DefaultFees.WasmInstantiate
       );
     });
 
@@ -719,7 +719,7 @@ describe("DesmosClient", () => {
         1,
         {},
         "test-contract-init",
-        "auto",
+        DefaultFees.WasmInstantiate,
         {
           admin: testUser1.address0,
         }
@@ -729,7 +729,7 @@ describe("DesmosClient", () => {
         testUser1.address0,
         response.contractAddress,
         testUser2.address0,
-        "auto"
+        DefaultFees.WasmExecute
       );
     });
 
@@ -751,7 +751,7 @@ describe("DesmosClient", () => {
         1,
         {},
         "test-contract-init",
-        "auto",
+        DefaultFees.WasmInstantiate,
         {
           admin: testUser1.address0,
         }
@@ -760,7 +760,7 @@ describe("DesmosClient", () => {
       await client.clearAdmin(
         testUser1.address0,
         response.contractAddress,
-        "auto"
+        DefaultFees.WasmExecute
       );
     });
 
@@ -792,7 +792,7 @@ describe("DesmosClient", () => {
             ],
           },
         },
-        "auto"
+        DefaultFees.WasmExecute
       );
     });
   });
