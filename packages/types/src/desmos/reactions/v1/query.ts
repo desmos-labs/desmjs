@@ -12,28 +12,23 @@ import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reactions.v1";
 /** QueryReactionsRequest is the request type for the Query/Reactions RPC method */
-
 export interface QueryReactionsRequest {
   /** Id of the subspace that contains the post to query the reactions for */
   subspaceId: Long;
   /** Post id to query the reactions for */
-
   postId: Long;
   /**
    * (optional) User to query the reactions for.
    * This is going to be used only if a post id is specified as well.
    */
-
   user: string;
   /** pagination defines an optional pagination for the request. */
-
   pagination?: PageRequest;
 }
 /**
  * QueryReactionsResponse is the response type for the Query/Reactions RPC
  * method
  */
-
 export interface QueryReactionsResponse {
   reactions: Reaction[];
   pagination?: PageResponse;
@@ -42,22 +37,18 @@ export interface QueryReactionsResponse {
  * QueryReactionRequest is the request type for the Query/ReactionRequest RPC
  * method
  */
-
 export interface QueryReactionRequest {
   /** Id of the subspace that contains the post to query the reactions for */
   subspaceId: Long;
   /** Post id to query the reactions for */
-
   postId: Long;
   /** Id of the reaction to query */
-
   reactionId: number;
 }
 /**
  * QueryReactionResponse is the response type for the Query/Reaction RPC
  * method
  */
-
 export interface QueryReactionResponse {
   reaction?: Reaction;
 }
@@ -65,19 +56,16 @@ export interface QueryReactionResponse {
  * QueryRegisteredReactionsRequest is the request type for the
  * Query/RegisteredReactions RPC method
  */
-
 export interface QueryRegisteredReactionsRequest {
   /** Id of the subspace to query the registered reactions for */
   subspaceId: Long;
   /** pagination defines an optional pagination for the request. */
-
   pagination?: PageRequest;
 }
 /**
  * QueryRegisteredReactionsResponse is the response type for the
  * Query/RegisteredReactions RPC method
  */
-
 export interface QueryRegisteredReactionsResponse {
   registeredReactions: RegisteredReaction[];
   pagination?: PageResponse;
@@ -86,19 +74,16 @@ export interface QueryRegisteredReactionsResponse {
  * QueryRegisteredReactionRequest is the request type for the
  * Query/RegisteredReaction RPC method
  */
-
 export interface QueryRegisteredReactionRequest {
   /** Id of the subspace to query the registered reactions for */
   subspaceId: Long;
   /** Id of the registered reaction to query for */
-
   reactionId: number;
 }
 /**
  * QueryRegisteredReactionResponse is the response type for the
  * Query/RegisteredReaction RPC method
  */
-
 export interface QueryRegisteredReactionResponse {
   registeredReaction?: RegisteredReaction;
 }
@@ -106,7 +91,6 @@ export interface QueryRegisteredReactionResponse {
  * QueryReactionsParamsRequest is the request type for the Query/ReactionsParams
  * RPC method
  */
-
 export interface QueryReactionsParamsRequest {
   /** Id of the subspace for which to query the params */
   subspaceId: Long;
@@ -115,11 +99,9 @@ export interface QueryReactionsParamsRequest {
  * QueryReactionsParamsResponse is the response type for the
  * Query/ReactionsParam RPC method
  */
-
 export interface QueryReactionsParamsResponse {
   params?: SubspaceReactionsParams;
 }
-
 function createBaseQueryReactionsRequest(): QueryReactionsRequest {
   return {
     subspaceId: Long.UZERO,
@@ -128,7 +110,6 @@ function createBaseQueryReactionsRequest(): QueryReactionsRequest {
     pagination: undefined,
   };
 }
-
 export const QueryReactionsRequest = {
   encode(
     message: QueryReactionsRequest,
@@ -137,22 +118,17 @@ export const QueryReactionsRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.user !== "") {
       writer.uint32(26).string(message.user);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -160,36 +136,28 @@ export const QueryReactionsRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.user = reader.string();
           break;
-
         case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryReactionsRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -202,7 +170,6 @@ export const QueryReactionsRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryReactionsRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -216,7 +183,6 @@ export const QueryReactionsRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryReactionsRequest>, I>>(
     object: I
   ): QueryReactionsRequest {
@@ -237,14 +203,12 @@ export const QueryReactionsRequest = {
     return message;
   },
 };
-
 function createBaseQueryReactionsResponse(): QueryReactionsResponse {
   return {
     reactions: [],
     pagination: undefined,
   };
 }
-
 export const QueryReactionsResponse = {
   encode(
     message: QueryReactionsResponse,
@@ -253,17 +217,14 @@ export const QueryReactionsResponse = {
     for (const v of message.reactions) {
       Reaction.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -271,28 +232,22 @@ export const QueryReactionsResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reactions.push(Reaction.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryReactionsResponse {
     return {
       reactions: Array.isArray(object?.reactions)
@@ -303,10 +258,8 @@ export const QueryReactionsResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryReactionsResponse): unknown {
     const obj: any = {};
-
     if (message.reactions) {
       obj.reactions = message.reactions.map((e) =>
         e ? Reaction.toJSON(e) : undefined
@@ -314,14 +267,12 @@ export const QueryReactionsResponse = {
     } else {
       obj.reactions = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryReactionsResponse>, I>>(
     object: I
   ): QueryReactionsResponse {
@@ -335,7 +286,6 @@ export const QueryReactionsResponse = {
     return message;
   },
 };
-
 function createBaseQueryReactionRequest(): QueryReactionRequest {
   return {
     subspaceId: Long.UZERO,
@@ -343,7 +293,6 @@ function createBaseQueryReactionRequest(): QueryReactionRequest {
     reactionId: 0,
   };
 }
-
 export const QueryReactionRequest = {
   encode(
     message: QueryReactionRequest,
@@ -352,18 +301,14 @@ export const QueryReactionRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.reactionId !== 0) {
       writer.uint32(24).uint32(message.reactionId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -371,32 +316,25 @@ export const QueryReactionRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.reactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryReactionRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -406,7 +344,6 @@ export const QueryReactionRequest = {
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
     };
   },
-
   toJSON(message: QueryReactionRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -417,7 +354,6 @@ export const QueryReactionRequest = {
       (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryReactionRequest>, I>>(
     object: I
   ): QueryReactionRequest {
@@ -434,13 +370,11 @@ export const QueryReactionRequest = {
     return message;
   },
 };
-
 function createBaseQueryReactionResponse(): QueryReactionResponse {
   return {
     reaction: undefined,
   };
 }
-
 export const QueryReactionResponse = {
   encode(
     message: QueryReactionResponse,
@@ -449,10 +383,8 @@ export const QueryReactionResponse = {
     if (message.reaction !== undefined) {
       Reaction.encode(message.reaction, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -460,24 +392,19 @@ export const QueryReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reaction = Reaction.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryReactionResponse {
     return {
       reaction: isSet(object.reaction)
@@ -485,7 +412,6 @@ export const QueryReactionResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryReactionResponse): unknown {
     const obj: any = {};
     message.reaction !== undefined &&
@@ -494,7 +420,6 @@ export const QueryReactionResponse = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryReactionResponse>, I>>(
     object: I
   ): QueryReactionResponse {
@@ -506,14 +431,12 @@ export const QueryReactionResponse = {
     return message;
   },
 };
-
 function createBaseQueryRegisteredReactionsRequest(): QueryRegisteredReactionsRequest {
   return {
     subspaceId: Long.UZERO,
     pagination: undefined,
   };
 }
-
 export const QueryRegisteredReactionsRequest = {
   encode(
     message: QueryRegisteredReactionsRequest,
@@ -522,14 +445,11 @@ export const QueryRegisteredReactionsRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -537,28 +457,22 @@ export const QueryRegisteredReactionsRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 3:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRegisteredReactionsRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -569,7 +483,6 @@ export const QueryRegisteredReactionsRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryRegisteredReactionsRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -580,7 +493,6 @@ export const QueryRegisteredReactionsRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionsRequest>, I>>(
     object: I
   ): QueryRegisteredReactionsRequest {
@@ -596,14 +508,12 @@ export const QueryRegisteredReactionsRequest = {
     return message;
   },
 };
-
 function createBaseQueryRegisteredReactionsResponse(): QueryRegisteredReactionsResponse {
   return {
     registeredReactions: [],
     pagination: undefined,
   };
 }
-
 export const QueryRegisteredReactionsResponse = {
   encode(
     message: QueryRegisteredReactionsResponse,
@@ -612,17 +522,14 @@ export const QueryRegisteredReactionsResponse = {
     for (const v of message.registeredReactions) {
       RegisteredReaction.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -630,30 +537,24 @@ export const QueryRegisteredReactionsResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.registeredReactions.push(
             RegisteredReaction.decode(reader, reader.uint32())
           );
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRegisteredReactionsResponse {
     return {
       registeredReactions: Array.isArray(object?.registeredReactions)
@@ -666,10 +567,8 @@ export const QueryRegisteredReactionsResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryRegisteredReactionsResponse): unknown {
     const obj: any = {};
-
     if (message.registeredReactions) {
       obj.registeredReactions = message.registeredReactions.map((e) =>
         e ? RegisteredReaction.toJSON(e) : undefined
@@ -677,14 +576,12 @@ export const QueryRegisteredReactionsResponse = {
     } else {
       obj.registeredReactions = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<QueryRegisteredReactionsResponse>, I>
   >(object: I): QueryRegisteredReactionsResponse {
@@ -700,14 +597,12 @@ export const QueryRegisteredReactionsResponse = {
     return message;
   },
 };
-
 function createBaseQueryRegisteredReactionRequest(): QueryRegisteredReactionRequest {
   return {
     subspaceId: Long.UZERO,
     reactionId: 0,
   };
 }
-
 export const QueryRegisteredReactionRequest = {
   encode(
     message: QueryRegisteredReactionRequest,
@@ -716,14 +611,11 @@ export const QueryRegisteredReactionRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.reactionId !== 0) {
       writer.uint32(16).uint32(message.reactionId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -731,28 +623,22 @@ export const QueryRegisteredReactionRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.reactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRegisteredReactionRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -761,7 +647,6 @@ export const QueryRegisteredReactionRequest = {
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
     };
   },
-
   toJSON(message: QueryRegisteredReactionRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -770,7 +655,6 @@ export const QueryRegisteredReactionRequest = {
       (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionRequest>, I>>(
     object: I
   ): QueryRegisteredReactionRequest {
@@ -783,13 +667,11 @@ export const QueryRegisteredReactionRequest = {
     return message;
   },
 };
-
 function createBaseQueryRegisteredReactionResponse(): QueryRegisteredReactionResponse {
   return {
     registeredReaction: undefined,
   };
 }
-
 export const QueryRegisteredReactionResponse = {
   encode(
     message: QueryRegisteredReactionResponse,
@@ -801,10 +683,8 @@ export const QueryRegisteredReactionResponse = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -812,10 +692,8 @@ export const QueryRegisteredReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRegisteredReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.registeredReaction = RegisteredReaction.decode(
@@ -823,16 +701,13 @@ export const QueryRegisteredReactionResponse = {
             reader.uint32()
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRegisteredReactionResponse {
     return {
       registeredReaction: isSet(object.registeredReaction)
@@ -840,7 +715,6 @@ export const QueryRegisteredReactionResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryRegisteredReactionResponse): unknown {
     const obj: any = {};
     message.registeredReaction !== undefined &&
@@ -849,7 +723,6 @@ export const QueryRegisteredReactionResponse = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionResponse>, I>>(
     object: I
   ): QueryRegisteredReactionResponse {
@@ -862,13 +735,11 @@ export const QueryRegisteredReactionResponse = {
     return message;
   },
 };
-
 function createBaseQueryReactionsParamsRequest(): QueryReactionsParamsRequest {
   return {
     subspaceId: Long.UZERO,
   };
 }
-
 export const QueryReactionsParamsRequest = {
   encode(
     message: QueryReactionsParamsRequest,
@@ -877,10 +748,8 @@ export const QueryReactionsParamsRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -888,24 +757,19 @@ export const QueryReactionsParamsRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsParamsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryReactionsParamsRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -913,14 +777,12 @@ export const QueryReactionsParamsRequest = {
         : Long.UZERO,
     };
   },
-
   toJSON(message: QueryReactionsParamsRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsRequest>, I>>(
     object: I
   ): QueryReactionsParamsRequest {
@@ -932,13 +794,11 @@ export const QueryReactionsParamsRequest = {
     return message;
   },
 };
-
 function createBaseQueryReactionsParamsResponse(): QueryReactionsParamsResponse {
   return {
     params: undefined,
   };
 }
-
 export const QueryReactionsParamsResponse = {
   encode(
     message: QueryReactionsParamsResponse,
@@ -950,10 +810,8 @@ export const QueryReactionsParamsResponse = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -961,10 +819,8 @@ export const QueryReactionsParamsResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryReactionsParamsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.params = SubspaceReactionsParams.decode(
@@ -972,16 +828,13 @@ export const QueryReactionsParamsResponse = {
             reader.uint32()
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryReactionsParamsResponse {
     return {
       params: isSet(object.params)
@@ -989,7 +842,6 @@ export const QueryReactionsParamsResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryReactionsParamsResponse): unknown {
     const obj: any = {};
     message.params !== undefined &&
@@ -998,7 +850,6 @@ export const QueryReactionsParamsResponse = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsResponse>, I>>(
     object: I
   ): QueryReactionsParamsResponse {
@@ -1011,32 +862,26 @@ export const QueryReactionsParamsResponse = {
   },
 };
 /** Query defines the gRPC querier service. */
-
 export interface Query {
   /** Reactions allows to query the reactions for a given post */
   Reactions(request: QueryReactionsRequest): Promise<QueryReactionsResponse>;
   /** Reaction allows to query the reaction with the given id */
-
   Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse>;
   /** RegisteredReactions allows to query the registered reaction of a subspace */
-
   RegisteredReactions(
     request: QueryRegisteredReactionsRequest
   ): Promise<QueryRegisteredReactionsResponse>;
   /** RegisteredReaction allows to query the registered reaction of a subspace */
-
   RegisteredReaction(
     request: QueryRegisteredReactionRequest
   ): Promise<QueryRegisteredReactionResponse>;
   /** ReactionsParams allows to query the reaction params of a subspace */
-
   ReactionsParams(
     request: QueryReactionsParamsRequest
   ): Promise<QueryReactionsParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Reactions = this.Reactions.bind(this);
@@ -1045,7 +890,6 @@ export class QueryClientImpl implements Query {
     this.RegisteredReaction = this.RegisteredReaction.bind(this);
     this.ReactionsParams = this.ReactionsParams.bind(this);
   }
-
   Reactions(request: QueryReactionsRequest): Promise<QueryReactionsResponse> {
     const data = QueryReactionsRequest.encode(request).finish();
     const promise = this.rpc.request(
@@ -1057,7 +901,6 @@ export class QueryClientImpl implements Query {
       QueryReactionsResponse.decode(new _m0.Reader(data))
     );
   }
-
   Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse> {
     const data = QueryReactionRequest.encode(request).finish();
     const promise = this.rpc.request(
@@ -1069,7 +912,6 @@ export class QueryClientImpl implements Query {
       QueryReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   RegisteredReactions(
     request: QueryRegisteredReactionsRequest
   ): Promise<QueryRegisteredReactionsResponse> {
@@ -1083,7 +925,6 @@ export class QueryClientImpl implements Query {
       QueryRegisteredReactionsResponse.decode(new _m0.Reader(data))
     );
   }
-
   RegisteredReaction(
     request: QueryRegisteredReactionRequest
   ): Promise<QueryRegisteredReactionResponse> {
@@ -1097,7 +938,6 @@ export class QueryClientImpl implements Query {
       QueryRegisteredReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   ReactionsParams(
     request: QueryReactionsParamsRequest
   ): Promise<QueryReactionsParamsResponse> {

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { Any } from "../../../google/protobuf/any";
+import { Params } from "./models";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import {
   Long,
@@ -13,67 +14,52 @@ import {
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reports.v1";
 /** MsgCreateReport represents the message to be used to create a report */
-
 export interface MsgCreateReport {
   /** Id of the subspace for which the report should be stored */
   subspaceId: Long;
   /** Id of the reason this report has been created for */
-
   reasonsIds: number[];
   /** (optional) Message attached to this report */
-
   message: string;
   /** Address of the reporter */
-
   reporter: string;
   /** Target of the report */
-
   target?: Any;
 }
 /** MsgCreateReportResponse represents the Msg/CreateReport response type */
-
 export interface MsgCreateReportResponse {
   /** Id of the newly created report */
   reportId: Long;
   /** Time in which the report was created */
-
   creationDate?: Timestamp;
 }
 /** MsgDeleteReport represents the message to be used when deleting a report */
-
 export interface MsgDeleteReport {
   /** Id of the subspace that contains the report to be deleted */
   subspaceId: Long;
   /** Id of the report to be deleted */
-
   reportId: Long;
   /** Address of the user deleting the report */
-
   signer: string;
 }
 /** MsgDeleteReportResponse represents the Msg/DeleteReport response type */
-
 export interface MsgDeleteReportResponse {}
 /**
  * MsgSupportStandardReason represents the message to be used when wanting to
  * support one reason from the module params
  */
-
 export interface MsgSupportStandardReason {
   /** Id of the subspace for which to support the reason */
   subspaceId: Long;
   /** Id of the reason that should be supported */
-
   standardReasonId: number;
   /** Address of the user signing the message */
-
   signer: string;
 }
 /**
  * MsgSupportStandardReasonResponse represents the Msg/SupportStandardReason
  * response type
  */
-
 export interface MsgSupportStandardReasonResponse {
   /** Id of the newly added reason */
   reasonsIds: number;
@@ -82,22 +68,17 @@ export interface MsgSupportStandardReasonResponse {
  * MsgAddReason represents the message to be used when adding a new supported
  * reason
  */
-
 export interface MsgAddReason {
   /** Id of the subspace for which to add the reason */
   subspaceId: Long;
   /** Title of the reason */
-
   title: string;
   /** (optional) Extended description of the reason and the cases it applies to */
-
   description: string;
   /** Address of the user adding the supported reason */
-
   signer: string;
 }
 /** MsgAddReasonResponse represents the Msg/AddReason response type */
-
 export interface MsgAddReasonResponse {
   /** Id of the newly supported reason */
   reasonId: number;
@@ -106,21 +87,41 @@ export interface MsgAddReasonResponse {
  * MsgRemoveReason represents the message to be used when removing an exiting
  * reporting reason
  */
-
 export interface MsgRemoveReason {
   /** Id of the subspace from which to remove the reason */
   subspaceId: Long;
   /** Id of the reason to be deleted */
-
   reasonId: number;
   /** Address of the user adding the supported reason */
-
   signer: string;
 }
 /** MsgRemoveReasonResponse represents the Msg/RemoveReason response type */
-
 export interface MsgRemoveReasonResponse {}
-
+/**
+ * MsgUpdateParams is the Msg/UpdateParams request type.
+ *
+ * Since: Desmos 5.0.0
+ */
+export interface MsgUpdateParams {
+  /**
+   * authority is the address that controls the module (defaults to x/gov unless
+   * overwritten).
+   */
+  authority: string;
+  /**
+   * params defines the parameters to update.
+   *
+   * NOTE: All parameters must be supplied.
+   */
+  params?: Params;
+}
+/**
+ * MsgUpdateParamsResponse defines the response structure for executing a
+ * MsgUpdateParams message.
+ *
+ * Since: Desmos 5.0.0
+ */
+export interface MsgUpdateParamsResponse {}
 function createBaseMsgCreateReport(): MsgCreateReport {
   return {
     subspaceId: Long.UZERO,
@@ -130,7 +131,6 @@ function createBaseMsgCreateReport(): MsgCreateReport {
     target: undefined,
   };
 }
-
 export const MsgCreateReport = {
   encode(
     message: MsgCreateReport,
@@ -139,77 +139,58 @@ export const MsgCreateReport = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     writer.uint32(18).fork();
-
     for (const v of message.reasonsIds) {
       writer.uint32(v);
     }
-
     writer.ldelim();
-
     if (message.message !== "") {
       writer.uint32(26).string(message.message);
     }
-
     if (message.reporter !== "") {
       writer.uint32(34).string(message.reporter);
     }
-
     if (message.target !== undefined) {
       Any.encode(message.target, writer.uint32(42).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateReport {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateReport();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.reasonsIds.push(reader.uint32());
             }
           } else {
             message.reasonsIds.push(reader.uint32());
           }
-
           break;
-
         case 3:
           message.message = reader.string();
           break;
-
         case 4:
           message.reporter = reader.string();
           break;
-
         case 5:
           message.target = Any.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgCreateReport {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -223,25 +204,21 @@ export const MsgCreateReport = {
       target: isSet(object.target) ? Any.fromJSON(object.target) : undefined,
     };
   },
-
   toJSON(message: MsgCreateReport): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
       (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
-
     if (message.reasonsIds) {
       obj.reasonsIds = message.reasonsIds.map((e) => Math.round(e));
     } else {
       obj.reasonsIds = [];
     }
-
     message.message !== undefined && (obj.message = message.message);
     message.reporter !== undefined && (obj.reporter = message.reporter);
     message.target !== undefined &&
       (obj.target = message.target ? Any.toJSON(message.target) : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateReport>, I>>(
     object: I
   ): MsgCreateReport {
@@ -260,14 +237,12 @@ export const MsgCreateReport = {
     return message;
   },
 };
-
 function createBaseMsgCreateReportResponse(): MsgCreateReportResponse {
   return {
     reportId: Long.UZERO,
     creationDate: undefined,
   };
 }
-
 export const MsgCreateReportResponse = {
   encode(
     message: MsgCreateReportResponse,
@@ -276,14 +251,11 @@ export const MsgCreateReportResponse = {
     if (!message.reportId.isZero()) {
       writer.uint32(8).uint64(message.reportId);
     }
-
     if (message.creationDate !== undefined) {
       Timestamp.encode(message.creationDate, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -291,28 +263,22 @@ export const MsgCreateReportResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateReportResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reportId = reader.uint64() as Long;
           break;
-
         case 2:
           message.creationDate = Timestamp.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgCreateReportResponse {
     return {
       reportId: isSet(object.reportId)
@@ -323,7 +289,6 @@ export const MsgCreateReportResponse = {
         : undefined,
     };
   },
-
   toJSON(message: MsgCreateReportResponse): unknown {
     const obj: any = {};
     message.reportId !== undefined &&
@@ -332,7 +297,6 @@ export const MsgCreateReportResponse = {
       (obj.creationDate = fromTimestamp(message.creationDate).toISOString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgCreateReportResponse>, I>>(
     object: I
   ): MsgCreateReportResponse {
@@ -348,7 +312,6 @@ export const MsgCreateReportResponse = {
     return message;
   },
 };
-
 function createBaseMsgDeleteReport(): MsgDeleteReport {
   return {
     subspaceId: Long.UZERO,
@@ -356,7 +319,6 @@ function createBaseMsgDeleteReport(): MsgDeleteReport {
     signer: "",
   };
 }
-
 export const MsgDeleteReport = {
   encode(
     message: MsgDeleteReport,
@@ -365,48 +327,37 @@ export const MsgDeleteReport = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.reportId.isZero()) {
       writer.uint32(16).uint64(message.reportId);
     }
-
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgDeleteReport {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteReport();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.reportId = reader.uint64() as Long;
           break;
-
         case 3:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgDeleteReport {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -418,7 +369,6 @@ export const MsgDeleteReport = {
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
-
   toJSON(message: MsgDeleteReport): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -428,7 +378,6 @@ export const MsgDeleteReport = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgDeleteReport>, I>>(
     object: I
   ): MsgDeleteReport {
@@ -445,11 +394,9 @@ export const MsgDeleteReport = {
     return message;
   },
 };
-
 function createBaseMsgDeleteReportResponse(): MsgDeleteReportResponse {
   return {};
 }
-
 export const MsgDeleteReportResponse = {
   encode(
     _: MsgDeleteReportResponse,
@@ -457,7 +404,6 @@ export const MsgDeleteReportResponse = {
   ): _m0.Writer {
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -465,29 +411,23 @@ export const MsgDeleteReportResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDeleteReportResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgDeleteReportResponse {
     return {};
   },
-
   toJSON(_: MsgDeleteReportResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgDeleteReportResponse>, I>>(
     _: I
   ): MsgDeleteReportResponse {
@@ -495,7 +435,6 @@ export const MsgDeleteReportResponse = {
     return message;
   },
 };
-
 function createBaseMsgSupportStandardReason(): MsgSupportStandardReason {
   return {
     subspaceId: Long.UZERO,
@@ -503,7 +442,6 @@ function createBaseMsgSupportStandardReason(): MsgSupportStandardReason {
     signer: "",
   };
 }
-
 export const MsgSupportStandardReason = {
   encode(
     message: MsgSupportStandardReason,
@@ -512,18 +450,14 @@ export const MsgSupportStandardReason = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.standardReasonId !== 0) {
       writer.uint32(16).uint32(message.standardReasonId);
     }
-
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -531,32 +465,25 @@ export const MsgSupportStandardReason = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSupportStandardReason();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.standardReasonId = reader.uint32();
           break;
-
         case 3:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSupportStandardReason {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -568,7 +495,6 @@ export const MsgSupportStandardReason = {
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
-
   toJSON(message: MsgSupportStandardReason): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -578,7 +504,6 @@ export const MsgSupportStandardReason = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgSupportStandardReason>, I>>(
     object: I
   ): MsgSupportStandardReason {
@@ -592,13 +517,11 @@ export const MsgSupportStandardReason = {
     return message;
   },
 };
-
 function createBaseMsgSupportStandardReasonResponse(): MsgSupportStandardReasonResponse {
   return {
     reasonsIds: 0,
   };
 }
-
 export const MsgSupportStandardReasonResponse = {
   encode(
     message: MsgSupportStandardReasonResponse,
@@ -607,10 +530,8 @@ export const MsgSupportStandardReasonResponse = {
     if (message.reasonsIds !== 0) {
       writer.uint32(8).uint32(message.reasonsIds);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -618,37 +539,30 @@ export const MsgSupportStandardReasonResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSupportStandardReasonResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reasonsIds = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSupportStandardReasonResponse {
     return {
       reasonsIds: isSet(object.reasonsIds) ? Number(object.reasonsIds) : 0,
     };
   },
-
   toJSON(message: MsgSupportStandardReasonResponse): unknown {
     const obj: any = {};
     message.reasonsIds !== undefined &&
       (obj.reasonsIds = Math.round(message.reasonsIds));
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<MsgSupportStandardReasonResponse>, I>
   >(object: I): MsgSupportStandardReasonResponse {
@@ -657,7 +571,6 @@ export const MsgSupportStandardReasonResponse = {
     return message;
   },
 };
-
 function createBaseMsgAddReason(): MsgAddReason {
   return {
     subspaceId: Long.UZERO,
@@ -666,7 +579,6 @@ function createBaseMsgAddReason(): MsgAddReason {
     signer: "",
   };
 }
-
 export const MsgAddReason = {
   encode(
     message: MsgAddReason,
@@ -675,56 +587,43 @@ export const MsgAddReason = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.title !== "") {
       writer.uint32(18).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(26).string(message.description);
     }
-
     if (message.signer !== "") {
       writer.uint32(34).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddReason {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddReason();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.title = reader.string();
           break;
-
         case 3:
           message.description = reader.string();
           break;
-
         case 4:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAddReason {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -735,7 +634,6 @@ export const MsgAddReason = {
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
-
   toJSON(message: MsgAddReason): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -746,7 +644,6 @@ export const MsgAddReason = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgAddReason>, I>>(
     object: I
   ): MsgAddReason {
@@ -761,13 +658,11 @@ export const MsgAddReason = {
     return message;
   },
 };
-
 function createBaseMsgAddReasonResponse(): MsgAddReasonResponse {
   return {
     reasonId: 0,
   };
 }
-
 export const MsgAddReasonResponse = {
   encode(
     message: MsgAddReasonResponse,
@@ -776,10 +671,8 @@ export const MsgAddReasonResponse = {
     if (message.reasonId !== 0) {
       writer.uint32(8).uint32(message.reasonId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -787,37 +680,30 @@ export const MsgAddReasonResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddReasonResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reasonId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAddReasonResponse {
     return {
       reasonId: isSet(object.reasonId) ? Number(object.reasonId) : 0,
     };
   },
-
   toJSON(message: MsgAddReasonResponse): unknown {
     const obj: any = {};
     message.reasonId !== undefined &&
       (obj.reasonId = Math.round(message.reasonId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgAddReasonResponse>, I>>(
     object: I
   ): MsgAddReasonResponse {
@@ -826,7 +712,6 @@ export const MsgAddReasonResponse = {
     return message;
   },
 };
-
 function createBaseMsgRemoveReason(): MsgRemoveReason {
   return {
     subspaceId: Long.UZERO,
@@ -834,7 +719,6 @@ function createBaseMsgRemoveReason(): MsgRemoveReason {
     signer: "",
   };
 }
-
 export const MsgRemoveReason = {
   encode(
     message: MsgRemoveReason,
@@ -843,48 +727,37 @@ export const MsgRemoveReason = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.reasonId !== 0) {
       writer.uint32(16).uint32(message.reasonId);
     }
-
     if (message.signer !== "") {
       writer.uint32(26).string(message.signer);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveReason {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveReason();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.reasonId = reader.uint32();
           break;
-
         case 3:
           message.signer = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgRemoveReason {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -894,7 +767,6 @@ export const MsgRemoveReason = {
       signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
-
   toJSON(message: MsgRemoveReason): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -904,7 +776,6 @@ export const MsgRemoveReason = {
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgRemoveReason>, I>>(
     object: I
   ): MsgRemoveReason {
@@ -918,11 +789,9 @@ export const MsgRemoveReason = {
     return message;
   },
 };
-
 function createBaseMsgRemoveReasonResponse(): MsgRemoveReasonResponse {
   return {};
 }
-
 export const MsgRemoveReasonResponse = {
   encode(
     _: MsgRemoveReasonResponse,
@@ -930,7 +799,6 @@ export const MsgRemoveReasonResponse = {
   ): _m0.Writer {
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -938,29 +806,23 @@ export const MsgRemoveReasonResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveReasonResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgRemoveReasonResponse {
     return {};
   },
-
   toJSON(_: MsgRemoveReasonResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgRemoveReasonResponse>, I>>(
     _: I
   ): MsgRemoveReasonResponse {
@@ -968,32 +830,139 @@ export const MsgRemoveReasonResponse = {
     return message;
   },
 };
+function createBaseMsgUpdateParams(): MsgUpdateParams {
+  return {
+    authority: "",
+    params: undefined,
+  };
+}
+export const MsgUpdateParams = {
+  encode(
+    message: MsgUpdateParams,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.params !== undefined) {
+      Params.encode(message.params, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateParams {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.params = Params.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgUpdateParams {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+    };
+  },
+  toJSON(message: MsgUpdateParams): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.params !== undefined &&
+      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
+    object: I
+  ): MsgUpdateParams {
+    const message = createBaseMsgUpdateParams();
+    message.authority = object.authority ?? "";
+    message.params =
+      object.params !== undefined && object.params !== null
+        ? Params.fromPartial(object.params)
+        : undefined;
+    return message;
+  },
+};
+function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
+  return {};
+}
+export const MsgUpdateParamsResponse = {
+  encode(
+    _: MsgUpdateParamsResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): MsgUpdateParamsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateParamsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgUpdateParamsResponse {
+    return {};
+  },
+  toJSON(_: MsgUpdateParamsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
+    _: I
+  ): MsgUpdateParamsResponse {
+    const message = createBaseMsgUpdateParamsResponse();
+    return message;
+  },
+};
 /** Msg defines the reports Msg service. */
-
 export interface Msg {
   /** CreateReport allows to create a new report */
   CreateReport(request: MsgCreateReport): Promise<MsgCreateReportResponse>;
   /** DeleteReport allows to delete an existing report */
-
   DeleteReport(request: MsgDeleteReport): Promise<MsgDeleteReportResponse>;
   /**
    * SupportStandardReason allows to support one of the reasons present inside
    * the module params
    */
-
   SupportStandardReason(
     request: MsgSupportStandardReason
   ): Promise<MsgSupportStandardReasonResponse>;
   /** AddReason allows to add a new supported reporting reason */
-
   AddReason(request: MsgAddReason): Promise<MsgAddReasonResponse>;
   /** RemoveReason allows to remove a supported reporting reason */
-
   RemoveReason(request: MsgRemoveReason): Promise<MsgRemoveReasonResponse>;
+  /**
+   * UpdateParams defines a (governance) operation for updating the module
+   * parameters.
+   * The authority defaults to the x/gov module account.
+   *
+   * Since: Desmos 5.0.0
+   */
+  UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.CreateReport = this.CreateReport.bind(this);
@@ -1001,8 +970,8 @@ export class MsgClientImpl implements Msg {
     this.SupportStandardReason = this.SupportStandardReason.bind(this);
     this.AddReason = this.AddReason.bind(this);
     this.RemoveReason = this.RemoveReason.bind(this);
+    this.UpdateParams = this.UpdateParams.bind(this);
   }
-
   CreateReport(request: MsgCreateReport): Promise<MsgCreateReportResponse> {
     const data = MsgCreateReport.encode(request).finish();
     const promise = this.rpc.request(
@@ -1014,7 +983,6 @@ export class MsgClientImpl implements Msg {
       MsgCreateReportResponse.decode(new _m0.Reader(data))
     );
   }
-
   DeleteReport(request: MsgDeleteReport): Promise<MsgDeleteReportResponse> {
     const data = MsgDeleteReport.encode(request).finish();
     const promise = this.rpc.request(
@@ -1026,7 +994,6 @@ export class MsgClientImpl implements Msg {
       MsgDeleteReportResponse.decode(new _m0.Reader(data))
     );
   }
-
   SupportStandardReason(
     request: MsgSupportStandardReason
   ): Promise<MsgSupportStandardReasonResponse> {
@@ -1040,7 +1007,6 @@ export class MsgClientImpl implements Msg {
       MsgSupportStandardReasonResponse.decode(new _m0.Reader(data))
     );
   }
-
   AddReason(request: MsgAddReason): Promise<MsgAddReasonResponse> {
     const data = MsgAddReason.encode(request).finish();
     const promise = this.rpc.request(
@@ -1052,7 +1018,6 @@ export class MsgClientImpl implements Msg {
       MsgAddReasonResponse.decode(new _m0.Reader(data))
     );
   }
-
   RemoveReason(request: MsgRemoveReason): Promise<MsgRemoveReasonResponse> {
     const data = MsgRemoveReason.encode(request).finish();
     const promise = this.rpc.request(
@@ -1062,6 +1027,17 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgRemoveReasonResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
+    const data = MsgUpdateParams.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.reports.v1.Msg",
+      "UpdateParams",
+      data
+    );
+    return promise.then((data) =>
+      MsgUpdateParamsResponse.decode(new _m0.Reader(data))
     );
   }
 }

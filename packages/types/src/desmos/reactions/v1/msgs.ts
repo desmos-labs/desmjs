@@ -5,22 +5,17 @@ import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reactions.v1";
 /** MsgAddReaction represents the message to be used to add a post reaction */
-
 export interface MsgAddReaction {
   /** Id of the subspace inside which the post to react to is */
   subspaceId: Long;
   /** Id of the post to react to */
-
   postId: Long;
   /** Value of the reaction */
-
   value?: Any;
   /** User reacting to the post */
-
   user: string;
 }
 /** MsgAddReactionResponse represents the Msg/AddReaction response type */
-
 export interface MsgAddReactionResponse {
   /** Id of the newly added reaction */
   reactionId: number;
@@ -29,46 +24,36 @@ export interface MsgAddReactionResponse {
  * MsgRemoveReaction represents the message to be used to remove an
  * existing reaction from a post
  */
-
 export interface MsgRemoveReaction {
   /** Id of the subspace inside which the reaction to remove is */
   subspaceId: Long;
   /** Id of the post from which to remove the reaction */
-
   postId: Long;
   /** Id of the reaction to be removed */
-
   reactionId: number;
   /** User removing the reaction */
-
   user: string;
 }
 /** MsgRemoveReactionResponse represents the Msg/RemoveReaction response type */
-
 export interface MsgRemoveReactionResponse {}
 /**
  * MsgAddRegisteredReaction represents the message to be used to
  * register a new supported reaction
  */
-
 export interface MsgAddRegisteredReaction {
   /** Id of the subspace inside which this reaction should be registered */
   subspaceId: Long;
   /** Shorthand code of the reaction */
-
   shorthandCode: string;
   /** Display value of the reaction */
-
   displayValue: string;
   /** User adding the supported reaction */
-
   user: string;
 }
 /**
  * MsgAddRegisteredReactionResponse represents the
  * Msg/AddRegisteredReaction response type
  */
-
 export interface MsgAddRegisteredReactionResponse {
   /** Id of the newly registered reaction */
   registeredReactionId: number;
@@ -77,75 +62,59 @@ export interface MsgAddRegisteredReactionResponse {
  * MsgEditRegisteredReaction represents the message to be used to edit a
  * registered reaction
  */
-
 export interface MsgEditRegisteredReaction {
   /** Id of the subspace inside which the reaction to edit is */
   subspaceId: Long;
   /** Id of the registered reaction to edit */
-
   registeredReactionId: number;
   /** New shorthand code to be set */
-
   shorthandCode: string;
   /** Display value to be set */
-
   displayValue: string;
   /** User editing the registered reaction */
-
   user: string;
 }
 /**
  * MsgEditRegisteredReactionResponse represents the Msg/EditRegisteredReaction
  * response type
  */
-
 export interface MsgEditRegisteredReactionResponse {}
 /**
  * MsgRemoveRegisteredReaction represents the message to be used to
  * remove an existing registered reaction
  */
-
 export interface MsgRemoveRegisteredReaction {
   /** Id of the subspace from which to remove the registered reaction */
   subspaceId: Long;
   /** Id of the registered reaction to be removed */
-
   registeredReactionId: number;
   /** User removing the registered reaction */
-
   user: string;
 }
 /**
  * MsgRemoveRegisteredReactionResponse represents the
  * Msg/RemoveRegisteredReaction response type
  */
-
 export interface MsgRemoveRegisteredReactionResponse {}
 /**
  * MsgSetReactionsParams represents the message to be used when setting
  * a subspace reactions params
  */
-
 export interface MsgSetReactionsParams {
   /** Id of the subspace for which to set the params */
   subspaceId: Long;
   /** Params related to RegisteredReactionValue reactions */
-
   registeredReaction?: RegisteredReactionValueParams;
   /** Params related to FreeTextValue reactions */
-
   freeText?: FreeTextValueParams;
   /** User setting the params */
-
   user: string;
 }
 /**
  * MsgSetReactionsParamsResponse represents the Msg/SetReactionsParams response
  * type
  */
-
 export interface MsgSetReactionsParamsResponse {}
-
 function createBaseMsgAddReaction(): MsgAddReaction {
   return {
     subspaceId: Long.UZERO,
@@ -154,7 +123,6 @@ function createBaseMsgAddReaction(): MsgAddReaction {
     user: "",
   };
 }
-
 export const MsgAddReaction = {
   encode(
     message: MsgAddReaction,
@@ -163,56 +131,43 @@ export const MsgAddReaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.value !== undefined) {
       Any.encode(message.value, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.user !== "") {
       writer.uint32(34).string(message.user);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddReaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.value = Any.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAddReaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -223,7 +178,6 @@ export const MsgAddReaction = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: MsgAddReaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -235,7 +189,6 @@ export const MsgAddReaction = {
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgAddReaction>, I>>(
     object: I
   ): MsgAddReaction {
@@ -256,13 +209,11 @@ export const MsgAddReaction = {
     return message;
   },
 };
-
 function createBaseMsgAddReactionResponse(): MsgAddReactionResponse {
   return {
     reactionId: 0,
   };
 }
-
 export const MsgAddReactionResponse = {
   encode(
     message: MsgAddReactionResponse,
@@ -271,10 +222,8 @@ export const MsgAddReactionResponse = {
     if (message.reactionId !== 0) {
       writer.uint32(8).uint32(message.reactionId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -282,37 +231,30 @@ export const MsgAddReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.reactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAddReactionResponse {
     return {
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
     };
   },
-
   toJSON(message: MsgAddReactionResponse): unknown {
     const obj: any = {};
     message.reactionId !== undefined &&
       (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgAddReactionResponse>, I>>(
     object: I
   ): MsgAddReactionResponse {
@@ -321,7 +263,6 @@ export const MsgAddReactionResponse = {
     return message;
   },
 };
-
 function createBaseMsgRemoveReaction(): MsgRemoveReaction {
   return {
     subspaceId: Long.UZERO,
@@ -330,7 +271,6 @@ function createBaseMsgRemoveReaction(): MsgRemoveReaction {
     user: "",
   };
 }
-
 export const MsgRemoveReaction = {
   encode(
     message: MsgRemoveReaction,
@@ -339,56 +279,43 @@ export const MsgRemoveReaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.reactionId !== 0) {
       writer.uint32(24).uint32(message.reactionId);
     }
-
     if (message.user !== "") {
       writer.uint32(34).string(message.user);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveReaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.reactionId = reader.uint32();
           break;
-
         case 4:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgRemoveReaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -399,7 +326,6 @@ export const MsgRemoveReaction = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: MsgRemoveReaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -411,7 +337,6 @@ export const MsgRemoveReaction = {
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgRemoveReaction>, I>>(
     object: I
   ): MsgRemoveReaction {
@@ -429,11 +354,9 @@ export const MsgRemoveReaction = {
     return message;
   },
 };
-
 function createBaseMsgRemoveReactionResponse(): MsgRemoveReactionResponse {
   return {};
 }
-
 export const MsgRemoveReactionResponse = {
   encode(
     _: MsgRemoveReactionResponse,
@@ -441,7 +364,6 @@ export const MsgRemoveReactionResponse = {
   ): _m0.Writer {
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -449,29 +371,23 @@ export const MsgRemoveReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgRemoveReactionResponse {
     return {};
   },
-
   toJSON(_: MsgRemoveReactionResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgRemoveReactionResponse>, I>>(
     _: I
   ): MsgRemoveReactionResponse {
@@ -479,7 +395,6 @@ export const MsgRemoveReactionResponse = {
     return message;
   },
 };
-
 function createBaseMsgAddRegisteredReaction(): MsgAddRegisteredReaction {
   return {
     subspaceId: Long.UZERO,
@@ -488,7 +403,6 @@ function createBaseMsgAddRegisteredReaction(): MsgAddRegisteredReaction {
     user: "",
   };
 }
-
 export const MsgAddRegisteredReaction = {
   encode(
     message: MsgAddRegisteredReaction,
@@ -497,22 +411,17 @@ export const MsgAddRegisteredReaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.shorthandCode !== "") {
       writer.uint32(18).string(message.shorthandCode);
     }
-
     if (message.displayValue !== "") {
       writer.uint32(26).string(message.displayValue);
     }
-
     if (message.user !== "") {
       writer.uint32(34).string(message.user);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -520,36 +429,28 @@ export const MsgAddRegisteredReaction = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddRegisteredReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.shorthandCode = reader.string();
           break;
-
         case 3:
           message.displayValue = reader.string();
           break;
-
         case 4:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAddRegisteredReaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -564,7 +465,6 @@ export const MsgAddRegisteredReaction = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: MsgAddRegisteredReaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -576,7 +476,6 @@ export const MsgAddRegisteredReaction = {
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgAddRegisteredReaction>, I>>(
     object: I
   ): MsgAddRegisteredReaction {
@@ -591,13 +490,11 @@ export const MsgAddRegisteredReaction = {
     return message;
   },
 };
-
 function createBaseMsgAddRegisteredReactionResponse(): MsgAddRegisteredReactionResponse {
   return {
     registeredReactionId: 0,
   };
 }
-
 export const MsgAddRegisteredReactionResponse = {
   encode(
     message: MsgAddRegisteredReactionResponse,
@@ -606,10 +503,8 @@ export const MsgAddRegisteredReactionResponse = {
     if (message.registeredReactionId !== 0) {
       writer.uint32(8).uint32(message.registeredReactionId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -617,24 +512,19 @@ export const MsgAddRegisteredReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddRegisteredReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.registeredReactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAddRegisteredReactionResponse {
     return {
       registeredReactionId: isSet(object.registeredReactionId)
@@ -642,14 +532,12 @@ export const MsgAddRegisteredReactionResponse = {
         : 0,
     };
   },
-
   toJSON(message: MsgAddRegisteredReactionResponse): unknown {
     const obj: any = {};
     message.registeredReactionId !== undefined &&
       (obj.registeredReactionId = Math.round(message.registeredReactionId));
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<MsgAddRegisteredReactionResponse>, I>
   >(object: I): MsgAddRegisteredReactionResponse {
@@ -658,7 +546,6 @@ export const MsgAddRegisteredReactionResponse = {
     return message;
   },
 };
-
 function createBaseMsgEditRegisteredReaction(): MsgEditRegisteredReaction {
   return {
     subspaceId: Long.UZERO,
@@ -668,7 +555,6 @@ function createBaseMsgEditRegisteredReaction(): MsgEditRegisteredReaction {
     user: "",
   };
 }
-
 export const MsgEditRegisteredReaction = {
   encode(
     message: MsgEditRegisteredReaction,
@@ -677,26 +563,20 @@ export const MsgEditRegisteredReaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.registeredReactionId !== 0) {
       writer.uint32(16).uint32(message.registeredReactionId);
     }
-
     if (message.shorthandCode !== "") {
       writer.uint32(26).string(message.shorthandCode);
     }
-
     if (message.displayValue !== "") {
       writer.uint32(34).string(message.displayValue);
     }
-
     if (message.user !== "") {
       writer.uint32(42).string(message.user);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -704,40 +584,31 @@ export const MsgEditRegisteredReaction = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditRegisteredReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.registeredReactionId = reader.uint32();
           break;
-
         case 3:
           message.shorthandCode = reader.string();
           break;
-
         case 4:
           message.displayValue = reader.string();
           break;
-
         case 5:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgEditRegisteredReaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -755,7 +626,6 @@ export const MsgEditRegisteredReaction = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: MsgEditRegisteredReaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -769,7 +639,6 @@ export const MsgEditRegisteredReaction = {
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgEditRegisteredReaction>, I>>(
     object: I
   ): MsgEditRegisteredReaction {
@@ -785,11 +654,9 @@ export const MsgEditRegisteredReaction = {
     return message;
   },
 };
-
 function createBaseMsgEditRegisteredReactionResponse(): MsgEditRegisteredReactionResponse {
   return {};
 }
-
 export const MsgEditRegisteredReactionResponse = {
   encode(
     _: MsgEditRegisteredReactionResponse,
@@ -797,7 +664,6 @@ export const MsgEditRegisteredReactionResponse = {
   ): _m0.Writer {
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -805,29 +671,23 @@ export const MsgEditRegisteredReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgEditRegisteredReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgEditRegisteredReactionResponse {
     return {};
   },
-
   toJSON(_: MsgEditRegisteredReactionResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<MsgEditRegisteredReactionResponse>, I>
   >(_: I): MsgEditRegisteredReactionResponse {
@@ -835,7 +695,6 @@ export const MsgEditRegisteredReactionResponse = {
     return message;
   },
 };
-
 function createBaseMsgRemoveRegisteredReaction(): MsgRemoveRegisteredReaction {
   return {
     subspaceId: Long.UZERO,
@@ -843,7 +702,6 @@ function createBaseMsgRemoveRegisteredReaction(): MsgRemoveRegisteredReaction {
     user: "",
   };
 }
-
 export const MsgRemoveRegisteredReaction = {
   encode(
     message: MsgRemoveRegisteredReaction,
@@ -852,18 +710,14 @@ export const MsgRemoveRegisteredReaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.registeredReactionId !== 0) {
       writer.uint32(16).uint32(message.registeredReactionId);
     }
-
     if (message.user !== "") {
       writer.uint32(26).string(message.user);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -871,32 +725,25 @@ export const MsgRemoveRegisteredReaction = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveRegisteredReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.registeredReactionId = reader.uint32();
           break;
-
         case 3:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgRemoveRegisteredReaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -908,7 +755,6 @@ export const MsgRemoveRegisteredReaction = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: MsgRemoveRegisteredReaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -918,7 +764,6 @@ export const MsgRemoveRegisteredReaction = {
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgRemoveRegisteredReaction>, I>>(
     object: I
   ): MsgRemoveRegisteredReaction {
@@ -932,11 +777,9 @@ export const MsgRemoveRegisteredReaction = {
     return message;
   },
 };
-
 function createBaseMsgRemoveRegisteredReactionResponse(): MsgRemoveRegisteredReactionResponse {
   return {};
 }
-
 export const MsgRemoveRegisteredReactionResponse = {
   encode(
     _: MsgRemoveRegisteredReactionResponse,
@@ -944,7 +787,6 @@ export const MsgRemoveRegisteredReactionResponse = {
   ): _m0.Writer {
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -952,29 +794,23 @@ export const MsgRemoveRegisteredReactionResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveRegisteredReactionResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgRemoveRegisteredReactionResponse {
     return {};
   },
-
   toJSON(_: MsgRemoveRegisteredReactionResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<MsgRemoveRegisteredReactionResponse>, I>
   >(_: I): MsgRemoveRegisteredReactionResponse {
@@ -982,7 +818,6 @@ export const MsgRemoveRegisteredReactionResponse = {
     return message;
   },
 };
-
 function createBaseMsgSetReactionsParams(): MsgSetReactionsParams {
   return {
     subspaceId: Long.UZERO,
@@ -991,7 +826,6 @@ function createBaseMsgSetReactionsParams(): MsgSetReactionsParams {
     user: "",
   };
 }
-
 export const MsgSetReactionsParams = {
   encode(
     message: MsgSetReactionsParams,
@@ -1000,28 +834,23 @@ export const MsgSetReactionsParams = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.registeredReaction !== undefined) {
       RegisteredReactionValueParams.encode(
         message.registeredReaction,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     if (message.freeText !== undefined) {
       FreeTextValueParams.encode(
         message.freeText,
         writer.uint32(26).fork()
       ).ldelim();
     }
-
     if (message.user !== "") {
       writer.uint32(34).string(message.user);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -1029,42 +858,34 @@ export const MsgSetReactionsParams = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetReactionsParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.registeredReaction = RegisteredReactionValueParams.decode(
             reader,
             reader.uint32()
           );
           break;
-
         case 3:
           message.freeText = FreeTextValueParams.decode(
             reader,
             reader.uint32()
           );
           break;
-
         case 4:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgSetReactionsParams {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -1079,7 +900,6 @@ export const MsgSetReactionsParams = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: MsgSetReactionsParams): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -1095,7 +915,6 @@ export const MsgSetReactionsParams = {
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgSetReactionsParams>, I>>(
     object: I
   ): MsgSetReactionsParams {
@@ -1117,11 +936,9 @@ export const MsgSetReactionsParams = {
     return message;
   },
 };
-
 function createBaseMsgSetReactionsParamsResponse(): MsgSetReactionsParamsResponse {
   return {};
 }
-
 export const MsgSetReactionsParamsResponse = {
   encode(
     _: MsgSetReactionsParamsResponse,
@@ -1129,7 +946,6 @@ export const MsgSetReactionsParamsResponse = {
   ): _m0.Writer {
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -1137,29 +953,23 @@ export const MsgSetReactionsParamsResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetReactionsParamsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(_: any): MsgSetReactionsParamsResponse {
     return {};
   },
-
   toJSON(_: MsgSetReactionsParamsResponse): unknown {
     const obj: any = {};
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgSetReactionsParamsResponse>, I>>(
     _: I
   ): MsgSetReactionsParamsResponse {
@@ -1168,39 +978,32 @@ export const MsgSetReactionsParamsResponse = {
   },
 };
 /** Msg defines the reactions Msg service. */
-
 export interface Msg {
   /** AddReaction allows to add a post reaction */
   AddReaction(request: MsgAddReaction): Promise<MsgAddReactionResponse>;
   /** RemoveReaction allows to remove an existing post reaction */
-
   RemoveReaction(
     request: MsgRemoveReaction
   ): Promise<MsgRemoveReactionResponse>;
   /** AddRegisteredReaction allows to registered a new supported reaction */
-
   AddRegisteredReaction(
     request: MsgAddRegisteredReaction
   ): Promise<MsgAddRegisteredReactionResponse>;
   /** EditRegisteredReaction allows to edit a registered reaction */
-
   EditRegisteredReaction(
     request: MsgEditRegisteredReaction
   ): Promise<MsgEditRegisteredReactionResponse>;
   /** RemoveRegisteredReaction allows to remove an existing supported reaction */
-
   RemoveRegisteredReaction(
     request: MsgRemoveRegisteredReaction
   ): Promise<MsgRemoveRegisteredReactionResponse>;
   /** SetReactionsParams allows to set the reactions params */
-
   SetReactionsParams(
     request: MsgSetReactionsParams
   ): Promise<MsgSetReactionsParamsResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.AddReaction = this.AddReaction.bind(this);
@@ -1210,7 +1013,6 @@ export class MsgClientImpl implements Msg {
     this.RemoveRegisteredReaction = this.RemoveRegisteredReaction.bind(this);
     this.SetReactionsParams = this.SetReactionsParams.bind(this);
   }
-
   AddReaction(request: MsgAddReaction): Promise<MsgAddReactionResponse> {
     const data = MsgAddReaction.encode(request).finish();
     const promise = this.rpc.request(
@@ -1222,7 +1024,6 @@ export class MsgClientImpl implements Msg {
       MsgAddReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   RemoveReaction(
     request: MsgRemoveReaction
   ): Promise<MsgRemoveReactionResponse> {
@@ -1236,7 +1037,6 @@ export class MsgClientImpl implements Msg {
       MsgRemoveReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   AddRegisteredReaction(
     request: MsgAddRegisteredReaction
   ): Promise<MsgAddRegisteredReactionResponse> {
@@ -1250,7 +1050,6 @@ export class MsgClientImpl implements Msg {
       MsgAddRegisteredReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   EditRegisteredReaction(
     request: MsgEditRegisteredReaction
   ): Promise<MsgEditRegisteredReactionResponse> {
@@ -1264,7 +1063,6 @@ export class MsgClientImpl implements Msg {
       MsgEditRegisteredReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   RemoveRegisteredReaction(
     request: MsgRemoveRegisteredReaction
   ): Promise<MsgRemoveRegisteredReactionResponse> {
@@ -1278,7 +1076,6 @@ export class MsgClientImpl implements Msg {
       MsgRemoveRegisteredReactionResponse.decode(new _m0.Reader(data))
     );
   }
-
   SetReactionsParams(
     request: MsgSetReactionsParams
   ): Promise<MsgSetReactionsParamsResponse> {

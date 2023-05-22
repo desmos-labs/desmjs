@@ -13,7 +13,6 @@ export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
  * See cosmos.tx.v1betata1.ModeInfo.Multi for how to specify which signers
  * signed and with which modes.
  */
-
 export interface MultiSignature {
   signatures: Uint8Array[];
 }
@@ -23,18 +22,15 @@ export interface MultiSignature {
  * space after proto encoding.
  * This is not thread safe, and is not intended for concurrent usage.
  */
-
 export interface CompactBitArray {
   extraBitsStored: number;
   elems: Uint8Array;
 }
-
 function createBaseMultiSignature(): MultiSignature {
   return {
     signatures: [],
   };
 }
-
 export const MultiSignature = {
   encode(
     message: MultiSignature,
@@ -43,32 +39,25 @@ export const MultiSignature = {
     for (const v of message.signatures) {
       writer.uint32(10).bytes(v!);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MultiSignature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMultiSignature();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.signatures.push(reader.bytes());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MultiSignature {
     return {
       signatures: Array.isArray(object?.signatures)
@@ -76,10 +65,8 @@ export const MultiSignature = {
         : [],
     };
   },
-
   toJSON(message: MultiSignature): unknown {
     const obj: any = {};
-
     if (message.signatures) {
       obj.signatures = message.signatures.map((e) =>
         base64FromBytes(e !== undefined ? e : new Uint8Array())
@@ -87,10 +74,8 @@ export const MultiSignature = {
     } else {
       obj.signatures = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MultiSignature>, I>>(
     object: I
   ): MultiSignature {
@@ -99,14 +84,12 @@ export const MultiSignature = {
     return message;
   },
 };
-
 function createBaseCompactBitArray(): CompactBitArray {
   return {
     extraBitsStored: 0,
     elems: new Uint8Array(),
   };
 }
-
 export const CompactBitArray = {
   encode(
     message: CompactBitArray,
@@ -115,40 +98,31 @@ export const CompactBitArray = {
     if (message.extraBitsStored !== 0) {
       writer.uint32(8).uint32(message.extraBitsStored);
     }
-
     if (message.elems.length !== 0) {
       writer.uint32(18).bytes(message.elems);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CompactBitArray {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCompactBitArray();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.extraBitsStored = reader.uint32();
           break;
-
         case 2:
           message.elems = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CompactBitArray {
     return {
       extraBitsStored: isSet(object.extraBitsStored)
@@ -159,7 +133,6 @@ export const CompactBitArray = {
         : new Uint8Array(),
     };
   },
-
   toJSON(message: CompactBitArray): unknown {
     const obj: any = {};
     message.extraBitsStored !== undefined &&
@@ -170,7 +143,6 @@ export const CompactBitArray = {
       ));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<CompactBitArray>, I>>(
     object: I
   ): CompactBitArray {

@@ -18,7 +18,6 @@ export const protobufPackage = "cosmos.base.query.v1beta1";
  *          PageRequest pagination = 2;
  *  }
  */
-
 export interface PageRequest {
   /**
    * key is a value returned in PageResponse.next_key to begin
@@ -31,13 +30,11 @@ export interface PageRequest {
    * It is less efficient than using key. Only one of offset or key should
    * be set.
    */
-
   offset: Long;
   /**
    * limit is the total number of results to be returned in the result page.
    * If left empty it will default to a value to be set by each app.
    */
-
   limit: Long;
   /**
    * count_total is set to true  to indicate that the result set should include
@@ -45,14 +42,12 @@ export interface PageRequest {
    * count_total is only respected when offset is used. It is ignored when key
    * is set.
    */
-
   countTotal: boolean;
   /**
    * reverse is set to true if results are to be returned in the descending order.
    *
    * Since: cosmos-sdk 0.43
    */
-
   reverse: boolean;
 }
 /**
@@ -64,21 +59,19 @@ export interface PageRequest {
  *          PageResponse page = 2;
  *  }
  */
-
 export interface PageResponse {
   /**
    * next_key is the key to be passed to PageRequest.key to
-   * query the next page most efficiently
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
    */
   nextKey: Uint8Array;
   /**
    * total is total number of results available if PageRequest.count_total
    * was set, its value is undefined otherwise
    */
-
   total: Long;
 }
-
 function createBasePageRequest(): PageRequest {
   return {
     key: new Uint8Array(),
@@ -88,7 +81,6 @@ function createBasePageRequest(): PageRequest {
     reverse: false,
   };
 }
-
 export const PageRequest = {
   encode(
     message: PageRequest,
@@ -97,64 +89,49 @@ export const PageRequest = {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
-
     if (!message.offset.isZero()) {
       writer.uint32(16).uint64(message.offset);
     }
-
     if (!message.limit.isZero()) {
       writer.uint32(24).uint64(message.limit);
     }
-
     if (message.countTotal === true) {
       writer.uint32(32).bool(message.countTotal);
     }
-
     if (message.reverse === true) {
       writer.uint32(40).bool(message.reverse);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PageRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.key = reader.bytes();
           break;
-
         case 2:
           message.offset = reader.uint64() as Long;
           break;
-
         case 3:
           message.limit = reader.uint64() as Long;
           break;
-
         case 4:
           message.countTotal = reader.bool();
           break;
-
         case 5:
           message.reverse = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PageRequest {
     return {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
@@ -164,7 +141,6 @@ export const PageRequest = {
       reverse: isSet(object.reverse) ? Boolean(object.reverse) : false,
     };
   },
-
   toJSON(message: PageRequest): unknown {
     const obj: any = {};
     message.key !== undefined &&
@@ -179,7 +155,6 @@ export const PageRequest = {
     message.reverse !== undefined && (obj.reverse = message.reverse);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PageRequest>, I>>(
     object: I
   ): PageRequest {
@@ -198,14 +173,12 @@ export const PageRequest = {
     return message;
   },
 };
-
 function createBasePageResponse(): PageResponse {
   return {
     nextKey: new Uint8Array(),
     total: Long.UZERO,
   };
 }
-
 export const PageResponse = {
   encode(
     message: PageResponse,
@@ -214,40 +187,31 @@ export const PageResponse = {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
     }
-
     if (!message.total.isZero()) {
       writer.uint32(16).uint64(message.total);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PageResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePageResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.nextKey = reader.bytes();
           break;
-
         case 2:
           message.total = reader.uint64() as Long;
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PageResponse {
     return {
       nextKey: isSet(object.nextKey)
@@ -256,7 +220,6 @@ export const PageResponse = {
       total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO,
     };
   },
-
   toJSON(message: PageResponse): unknown {
     const obj: any = {};
     message.nextKey !== undefined &&
@@ -267,7 +230,6 @@ export const PageResponse = {
       (obj.total = (message.total || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PageResponse>, I>>(
     object: I
   ): PageResponse {
