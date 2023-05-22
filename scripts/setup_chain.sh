@@ -18,6 +18,9 @@ SMART_CONTRACT="$SCRIPT_DIR/assets/test_contract.wasm"
 
 desmos() {
 	"$SCRIPT_DIR/desmos" --home="$DESMOS_HOME" "$@"
+
+  # Wait tx including block
+  sleep 10
 }
 
 # Force the script to exit at the first error
@@ -27,12 +30,12 @@ set -e
 echo "Uploading contract..."
 echo $KEYRING_PASS | desmos tx wasm store "$SMART_CONTRACT" \
   --from $USER1 --chain-id=testchain --keyring-backend=file -y --gas 3000000 \
-  -b=block
+  -b=sync
 
 # Initialize the contract
 echo "Initializing contract..."
 echo $KEYRING_PASS | desmos --keyring-backend=file tx wasm instantiate 1 "{}" \
-  --from $USER1 --label "test-contract" --admin $USER1_ADDRESS --chain-id=testchain -b=block -y
+  --from $USER1 --label "test-contract" --admin $USER1_ADDRESS --chain-id=testchain -b=sync -y
 echo "Contract initialized"
 
 # Print contract address
@@ -44,4 +47,4 @@ MSG="{\"desmos_messages\":{\"msgs\":[{\"custom\":{\"profiles\":{\"save_profile\"
 echo "Create smart contract profile"
 echo $KEYRING_PASS | desmos tx wasm execute "$CONTRACT" "$MSG" \
   --from $USER1 \
-  --chain-id=testchain --keyring-backend=file -b=block -y
+  --chain-id=testchain --keyring-backend=file -b=sync -y

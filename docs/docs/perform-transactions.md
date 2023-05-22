@@ -48,7 +48,7 @@ const saveProfile: MsgSaveProfileEncodeObject = {
 
 // Message to create a post inside a subspace
 const createPost: MsgCreatePostEncodeObject = {
-  typeUrl: "/desmos.posts.v2.MsgCreatePost",
+  typeUrl: "/desmos.posts.v3.MsgCreatePost",
   value: MsgCreatePost.fromPartial({
     subspaceId: Long.fromNumber(1),
     author: signerAddress,
@@ -325,7 +325,7 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
 });
 
 const createPost: MsgCreatePostEncodeObject = {
-  typeUrl: "/desmos.posts.v2.MsgCreatePost",
+  typeUrl: "/desmos.posts.v3.MsgCreatePost",
   value: MsgCreatePost.fromPartial({
     subspaceId: Long.fromNumber(1),
     author: "desmos...",
