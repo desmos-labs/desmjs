@@ -5,7 +5,7 @@ import {
   MsgDeletePost,
   MsgEditPost,
   MsgRemovePostAttachment,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import { EncodeObject } from "@cosmjs/proto-signing";
 import {
   MsgAddPostAttachmentTypeUrl,

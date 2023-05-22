@@ -314,8 +314,8 @@ Here an example that showcase how to create a post:
 
 ```js
 import Long from "long";
-import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
-import { MsgCreatePost } from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
+import { MsgCreatePost } from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import { DesmosClient, GasPrice, MsgCreatePostEncodeObject } from "@desmoslabs/desmjs";
 
 const signer = ...; // Your signer

@@ -5,11 +5,11 @@ import {
   MsgDeletePost,
   MsgEditPost,
   MsgRemovePostAttachment,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import {
   PostReferenceType,
   ReplySetting,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import Long from "long";
 import { toTimestamp } from "@desmoslabs/desmjs-types/helpers";
 import createPostsConverters, { mediaToAny, pollToAny } from "./converter";

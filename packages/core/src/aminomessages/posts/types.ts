@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { PostReferenceType } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+import { PostReferenceType } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { MediaAminoType, PollAminoType } from "../../const";
 
 export interface AminoTextTag {

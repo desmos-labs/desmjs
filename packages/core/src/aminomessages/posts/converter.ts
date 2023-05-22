@@ -6,7 +6,7 @@ import {
   MsgDeletePost,
   MsgEditPost,
   MsgRemovePostAttachment,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import {
   Attachment,
   Entities,
@@ -17,7 +17,7 @@ import {
   PollTallyResults_AnswerResult,
   TextTag,
   Url,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 import Long from "long";
