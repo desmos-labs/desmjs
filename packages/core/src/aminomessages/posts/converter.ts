@@ -8,7 +8,6 @@ import {
   MsgRemovePostAttachment,
 } from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import {
-  Attachment,
   Entities,
   Media,
   Poll,
@@ -32,7 +31,6 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import {
-  AminoAttachment,
   AminoContent,
   AminoEntities,
   AminoMedia,
@@ -100,17 +98,6 @@ export function mediaToAny(media: Media): Any {
   });
 }
 
-function convertAttachmentToAmino(attachment: Attachment): AminoAttachment {
-  return {
-    id: omitEmptyNumber(attachment.id),
-    post_id: omitZeroLong(attachment.postId),
-    subspace_id: omitZeroLong(attachment.subspaceId),
-    content: attachment.content
-      ? convertContentToAmino(attachment.content)
-      : undefined,
-  };
-}
-
 function convertPollProvidedAnswerToAmino(
   answer: Poll_ProvidedAnswer
 ): AminoPollProvidedAnswer {
@@ -153,17 +140,6 @@ function convertPollTallyResultsFromAmino(
 ): PollTallyResults {
   return {
     results: results.results.map(convertPollTallyResultAnswerResultFromAmino),
-  };
-}
-
-function convertAttachmentFromAmino(attachment: AminoAttachment): Attachment {
-  return {
-    id: fromOmitEmptyNumber(attachment.id),
-    postId: Long.fromString(attachment.post_id ?? "0"),
-    subspaceId: Long.fromString(attachment.subspace_id ?? "0"),
-    content: attachment.content
-      ? convertContentFromAmino(attachment.content)
-      : undefined,
   };
 }
 
