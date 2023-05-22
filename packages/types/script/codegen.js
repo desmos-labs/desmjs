@@ -31,7 +31,6 @@ function appendImport(file, content) {
 telescope({
   protoDirs: [
     'proto-files/proto',
-    'proto-files/telescope',
     'proto',
   ],
   outPath: outPath,
