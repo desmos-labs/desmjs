@@ -48,7 +48,6 @@ import {
   DesmosQueryClient,
   profileFromAny,
   setupAuthzExtension,
-  setupFeesExtension,
   setupPostsExtension,
   setupProfilesExtension,
   setupReactionsExtension,
@@ -260,7 +259,6 @@ export class DesmosClient extends SigningCosmWasmClient {
           setupPostsExtension,
           setupReactionsExtension,
           setupReportsExtension,
-          setupFeesExtension,
           setupSupplyExtension,
           setupWasmExtension,
           setupIbcExtension

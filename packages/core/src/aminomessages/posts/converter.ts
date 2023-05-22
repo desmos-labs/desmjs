@@ -117,7 +117,7 @@ function convertPollProvidedAnswerToAmino(
   return {
     text: omitEmptyString(answer.text),
     attachments: nullIfEmptyArray(
-      answer.attachments.map(convertAttachmentToAmino)
+      answer.attachments.map(convertContentToAmino)
     ),
   };
 }
@@ -173,7 +173,7 @@ function convertPollProvidedAnswerFromAmino(
   return {
     text: fromOmitEmptyString(answer.text),
     attachments: fromNullIfEmptyArray(answer.attachments).map(
-      convertAttachmentFromAmino
+      convertContentFromAmino
     ),
   };
 }

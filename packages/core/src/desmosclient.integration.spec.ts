@@ -382,7 +382,6 @@ describe("DesmosClient", () => {
         value: {
           name: "Test Subspace",
           description: "Test subspaces",
-          treasury: "",
           owner: address,
           creator: address,
         },

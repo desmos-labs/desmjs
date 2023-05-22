@@ -60,7 +60,6 @@ describe("Subspaces converter", () => {
           name: "Test subspace",
           description: "This is a test subspace",
           owner: "cosmos1lv3e0l66rr68k5l74mnrv4j9kyny6cz27pvnez",
-          treasury: "cosmos1dkan28w7t65xe3fr44wxr4v86wnwuwh5tun2w2",
           creator: "cosmos1qzskhrcjnkdz2ln4yeafzsdwht8ch08j4wed69",
         },
         expectedJsonSerialized:
@@ -85,7 +84,6 @@ describe("Subspaces converter", () => {
           subspaceId: Long.fromNumber(1),
           name: "This is a new name",
           description: "This is a new description",
-          treasury: "cosmos1dkan28w7t65xe3fr44wxr4v86wnwuwh5tun2w2",
           owner: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
           signer: "cosmos1m0czrla04f7rp3zg7dsgc4kla54q7pc4xt00l5",
         },

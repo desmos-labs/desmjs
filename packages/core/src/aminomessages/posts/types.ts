@@ -30,7 +30,7 @@ export interface AminoAttachment {
 
 export interface AminoPollProvidedAnswer {
   readonly text: string | undefined; // Undefined if empty
-  readonly attachments: AminoAttachment[] | null; // Undefined if empty
+  readonly attachments: AminoContent[] | null; // Undefined if empty
 }
 
 export interface AminoPollTallyResultAnswerResult {
