@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-keplr",
-  "version": "4.7.10",
+  "version": "5.0.0",
   "description": "Keplr integration for DesmJS",
   "contributors": [
     "Luca Graziotti <luca.g@protonmail.ch>"

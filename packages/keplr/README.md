@@ -7,10 +7,11 @@ by signing transactions through a [Keplr](https://www.keplr.app/) client.
 
 ## Compatibility table
 
-| Package version | Desmos version | 
-|:---------------:|:--------------:|
-|    `4.3.10`     |    `v4.3.x`    |
-|     `4.4.x`     |    `v4.4.x`    |
-|     `4.5.x`     |    `v4.5.x`    |
-|     `4.6.x`     |    `v4.6.x`    |
-|     `4.7.x`     |    `v4.7.x`    |
+| Package version |   Desmos version   | 
+|:---------------:|:------------------:|
+|    `4.3.10`     |      `v4.3.x`      |
+|     `4.4.x`     |      `v4.4.x`      |
+|     `4.5.x`     |      `v4.5.x`      |
+|     `4.6.x`     |      `v4.6.x`      |
+|     `4.7.x`     | `v4.7.x`, `v4.8.1` |
+|     `5.0.x`     |      `v5.0.x`      |

@@ -11,4 +11,5 @@ See the [Web3Auth docs](https://web3auth.io/docs/sdk/react-native/initialize) fo
 
 | Package version |        Desmos version         | 
 |:---------------:|:-----------------------------:|
-|     `4.7.x`     |           `v4.7.x`            |
+|     `4.7.x`     |      `v4.7.x`, `v4.8.1`       |
+|     `5.0.x`     |           `v5.0.x`            |

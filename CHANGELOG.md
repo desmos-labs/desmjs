@@ -1,3 +1,7 @@
+## Version 5.0.0
+- Updated Desmos to `5.0.0`
+- Added the ability to specify a `gasAdjustment` value when creating a `DesmosClient` instance
+
 ## Version 4.7.10
 - Fix `StakeAuthorizationTypeUrl`
 
