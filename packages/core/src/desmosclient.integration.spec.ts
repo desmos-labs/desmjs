@@ -8,7 +8,7 @@ import {
   ChainConfig,
   Proof,
   SignatureValueType,
-  SingleSignature
+  SingleSignature,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
@@ -18,13 +18,18 @@ import Long from "long";
 import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
-import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
+import {
+  defaultGasPrice,
+  TEST_CHAIN_URL,
+  testUser1,
+  testUser2,
+} from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
   getSignatureBytes,
   getSignedBytes,
-  SignatureResult
+  SignatureResult,
 } from "./signatureresult";
 import {
   MsgAddReactionEncodeObject,
@@ -36,9 +41,12 @@ import {
   MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
-  MsgSaveProfileEncodeObject
+  MsgSaveProfileEncodeObject,
 } from "./encodeobjects";
-import { bech32AddressToAny, singleSignatureToAny } from "./aminomessages/profiles";
+import {
+  bech32AddressToAny,
+  singleSignatureToAny,
+} from "./aminomessages/profiles";
 import { postTargetToAny } from "./aminomessages/reports";
 import { registeredReactionValueToAny } from "./aminomessages/reactions";
 import {
@@ -50,7 +58,7 @@ import {
   MsgCreateReportTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgMultiSendTypeUrl,
-  MsgSaveProfileTypeUrl
+  MsgSaveProfileTypeUrl,
 } from "./const";
 import MsgAuthenticateTypeUrl from "./const/desmjs";
 
@@ -71,6 +79,7 @@ describe("DesmosClient", () => {
       signer,
       {
         gasPrice: defaultGasPrice,
+        gasAdjustment: 1.5,
       }
     );
     return [signer, client];
@@ -90,6 +99,7 @@ describe("DesmosClient", () => {
       signer,
       {
         gasPrice: defaultGasPrice,
+        gasAdjustment: 1.8,
       }
     );
     return [signer, client];
@@ -221,28 +231,13 @@ describe("DesmosClient", () => {
       );
       const externalClient = await DesmosClient.connectWithSigner(
         TEST_CHAIN_URL,
-        externalSigner,
-        {
-          gasPrice: defaultGasPrice,
-          gasAdjustment: 1.3,
-        }
+        externalSigner
       );
       const externalAccounts = await externalSigner.getAccounts();
       const externalAddress = externalAccounts[0].address;
 
       // Setup the client associated to the Desmos profile
-      const profileSigner = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const profileClient = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        profileSigner,
-        {
-          gasPrice: defaultGasPrice,
-          gasAdjustment: 1.3,
-        }
-      );
+      const [profileSigner, profileClient] = await getDirectSignerAndClient();
       const profileAccounts = await profileSigner.getAccounts();
       const profileAddress = profileAccounts[0].address;
 
@@ -382,7 +377,6 @@ describe("DesmosClient", () => {
         value: {
           name: "Test Subspace",
           description: "Test subspaces",
-          treasury: "",
           owner: address,
           creator: address,
         },
@@ -735,17 +729,7 @@ describe("DesmosClient", () => {
     });
 
     it("test clearAdmin", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getDirectSignerAndClient();
 
       const response = await client.instantiate(
         testUser1.address0,

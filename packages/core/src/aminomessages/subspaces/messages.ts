@@ -31,7 +31,6 @@ export interface AminoMsgCreateSubspace extends AminoMsg {
   readonly value: {
     name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
-    treasury: string | undefined; // Undefined if empty
     owner: string | undefined; // Undefined if empty
     creator: string | undefined; // Undefined if empty
   };
@@ -43,7 +42,6 @@ export interface AminoMsgEditSubspace extends AminoMsg {
     subspace_id: string | undefined; // Undefined if zero
     name: string | undefined; // Undefined if empty
     description: string | undefined; // Undefined if empty
-    treasury: string | undefined; // Undefined if empty
     owner: string | undefined; // Undefined if empty
     signer: string | undefined; // Undefined if empty
   };

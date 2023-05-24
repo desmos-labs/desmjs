@@ -30,11 +30,14 @@ export const CosmosHdPath: HdPath = {
 
 export const DefaultFees = {
   SaveProfile: calculateFee(100_000, defaultGasPrice),
-  DeleteProfile: calculateFee(100_000, defaultGasPrice),
-  DTagTransfer: calculateFee(100_000, defaultGasPrice),
-  AcceptDTag: calculateFee(200_000, defaultGasPrice),
-  CancelDTagTransfer: calculateFee(100_000, defaultGasPrice),
-  RefuseDTagTransfer: calculateFee(100_000, defaultGasPrice),
+  CreateSubspace: calculateFee(200_000, defaultGasPrice),
+  CreatePost: calculateFee(200_000, defaultGasPrice),
+  AddReason: calculateFee(200_000, defaultGasPrice),
+  CreateReport: calculateFee(100_000, defaultGasPrice),
+  RegisterReaction: calculateFee(100_000, defaultGasPrice),
+  AddReaction: calculateFee(100_000, defaultGasPrice),
+  WasmInstantiate: calculateFee(200_000, defaultGasPrice),
+  WasmExecute: calculateFee(200_000, defaultGasPrice),
 };
 
 export const testUser1 = {

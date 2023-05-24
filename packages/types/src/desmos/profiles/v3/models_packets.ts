@@ -9,28 +9,22 @@ export const protobufPackage = "desmos.profiles.v3";
  * MsgSendPacket when wanting to link an external chain to a Desmos profile
  * using IBC
  */
-
 export interface LinkChainAccountPacketData {
   /** SourceAddress contains the details of the external chain address */
   sourceAddress?: Any;
   /** SourceProof represents the proof of ownership of the source address */
-
   sourceProof?: Proof;
   /** SourceChainConfig contains the details of the source chain */
-
   sourceChainConfig?: ChainConfig;
   /**
    * DestinationAddress represents the Desmos address of the profile that should
    * be linked with the external account
    */
-
   destinationAddress: string;
   /** DestinationProof contains the proof of ownership of the DestinationAddress */
-
   destinationProof?: Proof;
 }
 /** LinkChainAccountPacketAck defines a struct for the packet acknowledgment */
-
 export interface LinkChainAccountPacketAck {
   /**
    * SourceAddress contains the external address that has been linked properly
@@ -38,7 +32,6 @@ export interface LinkChainAccountPacketAck {
    */
   sourceAddress: string;
 }
-
 function createBaseLinkChainAccountPacketData(): LinkChainAccountPacketData {
   return {
     sourceAddress: undefined,
@@ -48,7 +41,6 @@ function createBaseLinkChainAccountPacketData(): LinkChainAccountPacketData {
     destinationProof: undefined,
   };
 }
-
 export const LinkChainAccountPacketData = {
   encode(
     message: LinkChainAccountPacketData,
@@ -57,29 +49,23 @@ export const LinkChainAccountPacketData = {
     if (message.sourceAddress !== undefined) {
       Any.encode(message.sourceAddress, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.sourceProof !== undefined) {
       Proof.encode(message.sourceProof, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.sourceChainConfig !== undefined) {
       ChainConfig.encode(
         message.sourceChainConfig,
         writer.uint32(26).fork()
       ).ldelim();
     }
-
     if (message.destinationAddress !== "") {
       writer.uint32(34).string(message.destinationAddress);
     }
-
     if (message.destinationProof !== undefined) {
       Proof.encode(message.destinationProof, writer.uint32(42).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -87,43 +73,34 @@ export const LinkChainAccountPacketData = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLinkChainAccountPacketData();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sourceAddress = Any.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.sourceProof = Proof.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.sourceChainConfig = ChainConfig.decode(
             reader,
             reader.uint32()
           );
           break;
-
         case 4:
           message.destinationAddress = reader.string();
           break;
-
         case 5:
           message.destinationProof = Proof.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LinkChainAccountPacketData {
     return {
       sourceAddress: isSet(object.sourceAddress)
@@ -143,7 +120,6 @@ export const LinkChainAccountPacketData = {
         : undefined,
     };
   },
-
   toJSON(message: LinkChainAccountPacketData): unknown {
     const obj: any = {};
     message.sourceAddress !== undefined &&
@@ -166,7 +142,6 @@ export const LinkChainAccountPacketData = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<LinkChainAccountPacketData>, I>>(
     object: I
   ): LinkChainAccountPacketData {
@@ -192,13 +167,11 @@ export const LinkChainAccountPacketData = {
     return message;
   },
 };
-
 function createBaseLinkChainAccountPacketAck(): LinkChainAccountPacketAck {
   return {
     sourceAddress: "",
   };
 }
-
 export const LinkChainAccountPacketAck = {
   encode(
     message: LinkChainAccountPacketAck,
@@ -207,10 +180,8 @@ export const LinkChainAccountPacketAck = {
     if (message.sourceAddress !== "") {
       writer.uint32(10).string(message.sourceAddress);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -218,24 +189,19 @@ export const LinkChainAccountPacketAck = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLinkChainAccountPacketAck();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.sourceAddress = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): LinkChainAccountPacketAck {
     return {
       sourceAddress: isSet(object.sourceAddress)
@@ -243,14 +209,12 @@ export const LinkChainAccountPacketAck = {
         : "",
     };
   },
-
   toJSON(message: LinkChainAccountPacketAck): unknown {
     const obj: any = {};
     message.sourceAddress !== undefined &&
       (obj.sourceAddress = message.sourceAddress);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<LinkChainAccountPacketAck>, I>>(
     object: I
   ): LinkChainAccountPacketAck {

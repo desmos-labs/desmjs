@@ -22,7 +22,7 @@ import {
   Registry,
   TxBodyEncodeObject,
 } from "@cosmjs/proto-signing";
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
+import { Tendermint37Client } from "@cosmjs/tendermint-rpc";
 import {
   AccountData,
   AminoMsg,
@@ -49,7 +49,6 @@ import {
   DesmosQueryClient,
   profileFromAny,
   setupAuthzExtension,
-  setupFeesExtension,
   setupPostsExtension,
   setupProfilesExtension,
   setupReactionsExtension,
@@ -161,7 +160,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     endpoint: string,
     options: Options = {}
   ): Promise<DesmosClient> {
-    const tmClient = await Tendermint34Client.connect(endpoint);
+    const tmClient = await Tendermint37Client.connect(endpoint);
     return new DesmosClient(tmClient, options, undefined);
   }
 
@@ -170,7 +169,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signer: Signer,
     options: Options = {}
   ): Promise<DesmosClient> {
-    const tmClient = await Tendermint34Client.connect(endpoint);
+    const tmClient = await Tendermint37Client.connect(endpoint);
     return new DesmosClient(tmClient, options, signer);
   }
 
@@ -219,7 +218,7 @@ export class DesmosClient extends SigningCosmWasmClient {
   }
 
   protected constructor(
-    client: Tendermint34Client | undefined,
+    client: Tendermint37Client | undefined,
     options: Options,
     signer: Signer = new NoOpSigner()
   ) {
@@ -292,7 +291,6 @@ export class DesmosClient extends SigningCosmWasmClient {
           setupPostsExtension,
           setupReactionsExtension,
           setupReportsExtension,
-          setupFeesExtension,
           setupSupplyExtension,
           setupWasmExtension,
           setupIbcExtension

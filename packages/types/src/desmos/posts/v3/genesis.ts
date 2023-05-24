@@ -1,18 +1,17 @@
 /* eslint-disable */
 import { Post, Attachment, UserAnswer, Params } from "./models";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
 import {
+  Long,
   isSet,
   DeepPartial,
   Exact,
-  Long,
   fromJsonTimestamp,
   fromTimestamp,
 } from "../../../helpers";
-export const protobufPackage = "desmos.posts.v2";
+import * as _m0 from "protobufjs/minimal";
+export const protobufPackage = "desmos.posts.v3";
 /** GenesisState contains the data of the genesis state for the posts module */
-
 export interface GenesisState {
   subspacesData: SubspaceDataEntry[];
   postsData: PostDataEntry[];
@@ -23,27 +22,23 @@ export interface GenesisState {
   params?: Params;
 }
 /** SubspaceDataEntry contains the data for a given subspace */
-
 export interface SubspaceDataEntry {
   subspaceId: Long;
   initialPostId: Long;
 }
 /** PostDataEntry contains the data of a given post */
-
 export interface PostDataEntry {
   subspaceId: Long;
   postId: Long;
   initialAttachmentId: number;
 }
 /** ActivePollData contains the data of an active poll */
-
 export interface ActivePollData {
   subspaceId: Long;
   postId: Long;
   pollId: number;
   endDate?: Timestamp;
 }
-
 function createBaseGenesisState(): GenesisState {
   return {
     subspacesData: [],
@@ -55,7 +50,6 @@ function createBaseGenesisState(): GenesisState {
     params: undefined,
   };
 }
-
 export const GenesisState = {
   encode(
     message: GenesisState,
@@ -64,84 +58,65 @@ export const GenesisState = {
     for (const v of message.subspacesData) {
       SubspaceDataEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     for (const v of message.postsData) {
       PostDataEntry.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.posts) {
       Post.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     for (const v of message.attachments) {
       Attachment.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-
     for (const v of message.activePolls) {
       ActivePollData.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-
     for (const v of message.userAnswers) {
       UserAnswer.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(58).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspacesData.push(
             SubspaceDataEntry.decode(reader, reader.uint32())
           );
           break;
-
         case 2:
           message.postsData.push(PostDataEntry.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.posts.push(Post.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.attachments.push(Attachment.decode(reader, reader.uint32()));
           break;
-
         case 5:
           message.activePolls.push(
             ActivePollData.decode(reader, reader.uint32())
           );
           break;
-
         case 6:
           message.userAnswers.push(UserAnswer.decode(reader, reader.uint32()));
           break;
-
         case 7:
           message.params = Params.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GenesisState {
     return {
       subspacesData: Array.isArray(object?.subspacesData)
@@ -165,10 +140,8 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
-
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-
     if (message.subspacesData) {
       obj.subspacesData = message.subspacesData.map((e) =>
         e ? SubspaceDataEntry.toJSON(e) : undefined
@@ -176,7 +149,6 @@ export const GenesisState = {
     } else {
       obj.subspacesData = [];
     }
-
     if (message.postsData) {
       obj.postsData = message.postsData.map((e) =>
         e ? PostDataEntry.toJSON(e) : undefined
@@ -184,13 +156,11 @@ export const GenesisState = {
     } else {
       obj.postsData = [];
     }
-
     if (message.posts) {
       obj.posts = message.posts.map((e) => (e ? Post.toJSON(e) : undefined));
     } else {
       obj.posts = [];
     }
-
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
         e ? Attachment.toJSON(e) : undefined
@@ -198,7 +168,6 @@ export const GenesisState = {
     } else {
       obj.attachments = [];
     }
-
     if (message.activePolls) {
       obj.activePolls = message.activePolls.map((e) =>
         e ? ActivePollData.toJSON(e) : undefined
@@ -206,7 +175,6 @@ export const GenesisState = {
     } else {
       obj.activePolls = [];
     }
-
     if (message.userAnswers) {
       obj.userAnswers = message.userAnswers.map((e) =>
         e ? UserAnswer.toJSON(e) : undefined
@@ -214,12 +182,10 @@ export const GenesisState = {
     } else {
       obj.userAnswers = [];
     }
-
     message.params !== undefined &&
       (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
     object: I
   ): GenesisState {
@@ -242,14 +208,12 @@ export const GenesisState = {
     return message;
   },
 };
-
 function createBaseSubspaceDataEntry(): SubspaceDataEntry {
   return {
     subspaceId: Long.UZERO,
     initialPostId: Long.UZERO,
   };
 }
-
 export const SubspaceDataEntry = {
   encode(
     message: SubspaceDataEntry,
@@ -258,40 +222,31 @@ export const SubspaceDataEntry = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.initialPostId.isZero()) {
       writer.uint32(16).uint64(message.initialPostId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): SubspaceDataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubspaceDataEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.initialPostId = reader.uint64() as Long;
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SubspaceDataEntry {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -302,7 +257,6 @@ export const SubspaceDataEntry = {
         : Long.UZERO,
     };
   },
-
   toJSON(message: SubspaceDataEntry): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -311,7 +265,6 @@ export const SubspaceDataEntry = {
       (obj.initialPostId = (message.initialPostId || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<SubspaceDataEntry>, I>>(
     object: I
   ): SubspaceDataEntry {
@@ -327,7 +280,6 @@ export const SubspaceDataEntry = {
     return message;
   },
 };
-
 function createBasePostDataEntry(): PostDataEntry {
   return {
     subspaceId: Long.UZERO,
@@ -335,7 +287,6 @@ function createBasePostDataEntry(): PostDataEntry {
     initialAttachmentId: 0,
   };
 }
-
 export const PostDataEntry = {
   encode(
     message: PostDataEntry,
@@ -344,48 +295,37 @@ export const PostDataEntry = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.initialAttachmentId !== 0) {
       writer.uint32(24).uint32(message.initialAttachmentId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PostDataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePostDataEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.initialAttachmentId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PostDataEntry {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -397,7 +337,6 @@ export const PostDataEntry = {
         : 0,
     };
   },
-
   toJSON(message: PostDataEntry): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -408,7 +347,6 @@ export const PostDataEntry = {
       (obj.initialAttachmentId = Math.round(message.initialAttachmentId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PostDataEntry>, I>>(
     object: I
   ): PostDataEntry {
@@ -425,7 +363,6 @@ export const PostDataEntry = {
     return message;
   },
 };
-
 function createBaseActivePollData(): ActivePollData {
   return {
     subspaceId: Long.UZERO,
@@ -434,7 +371,6 @@ function createBaseActivePollData(): ActivePollData {
     endDate: undefined,
   };
 }
-
 export const ActivePollData = {
   encode(
     message: ActivePollData,
@@ -443,56 +379,43 @@ export const ActivePollData = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.pollId !== 0) {
       writer.uint32(24).uint32(message.pollId);
     }
-
     if (message.endDate !== undefined) {
       Timestamp.encode(message.endDate, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ActivePollData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseActivePollData();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.pollId = reader.uint32();
           break;
-
         case 4:
           message.endDate = Timestamp.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ActivePollData {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -505,7 +428,6 @@ export const ActivePollData = {
         : undefined,
     };
   },
-
   toJSON(message: ActivePollData): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -517,7 +439,6 @@ export const ActivePollData = {
       (obj.endDate = fromTimestamp(message.endDate).toISOString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<ActivePollData>, I>>(
     object: I
   ): ActivePollData {

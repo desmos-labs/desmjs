@@ -6,8 +6,8 @@ import {
   QuerySectionPostsResponse,
   QuerySubspacePostsResponse,
   QueryClientImpl,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/query";
-import { Params, Post } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/query";
+import { Params, Post } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 

@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { PostReferenceType } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+import { PostReferenceType } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { MediaAminoType, PollAminoType } from "../../const";
 
 export interface AminoTextTag {
@@ -30,7 +30,7 @@ export interface AminoAttachment {
 
 export interface AminoPollProvidedAnswer {
   readonly text: string | undefined; // Undefined if empty
-  readonly attachments: AminoAttachment[] | null; // Undefined if empty
+  readonly attachments: AminoContent[] | null; // Undefined if empty
 }
 
 export interface AminoPollTallyResultAnswerResult {

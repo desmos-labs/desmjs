@@ -6,9 +6,8 @@ import {
   MsgDeletePost,
   MsgEditPost,
   MsgRemovePostAttachment,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import {
-  Attachment,
   Entities,
   Media,
   Poll,
@@ -17,7 +16,7 @@ import {
   PollTallyResults_AnswerResult,
   TextTag,
   Url,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 import Long from "long";
@@ -32,7 +31,6 @@ import {
 } from "./messages";
 import { isAminoConverter } from "../../types";
 import {
-  AminoAttachment,
   AminoContent,
   AminoEntities,
   AminoMedia,
@@ -100,24 +98,13 @@ export function mediaToAny(media: Media): Any {
   });
 }
 
-function convertAttachmentToAmino(attachment: Attachment): AminoAttachment {
-  return {
-    id: omitEmptyNumber(attachment.id),
-    post_id: omitZeroLong(attachment.postId),
-    subspace_id: omitZeroLong(attachment.subspaceId),
-    content: attachment.content
-      ? convertContentToAmino(attachment.content)
-      : undefined,
-  };
-}
-
 function convertPollProvidedAnswerToAmino(
   answer: Poll_ProvidedAnswer
 ): AminoPollProvidedAnswer {
   return {
     text: omitEmptyString(answer.text),
     attachments: nullIfEmptyArray(
-      answer.attachments.map(convertAttachmentToAmino)
+      answer.attachments.map(convertContentToAmino)
     ),
   };
 }
@@ -156,24 +143,13 @@ function convertPollTallyResultsFromAmino(
   };
 }
 
-function convertAttachmentFromAmino(attachment: AminoAttachment): Attachment {
-  return {
-    id: fromOmitEmptyNumber(attachment.id),
-    postId: Long.fromString(attachment.post_id ?? "0"),
-    subspaceId: Long.fromString(attachment.subspace_id ?? "0"),
-    content: attachment.content
-      ? convertContentFromAmino(attachment.content)
-      : undefined,
-  };
-}
-
 function convertPollProvidedAnswerFromAmino(
   answer: AminoPollProvidedAnswer
 ): Poll_ProvidedAnswer {
   return {
     text: fromOmitEmptyString(answer.text),
     attachments: fromNullIfEmptyArray(answer.attachments).map(
-      convertAttachmentFromAmino
+      convertContentFromAmino
     ),
   };
 }

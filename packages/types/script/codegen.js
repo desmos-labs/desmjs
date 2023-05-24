@@ -31,7 +31,6 @@ function appendImport(file, content) {
 telescope({
   protoDirs: [
     'proto-files/proto',
-    'proto-files/third_party/proto',
     'proto',
   ],
   outPath: outPath,
@@ -60,6 +59,68 @@ telescope({
         useExact: true,
         timestamp: 'timestamp',
         duration: 'duration'
+      },
+      excluded: {
+        packages: [
+          // Ignore legacy versions
+          'desmos.posts.v1',
+          'desmos.posts.v2',
+          'desmos.profiles.v1beta1',
+          'desmos.profiles.v1',
+          'desmos.profiles.v2',
+          'desmos.subspaces.v1',
+          'desmos.subspaces.v2.*',
+  
+          // Ignore unused cosmos deps
+          'cosmos.app.*',
+          'cosmos.auth.*',
+          'cosmos.bank.*',
+          'cosmos.base.abci.*',
+          'cosmos.base.kv.*',
+          'cosmos.base.reflection.*',
+          'cosmos.base.snapshots.*',
+          'cosmos.base.store.*',
+          'cosmos.base.tendermint.*',
+          'cosmos.base.reflection.*',
+          'cosmos.capability.*',
+          'cosmos.crisis.*',
+          'cosmos.crypto.ed25519',
+          'cosmos.crypto.hd.*',
+          'cosmos.crypto.keyring.*',
+          'cosmos.crypto.multisig',
+          'cosmos.crypto.secp256k1',
+          'cosmos.crypto.secp256r1',
+          'cosmos.distribution.*',
+          'cosmos.evidence.*',
+          'cosmos.feegrant.*',
+          'cosmos.genutil.*',
+          'cosmos.gov.*',
+          'cosmos.group.*',
+          'cosmos.mint.*',
+          'cosmos.msg.*',
+          'cosmos.nft.*',
+          'cosmos.orm.*',
+          'cosmos.params.*',
+          'cosmos.slashing.*',
+          'cosmos.staking.*',
+          'cosmos.tx.v1beta1',
+          'cosmos.vesting.*',
+
+          // Ignore unused ibc deps
+          'ibc.applications.*',
+          'ibc.core.channel.*',
+          'ibc.core.commitment.*',
+          'ibc.core.connection.*',
+          'ibc.core.port.*',
+          'ibc.core.types.*',
+          'ibc.lightclients.*',
+  
+          // Ignore unused tendermint deps
+          'tendermint.p2p',
+
+          // Ignore unused tool deps
+          'amino',
+        ]
       }
     },
     lcdClients: {
@@ -80,11 +141,12 @@ telescope({
     },
     aminoEncoding: {
       enabled: false
-    }
+    },
+
   }
 }).then(() => {
   // Fix import in desmos/profiles/v3/msg_server.ts
-  const msg_server_import = `
+  const profiles_msg_server_import = `
   import { MsgDeleteProfile, MsgDeleteProfileResponse, MsgSaveProfile, MsgSaveProfileResponse } from "./msgs_profile";
   import {
     MsgAcceptDTagTransferRequest,
@@ -110,9 +172,13 @@ telescope({
     MsgUnlinkApplication,
     MsgUnlinkApplicationResponse
   } from "./msgs_app_links";
+  import {
+    MsgUpdateParams,
+    MsgUpdateParamsResponse
+  } from "./msgs_params";
   `
   const profiles_msg_server_file = `${outPath}/desmos/profiles/v3/msg_server.ts`;
-  appendImport(profiles_msg_server_file, msg_server_import);
+  appendImport(profiles_msg_server_file, profiles_msg_server_import);
 
   // Fix import in desmos/profiles/v3/query.ts
   const profiles_query_import = `
@@ -139,6 +205,20 @@ telescope({
   `;
   const profiles_query_file = `${outPath}/desmos/profiles/v3/query.ts`;
   appendImport(profiles_query_file, profiles_query_import);
+
+  // Fix import in desmos/subspaces/v3/msgs.ts
+  const subspaces_msgs_import = `
+  import { 
+    MsgGrantAllowance, MsgGrantAllowanceResponse, 
+    MsgRevokeAllowance, MsgRevokeAllowanceResponse
+  } from "./msgs_feegrant";
+  import { 
+    MsgGrantTreasuryAuthorization, MsgGrantTreasuryAuthorizationResponse,
+    MsgRevokeTreasuryAuthorization, MsgRevokeTreasuryAuthorizationResponse
+  } from "./msgs_treasury";
+  `;
+  const subspaces_msgs_file = `${outPath}/desmos/subspaces/v3/msgs.ts`;
+  appendImport(subspaces_msgs_file, subspaces_msgs_import);
 
   // Create index.ts
   const index_ts = `

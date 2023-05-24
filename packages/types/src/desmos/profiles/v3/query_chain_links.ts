@@ -12,7 +12,6 @@ export const protobufPackage = "desmos.profiles.v3";
  * to retrieve the link associated with the provided user, for the given chain
  * and having the given target address
  */
-
 export interface QueryChainLinksRequest {
   /**
    * (optional) User represents the Desmos address of the user to which search
@@ -23,34 +22,28 @@ export interface QueryChainLinksRequest {
    * (optional) ChainName contains the name of the chain to which search the
    * link for. Used only if user is also set
    */
-
   chainName: string;
   /**
    * (optional) Target must contain the external address to which query the link
    * for. Used only if chain name is also set
    */
-
   target: string;
   /** Pagination defines an optional pagination for the request */
-
   pagination?: PageRequest;
 }
 /**
  * QueryChainLinksResponse is the response type for the
  * Query/ChainLinks RPC method.
  */
-
 export interface QueryChainLinksResponse {
   links: ChainLink[];
   /** Pagination defines the pagination response */
-
   pagination?: PageResponse;
 }
 /**
  * QueryChainLinkOwnersRequest contains the data of the request that can
  * be used to get chain link owners
  */
-
 export interface QueryChainLinkOwnersRequest {
   /**
    * (Optional) Chain name to search link owners of. If not specified, all
@@ -61,26 +54,21 @@ export interface QueryChainLinkOwnersRequest {
    * (Optional) External address to search for. This will only be used if the
    * chain name is specified as well
    */
-
   target: string;
   /** Pagination defines an optional pagination for the request */
-
   pagination?: PageRequest;
 }
 /**
  * QueryChainLinkOwnersResponse contains the data returned by the request
  * allowing to get chain link owners.
  */
-
 export interface QueryChainLinkOwnersResponse {
   /** Addresses of the chain links owners */
   owners: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails[];
   /** Pagination defines the pagination response */
-
   pagination?: PageResponse;
 }
 /** ChainLinkOwnerDetails contains the details of a single chain link owner */
-
 export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
   user: string;
   chainName: string;
@@ -90,22 +78,18 @@ export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
  * QueryDefaultExternalAddressesRequest is the request type for
  * Query/DefaultExternalAddresses RPC method
  */
-
 export interface QueryDefaultExternalAddressesRequest {
   /** (Optional) Owner for which to query the default addresses */
   owner: string;
   /** (Optional) Chain name to query the default address for */
-
   chainName: string;
   /** Pagination defines an optional pagination for the request. */
-
   pagination?: PageRequest;
 }
 /**
  * QueryDefaultExternalAddressesResponse is the response type for
  * Query/DefaultExternalAddresses RPC method
  */
-
 export interface QueryDefaultExternalAddressesResponse {
   /**
    * List of default addresses, each one represented by the associated chain
@@ -114,7 +98,6 @@ export interface QueryDefaultExternalAddressesResponse {
   links: ChainLink[];
   pagination?: PageResponse;
 }
-
 function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
   return {
     user: "",
@@ -123,7 +106,6 @@ function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
     pagination: undefined,
   };
 }
-
 export const QueryChainLinksRequest = {
   encode(
     message: QueryChainLinksRequest,
@@ -132,22 +114,17 @@ export const QueryChainLinksRequest = {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
-
     if (message.chainName !== "") {
       writer.uint32(18).string(message.chainName);
     }
-
     if (message.target !== "") {
       writer.uint32(26).string(message.target);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -155,36 +132,28 @@ export const QueryChainLinksRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinksRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.user = reader.string();
           break;
-
         case 2:
           message.chainName = reader.string();
           break;
-
         case 3:
           message.target = reader.string();
           break;
-
         case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryChainLinksRequest {
     return {
       user: isSet(object.user) ? String(object.user) : "",
@@ -195,7 +164,6 @@ export const QueryChainLinksRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryChainLinksRequest): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
@@ -207,7 +175,6 @@ export const QueryChainLinksRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryChainLinksRequest>, I>>(
     object: I
   ): QueryChainLinksRequest {
@@ -222,14 +189,12 @@ export const QueryChainLinksRequest = {
     return message;
   },
 };
-
 function createBaseQueryChainLinksResponse(): QueryChainLinksResponse {
   return {
     links: [],
     pagination: undefined,
   };
 }
-
 export const QueryChainLinksResponse = {
   encode(
     message: QueryChainLinksResponse,
@@ -238,17 +203,14 @@ export const QueryChainLinksResponse = {
     for (const v of message.links) {
       ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -256,28 +218,22 @@ export const QueryChainLinksResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinksResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.links.push(ChainLink.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryChainLinksResponse {
     return {
       links: Array.isArray(object?.links)
@@ -288,10 +244,8 @@ export const QueryChainLinksResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryChainLinksResponse): unknown {
     const obj: any = {};
-
     if (message.links) {
       obj.links = message.links.map((e) =>
         e ? ChainLink.toJSON(e) : undefined
@@ -299,14 +253,12 @@ export const QueryChainLinksResponse = {
     } else {
       obj.links = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryChainLinksResponse>, I>>(
     object: I
   ): QueryChainLinksResponse {
@@ -319,7 +271,6 @@ export const QueryChainLinksResponse = {
     return message;
   },
 };
-
 function createBaseQueryChainLinkOwnersRequest(): QueryChainLinkOwnersRequest {
   return {
     chainName: "",
@@ -327,7 +278,6 @@ function createBaseQueryChainLinkOwnersRequest(): QueryChainLinkOwnersRequest {
     pagination: undefined,
   };
 }
-
 export const QueryChainLinkOwnersRequest = {
   encode(
     message: QueryChainLinkOwnersRequest,
@@ -336,18 +286,14 @@ export const QueryChainLinkOwnersRequest = {
     if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
     }
-
     if (message.target !== "") {
       writer.uint32(18).string(message.target);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -355,32 +301,25 @@ export const QueryChainLinkOwnersRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinkOwnersRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.chainName = reader.string();
           break;
-
         case 2:
           message.target = reader.string();
           break;
-
         case 3:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryChainLinkOwnersRequest {
     return {
       chainName: isSet(object.chainName) ? String(object.chainName) : "",
@@ -390,7 +329,6 @@ export const QueryChainLinkOwnersRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryChainLinkOwnersRequest): unknown {
     const obj: any = {};
     message.chainName !== undefined && (obj.chainName = message.chainName);
@@ -401,7 +339,6 @@ export const QueryChainLinkOwnersRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersRequest>, I>>(
     object: I
   ): QueryChainLinkOwnersRequest {
@@ -415,14 +352,12 @@ export const QueryChainLinkOwnersRequest = {
     return message;
   },
 };
-
 function createBaseQueryChainLinkOwnersResponse(): QueryChainLinkOwnersResponse {
   return {
     owners: [],
     pagination: undefined,
   };
 }
-
 export const QueryChainLinkOwnersResponse = {
   encode(
     message: QueryChainLinkOwnersResponse,
@@ -434,17 +369,14 @@ export const QueryChainLinkOwnersResponse = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -452,10 +384,8 @@ export const QueryChainLinkOwnersResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryChainLinkOwnersResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.owners.push(
@@ -465,20 +395,16 @@ export const QueryChainLinkOwnersResponse = {
             )
           );
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryChainLinkOwnersResponse {
     return {
       owners: Array.isArray(object?.owners)
@@ -491,10 +417,8 @@ export const QueryChainLinkOwnersResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryChainLinkOwnersResponse): unknown {
     const obj: any = {};
-
     if (message.owners) {
       obj.owners = message.owners.map((e) =>
         e
@@ -504,14 +428,12 @@ export const QueryChainLinkOwnersResponse = {
     } else {
       obj.owners = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersResponse>, I>>(
     object: I
   ): QueryChainLinkOwnersResponse {
@@ -527,7 +449,6 @@ export const QueryChainLinkOwnersResponse = {
     return message;
   },
 };
-
 function createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails(): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
   return {
     user: "",
@@ -535,7 +456,6 @@ function createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails(): QueryCh
     target: "",
   };
 }
-
 export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
   encode(
     message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
@@ -544,18 +464,14 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
-
     if (message.chainName !== "") {
       writer.uint32(18).string(message.chainName);
     }
-
     if (message.target !== "") {
       writer.uint32(26).string(message.target);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -564,32 +480,25 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message =
       createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.user = reader.string();
           break;
-
         case 2:
           message.chainName = reader.string();
           break;
-
         case 3:
           message.target = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     return {
       user: isSet(object.user) ? String(object.user) : "",
@@ -597,7 +506,6 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
       target: isSet(object.target) ? String(object.target) : "",
     };
   },
-
   toJSON(message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
@@ -605,7 +513,6 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     message.target !== undefined && (obj.target = message.target);
     return obj;
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<QueryChainLinkOwnersResponse_ChainLinkOwnerDetails>,
@@ -620,7 +527,6 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     return message;
   },
 };
-
 function createBaseQueryDefaultExternalAddressesRequest(): QueryDefaultExternalAddressesRequest {
   return {
     owner: "",
@@ -628,7 +534,6 @@ function createBaseQueryDefaultExternalAddressesRequest(): QueryDefaultExternalA
     pagination: undefined,
   };
 }
-
 export const QueryDefaultExternalAddressesRequest = {
   encode(
     message: QueryDefaultExternalAddressesRequest,
@@ -637,18 +542,14 @@ export const QueryDefaultExternalAddressesRequest = {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-
     if (message.chainName !== "") {
       writer.uint32(18).string(message.chainName);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -656,32 +557,25 @@ export const QueryDefaultExternalAddressesRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDefaultExternalAddressesRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.owner = reader.string();
           break;
-
         case 2:
           message.chainName = reader.string();
           break;
-
         case 3:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryDefaultExternalAddressesRequest {
     return {
       owner: isSet(object.owner) ? String(object.owner) : "",
@@ -691,7 +585,6 @@ export const QueryDefaultExternalAddressesRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryDefaultExternalAddressesRequest): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
@@ -702,7 +595,6 @@ export const QueryDefaultExternalAddressesRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<QueryDefaultExternalAddressesRequest>, I>
   >(object: I): QueryDefaultExternalAddressesRequest {
@@ -716,14 +608,12 @@ export const QueryDefaultExternalAddressesRequest = {
     return message;
   },
 };
-
 function createBaseQueryDefaultExternalAddressesResponse(): QueryDefaultExternalAddressesResponse {
   return {
     links: [],
     pagination: undefined,
   };
 }
-
 export const QueryDefaultExternalAddressesResponse = {
   encode(
     message: QueryDefaultExternalAddressesResponse,
@@ -732,17 +622,14 @@ export const QueryDefaultExternalAddressesResponse = {
     for (const v of message.links) {
       ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -750,28 +637,22 @@ export const QueryDefaultExternalAddressesResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDefaultExternalAddressesResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.links.push(ChainLink.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryDefaultExternalAddressesResponse {
     return {
       links: Array.isArray(object?.links)
@@ -782,10 +663,8 @@ export const QueryDefaultExternalAddressesResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryDefaultExternalAddressesResponse): unknown {
     const obj: any = {};
-
     if (message.links) {
       obj.links = message.links.map((e) =>
         e ? ChainLink.toJSON(e) : undefined
@@ -793,14 +672,12 @@ export const QueryDefaultExternalAddressesResponse = {
     } else {
       obj.links = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<
     I extends Exact<DeepPartial<QueryDefaultExternalAddressesResponse>, I>
   >(object: I): QueryDefaultExternalAddressesResponse {

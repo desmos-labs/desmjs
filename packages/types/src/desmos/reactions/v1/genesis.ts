@@ -4,11 +4,10 @@ import {
   Reaction,
   SubspaceReactionsParams,
 } from "./models";
+import { Long, DeepPartial, Exact, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import { DeepPartial, Exact, Long, isSet } from "../../../helpers";
 export const protobufPackage = "desmos.reactions.v1";
 /** GenesisState contains the data of the genesis state for the reactions module */
-
 export interface GenesisState {
   subspacesData: SubspaceDataEntry[];
   registeredReactions: RegisteredReaction[];
@@ -17,19 +16,16 @@ export interface GenesisState {
   subspacesParams: SubspaceReactionsParams[];
 }
 /** SubspaceDataEntry contains the data related to a single subspace */
-
 export interface SubspaceDataEntry {
   subspaceId: Long;
   registeredReactionId: number;
 }
 /** PostDataEntry contains the data related to a single post */
-
 export interface PostDataEntry {
   subspaceId: Long;
   postId: Long;
   reactionId: number;
 }
-
 function createBaseGenesisState(): GenesisState {
   return {
     subspacesData: [],
@@ -39,7 +35,6 @@ function createBaseGenesisState(): GenesisState {
     subspacesParams: [],
   };
 }
-
 export const GenesisState = {
   encode(
     message: GenesisState,
@@ -48,70 +43,55 @@ export const GenesisState = {
     for (const v of message.subspacesData) {
       SubspaceDataEntry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     for (const v of message.registeredReactions) {
       RegisteredReaction.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.postsData) {
       PostDataEntry.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     for (const v of message.reactions) {
       Reaction.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-
     for (const v of message.subspacesParams) {
       SubspaceReactionsParams.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspacesData.push(
             SubspaceDataEntry.decode(reader, reader.uint32())
           );
           break;
-
         case 2:
           message.registeredReactions.push(
             RegisteredReaction.decode(reader, reader.uint32())
           );
           break;
-
         case 3:
           message.postsData.push(PostDataEntry.decode(reader, reader.uint32()));
           break;
-
         case 4:
           message.reactions.push(Reaction.decode(reader, reader.uint32()));
           break;
-
         case 5:
           message.subspacesParams.push(
             SubspaceReactionsParams.decode(reader, reader.uint32())
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GenesisState {
     return {
       subspacesData: Array.isArray(object?.subspacesData)
@@ -135,10 +115,8 @@ export const GenesisState = {
         : [],
     };
   },
-
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-
     if (message.subspacesData) {
       obj.subspacesData = message.subspacesData.map((e) =>
         e ? SubspaceDataEntry.toJSON(e) : undefined
@@ -146,7 +124,6 @@ export const GenesisState = {
     } else {
       obj.subspacesData = [];
     }
-
     if (message.registeredReactions) {
       obj.registeredReactions = message.registeredReactions.map((e) =>
         e ? RegisteredReaction.toJSON(e) : undefined
@@ -154,7 +131,6 @@ export const GenesisState = {
     } else {
       obj.registeredReactions = [];
     }
-
     if (message.postsData) {
       obj.postsData = message.postsData.map((e) =>
         e ? PostDataEntry.toJSON(e) : undefined
@@ -162,7 +138,6 @@ export const GenesisState = {
     } else {
       obj.postsData = [];
     }
-
     if (message.reactions) {
       obj.reactions = message.reactions.map((e) =>
         e ? Reaction.toJSON(e) : undefined
@@ -170,7 +145,6 @@ export const GenesisState = {
     } else {
       obj.reactions = [];
     }
-
     if (message.subspacesParams) {
       obj.subspacesParams = message.subspacesParams.map((e) =>
         e ? SubspaceReactionsParams.toJSON(e) : undefined
@@ -178,10 +152,8 @@ export const GenesisState = {
     } else {
       obj.subspacesParams = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
     object: I
   ): GenesisState {
@@ -203,14 +175,12 @@ export const GenesisState = {
     return message;
   },
 };
-
 function createBaseSubspaceDataEntry(): SubspaceDataEntry {
   return {
     subspaceId: Long.UZERO,
     registeredReactionId: 0,
   };
 }
-
 export const SubspaceDataEntry = {
   encode(
     message: SubspaceDataEntry,
@@ -219,40 +189,31 @@ export const SubspaceDataEntry = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.registeredReactionId !== 0) {
       writer.uint32(16).uint32(message.registeredReactionId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): SubspaceDataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubspaceDataEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.registeredReactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SubspaceDataEntry {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -263,7 +224,6 @@ export const SubspaceDataEntry = {
         : 0,
     };
   },
-
   toJSON(message: SubspaceDataEntry): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -272,7 +232,6 @@ export const SubspaceDataEntry = {
       (obj.registeredReactionId = Math.round(message.registeredReactionId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<SubspaceDataEntry>, I>>(
     object: I
   ): SubspaceDataEntry {
@@ -285,7 +244,6 @@ export const SubspaceDataEntry = {
     return message;
   },
 };
-
 function createBasePostDataEntry(): PostDataEntry {
   return {
     subspaceId: Long.UZERO,
@@ -293,7 +251,6 @@ function createBasePostDataEntry(): PostDataEntry {
     reactionId: 0,
   };
 }
-
 export const PostDataEntry = {
   encode(
     message: PostDataEntry,
@@ -302,48 +259,37 @@ export const PostDataEntry = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.reactionId !== 0) {
       writer.uint32(24).uint32(message.reactionId);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PostDataEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePostDataEntry();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.reactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PostDataEntry {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -353,7 +299,6 @@ export const PostDataEntry = {
       reactionId: isSet(object.reactionId) ? Number(object.reactionId) : 0,
     };
   },
-
   toJSON(message: PostDataEntry): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -364,7 +309,6 @@ export const PostDataEntry = {
       (obj.reactionId = Math.round(message.reactionId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PostDataEntry>, I>>(
     object: I
   ): PostDataEntry {

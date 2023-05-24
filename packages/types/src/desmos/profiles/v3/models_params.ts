@@ -1,18 +1,17 @@
 /* eslint-disable */
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Duration } from "../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
 import {
+  Long,
   isSet,
   DeepPartial,
   Exact,
   bytesFromBase64,
   base64FromBytes,
-  Long,
 } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.profiles.v3";
 /** Params contains the parameters for the profiles module */
-
 export interface Params {
   nickname?: NicknameParams;
   dtag?: DTagParams;
@@ -21,20 +20,17 @@ export interface Params {
   appLinks?: AppLinksParams;
 }
 /** NicknameParams defines the parameters related to the profiles nicknames */
-
 export interface NicknameParams {
   minLength: Uint8Array;
   maxLength: Uint8Array;
 }
 /** DTagParams defines the parameters related to profile DTags */
-
 export interface DTagParams {
   regEx: string;
   minLength: Uint8Array;
   maxLength: Uint8Array;
 }
 /** BioParams defines the parameters related to profile biography */
-
 export interface BioParams {
   maxLength: Uint8Array;
 }
@@ -43,7 +39,6 @@ export interface BioParams {
  * that will be used to verify the ownership of a centralized
  * application account by a Desmos profile
  */
-
 export interface OracleParams {
   /**
    * ScriptID represents the ID of the oracle script to be called to verify the
@@ -51,40 +46,33 @@ export interface OracleParams {
    */
   scriptId: Long;
   /** AskCount represents the number of oracles to which ask to verify the data */
-
   askCount: Long;
   /**
    * MinCount represents the minimum count of oracles that should complete the
    * verification successfully
    */
-
   minCount: Long;
   /**
    * PrepareGas represents the amount of gas to be used during the preparation
    * stage of the oracle script
    */
-
   prepareGas: Long;
   /**
    * ExecuteGas represents the amount of gas to be used during the execution of
    * the oracle script
    */
-
   executeGas: Long;
   /**
    * FeeAmount represents the amount of fees to be payed in order to execute the
    * oracle script
    */
-
   feeAmount: Coin[];
 }
 /** AppLinksParams define the parameters related to the app links */
-
 export interface AppLinksParams {
   /** Default validity duration before an application link expires */
   validityDuration?: Duration;
 }
-
 function createBaseParams(): Params {
   return {
     nickname: undefined,
@@ -94,7 +82,6 @@ function createBaseParams(): Params {
     appLinks: undefined,
   };
 }
-
 export const Params = {
   encode(
     message: Params,
@@ -106,67 +93,52 @@ export const Params = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     if (message.dtag !== undefined) {
       DTagParams.encode(message.dtag, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.bio !== undefined) {
       BioParams.encode(message.bio, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.oracle !== undefined) {
       OracleParams.encode(message.oracle, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.appLinks !== undefined) {
       AppLinksParams.encode(
         message.appLinks,
         writer.uint32(42).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.nickname = NicknameParams.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.dtag = DTagParams.decode(reader, reader.uint32());
           break;
-
         case 3:
           message.bio = BioParams.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.oracle = OracleParams.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.appLinks = AppLinksParams.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Params {
     return {
       nickname: isSet(object.nickname)
@@ -182,7 +154,6 @@ export const Params = {
         : undefined,
     };
   },
-
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.nickname !== undefined &&
@@ -203,7 +174,6 @@ export const Params = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.nickname =
@@ -229,14 +199,12 @@ export const Params = {
     return message;
   },
 };
-
 function createBaseNicknameParams(): NicknameParams {
   return {
     minLength: new Uint8Array(),
     maxLength: new Uint8Array(),
   };
 }
-
 export const NicknameParams = {
   encode(
     message: NicknameParams,
@@ -245,40 +213,31 @@ export const NicknameParams = {
     if (message.minLength.length !== 0) {
       writer.uint32(10).bytes(message.minLength);
     }
-
     if (message.maxLength.length !== 0) {
       writer.uint32(18).bytes(message.maxLength);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): NicknameParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNicknameParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.minLength = reader.bytes();
           break;
-
         case 2:
           message.maxLength = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): NicknameParams {
     return {
       minLength: isSet(object.minLength)
@@ -289,7 +248,6 @@ export const NicknameParams = {
         : new Uint8Array(),
     };
   },
-
   toJSON(message: NicknameParams): unknown {
     const obj: any = {};
     message.minLength !== undefined &&
@@ -302,7 +260,6 @@ export const NicknameParams = {
       ));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<NicknameParams>, I>>(
     object: I
   ): NicknameParams {
@@ -312,7 +269,6 @@ export const NicknameParams = {
     return message;
   },
 };
-
 function createBaseDTagParams(): DTagParams {
   return {
     regEx: "",
@@ -320,7 +276,6 @@ function createBaseDTagParams(): DTagParams {
     maxLength: new Uint8Array(),
   };
 }
-
 export const DTagParams = {
   encode(
     message: DTagParams,
@@ -329,48 +284,37 @@ export const DTagParams = {
     if (message.regEx !== "") {
       writer.uint32(10).string(message.regEx);
     }
-
     if (message.minLength.length !== 0) {
       writer.uint32(18).bytes(message.minLength);
     }
-
     if (message.maxLength.length !== 0) {
       writer.uint32(26).bytes(message.maxLength);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): DTagParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDTagParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.regEx = reader.string();
           break;
-
         case 2:
           message.minLength = reader.bytes();
           break;
-
         case 3:
           message.maxLength = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): DTagParams {
     return {
       regEx: isSet(object.regEx) ? String(object.regEx) : "",
@@ -382,7 +326,6 @@ export const DTagParams = {
         : new Uint8Array(),
     };
   },
-
   toJSON(message: DTagParams): unknown {
     const obj: any = {};
     message.regEx !== undefined && (obj.regEx = message.regEx);
@@ -396,7 +339,6 @@ export const DTagParams = {
       ));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<DTagParams>, I>>(
     object: I
   ): DTagParams {
@@ -407,13 +349,11 @@ export const DTagParams = {
     return message;
   },
 };
-
 function createBaseBioParams(): BioParams {
   return {
     maxLength: new Uint8Array(),
   };
 }
-
 export const BioParams = {
   encode(
     message: BioParams,
@@ -422,32 +362,25 @@ export const BioParams = {
     if (message.maxLength.length !== 0) {
       writer.uint32(26).bytes(message.maxLength);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): BioParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBioParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 3:
           message.maxLength = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): BioParams {
     return {
       maxLength: isSet(object.maxLength)
@@ -455,7 +388,6 @@ export const BioParams = {
         : new Uint8Array(),
     };
   },
-
   toJSON(message: BioParams): unknown {
     const obj: any = {};
     message.maxLength !== undefined &&
@@ -464,7 +396,6 @@ export const BioParams = {
       ));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<BioParams>, I>>(
     object: I
   ): BioParams {
@@ -473,7 +404,6 @@ export const BioParams = {
     return message;
   },
 };
-
 function createBaseOracleParams(): OracleParams {
   return {
     scriptId: Long.UZERO,
@@ -484,7 +414,6 @@ function createBaseOracleParams(): OracleParams {
     feeAmount: [],
   };
 }
-
 export const OracleParams = {
   encode(
     message: OracleParams,
@@ -493,72 +422,55 @@ export const OracleParams = {
     if (!message.scriptId.isZero()) {
       writer.uint32(8).uint64(message.scriptId);
     }
-
     if (!message.askCount.isZero()) {
       writer.uint32(16).uint64(message.askCount);
     }
-
     if (!message.minCount.isZero()) {
       writer.uint32(24).uint64(message.minCount);
     }
-
     if (!message.prepareGas.isZero()) {
       writer.uint32(32).uint64(message.prepareGas);
     }
-
     if (!message.executeGas.isZero()) {
       writer.uint32(40).uint64(message.executeGas);
     }
-
     for (const v of message.feeAmount) {
       Coin.encode(v!, writer.uint32(50).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): OracleParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOracleParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.scriptId = reader.uint64() as Long;
           break;
-
         case 2:
           message.askCount = reader.uint64() as Long;
           break;
-
         case 3:
           message.minCount = reader.uint64() as Long;
           break;
-
         case 4:
           message.prepareGas = reader.uint64() as Long;
           break;
-
         case 5:
           message.executeGas = reader.uint64() as Long;
           break;
-
         case 6:
           message.feeAmount.push(Coin.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): OracleParams {
     return {
       scriptId: isSet(object.scriptId)
@@ -581,7 +493,6 @@ export const OracleParams = {
         : [],
     };
   },
-
   toJSON(message: OracleParams): unknown {
     const obj: any = {};
     message.scriptId !== undefined &&
@@ -594,7 +505,6 @@ export const OracleParams = {
       (obj.prepareGas = (message.prepareGas || Long.UZERO).toString());
     message.executeGas !== undefined &&
       (obj.executeGas = (message.executeGas || Long.UZERO).toString());
-
     if (message.feeAmount) {
       obj.feeAmount = message.feeAmount.map((e) =>
         e ? Coin.toJSON(e) : undefined
@@ -602,10 +512,8 @@ export const OracleParams = {
     } else {
       obj.feeAmount = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<OracleParams>, I>>(
     object: I
   ): OracleParams {
@@ -634,13 +542,11 @@ export const OracleParams = {
     return message;
   },
 };
-
 function createBaseAppLinksParams(): AppLinksParams {
   return {
     validityDuration: undefined,
   };
 }
-
 export const AppLinksParams = {
   encode(
     message: AppLinksParams,
@@ -652,32 +558,25 @@ export const AppLinksParams = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): AppLinksParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAppLinksParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.validityDuration = Duration.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): AppLinksParams {
     return {
       validityDuration: isSet(object.validityDuration)
@@ -685,7 +584,6 @@ export const AppLinksParams = {
         : undefined,
     };
   },
-
   toJSON(message: AppLinksParams): unknown {
     const obj: any = {};
     message.validityDuration !== undefined &&
@@ -694,7 +592,6 @@ export const AppLinksParams = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<AppLinksParams>, I>>(
     object: I
   ): AppLinksParams {

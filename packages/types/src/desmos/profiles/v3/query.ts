@@ -25,7 +25,6 @@ import {
 import { QueryParamsRequest, QueryParamsResponse } from "./query_params";
 export const protobufPackage = "desmos.profiles.v3";
 /** Query defines the gRPC querier service. */
-
 export interface Query {
   /**
    * Profile queries the profile of a specific user given their DTag or address.
@@ -37,7 +36,6 @@ export interface Query {
    * IncomingDTagTransferRequests queries all the DTag transfers requests that
    * have been made towards the user with the given address
    */
-
   IncomingDTagTransferRequests(
     request: QueryIncomingDTagTransferRequestsRequest
   ): Promise<QueryIncomingDTagTransferRequestsResponse>;
@@ -45,13 +43,11 @@ export interface Query {
    * ChainLinks queries the chain links associated to the given user, if
    * provided. Otherwise it queries all the chain links stored.
    */
-
   ChainLinks(request: QueryChainLinksRequest): Promise<QueryChainLinksResponse>;
   /**
    * ChainLinkOwners queries for the owners of chain links, optionally searching
    * for a specific chain name and external address
    */
-
   ChainLinkOwners(
     request: QueryChainLinkOwnersRequest
   ): Promise<QueryChainLinkOwnersResponse>;
@@ -59,7 +55,6 @@ export interface Query {
    * DefaultExternalAddresses queries the default addresses associated to the
    * given user and (optionally) chain name
    */
-
   DefaultExternalAddresses(
     request: QueryDefaultExternalAddressesRequest
   ): Promise<QueryDefaultExternalAddressesResponse>;
@@ -67,7 +62,6 @@ export interface Query {
    * ApplicationLinks queries the applications links associated to the given
    * user, if provided. Otherwise, it queries all the application links stored.
    */
-
   ApplicationLinks(
     request: QueryApplicationLinksRequest
   ): Promise<QueryApplicationLinksResponse>;
@@ -75,7 +69,6 @@ export interface Query {
    * ApplicationLinkByClientID queries a single application link for a given
    * client id.
    */
-
   ApplicationLinkByClientID(
     request: QueryApplicationLinkByClientIDRequest
   ): Promise<QueryApplicationLinkByClientIDResponse>;
@@ -83,17 +76,14 @@ export interface Query {
    * ApplicationLinkOwners queries for the owners of applications links,
    * optionally searching for a specific application and username.
    */
-
   ApplicationLinkOwners(
     request: QueryApplicationLinkOwnersRequest
   ): Promise<QueryApplicationLinkOwnersResponse>;
   /** Params queries the profiles module params */
-
   Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Profile = this.Profile.bind(this);
@@ -107,7 +97,6 @@ export class QueryClientImpl implements Query {
     this.ApplicationLinkOwners = this.ApplicationLinkOwners.bind(this);
     this.Params = this.Params.bind(this);
   }
-
   Profile(request: QueryProfileRequest): Promise<QueryProfileResponse> {
     const data = QueryProfileRequest.encode(request).finish();
     const promise = this.rpc.request(
@@ -119,7 +108,6 @@ export class QueryClientImpl implements Query {
       QueryProfileResponse.decode(new _m0.Reader(data))
     );
   }
-
   IncomingDTagTransferRequests(
     request: QueryIncomingDTagTransferRequestsRequest
   ): Promise<QueryIncomingDTagTransferRequestsResponse> {
@@ -134,7 +122,6 @@ export class QueryClientImpl implements Query {
       QueryIncomingDTagTransferRequestsResponse.decode(new _m0.Reader(data))
     );
   }
-
   ChainLinks(
     request: QueryChainLinksRequest
   ): Promise<QueryChainLinksResponse> {
@@ -148,7 +135,6 @@ export class QueryClientImpl implements Query {
       QueryChainLinksResponse.decode(new _m0.Reader(data))
     );
   }
-
   ChainLinkOwners(
     request: QueryChainLinkOwnersRequest
   ): Promise<QueryChainLinkOwnersResponse> {
@@ -162,7 +148,6 @@ export class QueryClientImpl implements Query {
       QueryChainLinkOwnersResponse.decode(new _m0.Reader(data))
     );
   }
-
   DefaultExternalAddresses(
     request: QueryDefaultExternalAddressesRequest
   ): Promise<QueryDefaultExternalAddressesResponse> {
@@ -176,7 +161,6 @@ export class QueryClientImpl implements Query {
       QueryDefaultExternalAddressesResponse.decode(new _m0.Reader(data))
     );
   }
-
   ApplicationLinks(
     request: QueryApplicationLinksRequest
   ): Promise<QueryApplicationLinksResponse> {
@@ -190,7 +174,6 @@ export class QueryClientImpl implements Query {
       QueryApplicationLinksResponse.decode(new _m0.Reader(data))
     );
   }
-
   ApplicationLinkByClientID(
     request: QueryApplicationLinkByClientIDRequest
   ): Promise<QueryApplicationLinkByClientIDResponse> {
@@ -204,7 +187,6 @@ export class QueryClientImpl implements Query {
       QueryApplicationLinkByClientIDResponse.decode(new _m0.Reader(data))
     );
   }
-
   ApplicationLinkOwners(
     request: QueryApplicationLinkOwnersRequest
   ): Promise<QueryApplicationLinkOwnersResponse> {
@@ -218,7 +200,6 @@ export class QueryClientImpl implements Query {
       QueryApplicationLinkOwnersResponse.decode(new _m0.Reader(data))
     );
   }
-
   Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request(

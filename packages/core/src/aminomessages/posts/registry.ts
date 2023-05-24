@@ -6,7 +6,7 @@ import {
   MsgAddPostAttachment,
   MsgRemovePostAttachment,
   MsgAnswerPoll,
-} from "@desmoslabs/desmjs-types/desmos/posts/v2/msgs";
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import {
   MsgAddPostAttachmentTypeUrl,
   MsgAnswerPollTypeUrl,

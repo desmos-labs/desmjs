@@ -11,28 +11,23 @@ export const protobufPackage = "desmos.relationships.v1";
  * QueryRelationshipsRequest is the request type for the
  * Query/Relationships RPC method.
  */
-
 export interface QueryRelationshipsRequest {
   /** subspace to query the relationships for */
   subspaceId: Long;
   /** optional address of the user for which to query the relationships */
-
   user: string;
   /**
    * optional address of the counterparty of the relationships (used only if the
    * user is provided)
    */
-
   counterparty: string;
   /** pagination defines an optional pagination for the request. */
-
   pagination?: PageRequest;
 }
 /**
  * QueryRelationshipsResponse is the response type for the
  * Query/Relationships RPC method.
  */
-
 export interface QueryRelationshipsResponse {
   relationships: Relationship[];
   pagination?: PageResponse;
@@ -41,33 +36,27 @@ export interface QueryRelationshipsResponse {
  * QueryBlocksRequest is the request type for the Query/Blocks RPC
  * endpoint
  */
-
 export interface QueryBlocksRequest {
   /** subspace to query the blocks for */
   subspaceId: Long;
   /** optional address of the blocker to query the blocks for */
-
   blocker: string;
   /**
    * optional address of the blocked user to query the block for (used only if
    * the blocker is provided)
    */
-
   blocked: string;
   /** pagination defines an optional pagination for the request. */
-
   pagination?: PageRequest;
 }
 /**
  * QueryBlocksResponse is the response type for the Query/Blocks RPC
  * method.
  */
-
 export interface QueryBlocksResponse {
   blocks: UserBlock[];
   pagination?: PageResponse;
 }
-
 function createBaseQueryRelationshipsRequest(): QueryRelationshipsRequest {
   return {
     subspaceId: Long.UZERO,
@@ -76,7 +65,6 @@ function createBaseQueryRelationshipsRequest(): QueryRelationshipsRequest {
     pagination: undefined,
   };
 }
-
 export const QueryRelationshipsRequest = {
   encode(
     message: QueryRelationshipsRequest,
@@ -85,22 +73,17 @@ export const QueryRelationshipsRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.user !== "") {
       writer.uint32(18).string(message.user);
     }
-
     if (message.counterparty !== "") {
       writer.uint32(26).string(message.counterparty);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -108,36 +91,28 @@ export const QueryRelationshipsRequest = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRelationshipsRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.user = reader.string();
           break;
-
         case 3:
           message.counterparty = reader.string();
           break;
-
         case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRelationshipsRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -152,7 +127,6 @@ export const QueryRelationshipsRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryRelationshipsRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -166,7 +140,6 @@ export const QueryRelationshipsRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryRelationshipsRequest>, I>>(
     object: I
   ): QueryRelationshipsRequest {
@@ -184,14 +157,12 @@ export const QueryRelationshipsRequest = {
     return message;
   },
 };
-
 function createBaseQueryRelationshipsResponse(): QueryRelationshipsResponse {
   return {
     relationships: [],
     pagination: undefined,
   };
 }
-
 export const QueryRelationshipsResponse = {
   encode(
     message: QueryRelationshipsResponse,
@@ -200,17 +171,14 @@ export const QueryRelationshipsResponse = {
     for (const v of message.relationships) {
       Relationship.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -218,30 +186,24 @@ export const QueryRelationshipsResponse = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryRelationshipsResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.relationships.push(
             Relationship.decode(reader, reader.uint32())
           );
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryRelationshipsResponse {
     return {
       relationships: Array.isArray(object?.relationships)
@@ -252,10 +214,8 @@ export const QueryRelationshipsResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryRelationshipsResponse): unknown {
     const obj: any = {};
-
     if (message.relationships) {
       obj.relationships = message.relationships.map((e) =>
         e ? Relationship.toJSON(e) : undefined
@@ -263,14 +223,12 @@ export const QueryRelationshipsResponse = {
     } else {
       obj.relationships = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryRelationshipsResponse>, I>>(
     object: I
   ): QueryRelationshipsResponse {
@@ -284,7 +242,6 @@ export const QueryRelationshipsResponse = {
     return message;
   },
 };
-
 function createBaseQueryBlocksRequest(): QueryBlocksRequest {
   return {
     subspaceId: Long.UZERO,
@@ -293,7 +250,6 @@ function createBaseQueryBlocksRequest(): QueryBlocksRequest {
     pagination: undefined,
   };
 }
-
 export const QueryBlocksRequest = {
   encode(
     message: QueryBlocksRequest,
@@ -302,56 +258,43 @@ export const QueryBlocksRequest = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.blocker !== "") {
       writer.uint32(18).string(message.blocker);
     }
-
     if (message.blocked !== "") {
       writer.uint32(26).string(message.blocked);
     }
-
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryBlocksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBlocksRequest();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.blocker = reader.string();
           break;
-
         case 3:
           message.blocked = reader.string();
           break;
-
         case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryBlocksRequest {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -364,7 +307,6 @@ export const QueryBlocksRequest = {
         : undefined,
     };
   },
-
   toJSON(message: QueryBlocksRequest): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -377,7 +319,6 @@ export const QueryBlocksRequest = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryBlocksRequest>, I>>(
     object: I
   ): QueryBlocksRequest {
@@ -395,14 +336,12 @@ export const QueryBlocksRequest = {
     return message;
   },
 };
-
 function createBaseQueryBlocksResponse(): QueryBlocksResponse {
   return {
     blocks: [],
     pagination: undefined,
   };
 }
-
 export const QueryBlocksResponse = {
   encode(
     message: QueryBlocksResponse,
@@ -411,43 +350,34 @@ export const QueryBlocksResponse = {
     for (const v of message.blocks) {
       UserBlock.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): QueryBlocksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBlocksResponse();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.blocks.push(UserBlock.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): QueryBlocksResponse {
     return {
       blocks: Array.isArray(object?.blocks)
@@ -458,10 +388,8 @@ export const QueryBlocksResponse = {
         : undefined,
     };
   },
-
   toJSON(message: QueryBlocksResponse): unknown {
     const obj: any = {};
-
     if (message.blocks) {
       obj.blocks = message.blocks.map((e) =>
         e ? UserBlock.toJSON(e) : undefined
@@ -469,14 +397,12 @@ export const QueryBlocksResponse = {
     } else {
       obj.blocks = [];
     }
-
     message.pagination !== undefined &&
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<QueryBlocksResponse>, I>>(
     object: I
   ): QueryBlocksResponse {
@@ -490,7 +416,6 @@ export const QueryBlocksResponse = {
   },
 };
 /** Query defines the gRPC querier service. */
-
 export interface Query {
   /** Relationships queries all relationships present inside a specific subspace */
   Relationships(
@@ -500,18 +425,15 @@ export interface Query {
    * Blocks queries the blocks for the given user, if provided.
    * Otherwise, it queries all the stored blocks.
    */
-
   Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Relationships = this.Relationships.bind(this);
     this.Blocks = this.Blocks.bind(this);
   }
-
   Relationships(
     request: QueryRelationshipsRequest
   ): Promise<QueryRelationshipsResponse> {
@@ -525,7 +447,6 @@ export class QueryClientImpl implements Query {
       QueryRelationshipsResponse.decode(new _m0.Reader(data))
     );
   }
-
   Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse> {
     const data = QueryBlocksRequest.encode(request).finish();
     const promise = this.rpc.request(

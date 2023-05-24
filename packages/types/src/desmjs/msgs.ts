@@ -9,22 +9,18 @@ import {
 } from "../helpers";
 export const protobufPackage = "desmsjs.v2";
 /** MsgAuthenticate represents the message used to authenticate a user */
-
 export interface MsgAuthenticate {
   /** Address of the user to authenticate */
   user: string;
   /** Nonce to avoid double spending attacks */
-
   nonce: Uint8Array;
 }
-
 function createBaseMsgAuthenticate(): MsgAuthenticate {
   return {
     user: "",
     nonce: new Uint8Array(),
   };
 }
-
 export const MsgAuthenticate = {
   encode(
     message: MsgAuthenticate,
@@ -33,40 +29,31 @@ export const MsgAuthenticate = {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
     }
-
     if (message.nonce.length !== 0) {
       writer.uint32(18).bytes(message.nonce);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): MsgAuthenticate {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAuthenticate();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.user = reader.string();
           break;
-
         case 2:
           message.nonce = reader.bytes();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): MsgAuthenticate {
     return {
       user: isSet(object.user) ? String(object.user) : "",
@@ -75,7 +62,6 @@ export const MsgAuthenticate = {
         : new Uint8Array(),
     };
   },
-
   toJSON(message: MsgAuthenticate): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
@@ -85,7 +71,6 @@ export const MsgAuthenticate = {
       ));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<MsgAuthenticate>, I>>(
     object: I
   ): MsgAuthenticate {

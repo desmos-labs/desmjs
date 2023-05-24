@@ -16,7 +16,7 @@ ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
 
 # Url from where will be downloaded the desmos proto files
-DESMOS_VERSION="4.7.0"
+DESMOS_VERSION="5.0.0"
 SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"
 
 # Download the proto files
@@ -35,12 +35,12 @@ mkdir $PROTO_DIR
 
 # Mv the proto file into the proto dir
 mv "$TMP_DIR/desmos-$DESMOS_VERSION/proto" $PROTO_DIR
-mv "$TMP_DIR/desmos-$DESMOS_VERSION/third_party" $PROTO_DIR
 
-# Remove all the old proto folders
-rm -r "$PROTO_DIR/proto/desmos/profiles/v1beta1"
-rm -r "$PROTO_DIR/proto/desmos/profiles/v2"
-rm -r "$PROTO_DIR/proto/desmos/subspaces/v1"
+# Install needed third party proto files by telescope
+yarn telescope install @protobufs/cosmos @protobufs/cosmos_proto @protobufs/ibc
+
+# Mv the proto files downloaded by telescope into the proto dir
+find "proto" -mindepth 1 -maxdepth 1 -type d ! -name "desmjs" -exec mv -t "$PROTO_DIR/proto/" {} +
 
 # Clean up tmp dir
 rm -Rf $TMP_DIR

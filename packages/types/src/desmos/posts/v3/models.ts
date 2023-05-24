@@ -10,19 +10,15 @@ import {
   Exact,
 } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-export const protobufPackage = "desmos.posts.v2";
+export const protobufPackage = "desmos.posts.v3";
 /** PostReferenceType represents the different types of references */
-
 export enum PostReferenceType {
   /** POST_REFERENCE_TYPE_UNSPECIFIED - No reference specified */
   POST_REFERENCE_TYPE_UNSPECIFIED = 0,
-
   /** POST_REFERENCE_TYPE_REPLY - This reference represents a reply to the specified post */
   POST_REFERENCE_TYPE_REPLY = 1,
-
   /** POST_REFERENCE_TYPE_QUOTE - This reference represents a quote of the specified post */
   POST_REFERENCE_TYPE_QUOTE = 2,
-
   /** POST_REFERENCE_TYPE_REPOST - This reference represents a repost of the specified post */
   POST_REFERENCE_TYPE_REPOST = 3,
   UNRECOGNIZED = -1,
@@ -32,19 +28,15 @@ export function postReferenceTypeFromJSON(object: any): PostReferenceType {
     case 0:
     case "POST_REFERENCE_TYPE_UNSPECIFIED":
       return PostReferenceType.POST_REFERENCE_TYPE_UNSPECIFIED;
-
     case 1:
     case "POST_REFERENCE_TYPE_REPLY":
       return PostReferenceType.POST_REFERENCE_TYPE_REPLY;
-
     case 2:
     case "POST_REFERENCE_TYPE_QUOTE":
       return PostReferenceType.POST_REFERENCE_TYPE_QUOTE;
-
     case 3:
     case "POST_REFERENCE_TYPE_REPOST":
       return PostReferenceType.POST_REFERENCE_TYPE_REPOST;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -55,36 +47,27 @@ export function postReferenceTypeToJSON(object: PostReferenceType): string {
   switch (object) {
     case PostReferenceType.POST_REFERENCE_TYPE_UNSPECIFIED:
       return "POST_REFERENCE_TYPE_UNSPECIFIED";
-
     case PostReferenceType.POST_REFERENCE_TYPE_REPLY:
       return "POST_REFERENCE_TYPE_REPLY";
-
     case PostReferenceType.POST_REFERENCE_TYPE_QUOTE:
       return "POST_REFERENCE_TYPE_QUOTE";
-
     case PostReferenceType.POST_REFERENCE_TYPE_REPOST:
       return "POST_REFERENCE_TYPE_REPOST";
-
     case PostReferenceType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
 /** ReplySetting contains the possible reply settings that a post can have */
-
 export enum ReplySetting {
   /** REPLY_SETTING_UNSPECIFIED - No reply setting specified */
   REPLY_SETTING_UNSPECIFIED = 0,
-
   /** REPLY_SETTING_EVERYONE - Everyone will be able to reply to this post */
   REPLY_SETTING_EVERYONE = 1,
-
   /** REPLY_SETTING_FOLLOWERS - Only followers of the author will be able to reply to this post */
   REPLY_SETTING_FOLLOWERS = 2,
-
   /** REPLY_SETTING_MUTUAL - Only the author mutual followers will be able to reply to this post */
   REPLY_SETTING_MUTUAL = 3,
-
   /** REPLY_SETTING_MENTIONS - Only people mentioned inside this post will be able to reply */
   REPLY_SETTING_MENTIONS = 4,
   UNRECOGNIZED = -1,
@@ -94,23 +77,18 @@ export function replySettingFromJSON(object: any): ReplySetting {
     case 0:
     case "REPLY_SETTING_UNSPECIFIED":
       return ReplySetting.REPLY_SETTING_UNSPECIFIED;
-
     case 1:
     case "REPLY_SETTING_EVERYONE":
       return ReplySetting.REPLY_SETTING_EVERYONE;
-
     case 2:
     case "REPLY_SETTING_FOLLOWERS":
       return ReplySetting.REPLY_SETTING_FOLLOWERS;
-
     case 3:
     case "REPLY_SETTING_MUTUAL":
       return ReplySetting.REPLY_SETTING_MUTUAL;
-
     case 4:
     case "REPLY_SETTING_MENTIONS":
       return ReplySetting.REPLY_SETTING_MENTIONS;
-
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -121,122 +99,90 @@ export function replySettingToJSON(object: ReplySetting): string {
   switch (object) {
     case ReplySetting.REPLY_SETTING_UNSPECIFIED:
       return "REPLY_SETTING_UNSPECIFIED";
-
     case ReplySetting.REPLY_SETTING_EVERYONE:
       return "REPLY_SETTING_EVERYONE";
-
     case ReplySetting.REPLY_SETTING_FOLLOWERS:
       return "REPLY_SETTING_FOLLOWERS";
-
     case ReplySetting.REPLY_SETTING_MUTUAL:
       return "REPLY_SETTING_MUTUAL";
-
     case ReplySetting.REPLY_SETTING_MENTIONS:
       return "REPLY_SETTING_MENTIONS";
-
     case ReplySetting.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
 /** Post contains all the information about a single post */
-
 export interface Post {
   /** Id of the subspace inside which the post has been created */
   subspaceId: Long;
   /** Id of the section inside which the post has been created */
-
   sectionId: number;
   /** Unique id of the post */
-
   id: Long;
   /** (optional) External id for this post */
-
   externalId: string;
   /** (optional) Text of the post */
-
   text: string;
   /** (optional) Entities connected to this post */
-
   entities?: Entities;
   /** Tags related to this post, useful for categorization */
-
   tags: string[];
   /** Author of the post */
-
   author: string;
   /** (optional) Id of the original post of the conversation */
-
   conversationId: Long;
   /** A list this posts references (either as a reply, repost or quote) */
-
   referencedPosts: PostReference[];
   /** Reply settings of this post */
-
   replySettings: ReplySetting;
   /** Creation date of the post */
-
   creationDate?: Timestamp;
   /** (optional) Last edited time of the post */
-
   lastEditedDate?: Timestamp;
 }
 /** PostReference contains the details of a post reference */
-
 export interface PostReference {
   /** Type of reference */
   type: PostReferenceType;
   /** Id of the referenced post */
-
   postId: Long;
   /**
    * Position of the reference inside the post's text. This should be used only
    * with the type set to TYPE_QUOTE
    */
-
   position: Long;
 }
 /** Contains the details of entities parsed out of the post text */
-
 export interface Entities {
   /** Hashtags represent inside the post text */
   hashtags: TextTag[];
   /** Mentions present inside the post text */
-
   mentions: TextTag[];
   /** Links present inside the post text */
-
   urls: Url[];
 }
 /** TextTag represents a tag within the post text */
-
 export interface TextTag {
   /** Index of the character inside the text at which the tag starts */
   start: Long;
   /** Index of the character inside the text at which the tag ends */
-
   end: Long;
   /** Tag reference (user address, hashtag value, etc) */
-
   tag: string;
 }
 /** Url contains the details of a generic URL */
-
 export interface Url {
   /** Index of the character inside the text at which the URL starts */
   start: Long;
   /** Index of the character inside the text at which the URL ends */
-
   end: Long;
   /** Value of the URL where the user should be redirected to */
-
   url: string;
   /** (optional) Display value of the URL */
-
   displayUrl: string;
 }
 /** Attachment contains the data of a single post attachment */
-
 export interface Attachment {
   /**
    * Id of the subspace inside which the post to which this attachment should be
@@ -244,90 +190,68 @@ export interface Attachment {
    */
   subspaceId: Long;
   /** Id of the post to which this attachment should be connected */
-
   postId: Long;
   /** If of this attachment */
-
   id: number;
   /** Content of the attachment */
-
   content?: Any;
 }
 /** Media represents a media attachment */
-
 export interface Media {
   uri: string;
   mimeType: string;
 }
 /** Poll represents a poll attachment */
-
 export interface Poll {
   /** Question of the poll */
   question: string;
   /** Answers the users can choose from */
-
   providedAnswers: Poll_ProvidedAnswer[];
   /** Date at which the poll will close */
-
   endDate?: Timestamp;
   /** Whether the poll allows multiple choices from the same user or not */
-
   allowsMultipleAnswers: boolean;
   /** Whether the poll allows to edit an answer or not */
-
   allowsAnswerEdits: boolean;
   /** Final poll results */
-
   finalTallyResults?: PollTallyResults;
 }
 /** Provided answer contains the details of a possible poll answer */
-
 export interface Poll_ProvidedAnswer {
   /** (optional) Text of the answer */
   text: string;
-  /** Attachments of the answer */
-
-  attachments: Attachment[];
+  /** Content of the attachment */
+  attachments: Any[];
 }
 /** UserAnswer represents a user answer to a poll */
-
 export interface UserAnswer {
   /** Subspace id inside which the post related to this attachment is located */
   subspaceId: Long;
   /** Id of the post associated to this attachment */
-
   postId: Long;
   /** Id of the poll to which this answer is associated */
-
   pollId: number;
   /** Indexes of the answers inside the ProvidedAnswers array */
-
   answersIndexes: number[];
   /** Address of the user answering the poll */
-
   user: string;
 }
 /** PollTallyResults contains the tally results for a poll */
-
 export interface PollTallyResults {
   results: PollTallyResults_AnswerResult[];
 }
 /** AnswerResult contains the result of a single poll provided answer */
-
 export interface PollTallyResults_AnswerResult {
   /** Index of the answer inside the poll's ProvidedAnswers slice */
   answerIndex: number;
   /** Number of votes the answer has received */
-
   votes: Long;
 }
 /** Params contains the parameters for the posts module */
-
 export interface Params {
   /** Maximum length of the post text */
   maxTextLength: number;
 }
-
 function createBasePost(): Post {
   return {
     subspaceId: Long.UZERO,
@@ -345,139 +269,107 @@ function createBasePost(): Post {
     lastEditedDate: undefined,
   };
 }
-
 export const Post = {
   encode(message: Post, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.sectionId !== 0) {
       writer.uint32(16).uint32(message.sectionId);
     }
-
     if (!message.id.isZero()) {
       writer.uint32(24).uint64(message.id);
     }
-
     if (message.externalId !== "") {
       writer.uint32(34).string(message.externalId);
     }
-
     if (message.text !== "") {
       writer.uint32(42).string(message.text);
     }
-
     if (message.entities !== undefined) {
       Entities.encode(message.entities, writer.uint32(50).fork()).ldelim();
     }
-
     for (const v of message.tags) {
       writer.uint32(58).string(v!);
     }
-
     if (message.author !== "") {
       writer.uint32(66).string(message.author);
     }
-
     if (!message.conversationId.isZero()) {
       writer.uint32(72).uint64(message.conversationId);
     }
-
     for (const v of message.referencedPosts) {
       PostReference.encode(v!, writer.uint32(82).fork()).ldelim();
     }
-
     if (message.replySettings !== 0) {
       writer.uint32(88).int32(message.replySettings);
     }
-
     if (message.creationDate !== undefined) {
       Timestamp.encode(message.creationDate, writer.uint32(98).fork()).ldelim();
     }
-
     if (message.lastEditedDate !== undefined) {
       Timestamp.encode(
         message.lastEditedDate,
         writer.uint32(106).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Post {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePost();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.sectionId = reader.uint32();
           break;
-
         case 3:
           message.id = reader.uint64() as Long;
           break;
-
         case 4:
           message.externalId = reader.string();
           break;
-
         case 5:
           message.text = reader.string();
           break;
-
         case 6:
           message.entities = Entities.decode(reader, reader.uint32());
           break;
-
         case 7:
           message.tags.push(reader.string());
           break;
-
         case 8:
           message.author = reader.string();
           break;
-
         case 9:
           message.conversationId = reader.uint64() as Long;
           break;
-
         case 10:
           message.referencedPosts.push(
             PostReference.decode(reader, reader.uint32())
           );
           break;
-
         case 11:
           message.replySettings = reader.int32() as any;
           break;
-
         case 12:
           message.creationDate = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 13:
           message.lastEditedDate = Timestamp.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Post {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -511,7 +403,6 @@ export const Post = {
         : undefined,
     };
   },
-
   toJSON(message: Post): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -526,17 +417,14 @@ export const Post = {
       (obj.entities = message.entities
         ? Entities.toJSON(message.entities)
         : undefined);
-
     if (message.tags) {
       obj.tags = message.tags.map((e) => e);
     } else {
       obj.tags = [];
     }
-
     message.author !== undefined && (obj.author = message.author);
     message.conversationId !== undefined &&
       (obj.conversationId = (message.conversationId || Long.UZERO).toString());
-
     if (message.referencedPosts) {
       obj.referencedPosts = message.referencedPosts.map((e) =>
         e ? PostReference.toJSON(e) : undefined
@@ -544,7 +432,6 @@ export const Post = {
     } else {
       obj.referencedPosts = [];
     }
-
     message.replySettings !== undefined &&
       (obj.replySettings = replySettingToJSON(message.replySettings));
     message.creationDate !== undefined &&
@@ -555,7 +442,6 @@ export const Post = {
       ).toISOString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Post>, I>>(object: I): Post {
     const message = createBasePost();
     message.subspaceId =
@@ -593,7 +479,6 @@ export const Post = {
     return message;
   },
 };
-
 function createBasePostReference(): PostReference {
   return {
     type: 0,
@@ -601,7 +486,6 @@ function createBasePostReference(): PostReference {
     position: Long.UZERO,
   };
 }
-
 export const PostReference = {
   encode(
     message: PostReference,
@@ -610,48 +494,37 @@ export const PostReference = {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (!message.position.isZero()) {
       writer.uint32(24).uint64(message.position);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PostReference {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePostReference();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.type = reader.int32() as any;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.position = reader.uint64() as Long;
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PostReference {
     return {
       type: isSet(object.type) ? postReferenceTypeFromJSON(object.type) : 0,
@@ -661,7 +534,6 @@ export const PostReference = {
         : Long.UZERO,
     };
   },
-
   toJSON(message: PostReference): unknown {
     const obj: any = {};
     message.type !== undefined &&
@@ -672,7 +544,6 @@ export const PostReference = {
       (obj.position = (message.position || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PostReference>, I>>(
     object: I
   ): PostReference {
@@ -689,7 +560,6 @@ export const PostReference = {
     return message;
   },
 };
-
 function createBaseEntities(): Entities {
   return {
     hashtags: [],
@@ -697,7 +567,6 @@ function createBaseEntities(): Entities {
     urls: [],
   };
 }
-
 export const Entities = {
   encode(
     message: Entities,
@@ -706,48 +575,37 @@ export const Entities = {
     for (const v of message.hashtags) {
       TextTag.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     for (const v of message.mentions) {
       TextTag.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.urls) {
       Url.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Entities {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntities();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.hashtags.push(TextTag.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.mentions.push(TextTag.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.urls.push(Url.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Entities {
     return {
       hashtags: Array.isArray(object?.hashtags)
@@ -761,10 +619,8 @@ export const Entities = {
         : [],
     };
   },
-
   toJSON(message: Entities): unknown {
     const obj: any = {};
-
     if (message.hashtags) {
       obj.hashtags = message.hashtags.map((e) =>
         e ? TextTag.toJSON(e) : undefined
@@ -772,7 +628,6 @@ export const Entities = {
     } else {
       obj.hashtags = [];
     }
-
     if (message.mentions) {
       obj.mentions = message.mentions.map((e) =>
         e ? TextTag.toJSON(e) : undefined
@@ -780,16 +635,13 @@ export const Entities = {
     } else {
       obj.mentions = [];
     }
-
     if (message.urls) {
       obj.urls = message.urls.map((e) => (e ? Url.toJSON(e) : undefined));
     } else {
       obj.urls = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Entities>, I>>(object: I): Entities {
     const message = createBaseEntities();
     message.hashtags =
@@ -800,7 +652,6 @@ export const Entities = {
     return message;
   },
 };
-
 function createBaseTextTag(): TextTag {
   return {
     start: Long.UZERO,
@@ -808,7 +659,6 @@ function createBaseTextTag(): TextTag {
     tag: "",
   };
 }
-
 export const TextTag = {
   encode(
     message: TextTag,
@@ -817,48 +667,37 @@ export const TextTag = {
     if (!message.start.isZero()) {
       writer.uint32(8).uint64(message.start);
     }
-
     if (!message.end.isZero()) {
       writer.uint32(16).uint64(message.end);
     }
-
     if (message.tag !== "") {
       writer.uint32(26).string(message.tag);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): TextTag {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTextTag();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.start = reader.uint64() as Long;
           break;
-
         case 2:
           message.end = reader.uint64() as Long;
           break;
-
         case 3:
           message.tag = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): TextTag {
     return {
       start: isSet(object.start) ? Long.fromValue(object.start) : Long.UZERO,
@@ -866,7 +705,6 @@ export const TextTag = {
       tag: isSet(object.tag) ? String(object.tag) : "",
     };
   },
-
   toJSON(message: TextTag): unknown {
     const obj: any = {};
     message.start !== undefined &&
@@ -876,7 +714,6 @@ export const TextTag = {
     message.tag !== undefined && (obj.tag = message.tag);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<TextTag>, I>>(object: I): TextTag {
     const message = createBaseTextTag();
     message.start =
@@ -891,7 +728,6 @@ export const TextTag = {
     return message;
   },
 };
-
 function createBaseUrl(): Url {
   return {
     start: Long.UZERO,
@@ -900,62 +736,48 @@ function createBaseUrl(): Url {
     displayUrl: "",
   };
 }
-
 export const Url = {
   encode(message: Url, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.start.isZero()) {
       writer.uint32(8).uint64(message.start);
     }
-
     if (!message.end.isZero()) {
       writer.uint32(16).uint64(message.end);
     }
-
     if (message.url !== "") {
       writer.uint32(26).string(message.url);
     }
-
     if (message.displayUrl !== "") {
       writer.uint32(34).string(message.displayUrl);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Url {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUrl();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.start = reader.uint64() as Long;
           break;
-
         case 2:
           message.end = reader.uint64() as Long;
           break;
-
         case 3:
           message.url = reader.string();
           break;
-
         case 4:
           message.displayUrl = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Url {
     return {
       start: isSet(object.start) ? Long.fromValue(object.start) : Long.UZERO,
@@ -964,7 +786,6 @@ export const Url = {
       displayUrl: isSet(object.displayUrl) ? String(object.displayUrl) : "",
     };
   },
-
   toJSON(message: Url): unknown {
     const obj: any = {};
     message.start !== undefined &&
@@ -975,7 +796,6 @@ export const Url = {
     message.displayUrl !== undefined && (obj.displayUrl = message.displayUrl);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Url>, I>>(object: I): Url {
     const message = createBaseUrl();
     message.start =
@@ -991,7 +811,6 @@ export const Url = {
     return message;
   },
 };
-
 function createBaseAttachment(): Attachment {
   return {
     subspaceId: Long.UZERO,
@@ -1000,7 +819,6 @@ function createBaseAttachment(): Attachment {
     content: undefined,
   };
 }
-
 export const Attachment = {
   encode(
     message: Attachment,
@@ -1009,56 +827,43 @@ export const Attachment = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.id !== 0) {
       writer.uint32(24).uint32(message.id);
     }
-
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(34).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Attachment {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttachment();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.id = reader.uint32();
           break;
-
         case 4:
           message.content = Any.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Attachment {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -1069,7 +874,6 @@ export const Attachment = {
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
     };
   },
-
   toJSON(message: Attachment): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -1081,7 +885,6 @@ export const Attachment = {
       (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Attachment>, I>>(
     object: I
   ): Attachment {
@@ -1102,67 +905,54 @@ export const Attachment = {
     return message;
   },
 };
-
 function createBaseMedia(): Media {
   return {
     uri: "",
     mimeType: "",
   };
 }
-
 export const Media = {
   encode(message: Media, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.uri !== "") {
       writer.uint32(18).string(message.uri);
     }
-
     if (message.mimeType !== "") {
       writer.uint32(26).string(message.mimeType);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Media {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 2:
           message.uri = reader.string();
           break;
-
         case 3:
           message.mimeType = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Media {
     return {
       uri: isSet(object.uri) ? String(object.uri) : "",
       mimeType: isSet(object.mimeType) ? String(object.mimeType) : "",
     };
   },
-
   toJSON(message: Media): unknown {
     const obj: any = {};
     message.uri !== undefined && (obj.uri = message.uri);
     message.mimeType !== undefined && (obj.mimeType = message.mimeType);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Media>, I>>(object: I): Media {
     const message = createBaseMedia();
     message.uri = object.uri ?? "";
@@ -1170,7 +960,6 @@ export const Media = {
     return message;
   },
 };
-
 function createBasePoll(): Poll {
   return {
     question: "",
@@ -1181,86 +970,68 @@ function createBasePoll(): Poll {
     finalTallyResults: undefined,
   };
 }
-
 export const Poll = {
   encode(message: Poll, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.question !== "") {
       writer.uint32(10).string(message.question);
     }
-
     for (const v of message.providedAnswers) {
       Poll_ProvidedAnswer.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     if (message.endDate !== undefined) {
       Timestamp.encode(message.endDate, writer.uint32(26).fork()).ldelim();
     }
-
     if (message.allowsMultipleAnswers === true) {
       writer.uint32(32).bool(message.allowsMultipleAnswers);
     }
-
     if (message.allowsAnswerEdits === true) {
       writer.uint32(40).bool(message.allowsAnswerEdits);
     }
-
     if (message.finalTallyResults !== undefined) {
       PollTallyResults.encode(
         message.finalTallyResults,
         writer.uint32(50).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Poll {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoll();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.question = reader.string();
           break;
-
         case 2:
           message.providedAnswers.push(
             Poll_ProvidedAnswer.decode(reader, reader.uint32())
           );
           break;
-
         case 3:
           message.endDate = Timestamp.decode(reader, reader.uint32());
           break;
-
         case 4:
           message.allowsMultipleAnswers = reader.bool();
           break;
-
         case 5:
           message.allowsAnswerEdits = reader.bool();
           break;
-
         case 6:
           message.finalTallyResults = PollTallyResults.decode(
             reader,
             reader.uint32()
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Poll {
     return {
       question: isSet(object.question) ? String(object.question) : "",
@@ -1283,11 +1054,9 @@ export const Poll = {
         : undefined,
     };
   },
-
   toJSON(message: Poll): unknown {
     const obj: any = {};
     message.question !== undefined && (obj.question = message.question);
-
     if (message.providedAnswers) {
       obj.providedAnswers = message.providedAnswers.map((e) =>
         e ? Poll_ProvidedAnswer.toJSON(e) : undefined
@@ -1295,7 +1064,6 @@ export const Poll = {
     } else {
       obj.providedAnswers = [];
     }
-
     message.endDate !== undefined &&
       (obj.endDate = fromTimestamp(message.endDate).toISOString());
     message.allowsMultipleAnswers !== undefined &&
@@ -1308,7 +1076,6 @@ export const Poll = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Poll>, I>>(object: I): Poll {
     const message = createBasePoll();
     message.question = object.question ?? "";
@@ -1329,14 +1096,12 @@ export const Poll = {
     return message;
   },
 };
-
 function createBasePoll_ProvidedAnswer(): Poll_ProvidedAnswer {
   return {
     text: "",
     attachments: [],
   };
 }
-
 export const Poll_ProvidedAnswer = {
   encode(
     message: Poll_ProvidedAnswer,
@@ -1345,75 +1110,61 @@ export const Poll_ProvidedAnswer = {
     if (message.text !== "") {
       writer.uint32(10).string(message.text);
     }
-
     for (const v of message.attachments) {
-      Attachment.encode(v!, writer.uint32(18).fork()).ldelim();
+      Any.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Poll_ProvidedAnswer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoll_ProvidedAnswer();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.text = reader.string();
           break;
-
         case 2:
-          message.attachments.push(Attachment.decode(reader, reader.uint32()));
+          message.attachments.push(Any.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Poll_ProvidedAnswer {
     return {
       text: isSet(object.text) ? String(object.text) : "",
       attachments: Array.isArray(object?.attachments)
-        ? object.attachments.map((e: any) => Attachment.fromJSON(e))
+        ? object.attachments.map((e: any) => Any.fromJSON(e))
         : [],
     };
   },
-
   toJSON(message: Poll_ProvidedAnswer): unknown {
     const obj: any = {};
     message.text !== undefined && (obj.text = message.text);
-
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toJSON(e) : undefined
+        e ? Any.toJSON(e) : undefined
       );
     } else {
       obj.attachments = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Poll_ProvidedAnswer>, I>>(
     object: I
   ): Poll_ProvidedAnswer {
     const message = createBasePoll_ProvidedAnswer();
     message.text = object.text ?? "";
     message.attachments =
-      object.attachments?.map((e) => Attachment.fromPartial(e)) || [];
+      object.attachments?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
-
 function createBaseUserAnswer(): UserAnswer {
   return {
     subspaceId: Long.UZERO,
@@ -1423,7 +1174,6 @@ function createBaseUserAnswer(): UserAnswer {
     user: "",
   };
 }
-
 export const UserAnswer = {
   encode(
     message: UserAnswer,
@@ -1432,77 +1182,58 @@ export const UserAnswer = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.pollId !== 0) {
       writer.uint32(24).uint32(message.pollId);
     }
-
     writer.uint32(34).fork();
-
     for (const v of message.answersIndexes) {
       writer.uint32(v);
     }
-
     writer.ldelim();
-
     if (message.user !== "") {
       writer.uint32(42).string(message.user);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): UserAnswer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUserAnswer();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.pollId = reader.uint32();
           break;
-
         case 4:
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
-
             while (reader.pos < end2) {
               message.answersIndexes.push(reader.uint32());
             }
           } else {
             message.answersIndexes.push(reader.uint32());
           }
-
           break;
-
         case 5:
           message.user = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): UserAnswer {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -1516,7 +1247,6 @@ export const UserAnswer = {
       user: isSet(object.user) ? String(object.user) : "",
     };
   },
-
   toJSON(message: UserAnswer): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -1524,17 +1254,14 @@ export const UserAnswer = {
     message.postId !== undefined &&
       (obj.postId = (message.postId || Long.UZERO).toString());
     message.pollId !== undefined && (obj.pollId = Math.round(message.pollId));
-
     if (message.answersIndexes) {
       obj.answersIndexes = message.answersIndexes.map((e) => Math.round(e));
     } else {
       obj.answersIndexes = [];
     }
-
     message.user !== undefined && (obj.user = message.user);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<UserAnswer>, I>>(
     object: I
   ): UserAnswer {
@@ -1553,13 +1280,11 @@ export const UserAnswer = {
     return message;
   },
 };
-
 function createBasePollTallyResults(): PollTallyResults {
   return {
     results: [],
   };
 }
-
 export const PollTallyResults = {
   encode(
     message: PollTallyResults,
@@ -1571,34 +1296,27 @@ export const PollTallyResults = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): PollTallyResults {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePollTallyResults();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.results.push(
             PollTallyResults_AnswerResult.decode(reader, reader.uint32())
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PollTallyResults {
     return {
       results: Array.isArray(object?.results)
@@ -1608,10 +1326,8 @@ export const PollTallyResults = {
         : [],
     };
   },
-
   toJSON(message: PollTallyResults): unknown {
     const obj: any = {};
-
     if (message.results) {
       obj.results = message.results.map((e) =>
         e ? PollTallyResults_AnswerResult.toJSON(e) : undefined
@@ -1619,10 +1335,8 @@ export const PollTallyResults = {
     } else {
       obj.results = [];
     }
-
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PollTallyResults>, I>>(
     object: I
   ): PollTallyResults {
@@ -1634,14 +1348,12 @@ export const PollTallyResults = {
     return message;
   },
 };
-
 function createBasePollTallyResults_AnswerResult(): PollTallyResults_AnswerResult {
   return {
     answerIndex: 0,
     votes: Long.UZERO,
   };
 }
-
 export const PollTallyResults_AnswerResult = {
   encode(
     message: PollTallyResults_AnswerResult,
@@ -1650,14 +1362,11 @@ export const PollTallyResults_AnswerResult = {
     if (message.answerIndex !== 0) {
       writer.uint32(8).uint32(message.answerIndex);
     }
-
     if (!message.votes.isZero()) {
       writer.uint32(16).uint64(message.votes);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -1665,35 +1374,28 @@ export const PollTallyResults_AnswerResult = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePollTallyResults_AnswerResult();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.answerIndex = reader.uint32();
           break;
-
         case 2:
           message.votes = reader.uint64() as Long;
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): PollTallyResults_AnswerResult {
     return {
       answerIndex: isSet(object.answerIndex) ? Number(object.answerIndex) : 0,
       votes: isSet(object.votes) ? Long.fromValue(object.votes) : Long.UZERO,
     };
   },
-
   toJSON(message: PollTallyResults_AnswerResult): unknown {
     const obj: any = {};
     message.answerIndex !== undefined &&
@@ -1702,7 +1404,6 @@ export const PollTallyResults_AnswerResult = {
       (obj.votes = (message.votes || Long.UZERO).toString());
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<PollTallyResults_AnswerResult>, I>>(
     object: I
   ): PollTallyResults_AnswerResult {
@@ -1715,13 +1416,11 @@ export const PollTallyResults_AnswerResult = {
     return message;
   },
 };
-
 function createBaseParams(): Params {
   return {
     maxTextLength: 0,
   };
 }
-
 export const Params = {
   encode(
     message: Params,
@@ -1730,32 +1429,25 @@ export const Params = {
     if (message.maxTextLength !== 0) {
       writer.uint32(8).uint32(message.maxTextLength);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.maxTextLength = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Params {
     return {
       maxTextLength: isSet(object.maxTextLength)
@@ -1763,14 +1455,12 @@ export const Params = {
         : 0,
     };
   },
-
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.maxTextLength !== undefined &&
       (obj.maxTextLength = Math.round(message.maxTextLength));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
     const message = createBaseParams();
     message.maxTextLength = object.maxTextLength ?? 0;

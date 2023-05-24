@@ -1,75 +1,70 @@
 /* eslint-disable */
-import { Params } from "./params";
+import { GrantAuthorization } from "./authz";
 import * as _m0 from "protobufjs/minimal";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
-export const protobufPackage = "desmos.fees.v1";
-/** GenesisState contains the data of the genesis state for the fees module */
-
+import { DeepPartial, Exact } from "../../../helpers";
+export const protobufPackage = "cosmos.authz.v1beta1";
+/** GenesisState defines the authz module's genesis state. */
 export interface GenesisState {
-  params?: Params;
+  authorization: GrantAuthorization[];
 }
-
 function createBaseGenesisState(): GenesisState {
   return {
-    params: undefined,
+    authorization: [],
   };
 }
-
 export const GenesisState = {
   encode(
     message: GenesisState,
     writer: _m0.Writer = _m0.Writer.create()
   ): _m0.Writer {
-    if (message.params !== undefined) {
-      Params.encode(message.params, writer.uint32(10).fork()).ldelim();
+    for (const v of message.authorization) {
+      GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.authorization.push(
+            GrantAuthorization.decode(reader, reader.uint32())
+          );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): GenesisState {
     return {
-      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      authorization: Array.isArray(object?.authorization)
+        ? object.authorization.map((e: any) => GrantAuthorization.fromJSON(e))
+        : [],
     };
   },
-
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.authorization) {
+      obj.authorization = message.authorization.map((e) =>
+        e ? GrantAuthorization.toJSON(e) : undefined
+      );
+    } else {
+      obj.authorization = [];
+    }
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
     object: I
   ): GenesisState {
     const message = createBaseGenesisState();
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
+    message.authorization =
+      object.authorization?.map((e) => GrantAuthorization.fromPartial(e)) || [];
     return message;
   },
 };

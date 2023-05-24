@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v2/models";
+import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { AminoContent, AminoEntities, AminoPostReference } from "./types";
 import {
   MsgAddPostAttachmentAminoType,

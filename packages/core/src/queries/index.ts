@@ -11,14 +11,12 @@ import { AuthzExtension } from "./authz";
 import { ProfilesExtension } from "./profiles";
 import { RelationshipsExtension } from "./relationships";
 import { SubspacesExtension } from "./subspaces";
-import { FeesExtension } from "./fees";
 import { SupplyExtension } from "./supply";
 import { PostsExtension } from "./posts";
 import { ReactionsExtension } from "./reactions";
 import { ReportsExtension } from "./reports";
 
 export * from "./authz";
-export * from "./fees";
 export * from "./posts";
 export * from "./profiles";
 export * from "./reactions";
@@ -39,7 +37,6 @@ export type DesmosQueryClient = QueryClient &
   PostsExtension &
   ReactionsExtension &
   ReportsExtension &
-  FeesExtension &
   SupplyExtension &
   WasmExtension &
   IbcExtension;

@@ -7,22 +7,18 @@ export const protobufPackage = "desmos.reactions.v1.client";
  * SetReactionsParamsJSON contains the data that can be specified when setting a
  * subspace reactions params using the CLI command
  */
-
 export interface SetReactionsParamsJSON {
   /** Params related to RegisteredReactionValue reactions */
   registeredReactionParams?: RegisteredReactionValueParams;
   /** Params related to FreeTextValue reactions */
-
   freeTextParams?: FreeTextValueParams;
 }
-
 function createBaseSetReactionsParamsJSON(): SetReactionsParamsJSON {
   return {
     registeredReactionParams: undefined,
     freeTextParams: undefined,
   };
 }
-
 export const SetReactionsParamsJSON = {
   encode(
     message: SetReactionsParamsJSON,
@@ -34,17 +30,14 @@ export const SetReactionsParamsJSON = {
         writer.uint32(10).fork()
       ).ldelim();
     }
-
     if (message.freeTextParams !== undefined) {
       FreeTextValueParams.encode(
         message.freeTextParams,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -52,32 +45,26 @@ export const SetReactionsParamsJSON = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSetReactionsParamsJSON();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.registeredReactionParams =
             RegisteredReactionValueParams.decode(reader, reader.uint32());
           break;
-
         case 2:
           message.freeTextParams = FreeTextValueParams.decode(
             reader,
             reader.uint32()
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SetReactionsParamsJSON {
     return {
       registeredReactionParams: isSet(object.registeredReactionParams)
@@ -90,7 +77,6 @@ export const SetReactionsParamsJSON = {
         : undefined,
     };
   },
-
   toJSON(message: SetReactionsParamsJSON): unknown {
     const obj: any = {};
     message.registeredReactionParams !== undefined &&
@@ -103,7 +89,6 @@ export const SetReactionsParamsJSON = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<SetReactionsParamsJSON>, I>>(
     object: I
   ): SetReactionsParamsJSON {

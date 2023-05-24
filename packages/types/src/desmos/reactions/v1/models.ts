@@ -4,28 +4,22 @@ import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reactions.v1";
 /** Reaction contains the data of a single post reaction */
-
 export interface Reaction {
   /** Id of the subspace inside which the reaction has been put */
   subspaceId: Long;
   /** Id of the post to which the reaction is associated */
-
   postId: Long;
   /** Id of the reaction within the post */
-
   id: number;
   /** Value of the reaction. */
-
   value?: Any;
   /** Author of the reaction */
-
   author: string;
 }
 /**
  * RegisteredReactionValue contains the details of a reaction value that
  * references a reaction registered within the subspace
  */
-
 export interface RegisteredReactionValue {
   /** Id of the registered reaction */
   registeredReactionId: number;
@@ -34,7 +28,6 @@ export interface RegisteredReactionValue {
  * FreeTextValue contains the details of a reaction value that
  * is made of free text
  */
-
 export interface FreeTextValue {
   text: string;
 }
@@ -42,60 +35,48 @@ export interface FreeTextValue {
  * RegisteredReaction contains the details of a registered reaction within a
  * subspace
  */
-
 export interface RegisteredReaction {
   /** Id of the subspace for which this reaction has been registered */
   subspaceId: Long;
   /** Id of the registered reaction */
-
   id: number;
   /** Unique shorthand code associated to this reaction */
-
   shorthandCode: string;
   /** Value that should be displayed when using this reaction */
-
   displayValue: string;
 }
 /**
  * SubspaceReactionsParams contains the params related to a single subspace
  * reactions
  */
-
 export interface SubspaceReactionsParams {
   /** Id of the subspace for which these params are valid */
   subspaceId: Long;
   /** Params related to RegisteredReactionValue reactions */
-
   registeredReaction?: RegisteredReactionValueParams;
   /** Params related to FreeTextValue reactions */
-
   freeText?: FreeTextValueParams;
 }
 /** FreeTextValueParams contains the params for FreeTextValue based reactions */
-
 export interface FreeTextValueParams {
   /** Whether FreeTextValue reactions should be enabled */
   enabled: boolean;
   /** The max length that FreeTextValue reactions should have */
-
   maxLength: number;
   /**
    * RegEx that each FreeTextValue should respect.
    * This is useful to limit what characters can be used as a reaction.
    */
-
   regEx: string;
 }
 /**
  * RegisteredReactionValueParams contains the params for RegisteredReactionValue
  * based reactions
  */
-
 export interface RegisteredReactionValueParams {
   /** Whether RegisteredReactionValue reactions should be enabled */
   enabled: boolean;
 }
-
 function createBaseReaction(): Reaction {
   return {
     subspaceId: Long.UZERO,
@@ -105,7 +86,6 @@ function createBaseReaction(): Reaction {
     author: "",
   };
 }
-
 export const Reaction = {
   encode(
     message: Reaction,
@@ -114,64 +94,49 @@ export const Reaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (!message.postId.isZero()) {
       writer.uint32(16).uint64(message.postId);
     }
-
     if (message.id !== 0) {
       writer.uint32(24).uint32(message.id);
     }
-
     if (message.value !== undefined) {
       Any.encode(message.value, writer.uint32(34).fork()).ldelim();
     }
-
     if (message.author !== "") {
       writer.uint32(42).string(message.author);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Reaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.postId = reader.uint64() as Long;
           break;
-
         case 3:
           message.id = reader.uint32();
           break;
-
         case 4:
           message.value = Any.decode(reader, reader.uint32());
           break;
-
         case 5:
           message.author = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Reaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -183,7 +148,6 @@ export const Reaction = {
       author: isSet(object.author) ? String(object.author) : "",
     };
   },
-
   toJSON(message: Reaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -196,7 +160,6 @@ export const Reaction = {
     message.author !== undefined && (obj.author = message.author);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<Reaction>, I>>(object: I): Reaction {
     const message = createBaseReaction();
     message.subspaceId =
@@ -216,13 +179,11 @@ export const Reaction = {
     return message;
   },
 };
-
 function createBaseRegisteredReactionValue(): RegisteredReactionValue {
   return {
     registeredReactionId: 0,
   };
 }
-
 export const RegisteredReactionValue = {
   encode(
     message: RegisteredReactionValue,
@@ -231,10 +192,8 @@ export const RegisteredReactionValue = {
     if (message.registeredReactionId !== 0) {
       writer.uint32(8).uint32(message.registeredReactionId);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -242,24 +201,19 @@ export const RegisteredReactionValue = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisteredReactionValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.registeredReactionId = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RegisteredReactionValue {
     return {
       registeredReactionId: isSet(object.registeredReactionId)
@@ -267,14 +221,12 @@ export const RegisteredReactionValue = {
         : 0,
     };
   },
-
   toJSON(message: RegisteredReactionValue): unknown {
     const obj: any = {};
     message.registeredReactionId !== undefined &&
       (obj.registeredReactionId = Math.round(message.registeredReactionId));
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<RegisteredReactionValue>, I>>(
     object: I
   ): RegisteredReactionValue {
@@ -283,13 +235,11 @@ export const RegisteredReactionValue = {
     return message;
   },
 };
-
 function createBaseFreeTextValue(): FreeTextValue {
   return {
     text: "",
   };
 }
-
 export const FreeTextValue = {
   encode(
     message: FreeTextValue,
@@ -298,44 +248,35 @@ export const FreeTextValue = {
     if (message.text !== "") {
       writer.uint32(10).string(message.text);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): FreeTextValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFreeTextValue();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.text = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): FreeTextValue {
     return {
       text: isSet(object.text) ? String(object.text) : "",
     };
   },
-
   toJSON(message: FreeTextValue): unknown {
     const obj: any = {};
     message.text !== undefined && (obj.text = message.text);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<FreeTextValue>, I>>(
     object: I
   ): FreeTextValue {
@@ -344,7 +285,6 @@ export const FreeTextValue = {
     return message;
   },
 };
-
 function createBaseRegisteredReaction(): RegisteredReaction {
   return {
     subspaceId: Long.UZERO,
@@ -353,7 +293,6 @@ function createBaseRegisteredReaction(): RegisteredReaction {
     displayValue: "",
   };
 }
-
 export const RegisteredReaction = {
   encode(
     message: RegisteredReaction,
@@ -362,56 +301,43 @@ export const RegisteredReaction = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.id !== 0) {
       writer.uint32(16).uint32(message.id);
     }
-
     if (message.shorthandCode !== "") {
       writer.uint32(26).string(message.shorthandCode);
     }
-
     if (message.displayValue !== "") {
       writer.uint32(34).string(message.displayValue);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): RegisteredReaction {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisteredReaction();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.id = reader.uint32();
           break;
-
         case 3:
           message.shorthandCode = reader.string();
           break;
-
         case 4:
           message.displayValue = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RegisteredReaction {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -426,7 +352,6 @@ export const RegisteredReaction = {
         : "",
     };
   },
-
   toJSON(message: RegisteredReaction): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -438,7 +363,6 @@ export const RegisteredReaction = {
       (obj.displayValue = message.displayValue);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<RegisteredReaction>, I>>(
     object: I
   ): RegisteredReaction {
@@ -453,7 +377,6 @@ export const RegisteredReaction = {
     return message;
   },
 };
-
 function createBaseSubspaceReactionsParams(): SubspaceReactionsParams {
   return {
     subspaceId: Long.UZERO,
@@ -461,7 +384,6 @@ function createBaseSubspaceReactionsParams(): SubspaceReactionsParams {
     freeText: undefined,
   };
 }
-
 export const SubspaceReactionsParams = {
   encode(
     message: SubspaceReactionsParams,
@@ -470,24 +392,20 @@ export const SubspaceReactionsParams = {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
     }
-
     if (message.registeredReaction !== undefined) {
       RegisteredReactionValueParams.encode(
         message.registeredReaction,
         writer.uint32(18).fork()
       ).ldelim();
     }
-
     if (message.freeText !== undefined) {
       FreeTextValueParams.encode(
         message.freeText,
         writer.uint32(26).fork()
       ).ldelim();
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -495,38 +413,31 @@ export const SubspaceReactionsParams = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSubspaceReactionsParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.subspaceId = reader.uint64() as Long;
           break;
-
         case 2:
           message.registeredReaction = RegisteredReactionValueParams.decode(
             reader,
             reader.uint32()
           );
           break;
-
         case 3:
           message.freeText = FreeTextValueParams.decode(
             reader,
             reader.uint32()
           );
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): SubspaceReactionsParams {
     return {
       subspaceId: isSet(object.subspaceId)
@@ -540,7 +451,6 @@ export const SubspaceReactionsParams = {
         : undefined,
     };
   },
-
   toJSON(message: SubspaceReactionsParams): unknown {
     const obj: any = {};
     message.subspaceId !== undefined &&
@@ -555,7 +465,6 @@ export const SubspaceReactionsParams = {
         : undefined);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<SubspaceReactionsParams>, I>>(
     object: I
   ): SubspaceReactionsParams {
@@ -576,7 +485,6 @@ export const SubspaceReactionsParams = {
     return message;
   },
 };
-
 function createBaseFreeTextValueParams(): FreeTextValueParams {
   return {
     enabled: false,
@@ -584,7 +492,6 @@ function createBaseFreeTextValueParams(): FreeTextValueParams {
     regEx: "",
   };
 }
-
 export const FreeTextValueParams = {
   encode(
     message: FreeTextValueParams,
@@ -593,48 +500,37 @@ export const FreeTextValueParams = {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
-
     if (message.maxLength !== 0) {
       writer.uint32(16).uint32(message.maxLength);
     }
-
     if (message.regEx !== "") {
       writer.uint32(26).string(message.regEx);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): FreeTextValueParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFreeTextValueParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.enabled = reader.bool();
           break;
-
         case 2:
           message.maxLength = reader.uint32();
           break;
-
         case 3:
           message.regEx = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): FreeTextValueParams {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
@@ -642,7 +538,6 @@ export const FreeTextValueParams = {
       regEx: isSet(object.regEx) ? String(object.regEx) : "",
     };
   },
-
   toJSON(message: FreeTextValueParams): unknown {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
@@ -651,7 +546,6 @@ export const FreeTextValueParams = {
     message.regEx !== undefined && (obj.regEx = message.regEx);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<FreeTextValueParams>, I>>(
     object: I
   ): FreeTextValueParams {
@@ -662,13 +556,11 @@ export const FreeTextValueParams = {
     return message;
   },
 };
-
 function createBaseRegisteredReactionValueParams(): RegisteredReactionValueParams {
   return {
     enabled: false,
   };
 }
-
 export const RegisteredReactionValueParams = {
   encode(
     message: RegisteredReactionValueParams,
@@ -677,10 +569,8 @@ export const RegisteredReactionValueParams = {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
-
     return writer;
   },
-
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number
@@ -688,36 +578,29 @@ export const RegisteredReactionValueParams = {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisteredReactionValueParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.enabled = reader.bool();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): RegisteredReactionValueParams {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
     };
   },
-
   toJSON(message: RegisteredReactionValueParams): unknown {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
     return obj;
   },
-
   fromPartial<I extends Exact<DeepPartial<RegisteredReactionValueParams>, I>>(
     object: I
   ): RegisteredReactionValueParams {
