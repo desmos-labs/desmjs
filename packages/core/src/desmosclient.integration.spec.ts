@@ -224,7 +224,7 @@ describe("DesmosClient", () => {
         externalSigner,
         {
           gasPrice: defaultGasPrice,
-          gasAdjustment: 1.2,
+          gasAdjustment: 1.3,
         }
       );
       const externalAccounts = await externalSigner.getAccounts();
@@ -240,7 +240,7 @@ describe("DesmosClient", () => {
         profileSigner,
         {
           gasPrice: defaultGasPrice,
-          gasAdjustment: 1.2,
+          gasAdjustment: 1.3,
         }
       );
       const profileAccounts = await profileSigner.getAccounts();
