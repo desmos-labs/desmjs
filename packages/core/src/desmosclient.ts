@@ -188,7 +188,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       );
       const gasEstimation = await this.simulate(signerAddress, messages, memo);
       const multiplier =
-        typeof fee === "number" ? fee : this.options.gasAdjustment || 1.3;
+        typeof fee === "number" ? fee : this.options.gasAdjustment || 1.5;
       usedFee = calculateFee(
         Math.round(gasEstimation * multiplier),
         this.options.gasPrice
