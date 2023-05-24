@@ -79,6 +79,7 @@ describe("DesmosClient", () => {
       signer,
       {
         gasPrice: defaultGasPrice,
+        gasAdjustment: 1.8,
       }
     );
     return [signer, client];
@@ -98,6 +99,7 @@ describe("DesmosClient", () => {
       signer,
       {
         gasPrice: defaultGasPrice,
+        gasAdjustment: 1.8,
       }
     );
     return [signer, client];
