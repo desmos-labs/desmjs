@@ -1,6 +1,7 @@
 import {
   Account,
   AminoTypes,
+  calculateFee,
   DeliverTxResponse,
   MsgTransferEncodeObject,
   QueryClient,
@@ -173,6 +174,21 @@ export class DesmosClient extends SigningCosmWasmClient {
     return new DesmosClient(tmClient, options, signer);
   }
 
+  override async signAndBroadcast(signerAddress: string, messages: readonly EncodeObject[], fee: StdFee | "auto" | number, memo?: string): Promise<DeliverTxResponse> {
+    let usedFee: StdFee;
+    if (fee == "auto" || typeof fee === "number") {
+      assertDefined(this.options.gasPrice, "Gas price must be set in the client options when auto gas is used.");
+      const gasEstimation = await this.simulate(signerAddress, messages, memo);
+      const multiplier = typeof fee === "number" ? fee : this.options.gasAdjustment || 1.3;
+      usedFee = calculateFee(Math.round(gasEstimation * multiplier), this.options.gasPrice);
+    } else {
+      usedFee = fee;
+    }
+    const txRaw = await this.sign(signerAddress, messages, usedFee, memo);
+    const txBytes = TxRaw.encode(txRaw).finish();
+    return this.broadcastTx(txBytes, this.broadcastTimeoutMs, this.broadcastPollIntervalMs);
+  };
+
   /**
    * Creates a client in offline mode.
    *
@@ -313,7 +329,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee | "auto",
-    memo: string,
+    memo?: string,
     explicitSignerData?: SignerData
   ): Promise<TxRaw> {
     const result = await this.signTx(signerAddress, messages, {
