@@ -231,28 +231,13 @@ describe("DesmosClient", () => {
       );
       const externalClient = await DesmosClient.connectWithSigner(
         TEST_CHAIN_URL,
-        externalSigner,
-        {
-          gasPrice: defaultGasPrice,
-          gasAdjustment: 1.3,
-        }
+        externalSigner
       );
       const externalAccounts = await externalSigner.getAccounts();
       const externalAddress = externalAccounts[0].address;
 
       // Setup the client associated to the Desmos profile
-      const profileSigner = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const profileClient = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        profileSigner,
-        {
-          gasPrice: defaultGasPrice,
-          gasAdjustment: 1.3,
-        }
-      );
+      const [profileSigner, profileClient] = await getDirectSignerAndClient();
       const profileAccounts = await profileSigner.getAccounts();
       const profileAddress = profileAccounts[0].address;
 
