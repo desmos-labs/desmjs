@@ -729,17 +729,7 @@ describe("DesmosClient", () => {
     });
 
     it("test clearAdmin", async () => {
-      const signer = await OfflineSignerAdapter.fromMnemonic(
-        SigningMode.DIRECT,
-        testUser1.mnemonic
-      );
-      const client = await DesmosClient.connectWithSigner(
-        TEST_CHAIN_URL,
-        signer,
-        {
-          gasPrice: defaultGasPrice,
-        }
-      );
+      const [, client] = await getDirectSignerAndClient();
 
       const response = await client.instantiate(
         testUser1.address0,
