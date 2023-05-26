@@ -48,7 +48,7 @@
     "@protobufs/gogoproto": "^0.0.10",
     "@protobufs/ibc": "^0.1.0",
     "@types/long": "^4.0.1",
-    "@types/node": "^20.2.3",
+    "@types/node": "^20.2.4",
     "prettier": "^2.8.8",
     "typescript": "^4.9.5"
   }
