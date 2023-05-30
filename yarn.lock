@@ -4111,7 +4111,7 @@ __metadata:
     "@cosmjs/proto-signing": 0.30.1
     "@cosmjs/utils": ^0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.12.0
+    "@keplr-wallet/types": 0.12.1
     "@types/jest": ^29.5.1
     "@types/node": ^20.2.5
     "@types/pino": ^7.0.5
@@ -4243,7 +4243,7 @@ __metadata:
     "@types/keccak": ^3.0.1
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^5.2.0
-    "@web3auth/modal": ^5.2.0
+    "@web3auth/modal": ^5.2.1
     "@web3auth/ui": ^5.2.0
     cosmjs-types: ^0.6.0
     readable-stream: ^4.4.0
@@ -5713,12 +5713,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.12.0":
-  version: 0.12.0
-  resolution: "@keplr-wallet/types@npm:0.12.0"
+"@keplr-wallet/types@npm:0.12.1":
+  version: 0.12.1
+  resolution: "@keplr-wallet/types@npm:0.12.1"
   dependencies:
     long: ^4.0.0
-  checksum: e55f930f007b667d715e8a9522591df36dba34c8e124b6e97be2bdbfa2d4a80cbe02b5e12608622f62eadc21e3e3e01fe60b9b83110eed2ac9cb3bba8feed73c
+  checksum: eb0739dfdb1173f9bfd8fc46a1c10f43e0a848e284c934268b6d6692ccf23bea0f50ed3ceaa8aa374277d19e88d862bc7f463695a983bd48b91e26fb84ad4ef1
   languageName: node
   linkType: hard
 
@@ -6916,90 +6916,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-darwin-arm64@npm:1.3.60"
+"@swc/core-darwin-arm64@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-darwin-arm64@npm:1.3.61"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-darwin-x64@npm:1.3.60"
+"@swc/core-darwin-x64@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-darwin-x64@npm:1.3.61"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.60"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.61"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.60"
+"@swc/core-linux-arm64-gnu@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.61"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.60"
+"@swc/core-linux-arm64-musl@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.61"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.60"
+"@swc/core-linux-x64-gnu@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.61"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.60"
+"@swc/core-linux-x64-musl@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.61"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.60"
+"@swc/core-win32-arm64-msvc@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.61"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.60"
+"@swc/core-win32-ia32-msvc@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.61"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.60"
+"@swc/core-win32-x64-msvc@npm:1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.61"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.60":
-  version: 1.3.60
-  resolution: "@swc/core@npm:1.3.60"
+"@swc/core@npm:^1.3.61":
+  version: 1.3.61
+  resolution: "@swc/core@npm:1.3.61"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.60
-    "@swc/core-darwin-x64": 1.3.60
-    "@swc/core-linux-arm-gnueabihf": 1.3.60
-    "@swc/core-linux-arm64-gnu": 1.3.60
-    "@swc/core-linux-arm64-musl": 1.3.60
-    "@swc/core-linux-x64-gnu": 1.3.60
-    "@swc/core-linux-x64-musl": 1.3.60
-    "@swc/core-win32-arm64-msvc": 1.3.60
-    "@swc/core-win32-ia32-msvc": 1.3.60
-    "@swc/core-win32-x64-msvc": 1.3.60
+    "@swc/core-darwin-arm64": 1.3.61
+    "@swc/core-darwin-x64": 1.3.61
+    "@swc/core-linux-arm-gnueabihf": 1.3.61
+    "@swc/core-linux-arm64-gnu": 1.3.61
+    "@swc/core-linux-arm64-musl": 1.3.61
+    "@swc/core-linux-x64-gnu": 1.3.61
+    "@swc/core-linux-x64-musl": 1.3.61
+    "@swc/core-win32-arm64-msvc": 1.3.61
+    "@swc/core-win32-ia32-msvc": 1.3.61
+    "@swc/core-win32-x64-msvc": 1.3.61
   peerDependencies:
     "@swc/helpers": ^0.5.0
   dependenciesMeta:
@@ -7026,7 +7026,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: f123571f90783a5b7c4569c88ed6679c3c462b8a19b6d039cffcab7e367e3a972e776cfb4ffef6904f5b2002c7859057385996ae1158278b765ab55de1d69393
+  checksum: e1a6f6cab548e21c934a1c56c5008ec5fccbd784f8b4b6456241f78ac0b3a68e6ac70fd2b0f45c5d7b008330c495872b247d1b0b53c9bea60a43ecbc174b8594
   languageName: node
   linkType: hard
 
@@ -8701,14 +8701,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "@web3auth/modal@npm:5.2.0"
+"@web3auth/modal@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "@web3auth/modal@npm:5.2.1"
   dependencies:
     "@web3auth/base": ^5.2.0
     "@web3auth/metamask-adapter": ^5.2.0
     "@web3auth/no-modal": ^5.2.0
-    "@web3auth/openlogin-adapter": ^5.2.0
+    "@web3auth/openlogin-adapter": ^5.2.1
     "@web3auth/phantom-adapter": ^5.2.0
     "@web3auth/torus-evm-adapter": ^5.2.0
     "@web3auth/torus-solana-adapter": ^5.2.0
@@ -8717,7 +8717,7 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
     "@solana/web3.js": ^1.x
-  checksum: 119cd550862d9026bf6db8b92df4ebcf4d3c4060ad5cd5787f1af37728e376acd22764591da0d74e3ba3136bbad37ed02a9e2bf2a522bcac812f44b63568c7c5
+  checksum: c42ec1897505b54f7eeda14465ce9b8b0022289b6b3eb2c9e80d6ba1366b16afc1e57b3335503834ef91d9cf6868a972b9f8082d5dfc8fc7603652b30ba93830
   languageName: node
   linkType: hard
 
@@ -8735,9 +8735,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/openlogin-adapter@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "@web3auth/openlogin-adapter@npm:5.2.0"
+"@web3auth/openlogin-adapter@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "@web3auth/openlogin-adapter@npm:5.2.1"
   dependencies:
     "@toruslabs/openlogin": ^3.2.1
     "@toruslabs/openlogin-ed25519": ^3.2.0
@@ -8749,7 +8749,7 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
     "@solana/web3.js": ^1.x
-  checksum: 45518a126681964df268b7df3e3b82a8a0f02ab55838b1fba0a34e11ad571646e32eee793f3d6bb98de3d7b5ff307cc9176c20a00dfa5f1d1e78641b7769dcea
+  checksum: 721d1d0c88f549000ae7b37a9a071b3a22b72d5100c53c9ec37066b6cb4dfadfb09bc9ebcbd99cd90cc55930089202f395c01df9a1c1b32e5de2c0212e925e8a
   languageName: node
   linkType: hard
 
@@ -12052,7 +12052,7 @@ __metadata:
     "@docusaurus/core": 2.4.1
     "@docusaurus/module-type-aliases": 2.4.1
     "@docusaurus/preset-classic": 2.4.1
-    "@swc/core": ^1.3.60
+    "@swc/core": ^1.3.61
     "@tsconfig/docusaurus": ^1.0.7
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^1.2.1
