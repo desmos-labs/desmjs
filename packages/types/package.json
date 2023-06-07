@@ -42,7 +42,7 @@
     "protobufjs": "^7.2.3"
   },
   "devDependencies": {
-    "@osmonauts/telescope": "^0.96.0",
+    "@osmonauts/telescope": "^0.97.0",
     "@protobufs/cosmos": "^0.1.0",
     "@protobufs/cosmos_proto": "^0.0.10",
     "@protobufs/gogoproto": "^0.0.10",
