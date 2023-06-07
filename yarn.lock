@@ -4054,9 +4054,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmwasm/ts-codegen@npm:0.26.0":
-  version: 0.26.0
-  resolution: "@cosmwasm/ts-codegen@npm:0.26.0"
+"@cosmwasm/ts-codegen@npm:0.30.1":
+  version: 0.30.1
+  resolution: "@cosmwasm/ts-codegen@npm:0.30.1"
   dependencies:
     "@babel/core": 7.18.10
     "@babel/generator": 7.18.12
@@ -4084,10 +4084,10 @@ __metadata:
     parse-package-name: 1.0.0
     rimraf: 3.0.2
     shelljs: 0.8.5
-    wasm-ast-types: ^0.19.0
+    wasm-ast-types: ^0.23.1
   bin:
     cosmwasm-ts-codegen: main/ts-codegen.js
-  checksum: d732ff664b06656196388d3df97290eb4260819e1d467df71c2f3be035373572b054bfed39566902d20a5c5b4d47beb103f21d69bafc8773d8001ee0e42903d8
+  checksum: ce0b22511767431d2d24ac3e07e7b91ea3eec60d012a1d20ac7099047766c51f0fc59e6c78b5b2c64d599eb79523e43c1cd7b45e15c0e06f23d784a496e762db
   languageName: node
   linkType: hard
 
@@ -4127,7 +4127,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-types@workspace:packages/types"
   dependencies:
-    "@osmonauts/telescope": ^0.96.0
+    "@osmonauts/telescope": ^0.97.0
     "@protobufs/cosmos": ^0.1.0
     "@protobufs/cosmos_proto": ^0.0.10
     "@protobufs/gogoproto": ^0.0.10
@@ -4222,7 +4222,7 @@ __metadata:
     "@types/react-native": ^0.72.2
     "@types/readable-stream": ^2.3.15
     "@web3auth/react-native-sdk": ^3.5.0
-    react-native: ^0.71.8
+    react-native: ^0.71.10
     readable-stream: ^4.4.0
     typescript: ^4.9.5
   languageName: unknown
@@ -5899,9 +5899,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@osmonauts/ast@npm:^0.82.0":
-  version: 0.82.0
-  resolution: "@osmonauts/ast@npm:0.82.0"
+"@osmonauts/ast@npm:^0.83.0":
+  version: 0.83.0
+  resolution: "@osmonauts/ast@npm:0.83.0"
   dependencies:
     "@babel/parser": ^7.21.4
     "@babel/runtime": ^7.21.0
@@ -5911,7 +5911,7 @@ __metadata:
     "@osmonauts/utils": ^0.11.1
     case: 1.6.3
     dotty: 0.1.2
-  checksum: 539e420e3497508220638460dca0c144800706d08bb3ffd6d81c0e830ec7478d2304fd0bdccc8e03a0e6a982abde494b4ef535a0469e581bf3713dd648d82f44
+  checksum: 229c4ba9f7395a9736b3ef5d5a0192fb395194c8f88b7f9633101171c55109c9f2aeeabdb577698b21f884308ce5266de8a3f6d644b90df4ea8e8b5b4222beda
   languageName: node
   linkType: hard
 
@@ -5930,9 +5930,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@osmonauts/telescope@npm:^0.96.0":
-  version: 0.96.0
-  resolution: "@osmonauts/telescope@npm:0.96.0"
+"@osmonauts/telescope@npm:^0.97.0":
+  version: 0.97.0
+  resolution: "@osmonauts/telescope@npm:0.97.0"
   dependencies:
     "@babel/core": 7.21.4
     "@babel/generator": 7.21.4
@@ -5946,8 +5946,8 @@ __metadata:
     "@babel/runtime": ^7.21.0
     "@babel/traverse": 7.21.4
     "@babel/types": 7.21.4
-    "@cosmwasm/ts-codegen": 0.26.0
-    "@osmonauts/ast": ^0.82.0
+    "@cosmwasm/ts-codegen": 0.30.1
+    "@osmonauts/ast": ^0.83.0
     "@osmonauts/proto-parser": ^0.43.0
     "@osmonauts/types": ^0.35.0
     "@osmonauts/utils": ^0.11.1
@@ -5968,7 +5968,7 @@ __metadata:
     shelljs: 0.8.5
   bin:
     telescope: main/telescope.js
-  checksum: e4354919c8f8e8dd6cc3f1930c6e8981cdc00995aa3fb19372df0eaeaf61eb850673a37b93ad528c39140802b2e64e0be3961378826c7d9517f0f26050fd3572
+  checksum: a93911c93c1e5a818b5cb2c09a01ea4aae2a93202e26dfdd030c839d74b4ab1d4ec9e64d9e37ddb61d55c86d44636b6407aece8b44893628d7e83b0d09bff7ab
   languageName: node
   linkType: hard
 
@@ -20208,10 +20208,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gradle-plugin@npm:^0.71.18":
-  version: 0.71.18
-  resolution: "react-native-gradle-plugin@npm:0.71.18"
-  checksum: 19f0a41e29c9210ff495010aaa612f2c2f4f5f937b6c20266c8dc62f4ccedc65bb7576de59b2f3fd2bb8044ce9785e56673879f2eb452f948e6659a5e1fa5894
+"react-native-gradle-plugin@npm:^0.71.19":
+  version: 0.71.19
+  resolution: "react-native-gradle-plugin@npm:0.71.19"
+  checksum: 2e3ab679f0b81edd81b9fb88a73a16c8b9b6dbef4e7158fd894c42e6dff04ba8d11f1b9663ffa2c30d0d9deee3cd44b033cd280322c010be3c290e4422088a7a
   languageName: node
   linkType: hard
 
@@ -20226,9 +20226,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:^0.71.8":
-  version: 0.71.8
-  resolution: "react-native@npm:0.71.8"
+"react-native@npm:^0.71.10":
+  version: 0.71.10
+  resolution: "react-native@npm:0.71.10"
   dependencies:
     "@jest/create-cache-key-function": ^29.2.1
     "@react-native-community/cli": 10.2.2
@@ -20255,7 +20255,7 @@ __metadata:
     promise: ^8.3.0
     react-devtools-core: ^4.26.1
     react-native-codegen: ^0.71.5
-    react-native-gradle-plugin: ^0.71.18
+    react-native-gradle-plugin: ^0.71.19
     react-refresh: ^0.4.0
     react-shallow-renderer: ^16.15.0
     regenerator-runtime: ^0.13.2
@@ -20268,7 +20268,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native: cli.js
-  checksum: fe887c1b8bded23f9efea9dc10a8a8b2f32147e06418fc9a78294944874797abb0185ebcb0fdc5ce88046280bca72264ae8d119f4ca681a3e0bc502d0f75bfbe
+  checksum: 08780690cdbdb15798bb59666ab7deabb4555904e78bcade60be42a35ea75365a668c2b5da1f3b431a66d0f1614e143344024ed8be49c219cd034a17fabb1ae9
   languageName: node
   linkType: hard
 
@@ -23382,9 +23382,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wasm-ast-types@npm:^0.19.0":
-  version: 0.19.0
-  resolution: "wasm-ast-types@npm:0.19.0"
+"wasm-ast-types@npm:^0.23.1":
+  version: 0.23.1
+  resolution: "wasm-ast-types@npm:0.23.1"
   dependencies:
     "@babel/runtime": ^7.18.9
     "@babel/types": 7.18.10
@@ -23392,7 +23392,7 @@ __metadata:
     ast-stringify: 0.1.0
     case: 1.6.3
     deepmerge: 4.2.2
-  checksum: a87ec662cbbfa7bfc1548f6dfb224ff90ffe56e88ba3c9fa5ab40ec339b5090c4eff3bc2dd0dcd86cee2b91225ca08acf91e98cacb8a05a550b48414b7968b91
+  checksum: c59ab9d0a446561f649ca955a68090f1a27629dda89dcbdf8ec41e22b49822be7f949d6d1af72cf2ef67815dace5cfd4a44839938c78ec22578974a154d1b2de
   languageName: node
   linkType: hard
 
