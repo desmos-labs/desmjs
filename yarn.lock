@@ -4532,7 +4532,7 @@ __metadata:
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.8.0
     "@walletconnect/types": ^2.4.0
-    "@walletconnect/utils": ^2.7.8
+    "@walletconnect/utils": ^2.8.0
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     dotenv: ^16.1.4
@@ -4567,7 +4567,7 @@ __metadata:
     "@walletconnect/client": ^1.8.0
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/types": ^1.6.6
-    "@walletconnect/utils": ^2.7.8
+    "@walletconnect/utils": ^2.8.0
     babel-jest: ^29.5.0
     cosmjs-types: ^0.5.2
     cosmos-wallet: ^1.2.0
@@ -8838,20 +8838,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/types@npm:2.7.8":
-  version: 2.7.8
-  resolution: "@walletconnect/types@npm:2.7.8"
-  dependencies:
-    "@walletconnect/events": ^1.0.1
-    "@walletconnect/heartbeat": 1.2.1
-    "@walletconnect/jsonrpc-types": 1.0.3
-    "@walletconnect/keyvaluestorage": ^1.0.2
-    "@walletconnect/logger": ^2.0.1
-    events: ^3.3.0
-  checksum: b60742237ef542a21440a6ecfc7d096ded8c6a6f7cda6445e33d91bac696bcf1b1d2f3b29821c1ba38c60f0cb55a0a0404688131994f4f20977db544755a45d8
-  languageName: node
-  linkType: hard
-
 "@walletconnect/types@npm:2.8.0":
   version: 2.8.0
   resolution: "@walletconnect/types@npm:2.8.0"
@@ -8887,7 +8873,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.8.0":
+"@walletconnect/utils@npm:2.8.0, @walletconnect/utils@npm:^2.8.0":
   version: 2.8.0
   resolution: "@walletconnect/utils@npm:2.8.0"
   dependencies:
@@ -8944,28 +8930,6 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: ^3.1.0
   checksum: f32cd3170eff48802112831c9ac6e75410012e6b1aaba277d4e3333af138f372d38f418b8dad91b8cd80049bccd30c7dfab72444970b9c859ba76007f7875d67
-  languageName: node
-  linkType: hard
-
-"@walletconnect/utils@npm:^2.7.8":
-  version: 2.7.8
-  resolution: "@walletconnect/utils@npm:2.7.8"
-  dependencies:
-    "@stablelib/chacha20poly1305": 1.0.1
-    "@stablelib/hkdf": 1.0.1
-    "@stablelib/random": ^1.0.2
-    "@stablelib/sha256": 1.0.1
-    "@stablelib/x25519": ^1.0.3
-    "@walletconnect/relay-api": ^1.0.9
-    "@walletconnect/safe-json": ^1.0.2
-    "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.8
-    "@walletconnect/window-getters": ^1.0.1
-    "@walletconnect/window-metadata": ^1.0.1
-    detect-browser: 5.3.0
-    query-string: 7.1.3
-    uint8arrays: ^3.1.0
-  checksum: d8f4c64540a1dc57b264d404357dbc9dd0463ef01361d1be6fe507bd7586590ddc4e2ba420cc38a2365e1faf9ccd580d28d9f3cf709c6c89b1fdcd2e2b02d528
   languageName: node
   linkType: hard
 
@@ -12463,7 +12427,7 @@ __metadata:
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^1.2.1
     docusaurus-plugin-typedoc: ^0.18.0
-    prism-react-renderer: ^2.0.4
+    prism-react-renderer: ^2.0.5
     react: ^18.2.0
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
@@ -20056,15 +20020,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "prism-react-renderer@npm:2.0.4"
+"prism-react-renderer@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "prism-react-renderer@npm:2.0.5"
   dependencies:
     "@types/prismjs": ^1.26.0
     clsx: ^1.2.1
   peerDependencies:
     react: ">=16.0.0"
-  checksum: f6719a8f01546b0a02ddf05f95d4e3adfe3e38622f493270b67c98e89f707a8236cfd838863a7cb6cb01135b5ddbfc3bdadf0576bf9b64d760603d6d8ebc3d73
+  checksum: 9cd7e1fcf1e758e230f46af2f069a47bbfe55d0209312b329aba40e7e9b18f6763352bf08fc9d89ab7622f1d7a4663e01d2ff964f721ea734e8f901e4f0cd87e
   languageName: node
   linkType: hard
 
