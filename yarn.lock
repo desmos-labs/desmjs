@@ -568,6 +568,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-annotate-as-pure@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-annotate-as-pure@npm:7.22.5"
+  dependencies:
+    "@babel/types": ^7.22.5
+  checksum: 53da330f1835c46f26b7bf4da31f7a496dee9fd8696cca12366b94ba19d97421ce519a74a837f687749318f94d1a37f8d1abcbf35e8ed22c32d16373b2f6198d
+  languageName: node
+  linkType: hard
+
 "@babel/helper-builder-binary-assignment-operator-visitor@npm:^7.18.6":
   version: 7.18.9
   resolution: "@babel/helper-builder-binary-assignment-operator-visitor@npm:7.18.9"
@@ -703,6 +712,25 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0
   checksum: a132d940c345effc55f4d018db4d113be56528cc5f9bdc12d14da311d27febdde9c606c62e81d17c7ab06b44fb7995d6116ed2aceee75ffa6c5e4e2da3c106ba
+  languageName: node
+  linkType: hard
+
+"@babel/helper-create-class-features-plugin@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-create-class-features-plugin@npm:7.22.5"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.22.5
+    "@babel/helper-environment-visitor": ^7.22.5
+    "@babel/helper-function-name": ^7.22.5
+    "@babel/helper-member-expression-to-functions": ^7.22.5
+    "@babel/helper-optimise-call-expression": ^7.22.5
+    "@babel/helper-replace-supers": ^7.22.5
+    "@babel/helper-skip-transparent-expression-wrappers": ^7.22.5
+    "@babel/helper-split-export-declaration": ^7.22.5
+    semver: ^6.3.0
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: f1e91deae06dbee6dd956c0346bca600adfbc7955427795d9d8825f0439a3c3290c789ba2b4a02a1cdf6c1a1bd163dfa16d3d5e96b02a8efb639d2a774e88ed9
   languageName: node
   linkType: hard
 
@@ -887,6 +915,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-member-expression-to-functions@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-member-expression-to-functions@npm:7.22.5"
+  dependencies:
+    "@babel/types": ^7.22.5
+  checksum: 4bd5791529c280c00743e8bdc669ef0d4cd1620d6e3d35e0d42b862f8262bc2364973e5968007f960780344c539a4b9cf92ab41f5b4f94560a9620f536de2a39
+  languageName: node
+  linkType: hard
+
 "@babel/helper-module-imports@npm:^7.18.6":
   version: 7.18.6
   resolution: "@babel/helper-module-imports@npm:7.18.6"
@@ -1019,6 +1056,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-optimise-call-expression@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-optimise-call-expression@npm:7.22.5"
+  dependencies:
+    "@babel/types": ^7.22.5
+  checksum: c70ef6cc6b6ed32eeeec4482127e8be5451d0e5282d5495d5d569d39eb04d7f1d66ec99b327f45d1d5842a9ad8c22d48567e93fc502003a47de78d122e355f7c
+  languageName: node
+  linkType: hard
+
 "@babel/helper-plugin-utils@npm:7.10.4":
   version: 7.10.4
   resolution: "@babel/helper-plugin-utils@npm:7.10.4"
@@ -1037,6 +1083,13 @@ __metadata:
   version: 7.21.5
   resolution: "@babel/helper-plugin-utils@npm:7.21.5"
   checksum: 6f086e9a84a50ea7df0d5639c8f9f68505af510ea3258b3c8ac8b175efdfb7f664436cb48996f71791a1350ba68f47ad3424131e8e718c5e2ad45564484cbb36
+  languageName: node
+  linkType: hard
+
+"@babel/helper-plugin-utils@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-plugin-utils@npm:7.22.5"
+  checksum: c0fc7227076b6041acd2f0e818145d2e8c41968cc52fb5ca70eed48e21b8fe6dd88a0a91cbddf4951e33647336eb5ae184747ca706817ca3bef5e9e905151ff5
   languageName: node
   linkType: hard
 
@@ -1095,6 +1148,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-replace-supers@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-replace-supers@npm:7.22.5"
+  dependencies:
+    "@babel/helper-environment-visitor": ^7.22.5
+    "@babel/helper-member-expression-to-functions": ^7.22.5
+    "@babel/helper-optimise-call-expression": ^7.22.5
+    "@babel/template": ^7.22.5
+    "@babel/traverse": ^7.22.5
+    "@babel/types": ^7.22.5
+  checksum: af29deff6c6dc3fa2d1a517390716aa3f4d329855e8689f1d5c3cb07c1b898e614a5e175f1826bb58e9ff1480e6552885a71a9a0ba5161787aaafa2c79b216cc
+  languageName: node
+  linkType: hard
+
 "@babel/helper-simple-access@npm:^7.19.4, @babel/helper-simple-access@npm:^7.20.2":
   version: 7.20.2
   resolution: "@babel/helper-simple-access@npm:7.20.2"
@@ -1128,6 +1195,15 @@ __metadata:
   dependencies:
     "@babel/types": ^7.20.0
   checksum: 34da8c832d1c8a546e45d5c1d59755459ffe43629436707079989599b91e8c19e50e73af7a4bd09c95402d389266731b0d9c5f69e372d8ebd3a709c05c80d7dd
+  languageName: node
+  linkType: hard
+
+"@babel/helper-skip-transparent-expression-wrappers@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/helper-skip-transparent-expression-wrappers@npm:7.22.5"
+  dependencies:
+    "@babel/types": ^7.22.5
+  checksum: 1012ef2295eb12dc073f2b9edf3425661e9b8432a3387e62a8bc27c42963f1f216ab3124228015c748770b2257b4f1fda882ca8fa34c0bf485e929ae5bc45244
   languageName: node
   linkType: hard
 
@@ -1909,6 +1985,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-syntax-jsx@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/plugin-syntax-jsx@npm:7.22.5"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.22.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 8829d30c2617ab31393d99cec2978e41f014f4ac6f01a1cecf4c4dd8320c3ec12fdc3ce121126b2d8d32f6887e99ca1a0bad53dedb1e6ad165640b92b24980ce
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-syntax-logical-assignment-operators@npm:^7.10.4, @babel/plugin-syntax-logical-assignment-operators@npm:^7.8.3":
   version: 7.10.4
   resolution: "@babel/plugin-syntax-logical-assignment-operators@npm:7.10.4"
@@ -2005,6 +2092,17 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 6189c0b5c32ba3c9a80a42338bd50719d783b20ef29b853d4f03929e971913d3cefd80184e924ae98ad6db09080be8fe6f1ffde9a6db8972523234f0274d36f7
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-syntax-typescript@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/plugin-syntax-typescript@npm:7.22.5"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.22.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 8ab7718fbb026d64da93681a57797d60326097fd7cb930380c8bffd9eb101689e90142c760a14b51e8e69c88a73ba3da956cb4520a3b0c65743aee5c71ef360a
   languageName: node
   linkType: hard
 
@@ -2480,6 +2578,19 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: d9ff7a21baaa60c08a0c86c5e468bb4b2bd85caf51ba78712d8f45e9afa2498d50d6cdf349696e08aa820cafed65f19b70e5938613db9ebb095f7aba1127f282
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-transform-modules-commonjs@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/plugin-transform-modules-commonjs@npm:7.22.5"
+  dependencies:
+    "@babel/helper-module-transforms": ^7.22.5
+    "@babel/helper-plugin-utils": ^7.22.5
+    "@babel/helper-simple-access": ^7.22.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 2067aca8f6454d54ffcce69b02c457cfa61428e11372f6a1d99ff4fcfbb55c396ed2ca6ca886bf06c852e38c1a205b8095921b2364fd0243f3e66bc1dda61caa
   languageName: node
   linkType: hard
 
@@ -3050,6 +3161,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-typescript@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/plugin-transform-typescript@npm:7.22.5"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.22.5
+    "@babel/helper-create-class-features-plugin": ^7.22.5
+    "@babel/helper-plugin-utils": ^7.22.5
+    "@babel/plugin-syntax-typescript": ^7.22.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: d12f1ca1ef1f2a54432eb044d2999705d1205ebe211c2a7f05b12e8eb2d2a461fd7657b5486b2f2f1efe7c0c0dc8e80725b767073d40fe4ae059a7af057b05e4
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-unicode-escapes@npm:^7.18.10":
   version: 7.18.10
   resolution: "@babel/plugin-transform-unicode-escapes@npm:7.18.10"
@@ -3525,18 +3650,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.21.5":
-  version: 7.21.5
-  resolution: "@babel/preset-typescript@npm:7.21.5"
+"@babel/preset-typescript@npm:^7.22.5":
+  version: 7.22.5
+  resolution: "@babel/preset-typescript@npm:7.22.5"
   dependencies:
-    "@babel/helper-plugin-utils": ^7.21.5
-    "@babel/helper-validator-option": ^7.21.0
-    "@babel/plugin-syntax-jsx": ^7.21.4
-    "@babel/plugin-transform-modules-commonjs": ^7.21.5
-    "@babel/plugin-transform-typescript": ^7.21.3
+    "@babel/helper-plugin-utils": ^7.22.5
+    "@babel/helper-validator-option": ^7.22.5
+    "@babel/plugin-syntax-jsx": ^7.22.5
+    "@babel/plugin-transform-modules-commonjs": ^7.22.5
+    "@babel/plugin-transform-typescript": ^7.22.5
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: e7b35c435139eec1d6bd9f57e8f3eb79bfc2da2c57a34ad9e9ea848ba4ecd72791cf4102df456604ab07c7f4518525b0764754b6dd5898036608b351e0792448
+  checksum: 7be1670cb4404797d3a473bd72d66eb2b3e0f2f8a672a5e40bdb0812cc66085ec84bcd7b896709764cabf042fdc6b7f2d4755ac7cce10515eb596ff61dab5154
   languageName: node
   linkType: hard
 
@@ -4299,7 +4424,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.4
-    "@babel/preset-typescript": ^7.21.5
+    "@babel/preset-typescript": ^7.22.5
     "@cosmjs/amino": 0.30.1
     "@cosmjs/proto-signing": 0.30.1
     "@cosmjs/utils": ^0.30.1
@@ -4340,7 +4465,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.4
-    "@babel/preset-typescript": ^7.21.5
+    "@babel/preset-typescript": ^7.22.5
     "@cosmjs/amino": 0.30.1
     "@cosmjs/encoding": 0.30.1
     "@cosmjs/proto-signing": 0.30.1
@@ -4353,7 +4478,7 @@ __metadata:
     "@types/node": ^20.2.5
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
-    "@walletconnect/sign-client": ^2.7.8
+    "@walletconnect/sign-client": ^2.8.0
     "@walletconnect/types": ^2.4.0
     "@walletconnect/utils": ^2.7.8
     babel-jest: ^29.5.0
@@ -4373,7 +4498,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.4
-    "@babel/preset-typescript": ^7.21.5
+    "@babel/preset-typescript": ^7.22.5
     "@cosmjs/amino": 0.30.1
     "@cosmjs/crypto": 0.30.1
     "@cosmjs/encoding": 0.30.1
@@ -4407,7 +4532,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.4
-    "@babel/preset-typescript": ^7.21.5
+    "@babel/preset-typescript": ^7.22.5
     "@cosmjs/encoding": 0.30.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.2
@@ -4427,7 +4552,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.4
-    "@babel/preset-typescript": ^7.21.5
+    "@babel/preset-typescript": ^7.22.5
     "@cosmjs/amino": 0.30.1
     "@cosmjs/encoding": 0.30.1
     "@cosmjs/proto-signing": 0.30.1
@@ -4450,7 +4575,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.4
-    "@babel/preset-typescript": ^7.21.5
+    "@babel/preset-typescript": ^7.22.5
     "@cosmjs/amino": 0.30.1
     "@cosmjs/cosmwasm-stargate": 0.30.1
     "@cosmjs/crypto": 0.30.1
@@ -8276,9 +8401,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/core@npm:2.7.8":
-  version: 2.7.8
-  resolution: "@walletconnect/core@npm:2.7.8"
+"@walletconnect/core@npm:2.8.0":
+  version: 2.8.0
+  resolution: "@walletconnect/core@npm:2.8.0"
   dependencies:
     "@walletconnect/heartbeat": 1.2.1
     "@walletconnect/jsonrpc-provider": 1.0.13
@@ -8291,12 +8416,12 @@ __metadata:
     "@walletconnect/relay-auth": ^1.0.4
     "@walletconnect/safe-json": ^1.0.2
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.8
-    "@walletconnect/utils": 2.7.8
+    "@walletconnect/types": 2.8.0
+    "@walletconnect/utils": 2.8.0
     events: ^3.3.0
     lodash.isequal: 4.5.0
     uint8arrays: ^3.1.0
-  checksum: 0cdb30c6a256c1a20fa39f37542fd47128891e6645219f995f5bc9f70ff92b2bca96734bf57bc016a708126751a203bfefb5233dac7d4dbb2710ddb7859260bc
+  checksum: 1a0242b7da525ecf58d63d55dc9a9dce3fffb63b5f025c330ffed6020d7009ecfd263ef6baa9507c2750f2f54861648b235c3fb7a0d8555d27af244fdb1b066e
   languageName: node
   linkType: hard
 
@@ -8610,20 +8735,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/sign-client@npm:^2.7.8":
-  version: 2.7.8
-  resolution: "@walletconnect/sign-client@npm:2.7.8"
+"@walletconnect/sign-client@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "@walletconnect/sign-client@npm:2.8.0"
   dependencies:
-    "@walletconnect/core": 2.7.8
+    "@walletconnect/core": 2.8.0
     "@walletconnect/events": ^1.0.1
     "@walletconnect/heartbeat": 1.2.1
     "@walletconnect/jsonrpc-utils": 1.0.8
     "@walletconnect/logger": ^2.0.1
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.8
-    "@walletconnect/utils": 2.7.8
+    "@walletconnect/types": 2.8.0
+    "@walletconnect/utils": 2.8.0
     events: ^3.3.0
-  checksum: 32a0ea4274836bee49ac1310b394c705aa7932c294c5dc195a66b09bd54864308020220fa69294342299a02a3a7f409f6b43f2f17617a0616e2cf4176d052f19
+  checksum: b339b68a65f574e22988f58594f4d0c7915765c6eb6ef797d423eeef49a33a35f82a206b4772c9480e8764d1ca761dc6809475aae4db0bba0e3ba1db8075690f
   languageName: node
   linkType: hard
 
@@ -8675,6 +8800,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@walletconnect/types@npm:2.8.0":
+  version: 2.8.0
+  resolution: "@walletconnect/types@npm:2.8.0"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.1
+    "@walletconnect/jsonrpc-types": 1.0.3
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    events: ^3.3.0
+  checksum: 9f69a66625cf522177c02c962d5e41584dfb6b19059f5071dda6a1c5b462db9f01948ecd3a4e227dacfd2c9075b15b045f2f8241b418d4e40b2a5df9d9043718
+  languageName: node
+  linkType: hard
+
 "@walletconnect/types@npm:^1.6.6, @walletconnect/types@npm:^1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/types@npm:1.8.0"
@@ -8696,9 +8835,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.7.8, @walletconnect/utils@npm:^2.7.8":
-  version: 2.7.8
-  resolution: "@walletconnect/utils@npm:2.7.8"
+"@walletconnect/utils@npm:2.8.0":
+  version: 2.8.0
+  resolution: "@walletconnect/utils@npm:2.8.0"
   dependencies:
     "@stablelib/chacha20poly1305": 1.0.1
     "@stablelib/hkdf": 1.0.1
@@ -8708,13 +8847,13 @@ __metadata:
     "@walletconnect/relay-api": ^1.0.9
     "@walletconnect/safe-json": ^1.0.2
     "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.7.8
+    "@walletconnect/types": 2.8.0
     "@walletconnect/window-getters": ^1.0.1
     "@walletconnect/window-metadata": ^1.0.1
     detect-browser: 5.3.0
     query-string: 7.1.3
     uint8arrays: ^3.1.0
-  checksum: d8f4c64540a1dc57b264d404357dbc9dd0463ef01361d1be6fe507bd7586590ddc4e2ba420cc38a2365e1faf9ccd580d28d9f3cf709c6c89b1fdcd2e2b02d528
+  checksum: b900ca697b996a6a3d0f1d1e1eb28b5afae6fc57cf2a946fa1a7e10bc0fa41ec866e1fec0319145bbd554e2126c284e02f756c6a081307e78d474a859587419a
   languageName: node
   linkType: hard
 
@@ -8753,6 +8892,28 @@ __metadata:
     query-string: 7.1.1
     uint8arrays: ^3.1.0
   checksum: f32cd3170eff48802112831c9ac6e75410012e6b1aaba277d4e3333af138f372d38f418b8dad91b8cd80049bccd30c7dfab72444970b9c859ba76007f7875d67
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:^2.7.8":
+  version: 2.7.8
+  resolution: "@walletconnect/utils@npm:2.7.8"
+  dependencies:
+    "@stablelib/chacha20poly1305": 1.0.1
+    "@stablelib/hkdf": 1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha256": 1.0.1
+    "@stablelib/x25519": ^1.0.3
+    "@walletconnect/relay-api": ^1.0.9
+    "@walletconnect/safe-json": ^1.0.2
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.7.8
+    "@walletconnect/window-getters": ^1.0.1
+    "@walletconnect/window-metadata": ^1.0.1
+    detect-browser: 5.3.0
+    query-string: 7.1.3
+    uint8arrays: ^3.1.0
+  checksum: d8f4c64540a1dc57b264d404357dbc9dd0463ef01361d1be6fe507bd7586590ddc4e2ba420cc38a2365e1faf9ccd580d28d9f3cf709c6c89b1fdcd2e2b02d528
   languageName: node
   linkType: hard
 
