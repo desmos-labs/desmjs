@@ -34,7 +34,9 @@ function convertGrant(grant: Grant): AminoGrant {
       ? authorizationTypes.toAmino(grant.authorization)
       : undefined,
     expiration: expiration
-      ? new Date(expiration.toNumber()).toISOString()
+      ? new Date(expiration.toNumber() * 1000)
+          .toISOString()
+          .replace(/\.000Z$/, "Z")
       : undefined,
   };
 }
