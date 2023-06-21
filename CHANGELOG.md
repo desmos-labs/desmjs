@@ -1,3 +1,7 @@
+## Version 5.0.1
+- Fixed authz expiration amino conversion thanks to @williamchong
+- Fixed x/gov messages type url
+
 ## Version 5.0.0
 - Updated Desmos to `5.0.0`
 - Added the ability to specify a `gasAdjustment` value when creating a `DesmosClient` instance
