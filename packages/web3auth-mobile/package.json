@@ -28,7 +28,7 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@cosmjs/encoding": "0.30.1",
+    "@cosmjs/encoding": "0.31.0",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@web3auth/react-native-sdk": "^3.5.0",
     "react-native": "^0.72.0"
