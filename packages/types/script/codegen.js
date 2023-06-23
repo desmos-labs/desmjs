@@ -70,7 +70,7 @@ telescope({
           'desmos.profiles.v2',
           'desmos.subspaces.v1',
           'desmos.subspaces.v2.*',
-  
+
           // Ignore unused cosmos deps
           'cosmos.app.*',
           'cosmos.auth.*',
@@ -94,7 +94,6 @@ telescope({
           'cosmos.evidence.*',
           'cosmos.feegrant.*',
           'cosmos.genutil.*',
-          'cosmos.gov.*',
           'cosmos.group.*',
           'cosmos.mint.*',
           'cosmos.msg.*',
@@ -114,12 +113,18 @@ telescope({
           'ibc.core.port.*',
           'ibc.core.types.*',
           'ibc.lightclients.*',
-  
+
           // Ignore unused tendermint deps
           'tendermint.p2p',
 
           // Ignore unused tool deps
           'amino',
+
+          // Ignore google packages
+          'google.api',
+
+          // Ignore gogoproto package
+          'gogoproto'
         ]
       }
     },
