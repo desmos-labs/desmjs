@@ -26,6 +26,12 @@ desmos() {
 # Force the script to exit at the first error
 set -e
 
+# Give user1 a feegrant
+echo "Allow user1 to use user2 balance to broadcast transactions"
+echo $KEYRING_PASS | desmos tx feegrant grant $USER2_ADDRESS $USER1_ADDRESS \
+  --chain-id=testchain --keyring-backend=file -y -b=sync
+
+
 # Upload the smart contract
 echo "Uploading contract..."
 echo $KEYRING_PASS | desmos tx wasm store "$SMART_CONTRACT" \

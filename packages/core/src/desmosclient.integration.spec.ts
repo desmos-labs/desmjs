@@ -8,7 +8,7 @@ import {
   ChainConfig,
   Proof,
   SignatureValueType,
-  SingleSignature,
+  SingleSignature
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
@@ -18,18 +18,13 @@ import Long from "long";
 import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
-import {
-  defaultGasPrice,
-  TEST_CHAIN_URL,
-  testUser1,
-  testUser2,
-} from "./testutils";
+import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
   getSignatureBytes,
   getSignedBytes,
-  SignatureResult,
+  SignatureResult
 } from "./signatureresult";
 import {
   MsgAddReactionEncodeObject,
@@ -41,12 +36,9 @@ import {
   MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
-  MsgSaveProfileEncodeObject,
+  MsgSaveProfileEncodeObject
 } from "./encodeobjects";
-import {
-  bech32AddressToAny,
-  singleSignatureToAny,
-} from "./aminomessages/profiles";
+import { bech32AddressToAny, singleSignatureToAny } from "./aminomessages/profiles";
 import { postTargetToAny } from "./aminomessages/reports";
 import { registeredReactionValueToAny } from "./aminomessages/reactions";
 import {
@@ -58,9 +50,10 @@ import {
   MsgCreateReportTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgMultiSendTypeUrl,
-  MsgSaveProfileTypeUrl,
+  MsgSaveProfileTypeUrl
 } from "./const";
 import MsgAuthenticateTypeUrl from "./const/desmjs";
+import { BlockBroadcastResponse } from "./types/responses";
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
@@ -121,6 +114,12 @@ describe("DesmosClient", () => {
     }
 
     throw new Error(`Timed out waiting for tx ${txHash}`);
+  }
+
+  function assertTxSuccess(response: BlockBroadcastResponse) {
+    if (response.checkTx.code !== 0) {
+      throw new Error(response.checkTx.log ?? `deliverTx code is !== 0, code = ${response.checkTx.code}`);
+    }
   }
 
   describe("SignatureResult utils", () => {
@@ -833,4 +832,25 @@ describe("DesmosClient", () => {
       await client.broadcastTxBlock(signResult.txRaw);
     });
   });
+
+  describe("Transaction fee estimation", () => {
+    it("test broadcast with estimated fee and fee granter", async () => {
+      const [signer, client] = await getDirectSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const signResult = await client.signTx(address, [
+        {
+          typeUrl: MsgSaveProfileTypeUrl,
+          value: {
+            dtag: "test_fee_granter",
+            creator: address,
+          },
+        } as MsgSaveProfileEncodeObject,
+      ], {
+        feeGranter: testUser2.address0
+      });
+      const response = await client.broadcastTxBlock(signResult.txRaw);
+      assertTxSuccess(response);
+    });
+  })
 });
