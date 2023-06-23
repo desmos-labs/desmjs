@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.relationships.v1";
 /**
@@ -553,76 +553,3 @@ export const MsgUnblockUserResponse = {
     return message;
   },
 };
-/** Msg defines the relationships Msg service. */
-export interface Msg {
-  /** CreateRelationship defines a method for creating a new relationship */
-  CreateRelationship(
-    request: MsgCreateRelationship
-  ): Promise<MsgCreateRelationshipResponse>;
-  /** DeleteRelationship defines a method for deleting a relationship */
-  DeleteRelationship(
-    request: MsgDeleteRelationship
-  ): Promise<MsgDeleteRelationshipResponse>;
-  /** BlockUser defines a method for blocking a user */
-  BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse>;
-  /** UnblockUser defines a method for unblocking a user */
-  UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse>;
-}
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.CreateRelationship = this.CreateRelationship.bind(this);
-    this.DeleteRelationship = this.DeleteRelationship.bind(this);
-    this.BlockUser = this.BlockUser.bind(this);
-    this.UnblockUser = this.UnblockUser.bind(this);
-  }
-  CreateRelationship(
-    request: MsgCreateRelationship
-  ): Promise<MsgCreateRelationshipResponse> {
-    const data = MsgCreateRelationship.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "CreateRelationship",
-      data
-    );
-    return promise.then((data) =>
-      MsgCreateRelationshipResponse.decode(new _m0.Reader(data))
-    );
-  }
-  DeleteRelationship(
-    request: MsgDeleteRelationship
-  ): Promise<MsgDeleteRelationshipResponse> {
-    const data = MsgDeleteRelationship.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "DeleteRelationship",
-      data
-    );
-    return promise.then((data) =>
-      MsgDeleteRelationshipResponse.decode(new _m0.Reader(data))
-    );
-  }
-  BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse> {
-    const data = MsgBlockUser.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "BlockUser",
-      data
-    );
-    return promise.then((data) =>
-      MsgBlockUserResponse.decode(new _m0.Reader(data))
-    );
-  }
-  UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse> {
-    const data = MsgUnblockUser.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Msg",
-      "UnblockUser",
-      data
-    );
-    return promise.then((data) =>
-      MsgUnblockUserResponse.decode(new _m0.Reader(data))
-    );
-  }
-}

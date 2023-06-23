@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.supply.v1";
 /** QueryTotalRequest is the request type for Query/Total RPC method */
@@ -282,43 +282,3 @@ export const QueryCirculatingResponse = {
     return message;
   },
 };
-/** Query defines the gRPC querier service. */
-export interface Query {
-  /** Total queries the total supply of the given denom */
-  Total(request: QueryTotalRequest): Promise<QueryTotalResponse>;
-  /**
-   * Circulating queries the amount of tokens circulating in the market of the
-   * given denom
-   */
-  Circulating(
-    request: QueryCirculatingRequest
-  ): Promise<QueryCirculatingResponse>;
-}
-export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.Total = this.Total.bind(this);
-    this.Circulating = this.Circulating.bind(this);
-  }
-  Total(request: QueryTotalRequest): Promise<QueryTotalResponse> {
-    const data = QueryTotalRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.supply.v1.Query", "Total", data);
-    return promise.then((data) =>
-      QueryTotalResponse.decode(new _m0.Reader(data))
-    );
-  }
-  Circulating(
-    request: QueryCirculatingRequest
-  ): Promise<QueryCirculatingResponse> {
-    const data = QueryCirculatingRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.supply.v1.Query",
-      "Circulating",
-      data
-    );
-    return promise.then((data) =>
-      QueryCirculatingResponse.decode(new _m0.Reader(data))
-    );
-  }
-}

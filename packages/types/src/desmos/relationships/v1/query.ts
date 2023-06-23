@@ -4,7 +4,7 @@ import {
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Relationship, UserBlock } from "./models";
-import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.relationships.v1";
 /**
@@ -415,47 +415,3 @@ export const QueryBlocksResponse = {
     return message;
   },
 };
-/** Query defines the gRPC querier service. */
-export interface Query {
-  /** Relationships queries all relationships present inside a specific subspace */
-  Relationships(
-    request: QueryRelationshipsRequest
-  ): Promise<QueryRelationshipsResponse>;
-  /**
-   * Blocks queries the blocks for the given user, if provided.
-   * Otherwise, it queries all the stored blocks.
-   */
-  Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse>;
-}
-export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.Relationships = this.Relationships.bind(this);
-    this.Blocks = this.Blocks.bind(this);
-  }
-  Relationships(
-    request: QueryRelationshipsRequest
-  ): Promise<QueryRelationshipsResponse> {
-    const data = QueryRelationshipsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Query",
-      "Relationships",
-      data
-    );
-    return promise.then((data) =>
-      QueryRelationshipsResponse.decode(new _m0.Reader(data))
-    );
-  }
-  Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse> {
-    const data = QueryBlocksRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.relationships.v1.Query",
-      "Blocks",
-      data
-    );
-    return promise.then((data) =>
-      QueryBlocksResponse.decode(new _m0.Reader(data))
-    );
-  }
-}

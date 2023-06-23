@@ -5,7 +5,7 @@ import {
   PageResponse,
 } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Report, Reason, Params } from "./models";
-import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reports.v1";
 /** QueryReportsResponse is the request type for Query/Reports RPC method */
@@ -742,70 +742,3 @@ export const QueryParamsResponse = {
     return message;
   },
 };
-/** Query defines the gRPC querier service. */
-export interface Query {
-  /** Reports allows to query the reports for a specific target */
-  Reports(request: QueryReportsRequest): Promise<QueryReportsResponse>;
-  /** Report allows to query the report having the given id */
-  Report(request: QueryReportRequest): Promise<QueryReportResponse>;
-  /** Reasons allows to query the supported reporting reasons for a subspace */
-  Reasons(request: QueryReasonsRequest): Promise<QueryReasonsResponse>;
-  /** Reason allows to query the reason having the given id */
-  Reason(request: QueryReasonRequest): Promise<QueryReasonResponse>;
-  /** Params allows to query the module parameters */
-  Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-}
-export class QueryClientImpl implements Query {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-    this.Reports = this.Reports.bind(this);
-    this.Report = this.Report.bind(this);
-    this.Reasons = this.Reasons.bind(this);
-    this.Reason = this.Reason.bind(this);
-    this.Params = this.Params.bind(this);
-  }
-  Reports(request: QueryReportsRequest): Promise<QueryReportsResponse> {
-    const data = QueryReportsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Query",
-      "Reports",
-      data
-    );
-    return promise.then((data) =>
-      QueryReportsResponse.decode(new _m0.Reader(data))
-    );
-  }
-  Report(request: QueryReportRequest): Promise<QueryReportResponse> {
-    const data = QueryReportRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.reports.v1.Query", "Report", data);
-    return promise.then((data) =>
-      QueryReportResponse.decode(new _m0.Reader(data))
-    );
-  }
-  Reasons(request: QueryReasonsRequest): Promise<QueryReasonsResponse> {
-    const data = QueryReasonsRequest.encode(request).finish();
-    const promise = this.rpc.request(
-      "desmos.reports.v1.Query",
-      "Reasons",
-      data
-    );
-    return promise.then((data) =>
-      QueryReasonsResponse.decode(new _m0.Reader(data))
-    );
-  }
-  Reason(request: QueryReasonRequest): Promise<QueryReasonResponse> {
-    const data = QueryReasonRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.reports.v1.Query", "Reason", data);
-    return promise.then((data) =>
-      QueryReasonResponse.decode(new _m0.Reader(data))
-    );
-  }
-  Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
-    const promise = this.rpc.request("desmos.reports.v1.Query", "Params", data);
-    return promise.then((data) =>
-      QueryParamsResponse.decode(new _m0.Reader(data))
-    );
-  }
-}

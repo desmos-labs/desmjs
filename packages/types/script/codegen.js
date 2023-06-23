@@ -11,6 +11,10 @@ function appendImport(file, content) {
   const data = readFileSync(file);
   // Search the last import statement
   const last_import_index = data.lastIndexOf("import");
+  if (last_import_index === -1) {
+    return;
+  }
+
   // Search where the import statement ends
   const append_start = data.indexOf(';', last_import_index);
 
@@ -70,6 +74,9 @@ telescope({
           'desmos.profiles.v2',
           'desmos.subspaces.v1',
           'desmos.subspaces.v2.*',
+
+          'desmos.profiles.v3.client',
+          'desmos.reactions.v1.client',
 
           // Ignore unused cosmos deps
           'cosmos.app.*',
@@ -132,17 +139,7 @@ telescope({
       enabled: false
     },
     rpcClients: {
-      enabled: true,
-      inline: true,
-      extensions: false,
-      camelCase: false,
-      enabledServices: [
-        'Msg',
-        'Query',
-        'Service',
-        'ReflectionService',
-        'ABCIApplication'
-      ]
+      enabled: false,
     },
     aminoEncoding: {
       enabled: false
