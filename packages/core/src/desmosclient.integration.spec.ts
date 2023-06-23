@@ -838,16 +838,20 @@ describe("DesmosClient", () => {
       const [signer, client] = await getDirectSignerAndClient();
       const { address } = (await signer.getAccounts())[0];
 
-      const signResult = await client.signTx(address, [
+      const msgs = [
         {
           typeUrl: MsgSaveProfileTypeUrl,
           value: {
-            dtag: "test_fee_granter",
+            dtag: "test_feeGranter",
             creator: address,
           },
         } as MsgSaveProfileEncodeObject,
-      ], {
-        feeGranter: testUser2.address0
+      ];
+
+      const fee = await client.estimateTxFee(address, msgs)
+      const signResult = await client.signTx(address, msgs, {
+        feeGranter: testUser2.address0,
+        fee,
       });
       const response = await client.broadcastTxBlock(signResult.txRaw);
       assertTxSuccess(response);
