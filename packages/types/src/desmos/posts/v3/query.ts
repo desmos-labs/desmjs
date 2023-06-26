@@ -15,7 +15,7 @@ import {
   Params,
   ParamsAmino,
 } from "./models";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.posts.v3";
 /**
@@ -1678,3 +1678,104 @@ export const QueryParamsResponse = {
     };
   },
 };
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** SubspacePosts queries all the posts inside a given subspace */
+  SubspacePosts(
+    request: QuerySubspacePostsRequest
+  ): Promise<QuerySubspacePostsResponse>;
+  /** SectionPosts queries all the posts inside a given section */
+  SectionPosts(
+    request: QuerySectionPostsRequest
+  ): Promise<QuerySectionPostsResponse>;
+  /** Post queries for a single post inside a given subspace */
+  Post(request: QueryPostRequest): Promise<QueryPostResponse>;
+  /** PostAttachments queries the attachments of the post having the given id */
+  PostAttachments(
+    request: QueryPostAttachmentsRequest
+  ): Promise<QueryPostAttachmentsResponse>;
+  /** PollAnswers queries the answers for the poll having the given id */
+  PollAnswers(
+    request: QueryPollAnswersRequest
+  ): Promise<QueryPollAnswersResponse>;
+  /** Params queries the module parameters */
+  Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.SubspacePosts = this.SubspacePosts.bind(this);
+    this.SectionPosts = this.SectionPosts.bind(this);
+    this.Post = this.Post.bind(this);
+    this.PostAttachments = this.PostAttachments.bind(this);
+    this.PollAnswers = this.PollAnswers.bind(this);
+    this.Params = this.Params.bind(this);
+  }
+  SubspacePosts(
+    request: QuerySubspacePostsRequest
+  ): Promise<QuerySubspacePostsResponse> {
+    const data = QuerySubspacePostsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Query",
+      "SubspacePosts",
+      data
+    );
+    return promise.then((data) =>
+      QuerySubspacePostsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  SectionPosts(
+    request: QuerySectionPostsRequest
+  ): Promise<QuerySectionPostsResponse> {
+    const data = QuerySectionPostsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Query",
+      "SectionPosts",
+      data
+    );
+    return promise.then((data) =>
+      QuerySectionPostsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Post(request: QueryPostRequest): Promise<QueryPostResponse> {
+    const data = QueryPostRequest.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Query", "Post", data);
+    return promise.then((data) =>
+      QueryPostResponse.decode(new _m0.Reader(data))
+    );
+  }
+  PostAttachments(
+    request: QueryPostAttachmentsRequest
+  ): Promise<QueryPostAttachmentsResponse> {
+    const data = QueryPostAttachmentsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Query",
+      "PostAttachments",
+      data
+    );
+    return promise.then((data) =>
+      QueryPostAttachmentsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  PollAnswers(
+    request: QueryPollAnswersRequest
+  ): Promise<QueryPollAnswersResponse> {
+    const data = QueryPollAnswersRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Query",
+      "PollAnswers",
+      data
+    );
+    return promise.then((data) =>
+      QueryPollAnswersResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
+    const data = QueryParamsRequest.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Query", "Params", data);
+    return promise.then((data) =>
+      QueryParamsResponse.decode(new _m0.Reader(data))
+    );
+  }
+}

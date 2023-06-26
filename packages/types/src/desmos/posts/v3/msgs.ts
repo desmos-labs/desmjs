@@ -19,6 +19,7 @@ import {
   Exact,
   fromJsonTimestamp,
   fromTimestamp,
+  Rpc,
 } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.posts.v3";
@@ -2106,3 +2107,108 @@ export const MsgUpdateParamsResponse = {
     };
   },
 };
+/** Msg defines the posts Msg service. */
+export interface Msg {
+  /** CreatePost allows to create a new post */
+  CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse>;
+  /** EditPost allows to edit an existing post */
+  EditPost(request: MsgEditPost): Promise<MsgEditPostResponse>;
+  /** DeletePost allows to delete an existing post */
+  DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse>;
+  /** AddPostAttachment allows to add a new attachment to a post */
+  AddPostAttachment(
+    request: MsgAddPostAttachment
+  ): Promise<MsgAddPostAttachmentResponse>;
+  /** RemovePostAttachment allows to remove an attachment from a post */
+  RemovePostAttachment(
+    request: MsgRemovePostAttachment
+  ): Promise<MsgRemovePostAttachmentResponse>;
+  /** AnswerPoll allows to answer a post poll */
+  AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse>;
+  /**
+   * UpdateParams defines a (governance) operation for updating the module
+   * parameters.
+   * The authority defaults to the x/gov module account.
+   *
+   * Since: Desmos 5.0.0
+   */
+  UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.CreatePost = this.CreatePost.bind(this);
+    this.EditPost = this.EditPost.bind(this);
+    this.DeletePost = this.DeletePost.bind(this);
+    this.AddPostAttachment = this.AddPostAttachment.bind(this);
+    this.RemovePostAttachment = this.RemovePostAttachment.bind(this);
+    this.AnswerPoll = this.AnswerPoll.bind(this);
+    this.UpdateParams = this.UpdateParams.bind(this);
+  }
+  CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse> {
+    const data = MsgCreatePost.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Msg", "CreatePost", data);
+    return promise.then((data) =>
+      MsgCreatePostResponse.decode(new _m0.Reader(data))
+    );
+  }
+  EditPost(request: MsgEditPost): Promise<MsgEditPostResponse> {
+    const data = MsgEditPost.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Msg", "EditPost", data);
+    return promise.then((data) =>
+      MsgEditPostResponse.decode(new _m0.Reader(data))
+    );
+  }
+  DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse> {
+    const data = MsgDeletePost.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Msg", "DeletePost", data);
+    return promise.then((data) =>
+      MsgDeletePostResponse.decode(new _m0.Reader(data))
+    );
+  }
+  AddPostAttachment(
+    request: MsgAddPostAttachment
+  ): Promise<MsgAddPostAttachmentResponse> {
+    const data = MsgAddPostAttachment.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "AddPostAttachment",
+      data
+    );
+    return promise.then((data) =>
+      MsgAddPostAttachmentResponse.decode(new _m0.Reader(data))
+    );
+  }
+  RemovePostAttachment(
+    request: MsgRemovePostAttachment
+  ): Promise<MsgRemovePostAttachmentResponse> {
+    const data = MsgRemovePostAttachment.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "RemovePostAttachment",
+      data
+    );
+    return promise.then((data) =>
+      MsgRemovePostAttachmentResponse.decode(new _m0.Reader(data))
+    );
+  }
+  AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse> {
+    const data = MsgAnswerPoll.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Msg", "AnswerPoll", data);
+    return promise.then((data) =>
+      MsgAnswerPollResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
+    const data = MsgUpdateParams.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "UpdateParams",
+      data
+    );
+    return promise.then((data) =>
+      MsgUpdateParamsResponse.decode(new _m0.Reader(data))
+    );
+  }
+}

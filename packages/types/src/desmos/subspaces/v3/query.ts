@@ -14,7 +14,7 @@ import {
   UserGroupAmino,
 } from "./models";
 import { Grant, GrantAmino } from "./models_feegrant";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.subspaces.v3";
 /** QuerySubspacesRequest is the request type for the Query/Subspaces RPC method */
@@ -3209,3 +3209,180 @@ export const QueryGroupAllowancesResponse = {
     };
   },
 };
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** Subspaces queries all the subspaces inside Desmos */
+  Subspaces(request?: QuerySubspacesRequest): Promise<QuerySubspacesResponse>;
+  /** Subspace queries all the information about the subspace with the given id */
+  Subspace(request: QuerySubspaceRequest): Promise<QuerySubspaceResponse>;
+  /** Sections allows to query for the sections of a specific subspace */
+  Sections(request: QuerySectionsRequest): Promise<QuerySectionsResponse>;
+  /** Section queries all the information about the section with the given id */
+  Section(request: QuerySectionRequest): Promise<QuerySectionResponse>;
+  /**
+   * UserGroups queries all the groups that are present inside the subspace with
+   * the given id
+   */
+  UserGroups(request: QueryUserGroupsRequest): Promise<QueryUserGroupsResponse>;
+  /**
+   * UserGroup queries the user group having the given id inside the specific
+   * subspace
+   */
+  UserGroup(request: QueryUserGroupRequest): Promise<QueryUserGroupResponse>;
+  /** UserGroupMembers queries all the members of a given user group */
+  UserGroupMembers(
+    request: QueryUserGroupMembersRequest
+  ): Promise<QueryUserGroupMembersResponse>;
+  /** UserPermissions queries the permissions for the given user */
+  UserPermissions(
+    request: QueryUserPermissionsRequest
+  ): Promise<QueryUserPermissionsResponse>;
+  /** UserAllowances returns all the grants for users. */
+  UserAllowances(
+    request: QueryUserAllowancesRequest
+  ): Promise<QueryUserAllowancesResponse>;
+  /** GroupAllowances returns all the grants for groups. */
+  GroupAllowances(
+    request: QueryGroupAllowancesRequest
+  ): Promise<QueryGroupAllowancesResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.Subspaces = this.Subspaces.bind(this);
+    this.Subspace = this.Subspace.bind(this);
+    this.Sections = this.Sections.bind(this);
+    this.Section = this.Section.bind(this);
+    this.UserGroups = this.UserGroups.bind(this);
+    this.UserGroup = this.UserGroup.bind(this);
+    this.UserGroupMembers = this.UserGroupMembers.bind(this);
+    this.UserPermissions = this.UserPermissions.bind(this);
+    this.UserAllowances = this.UserAllowances.bind(this);
+    this.GroupAllowances = this.GroupAllowances.bind(this);
+  }
+  Subspaces(
+    request: QuerySubspacesRequest = {
+      pagination: undefined,
+    }
+  ): Promise<QuerySubspacesResponse> {
+    const data = QuerySubspacesRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "Subspaces",
+      data
+    );
+    return promise.then((data) =>
+      QuerySubspacesResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Subspace(request: QuerySubspaceRequest): Promise<QuerySubspaceResponse> {
+    const data = QuerySubspaceRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "Subspace",
+      data
+    );
+    return promise.then((data) =>
+      QuerySubspaceResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Sections(request: QuerySectionsRequest): Promise<QuerySectionsResponse> {
+    const data = QuerySectionsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "Sections",
+      data
+    );
+    return promise.then((data) =>
+      QuerySectionsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Section(request: QuerySectionRequest): Promise<QuerySectionResponse> {
+    const data = QuerySectionRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "Section",
+      data
+    );
+    return promise.then((data) =>
+      QuerySectionResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UserGroups(
+    request: QueryUserGroupsRequest
+  ): Promise<QueryUserGroupsResponse> {
+    const data = QueryUserGroupsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "UserGroups",
+      data
+    );
+    return promise.then((data) =>
+      QueryUserGroupsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UserGroup(request: QueryUserGroupRequest): Promise<QueryUserGroupResponse> {
+    const data = QueryUserGroupRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "UserGroup",
+      data
+    );
+    return promise.then((data) =>
+      QueryUserGroupResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UserGroupMembers(
+    request: QueryUserGroupMembersRequest
+  ): Promise<QueryUserGroupMembersResponse> {
+    const data = QueryUserGroupMembersRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "UserGroupMembers",
+      data
+    );
+    return promise.then((data) =>
+      QueryUserGroupMembersResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UserPermissions(
+    request: QueryUserPermissionsRequest
+  ): Promise<QueryUserPermissionsResponse> {
+    const data = QueryUserPermissionsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "UserPermissions",
+      data
+    );
+    return promise.then((data) =>
+      QueryUserPermissionsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UserAllowances(
+    request: QueryUserAllowancesRequest
+  ): Promise<QueryUserAllowancesResponse> {
+    const data = QueryUserAllowancesRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "UserAllowances",
+      data
+    );
+    return promise.then((data) =>
+      QueryUserAllowancesResponse.decode(new _m0.Reader(data))
+    );
+  }
+  GroupAllowances(
+    request: QueryGroupAllowancesRequest
+  ): Promise<QueryGroupAllowancesResponse> {
+    const data = QueryGroupAllowancesRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Query",
+      "GroupAllowances",
+      data
+    );
+    return promise.then((data) =>
+      QueryGroupAllowancesResponse.decode(new _m0.Reader(data))
+    );
+  }
+}

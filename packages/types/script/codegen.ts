@@ -176,7 +176,17 @@ telescope({
       enabled: false
     },
     rpcClients: {
-      enabled: false
+      enabled: true,
+      inline: true,
+      extensions: false,
+      camelCase: false,
+      enabledServices: [
+        'Msg',
+        'Query',
+        'Service',
+        'ReflectionService',
+        'ABCIApplication'
+      ]
     },
     stargateClients: {
       enabled: false,

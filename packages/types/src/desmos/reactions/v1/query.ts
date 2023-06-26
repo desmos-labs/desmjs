@@ -13,7 +13,7 @@ import {
   SubspaceReactionsParams,
   SubspaceReactionsParamsAmino,
 } from "./models";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reactions.v1";
 /** QueryReactionsRequest is the request type for the Query/Reactions RPC method */
@@ -1423,3 +1423,94 @@ export const QueryReactionsParamsResponse = {
     };
   },
 };
+/** Query defines the gRPC querier service. */
+export interface Query {
+  /** Reactions allows to query the reactions for a given post */
+  Reactions(request: QueryReactionsRequest): Promise<QueryReactionsResponse>;
+  /** Reaction allows to query the reaction with the given id */
+  Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse>;
+  /** RegisteredReactions allows to query the registered reaction of a subspace */
+  RegisteredReactions(
+    request: QueryRegisteredReactionsRequest
+  ): Promise<QueryRegisteredReactionsResponse>;
+  /** RegisteredReaction allows to query the registered reaction of a subspace */
+  RegisteredReaction(
+    request: QueryRegisteredReactionRequest
+  ): Promise<QueryRegisteredReactionResponse>;
+  /** ReactionsParams allows to query the reaction params of a subspace */
+  ReactionsParams(
+    request: QueryReactionsParamsRequest
+  ): Promise<QueryReactionsParamsResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.Reactions = this.Reactions.bind(this);
+    this.Reaction = this.Reaction.bind(this);
+    this.RegisteredReactions = this.RegisteredReactions.bind(this);
+    this.RegisteredReaction = this.RegisteredReaction.bind(this);
+    this.ReactionsParams = this.ReactionsParams.bind(this);
+  }
+  Reactions(request: QueryReactionsRequest): Promise<QueryReactionsResponse> {
+    const data = QueryReactionsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.reactions.v1.Query",
+      "Reactions",
+      data
+    );
+    return promise.then((data) =>
+      QueryReactionsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse> {
+    const data = QueryReactionRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.reactions.v1.Query",
+      "Reaction",
+      data
+    );
+    return promise.then((data) =>
+      QueryReactionResponse.decode(new _m0.Reader(data))
+    );
+  }
+  RegisteredReactions(
+    request: QueryRegisteredReactionsRequest
+  ): Promise<QueryRegisteredReactionsResponse> {
+    const data = QueryRegisteredReactionsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.reactions.v1.Query",
+      "RegisteredReactions",
+      data
+    );
+    return promise.then((data) =>
+      QueryRegisteredReactionsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  RegisteredReaction(
+    request: QueryRegisteredReactionRequest
+  ): Promise<QueryRegisteredReactionResponse> {
+    const data = QueryRegisteredReactionRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.reactions.v1.Query",
+      "RegisteredReaction",
+      data
+    );
+    return promise.then((data) =>
+      QueryRegisteredReactionResponse.decode(new _m0.Reader(data))
+    );
+  }
+  ReactionsParams(
+    request: QueryReactionsParamsRequest
+  ): Promise<QueryReactionsParamsResponse> {
+    const data = QueryReactionsParamsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.reactions.v1.Query",
+      "ReactionsParams",
+      data
+    );
+    return promise.then((data) =>
+      QueryReactionsParamsResponse.decode(new _m0.Reader(data))
+    );
+  }
+}

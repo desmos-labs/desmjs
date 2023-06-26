@@ -8,7 +8,7 @@ import {
   voteOptionFromJSON,
   voteOptionToJSON,
 } from "./gov";
-import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
+import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.gov.v1";
 /**
@@ -1228,3 +1228,79 @@ export const MsgDepositResponse = {
     };
   },
 };
+/** Msg defines the gov Msg service. */
+export interface Msg {
+  /** SubmitProposal defines a method to create new proposal given a content. */
+  SubmitProposal(
+    request: MsgSubmitProposal
+  ): Promise<MsgSubmitProposalResponse>;
+  /**
+   * ExecLegacyContent defines a Msg to be in included in a MsgSubmitProposal
+   * to execute a legacy content-based proposal.
+   */
+  ExecLegacyContent(
+    request: MsgExecLegacyContent
+  ): Promise<MsgExecLegacyContentResponse>;
+  /** Vote defines a method to add a vote on a specific proposal. */
+  Vote(request: MsgVote): Promise<MsgVoteResponse>;
+  /** VoteWeighted defines a method to add a weighted vote on a specific proposal. */
+  VoteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse>;
+  /** Deposit defines a method to add deposit on a specific proposal. */
+  Deposit(request: MsgDeposit): Promise<MsgDepositResponse>;
+}
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.SubmitProposal = this.SubmitProposal.bind(this);
+    this.ExecLegacyContent = this.ExecLegacyContent.bind(this);
+    this.Vote = this.Vote.bind(this);
+    this.VoteWeighted = this.VoteWeighted.bind(this);
+    this.Deposit = this.Deposit.bind(this);
+  }
+  SubmitProposal(
+    request: MsgSubmitProposal
+  ): Promise<MsgSubmitProposalResponse> {
+    const data = MsgSubmitProposal.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.gov.v1.Msg",
+      "SubmitProposal",
+      data
+    );
+    return promise.then((data) =>
+      MsgSubmitProposalResponse.decode(new _m0.Reader(data))
+    );
+  }
+  ExecLegacyContent(
+    request: MsgExecLegacyContent
+  ): Promise<MsgExecLegacyContentResponse> {
+    const data = MsgExecLegacyContent.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.gov.v1.Msg",
+      "ExecLegacyContent",
+      data
+    );
+    return promise.then((data) =>
+      MsgExecLegacyContentResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Vote(request: MsgVote): Promise<MsgVoteResponse> {
+    const data = MsgVote.encode(request).finish();
+    const promise = this.rpc.request("cosmos.gov.v1.Msg", "Vote", data);
+    return promise.then((data) => MsgVoteResponse.decode(new _m0.Reader(data)));
+  }
+  VoteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse> {
+    const data = MsgVoteWeighted.encode(request).finish();
+    const promise = this.rpc.request("cosmos.gov.v1.Msg", "VoteWeighted", data);
+    return promise.then((data) =>
+      MsgVoteWeightedResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Deposit(request: MsgDeposit): Promise<MsgDepositResponse> {
+    const data = MsgDeposit.encode(request).finish();
+    const promise = this.rpc.request("cosmos.gov.v1.Msg", "Deposit", data);
+    return promise.then((data) =>
+      MsgDepositResponse.decode(new _m0.Reader(data))
+    );
+  }
+}

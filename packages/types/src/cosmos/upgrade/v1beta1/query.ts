@@ -7,6 +7,7 @@ import {
   isSet,
   bytesFromBase64,
   base64FromBytes,
+  Rpc,
 } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
@@ -1201,3 +1202,111 @@ export const QueryAuthorityResponse = {
     };
   },
 };
+/** Query defines the gRPC upgrade querier service. */
+export interface Query {
+  /** CurrentPlan queries the current upgrade plan. */
+  CurrentPlan(
+    request?: QueryCurrentPlanRequest
+  ): Promise<QueryCurrentPlanResponse>;
+  /** AppliedPlan queries a previously applied upgrade plan by its name. */
+  AppliedPlan(
+    request: QueryAppliedPlanRequest
+  ): Promise<QueryAppliedPlanResponse>;
+  /**
+   * UpgradedConsensusState queries the consensus state that will serve
+   * as a trusted kernel for the next version of this chain. It will only be
+   * stored at the last height of this chain.
+   * UpgradedConsensusState RPC not supported with legacy querier
+   * This rpc is deprecated now that IBC has its own replacement
+   * (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
+   */
+  UpgradedConsensusState(
+    request: QueryUpgradedConsensusStateRequest
+  ): Promise<QueryUpgradedConsensusStateResponse>;
+  /**
+   * ModuleVersions queries the list of module versions from state.
+   *
+   * Since: cosmos-sdk 0.43
+   */
+  ModuleVersions(
+    request: QueryModuleVersionsRequest
+  ): Promise<QueryModuleVersionsResponse>;
+  /** Returns the account with authority to conduct upgrades */
+  Authority(request?: QueryAuthorityRequest): Promise<QueryAuthorityResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.CurrentPlan = this.CurrentPlan.bind(this);
+    this.AppliedPlan = this.AppliedPlan.bind(this);
+    this.UpgradedConsensusState = this.UpgradedConsensusState.bind(this);
+    this.ModuleVersions = this.ModuleVersions.bind(this);
+    this.Authority = this.Authority.bind(this);
+  }
+  CurrentPlan(
+    request: QueryCurrentPlanRequest = {}
+  ): Promise<QueryCurrentPlanResponse> {
+    const data = QueryCurrentPlanRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.upgrade.v1beta1.Query",
+      "CurrentPlan",
+      data
+    );
+    return promise.then((data) =>
+      QueryCurrentPlanResponse.decode(new _m0.Reader(data))
+    );
+  }
+  AppliedPlan(
+    request: QueryAppliedPlanRequest
+  ): Promise<QueryAppliedPlanResponse> {
+    const data = QueryAppliedPlanRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.upgrade.v1beta1.Query",
+      "AppliedPlan",
+      data
+    );
+    return promise.then((data) =>
+      QueryAppliedPlanResponse.decode(new _m0.Reader(data))
+    );
+  }
+  UpgradedConsensusState(
+    request: QueryUpgradedConsensusStateRequest
+  ): Promise<QueryUpgradedConsensusStateResponse> {
+    const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.upgrade.v1beta1.Query",
+      "UpgradedConsensusState",
+      data
+    );
+    return promise.then((data) =>
+      QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data))
+    );
+  }
+  ModuleVersions(
+    request: QueryModuleVersionsRequest
+  ): Promise<QueryModuleVersionsResponse> {
+    const data = QueryModuleVersionsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.upgrade.v1beta1.Query",
+      "ModuleVersions",
+      data
+    );
+    return promise.then((data) =>
+      QueryModuleVersionsResponse.decode(new _m0.Reader(data))
+    );
+  }
+  Authority(
+    request: QueryAuthorityRequest = {}
+  ): Promise<QueryAuthorityResponse> {
+    const data = QueryAuthorityRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmos.upgrade.v1beta1.Query",
+      "Authority",
+      data
+    );
+    return promise.then((data) =>
+      QueryAuthorityResponse.decode(new _m0.Reader(data))
+    );
+  }
+}
