@@ -32,15 +32,86 @@ export interface MsgSaveProfile {
   /** Address of the user associated to the profile */
   creator: string;
 }
+export interface MsgSaveProfileProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgSaveProfile";
+  value: Uint8Array;
+}
+/** MsgSaveProfile represents a message to save a profile. */
+export interface MsgSaveProfileAmino {
+  /**
+   * DTag of the profile. If it shouldn't be changed, [do-no-modify] can be used
+   * instead.
+   */
+  dtag: string;
+  /**
+   * Nickname of the profile. If it shouldn't be changed, [do-no-modify] can be
+   * used instead.
+   */
+  nickname: string;
+  /**
+   * Bio of the profile. If it shouldn't be changed, [do-no-modify] can be used
+   * instead.
+   */
+  bio: string;
+  /**
+   * URL to the profile picture. If it shouldn't be changed, [do-no-modify] can
+   * be used instead.
+   */
+  profile_picture: string;
+  /**
+   * URL to the profile cover. If it shouldn't be changed, [do-no-modify] can be
+   * used instead.
+   */
+  cover_picture: string;
+  /** Address of the user associated to the profile */
+  creator: string;
+}
+export interface MsgSaveProfileAminoMsg {
+  type: "/desmos.profiles.v3.MsgSaveProfile";
+  value: MsgSaveProfileAmino;
+}
 /** MsgSaveProfileResponse defines the Msg/SaveProfile response type. */
 export interface MsgSaveProfileResponse {}
+export interface MsgSaveProfileResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgSaveProfileResponse";
+  value: Uint8Array;
+}
+/** MsgSaveProfileResponse defines the Msg/SaveProfile response type. */
+export interface MsgSaveProfileResponseAmino {}
+export interface MsgSaveProfileResponseAminoMsg {
+  type: "/desmos.profiles.v3.MsgSaveProfileResponse";
+  value: MsgSaveProfileResponseAmino;
+}
 /** MsgDeleteProfile represents the message used to delete an existing profile. */
 export interface MsgDeleteProfile {
   /** Address associated to the profile to be deleted */
   creator: string;
 }
+export interface MsgDeleteProfileProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgDeleteProfile";
+  value: Uint8Array;
+}
+/** MsgDeleteProfile represents the message used to delete an existing profile. */
+export interface MsgDeleteProfileAmino {
+  /** Address associated to the profile to be deleted */
+  creator: string;
+}
+export interface MsgDeleteProfileAminoMsg {
+  type: "/desmos.profiles.v3.MsgDeleteProfile";
+  value: MsgDeleteProfileAmino;
+}
 /** MsgDeleteProfileResponse defines the Msg/DeleteProfile response type. */
 export interface MsgDeleteProfileResponse {}
+export interface MsgDeleteProfileResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgDeleteProfileResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteProfileResponse defines the Msg/DeleteProfile response type. */
+export interface MsgDeleteProfileResponseAmino {}
+export interface MsgDeleteProfileResponseAminoMsg {
+  type: "/desmos.profiles.v3.MsgDeleteProfileResponse";
+  value: MsgDeleteProfileResponseAmino;
+}
 function createBaseMsgSaveProfile(): MsgSaveProfile {
   return {
     dtag: "",
@@ -146,6 +217,41 @@ export const MsgSaveProfile = {
     message.creator = object.creator ?? "";
     return message;
   },
+  fromAmino(object: MsgSaveProfileAmino): MsgSaveProfile {
+    return {
+      dtag: object.dtag,
+      nickname: object.nickname,
+      bio: object.bio,
+      profilePicture: object.profile_picture,
+      coverPicture: object.cover_picture,
+      creator: object.creator,
+    };
+  },
+  toAmino(message: MsgSaveProfile): MsgSaveProfileAmino {
+    const obj: any = {};
+    obj.dtag = message.dtag;
+    obj.nickname = message.nickname;
+    obj.bio = message.bio;
+    obj.profile_picture = message.profilePicture;
+    obj.cover_picture = message.coverPicture;
+    obj.creator = message.creator;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSaveProfileAminoMsg): MsgSaveProfile {
+    return MsgSaveProfile.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgSaveProfileProtoMsg): MsgSaveProfile {
+    return MsgSaveProfile.decode(message.value);
+  },
+  toProto(message: MsgSaveProfile): Uint8Array {
+    return MsgSaveProfile.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSaveProfile): MsgSaveProfileProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgSaveProfile",
+      value: MsgSaveProfile.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgSaveProfileResponse(): MsgSaveProfileResponse {
   return {};
@@ -186,6 +292,30 @@ export const MsgSaveProfileResponse = {
   ): MsgSaveProfileResponse {
     const message = createBaseMsgSaveProfileResponse();
     return message;
+  },
+  fromAmino(_: MsgSaveProfileResponseAmino): MsgSaveProfileResponse {
+    return {};
+  },
+  toAmino(_: MsgSaveProfileResponse): MsgSaveProfileResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSaveProfileResponseAminoMsg): MsgSaveProfileResponse {
+    return MsgSaveProfileResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSaveProfileResponseProtoMsg
+  ): MsgSaveProfileResponse {
+    return MsgSaveProfileResponse.decode(message.value);
+  },
+  toProto(message: MsgSaveProfileResponse): Uint8Array {
+    return MsgSaveProfileResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSaveProfileResponse): MsgSaveProfileResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgSaveProfileResponse",
+      value: MsgSaveProfileResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgDeleteProfile(): MsgDeleteProfile {
@@ -237,6 +367,31 @@ export const MsgDeleteProfile = {
     message.creator = object.creator ?? "";
     return message;
   },
+  fromAmino(object: MsgDeleteProfileAmino): MsgDeleteProfile {
+    return {
+      creator: object.creator,
+    };
+  },
+  toAmino(message: MsgDeleteProfile): MsgDeleteProfileAmino {
+    const obj: any = {};
+    obj.creator = message.creator;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProfileAminoMsg): MsgDeleteProfile {
+    return MsgDeleteProfile.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteProfileProtoMsg): MsgDeleteProfile {
+    return MsgDeleteProfile.decode(message.value);
+  },
+  toProto(message: MsgDeleteProfile): Uint8Array {
+    return MsgDeleteProfile.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProfile): MsgDeleteProfileProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgDeleteProfile",
+      value: MsgDeleteProfile.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgDeleteProfileResponse(): MsgDeleteProfileResponse {
   return {};
@@ -277,5 +432,33 @@ export const MsgDeleteProfileResponse = {
   ): MsgDeleteProfileResponse {
     const message = createBaseMsgDeleteProfileResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteProfileResponseAmino): MsgDeleteProfileResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteProfileResponse): MsgDeleteProfileResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgDeleteProfileResponseAminoMsg
+  ): MsgDeleteProfileResponse {
+    return MsgDeleteProfileResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgDeleteProfileResponseProtoMsg
+  ): MsgDeleteProfileResponse {
+    return MsgDeleteProfileResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteProfileResponse): Uint8Array {
+    return MsgDeleteProfileResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgDeleteProfileResponse
+  ): MsgDeleteProfileResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgDeleteProfileResponse",
+      value: MsgDeleteProfileResponse.encode(message).finish(),
+    };
   },
 };

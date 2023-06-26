@@ -39,7 +39,8 @@
   },
   "dependencies": {
     "long": "^4.0.0",
-    "protobufjs": "^7.2.3"
+    "protobufjs": "^7.2.3",
+    "@cosmjs/proto-signing": "^0.30.1"
   },
   "devDependencies": {
     "@osmonauts/telescope": "^0.97.0",

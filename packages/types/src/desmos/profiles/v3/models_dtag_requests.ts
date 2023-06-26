@@ -17,6 +17,29 @@ export interface DTagTransferRequest {
    */
   receiver: string;
 }
+export interface DTagTransferRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.DTagTransferRequest";
+  value: Uint8Array;
+}
+/** DTagTransferRequest represent a DTag transfer request between two users */
+export interface DTagTransferRequestAmino {
+  /**
+   * DTagToTrade contains the value of the DTag that should be transferred from
+   * the receiver of the request to the sender
+   */
+  dtag_to_trade: string;
+  /** Sender represents the address of the account that sent the request */
+  sender: string;
+  /**
+   * Receiver represents the receiver of the request that, if accepted, will
+   * give to the sender their DTag
+   */
+  receiver: string;
+}
+export interface DTagTransferRequestAminoMsg {
+  type: "/desmos.profiles.v3.DTagTransferRequest";
+  value: DTagTransferRequestAmino;
+}
 function createBaseDTagTransferRequest(): DTagTransferRequest {
   return {
     dtagToTrade: "",
@@ -86,5 +109,34 @@ export const DTagTransferRequest = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     return message;
+  },
+  fromAmino(object: DTagTransferRequestAmino): DTagTransferRequest {
+    return {
+      dtagToTrade: object.dtag_to_trade,
+      sender: object.sender,
+      receiver: object.receiver,
+    };
+  },
+  toAmino(message: DTagTransferRequest): DTagTransferRequestAmino {
+    const obj: any = {};
+    obj.dtag_to_trade = message.dtagToTrade;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    return obj;
+  },
+  fromAminoMsg(object: DTagTransferRequestAminoMsg): DTagTransferRequest {
+    return DTagTransferRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DTagTransferRequestProtoMsg): DTagTransferRequest {
+    return DTagTransferRequest.decode(message.value);
+  },
+  toProto(message: DTagTransferRequest): Uint8Array {
+    return DTagTransferRequest.encode(message).finish();
+  },
+  toProtoMsg(message: DTagTransferRequest): DTagTransferRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.DTagTransferRequest",
+      value: DTagTransferRequest.encode(message).finish(),
+    };
   },
 };

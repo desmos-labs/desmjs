@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.subspaces.v3";
@@ -17,13 +17,59 @@ export interface Grant {
    */
   allowance?: Any;
 }
+export interface GrantProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.Grant";
+  value: Uint8Array;
+}
+/** Grant represents a grant to a user or a group */
+export interface GrantAmino {
+  /** Id of the subspace inside which the user was granted the allowance */
+  subspace_id: string;
+  /** Address of the user that granted the allowance */
+  granter: string;
+  /** Target to which the allowance has been granted */
+  grantee?: AnyAmino;
+  /**
+   * Allowance can be any allowance type implementing the FeeAllowanceI
+   * interface
+   */
+  allowance?: AnyAmino;
+}
+export interface GrantAminoMsg {
+  type: "/desmos.subspaces.v3.Grant";
+  value: GrantAmino;
+}
 /** UserGrantee contains the target of a grant about a user */
 export interface UserGrantee {
   user: string;
 }
+export interface UserGranteeProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.UserGrantee";
+  value: Uint8Array;
+}
+/** UserGrantee contains the target of a grant about a user */
+export interface UserGranteeAmino {
+  user: string;
+}
+export interface UserGranteeAminoMsg {
+  type: "/desmos.subspaces.v3.UserGrantee";
+  value: UserGranteeAmino;
+}
 /** GroupGrantee contains the target of a grant about a group */
 export interface GroupGrantee {
   groupId: number;
+}
+export interface GroupGranteeProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.GroupGrantee";
+  value: Uint8Array;
+}
+/** GroupGrantee contains the target of a grant about a group */
+export interface GroupGranteeAmino {
+  group_id: number;
+}
+export interface GroupGranteeAminoMsg {
+  type: "/desmos.subspaces.v3.GroupGrantee";
+  value: GroupGranteeAmino;
 }
 function createBaseGrant(): Grant {
   return {
@@ -117,6 +163,43 @@ export const Grant = {
         : undefined;
     return message;
   },
+  fromAmino(object: GrantAmino): Grant {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object?.grantee ? Any.fromAmino(object.grantee) : undefined,
+      allowance: object?.allowance
+        ? Any.fromAmino(object.allowance)
+        : undefined,
+    };
+  },
+  toAmino(message: Grant): GrantAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee ? Any.toAmino(message.grantee) : undefined;
+    obj.allowance = message.allowance
+      ? Any.toAmino(message.allowance)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GrantAminoMsg): Grant {
+    return Grant.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GrantProtoMsg): Grant {
+    return Grant.decode(message.value);
+  },
+  toProto(message: Grant): Uint8Array {
+    return Grant.encode(message).finish();
+  },
+  toProtoMsg(message: Grant): GrantProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.Grant",
+      value: Grant.encode(message).finish(),
+    };
+  },
 };
 function createBaseUserGrantee(): UserGrantee {
   return {
@@ -166,6 +249,31 @@ export const UserGrantee = {
     const message = createBaseUserGrantee();
     message.user = object.user ?? "";
     return message;
+  },
+  fromAmino(object: UserGranteeAmino): UserGrantee {
+    return {
+      user: object.user,
+    };
+  },
+  toAmino(message: UserGrantee): UserGranteeAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: UserGranteeAminoMsg): UserGrantee {
+    return UserGrantee.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserGranteeProtoMsg): UserGrantee {
+    return UserGrantee.decode(message.value);
+  },
+  toProto(message: UserGrantee): Uint8Array {
+    return UserGrantee.encode(message).finish();
+  },
+  toProtoMsg(message: UserGrantee): UserGranteeProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.UserGrantee",
+      value: UserGrantee.encode(message).finish(),
+    };
   },
 };
 function createBaseGroupGrantee(): GroupGrantee {
@@ -217,5 +325,30 @@ export const GroupGrantee = {
     const message = createBaseGroupGrantee();
     message.groupId = object.groupId ?? 0;
     return message;
+  },
+  fromAmino(object: GroupGranteeAmino): GroupGrantee {
+    return {
+      groupId: object.group_id,
+    };
+  },
+  toAmino(message: GroupGrantee): GroupGranteeAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId;
+    return obj;
+  },
+  fromAminoMsg(object: GroupGranteeAminoMsg): GroupGrantee {
+    return GroupGrantee.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GroupGranteeProtoMsg): GroupGrantee {
+    return GroupGrantee.decode(message.value);
+  },
+  toProto(message: GroupGrantee): Uint8Array {
+    return GroupGrantee.encode(message).finish();
+  },
+  toProtoMsg(message: GroupGrantee): GroupGranteeProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.GroupGrantee",
+      value: GroupGrantee.encode(message).finish(),
+    };
   },
 };

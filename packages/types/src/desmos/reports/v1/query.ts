@@ -1,10 +1,19 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Report, Reason, Params } from "./models";
+import {
+  Report,
+  ReportAmino,
+  Reason,
+  ReasonAmino,
+  Params,
+  ParamsAmino,
+} from "./models";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reports.v1";
@@ -22,10 +31,45 @@ export interface QueryReportsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryReportsRequestProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReportsRequest";
+  value: Uint8Array;
+}
+/** QueryReportsResponse is the request type for Query/Reports RPC method */
+export interface QueryReportsRequestAmino {
+  /** Id of the subspace to query the reports for */
+  subspace_id: string;
+  /** (optional) Target to query the reports for */
+  target?: AnyAmino;
+  /**
+   * (optional) User that reported the target.
+   * This is going to be used only if the target is also specified
+   */
+  reporter: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryReportsRequestAminoMsg {
+  type: "/desmos.reports.v1.QueryReportsRequest";
+  value: QueryReportsRequestAmino;
+}
 /** QueryReportsResponse is the response type for Query/Reports RPC method */
 export interface QueryReportsResponse {
   reports: Report[];
   pagination?: PageResponse;
+}
+export interface QueryReportsResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReportsResponse";
+  value: Uint8Array;
+}
+/** QueryReportsResponse is the response type for Query/Reports RPC method */
+export interface QueryReportsResponseAmino {
+  reports: ReportAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryReportsResponseAminoMsg {
+  type: "/desmos.reports.v1.QueryReportsResponse";
+  value: QueryReportsResponseAmino;
 }
 /** QueryReportRequest is the request type for Query/Report RPC method */
 export interface QueryReportRequest {
@@ -34,9 +78,36 @@ export interface QueryReportRequest {
   /** Id of the report to query for */
   reportId: Long;
 }
+export interface QueryReportRequestProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReportRequest";
+  value: Uint8Array;
+}
+/** QueryReportRequest is the request type for Query/Report RPC method */
+export interface QueryReportRequestAmino {
+  /** Id of the subspace that holds the report to query for */
+  subspace_id: string;
+  /** Id of the report to query for */
+  report_id: string;
+}
+export interface QueryReportRequestAminoMsg {
+  type: "/desmos.reports.v1.QueryReportRequest";
+  value: QueryReportRequestAmino;
+}
 /** QueryReportResponse is the response type for Query/Report RPC method */
 export interface QueryReportResponse {
   report?: Report;
+}
+export interface QueryReportResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReportResponse";
+  value: Uint8Array;
+}
+/** QueryReportResponse is the response type for Query/Report RPC method */
+export interface QueryReportResponseAmino {
+  report?: ReportAmino;
+}
+export interface QueryReportResponseAminoMsg {
+  type: "/desmos.reports.v1.QueryReportResponse";
+  value: QueryReportResponseAmino;
 }
 /** QueryReasonsRequest is the request type for Query/Reasons RPC method */
 export interface QueryReasonsRequest {
@@ -45,10 +116,38 @@ export interface QueryReasonsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryReasonsRequestProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReasonsRequest";
+  value: Uint8Array;
+}
+/** QueryReasonsRequest is the request type for Query/Reasons RPC method */
+export interface QueryReasonsRequestAmino {
+  /** Id of the subspace to query the supported reporting reasons for */
+  subspace_id: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryReasonsRequestAminoMsg {
+  type: "/desmos.reports.v1.QueryReasonsRequest";
+  value: QueryReasonsRequestAmino;
+}
 /** QueryReasonsResponse is the response type for Query/Reasons RPC method */
 export interface QueryReasonsResponse {
   reasons: Reason[];
   pagination?: PageResponse;
+}
+export interface QueryReasonsResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReasonsResponse";
+  value: Uint8Array;
+}
+/** QueryReasonsResponse is the response type for Query/Reasons RPC method */
+export interface QueryReasonsResponseAmino {
+  reasons: ReasonAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryReasonsResponseAminoMsg {
+  type: "/desmos.reports.v1.QueryReasonsResponse";
+  value: QueryReasonsResponseAmino;
 }
 /** QueryReasonRequest is the request type for Query/Reason RPC method */
 export interface QueryReasonRequest {
@@ -57,15 +156,64 @@ export interface QueryReasonRequest {
   /** Id of the reason to query for */
   reasonId: number;
 }
+export interface QueryReasonRequestProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReasonRequest";
+  value: Uint8Array;
+}
+/** QueryReasonRequest is the request type for Query/Reason RPC method */
+export interface QueryReasonRequestAmino {
+  /** Id of the subspace that holds the reason to query for */
+  subspace_id: string;
+  /** Id of the reason to query for */
+  reason_id: number;
+}
+export interface QueryReasonRequestAminoMsg {
+  type: "/desmos.reports.v1.QueryReasonRequest";
+  value: QueryReasonRequestAmino;
+}
 /** QueryReasonResponse is the response type for Query/Reason RPC method */
 export interface QueryReasonResponse {
   reason?: Reason;
 }
+export interface QueryReasonResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryReasonResponse";
+  value: Uint8Array;
+}
+/** QueryReasonResponse is the response type for Query/Reason RPC method */
+export interface QueryReasonResponseAmino {
+  reason?: ReasonAmino;
+}
+export interface QueryReasonResponseAminoMsg {
+  type: "/desmos.reports.v1.QueryReasonResponse";
+  value: QueryReasonResponseAmino;
+}
 /** QueryParamsRequest is the request type for Query/Params RPC method */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for Query/Params RPC method */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/desmos.reports.v1.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 /** QueryParamsResponse is the response type for Query/Params RPC method */
 export interface QueryParamsResponse {
   params?: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.QueryParamsResponse";
+  value: Uint8Array;
+}
+/** QueryParamsResponse is the response type for Query/Params RPC method */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/desmos.reports.v1.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 function createBaseQueryReportsRequest(): QueryReportsRequest {
   return {
@@ -164,6 +312,43 @@ export const QueryReportsRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryReportsRequestAmino): QueryReportsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      target: object?.target ? Any.fromAmino(object.target) : undefined,
+      reporter: object.reporter,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryReportsRequest): QueryReportsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.target = message.target ? Any.toAmino(message.target) : undefined;
+    obj.reporter = message.reporter;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReportsRequestAminoMsg): QueryReportsRequest {
+    return QueryReportsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReportsRequestProtoMsg): QueryReportsRequest {
+    return QueryReportsRequest.decode(message.value);
+  },
+  toProto(message: QueryReportsRequest): Uint8Array {
+    return QueryReportsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReportsRequest): QueryReportsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReportsRequest",
+      value: QueryReportsRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryReportsResponse(): QueryReportsResponse {
   return {
@@ -246,6 +431,45 @@ export const QueryReportsResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryReportsResponseAmino): QueryReportsResponse {
+    return {
+      reports: Array.isArray(object?.reports)
+        ? object.reports.map((e: any) => Report.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryReportsResponse): QueryReportsResponseAmino {
+    const obj: any = {};
+    if (message.reports) {
+      obj.reports = message.reports.map((e) =>
+        e ? Report.toAmino(e) : undefined
+      );
+    } else {
+      obj.reports = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReportsResponseAminoMsg): QueryReportsResponse {
+    return QueryReportsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReportsResponseProtoMsg): QueryReportsResponse {
+    return QueryReportsResponse.decode(message.value);
+  },
+  toProto(message: QueryReportsResponse): Uint8Array {
+    return QueryReportsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReportsResponse): QueryReportsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReportsResponse",
+      value: QueryReportsResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryReportRequest(): QueryReportRequest {
   return {
@@ -318,6 +542,35 @@ export const QueryReportRequest = {
         : Long.UZERO;
     return message;
   },
+  fromAmino(object: QueryReportRequestAmino): QueryReportRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      reportId: Long.fromString(object.report_id),
+    };
+  },
+  toAmino(message: QueryReportRequest): QueryReportRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.report_id = message.reportId ? message.reportId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReportRequestAminoMsg): QueryReportRequest {
+    return QueryReportRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReportRequestProtoMsg): QueryReportRequest {
+    return QueryReportRequest.decode(message.value);
+  },
+  toProto(message: QueryReportRequest): Uint8Array {
+    return QueryReportRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReportRequest): QueryReportRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReportRequest",
+      value: QueryReportRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryReportResponse(): QueryReportResponse {
   return {
@@ -371,6 +624,31 @@ export const QueryReportResponse = {
         ? Report.fromPartial(object.report)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryReportResponseAmino): QueryReportResponse {
+    return {
+      report: object?.report ? Report.fromAmino(object.report) : undefined,
+    };
+  },
+  toAmino(message: QueryReportResponse): QueryReportResponseAmino {
+    const obj: any = {};
+    obj.report = message.report ? Report.toAmino(message.report) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReportResponseAminoMsg): QueryReportResponse {
+    return QueryReportResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReportResponseProtoMsg): QueryReportResponse {
+    return QueryReportResponse.decode(message.value);
+  },
+  toProto(message: QueryReportResponse): Uint8Array {
+    return QueryReportResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReportResponse): QueryReportResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReportResponse",
+      value: QueryReportResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryReasonsRequest(): QueryReasonsRequest {
@@ -445,6 +723,39 @@ export const QueryReasonsRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryReasonsRequestAmino): QueryReasonsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryReasonsRequest): QueryReasonsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReasonsRequestAminoMsg): QueryReasonsRequest {
+    return QueryReasonsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReasonsRequestProtoMsg): QueryReasonsRequest {
+    return QueryReasonsRequest.decode(message.value);
+  },
+  toProto(message: QueryReasonsRequest): Uint8Array {
+    return QueryReasonsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReasonsRequest): QueryReasonsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReasonsRequest",
+      value: QueryReasonsRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryReasonsResponse(): QueryReasonsResponse {
@@ -528,6 +839,45 @@ export const QueryReasonsResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryReasonsResponseAmino): QueryReasonsResponse {
+    return {
+      reasons: Array.isArray(object?.reasons)
+        ? object.reasons.map((e: any) => Reason.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryReasonsResponse): QueryReasonsResponseAmino {
+    const obj: any = {};
+    if (message.reasons) {
+      obj.reasons = message.reasons.map((e) =>
+        e ? Reason.toAmino(e) : undefined
+      );
+    } else {
+      obj.reasons = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReasonsResponseAminoMsg): QueryReasonsResponse {
+    return QueryReasonsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReasonsResponseProtoMsg): QueryReasonsResponse {
+    return QueryReasonsResponse.decode(message.value);
+  },
+  toProto(message: QueryReasonsResponse): Uint8Array {
+    return QueryReasonsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReasonsResponse): QueryReasonsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReasonsResponse",
+      value: QueryReasonsResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryReasonRequest(): QueryReasonRequest {
   return {
@@ -595,6 +945,35 @@ export const QueryReasonRequest = {
     message.reasonId = object.reasonId ?? 0;
     return message;
   },
+  fromAmino(object: QueryReasonRequestAmino): QueryReasonRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      reasonId: object.reason_id,
+    };
+  },
+  toAmino(message: QueryReasonRequest): QueryReasonRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.reason_id = message.reasonId;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReasonRequestAminoMsg): QueryReasonRequest {
+    return QueryReasonRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReasonRequestProtoMsg): QueryReasonRequest {
+    return QueryReasonRequest.decode(message.value);
+  },
+  toProto(message: QueryReasonRequest): Uint8Array {
+    return QueryReasonRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReasonRequest): QueryReasonRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReasonRequest",
+      value: QueryReasonRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryReasonResponse(): QueryReasonResponse {
   return {
@@ -649,6 +1028,31 @@ export const QueryReasonResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryReasonResponseAmino): QueryReasonResponse {
+    return {
+      reason: object?.reason ? Reason.fromAmino(object.reason) : undefined,
+    };
+  },
+  toAmino(message: QueryReasonResponse): QueryReasonResponseAmino {
+    const obj: any = {};
+    obj.reason = message.reason ? Reason.toAmino(message.reason) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryReasonResponseAminoMsg): QueryReasonResponse {
+    return QueryReasonResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryReasonResponseProtoMsg): QueryReasonResponse {
+    return QueryReasonResponse.decode(message.value);
+  },
+  toProto(message: QueryReasonResponse): Uint8Array {
+    return QueryReasonResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryReasonResponse): QueryReasonResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryReasonResponse",
+      value: QueryReasonResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -686,6 +1090,28 @@ export const QueryParamsRequest = {
   ): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -740,5 +1166,30 @@ export const QueryParamsResponse = {
         ? Params.fromPartial(object.params)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish(),
+    };
   },
 };

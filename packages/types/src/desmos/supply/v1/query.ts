@@ -12,9 +12,39 @@ export interface QueryTotalRequest {
    */
   dividerExponent: Long;
 }
+export interface QueryTotalRequestProtoMsg {
+  typeUrl: "/desmos.supply.v1.QueryTotalRequest";
+  value: Uint8Array;
+}
+/** QueryTotalRequest is the request type for Query/Total RPC method */
+export interface QueryTotalRequestAmino {
+  /** coin denom to query the circulating supply for */
+  denom: string;
+  /**
+   * divider_exponent is a factor used to power the divider used to convert the
+   * supply to the desired representation
+   */
+  divider_exponent: string;
+}
+export interface QueryTotalRequestAminoMsg {
+  type: "/desmos.supply.v1.QueryTotalRequest";
+  value: QueryTotalRequestAmino;
+}
 /** QueryTotalResponse is the response type for the Query/Total RPC method */
 export interface QueryTotalResponse {
   totalSupply: string;
+}
+export interface QueryTotalResponseProtoMsg {
+  typeUrl: "/desmos.supply.v1.QueryTotalResponse";
+  value: Uint8Array;
+}
+/** QueryTotalResponse is the response type for the Query/Total RPC method */
+export interface QueryTotalResponseAmino {
+  total_supply: string;
+}
+export interface QueryTotalResponseAminoMsg {
+  type: "/desmos.supply.v1.QueryTotalResponse";
+  value: QueryTotalResponseAmino;
 }
 /**
  * QueryCirculatingRequest is the request type for the Query/Circulating RPC
@@ -29,12 +59,48 @@ export interface QueryCirculatingRequest {
    */
   dividerExponent: Long;
 }
+export interface QueryCirculatingRequestProtoMsg {
+  typeUrl: "/desmos.supply.v1.QueryCirculatingRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryCirculatingRequest is the request type for the Query/Circulating RPC
+ * method
+ */
+export interface QueryCirculatingRequestAmino {
+  /** coin denom to query the circulating supply for */
+  denom: string;
+  /**
+   * divider_exponent is a factor used to power the divider used to convert the
+   * supply to the desired representation
+   */
+  divider_exponent: string;
+}
+export interface QueryCirculatingRequestAminoMsg {
+  type: "/desmos.supply.v1.QueryCirculatingRequest";
+  value: QueryCirculatingRequestAmino;
+}
 /**
  * QueryCirculatingResponse is the response type for the Query/Circulating RPC
  * method
  */
 export interface QueryCirculatingResponse {
   circulatingSupply: string;
+}
+export interface QueryCirculatingResponseProtoMsg {
+  typeUrl: "/desmos.supply.v1.QueryCirculatingResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryCirculatingResponse is the response type for the Query/Circulating RPC
+ * method
+ */
+export interface QueryCirculatingResponseAmino {
+  circulating_supply: string;
+}
+export interface QueryCirculatingResponseAminoMsg {
+  type: "/desmos.supply.v1.QueryCirculatingResponse";
+  value: QueryCirculatingResponseAmino;
 }
 function createBaseQueryTotalRequest(): QueryTotalRequest {
   return {
@@ -103,6 +169,35 @@ export const QueryTotalRequest = {
         : Long.UZERO;
     return message;
   },
+  fromAmino(object: QueryTotalRequestAmino): QueryTotalRequest {
+    return {
+      denom: object.denom,
+      dividerExponent: Long.fromString(object.divider_exponent),
+    };
+  },
+  toAmino(message: QueryTotalRequest): QueryTotalRequestAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.divider_exponent = message.dividerExponent
+      ? message.dividerExponent.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTotalRequestAminoMsg): QueryTotalRequest {
+    return QueryTotalRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTotalRequestProtoMsg): QueryTotalRequest {
+    return QueryTotalRequest.decode(message.value);
+  },
+  toProto(message: QueryTotalRequest): Uint8Array {
+    return QueryTotalRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTotalRequest): QueryTotalRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.supply.v1.QueryTotalRequest",
+      value: QueryTotalRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryTotalResponse(): QueryTotalResponse {
   return {
@@ -153,6 +248,31 @@ export const QueryTotalResponse = {
     const message = createBaseQueryTotalResponse();
     message.totalSupply = object.totalSupply ?? "";
     return message;
+  },
+  fromAmino(object: QueryTotalResponseAmino): QueryTotalResponse {
+    return {
+      totalSupply: object.total_supply,
+    };
+  },
+  toAmino(message: QueryTotalResponse): QueryTotalResponseAmino {
+    const obj: any = {};
+    obj.total_supply = message.totalSupply;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTotalResponseAminoMsg): QueryTotalResponse {
+    return QueryTotalResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryTotalResponseProtoMsg): QueryTotalResponse {
+    return QueryTotalResponse.decode(message.value);
+  },
+  toProto(message: QueryTotalResponse): Uint8Array {
+    return QueryTotalResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTotalResponse): QueryTotalResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.supply.v1.QueryTotalResponse",
+      value: QueryTotalResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryCirculatingRequest(): QueryCirculatingRequest {
@@ -225,6 +345,41 @@ export const QueryCirculatingRequest = {
         : Long.UZERO;
     return message;
   },
+  fromAmino(object: QueryCirculatingRequestAmino): QueryCirculatingRequest {
+    return {
+      denom: object.denom,
+      dividerExponent: Long.fromString(object.divider_exponent),
+    };
+  },
+  toAmino(message: QueryCirculatingRequest): QueryCirculatingRequestAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.divider_exponent = message.dividerExponent
+      ? message.dividerExponent.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryCirculatingRequestAminoMsg
+  ): QueryCirculatingRequest {
+    return QueryCirculatingRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryCirculatingRequestProtoMsg
+  ): QueryCirculatingRequest {
+    return QueryCirculatingRequest.decode(message.value);
+  },
+  toProto(message: QueryCirculatingRequest): Uint8Array {
+    return QueryCirculatingRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryCirculatingRequest
+  ): QueryCirculatingRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.supply.v1.QueryCirculatingRequest",
+      value: QueryCirculatingRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryCirculatingResponse(): QueryCirculatingResponse {
   return {
@@ -280,5 +435,36 @@ export const QueryCirculatingResponse = {
     const message = createBaseQueryCirculatingResponse();
     message.circulatingSupply = object.circulatingSupply ?? "";
     return message;
+  },
+  fromAmino(object: QueryCirculatingResponseAmino): QueryCirculatingResponse {
+    return {
+      circulatingSupply: object.circulating_supply,
+    };
+  },
+  toAmino(message: QueryCirculatingResponse): QueryCirculatingResponseAmino {
+    const obj: any = {};
+    obj.circulating_supply = message.circulatingSupply;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryCirculatingResponseAminoMsg
+  ): QueryCirculatingResponse {
+    return QueryCirculatingResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryCirculatingResponseProtoMsg
+  ): QueryCirculatingResponse {
+    return QueryCirculatingResponse.decode(message.value);
+  },
+  toProto(message: QueryCirculatingResponse): Uint8Array {
+    return QueryCirculatingResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryCirculatingResponse
+  ): QueryCirculatingResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.supply.v1.QueryCirculatingResponse",
+      value: QueryCirculatingResponse.encode(message).finish(),
+    };
   },
 };

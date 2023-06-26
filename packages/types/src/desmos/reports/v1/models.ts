@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import {
   Long,
   isSet,
@@ -28,15 +28,66 @@ export interface Report {
   /** Time in which the report was created */
   creationDate?: Timestamp;
 }
+export interface ReportProtoMsg {
+  typeUrl: "/desmos.reports.v1.Report";
+  value: Uint8Array;
+}
+/** Report contains the data of a generic report */
+export interface ReportAmino {
+  /** Id of the subspace for which the report has been created */
+  subspace_id: string;
+  /** Id of the report */
+  id: string;
+  /** Id of the reason this report has been created for */
+  reasons_ids: number[];
+  /** (optional) Message attached to this report */
+  message: string;
+  /** Address of the reporter */
+  reporter: string;
+  /** Target of the report */
+  target?: AnyAmino;
+  /** Time in which the report was created */
+  creation_date?: TimestampAmino;
+}
+export interface ReportAminoMsg {
+  type: "/desmos.reports.v1.Report";
+  value: ReportAmino;
+}
 /** UserTarget contains the data of a report about a user */
 export interface UserTarget {
   /** Address of the reported user */
   user: string;
 }
+export interface UserTargetProtoMsg {
+  typeUrl: "/desmos.reports.v1.UserTarget";
+  value: Uint8Array;
+}
+/** UserTarget contains the data of a report about a user */
+export interface UserTargetAmino {
+  /** Address of the reported user */
+  user: string;
+}
+export interface UserTargetAminoMsg {
+  type: "/desmos.reports.v1.UserTarget";
+  value: UserTargetAmino;
+}
 /** PostTarget contains the data of a report about a post */
 export interface PostTarget {
   /** Id of the reported post */
   postId: Long;
+}
+export interface PostTargetProtoMsg {
+  typeUrl: "/desmos.reports.v1.PostTarget";
+  value: Uint8Array;
+}
+/** PostTarget contains the data of a report about a post */
+export interface PostTargetAmino {
+  /** Id of the reported post */
+  post_id: string;
+}
+export interface PostTargetAminoMsg {
+  type: "/desmos.reports.v1.PostTarget";
+  value: PostTargetAmino;
 }
 /** Reason contains the data about a reporting reason */
 export interface Reason {
@@ -49,6 +100,25 @@ export interface Reason {
   /** (optional) Extended description of the reason and the cases it applies to */
   description: string;
 }
+export interface ReasonProtoMsg {
+  typeUrl: "/desmos.reports.v1.Reason";
+  value: Uint8Array;
+}
+/** Reason contains the data about a reporting reason */
+export interface ReasonAmino {
+  /** Id of the subspace for which this reason is valid */
+  subspace_id: string;
+  /** Id of the reason inside the subspace */
+  id: number;
+  /** Title of the reason */
+  title: string;
+  /** (optional) Extended description of the reason and the cases it applies to */
+  description: string;
+}
+export interface ReasonAminoMsg {
+  type: "/desmos.reports.v1.Reason";
+  value: ReasonAmino;
+}
 /** Params contains the module parameters */
 export interface Params {
   /**
@@ -56,6 +126,22 @@ export interface Params {
    * ones
    */
   standardReasons: StandardReason[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/desmos.reports.v1.Params";
+  value: Uint8Array;
+}
+/** Params contains the module parameters */
+export interface ParamsAmino {
+  /**
+   * List of available reasons from which new subspaces can pick their default
+   * ones
+   */
+  standard_reasons: StandardReasonAmino[];
+}
+export interface ParamsAminoMsg {
+  type: "/desmos.reports.v1.Params";
+  value: ParamsAmino;
 }
 /**
  * StandardReason contains the data of a standard reason that can be picked and
@@ -68,6 +154,26 @@ export interface StandardReason {
   title: string;
   /** (optional) Extended description of the reason and the cases it applies to */
   description: string;
+}
+export interface StandardReasonProtoMsg {
+  typeUrl: "/desmos.reports.v1.StandardReason";
+  value: Uint8Array;
+}
+/**
+ * StandardReason contains the data of a standard reason that can be picked and
+ * used from different subspaces
+ */
+export interface StandardReasonAmino {
+  /** Id of the reason inside the subspace */
+  id: number;
+  /** Title of the reason */
+  title: string;
+  /** (optional) Extended description of the reason and the cases it applies to */
+  description: string;
+}
+export interface StandardReasonAminoMsg {
+  type: "/desmos.reports.v1.StandardReason";
+  value: StandardReasonAmino;
 }
 function createBaseReport(): Report {
   return {
@@ -211,6 +317,55 @@ export const Report = {
         : undefined;
     return message;
   },
+  fromAmino(object: ReportAmino): Report {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      id: Long.fromString(object.id),
+      reasonsIds: Array.isArray(object?.reasons_ids)
+        ? object.reasons_ids.map((e: any) => e)
+        : [],
+      message: object.message,
+      reporter: object.reporter,
+      target: object?.target ? Any.fromAmino(object.target) : undefined,
+      creationDate: object?.creation_date
+        ? Timestamp.fromAmino(object.creation_date)
+        : undefined,
+    };
+  },
+  toAmino(message: Report): ReportAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.id = message.id ? message.id.toString() : undefined;
+    if (message.reasonsIds) {
+      obj.reasons_ids = message.reasonsIds.map((e) => e);
+    } else {
+      obj.reasons_ids = [];
+    }
+    obj.message = message.message;
+    obj.reporter = message.reporter;
+    obj.target = message.target ? Any.toAmino(message.target) : undefined;
+    obj.creation_date = message.creationDate
+      ? Timestamp.toAmino(message.creationDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ReportAminoMsg): Report {
+    return Report.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReportProtoMsg): Report {
+    return Report.decode(message.value);
+  },
+  toProto(message: Report): Uint8Array {
+    return Report.encode(message).finish();
+  },
+  toProtoMsg(message: Report): ReportProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.Report",
+      value: Report.encode(message).finish(),
+    };
+  },
 };
 function createBaseUserTarget(): UserTarget {
   return {
@@ -260,6 +415,31 @@ export const UserTarget = {
     const message = createBaseUserTarget();
     message.user = object.user ?? "";
     return message;
+  },
+  fromAmino(object: UserTargetAmino): UserTarget {
+    return {
+      user: object.user,
+    };
+  },
+  toAmino(message: UserTarget): UserTargetAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: UserTargetAminoMsg): UserTarget {
+    return UserTarget.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserTargetProtoMsg): UserTarget {
+    return UserTarget.decode(message.value);
+  },
+  toProto(message: UserTarget): Uint8Array {
+    return UserTarget.encode(message).finish();
+  },
+  toProtoMsg(message: UserTarget): UserTargetProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.UserTarget",
+      value: UserTarget.encode(message).finish(),
+    };
   },
 };
 function createBasePostTarget(): PostTarget {
@@ -314,6 +494,31 @@ export const PostTarget = {
         ? Long.fromValue(object.postId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: PostTargetAmino): PostTarget {
+    return {
+      postId: Long.fromString(object.post_id),
+    };
+  },
+  toAmino(message: PostTarget): PostTargetAmino {
+    const obj: any = {};
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PostTargetAminoMsg): PostTarget {
+    return PostTarget.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PostTargetProtoMsg): PostTarget {
+    return PostTarget.decode(message.value);
+  },
+  toProto(message: PostTarget): Uint8Array {
+    return PostTarget.encode(message).finish();
+  },
+  toProtoMsg(message: PostTarget): PostTargetProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.PostTarget",
+      value: PostTarget.encode(message).finish(),
+    };
   },
 };
 function createBaseReason(): Reason {
@@ -400,6 +605,39 @@ export const Reason = {
     message.description = object.description ?? "";
     return message;
   },
+  fromAmino(object: ReasonAmino): Reason {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      id: object.id,
+      title: object.title,
+      description: object.description,
+    };
+  },
+  toAmino(message: Reason): ReasonAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.id = message.id;
+    obj.title = message.title;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: ReasonAminoMsg): Reason {
+    return Reason.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReasonProtoMsg): Reason {
+    return Reason.decode(message.value);
+  },
+  toProto(message: Reason): Uint8Array {
+    return Reason.encode(message).finish();
+  },
+  toProtoMsg(message: Reason): ReasonProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.Reason",
+      value: Reason.encode(message).finish(),
+    };
+  },
 };
 function createBaseParams(): Params {
   return {
@@ -458,6 +696,39 @@ export const Params = {
     message.standardReasons =
       object.standardReasons?.map((e) => StandardReason.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      standardReasons: Array.isArray(object?.standard_reasons)
+        ? object.standard_reasons.map((e: any) => StandardReason.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    if (message.standardReasons) {
+      obj.standard_reasons = message.standardReasons.map((e) =>
+        e ? StandardReason.toAmino(e) : undefined
+      );
+    } else {
+      obj.standard_reasons = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.Params",
+      value: Params.encode(message).finish(),
+    };
   },
 };
 function createBaseStandardReason(): StandardReason {
@@ -529,5 +800,34 @@ export const StandardReason = {
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: StandardReasonAmino): StandardReason {
+    return {
+      id: object.id,
+      title: object.title,
+      description: object.description,
+    };
+  },
+  toAmino(message: StandardReason): StandardReasonAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.title = message.title;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: StandardReasonAminoMsg): StandardReason {
+    return StandardReason.fromAmino(object.value);
+  },
+  fromProtoMsg(message: StandardReasonProtoMsg): StandardReason {
+    return StandardReason.decode(message.value);
+  },
+  toProto(message: StandardReason): Uint8Array {
+    return StandardReason.encode(message).finish();
+  },
+  toProtoMsg(message: StandardReason): StandardReasonProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.StandardReason",
+      value: StandardReason.encode(message).finish(),
+    };
   },
 };

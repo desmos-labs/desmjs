@@ -15,6 +15,27 @@ export interface GenericSubspaceAuthorization {
    */
   msg: string;
 }
+export interface GenericSubspaceAuthorizationProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization";
+  value: Uint8Array;
+}
+/**
+ * GenericSubspaceAuthorization defines an authorization to perform any
+ * operation only inside a specific subspace.
+ */
+export interface GenericSubspaceAuthorizationAmino {
+  /** Ids of the subspaces inside which to grant the permission */
+  subspaces_ids: string[];
+  /**
+   * Msg, identified by it's type URL, to grant unrestricted permissions to
+   * execute within the subspace
+   */
+  msg: string;
+}
+export interface GenericSubspaceAuthorizationAminoMsg {
+  type: "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization";
+  value: GenericSubspaceAuthorizationAmino;
+}
 function createBaseGenericSubspaceAuthorization(): GenericSubspaceAuthorization {
   return {
     subspacesIds: [],
@@ -94,5 +115,48 @@ export const GenericSubspaceAuthorization = {
       object.subspacesIds?.map((e) => Long.fromValue(e)) || [];
     message.msg = object.msg ?? "";
     return message;
+  },
+  fromAmino(
+    object: GenericSubspaceAuthorizationAmino
+  ): GenericSubspaceAuthorization {
+    return {
+      subspacesIds: Array.isArray(object?.subspaces_ids)
+        ? object.subspaces_ids.map((e: any) => e)
+        : [],
+      msg: object.msg,
+    };
+  },
+  toAmino(
+    message: GenericSubspaceAuthorization
+  ): GenericSubspaceAuthorizationAmino {
+    const obj: any = {};
+    if (message.subspacesIds) {
+      obj.subspaces_ids = message.subspacesIds.map((e) => e);
+    } else {
+      obj.subspaces_ids = [];
+    }
+    obj.msg = message.msg;
+    return obj;
+  },
+  fromAminoMsg(
+    object: GenericSubspaceAuthorizationAminoMsg
+  ): GenericSubspaceAuthorization {
+    return GenericSubspaceAuthorization.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: GenericSubspaceAuthorizationProtoMsg
+  ): GenericSubspaceAuthorization {
+    return GenericSubspaceAuthorization.decode(message.value);
+  },
+  toProto(message: GenericSubspaceAuthorization): Uint8Array {
+    return GenericSubspaceAuthorization.encode(message).finish();
+  },
+  toProtoMsg(
+    message: GenericSubspaceAuthorization
+  ): GenericSubspaceAuthorizationProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization",
+      value: GenericSubspaceAuthorization.encode(message).finish(),
+    };
   },
 };

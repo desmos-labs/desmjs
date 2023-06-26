@@ -1,6 +1,11 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
-import { RegisteredReactionValueParams, FreeTextValueParams } from "./models";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import {
+  RegisteredReactionValueParams,
+  RegisteredReactionValueParamsAmino,
+  FreeTextValueParams,
+  FreeTextValueParamsAmino,
+} from "./models";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reactions.v1";
@@ -15,10 +20,42 @@ export interface MsgAddReaction {
   /** User reacting to the post */
   user: string;
 }
+export interface MsgAddReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgAddReaction";
+  value: Uint8Array;
+}
+/** MsgAddReaction represents the message to be used to add a post reaction */
+export interface MsgAddReactionAmino {
+  /** Id of the subspace inside which the post to react to is */
+  subspace_id: string;
+  /** Id of the post to react to */
+  post_id: string;
+  /** Value of the reaction */
+  value?: AnyAmino;
+  /** User reacting to the post */
+  user: string;
+}
+export interface MsgAddReactionAminoMsg {
+  type: "/desmos.reactions.v1.MsgAddReaction";
+  value: MsgAddReactionAmino;
+}
 /** MsgAddReactionResponse represents the Msg/AddReaction response type */
 export interface MsgAddReactionResponse {
   /** Id of the newly added reaction */
   reactionId: number;
+}
+export interface MsgAddReactionResponseProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgAddReactionResponse";
+  value: Uint8Array;
+}
+/** MsgAddReactionResponse represents the Msg/AddReaction response type */
+export interface MsgAddReactionResponseAmino {
+  /** Id of the newly added reaction */
+  reaction_id: number;
+}
+export interface MsgAddReactionResponseAminoMsg {
+  type: "/desmos.reactions.v1.MsgAddReactionResponse";
+  value: MsgAddReactionResponseAmino;
 }
 /**
  * MsgRemoveReaction represents the message to be used to remove an
@@ -34,8 +71,40 @@ export interface MsgRemoveReaction {
   /** User removing the reaction */
   user: string;
 }
+export interface MsgRemoveReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgRemoveReaction";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveReaction represents the message to be used to remove an
+ * existing reaction from a post
+ */
+export interface MsgRemoveReactionAmino {
+  /** Id of the subspace inside which the reaction to remove is */
+  subspace_id: string;
+  /** Id of the post from which to remove the reaction */
+  post_id: string;
+  /** Id of the reaction to be removed */
+  reaction_id: number;
+  /** User removing the reaction */
+  user: string;
+}
+export interface MsgRemoveReactionAminoMsg {
+  type: "/desmos.reactions.v1.MsgRemoveReaction";
+  value: MsgRemoveReactionAmino;
+}
 /** MsgRemoveReactionResponse represents the Msg/RemoveReaction response type */
 export interface MsgRemoveReactionResponse {}
+export interface MsgRemoveReactionResponseProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgRemoveReactionResponse";
+  value: Uint8Array;
+}
+/** MsgRemoveReactionResponse represents the Msg/RemoveReaction response type */
+export interface MsgRemoveReactionResponseAmino {}
+export interface MsgRemoveReactionResponseAminoMsg {
+  type: "/desmos.reactions.v1.MsgRemoveReactionResponse";
+  value: MsgRemoveReactionResponseAmino;
+}
 /**
  * MsgAddRegisteredReaction represents the message to be used to
  * register a new supported reaction
@@ -50,6 +119,28 @@ export interface MsgAddRegisteredReaction {
   /** User adding the supported reaction */
   user: string;
 }
+export interface MsgAddRegisteredReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgAddRegisteredReaction";
+  value: Uint8Array;
+}
+/**
+ * MsgAddRegisteredReaction represents the message to be used to
+ * register a new supported reaction
+ */
+export interface MsgAddRegisteredReactionAmino {
+  /** Id of the subspace inside which this reaction should be registered */
+  subspace_id: string;
+  /** Shorthand code of the reaction */
+  shorthand_code: string;
+  /** Display value of the reaction */
+  display_value: string;
+  /** User adding the supported reaction */
+  user: string;
+}
+export interface MsgAddRegisteredReactionAminoMsg {
+  type: "/desmos.reactions.v1.MsgAddRegisteredReaction";
+  value: MsgAddRegisteredReactionAmino;
+}
 /**
  * MsgAddRegisteredReactionResponse represents the
  * Msg/AddRegisteredReaction response type
@@ -57,6 +148,22 @@ export interface MsgAddRegisteredReaction {
 export interface MsgAddRegisteredReactionResponse {
   /** Id of the newly registered reaction */
   registeredReactionId: number;
+}
+export interface MsgAddRegisteredReactionResponseProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgAddRegisteredReactionResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgAddRegisteredReactionResponse represents the
+ * Msg/AddRegisteredReaction response type
+ */
+export interface MsgAddRegisteredReactionResponseAmino {
+  /** Id of the newly registered reaction */
+  registered_reaction_id: number;
+}
+export interface MsgAddRegisteredReactionResponseAminoMsg {
+  type: "/desmos.reactions.v1.MsgAddRegisteredReactionResponse";
+  value: MsgAddRegisteredReactionResponseAmino;
 }
 /**
  * MsgEditRegisteredReaction represents the message to be used to edit a
@@ -74,11 +181,48 @@ export interface MsgEditRegisteredReaction {
   /** User editing the registered reaction */
   user: string;
 }
+export interface MsgEditRegisteredReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgEditRegisteredReaction";
+  value: Uint8Array;
+}
+/**
+ * MsgEditRegisteredReaction represents the message to be used to edit a
+ * registered reaction
+ */
+export interface MsgEditRegisteredReactionAmino {
+  /** Id of the subspace inside which the reaction to edit is */
+  subspace_id: string;
+  /** Id of the registered reaction to edit */
+  registered_reaction_id: number;
+  /** New shorthand code to be set */
+  shorthand_code: string;
+  /** Display value to be set */
+  display_value: string;
+  /** User editing the registered reaction */
+  user: string;
+}
+export interface MsgEditRegisteredReactionAminoMsg {
+  type: "/desmos.reactions.v1.MsgEditRegisteredReaction";
+  value: MsgEditRegisteredReactionAmino;
+}
 /**
  * MsgEditRegisteredReactionResponse represents the Msg/EditRegisteredReaction
  * response type
  */
 export interface MsgEditRegisteredReactionResponse {}
+export interface MsgEditRegisteredReactionResponseProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgEditRegisteredReactionResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgEditRegisteredReactionResponse represents the Msg/EditRegisteredReaction
+ * response type
+ */
+export interface MsgEditRegisteredReactionResponseAmino {}
+export interface MsgEditRegisteredReactionResponseAminoMsg {
+  type: "/desmos.reactions.v1.MsgEditRegisteredReactionResponse";
+  value: MsgEditRegisteredReactionResponseAmino;
+}
 /**
  * MsgRemoveRegisteredReaction represents the message to be used to
  * remove an existing registered reaction
@@ -91,11 +235,44 @@ export interface MsgRemoveRegisteredReaction {
   /** User removing the registered reaction */
   user: string;
 }
+export interface MsgRemoveRegisteredReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgRemoveRegisteredReaction";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveRegisteredReaction represents the message to be used to
+ * remove an existing registered reaction
+ */
+export interface MsgRemoveRegisteredReactionAmino {
+  /** Id of the subspace from which to remove the registered reaction */
+  subspace_id: string;
+  /** Id of the registered reaction to be removed */
+  registered_reaction_id: number;
+  /** User removing the registered reaction */
+  user: string;
+}
+export interface MsgRemoveRegisteredReactionAminoMsg {
+  type: "/desmos.reactions.v1.MsgRemoveRegisteredReaction";
+  value: MsgRemoveRegisteredReactionAmino;
+}
 /**
  * MsgRemoveRegisteredReactionResponse represents the
  * Msg/RemoveRegisteredReaction response type
  */
 export interface MsgRemoveRegisteredReactionResponse {}
+export interface MsgRemoveRegisteredReactionResponseProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgRemoveRegisteredReactionResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveRegisteredReactionResponse represents the
+ * Msg/RemoveRegisteredReaction response type
+ */
+export interface MsgRemoveRegisteredReactionResponseAmino {}
+export interface MsgRemoveRegisteredReactionResponseAminoMsg {
+  type: "/desmos.reactions.v1.MsgRemoveRegisteredReactionResponse";
+  value: MsgRemoveRegisteredReactionResponseAmino;
+}
 /**
  * MsgSetReactionsParams represents the message to be used when setting
  * a subspace reactions params
@@ -110,11 +287,46 @@ export interface MsgSetReactionsParams {
   /** User setting the params */
   user: string;
 }
+export interface MsgSetReactionsParamsProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgSetReactionsParams";
+  value: Uint8Array;
+}
+/**
+ * MsgSetReactionsParams represents the message to be used when setting
+ * a subspace reactions params
+ */
+export interface MsgSetReactionsParamsAmino {
+  /** Id of the subspace for which to set the params */
+  subspace_id: string;
+  /** Params related to RegisteredReactionValue reactions */
+  registered_reaction?: RegisteredReactionValueParamsAmino;
+  /** Params related to FreeTextValue reactions */
+  free_text?: FreeTextValueParamsAmino;
+  /** User setting the params */
+  user: string;
+}
+export interface MsgSetReactionsParamsAminoMsg {
+  type: "/desmos.reactions.v1.MsgSetReactionsParams";
+  value: MsgSetReactionsParamsAmino;
+}
 /**
  * MsgSetReactionsParamsResponse represents the Msg/SetReactionsParams response
  * type
  */
 export interface MsgSetReactionsParamsResponse {}
+export interface MsgSetReactionsParamsResponseProtoMsg {
+  typeUrl: "/desmos.reactions.v1.MsgSetReactionsParamsResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgSetReactionsParamsResponse represents the Msg/SetReactionsParams response
+ * type
+ */
+export interface MsgSetReactionsParamsResponseAmino {}
+export interface MsgSetReactionsParamsResponseAminoMsg {
+  type: "/desmos.reactions.v1.MsgSetReactionsParamsResponse";
+  value: MsgSetReactionsParamsResponseAmino;
+}
 function createBaseMsgAddReaction(): MsgAddReaction {
   return {
     subspaceId: Long.UZERO,
@@ -208,6 +420,39 @@ export const MsgAddReaction = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(object: MsgAddReactionAmino): MsgAddReaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      value: object?.value ? Any.fromAmino(object.value) : undefined,
+      user: object.user,
+    };
+  },
+  toAmino(message: MsgAddReaction): MsgAddReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.value = message.value ? Any.toAmino(message.value) : undefined;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAddReactionAminoMsg): MsgAddReaction {
+    return MsgAddReaction.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAddReactionProtoMsg): MsgAddReaction {
+    return MsgAddReaction.decode(message.value);
+  },
+  toProto(message: MsgAddReaction): Uint8Array {
+    return MsgAddReaction.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAddReaction): MsgAddReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgAddReaction",
+      value: MsgAddReaction.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgAddReactionResponse(): MsgAddReactionResponse {
   return {
@@ -261,6 +506,33 @@ export const MsgAddReactionResponse = {
     const message = createBaseMsgAddReactionResponse();
     message.reactionId = object.reactionId ?? 0;
     return message;
+  },
+  fromAmino(object: MsgAddReactionResponseAmino): MsgAddReactionResponse {
+    return {
+      reactionId: object.reaction_id,
+    };
+  },
+  toAmino(message: MsgAddReactionResponse): MsgAddReactionResponseAmino {
+    const obj: any = {};
+    obj.reaction_id = message.reactionId;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAddReactionResponseAminoMsg): MsgAddReactionResponse {
+    return MsgAddReactionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgAddReactionResponseProtoMsg
+  ): MsgAddReactionResponse {
+    return MsgAddReactionResponse.decode(message.value);
+  },
+  toProto(message: MsgAddReactionResponse): Uint8Array {
+    return MsgAddReactionResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAddReactionResponse): MsgAddReactionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgAddReactionResponse",
+      value: MsgAddReactionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgRemoveReaction(): MsgRemoveReaction {
@@ -353,6 +625,39 @@ export const MsgRemoveReaction = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(object: MsgRemoveReactionAmino): MsgRemoveReaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      reactionId: object.reaction_id,
+      user: object.user,
+    };
+  },
+  toAmino(message: MsgRemoveReaction): MsgRemoveReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.reaction_id = message.reactionId;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRemoveReactionAminoMsg): MsgRemoveReaction {
+    return MsgRemoveReaction.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRemoveReactionProtoMsg): MsgRemoveReaction {
+    return MsgRemoveReaction.decode(message.value);
+  },
+  toProto(message: MsgRemoveReaction): Uint8Array {
+    return MsgRemoveReaction.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRemoveReaction): MsgRemoveReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgRemoveReaction",
+      value: MsgRemoveReaction.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgRemoveReactionResponse(): MsgRemoveReactionResponse {
   return {};
@@ -393,6 +698,34 @@ export const MsgRemoveReactionResponse = {
   ): MsgRemoveReactionResponse {
     const message = createBaseMsgRemoveReactionResponse();
     return message;
+  },
+  fromAmino(_: MsgRemoveReactionResponseAmino): MsgRemoveReactionResponse {
+    return {};
+  },
+  toAmino(_: MsgRemoveReactionResponse): MsgRemoveReactionResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemoveReactionResponseAminoMsg
+  ): MsgRemoveReactionResponse {
+    return MsgRemoveReactionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemoveReactionResponseProtoMsg
+  ): MsgRemoveReactionResponse {
+    return MsgRemoveReactionResponse.decode(message.value);
+  },
+  toProto(message: MsgRemoveReactionResponse): Uint8Array {
+    return MsgRemoveReactionResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemoveReactionResponse
+  ): MsgRemoveReactionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgRemoveReactionResponse",
+      value: MsgRemoveReactionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgAddRegisteredReaction(): MsgAddRegisteredReaction {
@@ -489,6 +822,45 @@ export const MsgAddRegisteredReaction = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(object: MsgAddRegisteredReactionAmino): MsgAddRegisteredReaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      shorthandCode: object.shorthand_code,
+      displayValue: object.display_value,
+      user: object.user,
+    };
+  },
+  toAmino(message: MsgAddRegisteredReaction): MsgAddRegisteredReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.shorthand_code = message.shorthandCode;
+    obj.display_value = message.displayValue;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgAddRegisteredReactionAminoMsg
+  ): MsgAddRegisteredReaction {
+    return MsgAddRegisteredReaction.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgAddRegisteredReactionProtoMsg
+  ): MsgAddRegisteredReaction {
+    return MsgAddRegisteredReaction.decode(message.value);
+  },
+  toProto(message: MsgAddRegisteredReaction): Uint8Array {
+    return MsgAddRegisteredReaction.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgAddRegisteredReaction
+  ): MsgAddRegisteredReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgAddRegisteredReaction",
+      value: MsgAddRegisteredReaction.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgAddRegisteredReactionResponse(): MsgAddRegisteredReactionResponse {
   return {
@@ -544,6 +916,41 @@ export const MsgAddRegisteredReactionResponse = {
     const message = createBaseMsgAddRegisteredReactionResponse();
     message.registeredReactionId = object.registeredReactionId ?? 0;
     return message;
+  },
+  fromAmino(
+    object: MsgAddRegisteredReactionResponseAmino
+  ): MsgAddRegisteredReactionResponse {
+    return {
+      registeredReactionId: object.registered_reaction_id,
+    };
+  },
+  toAmino(
+    message: MsgAddRegisteredReactionResponse
+  ): MsgAddRegisteredReactionResponseAmino {
+    const obj: any = {};
+    obj.registered_reaction_id = message.registeredReactionId;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgAddRegisteredReactionResponseAminoMsg
+  ): MsgAddRegisteredReactionResponse {
+    return MsgAddRegisteredReactionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgAddRegisteredReactionResponseProtoMsg
+  ): MsgAddRegisteredReactionResponse {
+    return MsgAddRegisteredReactionResponse.decode(message.value);
+  },
+  toProto(message: MsgAddRegisteredReactionResponse): Uint8Array {
+    return MsgAddRegisteredReactionResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgAddRegisteredReactionResponse
+  ): MsgAddRegisteredReactionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgAddRegisteredReactionResponse",
+      value: MsgAddRegisteredReactionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgEditRegisteredReaction(): MsgEditRegisteredReaction {
@@ -653,6 +1060,47 @@ export const MsgEditRegisteredReaction = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(object: MsgEditRegisteredReactionAmino): MsgEditRegisteredReaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      registeredReactionId: object.registered_reaction_id,
+      shorthandCode: object.shorthand_code,
+      displayValue: object.display_value,
+      user: object.user,
+    };
+  },
+  toAmino(message: MsgEditRegisteredReaction): MsgEditRegisteredReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.registered_reaction_id = message.registeredReactionId;
+    obj.shorthand_code = message.shorthandCode;
+    obj.display_value = message.displayValue;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgEditRegisteredReactionAminoMsg
+  ): MsgEditRegisteredReaction {
+    return MsgEditRegisteredReaction.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgEditRegisteredReactionProtoMsg
+  ): MsgEditRegisteredReaction {
+    return MsgEditRegisteredReaction.decode(message.value);
+  },
+  toProto(message: MsgEditRegisteredReaction): Uint8Array {
+    return MsgEditRegisteredReaction.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgEditRegisteredReaction
+  ): MsgEditRegisteredReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgEditRegisteredReaction",
+      value: MsgEditRegisteredReaction.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgEditRegisteredReactionResponse(): MsgEditRegisteredReactionResponse {
   return {};
@@ -693,6 +1141,38 @@ export const MsgEditRegisteredReactionResponse = {
   >(_: I): MsgEditRegisteredReactionResponse {
     const message = createBaseMsgEditRegisteredReactionResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgEditRegisteredReactionResponseAmino
+  ): MsgEditRegisteredReactionResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgEditRegisteredReactionResponse
+  ): MsgEditRegisteredReactionResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgEditRegisteredReactionResponseAminoMsg
+  ): MsgEditRegisteredReactionResponse {
+    return MsgEditRegisteredReactionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgEditRegisteredReactionResponseProtoMsg
+  ): MsgEditRegisteredReactionResponse {
+    return MsgEditRegisteredReactionResponse.decode(message.value);
+  },
+  toProto(message: MsgEditRegisteredReactionResponse): Uint8Array {
+    return MsgEditRegisteredReactionResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgEditRegisteredReactionResponse
+  ): MsgEditRegisteredReactionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgEditRegisteredReactionResponse",
+      value: MsgEditRegisteredReactionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgRemoveRegisteredReaction(): MsgRemoveRegisteredReaction {
@@ -776,6 +1256,47 @@ export const MsgRemoveRegisteredReaction = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(
+    object: MsgRemoveRegisteredReactionAmino
+  ): MsgRemoveRegisteredReaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      registeredReactionId: object.registered_reaction_id,
+      user: object.user,
+    };
+  },
+  toAmino(
+    message: MsgRemoveRegisteredReaction
+  ): MsgRemoveRegisteredReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.registered_reaction_id = message.registeredReactionId;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemoveRegisteredReactionAminoMsg
+  ): MsgRemoveRegisteredReaction {
+    return MsgRemoveRegisteredReaction.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemoveRegisteredReactionProtoMsg
+  ): MsgRemoveRegisteredReaction {
+    return MsgRemoveRegisteredReaction.decode(message.value);
+  },
+  toProto(message: MsgRemoveRegisteredReaction): Uint8Array {
+    return MsgRemoveRegisteredReaction.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemoveRegisteredReaction
+  ): MsgRemoveRegisteredReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgRemoveRegisteredReaction",
+      value: MsgRemoveRegisteredReaction.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgRemoveRegisteredReactionResponse(): MsgRemoveRegisteredReactionResponse {
   return {};
@@ -816,6 +1337,38 @@ export const MsgRemoveRegisteredReactionResponse = {
   >(_: I): MsgRemoveRegisteredReactionResponse {
     const message = createBaseMsgRemoveRegisteredReactionResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgRemoveRegisteredReactionResponseAmino
+  ): MsgRemoveRegisteredReactionResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgRemoveRegisteredReactionResponse
+  ): MsgRemoveRegisteredReactionResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemoveRegisteredReactionResponseAminoMsg
+  ): MsgRemoveRegisteredReactionResponse {
+    return MsgRemoveRegisteredReactionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemoveRegisteredReactionResponseProtoMsg
+  ): MsgRemoveRegisteredReactionResponse {
+    return MsgRemoveRegisteredReactionResponse.decode(message.value);
+  },
+  toProto(message: MsgRemoveRegisteredReactionResponse): Uint8Array {
+    return MsgRemoveRegisteredReactionResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemoveRegisteredReactionResponse
+  ): MsgRemoveRegisteredReactionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgRemoveRegisteredReactionResponse",
+      value: MsgRemoveRegisteredReactionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgSetReactionsParams(): MsgSetReactionsParams {
@@ -935,6 +1488,47 @@ export const MsgSetReactionsParams = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(object: MsgSetReactionsParamsAmino): MsgSetReactionsParams {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      registeredReaction: object?.registered_reaction
+        ? RegisteredReactionValueParams.fromAmino(object.registered_reaction)
+        : undefined,
+      freeText: object?.free_text
+        ? FreeTextValueParams.fromAmino(object.free_text)
+        : undefined,
+      user: object.user,
+    };
+  },
+  toAmino(message: MsgSetReactionsParams): MsgSetReactionsParamsAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.registered_reaction = message.registeredReaction
+      ? RegisteredReactionValueParams.toAmino(message.registeredReaction)
+      : undefined;
+    obj.free_text = message.freeText
+      ? FreeTextValueParams.toAmino(message.freeText)
+      : undefined;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetReactionsParamsAminoMsg): MsgSetReactionsParams {
+    return MsgSetReactionsParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgSetReactionsParamsProtoMsg): MsgSetReactionsParams {
+    return MsgSetReactionsParams.decode(message.value);
+  },
+  toProto(message: MsgSetReactionsParams): Uint8Array {
+    return MsgSetReactionsParams.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetReactionsParams): MsgSetReactionsParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgSetReactionsParams",
+      value: MsgSetReactionsParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgSetReactionsParamsResponse(): MsgSetReactionsParamsResponse {
   return {};
@@ -975,5 +1569,37 @@ export const MsgSetReactionsParamsResponse = {
   ): MsgSetReactionsParamsResponse {
     const message = createBaseMsgSetReactionsParamsResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgSetReactionsParamsResponseAmino
+  ): MsgSetReactionsParamsResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgSetReactionsParamsResponse
+  ): MsgSetReactionsParamsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgSetReactionsParamsResponseAminoMsg
+  ): MsgSetReactionsParamsResponse {
+    return MsgSetReactionsParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSetReactionsParamsResponseProtoMsg
+  ): MsgSetReactionsParamsResponse {
+    return MsgSetReactionsParamsResponse.decode(message.value);
+  },
+  toProto(message: MsgSetReactionsParamsResponse): Uint8Array {
+    return MsgSetReactionsParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgSetReactionsParamsResponse
+  ): MsgSetReactionsParamsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.MsgSetReactionsParamsResponse",
+      value: MsgSetReactionsParamsResponse.encode(message).finish(),
+    };
   },
 };

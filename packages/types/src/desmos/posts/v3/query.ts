@@ -1,9 +1,20 @@
 /* eslint-disable */
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Post, Attachment, UserAnswer, Params } from "./models";
+import {
+  Post,
+  PostAmino,
+  Attachment,
+  AttachmentAmino,
+  UserAnswer,
+  UserAnswerAmino,
+  Params,
+  ParamsAmino,
+} from "./models";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.posts.v3";
@@ -17,6 +28,24 @@ export interface QuerySubspacePostsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QuerySubspacePostsRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QuerySubspacePostsRequest";
+  value: Uint8Array;
+}
+/**
+ * QuerySubspacePostsRequest is the request type for the Query/SubspacePosts RPC
+ * method
+ */
+export interface QuerySubspacePostsRequestAmino {
+  /** Id of the subspace to query the posts for */
+  subspace_id: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QuerySubspacePostsRequestAminoMsg {
+  type: "/desmos.posts.v3.QuerySubspacePostsRequest";
+  value: QuerySubspacePostsRequestAmino;
+}
 /**
  * QuerySubspacePostsResponse is the response type for the Query/SubspacePosts
  * RPC method
@@ -24,6 +53,22 @@ export interface QuerySubspacePostsRequest {
 export interface QuerySubspacePostsResponse {
   posts: Post[];
   pagination?: PageResponse;
+}
+export interface QuerySubspacePostsResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QuerySubspacePostsResponse";
+  value: Uint8Array;
+}
+/**
+ * QuerySubspacePostsResponse is the response type for the Query/SubspacePosts
+ * RPC method
+ */
+export interface QuerySubspacePostsResponseAmino {
+  posts: PostAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QuerySubspacePostsResponseAminoMsg {
+  type: "/desmos.posts.v3.QuerySubspacePostsResponse";
+  value: QuerySubspacePostsResponseAmino;
 }
 /**
  * QuerySectionPostsRequest is the request type for the Query/SectionPosts RPC
@@ -37,6 +82,26 @@ export interface QuerySectionPostsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QuerySectionPostsRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QuerySectionPostsRequest";
+  value: Uint8Array;
+}
+/**
+ * QuerySectionPostsRequest is the request type for the Query/SectionPosts RPC
+ * method
+ */
+export interface QuerySectionPostsRequestAmino {
+  /** Id of the subspace to query the posts for */
+  subspace_id: string;
+  /** Id of the section to query the posts for */
+  section_id: number;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QuerySectionPostsRequestAminoMsg {
+  type: "/desmos.posts.v3.QuerySectionPostsRequest";
+  value: QuerySectionPostsRequestAmino;
+}
 /**
  * QuerySectionPostsResponse is the response type for the Query/SectionPosts RPC
  * method
@@ -45,6 +110,22 @@ export interface QuerySectionPostsResponse {
   posts: Post[];
   pagination?: PageResponse;
 }
+export interface QuerySectionPostsResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QuerySectionPostsResponse";
+  value: Uint8Array;
+}
+/**
+ * QuerySectionPostsResponse is the response type for the Query/SectionPosts RPC
+ * method
+ */
+export interface QuerySectionPostsResponseAmino {
+  posts: PostAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QuerySectionPostsResponseAminoMsg {
+  type: "/desmos.posts.v3.QuerySectionPostsResponse";
+  value: QuerySectionPostsResponseAmino;
+}
 /** QueryPostRequest is the request type for the Query/Post RPC method */
 export interface QueryPostRequest {
   /** Id of the subspace inside which the post lies */
@@ -52,10 +133,38 @@ export interface QueryPostRequest {
   /** Id of the post to query for */
   postId: Long;
 }
+export interface QueryPostRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryPostRequest";
+  value: Uint8Array;
+}
+/** QueryPostRequest is the request type for the Query/Post RPC method */
+export interface QueryPostRequestAmino {
+  /** Id of the subspace inside which the post lies */
+  subspace_id: string;
+  /** Id of the post to query for */
+  post_id: string;
+}
+export interface QueryPostRequestAminoMsg {
+  type: "/desmos.posts.v3.QueryPostRequest";
+  value: QueryPostRequestAmino;
+}
 /** QueryPostResponse is the response type for the Query/Post RPC method */
 export interface QueryPostResponse {
   /** QueryPostResponse is the response type for the Query/Post RPC method */
   post?: Post;
+}
+export interface QueryPostResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryPostResponse";
+  value: Uint8Array;
+}
+/** QueryPostResponse is the response type for the Query/Post RPC method */
+export interface QueryPostResponseAmino {
+  /** QueryPostResponse is the response type for the Query/Post RPC method */
+  post?: PostAmino;
+}
+export interface QueryPostResponseAminoMsg {
+  type: "/desmos.posts.v3.QueryPostResponse";
+  value: QueryPostResponseAmino;
 }
 /**
  * QueryPostsRequest is the request type for the Query/PostAttachments RPC
@@ -69,6 +178,26 @@ export interface QueryPostAttachmentsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryPostAttachmentsRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryPostAttachmentsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryPostsRequest is the request type for the Query/PostAttachments RPC
+ * method
+ */
+export interface QueryPostAttachmentsRequestAmino {
+  /** Id of the subspace where the post is stored */
+  subspace_id: string;
+  /** Id of the post to query the attachments for */
+  post_id: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryPostAttachmentsRequestAminoMsg {
+  type: "/desmos.posts.v3.QueryPostAttachmentsRequest";
+  value: QueryPostAttachmentsRequestAmino;
+}
 /**
  * QueryPostAttachmentsResponse is the response type for the
  * Query/PostAttachments RPC method
@@ -76,6 +205,22 @@ export interface QueryPostAttachmentsRequest {
 export interface QueryPostAttachmentsResponse {
   attachments: Attachment[];
   pagination?: PageResponse;
+}
+export interface QueryPostAttachmentsResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryPostAttachmentsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryPostAttachmentsResponse is the response type for the
+ * Query/PostAttachments RPC method
+ */
+export interface QueryPostAttachmentsResponseAmino {
+  attachments: AttachmentAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryPostAttachmentsResponseAminoMsg {
+  type: "/desmos.posts.v3.QueryPostAttachmentsResponse";
+  value: QueryPostAttachmentsResponseAmino;
 }
 /**
  * QueryPollAnswersRequest is the request type for the Query/PollAnswers RPC
@@ -93,6 +238,30 @@ export interface QueryPollAnswersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryPollAnswersRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryPollAnswersRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryPollAnswersRequest is the request type for the Query/PollAnswers RPC
+ * method
+ */
+export interface QueryPollAnswersRequestAmino {
+  /** Id of the subspace where the post is stored */
+  subspace_id: string;
+  /** Id of the post that holds the poll */
+  post_id: string;
+  /** Id of the poll to query the answers for */
+  poll_id: number;
+  /** (Optional) Address of the user to query the responses for */
+  user: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryPollAnswersRequestAminoMsg {
+  type: "/desmos.posts.v3.QueryPollAnswersRequest";
+  value: QueryPollAnswersRequestAmino;
+}
 /**
  * QueryPollAnswersResponse is the response type for the Query/PollAnswers RPC
  * method
@@ -101,11 +270,49 @@ export interface QueryPollAnswersResponse {
   answers: UserAnswer[];
   pagination?: PageResponse;
 }
+export interface QueryPollAnswersResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryPollAnswersResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryPollAnswersResponse is the response type for the Query/PollAnswers RPC
+ * method
+ */
+export interface QueryPollAnswersResponseAmino {
+  answers: UserAnswerAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryPollAnswersResponseAminoMsg {
+  type: "/desmos.posts.v3.QueryPollAnswersResponse";
+  value: QueryPollAnswersResponseAmino;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryParamsRequest";
+  value: Uint8Array;
+}
+/** QueryParamsRequest is the request type for the Query/Params RPC method */
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "/desmos.posts.v3.QueryParamsRequest";
+  value: QueryParamsRequestAmino;
+}
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponse {
   params?: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryParamsResponse";
+  value: Uint8Array;
+}
+/** QueryParamsResponse is the response type for the Query/Params RPC method */
+export interface QueryParamsResponseAmino {
+  params?: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "/desmos.posts.v3.QueryParamsResponse";
+  value: QueryParamsResponseAmino;
 }
 function createBaseQuerySubspacePostsRequest(): QuerySubspacePostsRequest {
   return {
@@ -182,6 +389,45 @@ export const QuerySubspacePostsRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(object: QuerySubspacePostsRequestAmino): QuerySubspacePostsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySubspacePostsRequest): QuerySubspacePostsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QuerySubspacePostsRequestAminoMsg
+  ): QuerySubspacePostsRequest {
+    return QuerySubspacePostsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QuerySubspacePostsRequestProtoMsg
+  ): QuerySubspacePostsRequest {
+    return QuerySubspacePostsRequest.decode(message.value);
+  },
+  toProto(message: QuerySubspacePostsRequest): Uint8Array {
+    return QuerySubspacePostsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QuerySubspacePostsRequest
+  ): QuerySubspacePostsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QuerySubspacePostsRequest",
+      value: QuerySubspacePostsRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQuerySubspacePostsResponse(): QuerySubspacePostsResponse {
@@ -262,6 +508,53 @@ export const QuerySubspacePostsResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QuerySubspacePostsResponseAmino
+  ): QuerySubspacePostsResponse {
+    return {
+      posts: Array.isArray(object?.posts)
+        ? object.posts.map((e: any) => Post.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QuerySubspacePostsResponse
+  ): QuerySubspacePostsResponseAmino {
+    const obj: any = {};
+    if (message.posts) {
+      obj.posts = message.posts.map((e) => (e ? Post.toAmino(e) : undefined));
+    } else {
+      obj.posts = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QuerySubspacePostsResponseAminoMsg
+  ): QuerySubspacePostsResponse {
+    return QuerySubspacePostsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QuerySubspacePostsResponseProtoMsg
+  ): QuerySubspacePostsResponse {
+    return QuerySubspacePostsResponse.decode(message.value);
+  },
+  toProto(message: QuerySubspacePostsResponse): Uint8Array {
+    return QuerySubspacePostsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QuerySubspacePostsResponse
+  ): QuerySubspacePostsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QuerySubspacePostsResponse",
+      value: QuerySubspacePostsResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQuerySectionPostsRequest(): QuerySectionPostsRequest {
@@ -351,6 +644,47 @@ export const QuerySectionPostsRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QuerySectionPostsRequestAmino): QuerySectionPostsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySectionPostsRequest): QuerySectionPostsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QuerySectionPostsRequestAminoMsg
+  ): QuerySectionPostsRequest {
+    return QuerySectionPostsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QuerySectionPostsRequestProtoMsg
+  ): QuerySectionPostsRequest {
+    return QuerySectionPostsRequest.decode(message.value);
+  },
+  toProto(message: QuerySectionPostsRequest): Uint8Array {
+    return QuerySectionPostsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QuerySectionPostsRequest
+  ): QuerySectionPostsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QuerySectionPostsRequest",
+      value: QuerySectionPostsRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQuerySectionPostsResponse(): QuerySectionPostsResponse {
   return {
@@ -431,6 +765,49 @@ export const QuerySectionPostsResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QuerySectionPostsResponseAmino): QuerySectionPostsResponse {
+    return {
+      posts: Array.isArray(object?.posts)
+        ? object.posts.map((e: any) => Post.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySectionPostsResponse): QuerySectionPostsResponseAmino {
+    const obj: any = {};
+    if (message.posts) {
+      obj.posts = message.posts.map((e) => (e ? Post.toAmino(e) : undefined));
+    } else {
+      obj.posts = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QuerySectionPostsResponseAminoMsg
+  ): QuerySectionPostsResponse {
+    return QuerySectionPostsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QuerySectionPostsResponseProtoMsg
+  ): QuerySectionPostsResponse {
+    return QuerySectionPostsResponse.decode(message.value);
+  },
+  toProto(message: QuerySectionPostsResponse): Uint8Array {
+    return QuerySectionPostsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QuerySectionPostsResponse
+  ): QuerySectionPostsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QuerySectionPostsResponse",
+      value: QuerySectionPostsResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryPostRequest(): QueryPostRequest {
   return {
@@ -501,6 +878,35 @@ export const QueryPostRequest = {
         : Long.UZERO;
     return message;
   },
+  fromAmino(object: QueryPostRequestAmino): QueryPostRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+    };
+  },
+  toAmino(message: QueryPostRequest): QueryPostRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryPostRequestAminoMsg): QueryPostRequest {
+    return QueryPostRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryPostRequestProtoMsg): QueryPostRequest {
+    return QueryPostRequest.decode(message.value);
+  },
+  toProto(message: QueryPostRequest): Uint8Array {
+    return QueryPostRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryPostRequest): QueryPostRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryPostRequest",
+      value: QueryPostRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryPostResponse(): QueryPostResponse {
   return {
@@ -554,6 +960,31 @@ export const QueryPostResponse = {
         ? Post.fromPartial(object.post)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryPostResponseAmino): QueryPostResponse {
+    return {
+      post: object?.post ? Post.fromAmino(object.post) : undefined,
+    };
+  },
+  toAmino(message: QueryPostResponse): QueryPostResponseAmino {
+    const obj: any = {};
+    obj.post = message.post ? Post.toAmino(message.post) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryPostResponseAminoMsg): QueryPostResponse {
+    return QueryPostResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryPostResponseProtoMsg): QueryPostResponse {
+    return QueryPostResponse.decode(message.value);
+  },
+  toProto(message: QueryPostResponse): Uint8Array {
+    return QueryPostResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryPostResponse): QueryPostResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryPostResponse",
+      value: QueryPostResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryPostAttachmentsRequest(): QueryPostAttachmentsRequest {
@@ -646,6 +1077,51 @@ export const QueryPostAttachmentsRequest = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryPostAttachmentsRequestAmino
+  ): QueryPostAttachmentsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryPostAttachmentsRequest
+  ): QueryPostAttachmentsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryPostAttachmentsRequestAminoMsg
+  ): QueryPostAttachmentsRequest {
+    return QueryPostAttachmentsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryPostAttachmentsRequestProtoMsg
+  ): QueryPostAttachmentsRequest {
+    return QueryPostAttachmentsRequest.decode(message.value);
+  },
+  toProto(message: QueryPostAttachmentsRequest): Uint8Array {
+    return QueryPostAttachmentsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryPostAttachmentsRequest
+  ): QueryPostAttachmentsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryPostAttachmentsRequest",
+      value: QueryPostAttachmentsRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryPostAttachmentsResponse(): QueryPostAttachmentsResponse {
   return {
@@ -728,6 +1204,55 @@ export const QueryPostAttachmentsResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryPostAttachmentsResponseAmino
+  ): QueryPostAttachmentsResponse {
+    return {
+      attachments: Array.isArray(object?.attachments)
+        ? object.attachments.map((e: any) => Attachment.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryPostAttachmentsResponse
+  ): QueryPostAttachmentsResponseAmino {
+    const obj: any = {};
+    if (message.attachments) {
+      obj.attachments = message.attachments.map((e) =>
+        e ? Attachment.toAmino(e) : undefined
+      );
+    } else {
+      obj.attachments = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryPostAttachmentsResponseAminoMsg
+  ): QueryPostAttachmentsResponse {
+    return QueryPostAttachmentsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryPostAttachmentsResponseProtoMsg
+  ): QueryPostAttachmentsResponse {
+    return QueryPostAttachmentsResponse.decode(message.value);
+  },
+  toProto(message: QueryPostAttachmentsResponse): Uint8Array {
+    return QueryPostAttachmentsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryPostAttachmentsResponse
+  ): QueryPostAttachmentsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryPostAttachmentsResponse",
+      value: QueryPostAttachmentsResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryPollAnswersRequest(): QueryPollAnswersRequest {
@@ -840,6 +1365,51 @@ export const QueryPollAnswersRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryPollAnswersRequestAmino): QueryPollAnswersRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      pollId: object.poll_id,
+      user: object.user,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryPollAnswersRequest): QueryPollAnswersRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.poll_id = message.pollId;
+    obj.user = message.user;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryPollAnswersRequestAminoMsg
+  ): QueryPollAnswersRequest {
+    return QueryPollAnswersRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryPollAnswersRequestProtoMsg
+  ): QueryPollAnswersRequest {
+    return QueryPollAnswersRequest.decode(message.value);
+  },
+  toProto(message: QueryPollAnswersRequest): Uint8Array {
+    return QueryPollAnswersRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryPollAnswersRequest
+  ): QueryPollAnswersRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryPollAnswersRequest",
+      value: QueryPollAnswersRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryPollAnswersResponse(): QueryPollAnswersResponse {
   return {
@@ -923,6 +1493,51 @@ export const QueryPollAnswersResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryPollAnswersResponseAmino): QueryPollAnswersResponse {
+    return {
+      answers: Array.isArray(object?.answers)
+        ? object.answers.map((e: any) => UserAnswer.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryPollAnswersResponse): QueryPollAnswersResponseAmino {
+    const obj: any = {};
+    if (message.answers) {
+      obj.answers = message.answers.map((e) =>
+        e ? UserAnswer.toAmino(e) : undefined
+      );
+    } else {
+      obj.answers = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryPollAnswersResponseAminoMsg
+  ): QueryPollAnswersResponse {
+    return QueryPollAnswersResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryPollAnswersResponseProtoMsg
+  ): QueryPollAnswersResponse {
+    return QueryPollAnswersResponse.decode(message.value);
+  },
+  toProto(message: QueryPollAnswersResponse): Uint8Array {
+    return QueryPollAnswersResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryPollAnswersResponse
+  ): QueryPollAnswersResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryPollAnswersResponse",
+      value: QueryPollAnswersResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -960,6 +1575,28 @@ export const QueryParamsRequest = {
   ): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    return {};
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -1014,5 +1651,30 @@ export const QueryParamsResponse = {
         ? Params.fromPartial(object.params)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish(),
+    };
   },
 };

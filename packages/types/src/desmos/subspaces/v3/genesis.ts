@@ -1,6 +1,15 @@
 /* eslint-disable */
-import { Subspace, Section, UserPermission, UserGroup } from "./models";
-import { Grant } from "./models_feegrant";
+import {
+  Subspace,
+  SubspaceAmino,
+  Section,
+  SectionAmino,
+  UserPermission,
+  UserPermissionAmino,
+  UserGroup,
+  UserGroupAmino,
+} from "./models";
+import { Grant, GrantAmino } from "./models_feegrant";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.subspaces.v3";
@@ -15,17 +24,64 @@ export interface GenesisState {
   userGroupsMembers: UserGroupMemberEntry[];
   grants: Grant[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState contains the data of the genesis state for the subspaces module */
+export interface GenesisStateAmino {
+  initial_subspace_id: string;
+  subspaces_data: SubspaceDataAmino[];
+  subspaces: SubspaceAmino[];
+  sections: SectionAmino[];
+  user_permissions: UserPermissionAmino[];
+  user_groups: UserGroupAmino[];
+  user_groups_members: UserGroupMemberEntryAmino[];
+  grants: GrantAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/desmos.subspaces.v3.GenesisState";
+  value: GenesisStateAmino;
+}
 /** SubspaceData contains the genesis data for a single subspace */
 export interface SubspaceData {
   subspaceId: Long;
   nextGroupId: number;
   nextSectionId: number;
 }
+export interface SubspaceDataProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.SubspaceData";
+  value: Uint8Array;
+}
+/** SubspaceData contains the genesis data for a single subspace */
+export interface SubspaceDataAmino {
+  subspace_id: string;
+  next_group_id: number;
+  next_section_id: number;
+}
+export interface SubspaceDataAminoMsg {
+  type: "/desmos.subspaces.v3.SubspaceData";
+  value: SubspaceDataAmino;
+}
 /** UserGroupMemberEntry contains the details of a user group member */
 export interface UserGroupMemberEntry {
   subspaceId: Long;
   groupId: number;
   user: string;
+}
+export interface UserGroupMemberEntryProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.UserGroupMemberEntry";
+  value: Uint8Array;
+}
+/** UserGroupMemberEntry contains the details of a user group member */
+export interface UserGroupMemberEntryAmino {
+  subspace_id: string;
+  group_id: number;
+  user: string;
+}
+export interface UserGroupMemberEntryAminoMsg {
+  type: "/desmos.subspaces.v3.UserGroupMemberEntry";
+  value: UserGroupMemberEntryAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -225,6 +281,105 @@ export const GenesisState = {
     message.grants = object.grants?.map((e) => Grant.fromPartial(e)) || [];
     return message;
   },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      initialSubspaceId: Long.fromString(object.initial_subspace_id),
+      subspacesData: Array.isArray(object?.subspaces_data)
+        ? object.subspaces_data.map((e: any) => SubspaceData.fromAmino(e))
+        : [],
+      subspaces: Array.isArray(object?.subspaces)
+        ? object.subspaces.map((e: any) => Subspace.fromAmino(e))
+        : [],
+      sections: Array.isArray(object?.sections)
+        ? object.sections.map((e: any) => Section.fromAmino(e))
+        : [],
+      userPermissions: Array.isArray(object?.user_permissions)
+        ? object.user_permissions.map((e: any) => UserPermission.fromAmino(e))
+        : [],
+      userGroups: Array.isArray(object?.user_groups)
+        ? object.user_groups.map((e: any) => UserGroup.fromAmino(e))
+        : [],
+      userGroupsMembers: Array.isArray(object?.user_groups_members)
+        ? object.user_groups_members.map((e: any) =>
+            UserGroupMemberEntry.fromAmino(e)
+          )
+        : [],
+      grants: Array.isArray(object?.grants)
+        ? object.grants.map((e: any) => Grant.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.initial_subspace_id = message.initialSubspaceId
+      ? message.initialSubspaceId.toString()
+      : undefined;
+    if (message.subspacesData) {
+      obj.subspaces_data = message.subspacesData.map((e) =>
+        e ? SubspaceData.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces_data = [];
+    }
+    if (message.subspaces) {
+      obj.subspaces = message.subspaces.map((e) =>
+        e ? Subspace.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces = [];
+    }
+    if (message.sections) {
+      obj.sections = message.sections.map((e) =>
+        e ? Section.toAmino(e) : undefined
+      );
+    } else {
+      obj.sections = [];
+    }
+    if (message.userPermissions) {
+      obj.user_permissions = message.userPermissions.map((e) =>
+        e ? UserPermission.toAmino(e) : undefined
+      );
+    } else {
+      obj.user_permissions = [];
+    }
+    if (message.userGroups) {
+      obj.user_groups = message.userGroups.map((e) =>
+        e ? UserGroup.toAmino(e) : undefined
+      );
+    } else {
+      obj.user_groups = [];
+    }
+    if (message.userGroupsMembers) {
+      obj.user_groups_members = message.userGroupsMembers.map((e) =>
+        e ? UserGroupMemberEntry.toAmino(e) : undefined
+      );
+    } else {
+      obj.user_groups_members = [];
+    }
+    if (message.grants) {
+      obj.grants = message.grants.map((e) =>
+        e ? Grant.toAmino(e) : undefined
+      );
+    } else {
+      obj.grants = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.GenesisState",
+      value: GenesisState.encode(message).finish(),
+    };
+  },
 };
 function createBaseSubspaceData(): SubspaceData {
   return {
@@ -305,6 +460,37 @@ export const SubspaceData = {
     message.nextSectionId = object.nextSectionId ?? 0;
     return message;
   },
+  fromAmino(object: SubspaceDataAmino): SubspaceData {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      nextGroupId: object.next_group_id,
+      nextSectionId: object.next_section_id,
+    };
+  },
+  toAmino(message: SubspaceData): SubspaceDataAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.next_group_id = message.nextGroupId;
+    obj.next_section_id = message.nextSectionId;
+    return obj;
+  },
+  fromAminoMsg(object: SubspaceDataAminoMsg): SubspaceData {
+    return SubspaceData.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SubspaceDataProtoMsg): SubspaceData {
+    return SubspaceData.decode(message.value);
+  },
+  toProto(message: SubspaceData): Uint8Array {
+    return SubspaceData.encode(message).finish();
+  },
+  toProtoMsg(message: SubspaceData): SubspaceDataProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.SubspaceData",
+      value: SubspaceData.encode(message).finish(),
+    };
+  },
 };
 function createBaseUserGroupMemberEntry(): UserGroupMemberEntry {
   return {
@@ -384,5 +570,36 @@ export const UserGroupMemberEntry = {
     message.groupId = object.groupId ?? 0;
     message.user = object.user ?? "";
     return message;
+  },
+  fromAmino(object: UserGroupMemberEntryAmino): UserGroupMemberEntry {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      user: object.user,
+    };
+  },
+  toAmino(message: UserGroupMemberEntry): UserGroupMemberEntryAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: UserGroupMemberEntryAminoMsg): UserGroupMemberEntry {
+    return UserGroupMemberEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserGroupMemberEntryProtoMsg): UserGroupMemberEntry {
+    return UserGroupMemberEntry.decode(message.value);
+  },
+  toProto(message: UserGroupMemberEntry): Uint8Array {
+    return UserGroupMemberEntry.encode(message).finish();
+  },
+  toProtoMsg(message: UserGroupMemberEntry): UserGroupMemberEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.UserGroupMemberEntry",
+      value: UserGroupMemberEntry.encode(message).finish(),
+    };
   },
 };

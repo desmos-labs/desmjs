@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
-import { Duration } from "../../../google/protobuf/duration";
+import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
+import { Duration, DurationAmino } from "../../../google/protobuf/duration";
 import {
   Long,
   isSet,
@@ -19,10 +19,39 @@ export interface Params {
   oracle?: OracleParams;
   appLinks?: AppLinksParams;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.Params";
+  value: Uint8Array;
+}
+/** Params contains the parameters for the profiles module */
+export interface ParamsAmino {
+  nickname?: NicknameParamsAmino;
+  dtag?: DTagParamsAmino;
+  bio?: BioParamsAmino;
+  oracle?: OracleParamsAmino;
+  app_links?: AppLinksParamsAmino;
+}
+export interface ParamsAminoMsg {
+  type: "/desmos.profiles.v3.Params";
+  value: ParamsAmino;
+}
 /** NicknameParams defines the parameters related to the profiles nicknames */
 export interface NicknameParams {
   minLength: Uint8Array;
   maxLength: Uint8Array;
+}
+export interface NicknameParamsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.NicknameParams";
+  value: Uint8Array;
+}
+/** NicknameParams defines the parameters related to the profiles nicknames */
+export interface NicknameParamsAmino {
+  min_length: Uint8Array;
+  max_length: Uint8Array;
+}
+export interface NicknameParamsAminoMsg {
+  type: "/desmos.profiles.v3.NicknameParams";
+  value: NicknameParamsAmino;
 }
 /** DTagParams defines the parameters related to profile DTags */
 export interface DTagParams {
@@ -30,9 +59,35 @@ export interface DTagParams {
   minLength: Uint8Array;
   maxLength: Uint8Array;
 }
+export interface DTagParamsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.DTagParams";
+  value: Uint8Array;
+}
+/** DTagParams defines the parameters related to profile DTags */
+export interface DTagParamsAmino {
+  reg_ex: string;
+  min_length: Uint8Array;
+  max_length: Uint8Array;
+}
+export interface DTagParamsAminoMsg {
+  type: "/desmos.profiles.v3.DTagParams";
+  value: DTagParamsAmino;
+}
 /** BioParams defines the parameters related to profile biography */
 export interface BioParams {
   maxLength: Uint8Array;
+}
+export interface BioParamsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.BioParams";
+  value: Uint8Array;
+}
+/** BioParams defines the parameters related to profile biography */
+export interface BioParamsAmino {
+  max_length: Uint8Array;
+}
+export interface BioParamsAminoMsg {
+  type: "/desmos.profiles.v3.BioParams";
+  value: BioParamsAmino;
 }
 /**
  * OracleParams defines the parameters related to the oracle
@@ -68,10 +123,65 @@ export interface OracleParams {
    */
   feeAmount: Coin[];
 }
+export interface OracleParamsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.OracleParams";
+  value: Uint8Array;
+}
+/**
+ * OracleParams defines the parameters related to the oracle
+ * that will be used to verify the ownership of a centralized
+ * application account by a Desmos profile
+ */
+export interface OracleParamsAmino {
+  /**
+   * ScriptID represents the ID of the oracle script to be called to verify the
+   * data
+   */
+  script_id: string;
+  /** AskCount represents the number of oracles to which ask to verify the data */
+  ask_count: string;
+  /**
+   * MinCount represents the minimum count of oracles that should complete the
+   * verification successfully
+   */
+  min_count: string;
+  /**
+   * PrepareGas represents the amount of gas to be used during the preparation
+   * stage of the oracle script
+   */
+  prepare_gas: string;
+  /**
+   * ExecuteGas represents the amount of gas to be used during the execution of
+   * the oracle script
+   */
+  execute_gas: string;
+  /**
+   * FeeAmount represents the amount of fees to be payed in order to execute the
+   * oracle script
+   */
+  fee_amount: CoinAmino[];
+}
+export interface OracleParamsAminoMsg {
+  type: "/desmos.profiles.v3.OracleParams";
+  value: OracleParamsAmino;
+}
 /** AppLinksParams define the parameters related to the app links */
 export interface AppLinksParams {
   /** Default validity duration before an application link expires */
   validityDuration?: Duration;
+}
+export interface AppLinksParamsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.AppLinksParams";
+  value: Uint8Array;
+}
+/** AppLinksParams define the parameters related to the app links */
+export interface AppLinksParamsAmino {
+  /** Default validity duration before an application link expires */
+  validity_duration?: DurationAmino;
+}
+export interface AppLinksParamsAminoMsg {
+  type: "/desmos.profiles.v3.AppLinksParams";
+  value: AppLinksParamsAmino;
 }
 function createBaseParams(): Params {
   return {
@@ -198,6 +308,51 @@ export const Params = {
         : undefined;
     return message;
   },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      nickname: object?.nickname
+        ? NicknameParams.fromAmino(object.nickname)
+        : undefined,
+      dtag: object?.dtag ? DTagParams.fromAmino(object.dtag) : undefined,
+      bio: object?.bio ? BioParams.fromAmino(object.bio) : undefined,
+      oracle: object?.oracle
+        ? OracleParams.fromAmino(object.oracle)
+        : undefined,
+      appLinks: object?.app_links
+        ? AppLinksParams.fromAmino(object.app_links)
+        : undefined,
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.nickname = message.nickname
+      ? NicknameParams.toAmino(message.nickname)
+      : undefined;
+    obj.dtag = message.dtag ? DTagParams.toAmino(message.dtag) : undefined;
+    obj.bio = message.bio ? BioParams.toAmino(message.bio) : undefined;
+    obj.oracle = message.oracle
+      ? OracleParams.toAmino(message.oracle)
+      : undefined;
+    obj.app_links = message.appLinks
+      ? AppLinksParams.toAmino(message.appLinks)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.Params",
+      value: Params.encode(message).finish(),
+    };
+  },
 };
 function createBaseNicknameParams(): NicknameParams {
   return {
@@ -267,6 +422,33 @@ export const NicknameParams = {
     message.minLength = object.minLength ?? new Uint8Array();
     message.maxLength = object.maxLength ?? new Uint8Array();
     return message;
+  },
+  fromAmino(object: NicknameParamsAmino): NicknameParams {
+    return {
+      minLength: object.min_length,
+      maxLength: object.max_length,
+    };
+  },
+  toAmino(message: NicknameParams): NicknameParamsAmino {
+    const obj: any = {};
+    obj.min_length = message.minLength;
+    obj.max_length = message.maxLength;
+    return obj;
+  },
+  fromAminoMsg(object: NicknameParamsAminoMsg): NicknameParams {
+    return NicknameParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: NicknameParamsProtoMsg): NicknameParams {
+    return NicknameParams.decode(message.value);
+  },
+  toProto(message: NicknameParams): Uint8Array {
+    return NicknameParams.encode(message).finish();
+  },
+  toProtoMsg(message: NicknameParams): NicknameParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.NicknameParams",
+      value: NicknameParams.encode(message).finish(),
+    };
   },
 };
 function createBaseDTagParams(): DTagParams {
@@ -348,6 +530,35 @@ export const DTagParams = {
     message.maxLength = object.maxLength ?? new Uint8Array();
     return message;
   },
+  fromAmino(object: DTagParamsAmino): DTagParams {
+    return {
+      regEx: object.reg_ex,
+      minLength: object.min_length,
+      maxLength: object.max_length,
+    };
+  },
+  toAmino(message: DTagParams): DTagParamsAmino {
+    const obj: any = {};
+    obj.reg_ex = message.regEx;
+    obj.min_length = message.minLength;
+    obj.max_length = message.maxLength;
+    return obj;
+  },
+  fromAminoMsg(object: DTagParamsAminoMsg): DTagParams {
+    return DTagParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DTagParamsProtoMsg): DTagParams {
+    return DTagParams.decode(message.value);
+  },
+  toProto(message: DTagParams): Uint8Array {
+    return DTagParams.encode(message).finish();
+  },
+  toProtoMsg(message: DTagParams): DTagParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.DTagParams",
+      value: DTagParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseBioParams(): BioParams {
   return {
@@ -402,6 +613,31 @@ export const BioParams = {
     const message = createBaseBioParams();
     message.maxLength = object.maxLength ?? new Uint8Array();
     return message;
+  },
+  fromAmino(object: BioParamsAmino): BioParams {
+    return {
+      maxLength: object.max_length,
+    };
+  },
+  toAmino(message: BioParams): BioParamsAmino {
+    const obj: any = {};
+    obj.max_length = message.maxLength;
+    return obj;
+  },
+  fromAminoMsg(object: BioParamsAminoMsg): BioParams {
+    return BioParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BioParamsProtoMsg): BioParams {
+    return BioParams.decode(message.value);
+  },
+  toProto(message: BioParams): Uint8Array {
+    return BioParams.encode(message).finish();
+  },
+  toProtoMsg(message: BioParams): BioParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.BioParams",
+      value: BioParams.encode(message).finish(),
+    };
   },
 };
 function createBaseOracleParams(): OracleParams {
@@ -541,6 +777,53 @@ export const OracleParams = {
     message.feeAmount = object.feeAmount?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
+  fromAmino(object: OracleParamsAmino): OracleParams {
+    return {
+      scriptId: Long.fromString(object.script_id),
+      askCount: Long.fromString(object.ask_count),
+      minCount: Long.fromString(object.min_count),
+      prepareGas: Long.fromString(object.prepare_gas),
+      executeGas: Long.fromString(object.execute_gas),
+      feeAmount: Array.isArray(object?.fee_amount)
+        ? object.fee_amount.map((e: any) => Coin.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: OracleParams): OracleParamsAmino {
+    const obj: any = {};
+    obj.script_id = message.scriptId ? message.scriptId.toString() : undefined;
+    obj.ask_count = message.askCount ? message.askCount.toString() : undefined;
+    obj.min_count = message.minCount ? message.minCount.toString() : undefined;
+    obj.prepare_gas = message.prepareGas
+      ? message.prepareGas.toString()
+      : undefined;
+    obj.execute_gas = message.executeGas
+      ? message.executeGas.toString()
+      : undefined;
+    if (message.feeAmount) {
+      obj.fee_amount = message.feeAmount.map((e) =>
+        e ? Coin.toAmino(e) : undefined
+      );
+    } else {
+      obj.fee_amount = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: OracleParamsAminoMsg): OracleParams {
+    return OracleParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OracleParamsProtoMsg): OracleParams {
+    return OracleParams.decode(message.value);
+  },
+  toProto(message: OracleParams): Uint8Array {
+    return OracleParams.encode(message).finish();
+  },
+  toProtoMsg(message: OracleParams): OracleParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.OracleParams",
+      value: OracleParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseAppLinksParams(): AppLinksParams {
   return {
@@ -601,5 +884,34 @@ export const AppLinksParams = {
         ? Duration.fromPartial(object.validityDuration)
         : undefined;
     return message;
+  },
+  fromAmino(object: AppLinksParamsAmino): AppLinksParams {
+    return {
+      validityDuration: object?.validity_duration
+        ? Duration.fromAmino(object.validity_duration)
+        : undefined,
+    };
+  },
+  toAmino(message: AppLinksParams): AppLinksParamsAmino {
+    const obj: any = {};
+    obj.validity_duration = message.validityDuration
+      ? Duration.toAmino(message.validityDuration)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: AppLinksParamsAminoMsg): AppLinksParams {
+    return AppLinksParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AppLinksParamsProtoMsg): AppLinksParams {
+    return AppLinksParams.decode(message.value);
+  },
+  toProto(message: AppLinksParams): Uint8Array {
+    return AppLinksParams.encode(message).finish();
+  },
+  toProtoMsg(message: AppLinksParams): AppLinksParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.AppLinksParams",
+      value: AppLinksParams.encode(message).finish(),
+    };
   },
 };

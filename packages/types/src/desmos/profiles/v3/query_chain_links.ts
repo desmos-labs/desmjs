@@ -1,9 +1,11 @@
 /* eslint-disable */
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { ChainLink } from "./models_chain_links";
+import { ChainLink, ChainLinkAmino } from "./models_chain_links";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.profiles.v3";
@@ -31,6 +33,38 @@ export interface QueryChainLinksRequest {
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryChainLinksRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryChainLinksRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryChainLinksRequest represents the request that should be used in order
+ * to retrieve the link associated with the provided user, for the given chain
+ * and having the given target address
+ */
+export interface QueryChainLinksRequestAmino {
+  /**
+   * (optional) User represents the Desmos address of the user to which search
+   * the link for
+   */
+  user: string;
+  /**
+   * (optional) ChainName contains the name of the chain to which search the
+   * link for. Used only if user is also set
+   */
+  chain_name: string;
+  /**
+   * (optional) Target must contain the external address to which query the link
+   * for. Used only if chain name is also set
+   */
+  target: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryChainLinksRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryChainLinksRequest";
+  value: QueryChainLinksRequestAmino;
+}
 /**
  * QueryChainLinksResponse is the response type for the
  * Query/ChainLinks RPC method.
@@ -39,6 +73,23 @@ export interface QueryChainLinksResponse {
   links: ChainLink[];
   /** Pagination defines the pagination response */
   pagination?: PageResponse;
+}
+export interface QueryChainLinksResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryChainLinksResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryChainLinksResponse is the response type for the
+ * Query/ChainLinks RPC method.
+ */
+export interface QueryChainLinksResponseAmino {
+  links: ChainLinkAmino[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryChainLinksResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryChainLinksResponse";
+  value: QueryChainLinksResponseAmino;
 }
 /**
  * QueryChainLinkOwnersRequest contains the data of the request that can
@@ -58,6 +109,32 @@ export interface QueryChainLinkOwnersRequest {
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryChainLinkOwnersRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryChainLinkOwnersRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryChainLinkOwnersRequest contains the data of the request that can
+ * be used to get chain link owners
+ */
+export interface QueryChainLinkOwnersRequestAmino {
+  /**
+   * (Optional) Chain name to search link owners of. If not specified, all
+   * links stored will be searched instead.
+   */
+  chain_name: string;
+  /**
+   * (Optional) External address to search for. This will only be used if the
+   * chain name is specified as well
+   */
+  target: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryChainLinkOwnersRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryChainLinkOwnersRequest";
+  value: QueryChainLinkOwnersRequestAmino;
+}
 /**
  * QueryChainLinkOwnersResponse contains the data returned by the request
  * allowing to get chain link owners.
@@ -68,11 +145,43 @@ export interface QueryChainLinkOwnersResponse {
   /** Pagination defines the pagination response */
   pagination?: PageResponse;
 }
+export interface QueryChainLinkOwnersResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryChainLinkOwnersResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryChainLinkOwnersResponse contains the data returned by the request
+ * allowing to get chain link owners.
+ */
+export interface QueryChainLinkOwnersResponseAmino {
+  /** Addresses of the chain links owners */
+  owners: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryChainLinkOwnersResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryChainLinkOwnersResponse";
+  value: QueryChainLinkOwnersResponseAmino;
+}
 /** ChainLinkOwnerDetails contains the details of a single chain link owner */
 export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
   user: string;
   chainName: string;
   target: string;
+}
+export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.ChainLinkOwnerDetails";
+  value: Uint8Array;
+}
+/** ChainLinkOwnerDetails contains the details of a single chain link owner */
+export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino {
+  user: string;
+  chain_name: string;
+  target: string;
+}
+export interface QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAminoMsg {
+  type: "/desmos.profiles.v3.ChainLinkOwnerDetails";
+  value: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino;
 }
 /**
  * QueryDefaultExternalAddressesRequest is the request type for
@@ -86,6 +195,26 @@ export interface QueryDefaultExternalAddressesRequest {
   /** Pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryDefaultExternalAddressesRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryDefaultExternalAddressesRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryDefaultExternalAddressesRequest is the request type for
+ * Query/DefaultExternalAddresses RPC method
+ */
+export interface QueryDefaultExternalAddressesRequestAmino {
+  /** (Optional) Owner for which to query the default addresses */
+  owner: string;
+  /** (Optional) Chain name to query the default address for */
+  chain_name: string;
+  /** Pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryDefaultExternalAddressesRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryDefaultExternalAddressesRequest";
+  value: QueryDefaultExternalAddressesRequestAmino;
+}
 /**
  * QueryDefaultExternalAddressesResponse is the response type for
  * Query/DefaultExternalAddresses RPC method
@@ -97,6 +226,26 @@ export interface QueryDefaultExternalAddressesResponse {
    */
   links: ChainLink[];
   pagination?: PageResponse;
+}
+export interface QueryDefaultExternalAddressesResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryDefaultExternalAddressesResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryDefaultExternalAddressesResponse is the response type for
+ * Query/DefaultExternalAddresses RPC method
+ */
+export interface QueryDefaultExternalAddressesResponseAmino {
+  /**
+   * List of default addresses, each one represented by the associated chain
+   * link
+   */
+  links: ChainLinkAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryDefaultExternalAddressesResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryDefaultExternalAddressesResponse";
+  value: QueryDefaultExternalAddressesResponseAmino;
 }
 function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
   return {
@@ -188,6 +337,43 @@ export const QueryChainLinksRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryChainLinksRequestAmino): QueryChainLinksRequest {
+    return {
+      user: object.user,
+      chainName: object.chain_name,
+      target: object.target,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryChainLinksRequest): QueryChainLinksRequestAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    obj.chain_name = message.chainName;
+    obj.target = message.target;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryChainLinksRequestAminoMsg): QueryChainLinksRequest {
+    return QueryChainLinksRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryChainLinksRequestProtoMsg
+  ): QueryChainLinksRequest {
+    return QueryChainLinksRequest.decode(message.value);
+  },
+  toProto(message: QueryChainLinksRequest): Uint8Array {
+    return QueryChainLinksRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryChainLinksRequest): QueryChainLinksRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryChainLinksRequest",
+      value: QueryChainLinksRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryChainLinksResponse(): QueryChainLinksResponse {
   return {
@@ -270,6 +456,51 @@ export const QueryChainLinksResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryChainLinksResponseAmino): QueryChainLinksResponse {
+    return {
+      links: Array.isArray(object?.links)
+        ? object.links.map((e: any) => ChainLink.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryChainLinksResponse): QueryChainLinksResponseAmino {
+    const obj: any = {};
+    if (message.links) {
+      obj.links = message.links.map((e) =>
+        e ? ChainLink.toAmino(e) : undefined
+      );
+    } else {
+      obj.links = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryChainLinksResponseAminoMsg
+  ): QueryChainLinksResponse {
+    return QueryChainLinksResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryChainLinksResponseProtoMsg
+  ): QueryChainLinksResponse {
+    return QueryChainLinksResponse.decode(message.value);
+  },
+  toProto(message: QueryChainLinksResponse): Uint8Array {
+    return QueryChainLinksResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryChainLinksResponse
+  ): QueryChainLinksResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryChainLinksResponse",
+      value: QueryChainLinksResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryChainLinkOwnersRequest(): QueryChainLinkOwnersRequest {
   return {
@@ -350,6 +581,49 @@ export const QueryChainLinkOwnersRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryChainLinkOwnersRequestAmino
+  ): QueryChainLinkOwnersRequest {
+    return {
+      chainName: object.chain_name,
+      target: object.target,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryChainLinkOwnersRequest
+  ): QueryChainLinkOwnersRequestAmino {
+    const obj: any = {};
+    obj.chain_name = message.chainName;
+    obj.target = message.target;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryChainLinkOwnersRequestAminoMsg
+  ): QueryChainLinkOwnersRequest {
+    return QueryChainLinkOwnersRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryChainLinkOwnersRequestProtoMsg
+  ): QueryChainLinkOwnersRequest {
+    return QueryChainLinkOwnersRequest.decode(message.value);
+  },
+  toProto(message: QueryChainLinkOwnersRequest): Uint8Array {
+    return QueryChainLinkOwnersRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryChainLinkOwnersRequest
+  ): QueryChainLinkOwnersRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryChainLinkOwnersRequest",
+      value: QueryChainLinkOwnersRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryChainLinkOwnersResponse(): QueryChainLinkOwnersResponse {
@@ -448,6 +722,59 @@ export const QueryChainLinkOwnersResponse = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryChainLinkOwnersResponseAmino
+  ): QueryChainLinkOwnersResponse {
+    return {
+      owners: Array.isArray(object?.owners)
+        ? object.owners.map((e: any) =>
+            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromAmino(e)
+          )
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryChainLinkOwnersResponse
+  ): QueryChainLinkOwnersResponseAmino {
+    const obj: any = {};
+    if (message.owners) {
+      obj.owners = message.owners.map((e) =>
+        e
+          ? QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.toAmino(e)
+          : undefined
+      );
+    } else {
+      obj.owners = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryChainLinkOwnersResponseAminoMsg
+  ): QueryChainLinkOwnersResponse {
+    return QueryChainLinkOwnersResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryChainLinkOwnersResponseProtoMsg
+  ): QueryChainLinkOwnersResponse {
+    return QueryChainLinkOwnersResponse.decode(message.value);
+  },
+  toProto(message: QueryChainLinkOwnersResponse): Uint8Array {
+    return QueryChainLinkOwnersResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryChainLinkOwnersResponse
+  ): QueryChainLinkOwnersResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryChainLinkOwnersResponse",
+      value: QueryChainLinkOwnersResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails(): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
   return {
@@ -525,6 +852,56 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
     return message;
+  },
+  fromAmino(
+    object: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    return {
+      user: object.user,
+      chainName: object.chain_name,
+      target: object.target,
+    };
+  },
+  toAmino(
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    obj.chain_name = message.chainName;
+    obj.target = message.target;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAminoMsg
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    return QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromAmino(
+      object.value
+    );
+  },
+  fromProtoMsg(
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsProtoMsg
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
+    return QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.decode(
+      message.value
+    );
+  },
+  toProto(
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails
+  ): Uint8Array {
+    return QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
+      message
+    ).finish();
+  },
+  toProtoMsg(
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails
+  ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.ChainLinkOwnerDetails",
+      value:
+        QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
+          message
+        ).finish(),
+    };
   },
 };
 function createBaseQueryDefaultExternalAddressesRequest(): QueryDefaultExternalAddressesRequest {
@@ -607,6 +984,49 @@ export const QueryDefaultExternalAddressesRequest = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryDefaultExternalAddressesRequestAmino
+  ): QueryDefaultExternalAddressesRequest {
+    return {
+      owner: object.owner,
+      chainName: object.chain_name,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryDefaultExternalAddressesRequest
+  ): QueryDefaultExternalAddressesRequestAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.chain_name = message.chainName;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryDefaultExternalAddressesRequestAminoMsg
+  ): QueryDefaultExternalAddressesRequest {
+    return QueryDefaultExternalAddressesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryDefaultExternalAddressesRequestProtoMsg
+  ): QueryDefaultExternalAddressesRequest {
+    return QueryDefaultExternalAddressesRequest.decode(message.value);
+  },
+  toProto(message: QueryDefaultExternalAddressesRequest): Uint8Array {
+    return QueryDefaultExternalAddressesRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryDefaultExternalAddressesRequest
+  ): QueryDefaultExternalAddressesRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryDefaultExternalAddressesRequest",
+      value: QueryDefaultExternalAddressesRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryDefaultExternalAddressesResponse(): QueryDefaultExternalAddressesResponse {
   return {
@@ -688,5 +1108,54 @@ export const QueryDefaultExternalAddressesResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryDefaultExternalAddressesResponseAmino
+  ): QueryDefaultExternalAddressesResponse {
+    return {
+      links: Array.isArray(object?.links)
+        ? object.links.map((e: any) => ChainLink.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryDefaultExternalAddressesResponse
+  ): QueryDefaultExternalAddressesResponseAmino {
+    const obj: any = {};
+    if (message.links) {
+      obj.links = message.links.map((e) =>
+        e ? ChainLink.toAmino(e) : undefined
+      );
+    } else {
+      obj.links = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryDefaultExternalAddressesResponseAminoMsg
+  ): QueryDefaultExternalAddressesResponse {
+    return QueryDefaultExternalAddressesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryDefaultExternalAddressesResponseProtoMsg
+  ): QueryDefaultExternalAddressesResponse {
+    return QueryDefaultExternalAddressesResponse.decode(message.value);
+  },
+  toProto(message: QueryDefaultExternalAddressesResponse): Uint8Array {
+    return QueryDefaultExternalAddressesResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryDefaultExternalAddressesResponse
+  ): QueryDefaultExternalAddressesResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryDefaultExternalAddressesResponse",
+      value: QueryDefaultExternalAddressesResponse.encode(message).finish(),
+    };
   },
 };

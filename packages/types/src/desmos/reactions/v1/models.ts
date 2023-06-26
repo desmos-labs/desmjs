@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reactions.v1";
@@ -16,6 +16,27 @@ export interface Reaction {
   /** Author of the reaction */
   author: string;
 }
+export interface ReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.Reaction";
+  value: Uint8Array;
+}
+/** Reaction contains the data of a single post reaction */
+export interface ReactionAmino {
+  /** Id of the subspace inside which the reaction has been put */
+  subspace_id: string;
+  /** Id of the post to which the reaction is associated */
+  post_id: string;
+  /** Id of the reaction within the post */
+  id: number;
+  /** Value of the reaction. */
+  value?: AnyAmino;
+  /** Author of the reaction */
+  author: string;
+}
+export interface ReactionAminoMsg {
+  type: "/desmos.reactions.v1.Reaction";
+  value: ReactionAmino;
+}
 /**
  * RegisteredReactionValue contains the details of a reaction value that
  * references a reaction registered within the subspace
@@ -24,12 +45,43 @@ export interface RegisteredReactionValue {
   /** Id of the registered reaction */
   registeredReactionId: number;
 }
+export interface RegisteredReactionValueProtoMsg {
+  typeUrl: "/desmos.reactions.v1.RegisteredReactionValue";
+  value: Uint8Array;
+}
+/**
+ * RegisteredReactionValue contains the details of a reaction value that
+ * references a reaction registered within the subspace
+ */
+export interface RegisteredReactionValueAmino {
+  /** Id of the registered reaction */
+  registered_reaction_id: number;
+}
+export interface RegisteredReactionValueAminoMsg {
+  type: "/desmos.reactions.v1.RegisteredReactionValue";
+  value: RegisteredReactionValueAmino;
+}
 /**
  * FreeTextValue contains the details of a reaction value that
  * is made of free text
  */
 export interface FreeTextValue {
   text: string;
+}
+export interface FreeTextValueProtoMsg {
+  typeUrl: "/desmos.reactions.v1.FreeTextValue";
+  value: Uint8Array;
+}
+/**
+ * FreeTextValue contains the details of a reaction value that
+ * is made of free text
+ */
+export interface FreeTextValueAmino {
+  text: string;
+}
+export interface FreeTextValueAminoMsg {
+  type: "/desmos.reactions.v1.FreeTextValue";
+  value: FreeTextValueAmino;
 }
 /**
  * RegisteredReaction contains the details of a registered reaction within a
@@ -45,6 +97,28 @@ export interface RegisteredReaction {
   /** Value that should be displayed when using this reaction */
   displayValue: string;
 }
+export interface RegisteredReactionProtoMsg {
+  typeUrl: "/desmos.reactions.v1.RegisteredReaction";
+  value: Uint8Array;
+}
+/**
+ * RegisteredReaction contains the details of a registered reaction within a
+ * subspace
+ */
+export interface RegisteredReactionAmino {
+  /** Id of the subspace for which this reaction has been registered */
+  subspace_id: string;
+  /** Id of the registered reaction */
+  id: number;
+  /** Unique shorthand code associated to this reaction */
+  shorthand_code: string;
+  /** Value that should be displayed when using this reaction */
+  display_value: string;
+}
+export interface RegisteredReactionAminoMsg {
+  type: "/desmos.reactions.v1.RegisteredReaction";
+  value: RegisteredReactionAmino;
+}
 /**
  * SubspaceReactionsParams contains the params related to a single subspace
  * reactions
@@ -56,6 +130,26 @@ export interface SubspaceReactionsParams {
   registeredReaction?: RegisteredReactionValueParams;
   /** Params related to FreeTextValue reactions */
   freeText?: FreeTextValueParams;
+}
+export interface SubspaceReactionsParamsProtoMsg {
+  typeUrl: "/desmos.reactions.v1.SubspaceReactionsParams";
+  value: Uint8Array;
+}
+/**
+ * SubspaceReactionsParams contains the params related to a single subspace
+ * reactions
+ */
+export interface SubspaceReactionsParamsAmino {
+  /** Id of the subspace for which these params are valid */
+  subspace_id: string;
+  /** Params related to RegisteredReactionValue reactions */
+  registered_reaction?: RegisteredReactionValueParamsAmino;
+  /** Params related to FreeTextValue reactions */
+  free_text?: FreeTextValueParamsAmino;
+}
+export interface SubspaceReactionsParamsAminoMsg {
+  type: "/desmos.reactions.v1.SubspaceReactionsParams";
+  value: SubspaceReactionsParamsAmino;
 }
 /** FreeTextValueParams contains the params for FreeTextValue based reactions */
 export interface FreeTextValueParams {
@@ -69,6 +163,26 @@ export interface FreeTextValueParams {
    */
   regEx: string;
 }
+export interface FreeTextValueParamsProtoMsg {
+  typeUrl: "/desmos.reactions.v1.FreeTextValueParams";
+  value: Uint8Array;
+}
+/** FreeTextValueParams contains the params for FreeTextValue based reactions */
+export interface FreeTextValueParamsAmino {
+  /** Whether FreeTextValue reactions should be enabled */
+  enabled: boolean;
+  /** The max length that FreeTextValue reactions should have */
+  max_length: number;
+  /**
+   * RegEx that each FreeTextValue should respect.
+   * This is useful to limit what characters can be used as a reaction.
+   */
+  reg_ex: string;
+}
+export interface FreeTextValueParamsAminoMsg {
+  type: "/desmos.reactions.v1.FreeTextValueParams";
+  value: FreeTextValueParamsAmino;
+}
 /**
  * RegisteredReactionValueParams contains the params for RegisteredReactionValue
  * based reactions
@@ -76,6 +190,22 @@ export interface FreeTextValueParams {
 export interface RegisteredReactionValueParams {
   /** Whether RegisteredReactionValue reactions should be enabled */
   enabled: boolean;
+}
+export interface RegisteredReactionValueParamsProtoMsg {
+  typeUrl: "/desmos.reactions.v1.RegisteredReactionValueParams";
+  value: Uint8Array;
+}
+/**
+ * RegisteredReactionValueParams contains the params for RegisteredReactionValue
+ * based reactions
+ */
+export interface RegisteredReactionValueParamsAmino {
+  /** Whether RegisteredReactionValue reactions should be enabled */
+  enabled: boolean;
+}
+export interface RegisteredReactionValueParamsAminoMsg {
+  type: "/desmos.reactions.v1.RegisteredReactionValueParams";
+  value: RegisteredReactionValueParamsAmino;
 }
 function createBaseReaction(): Reaction {
   return {
@@ -178,6 +308,41 @@ export const Reaction = {
     message.author = object.author ?? "";
     return message;
   },
+  fromAmino(object: ReactionAmino): Reaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      id: object.id,
+      value: object?.value ? Any.fromAmino(object.value) : undefined,
+      author: object.author,
+    };
+  },
+  toAmino(message: Reaction): ReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.id = message.id;
+    obj.value = message.value ? Any.toAmino(message.value) : undefined;
+    obj.author = message.author;
+    return obj;
+  },
+  fromAminoMsg(object: ReactionAminoMsg): Reaction {
+    return Reaction.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ReactionProtoMsg): Reaction {
+    return Reaction.decode(message.value);
+  },
+  toProto(message: Reaction): Uint8Array {
+    return Reaction.encode(message).finish();
+  },
+  toProtoMsg(message: Reaction): ReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.Reaction",
+      value: Reaction.encode(message).finish(),
+    };
+  },
 };
 function createBaseRegisteredReactionValue(): RegisteredReactionValue {
   return {
@@ -234,6 +399,37 @@ export const RegisteredReactionValue = {
     message.registeredReactionId = object.registeredReactionId ?? 0;
     return message;
   },
+  fromAmino(object: RegisteredReactionValueAmino): RegisteredReactionValue {
+    return {
+      registeredReactionId: object.registered_reaction_id,
+    };
+  },
+  toAmino(message: RegisteredReactionValue): RegisteredReactionValueAmino {
+    const obj: any = {};
+    obj.registered_reaction_id = message.registeredReactionId;
+    return obj;
+  },
+  fromAminoMsg(
+    object: RegisteredReactionValueAminoMsg
+  ): RegisteredReactionValue {
+    return RegisteredReactionValue.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: RegisteredReactionValueProtoMsg
+  ): RegisteredReactionValue {
+    return RegisteredReactionValue.decode(message.value);
+  },
+  toProto(message: RegisteredReactionValue): Uint8Array {
+    return RegisteredReactionValue.encode(message).finish();
+  },
+  toProtoMsg(
+    message: RegisteredReactionValue
+  ): RegisteredReactionValueProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.RegisteredReactionValue",
+      value: RegisteredReactionValue.encode(message).finish(),
+    };
+  },
 };
 function createBaseFreeTextValue(): FreeTextValue {
   return {
@@ -283,6 +479,31 @@ export const FreeTextValue = {
     const message = createBaseFreeTextValue();
     message.text = object.text ?? "";
     return message;
+  },
+  fromAmino(object: FreeTextValueAmino): FreeTextValue {
+    return {
+      text: object.text,
+    };
+  },
+  toAmino(message: FreeTextValue): FreeTextValueAmino {
+    const obj: any = {};
+    obj.text = message.text;
+    return obj;
+  },
+  fromAminoMsg(object: FreeTextValueAminoMsg): FreeTextValue {
+    return FreeTextValue.fromAmino(object.value);
+  },
+  fromProtoMsg(message: FreeTextValueProtoMsg): FreeTextValue {
+    return FreeTextValue.decode(message.value);
+  },
+  toProto(message: FreeTextValue): Uint8Array {
+    return FreeTextValue.encode(message).finish();
+  },
+  toProtoMsg(message: FreeTextValue): FreeTextValueProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.FreeTextValue",
+      value: FreeTextValue.encode(message).finish(),
+    };
   },
 };
 function createBaseRegisteredReaction(): RegisteredReaction {
@@ -375,6 +596,39 @@ export const RegisteredReaction = {
     message.shorthandCode = object.shorthandCode ?? "";
     message.displayValue = object.displayValue ?? "";
     return message;
+  },
+  fromAmino(object: RegisteredReactionAmino): RegisteredReaction {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      id: object.id,
+      shorthandCode: object.shorthand_code,
+      displayValue: object.display_value,
+    };
+  },
+  toAmino(message: RegisteredReaction): RegisteredReactionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.id = message.id;
+    obj.shorthand_code = message.shorthandCode;
+    obj.display_value = message.displayValue;
+    return obj;
+  },
+  fromAminoMsg(object: RegisteredReactionAminoMsg): RegisteredReaction {
+    return RegisteredReaction.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RegisteredReactionProtoMsg): RegisteredReaction {
+    return RegisteredReaction.decode(message.value);
+  },
+  toProto(message: RegisteredReaction): Uint8Array {
+    return RegisteredReaction.encode(message).finish();
+  },
+  toProtoMsg(message: RegisteredReaction): RegisteredReactionProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.RegisteredReaction",
+      value: RegisteredReaction.encode(message).finish(),
+    };
   },
 };
 function createBaseSubspaceReactionsParams(): SubspaceReactionsParams {
@@ -484,6 +738,51 @@ export const SubspaceReactionsParams = {
         : undefined;
     return message;
   },
+  fromAmino(object: SubspaceReactionsParamsAmino): SubspaceReactionsParams {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      registeredReaction: object?.registered_reaction
+        ? RegisteredReactionValueParams.fromAmino(object.registered_reaction)
+        : undefined,
+      freeText: object?.free_text
+        ? FreeTextValueParams.fromAmino(object.free_text)
+        : undefined,
+    };
+  },
+  toAmino(message: SubspaceReactionsParams): SubspaceReactionsParamsAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.registered_reaction = message.registeredReaction
+      ? RegisteredReactionValueParams.toAmino(message.registeredReaction)
+      : undefined;
+    obj.free_text = message.freeText
+      ? FreeTextValueParams.toAmino(message.freeText)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: SubspaceReactionsParamsAminoMsg
+  ): SubspaceReactionsParams {
+    return SubspaceReactionsParams.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: SubspaceReactionsParamsProtoMsg
+  ): SubspaceReactionsParams {
+    return SubspaceReactionsParams.decode(message.value);
+  },
+  toProto(message: SubspaceReactionsParams): Uint8Array {
+    return SubspaceReactionsParams.encode(message).finish();
+  },
+  toProtoMsg(
+    message: SubspaceReactionsParams
+  ): SubspaceReactionsParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.SubspaceReactionsParams",
+      value: SubspaceReactionsParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseFreeTextValueParams(): FreeTextValueParams {
   return {
@@ -555,6 +854,35 @@ export const FreeTextValueParams = {
     message.regEx = object.regEx ?? "";
     return message;
   },
+  fromAmino(object: FreeTextValueParamsAmino): FreeTextValueParams {
+    return {
+      enabled: object.enabled,
+      maxLength: object.max_length,
+      regEx: object.reg_ex,
+    };
+  },
+  toAmino(message: FreeTextValueParams): FreeTextValueParamsAmino {
+    const obj: any = {};
+    obj.enabled = message.enabled;
+    obj.max_length = message.maxLength;
+    obj.reg_ex = message.regEx;
+    return obj;
+  },
+  fromAminoMsg(object: FreeTextValueParamsAminoMsg): FreeTextValueParams {
+    return FreeTextValueParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: FreeTextValueParamsProtoMsg): FreeTextValueParams {
+    return FreeTextValueParams.decode(message.value);
+  },
+  toProto(message: FreeTextValueParams): Uint8Array {
+    return FreeTextValueParams.encode(message).finish();
+  },
+  toProtoMsg(message: FreeTextValueParams): FreeTextValueParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.FreeTextValueParams",
+      value: FreeTextValueParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseRegisteredReactionValueParams(): RegisteredReactionValueParams {
   return {
@@ -607,5 +935,40 @@ export const RegisteredReactionValueParams = {
     const message = createBaseRegisteredReactionValueParams();
     message.enabled = object.enabled ?? false;
     return message;
+  },
+  fromAmino(
+    object: RegisteredReactionValueParamsAmino
+  ): RegisteredReactionValueParams {
+    return {
+      enabled: object.enabled,
+    };
+  },
+  toAmino(
+    message: RegisteredReactionValueParams
+  ): RegisteredReactionValueParamsAmino {
+    const obj: any = {};
+    obj.enabled = message.enabled;
+    return obj;
+  },
+  fromAminoMsg(
+    object: RegisteredReactionValueParamsAminoMsg
+  ): RegisteredReactionValueParams {
+    return RegisteredReactionValueParams.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: RegisteredReactionValueParamsProtoMsg
+  ): RegisteredReactionValueParams {
+    return RegisteredReactionValueParams.decode(message.value);
+  },
+  toProto(message: RegisteredReactionValueParams): Uint8Array {
+    return RegisteredReactionValueParams.encode(message).finish();
+  },
+  toProtoMsg(
+    message: RegisteredReactionValueParams
+  ): RegisteredReactionValueParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.RegisteredReactionValueParams",
+      value: RegisteredReactionValueParams.encode(message).finish(),
+    };
   },
 };

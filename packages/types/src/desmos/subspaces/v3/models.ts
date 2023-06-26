@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import {
   Long,
   isSet,
@@ -30,6 +30,34 @@ export interface Subspace {
   /** the creation time of the subspace */
   creationTime?: Timestamp;
 }
+export interface SubspaceProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.Subspace";
+  value: Uint8Array;
+}
+/** Subspace contains all the data of a Desmos subspace */
+export interface SubspaceAmino {
+  /** Unique id that identifies the subspace */
+  id: string;
+  /** Human-readable name of the subspace */
+  name: string;
+  /** Optional description of this subspace */
+  description: string;
+  /**
+   * Represents the account that is associated with the subspace and
+   * should be used to connect external applications to verify this subspace
+   */
+  treasury: string;
+  /** Address of the user that owns the subspace */
+  owner: string;
+  /** Address of the subspace creator */
+  creator: string;
+  /** the creation time of the subspace */
+  creation_time?: TimestampAmino;
+}
+export interface SubspaceAminoMsg {
+  type: "/desmos.subspaces.v3.Subspace";
+  value: SubspaceAmino;
+}
 /** Section contains the data of a single subspace section */
 export interface Section {
   /** Id of the subspace inside which the section exists */
@@ -42,6 +70,27 @@ export interface Section {
   name: string;
   /** (optional) Description of the section */
   description: string;
+}
+export interface SectionProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.Section";
+  value: Uint8Array;
+}
+/** Section contains the data of a single subspace section */
+export interface SectionAmino {
+  /** Id of the subspace inside which the section exists */
+  subspace_id: string;
+  /** Unique id of the section within the subspace */
+  id: number;
+  /** (optional) Id of the parent section */
+  parent_id: number;
+  /** Name of the section within the subspace */
+  name: string;
+  /** (optional) Description of the section */
+  description: string;
+}
+export interface SectionAminoMsg {
+  type: "/desmos.subspaces.v3.Section";
+  value: SectionAmino;
 }
 /** UserGroup represents a group of users */
 export interface UserGroup {
@@ -58,12 +107,50 @@ export interface UserGroup {
   /** Permissions that will be granted to all the users part of this group */
   permissions: string[];
 }
+export interface UserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.UserGroup";
+  value: Uint8Array;
+}
+/** UserGroup represents a group of users */
+export interface UserGroupAmino {
+  /** ID of the subspace inside which this group exists */
+  subspace_id: string;
+  /** (optional) Id of the section inside which this group is valid */
+  section_id: number;
+  /** Unique id that identifies the group */
+  id: number;
+  /** Human-readable name of the user group */
+  name: string;
+  /** Optional description of this group */
+  description: string;
+  /** Permissions that will be granted to all the users part of this group */
+  permissions: string[];
+}
+export interface UserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.UserGroup";
+  value: UserGroupAmino;
+}
 /** UserPermission represents a single Access Control List entry */
 export interface UserPermission {
   subspaceId: Long;
   sectionId: number;
   user: string;
   permissions: string[];
+}
+export interface UserPermissionProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.UserPermission";
+  value: Uint8Array;
+}
+/** UserPermission represents a single Access Control List entry */
+export interface UserPermissionAmino {
+  subspace_id: string;
+  section_id: number;
+  user: string;
+  permissions: string[];
+}
+export interface UserPermissionAminoMsg {
+  type: "/desmos.subspaces.v3.UserPermission";
+  value: UserPermissionAmino;
 }
 function createBaseSubspace(): Subspace {
   return {
@@ -183,6 +270,47 @@ export const Subspace = {
         : undefined;
     return message;
   },
+  fromAmino(object: SubspaceAmino): Subspace {
+    return {
+      id: Long.fromString(object.id),
+      name: object.name,
+      description: object.description,
+      treasury: object.treasury,
+      owner: object.owner,
+      creator: object.creator,
+      creationTime: object?.creation_time
+        ? Timestamp.fromAmino(object.creation_time)
+        : undefined,
+    };
+  },
+  toAmino(message: Subspace): SubspaceAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.treasury = message.treasury;
+    obj.owner = message.owner;
+    obj.creator = message.creator;
+    obj.creation_time = message.creationTime
+      ? Timestamp.toAmino(message.creationTime)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SubspaceAminoMsg): Subspace {
+    return Subspace.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SubspaceProtoMsg): Subspace {
+    return Subspace.decode(message.value);
+  },
+  toProto(message: Subspace): Uint8Array {
+    return Subspace.encode(message).finish();
+  },
+  toProtoMsg(message: Subspace): SubspaceProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.Subspace",
+      value: Subspace.encode(message).finish(),
+    };
+  },
 };
 function createBaseSection(): Section {
   return {
@@ -278,6 +406,41 @@ export const Section = {
     message.name = object.name ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: SectionAmino): Section {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      id: object.id,
+      parentId: object.parent_id,
+      name: object.name,
+      description: object.description,
+    };
+  },
+  toAmino(message: Section): SectionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.id = message.id;
+    obj.parent_id = message.parentId;
+    obj.name = message.name;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: SectionAminoMsg): Section {
+    return Section.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SectionProtoMsg): Section {
+    return Section.decode(message.value);
+  },
+  toProto(message: Section): Uint8Array {
+    return Section.encode(message).finish();
+  },
+  toProtoMsg(message: Section): SectionProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.Section",
+      value: Section.encode(message).finish(),
+    };
   },
 };
 function createBaseUserGroup(): UserGroup {
@@ -393,6 +556,49 @@ export const UserGroup = {
     message.permissions = object.permissions?.map((e) => e) || [];
     return message;
   },
+  fromAmino(object: UserGroupAmino): UserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      id: object.id,
+      name: object.name,
+      description: object.description,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => e)
+        : [],
+    };
+  },
+  toAmino(message: UserGroup): UserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.description = message.description;
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: UserGroupAminoMsg): UserGroup {
+    return UserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserGroupProtoMsg): UserGroup {
+    return UserGroup.decode(message.value);
+  },
+  toProto(message: UserGroup): Uint8Array {
+    return UserGroup.encode(message).finish();
+  },
+  toProtoMsg(message: UserGroup): UserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.UserGroup",
+      value: UserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseUserPermission(): UserPermission {
   return {
@@ -485,5 +691,44 @@ export const UserPermission = {
     message.user = object.user ?? "";
     message.permissions = object.permissions?.map((e) => e) || [];
     return message;
+  },
+  fromAmino(object: UserPermissionAmino): UserPermission {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      user: object.user,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => e)
+        : [],
+    };
+  },
+  toAmino(message: UserPermission): UserPermissionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.user = message.user;
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: UserPermissionAminoMsg): UserPermission {
+    return UserPermission.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserPermissionProtoMsg): UserPermission {
+    return UserPermission.decode(message.value);
+  },
+  toProto(message: UserPermission): Uint8Array {
+    return UserPermission.encode(message).finish();
+  },
+  toProtoMsg(message: UserPermission): UserPermissionProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.UserPermission",
+      value: UserPermission.encode(message).finish(),
+    };
   },
 };

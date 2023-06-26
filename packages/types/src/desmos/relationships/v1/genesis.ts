@@ -1,5 +1,10 @@
 /* eslint-disable */
-import { Relationship, UserBlock } from "./models";
+import {
+  Relationship,
+  RelationshipAmino,
+  UserBlock,
+  UserBlockAmino,
+} from "./models";
 import * as _m0 from "protobufjs/minimal";
 import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.relationships.v1";
@@ -7,6 +12,19 @@ export const protobufPackage = "desmos.relationships.v1";
 export interface GenesisState {
   relationships: Relationship[];
   blocks: UserBlock[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/desmos.relationships.v1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the profiles module's genesis state. */
+export interface GenesisStateAmino {
+  relationships: RelationshipAmino[];
+  blocks: UserBlockAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/desmos.relationships.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -85,5 +103,48 @@ export const GenesisState = {
       object.relationships?.map((e) => Relationship.fromPartial(e)) || [];
     message.blocks = object.blocks?.map((e) => UserBlock.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      relationships: Array.isArray(object?.relationships)
+        ? object.relationships.map((e: any) => Relationship.fromAmino(e))
+        : [],
+      blocks: Array.isArray(object?.blocks)
+        ? object.blocks.map((e: any) => UserBlock.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.relationships) {
+      obj.relationships = message.relationships.map((e) =>
+        e ? Relationship.toAmino(e) : undefined
+      );
+    } else {
+      obj.relationships = [];
+    }
+    if (message.blocks) {
+      obj.blocks = message.blocks.map((e) =>
+        e ? UserBlock.toAmino(e) : undefined
+      );
+    } else {
+      obj.blocks = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.GenesisState",
+      value: GenesisState.encode(message).finish(),
+    };
   },
 };

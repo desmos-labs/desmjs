@@ -1,14 +1,17 @@
 /* eslint-disable */
 import {
   Entities,
+  EntitiesAmino,
   ReplySetting,
   PostReference,
+  PostReferenceAmino,
   Params,
+  ParamsAmino,
   replySettingFromJSON,
   replySettingToJSON,
 } from "./models";
-import { Any } from "../../../google/protobuf/any";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import {
   Long,
   isSet,
@@ -44,12 +47,60 @@ export interface MsgCreatePost {
   /** A list this posts references (either as a reply, repost or quote) */
   referencedPosts: PostReference[];
 }
+export interface MsgCreatePostProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgCreatePost";
+  value: Uint8Array;
+}
+/** MsgCreatePost represents the message to be used to create a post. */
+export interface MsgCreatePostAmino {
+  /** Id of the subspace inside which the post must be created */
+  subspace_id: string;
+  /** Id of the section inside which the post must be created */
+  section_id: number;
+  /** (optional) External id for this post */
+  external_id: string;
+  /** (optional) Text of the post */
+  text: string;
+  /** (optional) Entities connected to this post */
+  entities?: EntitiesAmino;
+  /** Tags connected to this post */
+  tags: string[];
+  /** Attachments of the post */
+  attachments: AnyAmino[];
+  /** Author of the post */
+  author: string;
+  /** (optional) Id of the original post of the conversation */
+  conversation_id: string;
+  /** Reply settings of this post */
+  reply_settings: ReplySetting;
+  /** A list this posts references (either as a reply, repost or quote) */
+  referenced_posts: PostReferenceAmino[];
+}
+export interface MsgCreatePostAminoMsg {
+  type: "/desmos.posts.v3.MsgCreatePost";
+  value: MsgCreatePostAmino;
+}
 /** MsgCreatePostResponse defines the Msg/CreatePost response type. */
 export interface MsgCreatePostResponse {
   /** Id of the newly created post */
   postId: Long;
   /** Creation date of the post */
   creationDate?: Timestamp;
+}
+export interface MsgCreatePostResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgCreatePostResponse";
+  value: Uint8Array;
+}
+/** MsgCreatePostResponse defines the Msg/CreatePost response type. */
+export interface MsgCreatePostResponseAmino {
+  /** Id of the newly created post */
+  post_id: string;
+  /** Creation date of the post */
+  creation_date?: TimestampAmino;
+}
+export interface MsgCreatePostResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgCreatePostResponse";
+  value: MsgCreatePostResponseAmino;
 }
 /** MsgEditPost represents the message to be used to edit a post. */
 export interface MsgEditPost {
@@ -75,10 +126,55 @@ export interface MsgEditPost {
   /** Editor of the post */
   editor: string;
 }
+export interface MsgEditPostProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgEditPost";
+  value: Uint8Array;
+}
+/** MsgEditPost represents the message to be used to edit a post. */
+export interface MsgEditPostAmino {
+  /** Id of the subspace inside which the post is */
+  subspace_id: string;
+  /** Id of the post to edit */
+  post_id: string;
+  /**
+   * New text of the post. If set to [do-not-modify] it will change the current
+   * post's text.
+   */
+  text: string;
+  /**
+   * New entities connected to this post. These will always replace the current
+   * post's entities
+   */
+  entities?: EntitiesAmino;
+  /**
+   * New tags connected to this post. These will always replace the current
+   * post's tags
+   */
+  tags: string[];
+  /** Editor of the post */
+  editor: string;
+}
+export interface MsgEditPostAminoMsg {
+  type: "/desmos.posts.v3.MsgEditPost";
+  value: MsgEditPostAmino;
+}
 /** MsgCreatePostResponse defines the Msg/EditPost response type. */
 export interface MsgEditPostResponse {
   /** Edit date of the post */
   editDate?: Timestamp;
+}
+export interface MsgEditPostResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgEditPostResponse";
+  value: Uint8Array;
+}
+/** MsgCreatePostResponse defines the Msg/EditPost response type. */
+export interface MsgEditPostResponseAmino {
+  /** Edit date of the post */
+  edit_date?: TimestampAmino;
+}
+export interface MsgEditPostResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgEditPostResponse";
+  value: MsgEditPostResponseAmino;
 }
 /** MsgDeletePost represents the message used when deleting a post. */
 export interface MsgDeletePost {
@@ -89,8 +185,35 @@ export interface MsgDeletePost {
   /** User that is deleting the post */
   signer: string;
 }
+export interface MsgDeletePostProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgDeletePost";
+  value: Uint8Array;
+}
+/** MsgDeletePost represents the message used when deleting a post. */
+export interface MsgDeletePostAmino {
+  /** Id of the subspace containing the post */
+  subspace_id: string;
+  /** Id of the post to be deleted */
+  post_id: string;
+  /** User that is deleting the post */
+  signer: string;
+}
+export interface MsgDeletePostAminoMsg {
+  type: "/desmos.posts.v3.MsgDeletePost";
+  value: MsgDeletePostAmino;
+}
 /** MsgDeletePostResponse represents the Msg/DeletePost response type */
 export interface MsgDeletePostResponse {}
+export interface MsgDeletePostResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgDeletePostResponse";
+  value: Uint8Array;
+}
+/** MsgDeletePostResponse represents the Msg/DeletePost response type */
+export interface MsgDeletePostResponseAmino {}
+export interface MsgDeletePostResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgDeletePostResponse";
+  value: MsgDeletePostResponseAmino;
+}
 /**
  * MsgAddPostAttachment represents the message that should be
  * used when adding an attachment to post
@@ -105,12 +228,49 @@ export interface MsgAddPostAttachment {
   /** Editor of the post */
   editor: string;
 }
+export interface MsgAddPostAttachmentProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgAddPostAttachment";
+  value: Uint8Array;
+}
+/**
+ * MsgAddPostAttachment represents the message that should be
+ * used when adding an attachment to post
+ */
+export interface MsgAddPostAttachmentAmino {
+  /** Id of the subspace containing the post */
+  subspace_id: string;
+  /** Id of the post to which to add the attachment */
+  post_id: string;
+  /** Content of the attachment */
+  content?: AnyAmino;
+  /** Editor of the post */
+  editor: string;
+}
+export interface MsgAddPostAttachmentAminoMsg {
+  type: "/desmos.posts.v3.MsgAddPostAttachment";
+  value: MsgAddPostAttachmentAmino;
+}
 /** MsgAddPostAttachmentResponse defines the Msg/AddPostAttachment response type. */
 export interface MsgAddPostAttachmentResponse {
   /** New id of the uploaded attachment */
   attachmentId: number;
   /** Edit date of the post */
   editDate?: Timestamp;
+}
+export interface MsgAddPostAttachmentResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgAddPostAttachmentResponse";
+  value: Uint8Array;
+}
+/** MsgAddPostAttachmentResponse defines the Msg/AddPostAttachment response type. */
+export interface MsgAddPostAttachmentResponseAmino {
+  /** New id of the uploaded attachment */
+  attachment_id: number;
+  /** Edit date of the post */
+  edit_date?: TimestampAmino;
+}
+export interface MsgAddPostAttachmentResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgAddPostAttachmentResponse";
+  value: MsgAddPostAttachmentResponseAmino;
 }
 /**
  * MsgRemovePostAttachment represents the message to be used when
@@ -126,6 +286,28 @@ export interface MsgRemovePostAttachment {
   /** User that is removing the attachment */
   editor: string;
 }
+export interface MsgRemovePostAttachmentProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgRemovePostAttachment";
+  value: Uint8Array;
+}
+/**
+ * MsgRemovePostAttachment represents the message to be used when
+ * removing an attachment from a post
+ */
+export interface MsgRemovePostAttachmentAmino {
+  /** Id of the subspace containing the post */
+  subspace_id: string;
+  /** Id of the post from which to remove the attachment */
+  post_id: string;
+  /** Id of the attachment to be removed */
+  attachment_id: number;
+  /** User that is removing the attachment */
+  editor: string;
+}
+export interface MsgRemovePostAttachmentAminoMsg {
+  type: "/desmos.posts.v3.MsgRemovePostAttachment";
+  value: MsgRemovePostAttachmentAmino;
+}
 /**
  * MsgRemovePostAttachmentResponse defines the
  * Msg/RemovePostAttachment response type.
@@ -133,6 +315,22 @@ export interface MsgRemovePostAttachment {
 export interface MsgRemovePostAttachmentResponse {
   /** Edit date of the post */
   editDate?: Timestamp;
+}
+export interface MsgRemovePostAttachmentResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgRemovePostAttachmentResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRemovePostAttachmentResponse defines the
+ * Msg/RemovePostAttachment response type.
+ */
+export interface MsgRemovePostAttachmentResponseAmino {
+  /** Edit date of the post */
+  edit_date?: TimestampAmino;
+}
+export interface MsgRemovePostAttachmentResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgRemovePostAttachmentResponse";
+  value: MsgRemovePostAttachmentResponseAmino;
 }
 /** MsgAnswerPoll represents the message used to answer a poll */
 export interface MsgAnswerPoll {
@@ -147,8 +345,39 @@ export interface MsgAnswerPoll {
   /** Address of the user answering the poll */
   signer: string;
 }
+export interface MsgAnswerPollProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgAnswerPoll";
+  value: Uint8Array;
+}
+/** MsgAnswerPoll represents the message used to answer a poll */
+export interface MsgAnswerPollAmino {
+  /** Id of the subspace containing the post */
+  subspace_id: string;
+  /** Id of the post that contains the poll to be answered */
+  post_id: string;
+  /** Id of the poll to be answered */
+  poll_id: number;
+  /** Indexes of the answer inside the ProvidedAnswers array */
+  answers_indexes: number[];
+  /** Address of the user answering the poll */
+  signer: string;
+}
+export interface MsgAnswerPollAminoMsg {
+  type: "/desmos.posts.v3.MsgAnswerPoll";
+  value: MsgAnswerPollAmino;
+}
 /** MsgAnswerPollResponse represents the MSg/AnswerPoll response type */
 export interface MsgAnswerPollResponse {}
+export interface MsgAnswerPollResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgAnswerPollResponse";
+  value: Uint8Array;
+}
+/** MsgAnswerPollResponse represents the MSg/AnswerPoll response type */
+export interface MsgAnswerPollResponseAmino {}
+export interface MsgAnswerPollResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgAnswerPollResponse";
+  value: MsgAnswerPollResponseAmino;
+}
 /**
  * MsgUpdateParams is the Msg/UpdateParams request type.
  *
@@ -167,6 +396,32 @@ export interface MsgUpdateParams {
    */
   params?: Params;
 }
+export interface MsgUpdateParamsProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgUpdateParams";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateParams is the Msg/UpdateParams request type.
+ *
+ * Since: Desmos 5.0.0
+ */
+export interface MsgUpdateParamsAmino {
+  /**
+   * authority is the address that controls the module (defaults to x/gov unless
+   * overwritten).
+   */
+  authority: string;
+  /**
+   * params defines the parameters to update.
+   *
+   * NOTE: All parameters must be supplied.
+   */
+  params?: ParamsAmino;
+}
+export interface MsgUpdateParamsAminoMsg {
+  type: "/desmos.posts.v3.MsgUpdateParams";
+  value: MsgUpdateParamsAmino;
+}
 /**
  * MsgUpdateParamsResponse defines the response structure for executing a
  * MsgUpdateParams message.
@@ -174,6 +429,21 @@ export interface MsgUpdateParams {
  * Since: Desmos 5.0.0
  */
 export interface MsgUpdateParamsResponse {}
+export interface MsgUpdateParamsResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgUpdateParamsResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateParamsResponse defines the response structure for executing a
+ * MsgUpdateParams message.
+ *
+ * Since: Desmos 5.0.0
+ */
+export interface MsgUpdateParamsResponseAmino {}
+export interface MsgUpdateParamsResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgUpdateParamsResponse";
+  value: MsgUpdateParamsResponseAmino;
+}
 function createBaseMsgCreatePost(): MsgCreatePost {
   return {
     subspaceId: Long.UZERO,
@@ -373,6 +643,81 @@ export const MsgCreatePost = {
       object.referencedPosts?.map((e) => PostReference.fromPartial(e)) || [];
     return message;
   },
+  fromAmino(object: MsgCreatePostAmino): MsgCreatePost {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      externalId: object.external_id,
+      text: object.text,
+      entities: object?.entities
+        ? Entities.fromAmino(object.entities)
+        : undefined,
+      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => e) : [],
+      attachments: Array.isArray(object?.attachments)
+        ? object.attachments.map((e: any) => Any.fromAmino(e))
+        : [],
+      author: object.author,
+      conversationId: Long.fromString(object.conversation_id),
+      replySettings: isSet(object.reply_settings)
+        ? replySettingFromJSON(object.reply_settings)
+        : 0,
+      referencedPosts: Array.isArray(object?.referenced_posts)
+        ? object.referenced_posts.map((e: any) => PostReference.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: MsgCreatePost): MsgCreatePostAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.external_id = message.externalId;
+    obj.text = message.text;
+    obj.entities = message.entities
+      ? Entities.toAmino(message.entities)
+      : undefined;
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
+    if (message.attachments) {
+      obj.attachments = message.attachments.map((e) =>
+        e ? Any.toAmino(e) : undefined
+      );
+    } else {
+      obj.attachments = [];
+    }
+    obj.author = message.author;
+    obj.conversation_id = message.conversationId
+      ? message.conversationId.toString()
+      : undefined;
+    obj.reply_settings = message.replySettings;
+    if (message.referencedPosts) {
+      obj.referenced_posts = message.referencedPosts.map((e) =>
+        e ? PostReference.toAmino(e) : undefined
+      );
+    } else {
+      obj.referenced_posts = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreatePostAminoMsg): MsgCreatePost {
+    return MsgCreatePost.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreatePostProtoMsg): MsgCreatePost {
+    return MsgCreatePost.decode(message.value);
+  },
+  toProto(message: MsgCreatePost): Uint8Array {
+    return MsgCreatePost.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreatePost): MsgCreatePostProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgCreatePost",
+      value: MsgCreatePost.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgCreatePostResponse(): MsgCreatePostResponse {
   return {
@@ -445,6 +790,37 @@ export const MsgCreatePostResponse = {
         ? Timestamp.fromPartial(object.creationDate)
         : undefined;
     return message;
+  },
+  fromAmino(object: MsgCreatePostResponseAmino): MsgCreatePostResponse {
+    return {
+      postId: Long.fromString(object.post_id),
+      creationDate: object?.creation_date
+        ? Timestamp.fromAmino(object.creation_date)
+        : undefined,
+    };
+  },
+  toAmino(message: MsgCreatePostResponse): MsgCreatePostResponseAmino {
+    const obj: any = {};
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.creation_date = message.creationDate
+      ? Timestamp.toAmino(message.creationDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreatePostResponseAminoMsg): MsgCreatePostResponse {
+    return MsgCreatePostResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreatePostResponseProtoMsg): MsgCreatePostResponse {
+    return MsgCreatePostResponse.decode(message.value);
+  },
+  toProto(message: MsgCreatePostResponse): Uint8Array {
+    return MsgCreatePostResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreatePostResponse): MsgCreatePostResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgCreatePostResponse",
+      value: MsgCreatePostResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgEditPost(): MsgEditPost {
@@ -570,6 +946,51 @@ export const MsgEditPost = {
     message.editor = object.editor ?? "";
     return message;
   },
+  fromAmino(object: MsgEditPostAmino): MsgEditPost {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      text: object.text,
+      entities: object?.entities
+        ? Entities.fromAmino(object.entities)
+        : undefined,
+      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => e) : [],
+      editor: object.editor,
+    };
+  },
+  toAmino(message: MsgEditPost): MsgEditPostAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.text = message.text;
+    obj.entities = message.entities
+      ? Entities.toAmino(message.entities)
+      : undefined;
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
+    obj.editor = message.editor;
+    return obj;
+  },
+  fromAminoMsg(object: MsgEditPostAminoMsg): MsgEditPost {
+    return MsgEditPost.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgEditPostProtoMsg): MsgEditPost {
+    return MsgEditPost.decode(message.value);
+  },
+  toProto(message: MsgEditPost): Uint8Array {
+    return MsgEditPost.encode(message).finish();
+  },
+  toProtoMsg(message: MsgEditPost): MsgEditPostProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgEditPost",
+      value: MsgEditPost.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgEditPostResponse(): MsgEditPostResponse {
   return {
@@ -625,6 +1046,35 @@ export const MsgEditPostResponse = {
         ? Timestamp.fromPartial(object.editDate)
         : undefined;
     return message;
+  },
+  fromAmino(object: MsgEditPostResponseAmino): MsgEditPostResponse {
+    return {
+      editDate: object?.edit_date
+        ? Timestamp.fromAmino(object.edit_date)
+        : undefined,
+    };
+  },
+  toAmino(message: MsgEditPostResponse): MsgEditPostResponseAmino {
+    const obj: any = {};
+    obj.edit_date = message.editDate
+      ? Timestamp.toAmino(message.editDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgEditPostResponseAminoMsg): MsgEditPostResponse {
+    return MsgEditPostResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgEditPostResponseProtoMsg): MsgEditPostResponse {
+    return MsgEditPostResponse.decode(message.value);
+  },
+  toProto(message: MsgEditPostResponse): Uint8Array {
+    return MsgEditPostResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgEditPostResponse): MsgEditPostResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgEditPostResponse",
+      value: MsgEditPostResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgDeletePost(): MsgDeletePost {
@@ -706,6 +1156,37 @@ export const MsgDeletePost = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgDeletePostAmino): MsgDeletePost {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgDeletePost): MsgDeletePostAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeletePostAminoMsg): MsgDeletePost {
+    return MsgDeletePost.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeletePostProtoMsg): MsgDeletePost {
+    return MsgDeletePost.decode(message.value);
+  },
+  toProto(message: MsgDeletePost): Uint8Array {
+    return MsgDeletePost.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeletePost): MsgDeletePostProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgDeletePost",
+      value: MsgDeletePost.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgDeletePostResponse(): MsgDeletePostResponse {
   return {};
@@ -746,6 +1227,28 @@ export const MsgDeletePostResponse = {
   ): MsgDeletePostResponse {
     const message = createBaseMsgDeletePostResponse();
     return message;
+  },
+  fromAmino(_: MsgDeletePostResponseAmino): MsgDeletePostResponse {
+    return {};
+  },
+  toAmino(_: MsgDeletePostResponse): MsgDeletePostResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeletePostResponseAminoMsg): MsgDeletePostResponse {
+    return MsgDeletePostResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeletePostResponseProtoMsg): MsgDeletePostResponse {
+    return MsgDeletePostResponse.decode(message.value);
+  },
+  toProto(message: MsgDeletePostResponse): Uint8Array {
+    return MsgDeletePostResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeletePostResponse): MsgDeletePostResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgDeletePostResponse",
+      value: MsgDeletePostResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgAddPostAttachment(): MsgAddPostAttachment {
@@ -844,6 +1347,39 @@ export const MsgAddPostAttachment = {
     message.editor = object.editor ?? "";
     return message;
   },
+  fromAmino(object: MsgAddPostAttachmentAmino): MsgAddPostAttachment {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      content: object?.content ? Any.fromAmino(object.content) : undefined,
+      editor: object.editor,
+    };
+  },
+  toAmino(message: MsgAddPostAttachment): MsgAddPostAttachmentAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.content = message.content ? Any.toAmino(message.content) : undefined;
+    obj.editor = message.editor;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAddPostAttachmentAminoMsg): MsgAddPostAttachment {
+    return MsgAddPostAttachment.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAddPostAttachmentProtoMsg): MsgAddPostAttachment {
+    return MsgAddPostAttachment.decode(message.value);
+  },
+  toProto(message: MsgAddPostAttachment): Uint8Array {
+    return MsgAddPostAttachment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAddPostAttachment): MsgAddPostAttachmentProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgAddPostAttachment",
+      value: MsgAddPostAttachment.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgAddPostAttachmentResponse(): MsgAddPostAttachmentResponse {
   return {
@@ -915,6 +1451,47 @@ export const MsgAddPostAttachmentResponse = {
         ? Timestamp.fromPartial(object.editDate)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: MsgAddPostAttachmentResponseAmino
+  ): MsgAddPostAttachmentResponse {
+    return {
+      attachmentId: object.attachment_id,
+      editDate: object?.edit_date
+        ? Timestamp.fromAmino(object.edit_date)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: MsgAddPostAttachmentResponse
+  ): MsgAddPostAttachmentResponseAmino {
+    const obj: any = {};
+    obj.attachment_id = message.attachmentId;
+    obj.edit_date = message.editDate
+      ? Timestamp.toAmino(message.editDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgAddPostAttachmentResponseAminoMsg
+  ): MsgAddPostAttachmentResponse {
+    return MsgAddPostAttachmentResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgAddPostAttachmentResponseProtoMsg
+  ): MsgAddPostAttachmentResponse {
+    return MsgAddPostAttachmentResponse.decode(message.value);
+  },
+  toProto(message: MsgAddPostAttachmentResponse): Uint8Array {
+    return MsgAddPostAttachmentResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgAddPostAttachmentResponse
+  ): MsgAddPostAttachmentResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgAddPostAttachmentResponse",
+      value: MsgAddPostAttachmentResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgRemovePostAttachment(): MsgRemovePostAttachment {
@@ -1012,6 +1589,45 @@ export const MsgRemovePostAttachment = {
     message.editor = object.editor ?? "";
     return message;
   },
+  fromAmino(object: MsgRemovePostAttachmentAmino): MsgRemovePostAttachment {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      attachmentId: object.attachment_id,
+      editor: object.editor,
+    };
+  },
+  toAmino(message: MsgRemovePostAttachment): MsgRemovePostAttachmentAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.attachment_id = message.attachmentId;
+    obj.editor = message.editor;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemovePostAttachmentAminoMsg
+  ): MsgRemovePostAttachment {
+    return MsgRemovePostAttachment.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemovePostAttachmentProtoMsg
+  ): MsgRemovePostAttachment {
+    return MsgRemovePostAttachment.decode(message.value);
+  },
+  toProto(message: MsgRemovePostAttachment): Uint8Array {
+    return MsgRemovePostAttachment.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemovePostAttachment
+  ): MsgRemovePostAttachmentProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgRemovePostAttachment",
+      value: MsgRemovePostAttachment.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgRemovePostAttachmentResponse(): MsgRemovePostAttachmentResponse {
   return {
@@ -1070,6 +1686,45 @@ export const MsgRemovePostAttachmentResponse = {
         ? Timestamp.fromPartial(object.editDate)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: MsgRemovePostAttachmentResponseAmino
+  ): MsgRemovePostAttachmentResponse {
+    return {
+      editDate: object?.edit_date
+        ? Timestamp.fromAmino(object.edit_date)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: MsgRemovePostAttachmentResponse
+  ): MsgRemovePostAttachmentResponseAmino {
+    const obj: any = {};
+    obj.edit_date = message.editDate
+      ? Timestamp.toAmino(message.editDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemovePostAttachmentResponseAminoMsg
+  ): MsgRemovePostAttachmentResponse {
+    return MsgRemovePostAttachmentResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemovePostAttachmentResponseProtoMsg
+  ): MsgRemovePostAttachmentResponse {
+    return MsgRemovePostAttachmentResponse.decode(message.value);
+  },
+  toProto(message: MsgRemovePostAttachmentResponse): Uint8Array {
+    return MsgRemovePostAttachmentResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemovePostAttachmentResponse
+  ): MsgRemovePostAttachmentResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgRemovePostAttachmentResponse",
+      value: MsgRemovePostAttachmentResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgAnswerPoll(): MsgAnswerPoll {
@@ -1186,6 +1841,47 @@ export const MsgAnswerPoll = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgAnswerPollAmino): MsgAnswerPoll {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      pollId: object.poll_id,
+      answersIndexes: Array.isArray(object?.answers_indexes)
+        ? object.answers_indexes.map((e: any) => e)
+        : [],
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgAnswerPoll): MsgAnswerPollAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.poll_id = message.pollId;
+    if (message.answersIndexes) {
+      obj.answers_indexes = message.answersIndexes.map((e) => e);
+    } else {
+      obj.answers_indexes = [];
+    }
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAnswerPollAminoMsg): MsgAnswerPoll {
+    return MsgAnswerPoll.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAnswerPollProtoMsg): MsgAnswerPoll {
+    return MsgAnswerPoll.decode(message.value);
+  },
+  toProto(message: MsgAnswerPoll): Uint8Array {
+    return MsgAnswerPoll.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAnswerPoll): MsgAnswerPollProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgAnswerPoll",
+      value: MsgAnswerPoll.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgAnswerPollResponse(): MsgAnswerPollResponse {
   return {};
@@ -1226,6 +1922,28 @@ export const MsgAnswerPollResponse = {
   ): MsgAnswerPollResponse {
     const message = createBaseMsgAnswerPollResponse();
     return message;
+  },
+  fromAmino(_: MsgAnswerPollResponseAmino): MsgAnswerPollResponse {
+    return {};
+  },
+  toAmino(_: MsgAnswerPollResponse): MsgAnswerPollResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgAnswerPollResponseAminoMsg): MsgAnswerPollResponse {
+    return MsgAnswerPollResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAnswerPollResponseProtoMsg): MsgAnswerPollResponse {
+    return MsgAnswerPollResponse.decode(message.value);
+  },
+  toProto(message: MsgAnswerPollResponse): Uint8Array {
+    return MsgAnswerPollResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAnswerPollResponse): MsgAnswerPollResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgAnswerPollResponse",
+      value: MsgAnswerPollResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgUpdateParams(): MsgUpdateParams {
@@ -1291,6 +2009,33 @@ export const MsgUpdateParams = {
         : undefined;
     return message;
   },
+  fromAmino(object: MsgUpdateParamsAmino): MsgUpdateParams {
+    return {
+      authority: object.authority,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: MsgUpdateParams): MsgUpdateParamsAmino {
+    const obj: any = {};
+    obj.authority = message.authority;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateParamsAminoMsg): MsgUpdateParams {
+    return MsgUpdateParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateParamsProtoMsg): MsgUpdateParams {
+    return MsgUpdateParams.decode(message.value);
+  },
+  toProto(message: MsgUpdateParams): Uint8Array {
+    return MsgUpdateParams.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateParams): MsgUpdateParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgUpdateParams",
+      value: MsgUpdateParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
   return {};
@@ -1331,5 +2076,33 @@ export const MsgUpdateParamsResponse = {
   ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
+  },
+  fromAmino(_: MsgUpdateParamsResponseAmino): MsgUpdateParamsResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateParamsResponse): MsgUpdateParamsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgUpdateParamsResponseAminoMsg
+  ): MsgUpdateParamsResponse {
+    return MsgUpdateParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgUpdateParamsResponseProtoMsg
+  ): MsgUpdateParamsResponse {
+    return MsgUpdateParamsResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateParamsResponse): Uint8Array {
+    return MsgUpdateParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgUpdateParamsResponse
+  ): MsgUpdateParamsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgUpdateParamsResponse",
+      value: MsgUpdateParamsResponse.encode(message).finish(),
+    };
   },
 };

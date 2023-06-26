@@ -28,10 +28,45 @@ export interface MsgCreateSubspace {
   /** Address creating the subspace */
   creator: string;
 }
+export interface MsgCreateSubspaceProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgCreateSubspace";
+  value: Uint8Array;
+}
+/** MsgCreateSubspace represents the message used to create a subspace */
+export interface MsgCreateSubspaceAmino {
+  /** Name of the subspace */
+  name: string;
+  /** (optional) Description of the subspace */
+  description: string;
+  /**
+   * (optional) Owner of this subspace. If not specified, the creator will be
+   * the default owner.
+   */
+  owner: string;
+  /** Address creating the subspace */
+  creator: string;
+}
+export interface MsgCreateSubspaceAminoMsg {
+  type: "/desmos.subspaces.v3.MsgCreateSubspace";
+  value: MsgCreateSubspaceAmino;
+}
 /** MsgCreateSubspaceResponse defines the Msg/CreateSubspace response type */
 export interface MsgCreateSubspaceResponse {
   /** Id of the newly created subspace id */
   subspaceId: Long;
+}
+export interface MsgCreateSubspaceResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgCreateSubspaceResponse";
+  value: Uint8Array;
+}
+/** MsgCreateSubspaceResponse defines the Msg/CreateSubspace response type */
+export interface MsgCreateSubspaceResponseAmino {
+  /** Id of the newly created subspace id */
+  subspace_id: string;
+}
+export interface MsgCreateSubspaceResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgCreateSubspaceResponse";
+  value: MsgCreateSubspaceResponseAmino;
 }
 /** MsgEditSubspace represents the message used to edit a subspace fields */
 export interface MsgEditSubspace {
@@ -55,8 +90,48 @@ export interface MsgEditSubspace {
   /** Address of the user editing the subspace */
   signer: string;
 }
+export interface MsgEditSubspaceProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgEditSubspace";
+  value: Uint8Array;
+}
+/** MsgEditSubspace represents the message used to edit a subspace fields */
+export interface MsgEditSubspaceAmino {
+  /** Id of the subspace to edit */
+  subspace_id: string;
+  /**
+   * New name of the subspace. If it shouldn't be changed, use [do-not-modify]
+   * instead.
+   */
+  name: string;
+  /**
+   * New description of the subspace. If it shouldn't be changed, use
+   * [do-not-modify] instead.
+   */
+  description: string;
+  /**
+   * New owner of the subspace. If it shouldn't be changed, use [do-not-modify]
+   * instead.
+   */
+  owner: string;
+  /** Address of the user editing the subspace */
+  signer: string;
+}
+export interface MsgEditSubspaceAminoMsg {
+  type: "/desmos.subspaces.v3.MsgEditSubspace";
+  value: MsgEditSubspaceAmino;
+}
 /** MsgEditSubspaceResponse defines the Msg/EditSubspace response type */
 export interface MsgEditSubspaceResponse {}
+export interface MsgEditSubspaceResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgEditSubspaceResponse";
+  value: Uint8Array;
+}
+/** MsgEditSubspaceResponse defines the Msg/EditSubspace response type */
+export interface MsgEditSubspaceResponseAmino {}
+export interface MsgEditSubspaceResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgEditSubspaceResponse";
+  value: MsgEditSubspaceResponseAmino;
+}
 /** MsgDeleteSubspace represents the message used to delete a subspace */
 export interface MsgDeleteSubspace {
   /** Id of the subspace to delete */
@@ -64,8 +139,33 @@ export interface MsgDeleteSubspace {
   /** Address of the user deleting the subspace */
   signer: string;
 }
+export interface MsgDeleteSubspaceProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspace";
+  value: Uint8Array;
+}
+/** MsgDeleteSubspace represents the message used to delete a subspace */
+export interface MsgDeleteSubspaceAmino {
+  /** Id of the subspace to delete */
+  subspace_id: string;
+  /** Address of the user deleting the subspace */
+  signer: string;
+}
+export interface MsgDeleteSubspaceAminoMsg {
+  type: "/desmos.subspaces.v3.MsgDeleteSubspace";
+  value: MsgDeleteSubspaceAmino;
+}
 /** MsgDeleteSubspaceResponse defines the Msg/DeleteSubspace response type */
 export interface MsgDeleteSubspaceResponse {}
+export interface MsgDeleteSubspaceResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspaceResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteSubspaceResponse defines the Msg/DeleteSubspace response type */
+export interface MsgDeleteSubspaceResponseAmino {}
+export interface MsgDeleteSubspaceResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgDeleteSubspaceResponse";
+  value: MsgDeleteSubspaceResponseAmino;
+}
 /**
  * MsgCreateSection represents the message to be used when creating a subspace
  * section
@@ -82,10 +182,47 @@ export interface MsgCreateSection {
   /** User creating the section */
   creator: string;
 }
+export interface MsgCreateSectionProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgCreateSection";
+  value: Uint8Array;
+}
+/**
+ * MsgCreateSection represents the message to be used when creating a subspace
+ * section
+ */
+export interface MsgCreateSectionAmino {
+  /** Id of the subspace inside which the section will be placed */
+  subspace_id: string;
+  /** Name of the section to be created */
+  name: string;
+  /** (optional) Description of the section */
+  description: string;
+  /** (optional) Id of the parent section */
+  parent_id: number;
+  /** User creating the section */
+  creator: string;
+}
+export interface MsgCreateSectionAminoMsg {
+  type: "/desmos.subspaces.v3.MsgCreateSection";
+  value: MsgCreateSectionAmino;
+}
 /** MsgCreateSectionResponse represents the Msg/CreateSection response type */
 export interface MsgCreateSectionResponse {
   /** Id of the newly created section */
   sectionId: number;
+}
+export interface MsgCreateSectionResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgCreateSectionResponse";
+  value: Uint8Array;
+}
+/** MsgCreateSectionResponse represents the Msg/CreateSection response type */
+export interface MsgCreateSectionResponseAmino {
+  /** Id of the newly created section */
+  section_id: number;
+}
+export interface MsgCreateSectionResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgCreateSectionResponse";
+  value: MsgCreateSectionResponseAmino;
 }
 /**
  * MsgEditSection represents the message to be used when editing a subspace
@@ -103,8 +240,42 @@ export interface MsgEditSection {
   /** User editing the section */
   editor: string;
 }
+export interface MsgEditSectionProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgEditSection";
+  value: Uint8Array;
+}
+/**
+ * MsgEditSection represents the message to be used when editing a subspace
+ * section
+ */
+export interface MsgEditSectionAmino {
+  /** Id of the subspace inside which the section to be edited is */
+  subspace_id: string;
+  /** Id of the section to be edited */
+  section_id: number;
+  /** (optional) New name of the section */
+  name: string;
+  /** (optional) New description of the section */
+  description: string;
+  /** User editing the section */
+  editor: string;
+}
+export interface MsgEditSectionAminoMsg {
+  type: "/desmos.subspaces.v3.MsgEditSection";
+  value: MsgEditSectionAmino;
+}
 /** MsgEditSectionResponse represents the Msg/EditSection response type */
 export interface MsgEditSectionResponse {}
+export interface MsgEditSectionResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgEditSectionResponse";
+  value: Uint8Array;
+}
+/** MsgEditSectionResponse represents the Msg/EditSection response type */
+export interface MsgEditSectionResponseAmino {}
+export interface MsgEditSectionResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgEditSectionResponse";
+  value: MsgEditSectionResponseAmino;
+}
 /**
  * MsgMoveSection represents the message to be used when moving a section to
  * another parent
@@ -119,8 +290,40 @@ export interface MsgMoveSection {
   /** Signer of the message */
   signer: string;
 }
+export interface MsgMoveSectionProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgMoveSection";
+  value: Uint8Array;
+}
+/**
+ * MsgMoveSection represents the message to be used when moving a section to
+ * another parent
+ */
+export interface MsgMoveSectionAmino {
+  /** Id of the subspace inside which the section lies */
+  subspace_id: string;
+  /** Id of the section to be moved */
+  section_id: number;
+  /** Id of the new parent */
+  new_parent_id: number;
+  /** Signer of the message */
+  signer: string;
+}
+export interface MsgMoveSectionAminoMsg {
+  type: "/desmos.subspaces.v3.MsgMoveSection";
+  value: MsgMoveSectionAmino;
+}
 /** MsgMoveSectionResponse */
 export interface MsgMoveSectionResponse {}
+export interface MsgMoveSectionResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgMoveSectionResponse";
+  value: Uint8Array;
+}
+/** MsgMoveSectionResponse */
+export interface MsgMoveSectionResponseAmino {}
+export interface MsgMoveSectionResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgMoveSectionResponse";
+  value: MsgMoveSectionResponseAmino;
+}
 /** MsgDeleteSection represents the message to be used when deleting a section */
 export interface MsgDeleteSection {
   /** Id of the subspace inside which the section to be deleted is */
@@ -130,8 +333,35 @@ export interface MsgDeleteSection {
   /** User deleting the section */
   signer: string;
 }
+export interface MsgDeleteSectionProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgDeleteSection";
+  value: Uint8Array;
+}
+/** MsgDeleteSection represents the message to be used when deleting a section */
+export interface MsgDeleteSectionAmino {
+  /** Id of the subspace inside which the section to be deleted is */
+  subspace_id: string;
+  /** Id of the section to delete */
+  section_id: number;
+  /** User deleting the section */
+  signer: string;
+}
+export interface MsgDeleteSectionAminoMsg {
+  type: "/desmos.subspaces.v3.MsgDeleteSection";
+  value: MsgDeleteSectionAmino;
+}
 /** MsgDeleteSectionResponse represents the Msg/DeleteSection response type */
 export interface MsgDeleteSectionResponse {}
+export interface MsgDeleteSectionResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgDeleteSectionResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteSectionResponse represents the Msg/DeleteSection response type */
+export interface MsgDeleteSectionResponseAmino {}
+export interface MsgDeleteSectionResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgDeleteSectionResponse";
+  value: MsgDeleteSectionResponseAmino;
+}
 /** MsgCreateUserGroup represents the message used to create a user group */
 export interface MsgCreateUserGroup {
   /** Id of the subspace inside which the group will be created */
@@ -149,9 +379,46 @@ export interface MsgCreateUserGroup {
   /** Creator of the group */
   creator: string;
 }
+export interface MsgCreateUserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroup";
+  value: Uint8Array;
+}
+/** MsgCreateUserGroup represents the message used to create a user group */
+export interface MsgCreateUserGroupAmino {
+  /** Id of the subspace inside which the group will be created */
+  subspace_id: string;
+  /** (optional) Id of the section inside which the group will be created */
+  section_id: number;
+  /** Name of the group */
+  name: string;
+  /** (optional) Description of the group */
+  description: string;
+  /** Default permissions to be applied to the group */
+  default_permissions: string[];
+  /** Initial members to be put inside the group */
+  initial_members: string[];
+  /** Creator of the group */
+  creator: string;
+}
+export interface MsgCreateUserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.MsgCreateUserGroup";
+  value: MsgCreateUserGroupAmino;
+}
 /** MsgCreateUserGroupResponse defines the Msg/CreateUserGroup response type */
 export interface MsgCreateUserGroupResponse {
   groupId: number;
+}
+export interface MsgCreateUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroupResponse";
+  value: Uint8Array;
+}
+/** MsgCreateUserGroupResponse defines the Msg/CreateUserGroup response type */
+export interface MsgCreateUserGroupResponseAmino {
+  group_id: number;
+}
+export interface MsgCreateUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgCreateUserGroupResponse";
+  value: MsgCreateUserGroupResponseAmino;
 }
 /** MsgEditUserGroup represents the message used to edit a user group */
 export interface MsgEditUserGroup {
@@ -166,8 +433,39 @@ export interface MsgEditUserGroup {
   /** User editing the group */
   signer: string;
 }
+export interface MsgEditUserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgEditUserGroup";
+  value: Uint8Array;
+}
+/** MsgEditUserGroup represents the message used to edit a user group */
+export interface MsgEditUserGroupAmino {
+  /** Id of the subspace inside which the group to be edited is */
+  subspace_id: string;
+  /** Id of the group to be edited */
+  group_id: number;
+  /** (optional) New name of the group */
+  name: string;
+  /** (optional) New description of the group */
+  description: string;
+  /** User editing the group */
+  signer: string;
+}
+export interface MsgEditUserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.MsgEditUserGroup";
+  value: MsgEditUserGroupAmino;
+}
 /** MsgEditUserGroupResponse defines the Msg/EditUserGroup response type */
 export interface MsgEditUserGroupResponse {}
+export interface MsgEditUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgEditUserGroupResponse";
+  value: Uint8Array;
+}
+/** MsgEditUserGroupResponse defines the Msg/EditUserGroup response type */
+export interface MsgEditUserGroupResponseAmino {}
+export interface MsgEditUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgEditUserGroupResponse";
+  value: MsgEditUserGroupResponseAmino;
+}
 /**
  * MsgMoveUserGroup represents the message used to move one user group from a
  * section to anoter
@@ -182,8 +480,40 @@ export interface MsgMoveUserGroup {
   /** User signing the message */
   signer: string;
 }
+export interface MsgMoveUserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroup";
+  value: Uint8Array;
+}
+/**
+ * MsgMoveUserGroup represents the message used to move one user group from a
+ * section to anoter
+ */
+export interface MsgMoveUserGroupAmino {
+  /** Id of the subspace inside which the group to move is */
+  subspace_id: string;
+  /** Id of the group to be moved */
+  group_id: number;
+  /** Id of the new section where to move the group */
+  new_section_id: number;
+  /** User signing the message */
+  signer: string;
+}
+export interface MsgMoveUserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.MsgMoveUserGroup";
+  value: MsgMoveUserGroupAmino;
+}
 /** MsgMoveUserGroupResponse defines the Msg/MoveUserGroup response type */
 export interface MsgMoveUserGroupResponse {}
+export interface MsgMoveUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroupResponse";
+  value: Uint8Array;
+}
+/** MsgMoveUserGroupResponse defines the Msg/MoveUserGroup response type */
+export interface MsgMoveUserGroupResponseAmino {}
+export interface MsgMoveUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgMoveUserGroupResponse";
+  value: MsgMoveUserGroupResponseAmino;
+}
 /**
  * MsgSetUserGroupPermissions represents the message used to set the permissions
  * of a user group
@@ -198,11 +528,46 @@ export interface MsgSetUserGroupPermissions {
   /** User setting the new permissions */
   signer: string;
 }
+export interface MsgSetUserGroupPermissionsProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissions";
+  value: Uint8Array;
+}
+/**
+ * MsgSetUserGroupPermissions represents the message used to set the permissions
+ * of a user group
+ */
+export interface MsgSetUserGroupPermissionsAmino {
+  /** Id of the subspace inside which the group is */
+  subspace_id: string;
+  /** Id of the group for which to set the new permissions */
+  group_id: number;
+  /** New permissions to be set to the group */
+  permissions: string[];
+  /** User setting the new permissions */
+  signer: string;
+}
+export interface MsgSetUserGroupPermissionsAminoMsg {
+  type: "/desmos.subspaces.v3.MsgSetUserGroupPermissions";
+  value: MsgSetUserGroupPermissionsAmino;
+}
 /**
  * MsgSetUserGroupPermissionsResponse defines the
  * Msg/SetUserGroupPermissionsResponse response type
  */
 export interface MsgSetUserGroupPermissionsResponse {}
+export interface MsgSetUserGroupPermissionsResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissionsResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgSetUserGroupPermissionsResponse defines the
+ * Msg/SetUserGroupPermissionsResponse response type
+ */
+export interface MsgSetUserGroupPermissionsResponseAmino {}
+export interface MsgSetUserGroupPermissionsResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgSetUserGroupPermissionsResponse";
+  value: MsgSetUserGroupPermissionsResponseAmino;
+}
 /** MsgDeleteUserGroup represents the message used to delete a user group */
 export interface MsgDeleteUserGroup {
   /** Id of the subspace inside which the group to delete is */
@@ -212,8 +577,35 @@ export interface MsgDeleteUserGroup {
   /** User deleting the group */
   signer: string;
 }
+export interface MsgDeleteUserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroup";
+  value: Uint8Array;
+}
+/** MsgDeleteUserGroup represents the message used to delete a user group */
+export interface MsgDeleteUserGroupAmino {
+  /** Id of the subspace inside which the group to delete is */
+  subspace_id: string;
+  /** Id of the group to be deleted */
+  group_id: number;
+  /** User deleting the group */
+  signer: string;
+}
+export interface MsgDeleteUserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.MsgDeleteUserGroup";
+  value: MsgDeleteUserGroupAmino;
+}
 /** MsgDeleteUserGroupResponse defines the Msg/DeleteUserGroup response type */
 export interface MsgDeleteUserGroupResponse {}
+export interface MsgDeleteUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroupResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteUserGroupResponse defines the Msg/DeleteUserGroup response type */
+export interface MsgDeleteUserGroupResponseAmino {}
+export interface MsgDeleteUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgDeleteUserGroupResponse";
+  value: MsgDeleteUserGroupResponseAmino;
+}
 /**
  * MsgAddUserToUserGroup represents the message used to add a user to a user
  * group
@@ -228,11 +620,46 @@ export interface MsgAddUserToUserGroup {
   /** User signing the message */
   signer: string;
 }
+export interface MsgAddUserToUserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroup";
+  value: Uint8Array;
+}
+/**
+ * MsgAddUserToUserGroup represents the message used to add a user to a user
+ * group
+ */
+export interface MsgAddUserToUserGroupAmino {
+  /** Id of the subspace inside which the group is */
+  subspace_id: string;
+  /** Id of the group to which to add the user */
+  group_id: number;
+  /** User to be added to the group */
+  user: string;
+  /** User signing the message */
+  signer: string;
+}
+export interface MsgAddUserToUserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.MsgAddUserToUserGroup";
+  value: MsgAddUserToUserGroupAmino;
+}
 /**
  * MsgAddUserToUserGroupResponse defines the Msg/AddUserToUserGroupResponse
  * response type
  */
 export interface MsgAddUserToUserGroupResponse {}
+export interface MsgAddUserToUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroupResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgAddUserToUserGroupResponse defines the Msg/AddUserToUserGroupResponse
+ * response type
+ */
+export interface MsgAddUserToUserGroupResponseAmino {}
+export interface MsgAddUserToUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgAddUserToUserGroupResponse";
+  value: MsgAddUserToUserGroupResponseAmino;
+}
 /**
  * MsgRemoveUserFromUserGroup represents the message used to remove a user from
  * a user group
@@ -247,11 +674,46 @@ export interface MsgRemoveUserFromUserGroup {
   /** User signing the message */
   signer: string;
 }
+export interface MsgRemoveUserFromUserGroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveUserFromUserGroup represents the message used to remove a user from
+ * a user group
+ */
+export interface MsgRemoveUserFromUserGroupAmino {
+  /** Id of the subspace inside which the group to remove the user from is */
+  subspace_id: string;
+  /** Id of the group from which to remove the user */
+  group_id: number;
+  /** User to be removed from the group */
+  user: string;
+  /** User signing the message */
+  signer: string;
+}
+export interface MsgRemoveUserFromUserGroupAminoMsg {
+  type: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup";
+  value: MsgRemoveUserFromUserGroupAmino;
+}
 /**
  * MsgRemoveUserFromUserGroupResponse defines the
  * Msg/RemoveUserFromUserGroupResponse response type
  */
 export interface MsgRemoveUserFromUserGroupResponse {}
+export interface MsgRemoveUserFromUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroupResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveUserFromUserGroupResponse defines the
+ * Msg/RemoveUserFromUserGroupResponse response type
+ */
+export interface MsgRemoveUserFromUserGroupResponseAmino {}
+export interface MsgRemoveUserFromUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroupResponse";
+  value: MsgRemoveUserFromUserGroupResponseAmino;
+}
 /**
  * MsgSetUserPermissions represents the message used to set the permissions of a
  * specific user
@@ -268,11 +730,48 @@ export interface MsgSetUserPermissions {
   /** User signing the message */
   signer: string;
 }
+export interface MsgSetUserPermissionsProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissions";
+  value: Uint8Array;
+}
+/**
+ * MsgSetUserPermissions represents the message used to set the permissions of a
+ * specific user
+ */
+export interface MsgSetUserPermissionsAmino {
+  /** Id of the subspace inside which to set the permissions */
+  subspace_id: string;
+  /** Id of the section for which to set the permissions */
+  section_id: number;
+  /** User for which to set the permissions */
+  user: string;
+  /** Permissions to be set to the user */
+  permissions: string[];
+  /** User signing the message */
+  signer: string;
+}
+export interface MsgSetUserPermissionsAminoMsg {
+  type: "/desmos.subspaces.v3.MsgSetUserPermissions";
+  value: MsgSetUserPermissionsAmino;
+}
 /**
  * MsgSetUserPermissionsResponse defines the Msg/SetPermissionsResponse
  * response type
  */
 export interface MsgSetUserPermissionsResponse {}
+export interface MsgSetUserPermissionsResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissionsResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgSetUserPermissionsResponse defines the Msg/SetPermissionsResponse
+ * response type
+ */
+export interface MsgSetUserPermissionsResponseAmino {}
+export interface MsgSetUserPermissionsResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgSetUserPermissionsResponse";
+  value: MsgSetUserPermissionsResponseAmino;
+}
 function createBaseMsgCreateSubspace(): MsgCreateSubspace {
   return {
     name: "",
@@ -353,6 +852,37 @@ export const MsgCreateSubspace = {
     message.creator = object.creator ?? "";
     return message;
   },
+  fromAmino(object: MsgCreateSubspaceAmino): MsgCreateSubspace {
+    return {
+      name: object.name,
+      description: object.description,
+      owner: object.owner,
+      creator: object.creator,
+    };
+  },
+  toAmino(message: MsgCreateSubspace): MsgCreateSubspaceAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.owner = message.owner;
+    obj.creator = message.creator;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateSubspaceAminoMsg): MsgCreateSubspace {
+    return MsgCreateSubspace.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateSubspaceProtoMsg): MsgCreateSubspace {
+    return MsgCreateSubspace.decode(message.value);
+  },
+  toProto(message: MsgCreateSubspace): Uint8Array {
+    return MsgCreateSubspace.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateSubspace): MsgCreateSubspaceProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgCreateSubspace",
+      value: MsgCreateSubspace.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgCreateSubspaceResponse(): MsgCreateSubspaceResponse {
   return {
@@ -411,6 +941,39 @@ export const MsgCreateSubspaceResponse = {
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: MsgCreateSubspaceResponseAmino): MsgCreateSubspaceResponse {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+    };
+  },
+  toAmino(message: MsgCreateSubspaceResponse): MsgCreateSubspaceResponseAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgCreateSubspaceResponseAminoMsg
+  ): MsgCreateSubspaceResponse {
+    return MsgCreateSubspaceResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgCreateSubspaceResponseProtoMsg
+  ): MsgCreateSubspaceResponse {
+    return MsgCreateSubspaceResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateSubspaceResponse): Uint8Array {
+    return MsgCreateSubspaceResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgCreateSubspaceResponse
+  ): MsgCreateSubspaceResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgCreateSubspaceResponse",
+      value: MsgCreateSubspaceResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgEditSubspace(): MsgEditSubspace {
@@ -509,6 +1072,41 @@ export const MsgEditSubspace = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgEditSubspaceAmino): MsgEditSubspace {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      name: object.name,
+      description: object.description,
+      owner: object.owner,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgEditSubspace): MsgEditSubspaceAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.owner = message.owner;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgEditSubspaceAminoMsg): MsgEditSubspace {
+    return MsgEditSubspace.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgEditSubspaceProtoMsg): MsgEditSubspace {
+    return MsgEditSubspace.decode(message.value);
+  },
+  toProto(message: MsgEditSubspace): Uint8Array {
+    return MsgEditSubspace.encode(message).finish();
+  },
+  toProtoMsg(message: MsgEditSubspace): MsgEditSubspaceProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgEditSubspace",
+      value: MsgEditSubspace.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgEditSubspaceResponse(): MsgEditSubspaceResponse {
   return {};
@@ -549,6 +1147,34 @@ export const MsgEditSubspaceResponse = {
   ): MsgEditSubspaceResponse {
     const message = createBaseMsgEditSubspaceResponse();
     return message;
+  },
+  fromAmino(_: MsgEditSubspaceResponseAmino): MsgEditSubspaceResponse {
+    return {};
+  },
+  toAmino(_: MsgEditSubspaceResponse): MsgEditSubspaceResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgEditSubspaceResponseAminoMsg
+  ): MsgEditSubspaceResponse {
+    return MsgEditSubspaceResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgEditSubspaceResponseProtoMsg
+  ): MsgEditSubspaceResponse {
+    return MsgEditSubspaceResponse.decode(message.value);
+  },
+  toProto(message: MsgEditSubspaceResponse): Uint8Array {
+    return MsgEditSubspaceResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgEditSubspaceResponse
+  ): MsgEditSubspaceResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgEditSubspaceResponse",
+      value: MsgEditSubspaceResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgDeleteSubspace(): MsgDeleteSubspace {
@@ -616,6 +1242,35 @@ export const MsgDeleteSubspace = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgDeleteSubspaceAmino): MsgDeleteSubspace {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgDeleteSubspace): MsgDeleteSubspaceAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteSubspaceAminoMsg): MsgDeleteSubspace {
+    return MsgDeleteSubspace.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteSubspaceProtoMsg): MsgDeleteSubspace {
+    return MsgDeleteSubspace.decode(message.value);
+  },
+  toProto(message: MsgDeleteSubspace): Uint8Array {
+    return MsgDeleteSubspace.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteSubspace): MsgDeleteSubspaceProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspace",
+      value: MsgDeleteSubspace.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgDeleteSubspaceResponse(): MsgDeleteSubspaceResponse {
   return {};
@@ -656,6 +1311,34 @@ export const MsgDeleteSubspaceResponse = {
   ): MsgDeleteSubspaceResponse {
     const message = createBaseMsgDeleteSubspaceResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteSubspaceResponseAmino): MsgDeleteSubspaceResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteSubspaceResponse): MsgDeleteSubspaceResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgDeleteSubspaceResponseAminoMsg
+  ): MsgDeleteSubspaceResponse {
+    return MsgDeleteSubspaceResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgDeleteSubspaceResponseProtoMsg
+  ): MsgDeleteSubspaceResponse {
+    return MsgDeleteSubspaceResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteSubspaceResponse): Uint8Array {
+    return MsgDeleteSubspaceResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgDeleteSubspaceResponse
+  ): MsgDeleteSubspaceResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspaceResponse",
+      value: MsgDeleteSubspaceResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgCreateSection(): MsgCreateSection {
@@ -755,6 +1438,41 @@ export const MsgCreateSection = {
     message.creator = object.creator ?? "";
     return message;
   },
+  fromAmino(object: MsgCreateSectionAmino): MsgCreateSection {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      name: object.name,
+      description: object.description,
+      parentId: object.parent_id,
+      creator: object.creator,
+    };
+  },
+  toAmino(message: MsgCreateSection): MsgCreateSectionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.parent_id = message.parentId;
+    obj.creator = message.creator;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateSectionAminoMsg): MsgCreateSection {
+    return MsgCreateSection.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateSectionProtoMsg): MsgCreateSection {
+    return MsgCreateSection.decode(message.value);
+  },
+  toProto(message: MsgCreateSection): Uint8Array {
+    return MsgCreateSection.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateSection): MsgCreateSectionProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgCreateSection",
+      value: MsgCreateSection.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgCreateSectionResponse(): MsgCreateSectionResponse {
   return {
@@ -808,6 +1526,37 @@ export const MsgCreateSectionResponse = {
     const message = createBaseMsgCreateSectionResponse();
     message.sectionId = object.sectionId ?? 0;
     return message;
+  },
+  fromAmino(object: MsgCreateSectionResponseAmino): MsgCreateSectionResponse {
+    return {
+      sectionId: object.section_id,
+    };
+  },
+  toAmino(message: MsgCreateSectionResponse): MsgCreateSectionResponseAmino {
+    const obj: any = {};
+    obj.section_id = message.sectionId;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgCreateSectionResponseAminoMsg
+  ): MsgCreateSectionResponse {
+    return MsgCreateSectionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgCreateSectionResponseProtoMsg
+  ): MsgCreateSectionResponse {
+    return MsgCreateSectionResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateSectionResponse): Uint8Array {
+    return MsgCreateSectionResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgCreateSectionResponse
+  ): MsgCreateSectionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgCreateSectionResponse",
+      value: MsgCreateSectionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgEditSection(): MsgEditSection {
@@ -907,6 +1656,41 @@ export const MsgEditSection = {
     message.editor = object.editor ?? "";
     return message;
   },
+  fromAmino(object: MsgEditSectionAmino): MsgEditSection {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      name: object.name,
+      description: object.description,
+      editor: object.editor,
+    };
+  },
+  toAmino(message: MsgEditSection): MsgEditSectionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.editor = message.editor;
+    return obj;
+  },
+  fromAminoMsg(object: MsgEditSectionAminoMsg): MsgEditSection {
+    return MsgEditSection.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgEditSectionProtoMsg): MsgEditSection {
+    return MsgEditSection.decode(message.value);
+  },
+  toProto(message: MsgEditSection): Uint8Array {
+    return MsgEditSection.encode(message).finish();
+  },
+  toProtoMsg(message: MsgEditSection): MsgEditSectionProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgEditSection",
+      value: MsgEditSection.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgEditSectionResponse(): MsgEditSectionResponse {
   return {};
@@ -947,6 +1731,30 @@ export const MsgEditSectionResponse = {
   ): MsgEditSectionResponse {
     const message = createBaseMsgEditSectionResponse();
     return message;
+  },
+  fromAmino(_: MsgEditSectionResponseAmino): MsgEditSectionResponse {
+    return {};
+  },
+  toAmino(_: MsgEditSectionResponse): MsgEditSectionResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgEditSectionResponseAminoMsg): MsgEditSectionResponse {
+    return MsgEditSectionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgEditSectionResponseProtoMsg
+  ): MsgEditSectionResponse {
+    return MsgEditSectionResponse.decode(message.value);
+  },
+  toProto(message: MsgEditSectionResponse): Uint8Array {
+    return MsgEditSectionResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgEditSectionResponse): MsgEditSectionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgEditSectionResponse",
+      value: MsgEditSectionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgMoveSection(): MsgMoveSection {
@@ -1036,6 +1844,39 @@ export const MsgMoveSection = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgMoveSectionAmino): MsgMoveSection {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      newParentId: object.new_parent_id,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgMoveSection): MsgMoveSectionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.new_parent_id = message.newParentId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgMoveSectionAminoMsg): MsgMoveSection {
+    return MsgMoveSection.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgMoveSectionProtoMsg): MsgMoveSection {
+    return MsgMoveSection.decode(message.value);
+  },
+  toProto(message: MsgMoveSection): Uint8Array {
+    return MsgMoveSection.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMoveSection): MsgMoveSectionProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgMoveSection",
+      value: MsgMoveSection.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgMoveSectionResponse(): MsgMoveSectionResponse {
   return {};
@@ -1076,6 +1917,30 @@ export const MsgMoveSectionResponse = {
   ): MsgMoveSectionResponse {
     const message = createBaseMsgMoveSectionResponse();
     return message;
+  },
+  fromAmino(_: MsgMoveSectionResponseAmino): MsgMoveSectionResponse {
+    return {};
+  },
+  toAmino(_: MsgMoveSectionResponse): MsgMoveSectionResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgMoveSectionResponseAminoMsg): MsgMoveSectionResponse {
+    return MsgMoveSectionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgMoveSectionResponseProtoMsg
+  ): MsgMoveSectionResponse {
+    return MsgMoveSectionResponse.decode(message.value);
+  },
+  toProto(message: MsgMoveSectionResponse): Uint8Array {
+    return MsgMoveSectionResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMoveSectionResponse): MsgMoveSectionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgMoveSectionResponse",
+      value: MsgMoveSectionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgDeleteSection(): MsgDeleteSection {
@@ -1154,6 +2019,37 @@ export const MsgDeleteSection = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgDeleteSectionAmino): MsgDeleteSection {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgDeleteSection): MsgDeleteSectionAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteSectionAminoMsg): MsgDeleteSection {
+    return MsgDeleteSection.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteSectionProtoMsg): MsgDeleteSection {
+    return MsgDeleteSection.decode(message.value);
+  },
+  toProto(message: MsgDeleteSection): Uint8Array {
+    return MsgDeleteSection.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteSection): MsgDeleteSectionProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgDeleteSection",
+      value: MsgDeleteSection.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgDeleteSectionResponse(): MsgDeleteSectionResponse {
   return {};
@@ -1194,6 +2090,34 @@ export const MsgDeleteSectionResponse = {
   ): MsgDeleteSectionResponse {
     const message = createBaseMsgDeleteSectionResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteSectionResponseAmino): MsgDeleteSectionResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteSectionResponse): MsgDeleteSectionResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgDeleteSectionResponseAminoMsg
+  ): MsgDeleteSectionResponse {
+    return MsgDeleteSectionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgDeleteSectionResponseProtoMsg
+  ): MsgDeleteSectionResponse {
+    return MsgDeleteSectionResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteSectionResponse): Uint8Array {
+    return MsgDeleteSectionResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgDeleteSectionResponse
+  ): MsgDeleteSectionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgDeleteSectionResponse",
+      value: MsgDeleteSectionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgCreateUserGroup(): MsgCreateUserGroup {
@@ -1325,6 +2249,57 @@ export const MsgCreateUserGroup = {
     message.creator = object.creator ?? "";
     return message;
   },
+  fromAmino(object: MsgCreateUserGroupAmino): MsgCreateUserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      name: object.name,
+      description: object.description,
+      defaultPermissions: Array.isArray(object?.default_permissions)
+        ? object.default_permissions.map((e: any) => e)
+        : [],
+      initialMembers: Array.isArray(object?.initial_members)
+        ? object.initial_members.map((e: any) => e)
+        : [],
+      creator: object.creator,
+    };
+  },
+  toAmino(message: MsgCreateUserGroup): MsgCreateUserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.name = message.name;
+    obj.description = message.description;
+    if (message.defaultPermissions) {
+      obj.default_permissions = message.defaultPermissions.map((e) => e);
+    } else {
+      obj.default_permissions = [];
+    }
+    if (message.initialMembers) {
+      obj.initial_members = message.initialMembers.map((e) => e);
+    } else {
+      obj.initial_members = [];
+    }
+    obj.creator = message.creator;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateUserGroupAminoMsg): MsgCreateUserGroup {
+    return MsgCreateUserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateUserGroupProtoMsg): MsgCreateUserGroup {
+    return MsgCreateUserGroup.decode(message.value);
+  },
+  toProto(message: MsgCreateUserGroup): Uint8Array {
+    return MsgCreateUserGroup.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateUserGroup): MsgCreateUserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroup",
+      value: MsgCreateUserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgCreateUserGroupResponse(): MsgCreateUserGroupResponse {
   return {
@@ -1378,6 +2353,41 @@ export const MsgCreateUserGroupResponse = {
     const message = createBaseMsgCreateUserGroupResponse();
     message.groupId = object.groupId ?? 0;
     return message;
+  },
+  fromAmino(
+    object: MsgCreateUserGroupResponseAmino
+  ): MsgCreateUserGroupResponse {
+    return {
+      groupId: object.group_id,
+    };
+  },
+  toAmino(
+    message: MsgCreateUserGroupResponse
+  ): MsgCreateUserGroupResponseAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgCreateUserGroupResponseAminoMsg
+  ): MsgCreateUserGroupResponse {
+    return MsgCreateUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgCreateUserGroupResponseProtoMsg
+  ): MsgCreateUserGroupResponse {
+    return MsgCreateUserGroupResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateUserGroupResponse): Uint8Array {
+    return MsgCreateUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgCreateUserGroupResponse
+  ): MsgCreateUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroupResponse",
+      value: MsgCreateUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgEditUserGroup(): MsgEditUserGroup {
@@ -1477,6 +2487,41 @@ export const MsgEditUserGroup = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgEditUserGroupAmino): MsgEditUserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      name: object.name,
+      description: object.description,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgEditUserGroup): MsgEditUserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgEditUserGroupAminoMsg): MsgEditUserGroup {
+    return MsgEditUserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgEditUserGroupProtoMsg): MsgEditUserGroup {
+    return MsgEditUserGroup.decode(message.value);
+  },
+  toProto(message: MsgEditUserGroup): Uint8Array {
+    return MsgEditUserGroup.encode(message).finish();
+  },
+  toProtoMsg(message: MsgEditUserGroup): MsgEditUserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgEditUserGroup",
+      value: MsgEditUserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgEditUserGroupResponse(): MsgEditUserGroupResponse {
   return {};
@@ -1517,6 +2562,34 @@ export const MsgEditUserGroupResponse = {
   ): MsgEditUserGroupResponse {
     const message = createBaseMsgEditUserGroupResponse();
     return message;
+  },
+  fromAmino(_: MsgEditUserGroupResponseAmino): MsgEditUserGroupResponse {
+    return {};
+  },
+  toAmino(_: MsgEditUserGroupResponse): MsgEditUserGroupResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgEditUserGroupResponseAminoMsg
+  ): MsgEditUserGroupResponse {
+    return MsgEditUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgEditUserGroupResponseProtoMsg
+  ): MsgEditUserGroupResponse {
+    return MsgEditUserGroupResponse.decode(message.value);
+  },
+  toProto(message: MsgEditUserGroupResponse): Uint8Array {
+    return MsgEditUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgEditUserGroupResponse
+  ): MsgEditUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgEditUserGroupResponse",
+      value: MsgEditUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgMoveUserGroup(): MsgMoveUserGroup {
@@ -1608,6 +2681,39 @@ export const MsgMoveUserGroup = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgMoveUserGroupAmino): MsgMoveUserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      newSectionId: object.new_section_id,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgMoveUserGroup): MsgMoveUserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.new_section_id = message.newSectionId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgMoveUserGroupAminoMsg): MsgMoveUserGroup {
+    return MsgMoveUserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgMoveUserGroupProtoMsg): MsgMoveUserGroup {
+    return MsgMoveUserGroup.decode(message.value);
+  },
+  toProto(message: MsgMoveUserGroup): Uint8Array {
+    return MsgMoveUserGroup.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMoveUserGroup): MsgMoveUserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroup",
+      value: MsgMoveUserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgMoveUserGroupResponse(): MsgMoveUserGroupResponse {
   return {};
@@ -1648,6 +2754,34 @@ export const MsgMoveUserGroupResponse = {
   ): MsgMoveUserGroupResponse {
     const message = createBaseMsgMoveUserGroupResponse();
     return message;
+  },
+  fromAmino(_: MsgMoveUserGroupResponseAmino): MsgMoveUserGroupResponse {
+    return {};
+  },
+  toAmino(_: MsgMoveUserGroupResponse): MsgMoveUserGroupResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgMoveUserGroupResponseAminoMsg
+  ): MsgMoveUserGroupResponse {
+    return MsgMoveUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgMoveUserGroupResponseProtoMsg
+  ): MsgMoveUserGroupResponse {
+    return MsgMoveUserGroupResponse.decode(message.value);
+  },
+  toProto(message: MsgMoveUserGroupResponse): Uint8Array {
+    return MsgMoveUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgMoveUserGroupResponse
+  ): MsgMoveUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroupResponse",
+      value: MsgMoveUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgSetUserGroupPermissions(): MsgSetUserGroupPermissions {
@@ -1745,6 +2879,55 @@ export const MsgSetUserGroupPermissions = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(
+    object: MsgSetUserGroupPermissionsAmino
+  ): MsgSetUserGroupPermissions {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => e)
+        : [],
+      signer: object.signer,
+    };
+  },
+  toAmino(
+    message: MsgSetUserGroupPermissions
+  ): MsgSetUserGroupPermissionsAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgSetUserGroupPermissionsAminoMsg
+  ): MsgSetUserGroupPermissions {
+    return MsgSetUserGroupPermissions.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSetUserGroupPermissionsProtoMsg
+  ): MsgSetUserGroupPermissions {
+    return MsgSetUserGroupPermissions.decode(message.value);
+  },
+  toProto(message: MsgSetUserGroupPermissions): Uint8Array {
+    return MsgSetUserGroupPermissions.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgSetUserGroupPermissions
+  ): MsgSetUserGroupPermissionsProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissions",
+      value: MsgSetUserGroupPermissions.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgSetUserGroupPermissionsResponse(): MsgSetUserGroupPermissionsResponse {
   return {};
@@ -1785,6 +2968,38 @@ export const MsgSetUserGroupPermissionsResponse = {
   >(_: I): MsgSetUserGroupPermissionsResponse {
     const message = createBaseMsgSetUserGroupPermissionsResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgSetUserGroupPermissionsResponseAmino
+  ): MsgSetUserGroupPermissionsResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgSetUserGroupPermissionsResponse
+  ): MsgSetUserGroupPermissionsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgSetUserGroupPermissionsResponseAminoMsg
+  ): MsgSetUserGroupPermissionsResponse {
+    return MsgSetUserGroupPermissionsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSetUserGroupPermissionsResponseProtoMsg
+  ): MsgSetUserGroupPermissionsResponse {
+    return MsgSetUserGroupPermissionsResponse.decode(message.value);
+  },
+  toProto(message: MsgSetUserGroupPermissionsResponse): Uint8Array {
+    return MsgSetUserGroupPermissionsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgSetUserGroupPermissionsResponse
+  ): MsgSetUserGroupPermissionsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissionsResponse",
+      value: MsgSetUserGroupPermissionsResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgDeleteUserGroup(): MsgDeleteUserGroup {
@@ -1863,6 +3078,37 @@ export const MsgDeleteUserGroup = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgDeleteUserGroupAmino): MsgDeleteUserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgDeleteUserGroup): MsgDeleteUserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteUserGroupAminoMsg): MsgDeleteUserGroup {
+    return MsgDeleteUserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteUserGroupProtoMsg): MsgDeleteUserGroup {
+    return MsgDeleteUserGroup.decode(message.value);
+  },
+  toProto(message: MsgDeleteUserGroup): Uint8Array {
+    return MsgDeleteUserGroup.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteUserGroup): MsgDeleteUserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroup",
+      value: MsgDeleteUserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgDeleteUserGroupResponse(): MsgDeleteUserGroupResponse {
   return {};
@@ -1903,6 +3149,34 @@ export const MsgDeleteUserGroupResponse = {
   ): MsgDeleteUserGroupResponse {
     const message = createBaseMsgDeleteUserGroupResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteUserGroupResponseAmino): MsgDeleteUserGroupResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteUserGroupResponse): MsgDeleteUserGroupResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgDeleteUserGroupResponseAminoMsg
+  ): MsgDeleteUserGroupResponse {
+    return MsgDeleteUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgDeleteUserGroupResponseProtoMsg
+  ): MsgDeleteUserGroupResponse {
+    return MsgDeleteUserGroupResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteUserGroupResponse): Uint8Array {
+    return MsgDeleteUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgDeleteUserGroupResponse
+  ): MsgDeleteUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroupResponse",
+      value: MsgDeleteUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgAddUserToUserGroup(): MsgAddUserToUserGroup {
@@ -1994,6 +3268,39 @@ export const MsgAddUserToUserGroup = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgAddUserToUserGroupAmino): MsgAddUserToUserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      user: object.user,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgAddUserToUserGroup): MsgAddUserToUserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.user = message.user;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAddUserToUserGroupAminoMsg): MsgAddUserToUserGroup {
+    return MsgAddUserToUserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAddUserToUserGroupProtoMsg): MsgAddUserToUserGroup {
+    return MsgAddUserToUserGroup.decode(message.value);
+  },
+  toProto(message: MsgAddUserToUserGroup): Uint8Array {
+    return MsgAddUserToUserGroup.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAddUserToUserGroup): MsgAddUserToUserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroup",
+      value: MsgAddUserToUserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgAddUserToUserGroupResponse(): MsgAddUserToUserGroupResponse {
   return {};
@@ -2034,6 +3341,38 @@ export const MsgAddUserToUserGroupResponse = {
   ): MsgAddUserToUserGroupResponse {
     const message = createBaseMsgAddUserToUserGroupResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgAddUserToUserGroupResponseAmino
+  ): MsgAddUserToUserGroupResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgAddUserToUserGroupResponse
+  ): MsgAddUserToUserGroupResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgAddUserToUserGroupResponseAminoMsg
+  ): MsgAddUserToUserGroupResponse {
+    return MsgAddUserToUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgAddUserToUserGroupResponseProtoMsg
+  ): MsgAddUserToUserGroupResponse {
+    return MsgAddUserToUserGroupResponse.decode(message.value);
+  },
+  toProto(message: MsgAddUserToUserGroupResponse): Uint8Array {
+    return MsgAddUserToUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgAddUserToUserGroupResponse
+  ): MsgAddUserToUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroupResponse",
+      value: MsgAddUserToUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgRemoveUserFromUserGroup(): MsgRemoveUserFromUserGroup {
@@ -2125,6 +3464,49 @@ export const MsgRemoveUserFromUserGroup = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(
+    object: MsgRemoveUserFromUserGroupAmino
+  ): MsgRemoveUserFromUserGroup {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      user: object.user,
+      signer: object.signer,
+    };
+  },
+  toAmino(
+    message: MsgRemoveUserFromUserGroup
+  ): MsgRemoveUserFromUserGroupAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.user = message.user;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemoveUserFromUserGroupAminoMsg
+  ): MsgRemoveUserFromUserGroup {
+    return MsgRemoveUserFromUserGroup.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemoveUserFromUserGroupProtoMsg
+  ): MsgRemoveUserFromUserGroup {
+    return MsgRemoveUserFromUserGroup.decode(message.value);
+  },
+  toProto(message: MsgRemoveUserFromUserGroup): Uint8Array {
+    return MsgRemoveUserFromUserGroup.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemoveUserFromUserGroup
+  ): MsgRemoveUserFromUserGroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup",
+      value: MsgRemoveUserFromUserGroup.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgRemoveUserFromUserGroupResponse(): MsgRemoveUserFromUserGroupResponse {
   return {};
@@ -2165,6 +3547,38 @@ export const MsgRemoveUserFromUserGroupResponse = {
   >(_: I): MsgRemoveUserFromUserGroupResponse {
     const message = createBaseMsgRemoveUserFromUserGroupResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgRemoveUserFromUserGroupResponseAmino
+  ): MsgRemoveUserFromUserGroupResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgRemoveUserFromUserGroupResponse
+  ): MsgRemoveUserFromUserGroupResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemoveUserFromUserGroupResponseAminoMsg
+  ): MsgRemoveUserFromUserGroupResponse {
+    return MsgRemoveUserFromUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemoveUserFromUserGroupResponseProtoMsg
+  ): MsgRemoveUserFromUserGroupResponse {
+    return MsgRemoveUserFromUserGroupResponse.decode(message.value);
+  },
+  toProto(message: MsgRemoveUserFromUserGroupResponse): Uint8Array {
+    return MsgRemoveUserFromUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemoveUserFromUserGroupResponse
+  ): MsgRemoveUserFromUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroupResponse",
+      value: MsgRemoveUserFromUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgSetUserPermissions(): MsgSetUserPermissions {
@@ -2272,6 +3686,47 @@ export const MsgSetUserPermissions = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgSetUserPermissionsAmino): MsgSetUserPermissions {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      user: object.user,
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => e)
+        : [],
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgSetUserPermissions): MsgSetUserPermissionsAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.user = message.user;
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgSetUserPermissionsAminoMsg): MsgSetUserPermissions {
+    return MsgSetUserPermissions.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgSetUserPermissionsProtoMsg): MsgSetUserPermissions {
+    return MsgSetUserPermissions.decode(message.value);
+  },
+  toProto(message: MsgSetUserPermissions): Uint8Array {
+    return MsgSetUserPermissions.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSetUserPermissions): MsgSetUserPermissionsProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissions",
+      value: MsgSetUserPermissions.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgSetUserPermissionsResponse(): MsgSetUserPermissionsResponse {
   return {};
@@ -2312,5 +3767,37 @@ export const MsgSetUserPermissionsResponse = {
   ): MsgSetUserPermissionsResponse {
     const message = createBaseMsgSetUserPermissionsResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgSetUserPermissionsResponseAmino
+  ): MsgSetUserPermissionsResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgSetUserPermissionsResponse
+  ): MsgSetUserPermissionsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgSetUserPermissionsResponseAminoMsg
+  ): MsgSetUserPermissionsResponse {
+    return MsgSetUserPermissionsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSetUserPermissionsResponseProtoMsg
+  ): MsgSetUserPermissionsResponse {
+    return MsgSetUserPermissionsResponse.decode(message.value);
+  },
+  toProto(message: MsgSetUserPermissionsResponse): Uint8Array {
+    return MsgSetUserPermissionsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgSetUserPermissionsResponse
+  ): MsgSetUserPermissionsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissionsResponse",
+      value: MsgSetUserPermissionsResponse.encode(message).finish(),
+    };
   },
 };

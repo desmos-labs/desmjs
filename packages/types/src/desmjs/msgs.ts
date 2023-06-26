@@ -15,6 +15,21 @@ export interface MsgAuthenticate {
   /** Nonce to avoid double spending attacks */
   nonce: Uint8Array;
 }
+export interface MsgAuthenticateProtoMsg {
+  typeUrl: "/desmsjs.v2.MsgAuthenticate";
+  value: Uint8Array;
+}
+/** MsgAuthenticate represents the message used to authenticate a user */
+export interface MsgAuthenticateAmino {
+  /** Address of the user to authenticate */
+  user: string;
+  /** Nonce to avoid double spending attacks */
+  nonce: Uint8Array;
+}
+export interface MsgAuthenticateAminoMsg {
+  type: "/desmsjs.v2.MsgAuthenticate";
+  value: MsgAuthenticateAmino;
+}
 function createBaseMsgAuthenticate(): MsgAuthenticate {
   return {
     user: "",
@@ -78,5 +93,32 @@ export const MsgAuthenticate = {
     message.user = object.user ?? "";
     message.nonce = object.nonce ?? new Uint8Array();
     return message;
+  },
+  fromAmino(object: MsgAuthenticateAmino): MsgAuthenticate {
+    return {
+      user: object.user,
+      nonce: object.nonce,
+    };
+  },
+  toAmino(message: MsgAuthenticate): MsgAuthenticateAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    obj.nonce = message.nonce;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAuthenticateAminoMsg): MsgAuthenticate {
+    return MsgAuthenticate.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAuthenticateProtoMsg): MsgAuthenticate {
+    return MsgAuthenticate.decode(message.value);
+  },
+  toProto(message: MsgAuthenticate): Uint8Array {
+    return MsgAuthenticate.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAuthenticate): MsgAuthenticateProtoMsg {
+    return {
+      typeUrl: "/desmsjs.v2.MsgAuthenticate",
+      value: MsgAuthenticate.encode(message).finish(),
+    };
   },
 };
