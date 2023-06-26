@@ -8,7 +8,7 @@ import {
   ChainConfig,
   Proof,
   SignatureValueType,
-  SingleSignature,
+  SingleSignature
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
@@ -18,18 +18,13 @@ import Long from "long";
 import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
-import {
-  defaultGasPrice,
-  TEST_CHAIN_URL,
-  testUser1,
-  testUser2,
-} from "./testutils";
+import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
   getSignatureBytes,
   getSignedBytes,
-  SignatureResult,
+  SignatureResult
 } from "./signatureresult";
 import {
   MsgAddReactionEncodeObject,
@@ -41,12 +36,9 @@ import {
   MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
-  MsgSaveProfileEncodeObject,
+  MsgSaveProfileEncodeObject
 } from "./encodeobjects";
-import {
-  bech32AddressToAny,
-  singleSignatureToAny,
-} from "./aminomessages/profiles";
+import { bech32AddressToAny, singleSignatureToAny } from "./aminomessages/profiles";
 import { postTargetToAny } from "./aminomessages/reports";
 import { registeredReactionValueToAny } from "./aminomessages/reactions";
 import {
@@ -58,9 +50,13 @@ import {
   MsgCreateReportTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgMultiSendTypeUrl,
-  MsgSaveProfileTypeUrl,
+  MsgSaveProfileTypeUrl
 } from "./const";
 import MsgAuthenticateTypeUrl from "./const/desmjs";
+import { MsgVoteTypeUrl as MsgVoteV1TypeUrl } from "./modules/gov/v1/const";
+import { MsgVote as MsgVoteV1 } from "@desmoslabs/desmjs-types/cosmos/gov/v1/tx";
+import { VoteOption } from "@desmoslabs/desmjs-types/cosmos/gov/v1/gov";
+import { MsgVoteEncodeObject as MsgVoteV1EncodeObject } from "./modules/gov/v1/encodeobjects";
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
@@ -833,4 +829,44 @@ describe("DesmosClient", () => {
       await client.broadcastTxBlock(signResult.txRaw);
     });
   });
+
+  describe("/cosmos.gov.v1", () => {
+
+    it("MsgVote direct", async () => {
+      const [signer, client] = await getDirectSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const signResult = await client.signTx(address, [
+        {
+          typeUrl: MsgVoteV1TypeUrl,
+          value: MsgVoteV1.fromPartial({
+            proposalId: Long.fromNumber(1),
+            option: VoteOption.VOTE_OPTION_YES,
+            voter: address,
+          }),
+        } as MsgVoteV1EncodeObject,
+      ]);
+      const result = await client.broadcastTxBlock(signResult.txRaw);
+      expect(result.checkTx.code).toBe(0);
+    });
+
+    it("MsgVote amino", async () => {
+      const [signer, client] = await getAminoSignerAndClient();
+      const { address } = (await signer.getAccounts())[0];
+
+      const signResult = await client.signTx(address, [
+        {
+          typeUrl: MsgVoteV1TypeUrl,
+          value: MsgVoteV1.fromPartial({
+            proposalId: Long.fromNumber(1),
+            option: VoteOption.VOTE_OPTION_YES,
+            voter: address,
+          }),
+        } as MsgVoteV1EncodeObject,
+      ]);
+      const result = await client.broadcastTxBlock(signResult.txRaw);
+      expect(result.checkTx.log).toBe("[]");
+      expect(result.checkTx.code).toBe(0);
+    });
+  })
 });
