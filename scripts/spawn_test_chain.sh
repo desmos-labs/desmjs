@@ -30,15 +30,21 @@ desmos() {
 rm -r -f "$DESMOS_HOME"
 desmos tendermint unsafe-reset-all
 desmos init testchain --chain-id=testchain
+
 # Add a default reason to the reports module params
 jq '.app_state.reports.params.standard_reasons[0] |= . + {"id":"1","title":"Spam","description":"Spam user or content"}' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
 mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 
-(echo "$USER1_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER1" --recover --keyring-backend=file
-(echo "$USER2_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER2" --recover --keyring-backend=file
-echo $KEYRING_PASS | desmos add-genesis-account $USER1 200000000000000stake --keyring-backend=file
-echo $KEYRING_PASS | desmos add-genesis-account $USER2 200000000000000stake --keyring-backend=file
-echo $KEYRING_PASS | desmos gentx $USER1 100000000000stake --amount 100000000000stake --chain-id=testchain --keyring-backend=file
+# Add a proposal to the genesis file
+jq '.app_state.gov.proposals += [{"id": "1", "messages": [], "status": 2, "totalDeposit": [], "metadata": "", "submit_time": "2023-06-26T19:03:16.004Z", "voting_end_time": "3000-06-26T20:03:16.004Z", "voting_start_time": "2023-06-26T19:04:16.004Z"}]' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
+mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
+
+
+(echo "$USER1_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER1" --recover --keyring-backend=test
+(echo "$USER2_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER2" --recover --keyring-backend=test
+echo $KEYRING_PASS | desmos add-genesis-account $USER1 200000000000000stake --keyring-backend=test
+echo $KEYRING_PASS | desmos add-genesis-account $USER2 200000000000000stake --keyring-backend=test
+echo $KEYRING_PASS | desmos gentx $USER1 100000000000stake --amount 100000000000stake --chain-id=testchain --keyring-backend=test
 desmos collect-gentxs
 
 
