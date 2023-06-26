@@ -4574,6 +4574,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@desmoslabs/desmjs-types@workspace:packages/types"
   dependencies:
+    "@cosmjs/proto-signing": ^0.30.1
     "@osmonauts/telescope": ^0.97.0
     "@protobufs/cosmos": ^0.1.0
     "@protobufs/cosmos_proto": ^0.0.10
@@ -4584,6 +4585,7 @@ __metadata:
     long: ^4.0.0
     prettier: ^2.8.8
     protobufjs: ^7.2.3
+    ts-node: ^10.9.1
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft

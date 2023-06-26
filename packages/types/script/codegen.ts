@@ -1,15 +1,17 @@
-#!/usr/bin/env node
-
-const { join } = require("path");
-const { writeSync, writeFileSync, appendFileSync, readFileSync, openSync, close } = require("fs");
-const telescope = require("@osmonauts/telescope").default;
-const fs = require("fs");
+import { join } from "path";
+import * as fs from "fs";
+import telescope from "@osmonauts/telescope";
 
 const outPath = join(__dirname, "/../src");
 
-function appendImport(file, content) {
+interface PatchFunction {
+  readonly functionName: string;
+  readonly newDefinition: string;
+}
+
+function appendImport(file: string, content: string) {
   // Read the file contents
-  const data = readFileSync(file);
+  const data = fs.readFileSync(file);
   // Search the last import statement
   const last_import_index = data.lastIndexOf("import");
   if (last_import_index === -1) {
@@ -20,21 +22,21 @@ function appendImport(file, content) {
   const append_start = data.indexOf(";", last_import_index);
 
   // Open the file
-  const fd = openSync(file, "w+");
+  const fd = fs.openSync(file, "w+");
   // Write the original imports
-  writeSync(fd, data, 0, append_start);
+  fs.writeSync(fd, data, 0, append_start);
   // Write the new import statements.
-  appendFileSync(fd, content, {
+  fs.appendFileSync(fd, content, {
     encoding: "utf8"
   });
   // Append the old content.
-  writeSync(fd, data, append_start, data.length - append_start);
+  fs.writeSync(fd, data, append_start, data.length - append_start);
   // Close the file.
-  close(fd);
+  fs.close(fd);
 }
 
-function patchFunctions(file, definitions) {
-  fs.readFile(file, "utf8", (err, data) => {
+function patchFunctions(file: string, definitions: PatchFunction[]) {
+  fs.readFile(file, "utf8", (err: any, data: string) => {
     if (err) {
       console.error("Error reading file:", err);
       return;
@@ -59,7 +61,7 @@ function patchFunctions(file, definitions) {
       content = beforeString + newDefinition + afterString;
     }
 
-    fs.writeFile(file, content, "utf8", (err) => {
+    fs.writeFile(file, content, "utf8", (err: any) => {
       if (err) {
         console.error("Error writing to file:", err);
       }
@@ -269,7 +271,7 @@ telescope({
 
     export { DeepPartial, Exact } from "./helpers";
     `;
-  writeFileSync(`${outPath}/index.ts`, index_ts);
+  fs.writeFileSync(`${outPath}/index.ts`, index_ts);
 
   // Patch timestamp fromAmino and toAmino
   const timestampFile = `${outPath}/google/protobuf/timestamp.ts`;
@@ -319,7 +321,7 @@ telescope({
   ]);
 
   console.log("✨ All Done!");
-}, (e) => {
+}, (e: any) => {
   console.error(e);
   process.exit(1);
 });
