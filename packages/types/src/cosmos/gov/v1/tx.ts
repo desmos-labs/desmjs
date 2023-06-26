@@ -113,7 +113,7 @@ export interface MsgVoteAmino {
   proposal_id: string;
   voter: string;
   option: VoteOption;
-  metadata: string;
+  metadata?: string;
 }
 export interface MsgVoteAminoMsg {
   type: "cosmos-sdk/v1/MsgVote";
@@ -714,8 +714,8 @@ export const MsgVote = {
     return {
       proposalId: Long.fromString(object.proposal_id),
       voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: object.metadata,
+      option: isSet(object.option) ? object.option : 0,
+      metadata: object.metadata ?? "",
     };
   },
   toAmino(message: MsgVote): MsgVoteAmino {
@@ -725,7 +725,7 @@ export const MsgVote = {
       : undefined;
     obj.voter = message.voter;
     obj.option = message.option;
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
