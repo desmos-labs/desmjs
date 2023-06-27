@@ -13,6 +13,7 @@ import {
   MsgRevokeTreasuryAuthorization,
   MsgRevokeTreasuryAuthorizationResponse,
 } from "./msgs_treasury";
+
 export const protobufPackage = "desmos.subspaces.v3";
 /** MsgCreateSubspace represents the message used to create a subspace */
 export interface MsgCreateSubspace {

@@ -111,8 +111,7 @@ export interface MsgExecLegacyContentProtoMsg {
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContentAmino {
-  /** content is the proposal's content. */
-  content?: AnyAmino;
+  content?: AminoMsg;
   /** authority must be the gov module address. */
   authority: string;
 }
@@ -196,8 +195,7 @@ export interface MsgVoteWeightedAmino {
   voter: string;
   /** options defines the weighted vote options. */
   options: WeightedVoteOptionAmino[];
-  /** metadata is any arbitrary metadata attached to the VoteWeighted. */
-  metadata: string;
+  metadata?: string;
 }
 export interface MsgVoteWeightedAminoMsg {
   type: "cosmos-sdk/v1/MsgVoteWeighted";
@@ -666,15 +664,37 @@ export const MsgExecLegacyContent = {
     message.authority = object.authority ?? "";
     return message;
   },
-  fromAmino(object: MsgExecLegacyContentAmino): MsgExecLegacyContent {
+  fromAmino(
+    object: MsgExecLegacyContentAmino,
+    aminoConverter?: AminoConverter
+  ): MsgExecLegacyContent {
+    if (aminoConverter === undefined) {
+      throw new Error(
+        "Can't convert to MsgExecLegacyContent from amino without an AminoConverter instance"
+      );
+    }
+
     return {
-      content: object?.content ? Any.fromAmino(object.content) : undefined,
+      content: object?.content
+        ? aminoConverter.toAny(object.content)
+        : undefined,
       authority: object.authority,
     };
   },
-  toAmino(message: MsgExecLegacyContent): MsgExecLegacyContentAmino {
+  toAmino(
+    message: MsgExecLegacyContent,
+    converter?: AminoConverter
+  ): MsgExecLegacyContentAmino {
+    if (converter === undefined) {
+      throw new Error(
+        "Can't convert to MsgExecLegacyContent from amino without an AminoConverter instance"
+      );
+    }
+
     const obj: any = {};
-    obj.content = message.content ? Any.toAmino(message.content) : undefined;
+    obj.content = message.content
+      ? converter.fromAny(message.content)
+      : undefined;
     obj.authority = message.authority;
     return obj;
   },
@@ -1072,7 +1092,7 @@ export const MsgVoteWeighted = {
       options: Array.isArray(object?.options)
         ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e))
         : [],
-      metadata: object.metadata,
+      metadata: object.metadata ?? "",
     };
   },
   toAmino(message: MsgVoteWeighted): MsgVoteWeightedAmino {
@@ -1088,7 +1108,9 @@ export const MsgVoteWeighted = {
     } else {
       obj.options = [];
     }
-    obj.metadata = message.metadata;
+    if (message.metadata !== "") {
+      obj.metadata = message.metadata;
+    }
     return obj;
   },
   fromAminoMsg(object: MsgVoteWeightedAminoMsg): MsgVoteWeighted {
