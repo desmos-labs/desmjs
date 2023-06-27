@@ -1,8 +1,5 @@
 import * as fs from "fs";
 import { Project, SyntaxKind } from "ts-morph";
-import { join } from "path";
-
-const outPath = join(__dirname, "/../src");
 
 export interface PatchMethod {
   readonly object: string;
