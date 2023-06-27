@@ -5,7 +5,7 @@ export const OutputPath = join(__dirname, "/../../src");
 
 export const TelescopeConfig: TelescopeInput = {
   protoDirs: [
-    "proto-files/proto",
+    "proto-files",
     "proto"
   ],
   outPath: OutputPath,
