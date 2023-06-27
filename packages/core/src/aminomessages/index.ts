@@ -26,8 +26,10 @@ import { createSubspacesConverters, subspacesRegistryTypes } from "./subspaces";
 import { createPostsConverters, postsRegistryTypes } from "./posts";
 import { createReactionsConverters, reactionsRegistryTypes } from "./reactions";
 import { createReportsConverters, reportsRegistryTypes } from "./reports";
+import GovV1Beta1AminoConverter from "../modules/gov/v1beta1/aminoconverter";
 import GovV1AminoConverter from "../modules/gov/v1/aminoconverter";
 import GovV1Registry from "../modules/gov/v1/registry";
+import GovV1Beta1Registry from "../modules/gov/v1beta1/registry";
 
 export * from "./cosmos/authz/messages";
 export * from "./cosmos/bank/messages";
@@ -44,6 +46,7 @@ export function createDesmosTypes(): AminoConverters {
     ...createBankAminoConverters(),
     ...createDistributionAminoConverters(),
     ...createGovAminoConverters(),
+    ...GovV1Beta1AminoConverter,
     ...GovV1AminoConverter,
     ...createStakingAminoConverters(),
     ...createIbcAminoConverters(),
@@ -66,6 +69,7 @@ export function createDesmosTypes(): AminoConverters {
 
 export const desmosRegistryTypes: ReadonlyArray<[string, GeneratedType]> = [
   ...defaultRegistryTypes,
+  ...GovV1Beta1Registry,
   ...GovV1Registry,
 
   ...cosmosRegistryTypes,
