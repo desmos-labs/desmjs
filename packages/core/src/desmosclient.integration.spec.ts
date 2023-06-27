@@ -18,7 +18,15 @@ import Long from "long";
 import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
-import { defaultGasPrice, TEST_CHAIN_URL, testUser1, testUser2 } from "./testutils";
+import {
+  defaultGasPrice,
+  getAminoSignerAndClient,
+  getDirectSignerAndClient,
+  pollTx,
+  TEST_CHAIN_URL,
+  testUser1,
+  testUser2
+} from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
@@ -60,64 +68,6 @@ import { MsgVoteEncodeObject as MsgVoteV1EncodeObject } from "./modules/gov/v1/e
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
-
-  /**
-   * Builds a Signer and DesmosClient instance based on a test mnemonic.
-   * The returned signer will sign transactions using the AMINO signing mode.
-   */
-  async function getAminoSignerAndClient(): Promise<[Signer, DesmosClient]> {
-    const signer = await OfflineSignerAdapter.fromMnemonic(
-      SigningMode.AMINO,
-      testUser1.mnemonic
-    );
-    const client = await DesmosClient.connectWithSigner(
-      TEST_CHAIN_URL,
-      signer,
-      {
-        gasPrice: defaultGasPrice,
-        gasAdjustment: 1.5,
-      }
-    );
-    return [signer, client];
-  }
-
-  /**
-   * Builds a Signer and DesmosClient instance based on a test mnemonic.
-   * The returned signer will sign transactions using the DIRECT signing mode.
-   */
-  async function getDirectSignerAndClient(): Promise<[Signer, DesmosClient]> {
-    const signer = await OfflineSignerAdapter.fromMnemonic(
-      SigningMode.DIRECT,
-      testUser1.mnemonic
-    );
-    const client = await DesmosClient.connectWithSigner(
-      TEST_CHAIN_URL,
-      signer,
-      {
-        gasPrice: defaultGasPrice,
-        gasAdjustment: 1.8,
-      }
-    );
-    return [signer, client];
-  }
-
-  async function pollTx(client: DesmosClient, txHash: string): Promise<void> {
-    let timedOut = false;
-    const txPollTimeout = setTimeout(() => {
-      timedOut = true;
-    }, 60000);
-
-    while (!timedOut) {
-      const tx = await client.getTx(txHash);
-      if (tx !== null) {
-        clearTimeout(txPollTimeout);
-        return;
-      }
-      await sleep(3000);
-    }
-
-    throw new Error(`Timed out waiting for tx ${txHash}`);
-  }
 
   describe("SignatureResult utils", () => {
     async function getSignatureResult(): Promise<SignatureResult> {
