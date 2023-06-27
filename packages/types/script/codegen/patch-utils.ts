@@ -34,7 +34,7 @@ export function appendImport(file: string, content: string) {
     encoding: "utf8"
   });
   // Append the old content.
-  fs.writeSync(fd, data, append_start, data.length - append_start);
+  fs.writeSync(fd, data, append_start + 1, data.length - append_start - 1);
   // Close the file.
   fs.close(fd);
 }
