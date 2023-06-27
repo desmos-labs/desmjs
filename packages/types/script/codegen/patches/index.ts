@@ -7,7 +7,6 @@ import * as fs from "fs";
 export async function patchModules(outputPath: string): Promise<void> {
   await patchGovV1(outputPath);
   patchProfilesV3(outputPath);
-  patchProfilesV3(outputPath);
   patchSubspacesV3(outputPath);
   await patchGoogleProtobuf(outputPath);
 
