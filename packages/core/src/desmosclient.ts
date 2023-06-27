@@ -1,6 +1,5 @@
 import {
   Account,
-  AminoTypes,
   calculateFee,
   DeliverTxResponse,
   MsgTransferEncodeObject,
@@ -67,6 +66,7 @@ import {
   BroadcastResponse,
   SyncBroadcastResponse,
 } from "./types/responses";
+import { AminoTypes } from "./aminotypes";
 
 export interface SimulateOptions {
   publicKey?: PublicKey;
@@ -222,10 +222,13 @@ export class DesmosClient extends SigningCosmWasmClient {
     options: Options,
     signer: Signer = new NoOpSigner()
   ) {
-    const {
-      registry = createDefaultRegistry(),
-      aminoTypes = new AminoTypes(createDesmosTypes()),
-    } = options;
+    const newAminoTypes = new AminoTypes(
+      createDesmosTypes(),
+      createDefaultRegistry()
+    );
+
+    const { registry = createDefaultRegistry(), aminoTypes = newAminoTypes } =
+      options;
 
     super(client, signer, {
       registry,
@@ -236,7 +239,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
     this.txSigner = signer;
     this.typesRegistry = registry;
-    this.types = aminoTypes;
+    this.types = newAminoTypes;
     this.options = options;
   }
 
