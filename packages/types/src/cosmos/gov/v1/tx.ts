@@ -12,6 +12,9 @@ import {
 } from "./gov";
 import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { AminoMsg } from "@cosmjs/amino";
+import { AminoConverter } from "../../../aminoconverter";
+
 export const protobufPackage = "cosmos.gov.v1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -48,14 +51,12 @@ export interface MsgSubmitProposalProtoMsg {
  * proposal Content.
  */
 export interface MsgSubmitProposalAmino {
-  /** messages are the arbitrary messages to be executed if proposal passes. */
-  messages: AnyAmino[];
+  messages?: AminoMsg[];
   /** initial_deposit is the deposit value that must be paid at proposal submission. */
   initial_deposit: CoinAmino[];
   /** proposer is the account address of the proposer. */
   proposer: string;
-  /** metadata is any arbitrary metadata attached to the proposal. */
-  metadata: string;
+  metadata?: string;
   /**
    * title is the title of the proposal.
    *
@@ -428,28 +429,39 @@ export const MsgSubmitProposal = {
     message.summary = object.summary ?? "";
     return message;
   },
-  fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
+  fromAmino(
+    object: MsgSubmitProposalAmino,
+    converter?: AminoConverter
+  ): MsgSubmitProposal {
+    if (converter === undefined) {
+      throw new Error(
+        "Can't convert to MsgSubmitProposal from amino without an AminoConverter instance"
+      );
+    }
     return {
-      messages: Array.isArray(object?.messages)
-        ? object.messages.map((e: any) => Any.fromAmino(e))
-        : [],
+      messages: object.messages?.map((m) => converter.toAny(m)) ?? [],
       initialDeposit: Array.isArray(object?.initial_deposit)
         ? object.initial_deposit.map((e: any) => Coin.fromAmino(e))
         : [],
       proposer: object.proposer,
-      metadata: object.metadata,
+      metadata: object.metadata ?? "",
       title: object.title,
       summary: object.summary,
     };
   },
-  toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
-    const obj: any = {};
-    if (message.messages) {
-      obj.messages = message.messages.map((e) =>
-        e ? Any.toAmino(e) : undefined
+  toAmino(
+    message: MsgSubmitProposal,
+    converter?: AminoConverter
+  ): MsgSubmitProposalAmino {
+    if (converter === undefined) {
+      throw new Error(
+        "Can't convert to MsgSubmitProposal to amino without an AminoConverter instance"
       );
-    } else {
-      obj.messages = [];
+    }
+
+    const obj: any = {};
+    if (message.messages && message.messages.length > 0) {
+      obj.messages = message.messages.map((m) => converter.fromAny(m));
     }
     if (message.initialDeposit) {
       obj.initial_deposit = message.initialDeposit.map((e) =>
@@ -459,7 +471,9 @@ export const MsgSubmitProposal = {
       obj.initial_deposit = [];
     }
     obj.proposer = message.proposer;
-    obj.metadata = message.metadata;
+    if (message.metadata !== "") {
+      obj.metadata = message.metadata;
+    }
     obj.title = message.title;
     obj.summary = message.summary;
     return obj;
