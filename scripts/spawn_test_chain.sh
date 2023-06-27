@@ -36,9 +36,12 @@ jq '.app_state.reports.params.standard_reasons[0] |= . + {"id":"1","title":"Spam
 mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 
 # Add a proposal to the genesis file
-jq '.app_state.gov.proposals += [{"id": "1", "messages": [], "status": 2, "totalDeposit": [], "metadata": "", "submit_time": "2023-06-26T19:03:16.004Z", "voting_end_time": "3000-06-26T20:03:16.004Z", "voting_start_time": "2023-06-26T19:04:16.004Z"}]' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
+jq '.app_state.gov.proposals += [{"id": "1", "messages": [], "status": 2, "totalDeposit": [], "metadata": "", "submit_time": "2000-06-26T19:03:16.004Z", "voting_end_time": "3000-06-26T20:03:16.004Z", "voting_start_time": "2000-06-26T19:04:16.004Z"}]' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
 mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 
+# Update gov module starting proposal id
+jq '.app_state.gov.starting_proposal_id = "2"' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
+mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 
 (echo "$USER1_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER1" --recover --keyring-backend=test
 (echo "$USER2_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER2" --recover --keyring-backend=test
