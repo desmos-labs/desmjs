@@ -159,7 +159,7 @@ export interface BlockIDAminoMsg {
   type: "/tendermint.types.BlockID";
   value: BlockIDAmino;
 }
-/** Header defines the structure of a Tendermint block header. */
+/** Header defines the structure of a block header. */
 export interface Header {
   /** basic block info */
   version?: Consensus;
@@ -189,7 +189,7 @@ export interface HeaderProtoMsg {
   typeUrl: "/tendermint.types.Header";
   value: Uint8Array;
 }
-/** Header defines the structure of a Tendermint block header. */
+/** Header defines the structure of a block header. */
 export interface HeaderAmino {
   /** basic block info */
   version?: ConsensusAmino;
@@ -253,7 +253,6 @@ export interface Vote {
   type: SignedMsgType;
   height: Long;
   round: number;
-  /** zero if vote is nil. */
   blockId?: BlockID;
   timestamp?: Timestamp;
   validatorAddress: Uint8Array;
@@ -272,7 +271,6 @@ export interface VoteAmino {
   type: SignedMsgType;
   height: string;
   round: number;
-  /** zero if vote is nil. */
   block_id?: BlockIDAmino;
   timestamp?: TimestampAmino;
   validator_address: Uint8Array;

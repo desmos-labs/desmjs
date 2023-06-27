@@ -5,6 +5,7 @@ import {
   MsgVote,
   MsgVoteWeighted,
   MsgDeposit,
+  MsgUpdateParams,
 } from "./tx";
 export const AminoConverter = {
   "/cosmos.gov.v1.MsgSubmitProposal": {
@@ -31,5 +32,10 @@ export const AminoConverter = {
     aminoType: "cosmos-sdk/v1/MsgDeposit",
     toAmino: MsgDeposit.toAmino,
     fromAmino: MsgDeposit.fromAmino,
+  },
+  "/cosmos.gov.v1.MsgUpdateParams": {
+    aminoType: "cosmos-sdk/x/gov/v1/MsgUpdateParams",
+    toAmino: MsgUpdateParams.toAmino,
+    fromAmino: MsgUpdateParams.fromAmino,
   },
 };

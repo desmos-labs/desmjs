@@ -270,6 +270,62 @@ export interface QueryConsensusStatesResponseAminoMsg {
   value: QueryConsensusStatesResponseAmino;
 }
 /**
+ * QueryConsensusStateHeightsRequest is the request type for Query/ConsensusStateHeights
+ * RPC method.
+ */
+export interface QueryConsensusStateHeightsRequest {
+  /** client identifier */
+  clientId: string;
+  /** pagination request */
+  pagination?: PageRequest;
+}
+export interface QueryConsensusStateHeightsRequestProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateHeightsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryConsensusStateHeightsRequest is the request type for Query/ConsensusStateHeights
+ * RPC method.
+ */
+export interface QueryConsensusStateHeightsRequestAmino {
+  /** client identifier */
+  client_id: string;
+  /** pagination request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryConsensusStateHeightsRequestAminoMsg {
+  type: "cosmos-sdk/QueryConsensusStateHeightsRequest";
+  value: QueryConsensusStateHeightsRequestAmino;
+}
+/**
+ * QueryConsensusStateHeightsResponse is the response type for the
+ * Query/ConsensusStateHeights RPC method
+ */
+export interface QueryConsensusStateHeightsResponse {
+  /** consensus state heights */
+  consensusStateHeights: Height[];
+  /** pagination response */
+  pagination?: PageResponse;
+}
+export interface QueryConsensusStateHeightsResponseProtoMsg {
+  typeUrl: "/ibc.core.client.v1.QueryConsensusStateHeightsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryConsensusStateHeightsResponse is the response type for the
+ * Query/ConsensusStateHeights RPC method
+ */
+export interface QueryConsensusStateHeightsResponseAmino {
+  /** consensus state heights */
+  consensus_state_heights: HeightAmino[];
+  /** pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryConsensusStateHeightsResponseAminoMsg {
+  type: "cosmos-sdk/QueryConsensusStateHeightsResponse";
+  value: QueryConsensusStateHeightsResponseAmino;
+}
+/**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
@@ -1491,6 +1547,268 @@ export const QueryConsensusStatesResponse = {
     };
   },
 };
+function createBaseQueryConsensusStateHeightsRequest(): QueryConsensusStateHeightsRequest {
+  return {
+    clientId: "",
+    pagination: undefined,
+  };
+}
+export const QueryConsensusStateHeightsRequest = {
+  encode(
+    message: QueryConsensusStateHeightsRequest,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    if (message.clientId !== "") {
+      writer.uint32(10).string(message.clientId);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryConsensusStateHeightsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryConsensusStateHeightsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.clientId = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): QueryConsensusStateHeightsRequest {
+    return {
+      clientId: isSet(object.clientId) ? String(object.clientId) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+  toJSON(message: QueryConsensusStateHeightsRequest): unknown {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<QueryConsensusStateHeightsRequest>, I>
+  >(object: I): QueryConsensusStateHeightsRequest {
+    const message = createBaseQueryConsensusStateHeightsRequest();
+    message.clientId = object.clientId ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+  fromAmino(
+    object: QueryConsensusStateHeightsRequestAmino
+  ): QueryConsensusStateHeightsRequest {
+    return {
+      clientId: object.client_id,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryConsensusStateHeightsRequest
+  ): QueryConsensusStateHeightsRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryConsensusStateHeightsRequestAminoMsg
+  ): QueryConsensusStateHeightsRequest {
+    return QueryConsensusStateHeightsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: QueryConsensusStateHeightsRequest
+  ): QueryConsensusStateHeightsRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConsensusStateHeightsRequest",
+      value: QueryConsensusStateHeightsRequest.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: QueryConsensusStateHeightsRequestProtoMsg
+  ): QueryConsensusStateHeightsRequest {
+    return QueryConsensusStateHeightsRequest.decode(message.value);
+  },
+  toProto(message: QueryConsensusStateHeightsRequest): Uint8Array {
+    return QueryConsensusStateHeightsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryConsensusStateHeightsRequest
+  ): QueryConsensusStateHeightsRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryConsensusStateHeightsRequest",
+      value: QueryConsensusStateHeightsRequest.encode(message).finish(),
+    };
+  },
+};
+function createBaseQueryConsensusStateHeightsResponse(): QueryConsensusStateHeightsResponse {
+  return {
+    consensusStateHeights: [],
+    pagination: undefined,
+  };
+}
+export const QueryConsensusStateHeightsResponse = {
+  encode(
+    message: QueryConsensusStateHeightsResponse,
+    writer: _m0.Writer = _m0.Writer.create()
+  ): _m0.Writer {
+    for (const v of message.consensusStateHeights) {
+      Height.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number
+  ): QueryConsensusStateHeightsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryConsensusStateHeightsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.consensusStateHeights.push(
+            Height.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): QueryConsensusStateHeightsResponse {
+    return {
+      consensusStateHeights: Array.isArray(object?.consensusStateHeights)
+        ? object.consensusStateHeights.map((e: any) => Height.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+  toJSON(message: QueryConsensusStateHeightsResponse): unknown {
+    const obj: any = {};
+    if (message.consensusStateHeights) {
+      obj.consensusStateHeights = message.consensusStateHeights.map((e) =>
+        e ? Height.toJSON(e) : undefined
+      );
+    } else {
+      obj.consensusStateHeights = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<QueryConsensusStateHeightsResponse>, I>
+  >(object: I): QueryConsensusStateHeightsResponse {
+    const message = createBaseQueryConsensusStateHeightsResponse();
+    message.consensusStateHeights =
+      object.consensusStateHeights?.map((e) => Height.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+  fromAmino(
+    object: QueryConsensusStateHeightsResponseAmino
+  ): QueryConsensusStateHeightsResponse {
+    return {
+      consensusStateHeights: Array.isArray(object?.consensus_state_heights)
+        ? object.consensus_state_heights.map((e: any) => Height.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryConsensusStateHeightsResponse
+  ): QueryConsensusStateHeightsResponseAmino {
+    const obj: any = {};
+    if (message.consensusStateHeights) {
+      obj.consensus_state_heights = message.consensusStateHeights.map((e) =>
+        e ? Height.toAmino(e) : undefined
+      );
+    } else {
+      obj.consensus_state_heights = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryConsensusStateHeightsResponseAminoMsg
+  ): QueryConsensusStateHeightsResponse {
+    return QueryConsensusStateHeightsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: QueryConsensusStateHeightsResponse
+  ): QueryConsensusStateHeightsResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryConsensusStateHeightsResponse",
+      value: QueryConsensusStateHeightsResponse.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: QueryConsensusStateHeightsResponseProtoMsg
+  ): QueryConsensusStateHeightsResponse {
+    return QueryConsensusStateHeightsResponse.decode(message.value);
+  },
+  toProto(message: QueryConsensusStateHeightsResponse): Uint8Array {
+    return QueryConsensusStateHeightsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryConsensusStateHeightsResponse
+  ): QueryConsensusStateHeightsResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.core.client.v1.QueryConsensusStateHeightsResponse",
+      value: QueryConsensusStateHeightsResponse.encode(message).finish(),
+    };
+  },
+};
 function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
   return {
     clientId: "",
@@ -2258,11 +2576,15 @@ export interface Query {
   ConsensusStates(
     request: QueryConsensusStatesRequest
   ): Promise<QueryConsensusStatesResponse>;
+  /** ConsensusStateHeights queries the height of every consensus states associated with a given client. */
+  ConsensusStateHeights(
+    request: QueryConsensusStateHeightsRequest
+  ): Promise<QueryConsensusStateHeightsResponse>;
   /** Status queries the status of an IBC client. */
   ClientStatus(
     request: QueryClientStatusRequest
   ): Promise<QueryClientStatusResponse>;
-  /** ClientParams queries all parameters of the ibc client. */
+  /** ClientParams queries all parameters of the ibc client submodule. */
   ClientParams(
     request?: QueryClientParamsRequest
   ): Promise<QueryClientParamsResponse>;
@@ -2283,6 +2605,7 @@ export class QueryClientImpl implements Query {
     this.ClientStates = this.ClientStates.bind(this);
     this.ConsensusState = this.ConsensusState.bind(this);
     this.ConsensusStates = this.ConsensusStates.bind(this);
+    this.ConsensusStateHeights = this.ConsensusStateHeights.bind(this);
     this.ClientStatus = this.ClientStatus.bind(this);
     this.ClientParams = this.ClientParams.bind(this);
     this.UpgradedClientState = this.UpgradedClientState.bind(this);
@@ -2340,6 +2663,19 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryConsensusStatesResponse.decode(new _m0.Reader(data))
+    );
+  }
+  ConsensusStateHeights(
+    request: QueryConsensusStateHeightsRequest
+  ): Promise<QueryConsensusStateHeightsResponse> {
+    const data = QueryConsensusStateHeightsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "ibc.core.client.v1.Query",
+      "ConsensusStateHeights",
+      data
+    );
+    return promise.then((data) =>
+      QueryConsensusStateHeightsResponse.decode(new _m0.Reader(data))
     );
   }
   ClientStatus(

@@ -12,6 +12,8 @@ import {
   VotingParamsAmino,
   TallyParams,
   TallyParamsAmino,
+  Params,
+  ParamsAmino,
 } from "./gov";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -26,12 +28,30 @@ export interface GenesisState {
   votes: Vote[];
   /** proposals defines all the proposals present at genesis. */
   proposals: Proposal[];
-  /** params defines all the paramaters of related to deposit. */
+  /**
+   * Deprecated: Prefer to use `params` instead.
+   * deposit_params defines all the paramaters of related to deposit.
+   */
+  /** @deprecated */
   depositParams?: DepositParams;
-  /** params defines all the paramaters of related to voting. */
+  /**
+   * Deprecated: Prefer to use `params` instead.
+   * voting_params defines all the paramaters of related to voting.
+   */
+  /** @deprecated */
   votingParams?: VotingParams;
-  /** params defines all the paramaters of related to tally. */
+  /**
+   * Deprecated: Prefer to use `params` instead.
+   * tally_params defines all the paramaters of related to tally.
+   */
+  /** @deprecated */
   tallyParams?: TallyParams;
+  /**
+   * params defines all the paramaters of x/gov module.
+   *
+   * Since: cosmos-sdk 0.47
+   */
+  params?: Params;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.gov.v1.GenesisState";
@@ -47,12 +67,30 @@ export interface GenesisStateAmino {
   votes: VoteAmino[];
   /** proposals defines all the proposals present at genesis. */
   proposals: ProposalAmino[];
-  /** params defines all the paramaters of related to deposit. */
+  /**
+   * Deprecated: Prefer to use `params` instead.
+   * deposit_params defines all the paramaters of related to deposit.
+   */
+  /** @deprecated */
   deposit_params?: DepositParamsAmino;
-  /** params defines all the paramaters of related to voting. */
+  /**
+   * Deprecated: Prefer to use `params` instead.
+   * voting_params defines all the paramaters of related to voting.
+   */
+  /** @deprecated */
   voting_params?: VotingParamsAmino;
-  /** params defines all the paramaters of related to tally. */
+  /**
+   * Deprecated: Prefer to use `params` instead.
+   * tally_params defines all the paramaters of related to tally.
+   */
+  /** @deprecated */
   tally_params?: TallyParamsAmino;
+  /**
+   * params defines all the paramaters of x/gov module.
+   *
+   * Since: cosmos-sdk 0.47
+   */
+  params?: ParamsAmino;
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/v1/GenesisState";
@@ -67,6 +105,7 @@ function createBaseGenesisState(): GenesisState {
     depositParams: undefined,
     votingParams: undefined,
     tallyParams: undefined,
+    params: undefined,
   };
 }
 export const GenesisState = {
@@ -104,6 +143,9 @@ export const GenesisState = {
         writer.uint32(58).fork()
       ).ldelim();
     }
+    if (message.params !== undefined) {
+      Params.encode(message.params, writer.uint32(66).fork()).ldelim();
+    }
     return writer;
   },
   decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
@@ -133,6 +175,9 @@ export const GenesisState = {
           break;
         case 7:
           message.tallyParams = TallyParams.decode(reader, reader.uint32());
+          break;
+        case 8:
+          message.params = Params.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -164,6 +209,7 @@ export const GenesisState = {
       tallyParams: isSet(object.tallyParams)
         ? TallyParams.fromJSON(object.tallyParams)
         : undefined,
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
     };
   },
   toJSON(message: GenesisState): unknown {
@@ -203,6 +249,8 @@ export const GenesisState = {
       (obj.tallyParams = message.tallyParams
         ? TallyParams.toJSON(message.tallyParams)
         : undefined);
+    message.params !== undefined &&
+      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
@@ -231,6 +279,10 @@ export const GenesisState = {
       object.tallyParams !== undefined && object.tallyParams !== null
         ? TallyParams.fromPartial(object.tallyParams)
         : undefined;
+    message.params =
+      object.params !== undefined && object.params !== null
+        ? Params.fromPartial(object.params)
+        : undefined;
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
@@ -254,6 +306,7 @@ export const GenesisState = {
       tallyParams: object?.tally_params
         ? TallyParams.fromAmino(object.tally_params)
         : undefined,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -289,6 +342,7 @@ export const GenesisState = {
     obj.tally_params = message.tallyParams
       ? TallyParams.toAmino(message.tallyParams)
       : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

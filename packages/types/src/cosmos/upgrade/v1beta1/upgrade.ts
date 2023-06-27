@@ -30,10 +30,7 @@ export interface Plan {
    */
   /** @deprecated */
   time?: Timestamp;
-  /**
-   * The height at which the upgrade must be performed.
-   * Only used if Time is not set.
-   */
+  /** The height at which the upgrade must be performed. */
   height: Long;
   /**
    * Any application specific upgrade info to be included on-chain
@@ -71,10 +68,7 @@ export interface PlanAmino {
    */
   /** @deprecated */
   time?: TimestampAmino;
-  /**
-   * The height at which the upgrade must be performed.
-   * Only used if Time is not set.
-   */
+  /** The height at which the upgrade must be performed. */
   height: string;
   /**
    * Any application specific upgrade info to be included on-chain
@@ -101,8 +95,11 @@ export interface PlanAminoMsg {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposal {
+  /** title of the proposal */
   title: string;
+  /** description of the proposal */
   description: string;
+  /** plan of the proposal */
   plan?: Plan;
 }
 export interface SoftwareUpgradeProposalProtoMsg {
@@ -117,8 +114,11 @@ export interface SoftwareUpgradeProposalProtoMsg {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposalAmino {
+  /** title of the proposal */
   title: string;
+  /** description of the proposal */
   description: string;
+  /** plan of the proposal */
   plan?: PlanAmino;
 }
 export interface SoftwareUpgradeProposalAminoMsg {
@@ -133,7 +133,9 @@ export interface SoftwareUpgradeProposalAminoMsg {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposal {
+  /** title of the proposal */
   title: string;
+  /** description of the proposal */
   description: string;
 }
 export interface CancelSoftwareUpgradeProposalProtoMsg {
@@ -148,7 +150,9 @@ export interface CancelSoftwareUpgradeProposalProtoMsg {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposalAmino {
+  /** title of the proposal */
   title: string;
+  /** description of the proposal */
   description: string;
 }
 export interface CancelSoftwareUpgradeProposalAminoMsg {
