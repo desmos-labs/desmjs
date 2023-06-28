@@ -149,16 +149,26 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 ### Building a `DesmosClient` instance using `Web3AuthSigner`
 
 ```js
-import { DesmosClient, SigningMode, GasPrice } from "@desmoslabs/desmjs";
-import { web3authSigner } from "@desmoslabs/desmjs-web3auth-mobile";
+import { DesmosClient, SigningMode, GasPrice, PrivateKeySigner } from "@desmoslabs/desmjs";
+import { Web3AuthKeyProvider } from "@desmoslabs/desmjs-web3auth-mobile";
 import { LOGIN_PROVIDER } from "@web3auth/react-native-sdk";
 
-const signer = web3authSigner(web3auth, {
-  // Login provider that will be used to obtain the private key.
-  loginProvider: LOGIN_PROVIDER.GOOGLE,
-  // Redirect URL declared on the previous section.
-  redirectUrl: resolvedRedirectUrl
-}, SigningMode.DIRECT);
+
+// Create the private key provider instance.
+const privateKeyProvider = new Web3AuthKeyProvider(
+  web3auth,
+  {
+    loginParams: {
+      // Login provider that will be used to obtain the private key.
+      loginProvider: LOGIN_PROVIDER.GOOGLE,
+      // Redirect URL declared on the previous section.
+      redirectUrl: resolvedRedirectUrl
+    },
+  }
+);
+
+// Create the PrivateKeySigner instance that will be used to sign the transactions.
+const signer = new PrivateKeySigner(privateKeyProvider, SigningMode.DIRECT);
 
 // Connect to the signer
 await signer.connect();
