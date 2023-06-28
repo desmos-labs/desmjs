@@ -1,10 +1,19 @@
 /* eslint-disable */
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Subspace, Section, UserGroup } from "./models";
-import { Grant } from "./models_feegrant";
+import {
+  Subspace,
+  SubspaceAmino,
+  Section,
+  SectionAmino,
+  UserGroup,
+  UserGroupAmino,
+} from "./models";
+import { Grant, GrantAmino } from "./models_feegrant";
 import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.subspaces.v3";
@@ -12,6 +21,19 @@ export const protobufPackage = "desmos.subspaces.v3";
 export interface QuerySubspacesRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
+}
+export interface QuerySubspacesRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySubspacesRequest";
+  value: Uint8Array;
+}
+/** QuerySubspacesRequest is the request type for the Query/Subspaces RPC method */
+export interface QuerySubspacesRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QuerySubspacesRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySubspacesRequest";
+  value: QuerySubspacesRequestAmino;
 }
 /**
  * QuerySubspacesResponse is the response type for the Query/Subspaces RPC
@@ -21,14 +43,55 @@ export interface QuerySubspacesResponse {
   subspaces: Subspace[];
   pagination?: PageResponse;
 }
+export interface QuerySubspacesResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySubspacesResponse";
+  value: Uint8Array;
+}
+/**
+ * QuerySubspacesResponse is the response type for the Query/Subspaces RPC
+ * method
+ */
+export interface QuerySubspacesResponseAmino {
+  subspaces: SubspaceAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QuerySubspacesResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySubspacesResponse";
+  value: QuerySubspacesResponseAmino;
+}
 /** QuerySubspace is the request type for the Query/Subspace RPC method */
 export interface QuerySubspaceRequest {
   /** Id of the subspace to query */
   subspaceId: Long;
 }
+export interface QuerySubspaceRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySubspaceRequest";
+  value: Uint8Array;
+}
+/** QuerySubspace is the request type for the Query/Subspace RPC method */
+export interface QuerySubspaceRequestAmino {
+  /** Id of the subspace to query */
+  subspace_id: string;
+}
+export interface QuerySubspaceRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySubspaceRequest";
+  value: QuerySubspaceRequestAmino;
+}
 /** QuerySubspaceResponse is the response type for the Query/Subspace method */
 export interface QuerySubspaceResponse {
   subspace?: Subspace;
+}
+export interface QuerySubspaceResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySubspaceResponse";
+  value: Uint8Array;
+}
+/** QuerySubspaceResponse is the response type for the Query/Subspace method */
+export interface QuerySubspaceResponseAmino {
+  subspace?: SubspaceAmino;
+}
+export interface QuerySubspaceResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySubspaceResponse";
+  value: QuerySubspaceResponseAmino;
 }
 /** QuerySectionsRequest is the request type for Query/Sections RPC method */
 export interface QuerySectionsRequest {
@@ -37,10 +100,38 @@ export interface QuerySectionsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QuerySectionsRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySectionsRequest";
+  value: Uint8Array;
+}
+/** QuerySectionsRequest is the request type for Query/Sections RPC method */
+export interface QuerySectionsRequestAmino {
+  /** Id of the subspace to query the sections for */
+  subspace_id: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QuerySectionsRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySectionsRequest";
+  value: QuerySectionsRequestAmino;
+}
 /** QuerySectionsResponse is the response type for Query/Sections RPC method */
 export interface QuerySectionsResponse {
   sections: Section[];
   pagination?: PageResponse;
+}
+export interface QuerySectionsResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySectionsResponse";
+  value: Uint8Array;
+}
+/** QuerySectionsResponse is the response type for Query/Sections RPC method */
+export interface QuerySectionsResponseAmino {
+  sections: SectionAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QuerySectionsResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySectionsResponse";
+  value: QuerySectionsResponseAmino;
 }
 /** QuerySectionRequest is the request type for Query/Section RPC method */
 export interface QuerySectionRequest {
@@ -49,9 +140,36 @@ export interface QuerySectionRequest {
   /** Id of the searched section */
   sectionId: number;
 }
+export interface QuerySectionRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySectionRequest";
+  value: Uint8Array;
+}
+/** QuerySectionRequest is the request type for Query/Section RPC method */
+export interface QuerySectionRequestAmino {
+  /** Id of the subspace inside which to search for */
+  subspace_id: string;
+  /** Id of the searched section */
+  section_id: number;
+}
+export interface QuerySectionRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySectionRequest";
+  value: QuerySectionRequestAmino;
+}
 /** QuerySectionResponse is the response type for Query/Section RPC method */
 export interface QuerySectionResponse {
   section?: Section;
+}
+export interface QuerySectionResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QuerySectionResponse";
+  value: Uint8Array;
+}
+/** QuerySectionResponse is the response type for Query/Section RPC method */
+export interface QuerySectionResponseAmino {
+  section?: SectionAmino;
+}
+export interface QuerySectionResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QuerySectionResponse";
+  value: QuerySectionResponseAmino;
 }
 /**
  * QueryUserGroupsRequest is the request type for the Query/UserGroups RPC
@@ -65,6 +183,26 @@ export interface QueryUserGroupsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryUserGroupsRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserGroupsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryUserGroupsRequest is the request type for the Query/UserGroups RPC
+ * method
+ */
+export interface QueryUserGroupsRequestAmino {
+  /** Id of the subspace to query the groups for */
+  subspace_id: string;
+  /** (optional) Section id to query the groups for */
+  section_id: number;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryUserGroupsRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserGroupsRequest";
+  value: QueryUserGroupsRequestAmino;
+}
 /**
  * QueryUserGroupsResponse is the response type for the Query/UserGroups RPC
  * method
@@ -73,6 +211,22 @@ export interface QueryUserGroupsResponse {
   groups: UserGroup[];
   pagination?: PageResponse;
 }
+export interface QueryUserGroupsResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserGroupsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryUserGroupsResponse is the response type for the Query/UserGroups RPC
+ * method
+ */
+export interface QueryUserGroupsResponseAmino {
+  groups: UserGroupAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryUserGroupsResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserGroupsResponse";
+  value: QueryUserGroupsResponseAmino;
+}
 /** QueryUserGroupRequest is the request type for the Query/UserGroup RPC method */
 export interface QueryUserGroupRequest {
   /** Id of the subspace that contains the group */
@@ -80,12 +234,42 @@ export interface QueryUserGroupRequest {
   /** Id of the group to query */
   groupId: number;
 }
+export interface QueryUserGroupRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserGroupRequest";
+  value: Uint8Array;
+}
+/** QueryUserGroupRequest is the request type for the Query/UserGroup RPC method */
+export interface QueryUserGroupRequestAmino {
+  /** Id of the subspace that contains the group */
+  subspace_id: string;
+  /** Id of the group to query */
+  group_id: number;
+}
+export interface QueryUserGroupRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserGroupRequest";
+  value: QueryUserGroupRequestAmino;
+}
 /**
  * QueryUserGroupResponse is the response type for the Query/UserGroup RPC
  * method
  */
 export interface QueryUserGroupResponse {
   group?: UserGroup;
+}
+export interface QueryUserGroupResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserGroupResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryUserGroupResponse is the response type for the Query/UserGroup RPC
+ * method
+ */
+export interface QueryUserGroupResponseAmino {
+  group?: UserGroupAmino;
+}
+export interface QueryUserGroupResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserGroupResponse";
+  value: QueryUserGroupResponseAmino;
 }
 /**
  * QueryUserGroupMembersRequest is the request type for the
@@ -99,6 +283,26 @@ export interface QueryUserGroupMembersRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryUserGroupMembersRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserGroupMembersRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryUserGroupMembersRequest is the request type for the
+ * Query/UserGroupMembers RPC method
+ */
+export interface QueryUserGroupMembersRequestAmino {
+  /** Id of the subspace that contains the group */
+  subspace_id: string;
+  /** Id of the user group to query the members for */
+  group_id: number;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryUserGroupMembersRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserGroupMembersRequest";
+  value: QueryUserGroupMembersRequestAmino;
+}
 /**
  * QueryUserGroupMembersResponse is the response type for the
  * Query/UserGroupMembers RPC method
@@ -106,6 +310,22 @@ export interface QueryUserGroupMembersRequest {
 export interface QueryUserGroupMembersResponse {
   members: string[];
   pagination?: PageResponse;
+}
+export interface QueryUserGroupMembersResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserGroupMembersResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryUserGroupMembersResponse is the response type for the
+ * Query/UserGroupMembers RPC method
+ */
+export interface QueryUserGroupMembersResponseAmino {
+  members: string[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryUserGroupMembersResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserGroupMembersResponse";
+  value: QueryUserGroupMembersResponseAmino;
 }
 /**
  * QueryUserPermissionsRequest is the request type for the Query/UserPermissions
@@ -119,6 +339,26 @@ export interface QueryUserPermissionsRequest {
   /** Address of the user to query the permissions for */
   user: string;
 }
+export interface QueryUserPermissionsRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserPermissionsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryUserPermissionsRequest is the request type for the Query/UserPermissions
+ * RPC method
+ */
+export interface QueryUserPermissionsRequestAmino {
+  /** Id of the subspace to query the permissions for */
+  subspace_id: string;
+  /** Id of the section to query the permissions for */
+  section_id: number;
+  /** Address of the user to query the permissions for */
+  user: string;
+}
+export interface QueryUserPermissionsRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserPermissionsRequest";
+  value: QueryUserPermissionsRequestAmino;
+}
 /**
  * QueryUserPermissionsRequest is the response type for the
  * Query/UserPermissions method
@@ -126,6 +366,22 @@ export interface QueryUserPermissionsRequest {
 export interface QueryUserPermissionsResponse {
   permissions: string[];
   details: PermissionDetail[];
+}
+export interface QueryUserPermissionsResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserPermissionsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryUserPermissionsRequest is the response type for the
+ * Query/UserPermissions method
+ */
+export interface QueryUserPermissionsResponseAmino {
+  permissions: string[];
+  details: PermissionDetailAmino[];
+}
+export interface QueryUserPermissionsResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserPermissionsResponse";
+  value: QueryUserPermissionsResponseAmino;
 }
 /** PermissionDetail contains the details data of a permission */
 export interface PermissionDetail {
@@ -138,6 +394,25 @@ export interface PermissionDetail {
   /** Group represents a group permission */
   group?: PermissionDetail_Group;
 }
+export interface PermissionDetailProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.PermissionDetail";
+  value: Uint8Array;
+}
+/** PermissionDetail contains the details data of a permission */
+export interface PermissionDetailAmino {
+  /** Id of the subspace for which this permission is valid */
+  subspace_id: string;
+  /** Id of the section for which this permission is valid */
+  section_id: number;
+  /** User represents a user permission */
+  user?: PermissionDetail_UserAmino;
+  /** Group represents a group permission */
+  group?: PermissionDetail_GroupAmino;
+}
+export interface PermissionDetailAminoMsg {
+  type: "/desmos.subspaces.v3.PermissionDetail";
+  value: PermissionDetailAmino;
+}
 /** User is a permission that has been set to a specific user */
 export interface PermissionDetail_User {
   /** User for which the permission was set */
@@ -145,12 +420,42 @@ export interface PermissionDetail_User {
   /** Permissions set to the user */
   permission: string[];
 }
+export interface PermissionDetail_UserProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.User";
+  value: Uint8Array;
+}
+/** User is a permission that has been set to a specific user */
+export interface PermissionDetail_UserAmino {
+  /** User for which the permission was set */
+  user: string;
+  /** Permissions set to the user */
+  permission: string[];
+}
+export interface PermissionDetail_UserAminoMsg {
+  type: "/desmos.subspaces.v3.User";
+  value: PermissionDetail_UserAmino;
+}
 /** Group is a permission that has been set to a user group */
 export interface PermissionDetail_Group {
   /** Unique id of the group */
   groupId: number;
   /** Permissions set to the group */
   permission: string[];
+}
+export interface PermissionDetail_GroupProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.Group";
+  value: Uint8Array;
+}
+/** Group is a permission that has been set to a user group */
+export interface PermissionDetail_GroupAmino {
+  /** Unique id of the group */
+  group_id: number;
+  /** Permissions set to the group */
+  permission: string[];
+}
+export interface PermissionDetail_GroupAminoMsg {
+  type: "/desmos.subspaces.v3.Group";
+  value: PermissionDetail_GroupAmino;
 }
 /**
  * QueryUserAllowancesRequest is the request type for the Query/UserAllowances
@@ -164,6 +469,26 @@ export interface QueryUserAllowancesRequest {
   /** pagination defines an pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryUserAllowancesRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserAllowancesRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryUserAllowancesRequest is the request type for the Query/UserAllowances
+ * RPC method
+ */
+export interface QueryUserAllowancesRequestAmino {
+  /** Id of the subspace for which to get the grant(s) */
+  subspace_id: string;
+  /** (Optional) Address of the user that was granted an allowance */
+  grantee: string;
+  /** pagination defines an pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryUserAllowancesRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserAllowancesRequest";
+  value: QueryUserAllowancesRequestAmino;
+}
 /**
  * QueryUserAllowancesResponse is the response type for the Query/UserAllowances
  * RPC method
@@ -172,6 +497,23 @@ export interface QueryUserAllowancesResponse {
   grants: Grant[];
   /** pagination defines an pagination for the response */
   pagination?: PageResponse;
+}
+export interface QueryUserAllowancesResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryUserAllowancesResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryUserAllowancesResponse is the response type for the Query/UserAllowances
+ * RPC method
+ */
+export interface QueryUserAllowancesResponseAmino {
+  grants: GrantAmino[];
+  /** pagination defines an pagination for the response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryUserAllowancesResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QueryUserAllowancesResponse";
+  value: QueryUserAllowancesResponseAmino;
 }
 /**
  * QueryGroupAllowancesRequest is the request type for the Query/GroupAllowances
@@ -185,6 +527,26 @@ export interface QueryGroupAllowancesRequest {
   /** pagination defines an pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryGroupAllowancesRequestProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryGroupAllowancesRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryGroupAllowancesRequest is the request type for the Query/GroupAllowances
+ * RPC method
+ */
+export interface QueryGroupAllowancesRequestAmino {
+  /** Id of the subspace for which to get the grant(s) */
+  subspace_id: string;
+  /** (optional) Address of the user group that was granted the allowance(s) */
+  group_id: number;
+  /** pagination defines an pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryGroupAllowancesRequestAminoMsg {
+  type: "/desmos.subspaces.v3.QueryGroupAllowancesRequest";
+  value: QueryGroupAllowancesRequestAmino;
+}
 /**
  * QueryGroupAllowancesResponse is the response type for the
  * Query/GroupAllowances RPC method
@@ -193,6 +555,23 @@ export interface QueryGroupAllowancesResponse {
   grants: Grant[];
   /** pagination defines an pagination for the response */
   pagination?: PageResponse;
+}
+export interface QueryGroupAllowancesResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.QueryGroupAllowancesResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryGroupAllowancesResponse is the response type for the
+ * Query/GroupAllowances RPC method
+ */
+export interface QueryGroupAllowancesResponseAmino {
+  grants: GrantAmino[];
+  /** pagination defines an pagination for the response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryGroupAllowancesResponseAminoMsg {
+  type: "/desmos.subspaces.v3.QueryGroupAllowancesResponse";
+  value: QueryGroupAllowancesResponseAmino;
 }
 function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
   return {
@@ -253,6 +632,35 @@ export const QuerySubspacesRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(object: QuerySubspacesRequestAmino): QuerySubspacesRequest {
+    return {
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySubspacesRequest): QuerySubspacesRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySubspacesRequestAminoMsg): QuerySubspacesRequest {
+    return QuerySubspacesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySubspacesRequestProtoMsg): QuerySubspacesRequest {
+    return QuerySubspacesRequest.decode(message.value);
+  },
+  toProto(message: QuerySubspacesRequest): Uint8Array {
+    return QuerySubspacesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySubspacesRequest): QuerySubspacesRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySubspacesRequest",
+      value: QuerySubspacesRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
@@ -337,6 +745,47 @@ export const QuerySubspacesResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QuerySubspacesResponseAmino): QuerySubspacesResponse {
+    return {
+      subspaces: Array.isArray(object?.subspaces)
+        ? object.subspaces.map((e: any) => Subspace.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySubspacesResponse): QuerySubspacesResponseAmino {
+    const obj: any = {};
+    if (message.subspaces) {
+      obj.subspaces = message.subspaces.map((e) =>
+        e ? Subspace.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySubspacesResponseAminoMsg): QuerySubspacesResponse {
+    return QuerySubspacesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QuerySubspacesResponseProtoMsg
+  ): QuerySubspacesResponse {
+    return QuerySubspacesResponse.decode(message.value);
+  },
+  toProto(message: QuerySubspacesResponse): Uint8Array {
+    return QuerySubspacesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySubspacesResponse): QuerySubspacesResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySubspacesResponse",
+      value: QuerySubspacesResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQuerySubspaceRequest(): QuerySubspaceRequest {
   return {
@@ -395,6 +844,33 @@ export const QuerySubspaceRequest = {
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: QuerySubspaceRequestAmino): QuerySubspaceRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+    };
+  },
+  toAmino(message: QuerySubspaceRequest): QuerySubspaceRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySubspaceRequestAminoMsg): QuerySubspaceRequest {
+    return QuerySubspaceRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySubspaceRequestProtoMsg): QuerySubspaceRequest {
+    return QuerySubspaceRequest.decode(message.value);
+  },
+  toProto(message: QuerySubspaceRequest): Uint8Array {
+    return QuerySubspaceRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySubspaceRequest): QuerySubspaceRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySubspaceRequest",
+      value: QuerySubspaceRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQuerySubspaceResponse(): QuerySubspaceResponse {
@@ -456,6 +932,35 @@ export const QuerySubspaceResponse = {
         ? Subspace.fromPartial(object.subspace)
         : undefined;
     return message;
+  },
+  fromAmino(object: QuerySubspaceResponseAmino): QuerySubspaceResponse {
+    return {
+      subspace: object?.subspace
+        ? Subspace.fromAmino(object.subspace)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySubspaceResponse): QuerySubspaceResponseAmino {
+    const obj: any = {};
+    obj.subspace = message.subspace
+      ? Subspace.toAmino(message.subspace)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySubspaceResponseAminoMsg): QuerySubspaceResponse {
+    return QuerySubspaceResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySubspaceResponseProtoMsg): QuerySubspaceResponse {
+    return QuerySubspaceResponse.decode(message.value);
+  },
+  toProto(message: QuerySubspaceResponse): Uint8Array {
+    return QuerySubspaceResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySubspaceResponse): QuerySubspaceResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySubspaceResponse",
+      value: QuerySubspaceResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQuerySectionsRequest(): QuerySectionsRequest {
@@ -533,6 +1038,39 @@ export const QuerySectionsRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(object: QuerySectionsRequestAmino): QuerySectionsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySectionsRequest): QuerySectionsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySectionsRequestAminoMsg): QuerySectionsRequest {
+    return QuerySectionsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySectionsRequestProtoMsg): QuerySectionsRequest {
+    return QuerySectionsRequest.decode(message.value);
+  },
+  toProto(message: QuerySectionsRequest): Uint8Array {
+    return QuerySectionsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySectionsRequest): QuerySectionsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySectionsRequest",
+      value: QuerySectionsRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQuerySectionsResponse(): QuerySectionsResponse {
@@ -617,6 +1155,45 @@ export const QuerySectionsResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QuerySectionsResponseAmino): QuerySectionsResponse {
+    return {
+      sections: Array.isArray(object?.sections)
+        ? object.sections.map((e: any) => Section.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QuerySectionsResponse): QuerySectionsResponseAmino {
+    const obj: any = {};
+    if (message.sections) {
+      obj.sections = message.sections.map((e) =>
+        e ? Section.toAmino(e) : undefined
+      );
+    } else {
+      obj.sections = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySectionsResponseAminoMsg): QuerySectionsResponse {
+    return QuerySectionsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySectionsResponseProtoMsg): QuerySectionsResponse {
+    return QuerySectionsResponse.decode(message.value);
+  },
+  toProto(message: QuerySectionsResponse): Uint8Array {
+    return QuerySectionsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySectionsResponse): QuerySectionsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySectionsResponse",
+      value: QuerySectionsResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQuerySectionRequest(): QuerySectionRequest {
   return {
@@ -684,6 +1261,35 @@ export const QuerySectionRequest = {
     message.sectionId = object.sectionId ?? 0;
     return message;
   },
+  fromAmino(object: QuerySectionRequestAmino): QuerySectionRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+    };
+  },
+  toAmino(message: QuerySectionRequest): QuerySectionRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySectionRequestAminoMsg): QuerySectionRequest {
+    return QuerySectionRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySectionRequestProtoMsg): QuerySectionRequest {
+    return QuerySectionRequest.decode(message.value);
+  },
+  toProto(message: QuerySectionRequest): Uint8Array {
+    return QuerySectionRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySectionRequest): QuerySectionRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySectionRequest",
+      value: QuerySectionRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQuerySectionResponse(): QuerySectionResponse {
   return {
@@ -744,6 +1350,33 @@ export const QuerySectionResponse = {
         ? Section.fromPartial(object.section)
         : undefined;
     return message;
+  },
+  fromAmino(object: QuerySectionResponseAmino): QuerySectionResponse {
+    return {
+      section: object?.section ? Section.fromAmino(object.section) : undefined,
+    };
+  },
+  toAmino(message: QuerySectionResponse): QuerySectionResponseAmino {
+    const obj: any = {};
+    obj.section = message.section
+      ? Section.toAmino(message.section)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QuerySectionResponseAminoMsg): QuerySectionResponse {
+    return QuerySectionResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QuerySectionResponseProtoMsg): QuerySectionResponse {
+    return QuerySectionResponse.decode(message.value);
+  },
+  toProto(message: QuerySectionResponse): Uint8Array {
+    return QuerySectionResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QuerySectionResponse): QuerySectionResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QuerySectionResponse",
+      value: QuerySectionResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryUserGroupsRequest(): QueryUserGroupsRequest {
@@ -833,6 +1466,43 @@ export const QueryUserGroupsRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryUserGroupsRequestAmino): QueryUserGroupsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryUserGroupsRequest): QueryUserGroupsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryUserGroupsRequestAminoMsg): QueryUserGroupsRequest {
+    return QueryUserGroupsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserGroupsRequestProtoMsg
+  ): QueryUserGroupsRequest {
+    return QueryUserGroupsRequest.decode(message.value);
+  },
+  toProto(message: QueryUserGroupsRequest): Uint8Array {
+    return QueryUserGroupsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUserGroupsRequest): QueryUserGroupsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserGroupsRequest",
+      value: QueryUserGroupsRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryUserGroupsResponse(): QueryUserGroupsResponse {
   return {
@@ -915,6 +1585,51 @@ export const QueryUserGroupsResponse = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryUserGroupsResponseAmino): QueryUserGroupsResponse {
+    return {
+      groups: Array.isArray(object?.groups)
+        ? object.groups.map((e: any) => UserGroup.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryUserGroupsResponse): QueryUserGroupsResponseAmino {
+    const obj: any = {};
+    if (message.groups) {
+      obj.groups = message.groups.map((e) =>
+        e ? UserGroup.toAmino(e) : undefined
+      );
+    } else {
+      obj.groups = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserGroupsResponseAminoMsg
+  ): QueryUserGroupsResponse {
+    return QueryUserGroupsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserGroupsResponseProtoMsg
+  ): QueryUserGroupsResponse {
+    return QueryUserGroupsResponse.decode(message.value);
+  },
+  toProto(message: QueryUserGroupsResponse): Uint8Array {
+    return QueryUserGroupsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserGroupsResponse
+  ): QueryUserGroupsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserGroupsResponse",
+      value: QueryUserGroupsResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryUserGroupRequest(): QueryUserGroupRequest {
   return {
@@ -985,6 +1700,35 @@ export const QueryUserGroupRequest = {
     message.groupId = object.groupId ?? 0;
     return message;
   },
+  fromAmino(object: QueryUserGroupRequestAmino): QueryUserGroupRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+    };
+  },
+  toAmino(message: QueryUserGroupRequest): QueryUserGroupRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    return obj;
+  },
+  fromAminoMsg(object: QueryUserGroupRequestAminoMsg): QueryUserGroupRequest {
+    return QueryUserGroupRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryUserGroupRequestProtoMsg): QueryUserGroupRequest {
+    return QueryUserGroupRequest.decode(message.value);
+  },
+  toProto(message: QueryUserGroupRequest): Uint8Array {
+    return QueryUserGroupRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUserGroupRequest): QueryUserGroupRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserGroupRequest",
+      value: QueryUserGroupRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryUserGroupResponse(): QueryUserGroupResponse {
   return {
@@ -1041,6 +1785,33 @@ export const QueryUserGroupResponse = {
         ? UserGroup.fromPartial(object.group)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryUserGroupResponseAmino): QueryUserGroupResponse {
+    return {
+      group: object?.group ? UserGroup.fromAmino(object.group) : undefined,
+    };
+  },
+  toAmino(message: QueryUserGroupResponse): QueryUserGroupResponseAmino {
+    const obj: any = {};
+    obj.group = message.group ? UserGroup.toAmino(message.group) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryUserGroupResponseAminoMsg): QueryUserGroupResponse {
+    return QueryUserGroupResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserGroupResponseProtoMsg
+  ): QueryUserGroupResponse {
+    return QueryUserGroupResponse.decode(message.value);
+  },
+  toProto(message: QueryUserGroupResponse): Uint8Array {
+    return QueryUserGroupResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryUserGroupResponse): QueryUserGroupResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserGroupResponse",
+      value: QueryUserGroupResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryUserGroupMembersRequest(): QueryUserGroupMembersRequest {
@@ -1130,6 +1901,51 @@ export const QueryUserGroupMembersRequest = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryUserGroupMembersRequestAmino
+  ): QueryUserGroupMembersRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryUserGroupMembersRequest
+  ): QueryUserGroupMembersRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserGroupMembersRequestAminoMsg
+  ): QueryUserGroupMembersRequest {
+    return QueryUserGroupMembersRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserGroupMembersRequestProtoMsg
+  ): QueryUserGroupMembersRequest {
+    return QueryUserGroupMembersRequest.decode(message.value);
+  },
+  toProto(message: QueryUserGroupMembersRequest): Uint8Array {
+    return QueryUserGroupMembersRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserGroupMembersRequest
+  ): QueryUserGroupMembersRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserGroupMembersRequest",
+      value: QueryUserGroupMembersRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryUserGroupMembersResponse(): QueryUserGroupMembersResponse {
   return {
@@ -1209,6 +2025,53 @@ export const QueryUserGroupMembersResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryUserGroupMembersResponseAmino
+  ): QueryUserGroupMembersResponse {
+    return {
+      members: Array.isArray(object?.members)
+        ? object.members.map((e: any) => e)
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryUserGroupMembersResponse
+  ): QueryUserGroupMembersResponseAmino {
+    const obj: any = {};
+    if (message.members) {
+      obj.members = message.members.map((e) => e);
+    } else {
+      obj.members = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserGroupMembersResponseAminoMsg
+  ): QueryUserGroupMembersResponse {
+    return QueryUserGroupMembersResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserGroupMembersResponseProtoMsg
+  ): QueryUserGroupMembersResponse {
+    return QueryUserGroupMembersResponse.decode(message.value);
+  },
+  toProto(message: QueryUserGroupMembersResponse): Uint8Array {
+    return QueryUserGroupMembersResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserGroupMembersResponse
+  ): QueryUserGroupMembersResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserGroupMembersResponse",
+      value: QueryUserGroupMembersResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryUserPermissionsRequest(): QueryUserPermissionsRequest {
@@ -1290,6 +2153,47 @@ export const QueryUserPermissionsRequest = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(
+    object: QueryUserPermissionsRequestAmino
+  ): QueryUserPermissionsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      user: object.user,
+    };
+  },
+  toAmino(
+    message: QueryUserPermissionsRequest
+  ): QueryUserPermissionsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserPermissionsRequestAminoMsg
+  ): QueryUserPermissionsRequest {
+    return QueryUserPermissionsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserPermissionsRequestProtoMsg
+  ): QueryUserPermissionsRequest {
+    return QueryUserPermissionsRequest.decode(message.value);
+  },
+  toProto(message: QueryUserPermissionsRequest): Uint8Array {
+    return QueryUserPermissionsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserPermissionsRequest
+  ): QueryUserPermissionsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserPermissionsRequest",
+      value: QueryUserPermissionsRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryUserPermissionsResponse(): QueryUserPermissionsResponse {
   return {
@@ -1369,6 +2273,57 @@ export const QueryUserPermissionsResponse = {
     message.details =
       object.details?.map((e) => PermissionDetail.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(
+    object: QueryUserPermissionsResponseAmino
+  ): QueryUserPermissionsResponse {
+    return {
+      permissions: Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => e)
+        : [],
+      details: Array.isArray(object?.details)
+        ? object.details.map((e: any) => PermissionDetail.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(
+    message: QueryUserPermissionsResponse
+  ): QueryUserPermissionsResponseAmino {
+    const obj: any = {};
+    if (message.permissions) {
+      obj.permissions = message.permissions.map((e) => e);
+    } else {
+      obj.permissions = [];
+    }
+    if (message.details) {
+      obj.details = message.details.map((e) =>
+        e ? PermissionDetail.toAmino(e) : undefined
+      );
+    } else {
+      obj.details = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserPermissionsResponseAminoMsg
+  ): QueryUserPermissionsResponse {
+    return QueryUserPermissionsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserPermissionsResponseProtoMsg
+  ): QueryUserPermissionsResponse {
+    return QueryUserPermissionsResponse.decode(message.value);
+  },
+  toProto(message: QueryUserPermissionsResponse): Uint8Array {
+    return QueryUserPermissionsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserPermissionsResponse
+  ): QueryUserPermissionsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserPermissionsResponse",
+      value: QueryUserPermissionsResponse.encode(message).finish(),
+    };
   },
 };
 function createBasePermissionDetail(): PermissionDetail {
@@ -1482,6 +2437,47 @@ export const PermissionDetail = {
         : undefined;
     return message;
   },
+  fromAmino(object: PermissionDetailAmino): PermissionDetail {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      user: object?.user
+        ? PermissionDetail_User.fromAmino(object.user)
+        : undefined,
+      group: object?.group
+        ? PermissionDetail_Group.fromAmino(object.group)
+        : undefined,
+    };
+  },
+  toAmino(message: PermissionDetail): PermissionDetailAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.user = message.user
+      ? PermissionDetail_User.toAmino(message.user)
+      : undefined;
+    obj.group = message.group
+      ? PermissionDetail_Group.toAmino(message.group)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PermissionDetailAminoMsg): PermissionDetail {
+    return PermissionDetail.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PermissionDetailProtoMsg): PermissionDetail {
+    return PermissionDetail.decode(message.value);
+  },
+  toProto(message: PermissionDetail): Uint8Array {
+    return PermissionDetail.encode(message).finish();
+  },
+  toProtoMsg(message: PermissionDetail): PermissionDetailProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.PermissionDetail",
+      value: PermissionDetail.encode(message).finish(),
+    };
+  },
 };
 function createBasePermissionDetail_User(): PermissionDetail_User {
   return {
@@ -1550,6 +2546,39 @@ export const PermissionDetail_User = {
     message.user = object.user ?? "";
     message.permission = object.permission?.map((e) => e) || [];
     return message;
+  },
+  fromAmino(object: PermissionDetail_UserAmino): PermissionDetail_User {
+    return {
+      user: object.user,
+      permission: Array.isArray(object?.permission)
+        ? object.permission.map((e: any) => e)
+        : [],
+    };
+  },
+  toAmino(message: PermissionDetail_User): PermissionDetail_UserAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    if (message.permission) {
+      obj.permission = message.permission.map((e) => e);
+    } else {
+      obj.permission = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PermissionDetail_UserAminoMsg): PermissionDetail_User {
+    return PermissionDetail_User.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PermissionDetail_UserProtoMsg): PermissionDetail_User {
+    return PermissionDetail_User.decode(message.value);
+  },
+  toProto(message: PermissionDetail_User): Uint8Array {
+    return PermissionDetail_User.encode(message).finish();
+  },
+  toProtoMsg(message: PermissionDetail_User): PermissionDetail_UserProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.User",
+      value: PermissionDetail_User.encode(message).finish(),
+    };
   },
 };
 function createBasePermissionDetail_Group(): PermissionDetail_Group {
@@ -1620,6 +2649,41 @@ export const PermissionDetail_Group = {
     message.groupId = object.groupId ?? 0;
     message.permission = object.permission?.map((e) => e) || [];
     return message;
+  },
+  fromAmino(object: PermissionDetail_GroupAmino): PermissionDetail_Group {
+    return {
+      groupId: object.group_id,
+      permission: Array.isArray(object?.permission)
+        ? object.permission.map((e: any) => e)
+        : [],
+    };
+  },
+  toAmino(message: PermissionDetail_Group): PermissionDetail_GroupAmino {
+    const obj: any = {};
+    obj.group_id = message.groupId;
+    if (message.permission) {
+      obj.permission = message.permission.map((e) => e);
+    } else {
+      obj.permission = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PermissionDetail_GroupAminoMsg): PermissionDetail_Group {
+    return PermissionDetail_Group.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: PermissionDetail_GroupProtoMsg
+  ): PermissionDetail_Group {
+    return PermissionDetail_Group.decode(message.value);
+  },
+  toProto(message: PermissionDetail_Group): Uint8Array {
+    return PermissionDetail_Group.encode(message).finish();
+  },
+  toProtoMsg(message: PermissionDetail_Group): PermissionDetail_GroupProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.Group",
+      value: PermissionDetail_Group.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryUserAllowancesRequest(): QueryUserAllowancesRequest {
@@ -1708,6 +2772,51 @@ export const QueryUserAllowancesRequest = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryUserAllowancesRequestAmino
+  ): QueryUserAllowancesRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      grantee: object.grantee,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryUserAllowancesRequest
+  ): QueryUserAllowancesRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.grantee = message.grantee;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserAllowancesRequestAminoMsg
+  ): QueryUserAllowancesRequest {
+    return QueryUserAllowancesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserAllowancesRequestProtoMsg
+  ): QueryUserAllowancesRequest {
+    return QueryUserAllowancesRequest.decode(message.value);
+  },
+  toProto(message: QueryUserAllowancesRequest): Uint8Array {
+    return QueryUserAllowancesRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserAllowancesRequest
+  ): QueryUserAllowancesRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserAllowancesRequest",
+      value: QueryUserAllowancesRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryUserAllowancesResponse(): QueryUserAllowancesResponse {
   return {
@@ -1787,6 +2896,55 @@ export const QueryUserAllowancesResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryUserAllowancesResponseAmino
+  ): QueryUserAllowancesResponse {
+    return {
+      grants: Array.isArray(object?.grants)
+        ? object.grants.map((e: any) => Grant.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryUserAllowancesResponse
+  ): QueryUserAllowancesResponseAmino {
+    const obj: any = {};
+    if (message.grants) {
+      obj.grants = message.grants.map((e) =>
+        e ? Grant.toAmino(e) : undefined
+      );
+    } else {
+      obj.grants = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryUserAllowancesResponseAminoMsg
+  ): QueryUserAllowancesResponse {
+    return QueryUserAllowancesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryUserAllowancesResponseProtoMsg
+  ): QueryUserAllowancesResponse {
+    return QueryUserAllowancesResponse.decode(message.value);
+  },
+  toProto(message: QueryUserAllowancesResponse): Uint8Array {
+    return QueryUserAllowancesResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryUserAllowancesResponse
+  ): QueryUserAllowancesResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryUserAllowancesResponse",
+      value: QueryUserAllowancesResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryGroupAllowancesRequest(): QueryGroupAllowancesRequest {
@@ -1876,6 +3034,51 @@ export const QueryGroupAllowancesRequest = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryGroupAllowancesRequestAmino
+  ): QueryGroupAllowancesRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      groupId: object.group_id,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryGroupAllowancesRequest
+  ): QueryGroupAllowancesRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.group_id = message.groupId;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryGroupAllowancesRequestAminoMsg
+  ): QueryGroupAllowancesRequest {
+    return QueryGroupAllowancesRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryGroupAllowancesRequestProtoMsg
+  ): QueryGroupAllowancesRequest {
+    return QueryGroupAllowancesRequest.decode(message.value);
+  },
+  toProto(message: QueryGroupAllowancesRequest): Uint8Array {
+    return QueryGroupAllowancesRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryGroupAllowancesRequest
+  ): QueryGroupAllowancesRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryGroupAllowancesRequest",
+      value: QueryGroupAllowancesRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryGroupAllowancesResponse(): QueryGroupAllowancesResponse {
   return {
@@ -1955,6 +3158,55 @@ export const QueryGroupAllowancesResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryGroupAllowancesResponseAmino
+  ): QueryGroupAllowancesResponse {
+    return {
+      grants: Array.isArray(object?.grants)
+        ? object.grants.map((e: any) => Grant.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryGroupAllowancesResponse
+  ): QueryGroupAllowancesResponseAmino {
+    const obj: any = {};
+    if (message.grants) {
+      obj.grants = message.grants.map((e) =>
+        e ? Grant.toAmino(e) : undefined
+      );
+    } else {
+      obj.grants = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryGroupAllowancesResponseAminoMsg
+  ): QueryGroupAllowancesResponse {
+    return QueryGroupAllowancesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryGroupAllowancesResponseProtoMsg
+  ): QueryGroupAllowancesResponse {
+    return QueryGroupAllowancesResponse.decode(message.value);
+  },
+  toProto(message: QueryGroupAllowancesResponse): Uint8Array {
+    return QueryGroupAllowancesResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryGroupAllowancesResponse
+  ): QueryGroupAllowancesResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.QueryGroupAllowancesResponse",
+      value: QueryGroupAllowancesResponse.encode(message).finish(),
+    };
   },
 };
 /** Query defines the gRPC querier service */

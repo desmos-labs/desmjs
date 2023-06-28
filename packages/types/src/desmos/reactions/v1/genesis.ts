@@ -1,8 +1,11 @@
 /* eslint-disable */
 import {
   RegisteredReaction,
+  RegisteredReactionAmino,
   Reaction,
+  ReactionAmino,
   SubspaceReactionsParams,
+  SubspaceReactionsParamsAmino,
 } from "./models";
 import { Long, DeepPartial, Exact, isSet } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -15,16 +18,59 @@ export interface GenesisState {
   reactions: Reaction[];
   subspacesParams: SubspaceReactionsParams[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/desmos.reactions.v1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState contains the data of the genesis state for the reactions module */
+export interface GenesisStateAmino {
+  subspaces_data: SubspaceDataEntryAmino[];
+  registered_reactions: RegisteredReactionAmino[];
+  posts_data: PostDataEntryAmino[];
+  reactions: ReactionAmino[];
+  subspaces_params: SubspaceReactionsParamsAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/desmos.reactions.v1.GenesisState";
+  value: GenesisStateAmino;
+}
 /** SubspaceDataEntry contains the data related to a single subspace */
 export interface SubspaceDataEntry {
   subspaceId: Long;
   registeredReactionId: number;
+}
+export interface SubspaceDataEntryProtoMsg {
+  typeUrl: "/desmos.reactions.v1.SubspaceDataEntry";
+  value: Uint8Array;
+}
+/** SubspaceDataEntry contains the data related to a single subspace */
+export interface SubspaceDataEntryAmino {
+  subspace_id: string;
+  registered_reaction_id: number;
+}
+export interface SubspaceDataEntryAminoMsg {
+  type: "/desmos.reactions.v1.SubspaceDataEntry";
+  value: SubspaceDataEntryAmino;
 }
 /** PostDataEntry contains the data related to a single post */
 export interface PostDataEntry {
   subspaceId: Long;
   postId: Long;
   reactionId: number;
+}
+export interface PostDataEntryProtoMsg {
+  typeUrl: "/desmos.reactions.v1.PostDataEntry";
+  value: Uint8Array;
+}
+/** PostDataEntry contains the data related to a single post */
+export interface PostDataEntryAmino {
+  subspace_id: string;
+  post_id: string;
+  reaction_id: number;
+}
+export interface PostDataEntryAminoMsg {
+  type: "/desmos.reactions.v1.PostDataEntry";
+  value: PostDataEntryAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -174,6 +220,83 @@ export const GenesisState = {
       ) || [];
     return message;
   },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      subspacesData: Array.isArray(object?.subspaces_data)
+        ? object.subspaces_data.map((e: any) => SubspaceDataEntry.fromAmino(e))
+        : [],
+      registeredReactions: Array.isArray(object?.registered_reactions)
+        ? object.registered_reactions.map((e: any) =>
+            RegisteredReaction.fromAmino(e)
+          )
+        : [],
+      postsData: Array.isArray(object?.posts_data)
+        ? object.posts_data.map((e: any) => PostDataEntry.fromAmino(e))
+        : [],
+      reactions: Array.isArray(object?.reactions)
+        ? object.reactions.map((e: any) => Reaction.fromAmino(e))
+        : [],
+      subspacesParams: Array.isArray(object?.subspaces_params)
+        ? object.subspaces_params.map((e: any) =>
+            SubspaceReactionsParams.fromAmino(e)
+          )
+        : [],
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.subspacesData) {
+      obj.subspaces_data = message.subspacesData.map((e) =>
+        e ? SubspaceDataEntry.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces_data = [];
+    }
+    if (message.registeredReactions) {
+      obj.registered_reactions = message.registeredReactions.map((e) =>
+        e ? RegisteredReaction.toAmino(e) : undefined
+      );
+    } else {
+      obj.registered_reactions = [];
+    }
+    if (message.postsData) {
+      obj.posts_data = message.postsData.map((e) =>
+        e ? PostDataEntry.toAmino(e) : undefined
+      );
+    } else {
+      obj.posts_data = [];
+    }
+    if (message.reactions) {
+      obj.reactions = message.reactions.map((e) =>
+        e ? Reaction.toAmino(e) : undefined
+      );
+    } else {
+      obj.reactions = [];
+    }
+    if (message.subspacesParams) {
+      obj.subspaces_params = message.subspacesParams.map((e) =>
+        e ? SubspaceReactionsParams.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces_params = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.GenesisState",
+      value: GenesisState.encode(message).finish(),
+    };
+  },
 };
 function createBaseSubspaceDataEntry(): SubspaceDataEntry {
   return {
@@ -242,6 +365,35 @@ export const SubspaceDataEntry = {
         : Long.UZERO;
     message.registeredReactionId = object.registeredReactionId ?? 0;
     return message;
+  },
+  fromAmino(object: SubspaceDataEntryAmino): SubspaceDataEntry {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      registeredReactionId: object.registered_reaction_id,
+    };
+  },
+  toAmino(message: SubspaceDataEntry): SubspaceDataEntryAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.registered_reaction_id = message.registeredReactionId;
+    return obj;
+  },
+  fromAminoMsg(object: SubspaceDataEntryAminoMsg): SubspaceDataEntry {
+    return SubspaceDataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SubspaceDataEntryProtoMsg): SubspaceDataEntry {
+    return SubspaceDataEntry.decode(message.value);
+  },
+  toProto(message: SubspaceDataEntry): Uint8Array {
+    return SubspaceDataEntry.encode(message).finish();
+  },
+  toProtoMsg(message: SubspaceDataEntry): SubspaceDataEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.SubspaceDataEntry",
+      value: SubspaceDataEntry.encode(message).finish(),
+    };
   },
 };
 function createBasePostDataEntry(): PostDataEntry {
@@ -323,5 +475,36 @@ export const PostDataEntry = {
         : Long.UZERO;
     message.reactionId = object.reactionId ?? 0;
     return message;
+  },
+  fromAmino(object: PostDataEntryAmino): PostDataEntry {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      reactionId: object.reaction_id,
+    };
+  },
+  toAmino(message: PostDataEntry): PostDataEntryAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.reaction_id = message.reactionId;
+    return obj;
+  },
+  fromAminoMsg(object: PostDataEntryAminoMsg): PostDataEntry {
+    return PostDataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PostDataEntryProtoMsg): PostDataEntry {
+    return PostDataEntry.decode(message.value);
+  },
+  toProto(message: PostDataEntry): Uint8Array {
+    return PostDataEntry.encode(message).finish();
+  },
+  toProtoMsg(message: PostDataEntry): PostDataEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.reactions.v1.PostDataEntry",
+      value: PostDataEntry.encode(message).finish(),
+    };
   },
 };

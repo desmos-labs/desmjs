@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { Any } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
 import {
   Long,
   isSet,
@@ -23,6 +23,7 @@ export enum PostReferenceType {
   POST_REFERENCE_TYPE_REPOST = 3,
   UNRECOGNIZED = -1,
 }
+export const PostReferenceTypeAmino = PostReferenceType;
 export function postReferenceTypeFromJSON(object: any): PostReferenceType {
   switch (object) {
     case 0:
@@ -72,6 +73,7 @@ export enum ReplySetting {
   REPLY_SETTING_MENTIONS = 4,
   UNRECOGNIZED = -1,
 }
+export const ReplySettingAmino = ReplySetting;
 export function replySettingFromJSON(object: any): ReplySetting {
   switch (object) {
     case 0:
@@ -141,6 +143,43 @@ export interface Post {
   /** (optional) Last edited time of the post */
   lastEditedDate?: Timestamp;
 }
+export interface PostProtoMsg {
+  typeUrl: "/desmos.posts.v3.Post";
+  value: Uint8Array;
+}
+/** Post contains all the information about a single post */
+export interface PostAmino {
+  /** Id of the subspace inside which the post has been created */
+  subspace_id: string;
+  /** Id of the section inside which the post has been created */
+  section_id: number;
+  /** Unique id of the post */
+  id: string;
+  /** (optional) External id for this post */
+  external_id: string;
+  /** (optional) Text of the post */
+  text: string;
+  /** (optional) Entities connected to this post */
+  entities?: EntitiesAmino;
+  /** Tags related to this post, useful for categorization */
+  tags: string[];
+  /** Author of the post */
+  author: string;
+  /** (optional) Id of the original post of the conversation */
+  conversation_id: string;
+  /** A list this posts references (either as a reply, repost or quote) */
+  referenced_posts: PostReferenceAmino[];
+  /** Reply settings of this post */
+  reply_settings: ReplySetting;
+  /** Creation date of the post */
+  creation_date?: TimestampAmino;
+  /** (optional) Last edited time of the post */
+  last_edited_date?: TimestampAmino;
+}
+export interface PostAminoMsg {
+  type: "/desmos.posts.v3.Post";
+  value: PostAmino;
+}
 /** PostReference contains the details of a post reference */
 export interface PostReference {
   /** Type of reference */
@@ -153,6 +192,26 @@ export interface PostReference {
    */
   position: Long;
 }
+export interface PostReferenceProtoMsg {
+  typeUrl: "/desmos.posts.v3.PostReference";
+  value: Uint8Array;
+}
+/** PostReference contains the details of a post reference */
+export interface PostReferenceAmino {
+  /** Type of reference */
+  type: PostReferenceType;
+  /** Id of the referenced post */
+  post_id: string;
+  /**
+   * Position of the reference inside the post's text. This should be used only
+   * with the type set to TYPE_QUOTE
+   */
+  position: string;
+}
+export interface PostReferenceAminoMsg {
+  type: "/desmos.posts.v3.PostReference";
+  value: PostReferenceAmino;
+}
 /** Contains the details of entities parsed out of the post text */
 export interface Entities {
   /** Hashtags represent inside the post text */
@@ -162,6 +221,23 @@ export interface Entities {
   /** Links present inside the post text */
   urls: Url[];
 }
+export interface EntitiesProtoMsg {
+  typeUrl: "/desmos.posts.v3.Entities";
+  value: Uint8Array;
+}
+/** Contains the details of entities parsed out of the post text */
+export interface EntitiesAmino {
+  /** Hashtags represent inside the post text */
+  hashtags: TextTagAmino[];
+  /** Mentions present inside the post text */
+  mentions: TextTagAmino[];
+  /** Links present inside the post text */
+  urls: UrlAmino[];
+}
+export interface EntitiesAminoMsg {
+  type: "/desmos.posts.v3.Entities";
+  value: EntitiesAmino;
+}
 /** TextTag represents a tag within the post text */
 export interface TextTag {
   /** Index of the character inside the text at which the tag starts */
@@ -170,6 +246,23 @@ export interface TextTag {
   end: Long;
   /** Tag reference (user address, hashtag value, etc) */
   tag: string;
+}
+export interface TextTagProtoMsg {
+  typeUrl: "/desmos.posts.v3.TextTag";
+  value: Uint8Array;
+}
+/** TextTag represents a tag within the post text */
+export interface TextTagAmino {
+  /** Index of the character inside the text at which the tag starts */
+  start: string;
+  /** Index of the character inside the text at which the tag ends */
+  end: string;
+  /** Tag reference (user address, hashtag value, etc) */
+  tag: string;
+}
+export interface TextTagAminoMsg {
+  type: "/desmos.posts.v3.TextTag";
+  value: TextTagAmino;
 }
 /** Url contains the details of a generic URL */
 export interface Url {
@@ -181,6 +274,25 @@ export interface Url {
   url: string;
   /** (optional) Display value of the URL */
   displayUrl: string;
+}
+export interface UrlProtoMsg {
+  typeUrl: "/desmos.posts.v3.Url";
+  value: Uint8Array;
+}
+/** Url contains the details of a generic URL */
+export interface UrlAmino {
+  /** Index of the character inside the text at which the URL starts */
+  start: string;
+  /** Index of the character inside the text at which the URL ends */
+  end: string;
+  /** Value of the URL where the user should be redirected to */
+  url: string;
+  /** (optional) Display value of the URL */
+  display_url: string;
+}
+export interface UrlAminoMsg {
+  type: "/desmos.posts.v3.Url";
+  value: UrlAmino;
 }
 /** Attachment contains the data of a single post attachment */
 export interface Attachment {
@@ -196,10 +308,45 @@ export interface Attachment {
   /** Content of the attachment */
   content?: Any;
 }
+export interface AttachmentProtoMsg {
+  typeUrl: "/desmos.posts.v3.Attachment";
+  value: Uint8Array;
+}
+/** Attachment contains the data of a single post attachment */
+export interface AttachmentAmino {
+  /**
+   * Id of the subspace inside which the post to which this attachment should be
+   * connected is
+   */
+  subspace_id: string;
+  /** Id of the post to which this attachment should be connected */
+  post_id: string;
+  /** If of this attachment */
+  id: number;
+  /** Content of the attachment */
+  content?: AnyAmino;
+}
+export interface AttachmentAminoMsg {
+  type: "/desmos.posts.v3.Attachment";
+  value: AttachmentAmino;
+}
 /** Media represents a media attachment */
 export interface Media {
   uri: string;
   mimeType: string;
+}
+export interface MediaProtoMsg {
+  typeUrl: "/desmos.posts.v3.Media";
+  value: Uint8Array;
+}
+/** Media represents a media attachment */
+export interface MediaAmino {
+  uri: string;
+  mime_type: string;
+}
+export interface MediaAminoMsg {
+  type: "/desmos.posts.v3.Media";
+  value: MediaAmino;
 }
 /** Poll represents a poll attachment */
 export interface Poll {
@@ -216,12 +363,50 @@ export interface Poll {
   /** Final poll results */
   finalTallyResults?: PollTallyResults;
 }
+export interface PollProtoMsg {
+  typeUrl: "/desmos.posts.v3.Poll";
+  value: Uint8Array;
+}
+/** Poll represents a poll attachment */
+export interface PollAmino {
+  /** Question of the poll */
+  question: string;
+  /** Answers the users can choose from */
+  provided_answers: Poll_ProvidedAnswerAmino[];
+  /** Date at which the poll will close */
+  end_date?: TimestampAmino;
+  /** Whether the poll allows multiple choices from the same user or not */
+  allows_multiple_answers: boolean;
+  /** Whether the poll allows to edit an answer or not */
+  allows_answer_edits: boolean;
+  /** Final poll results */
+  final_tally_results?: PollTallyResultsAmino;
+}
+export interface PollAminoMsg {
+  type: "/desmos.posts.v3.Poll";
+  value: PollAmino;
+}
 /** Provided answer contains the details of a possible poll answer */
 export interface Poll_ProvidedAnswer {
   /** (optional) Text of the answer */
   text: string;
   /** Content of the attachment */
   attachments: Any[];
+}
+export interface Poll_ProvidedAnswerProtoMsg {
+  typeUrl: "/desmos.posts.v3.ProvidedAnswer";
+  value: Uint8Array;
+}
+/** Provided answer contains the details of a possible poll answer */
+export interface Poll_ProvidedAnswerAmino {
+  /** (optional) Text of the answer */
+  text: string;
+  /** Content of the attachment */
+  attachments: AnyAmino[];
+}
+export interface Poll_ProvidedAnswerAminoMsg {
+  type: "/desmos.posts.v3.ProvidedAnswer";
+  value: Poll_ProvidedAnswerAmino;
 }
 /** UserAnswer represents a user answer to a poll */
 export interface UserAnswer {
@@ -236,9 +421,42 @@ export interface UserAnswer {
   /** Address of the user answering the poll */
   user: string;
 }
+export interface UserAnswerProtoMsg {
+  typeUrl: "/desmos.posts.v3.UserAnswer";
+  value: Uint8Array;
+}
+/** UserAnswer represents a user answer to a poll */
+export interface UserAnswerAmino {
+  /** Subspace id inside which the post related to this attachment is located */
+  subspace_id: string;
+  /** Id of the post associated to this attachment */
+  post_id: string;
+  /** Id of the poll to which this answer is associated */
+  poll_id: number;
+  /** Indexes of the answers inside the ProvidedAnswers array */
+  answers_indexes: number[];
+  /** Address of the user answering the poll */
+  user: string;
+}
+export interface UserAnswerAminoMsg {
+  type: "/desmos.posts.v3.UserAnswer";
+  value: UserAnswerAmino;
+}
 /** PollTallyResults contains the tally results for a poll */
 export interface PollTallyResults {
   results: PollTallyResults_AnswerResult[];
+}
+export interface PollTallyResultsProtoMsg {
+  typeUrl: "/desmos.posts.v3.PollTallyResults";
+  value: Uint8Array;
+}
+/** PollTallyResults contains the tally results for a poll */
+export interface PollTallyResultsAmino {
+  results: PollTallyResults_AnswerResultAmino[];
+}
+export interface PollTallyResultsAminoMsg {
+  type: "/desmos.posts.v3.PollTallyResults";
+  value: PollTallyResultsAmino;
 }
 /** AnswerResult contains the result of a single poll provided answer */
 export interface PollTallyResults_AnswerResult {
@@ -247,10 +465,38 @@ export interface PollTallyResults_AnswerResult {
   /** Number of votes the answer has received */
   votes: Long;
 }
+export interface PollTallyResults_AnswerResultProtoMsg {
+  typeUrl: "/desmos.posts.v3.AnswerResult";
+  value: Uint8Array;
+}
+/** AnswerResult contains the result of a single poll provided answer */
+export interface PollTallyResults_AnswerResultAmino {
+  /** Index of the answer inside the poll's ProvidedAnswers slice */
+  answer_index: number;
+  /** Number of votes the answer has received */
+  votes: string;
+}
+export interface PollTallyResults_AnswerResultAminoMsg {
+  type: "/desmos.posts.v3.AnswerResult";
+  value: PollTallyResults_AnswerResultAmino;
+}
 /** Params contains the parameters for the posts module */
 export interface Params {
   /** Maximum length of the post text */
   maxTextLength: number;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/desmos.posts.v3.Params";
+  value: Uint8Array;
+}
+/** Params contains the parameters for the posts module */
+export interface ParamsAmino {
+  /** Maximum length of the post text */
+  max_text_length: number;
+}
+export interface ParamsAminoMsg {
+  type: "/desmos.posts.v3.Params";
+  value: ParamsAmino;
 }
 function createBasePost(): Post {
   return {
@@ -478,6 +724,85 @@ export const Post = {
         : undefined;
     return message;
   },
+  fromAmino(object: PostAmino): Post {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      sectionId: object.section_id,
+      id: Long.fromString(object.id),
+      externalId: object.external_id,
+      text: object.text,
+      entities: object?.entities
+        ? Entities.fromAmino(object.entities)
+        : undefined,
+      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => e) : [],
+      author: object.author,
+      conversationId: Long.fromString(object.conversation_id),
+      referencedPosts: Array.isArray(object?.referenced_posts)
+        ? object.referenced_posts.map((e: any) => PostReference.fromAmino(e))
+        : [],
+      replySettings: isSet(object.reply_settings)
+        ? replySettingFromJSON(object.reply_settings)
+        : 0,
+      creationDate: object?.creation_date
+        ? Timestamp.fromAmino(object.creation_date)
+        : undefined,
+      lastEditedDate: object?.last_edited_date
+        ? Timestamp.fromAmino(object.last_edited_date)
+        : undefined,
+    };
+  },
+  toAmino(message: Post): PostAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.section_id = message.sectionId;
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.external_id = message.externalId;
+    obj.text = message.text;
+    obj.entities = message.entities
+      ? Entities.toAmino(message.entities)
+      : undefined;
+    if (message.tags) {
+      obj.tags = message.tags.map((e) => e);
+    } else {
+      obj.tags = [];
+    }
+    obj.author = message.author;
+    obj.conversation_id = message.conversationId
+      ? message.conversationId.toString()
+      : undefined;
+    if (message.referencedPosts) {
+      obj.referenced_posts = message.referencedPosts.map((e) =>
+        e ? PostReference.toAmino(e) : undefined
+      );
+    } else {
+      obj.referenced_posts = [];
+    }
+    obj.reply_settings = message.replySettings;
+    obj.creation_date = message.creationDate
+      ? Timestamp.toAmino(message.creationDate)
+      : undefined;
+    obj.last_edited_date = message.lastEditedDate
+      ? Timestamp.toAmino(message.lastEditedDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PostAminoMsg): Post {
+    return Post.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PostProtoMsg): Post {
+    return Post.decode(message.value);
+  },
+  toProto(message: Post): Uint8Array {
+    return Post.encode(message).finish();
+  },
+  toProtoMsg(message: Post): PostProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Post",
+      value: Post.encode(message).finish(),
+    };
+  },
 };
 function createBasePostReference(): PostReference {
   return {
@@ -558,6 +883,35 @@ export const PostReference = {
         ? Long.fromValue(object.position)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: PostReferenceAmino): PostReference {
+    return {
+      type: isSet(object.type) ? postReferenceTypeFromJSON(object.type) : 0,
+      postId: Long.fromString(object.post_id),
+      position: Long.fromString(object.position),
+    };
+  },
+  toAmino(message: PostReference): PostReferenceAmino {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.position = message.position ? message.position.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PostReferenceAminoMsg): PostReference {
+    return PostReference.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PostReferenceProtoMsg): PostReference {
+    return PostReference.decode(message.value);
+  },
+  toProto(message: PostReference): Uint8Array {
+    return PostReference.encode(message).finish();
+  },
+  toProtoMsg(message: PostReference): PostReferenceProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.PostReference",
+      value: PostReference.encode(message).finish(),
+    };
   },
 };
 function createBaseEntities(): Entities {
@@ -651,6 +1005,57 @@ export const Entities = {
     message.urls = object.urls?.map((e) => Url.fromPartial(e)) || [];
     return message;
   },
+  fromAmino(object: EntitiesAmino): Entities {
+    return {
+      hashtags: Array.isArray(object?.hashtags)
+        ? object.hashtags.map((e: any) => TextTag.fromAmino(e))
+        : [],
+      mentions: Array.isArray(object?.mentions)
+        ? object.mentions.map((e: any) => TextTag.fromAmino(e))
+        : [],
+      urls: Array.isArray(object?.urls)
+        ? object.urls.map((e: any) => Url.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: Entities): EntitiesAmino {
+    const obj: any = {};
+    if (message.hashtags) {
+      obj.hashtags = message.hashtags.map((e) =>
+        e ? TextTag.toAmino(e) : undefined
+      );
+    } else {
+      obj.hashtags = [];
+    }
+    if (message.mentions) {
+      obj.mentions = message.mentions.map((e) =>
+        e ? TextTag.toAmino(e) : undefined
+      );
+    } else {
+      obj.mentions = [];
+    }
+    if (message.urls) {
+      obj.urls = message.urls.map((e) => (e ? Url.toAmino(e) : undefined));
+    } else {
+      obj.urls = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EntitiesAminoMsg): Entities {
+    return Entities.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EntitiesProtoMsg): Entities {
+    return Entities.decode(message.value);
+  },
+  toProto(message: Entities): Uint8Array {
+    return Entities.encode(message).finish();
+  },
+  toProtoMsg(message: Entities): EntitiesProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Entities",
+      value: Entities.encode(message).finish(),
+    };
+  },
 };
 function createBaseTextTag(): TextTag {
   return {
@@ -726,6 +1131,35 @@ export const TextTag = {
         : Long.UZERO;
     message.tag = object.tag ?? "";
     return message;
+  },
+  fromAmino(object: TextTagAmino): TextTag {
+    return {
+      start: Long.fromString(object.start),
+      end: Long.fromString(object.end),
+      tag: object.tag,
+    };
+  },
+  toAmino(message: TextTag): TextTagAmino {
+    const obj: any = {};
+    obj.start = message.start ? message.start.toString() : undefined;
+    obj.end = message.end ? message.end.toString() : undefined;
+    obj.tag = message.tag;
+    return obj;
+  },
+  fromAminoMsg(object: TextTagAminoMsg): TextTag {
+    return TextTag.fromAmino(object.value);
+  },
+  fromProtoMsg(message: TextTagProtoMsg): TextTag {
+    return TextTag.decode(message.value);
+  },
+  toProto(message: TextTag): Uint8Array {
+    return TextTag.encode(message).finish();
+  },
+  toProtoMsg(message: TextTag): TextTagProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.TextTag",
+      value: TextTag.encode(message).finish(),
+    };
   },
 };
 function createBaseUrl(): Url {
@@ -809,6 +1243,37 @@ export const Url = {
     message.url = object.url ?? "";
     message.displayUrl = object.displayUrl ?? "";
     return message;
+  },
+  fromAmino(object: UrlAmino): Url {
+    return {
+      start: Long.fromString(object.start),
+      end: Long.fromString(object.end),
+      url: object.url,
+      displayUrl: object.display_url,
+    };
+  },
+  toAmino(message: Url): UrlAmino {
+    const obj: any = {};
+    obj.start = message.start ? message.start.toString() : undefined;
+    obj.end = message.end ? message.end.toString() : undefined;
+    obj.url = message.url;
+    obj.display_url = message.displayUrl;
+    return obj;
+  },
+  fromAminoMsg(object: UrlAminoMsg): Url {
+    return Url.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UrlProtoMsg): Url {
+    return Url.decode(message.value);
+  },
+  toProto(message: Url): Uint8Array {
+    return Url.encode(message).finish();
+  },
+  toProtoMsg(message: Url): UrlProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Url",
+      value: Url.encode(message).finish(),
+    };
   },
 };
 function createBaseAttachment(): Attachment {
@@ -904,6 +1369,39 @@ export const Attachment = {
         : undefined;
     return message;
   },
+  fromAmino(object: AttachmentAmino): Attachment {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      id: object.id,
+      content: object?.content ? Any.fromAmino(object.content) : undefined,
+    };
+  },
+  toAmino(message: Attachment): AttachmentAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.id = message.id;
+    obj.content = message.content ? Any.toAmino(message.content) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: AttachmentAminoMsg): Attachment {
+    return Attachment.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AttachmentProtoMsg): Attachment {
+    return Attachment.decode(message.value);
+  },
+  toProto(message: Attachment): Uint8Array {
+    return Attachment.encode(message).finish();
+  },
+  toProtoMsg(message: Attachment): AttachmentProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Attachment",
+      value: Attachment.encode(message).finish(),
+    };
+  },
 };
 function createBaseMedia(): Media {
   return {
@@ -958,6 +1456,33 @@ export const Media = {
     message.uri = object.uri ?? "";
     message.mimeType = object.mimeType ?? "";
     return message;
+  },
+  fromAmino(object: MediaAmino): Media {
+    return {
+      uri: object.uri,
+      mimeType: object.mime_type,
+    };
+  },
+  toAmino(message: Media): MediaAmino {
+    const obj: any = {};
+    obj.uri = message.uri;
+    obj.mime_type = message.mimeType;
+    return obj;
+  },
+  fromAminoMsg(object: MediaAminoMsg): Media {
+    return Media.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MediaProtoMsg): Media {
+    return Media.decode(message.value);
+  },
+  toProto(message: Media): Uint8Array {
+    return Media.encode(message).finish();
+  },
+  toProtoMsg(message: Media): MediaProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Media",
+      value: Media.encode(message).finish(),
+    };
   },
 };
 function createBasePoll(): Poll {
@@ -1095,6 +1620,59 @@ export const Poll = {
         : undefined;
     return message;
   },
+  fromAmino(object: PollAmino): Poll {
+    return {
+      question: object.question,
+      providedAnswers: Array.isArray(object?.provided_answers)
+        ? object.provided_answers.map((e: any) =>
+            Poll_ProvidedAnswer.fromAmino(e)
+          )
+        : [],
+      endDate: object?.end_date
+        ? Timestamp.fromAmino(object.end_date)
+        : undefined,
+      allowsMultipleAnswers: object.allows_multiple_answers,
+      allowsAnswerEdits: object.allows_answer_edits,
+      finalTallyResults: object?.final_tally_results
+        ? PollTallyResults.fromAmino(object.final_tally_results)
+        : undefined,
+    };
+  },
+  toAmino(message: Poll): PollAmino {
+    const obj: any = {};
+    obj.question = message.question;
+    if (message.providedAnswers) {
+      obj.provided_answers = message.providedAnswers.map((e) =>
+        e ? Poll_ProvidedAnswer.toAmino(e) : undefined
+      );
+    } else {
+      obj.provided_answers = [];
+    }
+    obj.end_date = message.endDate
+      ? Timestamp.toAmino(message.endDate)
+      : undefined;
+    obj.allows_multiple_answers = message.allowsMultipleAnswers;
+    obj.allows_answer_edits = message.allowsAnswerEdits;
+    obj.final_tally_results = message.finalTallyResults
+      ? PollTallyResults.toAmino(message.finalTallyResults)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: PollAminoMsg): Poll {
+    return Poll.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PollProtoMsg): Poll {
+    return Poll.decode(message.value);
+  },
+  toProto(message: Poll): Uint8Array {
+    return Poll.encode(message).finish();
+  },
+  toProtoMsg(message: Poll): PollProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Poll",
+      value: Poll.encode(message).finish(),
+    };
+  },
 };
 function createBasePoll_ProvidedAnswer(): Poll_ProvidedAnswer {
   return {
@@ -1163,6 +1741,41 @@ export const Poll_ProvidedAnswer = {
     message.attachments =
       object.attachments?.map((e) => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: Poll_ProvidedAnswerAmino): Poll_ProvidedAnswer {
+    return {
+      text: object.text,
+      attachments: Array.isArray(object?.attachments)
+        ? object.attachments.map((e: any) => Any.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: Poll_ProvidedAnswer): Poll_ProvidedAnswerAmino {
+    const obj: any = {};
+    obj.text = message.text;
+    if (message.attachments) {
+      obj.attachments = message.attachments.map((e) =>
+        e ? Any.toAmino(e) : undefined
+      );
+    } else {
+      obj.attachments = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Poll_ProvidedAnswerAminoMsg): Poll_ProvidedAnswer {
+    return Poll_ProvidedAnswer.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Poll_ProvidedAnswerProtoMsg): Poll_ProvidedAnswer {
+    return Poll_ProvidedAnswer.decode(message.value);
+  },
+  toProto(message: Poll_ProvidedAnswer): Uint8Array {
+    return Poll_ProvidedAnswer.encode(message).finish();
+  },
+  toProtoMsg(message: Poll_ProvidedAnswer): Poll_ProvidedAnswerProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.ProvidedAnswer",
+      value: Poll_ProvidedAnswer.encode(message).finish(),
+    };
   },
 };
 function createBaseUserAnswer(): UserAnswer {
@@ -1279,6 +1892,47 @@ export const UserAnswer = {
     message.user = object.user ?? "";
     return message;
   },
+  fromAmino(object: UserAnswerAmino): UserAnswer {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      pollId: object.poll_id,
+      answersIndexes: Array.isArray(object?.answers_indexes)
+        ? object.answers_indexes.map((e: any) => e)
+        : [],
+      user: object.user,
+    };
+  },
+  toAmino(message: UserAnswer): UserAnswerAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.poll_id = message.pollId;
+    if (message.answersIndexes) {
+      obj.answers_indexes = message.answersIndexes.map((e) => e);
+    } else {
+      obj.answers_indexes = [];
+    }
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: UserAnswerAminoMsg): UserAnswer {
+    return UserAnswer.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserAnswerProtoMsg): UserAnswer {
+    return UserAnswer.decode(message.value);
+  },
+  toProto(message: UserAnswer): Uint8Array {
+    return UserAnswer.encode(message).finish();
+  },
+  toProtoMsg(message: UserAnswer): UserAnswerProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.UserAnswer",
+      value: UserAnswer.encode(message).finish(),
+    };
+  },
 };
 function createBasePollTallyResults(): PollTallyResults {
   return {
@@ -1346,6 +2000,41 @@ export const PollTallyResults = {
         PollTallyResults_AnswerResult.fromPartial(e)
       ) || [];
     return message;
+  },
+  fromAmino(object: PollTallyResultsAmino): PollTallyResults {
+    return {
+      results: Array.isArray(object?.results)
+        ? object.results.map((e: any) =>
+            PollTallyResults_AnswerResult.fromAmino(e)
+          )
+        : [],
+    };
+  },
+  toAmino(message: PollTallyResults): PollTallyResultsAmino {
+    const obj: any = {};
+    if (message.results) {
+      obj.results = message.results.map((e) =>
+        e ? PollTallyResults_AnswerResult.toAmino(e) : undefined
+      );
+    } else {
+      obj.results = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: PollTallyResultsAminoMsg): PollTallyResults {
+    return PollTallyResults.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PollTallyResultsProtoMsg): PollTallyResults {
+    return PollTallyResults.decode(message.value);
+  },
+  toProto(message: PollTallyResults): Uint8Array {
+    return PollTallyResults.encode(message).finish();
+  },
+  toProtoMsg(message: PollTallyResults): PollTallyResultsProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.PollTallyResults",
+      value: PollTallyResults.encode(message).finish(),
+    };
   },
 };
 function createBasePollTallyResults_AnswerResult(): PollTallyResults_AnswerResult {
@@ -1415,6 +2104,43 @@ export const PollTallyResults_AnswerResult = {
         : Long.UZERO;
     return message;
   },
+  fromAmino(
+    object: PollTallyResults_AnswerResultAmino
+  ): PollTallyResults_AnswerResult {
+    return {
+      answerIndex: object.answer_index,
+      votes: Long.fromString(object.votes),
+    };
+  },
+  toAmino(
+    message: PollTallyResults_AnswerResult
+  ): PollTallyResults_AnswerResultAmino {
+    const obj: any = {};
+    obj.answer_index = message.answerIndex;
+    obj.votes = message.votes ? message.votes.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: PollTallyResults_AnswerResultAminoMsg
+  ): PollTallyResults_AnswerResult {
+    return PollTallyResults_AnswerResult.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: PollTallyResults_AnswerResultProtoMsg
+  ): PollTallyResults_AnswerResult {
+    return PollTallyResults_AnswerResult.decode(message.value);
+  },
+  toProto(message: PollTallyResults_AnswerResult): Uint8Array {
+    return PollTallyResults_AnswerResult.encode(message).finish();
+  },
+  toProtoMsg(
+    message: PollTallyResults_AnswerResult
+  ): PollTallyResults_AnswerResultProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.AnswerResult",
+      value: PollTallyResults_AnswerResult.encode(message).finish(),
+    };
+  },
 };
 function createBaseParams(): Params {
   return {
@@ -1465,5 +2191,30 @@ export const Params = {
     const message = createBaseParams();
     message.maxTextLength = object.maxTextLength ?? 0;
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      maxTextLength: object.max_text_length,
+    };
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.max_text_length = message.maxTextLength;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.Params",
+      value: Params.encode(message).finish(),
+    };
   },
 };

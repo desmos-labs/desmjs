@@ -1,5 +1,12 @@
 /* eslint-disable */
-import { Reason, Report, Params } from "./models";
+import {
+  Reason,
+  ReasonAmino,
+  Report,
+  ReportAmino,
+  Params,
+  ParamsAmino,
+} from "./models";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.reports.v1";
@@ -10,6 +17,21 @@ export interface GenesisState {
   reports: Report[];
   params?: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/desmos.reports.v1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the reports module's genesis state. */
+export interface GenesisStateAmino {
+  subspaces_data: SubspaceDataEntryAmino[];
+  reasons: ReasonAmino[];
+  reports: ReportAmino[];
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/desmos.reports.v1.GenesisState";
+  value: GenesisStateAmino;
+}
 /** SubspaceDataEntry contains the data related to a single subspace */
 export interface SubspaceDataEntry {
   /** Id of the subspace to which the data relates */
@@ -18,6 +40,23 @@ export interface SubspaceDataEntry {
   reasonId: number;
   /** Id of the next report inside the subspace */
   reportId: Long;
+}
+export interface SubspaceDataEntryProtoMsg {
+  typeUrl: "/desmos.reports.v1.SubspaceDataEntry";
+  value: Uint8Array;
+}
+/** SubspaceDataEntry contains the data related to a single subspace */
+export interface SubspaceDataEntryAmino {
+  /** Id of the subspace to which the data relates */
+  subspace_id: string;
+  /** Id of the next reason inside the subspace */
+  reason_id: number;
+  /** Id of the next report inside the subspace */
+  report_id: string;
+}
+export interface SubspaceDataEntryAminoMsg {
+  type: "/desmos.reports.v1.SubspaceDataEntry";
+  value: SubspaceDataEntryAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -129,6 +168,61 @@ export const GenesisState = {
         : undefined;
     return message;
   },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      subspacesData: Array.isArray(object?.subspaces_data)
+        ? object.subspaces_data.map((e: any) => SubspaceDataEntry.fromAmino(e))
+        : [],
+      reasons: Array.isArray(object?.reasons)
+        ? object.reasons.map((e: any) => Reason.fromAmino(e))
+        : [],
+      reports: Array.isArray(object?.reports)
+        ? object.reports.map((e: any) => Report.fromAmino(e))
+        : [],
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.subspacesData) {
+      obj.subspaces_data = message.subspacesData.map((e) =>
+        e ? SubspaceDataEntry.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces_data = [];
+    }
+    if (message.reasons) {
+      obj.reasons = message.reasons.map((e) =>
+        e ? Reason.toAmino(e) : undefined
+      );
+    } else {
+      obj.reasons = [];
+    }
+    if (message.reports) {
+      obj.reports = message.reports.map((e) =>
+        e ? Report.toAmino(e) : undefined
+      );
+    } else {
+      obj.reports = [];
+    }
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.GenesisState",
+      value: GenesisState.encode(message).finish(),
+    };
+  },
 };
 function createBaseSubspaceDataEntry(): SubspaceDataEntry {
   return {
@@ -211,5 +305,36 @@ export const SubspaceDataEntry = {
         ? Long.fromValue(object.reportId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: SubspaceDataEntryAmino): SubspaceDataEntry {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      reasonId: object.reason_id,
+      reportId: Long.fromString(object.report_id),
+    };
+  },
+  toAmino(message: SubspaceDataEntry): SubspaceDataEntryAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.reason_id = message.reasonId;
+    obj.report_id = message.reportId ? message.reportId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SubspaceDataEntryAminoMsg): SubspaceDataEntry {
+    return SubspaceDataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SubspaceDataEntryProtoMsg): SubspaceDataEntry {
+    return SubspaceDataEntry.decode(message.value);
+  },
+  toProto(message: SubspaceDataEntry): Uint8Array {
+    return SubspaceDataEntry.encode(message).finish();
+  },
+  toProtoMsg(message: SubspaceDataEntry): SubspaceDataEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.SubspaceDataEntry",
+      value: SubspaceDataEntry.encode(message).finish(),
+    };
   },
 };

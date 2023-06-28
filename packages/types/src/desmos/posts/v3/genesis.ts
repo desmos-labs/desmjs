@@ -1,6 +1,15 @@
 /* eslint-disable */
-import { Post, Attachment, UserAnswer, Params } from "./models";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import {
+  Post,
+  PostAmino,
+  Attachment,
+  AttachmentAmino,
+  UserAnswer,
+  UserAnswerAmino,
+  Params,
+  ParamsAmino,
+} from "./models";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import {
   Long,
   isSet,
@@ -21,10 +30,41 @@ export interface GenesisState {
   userAnswers: UserAnswer[];
   params?: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/desmos.posts.v3.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState contains the data of the genesis state for the posts module */
+export interface GenesisStateAmino {
+  subspaces_data: SubspaceDataEntryAmino[];
+  posts_data: PostDataEntryAmino[];
+  posts: PostAmino[];
+  attachments: AttachmentAmino[];
+  active_polls: ActivePollDataAmino[];
+  user_answers: UserAnswerAmino[];
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/desmos.posts.v3.GenesisState";
+  value: GenesisStateAmino;
+}
 /** SubspaceDataEntry contains the data for a given subspace */
 export interface SubspaceDataEntry {
   subspaceId: Long;
   initialPostId: Long;
+}
+export interface SubspaceDataEntryProtoMsg {
+  typeUrl: "/desmos.posts.v3.SubspaceDataEntry";
+  value: Uint8Array;
+}
+/** SubspaceDataEntry contains the data for a given subspace */
+export interface SubspaceDataEntryAmino {
+  subspace_id: string;
+  initial_post_id: string;
+}
+export interface SubspaceDataEntryAminoMsg {
+  type: "/desmos.posts.v3.SubspaceDataEntry";
+  value: SubspaceDataEntryAmino;
 }
 /** PostDataEntry contains the data of a given post */
 export interface PostDataEntry {
@@ -32,12 +72,41 @@ export interface PostDataEntry {
   postId: Long;
   initialAttachmentId: number;
 }
+export interface PostDataEntryProtoMsg {
+  typeUrl: "/desmos.posts.v3.PostDataEntry";
+  value: Uint8Array;
+}
+/** PostDataEntry contains the data of a given post */
+export interface PostDataEntryAmino {
+  subspace_id: string;
+  post_id: string;
+  initial_attachment_id: number;
+}
+export interface PostDataEntryAminoMsg {
+  type: "/desmos.posts.v3.PostDataEntry";
+  value: PostDataEntryAmino;
+}
 /** ActivePollData contains the data of an active poll */
 export interface ActivePollData {
   subspaceId: Long;
   postId: Long;
   pollId: number;
   endDate?: Timestamp;
+}
+export interface ActivePollDataProtoMsg {
+  typeUrl: "/desmos.posts.v3.ActivePollData";
+  value: Uint8Array;
+}
+/** ActivePollData contains the data of an active poll */
+export interface ActivePollDataAmino {
+  subspace_id: string;
+  post_id: string;
+  poll_id: number;
+  end_date?: TimestampAmino;
+}
+export interface ActivePollDataAminoMsg {
+  type: "/desmos.posts.v3.ActivePollData";
+  value: ActivePollDataAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -207,6 +276,89 @@ export const GenesisState = {
         : undefined;
     return message;
   },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      subspacesData: Array.isArray(object?.subspaces_data)
+        ? object.subspaces_data.map((e: any) => SubspaceDataEntry.fromAmino(e))
+        : [],
+      postsData: Array.isArray(object?.posts_data)
+        ? object.posts_data.map((e: any) => PostDataEntry.fromAmino(e))
+        : [],
+      posts: Array.isArray(object?.posts)
+        ? object.posts.map((e: any) => Post.fromAmino(e))
+        : [],
+      attachments: Array.isArray(object?.attachments)
+        ? object.attachments.map((e: any) => Attachment.fromAmino(e))
+        : [],
+      activePolls: Array.isArray(object?.active_polls)
+        ? object.active_polls.map((e: any) => ActivePollData.fromAmino(e))
+        : [],
+      userAnswers: Array.isArray(object?.user_answers)
+        ? object.user_answers.map((e: any) => UserAnswer.fromAmino(e))
+        : [],
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.subspacesData) {
+      obj.subspaces_data = message.subspacesData.map((e) =>
+        e ? SubspaceDataEntry.toAmino(e) : undefined
+      );
+    } else {
+      obj.subspaces_data = [];
+    }
+    if (message.postsData) {
+      obj.posts_data = message.postsData.map((e) =>
+        e ? PostDataEntry.toAmino(e) : undefined
+      );
+    } else {
+      obj.posts_data = [];
+    }
+    if (message.posts) {
+      obj.posts = message.posts.map((e) => (e ? Post.toAmino(e) : undefined));
+    } else {
+      obj.posts = [];
+    }
+    if (message.attachments) {
+      obj.attachments = message.attachments.map((e) =>
+        e ? Attachment.toAmino(e) : undefined
+      );
+    } else {
+      obj.attachments = [];
+    }
+    if (message.activePolls) {
+      obj.active_polls = message.activePolls.map((e) =>
+        e ? ActivePollData.toAmino(e) : undefined
+      );
+    } else {
+      obj.active_polls = [];
+    }
+    if (message.userAnswers) {
+      obj.user_answers = message.userAnswers.map((e) =>
+        e ? UserAnswer.toAmino(e) : undefined
+      );
+    } else {
+      obj.user_answers = [];
+    }
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.GenesisState",
+      value: GenesisState.encode(message).finish(),
+    };
+  },
 };
 function createBaseSubspaceDataEntry(): SubspaceDataEntry {
   return {
@@ -278,6 +430,37 @@ export const SubspaceDataEntry = {
         ? Long.fromValue(object.initialPostId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: SubspaceDataEntryAmino): SubspaceDataEntry {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      initialPostId: Long.fromString(object.initial_post_id),
+    };
+  },
+  toAmino(message: SubspaceDataEntry): SubspaceDataEntryAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.initial_post_id = message.initialPostId
+      ? message.initialPostId.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: SubspaceDataEntryAminoMsg): SubspaceDataEntry {
+    return SubspaceDataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SubspaceDataEntryProtoMsg): SubspaceDataEntry {
+    return SubspaceDataEntry.decode(message.value);
+  },
+  toProto(message: SubspaceDataEntry): Uint8Array {
+    return SubspaceDataEntry.encode(message).finish();
+  },
+  toProtoMsg(message: SubspaceDataEntry): SubspaceDataEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.SubspaceDataEntry",
+      value: SubspaceDataEntry.encode(message).finish(),
+    };
   },
 };
 function createBasePostDataEntry(): PostDataEntry {
@@ -361,6 +544,37 @@ export const PostDataEntry = {
         : Long.UZERO;
     message.initialAttachmentId = object.initialAttachmentId ?? 0;
     return message;
+  },
+  fromAmino(object: PostDataEntryAmino): PostDataEntry {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      initialAttachmentId: object.initial_attachment_id,
+    };
+  },
+  toAmino(message: PostDataEntry): PostDataEntryAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.initial_attachment_id = message.initialAttachmentId;
+    return obj;
+  },
+  fromAminoMsg(object: PostDataEntryAminoMsg): PostDataEntry {
+    return PostDataEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PostDataEntryProtoMsg): PostDataEntry {
+    return PostDataEntry.decode(message.value);
+  },
+  toProto(message: PostDataEntry): Uint8Array {
+    return PostDataEntry.encode(message).finish();
+  },
+  toProtoMsg(message: PostDataEntry): PostDataEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.PostDataEntry",
+      value: PostDataEntry.encode(message).finish(),
+    };
   },
 };
 function createBaseActivePollData(): ActivePollData {
@@ -457,5 +671,42 @@ export const ActivePollData = {
         ? Timestamp.fromPartial(object.endDate)
         : undefined;
     return message;
+  },
+  fromAmino(object: ActivePollDataAmino): ActivePollData {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      pollId: object.poll_id,
+      endDate: object?.end_date
+        ? Timestamp.fromAmino(object.end_date)
+        : undefined,
+    };
+  },
+  toAmino(message: ActivePollData): ActivePollDataAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.poll_id = message.pollId;
+    obj.end_date = message.endDate
+      ? Timestamp.toAmino(message.endDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ActivePollDataAminoMsg): ActivePollData {
+    return ActivePollData.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ActivePollDataProtoMsg): ActivePollData {
+    return ActivePollData.decode(message.value);
+  },
+  toProto(message: ActivePollData): Uint8Array {
+    return ActivePollData.encode(message).finish();
+  },
+  toProtoMsg(message: ActivePollData): ActivePollDataProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.ActivePollData",
+      value: ActivePollData.encode(message).finish(),
+    };
   },
 };

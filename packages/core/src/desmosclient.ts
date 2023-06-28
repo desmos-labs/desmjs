@@ -1,6 +1,5 @@
 import {
   Account,
-  AminoTypes,
   calculateFee,
   DeliverTxResponse,
   MsgTransferEncodeObject,
@@ -67,6 +66,7 @@ import {
   BroadcastResponse,
   SyncBroadcastResponse,
 } from "./types/responses";
+import { AminoTypes } from "./aminotypes";
 
 export interface SimulateOptions {
   publicKey?: PublicKey;
@@ -222,10 +222,13 @@ export class DesmosClient extends SigningCosmWasmClient {
     options: Options,
     signer: Signer = new NoOpSigner()
   ) {
-    const {
-      registry = createDefaultRegistry(),
-      aminoTypes = new AminoTypes(createDesmosTypes()),
-    } = options;
+    const newAminoTypes = new AminoTypes(
+      createDesmosTypes(),
+      createDefaultRegistry()
+    );
+
+    const { registry = createDefaultRegistry(), aminoTypes = newAminoTypes } =
+      options;
 
     super(client, signer, {
       registry,
@@ -236,7 +239,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
     this.txSigner = signer;
     this.typesRegistry = registry;
-    this.types = aminoTypes;
+    this.types = newAminoTypes;
     this.options = options;
   }
 
@@ -706,7 +709,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    * Broadcast transaction to mempool and wait for response.
    * @param tx - The transaction to broadcast.
    */
-  public async broadcastTxSync(tx: TxRaw): Promise<SyncBroadcastResponse> {
+  public async broadcastTxRawSync(tx: TxRaw): Promise<SyncBroadcastResponse> {
     const client = this.forceGetTmClient();
     const response = await client.broadcastTxSync({
       tx: TxRaw.encode(tx).finish(),
@@ -748,7 +751,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       case BroadcastMode.Async:
         return this.broadcastTxAsync(tx);
       case BroadcastMode.Sync:
-        return this.broadcastTxAsync(tx);
+        return this.broadcastTxRawSync(tx);
       case BroadcastMode.Block:
         return this.broadcastTxBlock(tx);
       default:

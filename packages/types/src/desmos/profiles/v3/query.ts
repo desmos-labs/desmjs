@@ -23,6 +23,7 @@ import {
   QueryApplicationLinksResponse,
 } from "./query_app_links";
 import { QueryParamsRequest, QueryParamsResponse } from "./query_params";
+
 export const protobufPackage = "desmos.profiles.v3";
 /** Query defines the gRPC querier service. */
 export interface Query {

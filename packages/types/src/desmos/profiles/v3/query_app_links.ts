@@ -1,9 +1,11 @@
 /* eslint-disable */
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { ApplicationLink } from "./models_app_links";
+import { ApplicationLink, ApplicationLinkAmino } from "./models_app_links";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.profiles.v3";
@@ -30,6 +32,37 @@ export interface QueryApplicationLinksRequest {
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryApplicationLinksRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryApplicationLinksRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryUserApplicationLinkRequest represents the request used when querying an
+ * application link using an application name and username for a given user
+ */
+export interface QueryApplicationLinksRequestAmino {
+  /**
+   * (Optional) User contains the Desmos profile address associated for which
+   * the link should be searched for
+   */
+  user: string;
+  /**
+   * (Optional) Application represents the application name associated with the
+   * link. Used only if user is also set.
+   */
+  application: string;
+  /**
+   * Username represents the username inside the application associated with the
+   * link. Used only if application is also set.
+   */
+  username: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryApplicationLinksRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryApplicationLinksRequest";
+  value: QueryApplicationLinksRequestAmino;
+}
 /**
  * QueryApplicationLinksResponse represents the response to the query used
  * to get the application links for a specific user
@@ -39,6 +72,23 @@ export interface QueryApplicationLinksResponse {
   /** Pagination defines the pagination response */
   pagination?: PageResponse;
 }
+export interface QueryApplicationLinksResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryApplicationLinksResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryApplicationLinksResponse represents the response to the query used
+ * to get the application links for a specific user
+ */
+export interface QueryApplicationLinksResponseAmino {
+  links: ApplicationLinkAmino[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryApplicationLinksResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryApplicationLinksResponse";
+  value: QueryApplicationLinksResponseAmino;
+}
 /**
  * QueryApplicationLinkByClientIDRequest contains the data of the request that
  * can be used to get an application link based on a client id
@@ -47,12 +97,43 @@ export interface QueryApplicationLinkByClientIDRequest {
   /** ClientID represents the ID of the client to which search the link for */
   clientId: string;
 }
+export interface QueryApplicationLinkByClientIDRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryApplicationLinkByClientIDRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryApplicationLinkByClientIDRequest contains the data of the request that
+ * can be used to get an application link based on a client id
+ */
+export interface QueryApplicationLinkByClientIDRequestAmino {
+  /** ClientID represents the ID of the client to which search the link for */
+  client_id: string;
+}
+export interface QueryApplicationLinkByClientIDRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryApplicationLinkByClientIDRequest";
+  value: QueryApplicationLinkByClientIDRequestAmino;
+}
 /**
  * QueryApplicationLinkByClientIDResponse contains the data returned by the
  * request allowing to get an application link using a client id
  */
 export interface QueryApplicationLinkByClientIDResponse {
   link?: ApplicationLink;
+}
+export interface QueryApplicationLinkByClientIDResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryApplicationLinkByClientIDResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryApplicationLinkByClientIDResponse contains the data returned by the
+ * request allowing to get an application link using a client id
+ */
+export interface QueryApplicationLinkByClientIDResponseAmino {
+  link?: ApplicationLinkAmino;
+}
+export interface QueryApplicationLinkByClientIDResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryApplicationLinkByClientIDResponse";
+  value: QueryApplicationLinkByClientIDResponseAmino;
 }
 /**
  * QueryApplicationLinkOwnersRequest contains the data of the request that can
@@ -72,6 +153,32 @@ export interface QueryApplicationLinkOwnersRequest {
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryApplicationLinkOwnersRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryApplicationLinkOwnersRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryApplicationLinkOwnersRequest contains the data of the request that can
+ * be used to get application link owners
+ */
+export interface QueryApplicationLinkOwnersRequestAmino {
+  /**
+   * (Optional) Application name to search link owners of. If not specified, all
+   * links stored will be searched instead.
+   */
+  application: string;
+  /**
+   * (Optional) Username to search for. This will only be used if the
+   * application is specified as well
+   */
+  username: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryApplicationLinkOwnersRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryApplicationLinkOwnersRequest";
+  value: QueryApplicationLinkOwnersRequestAmino;
+}
 /**
  * QueryApplicationLinkOwnersResponse contains the data returned by the request
  * allowing to get application link owners.
@@ -82,6 +189,24 @@ export interface QueryApplicationLinkOwnersResponse {
   /** Pagination defines the pagination response */
   pagination?: PageResponse;
 }
+export interface QueryApplicationLinkOwnersResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryApplicationLinkOwnersResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryApplicationLinkOwnersResponse contains the data returned by the request
+ * allowing to get application link owners.
+ */
+export interface QueryApplicationLinkOwnersResponseAmino {
+  /** Addresses of the application links owners */
+  owners: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryApplicationLinkOwnersResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryApplicationLinkOwnersResponse";
+  value: QueryApplicationLinkOwnersResponseAmino;
+}
 /**
  * ApplicationLinkOwnerDetails contains the details of a single application
  * link owner
@@ -90,6 +215,23 @@ export interface QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails 
   user: string;
   application: string;
   username: string;
+}
+export interface QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsProtoMsg {
+  typeUrl: "/desmos.profiles.v3.ApplicationLinkOwnerDetails";
+  value: Uint8Array;
+}
+/**
+ * ApplicationLinkOwnerDetails contains the details of a single application
+ * link owner
+ */
+export interface QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino {
+  user: string;
+  application: string;
+  username: string;
+}
+export interface QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAminoMsg {
+  type: "/desmos.profiles.v3.ApplicationLinkOwnerDetails";
+  value: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino;
 }
 function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest {
   return {
@@ -182,6 +324,51 @@ export const QueryApplicationLinksRequest = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryApplicationLinksRequestAmino
+  ): QueryApplicationLinksRequest {
+    return {
+      user: object.user,
+      application: object.application,
+      username: object.username,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinksRequest
+  ): QueryApplicationLinksRequestAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    obj.application = message.application;
+    obj.username = message.username;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinksRequestAminoMsg
+  ): QueryApplicationLinksRequest {
+    return QueryApplicationLinksRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinksRequestProtoMsg
+  ): QueryApplicationLinksRequest {
+    return QueryApplicationLinksRequest.decode(message.value);
+  },
+  toProto(message: QueryApplicationLinksRequest): Uint8Array {
+    return QueryApplicationLinksRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinksRequest
+  ): QueryApplicationLinksRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryApplicationLinksRequest",
+      value: QueryApplicationLinksRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryApplicationLinksResponse(): QueryApplicationLinksResponse {
   return {
@@ -265,6 +452,55 @@ export const QueryApplicationLinksResponse = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryApplicationLinksResponseAmino
+  ): QueryApplicationLinksResponse {
+    return {
+      links: Array.isArray(object?.links)
+        ? object.links.map((e: any) => ApplicationLink.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinksResponse
+  ): QueryApplicationLinksResponseAmino {
+    const obj: any = {};
+    if (message.links) {
+      obj.links = message.links.map((e) =>
+        e ? ApplicationLink.toAmino(e) : undefined
+      );
+    } else {
+      obj.links = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinksResponseAminoMsg
+  ): QueryApplicationLinksResponse {
+    return QueryApplicationLinksResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinksResponseProtoMsg
+  ): QueryApplicationLinksResponse {
+    return QueryApplicationLinksResponse.decode(message.value);
+  },
+  toProto(message: QueryApplicationLinksResponse): Uint8Array {
+    return QueryApplicationLinksResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinksResponse
+  ): QueryApplicationLinksResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryApplicationLinksResponse",
+      value: QueryApplicationLinksResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryApplicationLinkByClientIDRequest(): QueryApplicationLinkByClientIDRequest {
   return {
@@ -317,6 +553,41 @@ export const QueryApplicationLinkByClientIDRequest = {
     const message = createBaseQueryApplicationLinkByClientIDRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+  fromAmino(
+    object: QueryApplicationLinkByClientIDRequestAmino
+  ): QueryApplicationLinkByClientIDRequest {
+    return {
+      clientId: object.client_id,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinkByClientIDRequest
+  ): QueryApplicationLinkByClientIDRequestAmino {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinkByClientIDRequestAminoMsg
+  ): QueryApplicationLinkByClientIDRequest {
+    return QueryApplicationLinkByClientIDRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinkByClientIDRequestProtoMsg
+  ): QueryApplicationLinkByClientIDRequest {
+    return QueryApplicationLinkByClientIDRequest.decode(message.value);
+  },
+  toProto(message: QueryApplicationLinkByClientIDRequest): Uint8Array {
+    return QueryApplicationLinkByClientIDRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinkByClientIDRequest
+  ): QueryApplicationLinkByClientIDRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryApplicationLinkByClientIDRequest",
+      value: QueryApplicationLinkByClientIDRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryApplicationLinkByClientIDResponse(): QueryApplicationLinkByClientIDResponse {
@@ -378,6 +649,41 @@ export const QueryApplicationLinkByClientIDResponse = {
         ? ApplicationLink.fromPartial(object.link)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryApplicationLinkByClientIDResponseAmino
+  ): QueryApplicationLinkByClientIDResponse {
+    return {
+      link: object?.link ? ApplicationLink.fromAmino(object.link) : undefined,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinkByClientIDResponse
+  ): QueryApplicationLinkByClientIDResponseAmino {
+    const obj: any = {};
+    obj.link = message.link ? ApplicationLink.toAmino(message.link) : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinkByClientIDResponseAminoMsg
+  ): QueryApplicationLinkByClientIDResponse {
+    return QueryApplicationLinkByClientIDResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinkByClientIDResponseProtoMsg
+  ): QueryApplicationLinkByClientIDResponse {
+    return QueryApplicationLinkByClientIDResponse.decode(message.value);
+  },
+  toProto(message: QueryApplicationLinkByClientIDResponse): Uint8Array {
+    return QueryApplicationLinkByClientIDResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinkByClientIDResponse
+  ): QueryApplicationLinkByClientIDResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryApplicationLinkByClientIDResponse",
+      value: QueryApplicationLinkByClientIDResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryApplicationLinkOwnersRequest(): QueryApplicationLinkOwnersRequest {
@@ -460,6 +766,49 @@ export const QueryApplicationLinkOwnersRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryApplicationLinkOwnersRequestAmino
+  ): QueryApplicationLinkOwnersRequest {
+    return {
+      application: object.application,
+      username: object.username,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinkOwnersRequest
+  ): QueryApplicationLinkOwnersRequestAmino {
+    const obj: any = {};
+    obj.application = message.application;
+    obj.username = message.username;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinkOwnersRequestAminoMsg
+  ): QueryApplicationLinkOwnersRequest {
+    return QueryApplicationLinkOwnersRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinkOwnersRequestProtoMsg
+  ): QueryApplicationLinkOwnersRequest {
+    return QueryApplicationLinkOwnersRequest.decode(message.value);
+  },
+  toProto(message: QueryApplicationLinkOwnersRequest): Uint8Array {
+    return QueryApplicationLinkOwnersRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinkOwnersRequest
+  ): QueryApplicationLinkOwnersRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryApplicationLinkOwnersRequest",
+      value: QueryApplicationLinkOwnersRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryApplicationLinkOwnersResponse(): QueryApplicationLinkOwnersResponse {
@@ -564,6 +913,63 @@ export const QueryApplicationLinkOwnersResponse = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: QueryApplicationLinkOwnersResponseAmino
+  ): QueryApplicationLinkOwnersResponse {
+    return {
+      owners: Array.isArray(object?.owners)
+        ? object.owners.map((e: any) =>
+            QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromAmino(
+              e
+            )
+          )
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinkOwnersResponse
+  ): QueryApplicationLinkOwnersResponseAmino {
+    const obj: any = {};
+    if (message.owners) {
+      obj.owners = message.owners.map((e) =>
+        e
+          ? QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.toAmino(
+              e
+            )
+          : undefined
+      );
+    } else {
+      obj.owners = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinkOwnersResponseAminoMsg
+  ): QueryApplicationLinkOwnersResponse {
+    return QueryApplicationLinkOwnersResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinkOwnersResponseProtoMsg
+  ): QueryApplicationLinkOwnersResponse {
+    return QueryApplicationLinkOwnersResponse.decode(message.value);
+  },
+  toProto(message: QueryApplicationLinkOwnersResponse): Uint8Array {
+    return QueryApplicationLinkOwnersResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinkOwnersResponse
+  ): QueryApplicationLinkOwnersResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryApplicationLinkOwnersResponse",
+      value: QueryApplicationLinkOwnersResponse.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails(): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
   return {
@@ -646,5 +1052,55 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     message.application = object.application ?? "";
     message.username = object.username ?? "";
     return message;
+  },
+  fromAmino(
+    object: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    return {
+      user: object.user,
+      application: object.application,
+      username: object.username,
+    };
+  },
+  toAmino(
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    obj.application = message.application;
+    obj.username = message.username;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAminoMsg
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    return QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromAmino(
+      object.value
+    );
+  },
+  fromProtoMsg(
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsProtoMsg
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
+    return QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.decode(
+      message.value
+    );
+  },
+  toProto(
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+  ): Uint8Array {
+    return QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
+      message
+    ).finish();
+  },
+  toProtoMsg(
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+  ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.ApplicationLinkOwnerDetails",
+      value:
+        QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
+          message
+        ).finish(),
+    };
   },
 };

@@ -17,6 +17,29 @@ export interface Relationship {
    */
   subspaceId: Long;
 }
+export interface RelationshipProtoMsg {
+  typeUrl: "/desmos.relationships.v1.Relationship";
+  value: Uint8Array;
+}
+/**
+ * Relationship is the struct of a relationship.
+ * It represent the concept of "follow" of traditional social networks.
+ */
+export interface RelationshipAmino {
+  /** Creator represents the creator of the relationship */
+  creator: string;
+  /** Counterparty represents the other user involved in the relationship */
+  counterparty: string;
+  /**
+   * SubspaceID represents the id of the subspace for which the relationship is
+   * valid
+   */
+  subspace_id: string;
+}
+export interface RelationshipAminoMsg {
+  type: "/desmos.relationships.v1.Relationship";
+  value: RelationshipAmino;
+}
 /**
  * UserBlock represents the fact that the Blocker has blocked the given Blocked
  * user.
@@ -33,6 +56,31 @@ export interface UserBlock {
    * be blocked
    */
   subspaceId: Long;
+}
+export interface UserBlockProtoMsg {
+  typeUrl: "/desmos.relationships.v1.UserBlock";
+  value: Uint8Array;
+}
+/**
+ * UserBlock represents the fact that the Blocker has blocked the given Blocked
+ * user.
+ */
+export interface UserBlockAmino {
+  /** Blocker represents the address of the user blocking another one */
+  blocker: string;
+  /** Blocked represents the address of the blocked user */
+  blocked: string;
+  /** Reason represents the optional reason the user has been blocked for. */
+  reason: string;
+  /**
+   * SubspaceID represents the ID of the subspace inside which the user should
+   * be blocked
+   */
+  subspace_id: string;
+}
+export interface UserBlockAminoMsg {
+  type: "/desmos.relationships.v1.UserBlock";
+  value: UserBlockAmino;
 }
 function createBaseRelationship(): Relationship {
   return {
@@ -111,6 +159,37 @@ export const Relationship = {
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: RelationshipAmino): Relationship {
+    return {
+      creator: object.creator,
+      counterparty: object.counterparty,
+      subspaceId: Long.fromString(object.subspace_id),
+    };
+  },
+  toAmino(message: Relationship): RelationshipAmino {
+    const obj: any = {};
+    obj.creator = message.creator;
+    obj.counterparty = message.counterparty;
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: RelationshipAminoMsg): Relationship {
+    return Relationship.fromAmino(object.value);
+  },
+  fromProtoMsg(message: RelationshipProtoMsg): Relationship {
+    return Relationship.decode(message.value);
+  },
+  toProto(message: Relationship): Uint8Array {
+    return Relationship.encode(message).finish();
+  },
+  toProtoMsg(message: Relationship): RelationshipProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.Relationship",
+      value: Relationship.encode(message).finish(),
+    };
   },
 };
 function createBaseUserBlock(): UserBlock {
@@ -197,5 +276,38 @@ export const UserBlock = {
         ? Long.fromValue(object.subspaceId)
         : Long.UZERO;
     return message;
+  },
+  fromAmino(object: UserBlockAmino): UserBlock {
+    return {
+      blocker: object.blocker,
+      blocked: object.blocked,
+      reason: object.reason,
+      subspaceId: Long.fromString(object.subspace_id),
+    };
+  },
+  toAmino(message: UserBlock): UserBlockAmino {
+    const obj: any = {};
+    obj.blocker = message.blocker;
+    obj.blocked = message.blocked;
+    obj.reason = message.reason;
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: UserBlockAminoMsg): UserBlock {
+    return UserBlock.fromAmino(object.value);
+  },
+  fromProtoMsg(message: UserBlockProtoMsg): UserBlock {
+    return UserBlock.decode(message.value);
+  },
+  toProto(message: UserBlock): Uint8Array {
+    return UserBlock.encode(message).finish();
+  },
+  toProtoMsg(message: UserBlock): UserBlockProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.UserBlock",
+      value: UserBlock.encode(message).finish(),
+    };
   },
 };

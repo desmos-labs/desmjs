@@ -2,6 +2,9 @@ import { calculateFee, GasPrice } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet, OfflineSigner } from "@cosmjs/proto-signing";
 import { stringToPath } from "@cosmjs/crypto";
 import { OfflineAminoSigner, Secp256k1HdWallet } from "@cosmjs/amino";
+import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
+import { DesmosClient } from "./desmosclient";
+import { BlockBroadcastResponse } from "./types/responses";
 
 export type HdPath = {
   coinType: number;
@@ -105,4 +108,72 @@ export async function delay(ms: number): Promise<void> {
   return new Promise((r) => {
     setTimeout(r, ms);
   });
+}
+
+/**
+ * Builds a Signer and DesmosClient instance based on a test mnemonic.
+ * The returned signer will sign transactions using the AMINO signing mode.
+ */
+export async function getAminoSignerAndClient(): Promise<
+  [Signer, DesmosClient]
+> {
+  const signer = await OfflineSignerAdapter.fromMnemonic(
+    SigningMode.AMINO,
+    testUser1.mnemonic
+  );
+  const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
+    gasPrice: defaultGasPrice,
+    gasAdjustment: 1.5,
+  });
+  return [signer, client];
+}
+
+/**
+ * Builds a Signer and DesmosClient instance based on a test mnemonic.
+ * The returned signer will sign transactions using the DIRECT signing mode.
+ */
+export async function getDirectSignerAndClient(): Promise<
+  [Signer, DesmosClient]
+> {
+  const signer = await OfflineSignerAdapter.fromMnemonic(
+    SigningMode.DIRECT,
+    testUser1.mnemonic
+  );
+  const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
+    gasPrice: defaultGasPrice,
+    gasAdjustment: 1.8,
+  });
+  return [signer, client];
+}
+
+export async function pollTx(
+  client: DesmosClient,
+  txHash: string
+): Promise<void> {
+  let timedOut = false;
+  const txPollTimeout = setTimeout(() => {
+    timedOut = true;
+  }, 60000);
+
+  while (!timedOut) {
+    // eslint-disable-next-line no-await-in-loop
+    const tx = await client.getTx(txHash);
+    if (tx !== null) {
+      clearTimeout(txPollTimeout);
+      return;
+    }
+    // eslint-disable-next-line no-await-in-loop
+    await delay(3000);
+  }
+
+  throw new Error(`Timed out waiting for tx ${txHash}`);
+}
+
+/**
+ * Ensure that the provided {@link BlockBroadcastResponse} represents a
+ * transaction that has been broadcasted successfully.
+ */
+export function assertTxSuccess(response: BlockBroadcastResponse) {
+  expect(response.checkTx.log).toBe("[]");
+  expect(response.checkTx.code).toBe(0);
 }

@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { Data } from "./models_app_links";
-import { Height } from "../../../ibc/core/client/v1/client";
+import { Data, DataAmino } from "./models_app_links";
+import { Height, HeightAmino } from "../../../ibc/core/client/v1/client";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.profiles.v3";
@@ -33,11 +33,61 @@ export interface MsgLinkApplication {
    */
   timeoutTimestamp: Long;
 }
+export interface MsgLinkApplicationProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgLinkApplication";
+  value: Uint8Array;
+}
+/**
+ * MsgLinkApplication defines a msg to connect a profile with a
+ * centralized application account (eg. Twitter, GitHub, etc).
+ */
+export interface MsgLinkApplicationAmino {
+  /** The sender of the connection request */
+  sender: string;
+  /** LinkData contains the data related to the application to which connect */
+  link_data?: DataAmino;
+  /**
+   * Hex encoded call data that will be sent to the data source in order to
+   * verify the link
+   */
+  call_data: string;
+  /** The port on which the packet will be sent */
+  source_port: string;
+  /** The channel by which the packet will be sent */
+  source_channel: string;
+  /**
+   * Timeout height relative to the current block height.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_height?: HeightAmino;
+  /**
+   * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
+   * The timeout is disabled when set to 0.
+   */
+  timeout_timestamp: string;
+}
+export interface MsgLinkApplicationAminoMsg {
+  type: "/desmos.profiles.v3.MsgLinkApplication";
+  value: MsgLinkApplicationAmino;
+}
 /**
  * MsgLinkApplicationResponse defines the Msg/LinkApplication
  * response type.
  */
 export interface MsgLinkApplicationResponse {}
+export interface MsgLinkApplicationResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgLinkApplicationResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgLinkApplicationResponse defines the Msg/LinkApplication
+ * response type.
+ */
+export interface MsgLinkApplicationResponseAmino {}
+export interface MsgLinkApplicationResponseAminoMsg {
+  type: "/desmos.profiles.v3.MsgLinkApplicationResponse";
+  value: MsgLinkApplicationResponseAmino;
+}
 /**
  * MsgUnlinkApplication defines a msg to delete an application link from a user
  * profile
@@ -53,11 +103,47 @@ export interface MsgUnlinkApplication {
    */
   signer: string;
 }
+export interface MsgUnlinkApplicationProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgUnlinkApplication";
+  value: Uint8Array;
+}
+/**
+ * MsgUnlinkApplication defines a msg to delete an application link from a user
+ * profile
+ */
+export interface MsgUnlinkApplicationAmino {
+  /** Application represents the name of the application to unlink */
+  application: string;
+  /** Username represents the username inside the application to unlink */
+  username: string;
+  /**
+   * Signer represents the Desmos account to which the application should be
+   * unlinked
+   */
+  signer: string;
+}
+export interface MsgUnlinkApplicationAminoMsg {
+  type: "/desmos.profiles.v3.MsgUnlinkApplication";
+  value: MsgUnlinkApplicationAmino;
+}
 /**
  * MsgUnlinkApplicationResponse defines the Msg/UnlinkApplication response
  * type.
  */
 export interface MsgUnlinkApplicationResponse {}
+export interface MsgUnlinkApplicationResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.MsgUnlinkApplicationResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUnlinkApplicationResponse defines the Msg/UnlinkApplication response
+ * type.
+ */
+export interface MsgUnlinkApplicationResponseAmino {}
+export interface MsgUnlinkApplicationResponseAminoMsg {
+  type: "/desmos.profiles.v3.MsgUnlinkApplicationResponse";
+  value: MsgUnlinkApplicationResponseAmino;
+}
 function createBaseMsgLinkApplication(): MsgLinkApplication {
   return {
     sender: "",
@@ -194,6 +280,53 @@ export const MsgLinkApplication = {
         : Long.UZERO;
     return message;
   },
+  fromAmino(object: MsgLinkApplicationAmino): MsgLinkApplication {
+    return {
+      sender: object.sender,
+      linkData: object?.link_data
+        ? Data.fromAmino(object.link_data)
+        : undefined,
+      callData: object.call_data,
+      sourcePort: object.source_port,
+      sourceChannel: object.source_channel,
+      timeoutHeight: object?.timeout_height
+        ? Height.fromAmino(object.timeout_height)
+        : undefined,
+      timeoutTimestamp: Long.fromString(object.timeout_timestamp),
+    };
+  },
+  toAmino(message: MsgLinkApplication): MsgLinkApplicationAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.link_data = message.linkData
+      ? Data.toAmino(message.linkData)
+      : undefined;
+    obj.call_data = message.callData;
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.timeout_height = message.timeoutHeight
+      ? Height.toAmino(message.timeoutHeight)
+      : {};
+    obj.timeout_timestamp = message.timeoutTimestamp
+      ? message.timeoutTimestamp.toString()
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgLinkApplicationAminoMsg): MsgLinkApplication {
+    return MsgLinkApplication.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgLinkApplicationProtoMsg): MsgLinkApplication {
+    return MsgLinkApplication.decode(message.value);
+  },
+  toProto(message: MsgLinkApplication): Uint8Array {
+    return MsgLinkApplication.encode(message).finish();
+  },
+  toProtoMsg(message: MsgLinkApplication): MsgLinkApplicationProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgLinkApplication",
+      value: MsgLinkApplication.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgLinkApplicationResponse(): MsgLinkApplicationResponse {
   return {};
@@ -234,6 +367,34 @@ export const MsgLinkApplicationResponse = {
   ): MsgLinkApplicationResponse {
     const message = createBaseMsgLinkApplicationResponse();
     return message;
+  },
+  fromAmino(_: MsgLinkApplicationResponseAmino): MsgLinkApplicationResponse {
+    return {};
+  },
+  toAmino(_: MsgLinkApplicationResponse): MsgLinkApplicationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgLinkApplicationResponseAminoMsg
+  ): MsgLinkApplicationResponse {
+    return MsgLinkApplicationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgLinkApplicationResponseProtoMsg
+  ): MsgLinkApplicationResponse {
+    return MsgLinkApplicationResponse.decode(message.value);
+  },
+  toProto(message: MsgLinkApplicationResponse): Uint8Array {
+    return MsgLinkApplicationResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgLinkApplicationResponse
+  ): MsgLinkApplicationResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgLinkApplicationResponse",
+      value: MsgLinkApplicationResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgUnlinkApplication(): MsgUnlinkApplication {
@@ -309,6 +470,35 @@ export const MsgUnlinkApplication = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgUnlinkApplicationAmino): MsgUnlinkApplication {
+    return {
+      application: object.application,
+      username: object.username,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgUnlinkApplication): MsgUnlinkApplicationAmino {
+    const obj: any = {};
+    obj.application = message.application;
+    obj.username = message.username;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUnlinkApplicationAminoMsg): MsgUnlinkApplication {
+    return MsgUnlinkApplication.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUnlinkApplicationProtoMsg): MsgUnlinkApplication {
+    return MsgUnlinkApplication.decode(message.value);
+  },
+  toProto(message: MsgUnlinkApplication): Uint8Array {
+    return MsgUnlinkApplication.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUnlinkApplication): MsgUnlinkApplicationProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgUnlinkApplication",
+      value: MsgUnlinkApplication.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgUnlinkApplicationResponse(): MsgUnlinkApplicationResponse {
   return {};
@@ -349,5 +539,35 @@ export const MsgUnlinkApplicationResponse = {
   ): MsgUnlinkApplicationResponse {
     const message = createBaseMsgUnlinkApplicationResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgUnlinkApplicationResponseAmino
+  ): MsgUnlinkApplicationResponse {
+    return {};
+  },
+  toAmino(_: MsgUnlinkApplicationResponse): MsgUnlinkApplicationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgUnlinkApplicationResponseAminoMsg
+  ): MsgUnlinkApplicationResponse {
+    return MsgUnlinkApplicationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgUnlinkApplicationResponseProtoMsg
+  ): MsgUnlinkApplicationResponse {
+    return MsgUnlinkApplicationResponse.decode(message.value);
+  },
+  toProto(message: MsgUnlinkApplicationResponse): Uint8Array {
+    return MsgUnlinkApplicationResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgUnlinkApplicationResponse
+  ): MsgUnlinkApplicationResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.MsgUnlinkApplicationResponse",
+      value: MsgUnlinkApplicationResponse.encode(message).finish(),
+    };
   },
 };

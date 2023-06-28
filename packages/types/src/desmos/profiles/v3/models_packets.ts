@@ -1,6 +1,11 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
-import { Proof, ChainConfig } from "./models_chain_links";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import {
+  Proof,
+  ProofAmino,
+  ChainConfig,
+  ChainConfigAmino,
+} from "./models_chain_links";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.profiles.v3";
@@ -24,6 +29,34 @@ export interface LinkChainAccountPacketData {
   /** DestinationProof contains the proof of ownership of the DestinationAddress */
   destinationProof?: Proof;
 }
+export interface LinkChainAccountPacketDataProtoMsg {
+  typeUrl: "/desmos.profiles.v3.LinkChainAccountPacketData";
+  value: Uint8Array;
+}
+/**
+ * LinkChainAccountPacketData defines the object that should be sent inside a
+ * MsgSendPacket when wanting to link an external chain to a Desmos profile
+ * using IBC
+ */
+export interface LinkChainAccountPacketDataAmino {
+  /** SourceAddress contains the details of the external chain address */
+  source_address?: AnyAmino;
+  /** SourceProof represents the proof of ownership of the source address */
+  source_proof?: ProofAmino;
+  /** SourceChainConfig contains the details of the source chain */
+  source_chain_config?: ChainConfigAmino;
+  /**
+   * DestinationAddress represents the Desmos address of the profile that should
+   * be linked with the external account
+   */
+  destination_address: string;
+  /** DestinationProof contains the proof of ownership of the DestinationAddress */
+  destination_proof?: ProofAmino;
+}
+export interface LinkChainAccountPacketDataAminoMsg {
+  type: "/desmos.profiles.v3.LinkChainAccountPacketData";
+  value: LinkChainAccountPacketDataAmino;
+}
 /** LinkChainAccountPacketAck defines a struct for the packet acknowledgment */
 export interface LinkChainAccountPacketAck {
   /**
@@ -31,6 +64,22 @@ export interface LinkChainAccountPacketAck {
    * with the profile
    */
   sourceAddress: string;
+}
+export interface LinkChainAccountPacketAckProtoMsg {
+  typeUrl: "/desmos.profiles.v3.LinkChainAccountPacketAck";
+  value: Uint8Array;
+}
+/** LinkChainAccountPacketAck defines a struct for the packet acknowledgment */
+export interface LinkChainAccountPacketAckAmino {
+  /**
+   * SourceAddress contains the external address that has been linked properly
+   * with the profile
+   */
+  source_address: string;
+}
+export interface LinkChainAccountPacketAckAminoMsg {
+  type: "/desmos.profiles.v3.LinkChainAccountPacketAck";
+  value: LinkChainAccountPacketAckAmino;
 }
 function createBaseLinkChainAccountPacketData(): LinkChainAccountPacketData {
   return {
@@ -166,6 +215,65 @@ export const LinkChainAccountPacketData = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: LinkChainAccountPacketDataAmino
+  ): LinkChainAccountPacketData {
+    return {
+      sourceAddress: object?.source_address
+        ? Any.fromAmino(object.source_address)
+        : undefined,
+      sourceProof: object?.source_proof
+        ? Proof.fromAmino(object.source_proof)
+        : undefined,
+      sourceChainConfig: object?.source_chain_config
+        ? ChainConfig.fromAmino(object.source_chain_config)
+        : undefined,
+      destinationAddress: object.destination_address,
+      destinationProof: object?.destination_proof
+        ? Proof.fromAmino(object.destination_proof)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: LinkChainAccountPacketData
+  ): LinkChainAccountPacketDataAmino {
+    const obj: any = {};
+    obj.source_address = message.sourceAddress
+      ? Any.toAmino(message.sourceAddress)
+      : undefined;
+    obj.source_proof = message.sourceProof
+      ? Proof.toAmino(message.sourceProof)
+      : undefined;
+    obj.source_chain_config = message.sourceChainConfig
+      ? ChainConfig.toAmino(message.sourceChainConfig)
+      : undefined;
+    obj.destination_address = message.destinationAddress;
+    obj.destination_proof = message.destinationProof
+      ? Proof.toAmino(message.destinationProof)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: LinkChainAccountPacketDataAminoMsg
+  ): LinkChainAccountPacketData {
+    return LinkChainAccountPacketData.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: LinkChainAccountPacketDataProtoMsg
+  ): LinkChainAccountPacketData {
+    return LinkChainAccountPacketData.decode(message.value);
+  },
+  toProto(message: LinkChainAccountPacketData): Uint8Array {
+    return LinkChainAccountPacketData.encode(message).finish();
+  },
+  toProtoMsg(
+    message: LinkChainAccountPacketData
+  ): LinkChainAccountPacketDataProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.LinkChainAccountPacketData",
+      value: LinkChainAccountPacketData.encode(message).finish(),
+    };
+  },
 };
 function createBaseLinkChainAccountPacketAck(): LinkChainAccountPacketAck {
   return {
@@ -221,5 +329,36 @@ export const LinkChainAccountPacketAck = {
     const message = createBaseLinkChainAccountPacketAck();
     message.sourceAddress = object.sourceAddress ?? "";
     return message;
+  },
+  fromAmino(object: LinkChainAccountPacketAckAmino): LinkChainAccountPacketAck {
+    return {
+      sourceAddress: object.source_address,
+    };
+  },
+  toAmino(message: LinkChainAccountPacketAck): LinkChainAccountPacketAckAmino {
+    const obj: any = {};
+    obj.source_address = message.sourceAddress;
+    return obj;
+  },
+  fromAminoMsg(
+    object: LinkChainAccountPacketAckAminoMsg
+  ): LinkChainAccountPacketAck {
+    return LinkChainAccountPacketAck.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: LinkChainAccountPacketAckProtoMsg
+  ): LinkChainAccountPacketAck {
+    return LinkChainAccountPacketAck.decode(message.value);
+  },
+  toProto(message: LinkChainAccountPacketAck): Uint8Array {
+    return LinkChainAccountPacketAck.encode(message).finish();
+  },
+  toProtoMsg(
+    message: LinkChainAccountPacketAck
+  ): LinkChainAccountPacketAckProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.LinkChainAccountPacketAck",
+      value: LinkChainAccountPacketAck.encode(message).finish(),
+    };
   },
 };

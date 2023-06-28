@@ -32,6 +32,7 @@ import {
   MsgUnlinkApplicationResponse,
 } from "./msgs_app_links";
 import { MsgUpdateParams, MsgUpdateParamsResponse } from "./msgs_params";
+
 export const protobufPackage = "desmos.profiles.v3";
 /** Msg defines the relationships Msg service. */
 export interface Msg {

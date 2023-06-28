@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import {
   isSet,
@@ -28,12 +28,53 @@ export interface Profile {
   /** CreationTime represents the time in which the profile has been created */
   creationDate?: Timestamp;
 }
+export interface ProfileProtoMsg {
+  typeUrl: "/desmos.profiles.v3.Profile";
+  value: Uint8Array;
+}
+/**
+ * Profile represents a generic first on Desmos, containing the information of a
+ * single user
+ */
+export interface ProfileAmino {
+  /** Account represents the base Cosmos account associated with this profile */
+  account?: AnyAmino;
+  /** DTag represents the unique tag of this profile */
+  dtag: string;
+  /** Nickname contains the custom human readable name of the profile */
+  nickname: string;
+  /** Bio contains the biography of the profile */
+  bio: string;
+  /** Pictures contains the data about the pictures associated with he profile */
+  pictures?: PicturesAmino;
+  /** CreationTime represents the time in which the profile has been created */
+  creation_date?: TimestampAmino;
+}
+export interface ProfileAminoMsg {
+  type: "/desmos.profiles.v3.Profile";
+  value: ProfileAmino;
+}
 /** Pictures contains the data of a user profile's related pictures */
 export interface Pictures {
   /** Profile contains the URL to the profile picture */
   profile: string;
   /** Cover contains the URL to the cover picture */
   cover: string;
+}
+export interface PicturesProtoMsg {
+  typeUrl: "/desmos.profiles.v3.Pictures";
+  value: Uint8Array;
+}
+/** Pictures contains the data of a user profile's related pictures */
+export interface PicturesAmino {
+  /** Profile contains the URL to the profile picture */
+  profile: string;
+  /** Cover contains the URL to the cover picture */
+  cover: string;
+}
+export interface PicturesAminoMsg {
+  type: "/desmos.profiles.v3.Pictures";
+  value: PicturesAmino;
 }
 function createBaseProfile(): Profile {
   return {
@@ -150,6 +191,49 @@ export const Profile = {
         : undefined;
     return message;
   },
+  fromAmino(object: ProfileAmino): Profile {
+    return {
+      account: object?.account ? Any.fromAmino(object.account) : undefined,
+      dtag: object.dtag,
+      nickname: object.nickname,
+      bio: object.bio,
+      pictures: object?.pictures
+        ? Pictures.fromAmino(object.pictures)
+        : undefined,
+      creationDate: object?.creation_date
+        ? Timestamp.fromAmino(object.creation_date)
+        : undefined,
+    };
+  },
+  toAmino(message: Profile): ProfileAmino {
+    const obj: any = {};
+    obj.account = message.account ? Any.toAmino(message.account) : undefined;
+    obj.dtag = message.dtag;
+    obj.nickname = message.nickname;
+    obj.bio = message.bio;
+    obj.pictures = message.pictures
+      ? Pictures.toAmino(message.pictures)
+      : undefined;
+    obj.creation_date = message.creationDate
+      ? Timestamp.toAmino(message.creationDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ProfileAminoMsg): Profile {
+    return Profile.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProfileProtoMsg): Profile {
+    return Profile.decode(message.value);
+  },
+  toProto(message: Profile): Uint8Array {
+    return Profile.encode(message).finish();
+  },
+  toProtoMsg(message: Profile): ProfileProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.Profile",
+      value: Profile.encode(message).finish(),
+    };
+  },
 };
 function createBasePictures(): Pictures {
   return {
@@ -207,5 +291,32 @@ export const Pictures = {
     message.profile = object.profile ?? "";
     message.cover = object.cover ?? "";
     return message;
+  },
+  fromAmino(object: PicturesAmino): Pictures {
+    return {
+      profile: object.profile,
+      cover: object.cover,
+    };
+  },
+  toAmino(message: Pictures): PicturesAmino {
+    const obj: any = {};
+    obj.profile = message.profile;
+    obj.cover = message.cover;
+    return obj;
+  },
+  fromAminoMsg(object: PicturesAminoMsg): Pictures {
+    return Pictures.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PicturesProtoMsg): Pictures {
+    return Pictures.decode(message.value);
+  },
+  toProto(message: Pictures): Uint8Array {
+    return Pictures.encode(message).finish();
+  },
+  toProtoMsg(message: Pictures): PicturesProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.Pictures",
+      value: Pictures.encode(message).finish(),
+    };
   },
 };

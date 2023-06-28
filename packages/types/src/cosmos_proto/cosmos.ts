@@ -8,6 +8,7 @@ export enum ScalarType {
   SCALAR_TYPE_BYTES = 2,
   UNRECOGNIZED = -1,
 }
+export const ScalarTypeAmino = ScalarType;
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
     case 0:
@@ -56,6 +57,32 @@ export interface InterfaceDescriptor {
    */
   description: string;
 }
+export interface InterfaceDescriptorProtoMsg {
+  typeUrl: "/cosmos_proto.InterfaceDescriptor";
+  value: Uint8Array;
+}
+/**
+ * InterfaceDescriptor describes an interface type to be used with
+ * accepts_interface and implements_interface and declared by declare_interface.
+ */
+export interface InterfaceDescriptorAmino {
+  /**
+   * name is the name of the interface. It should be a short-name (without
+   * a period) such that the fully qualified name of the interface will be
+   * package.name, ex. for the package a.b and interface named C, the
+   * fully-qualified name will be a.b.C.
+   */
+  name: string;
+  /**
+   * description is a human-readable description of the interface and its
+   * purpose.
+   */
+  description: string;
+}
+export interface InterfaceDescriptorAminoMsg {
+  type: "/cosmos_proto.InterfaceDescriptor";
+  value: InterfaceDescriptorAmino;
+}
 /**
  * ScalarDescriptor describes an scalar type to be used with
  * the scalar field option and declared by declare_scalar.
@@ -86,6 +113,45 @@ export interface ScalarDescriptor {
    * bytes fields are supported for scalars.
    */
   fieldType: ScalarType[];
+}
+export interface ScalarDescriptorProtoMsg {
+  typeUrl: "/cosmos_proto.ScalarDescriptor";
+  value: Uint8Array;
+}
+/**
+ * ScalarDescriptor describes an scalar type to be used with
+ * the scalar field option and declared by declare_scalar.
+ * Scalars extend simple protobuf built-in types with additional
+ * syntax and semantics, for instance to represent big integers.
+ * Scalars should ideally define an encoding such that there is only one
+ * valid syntactical representation for a given semantic meaning,
+ * i.e. the encoding should be deterministic.
+ */
+export interface ScalarDescriptorAmino {
+  /**
+   * name is the name of the scalar. It should be a short-name (without
+   * a period) such that the fully qualified name of the scalar will be
+   * package.name, ex. for the package a.b and scalar named C, the
+   * fully-qualified name will be a.b.C.
+   */
+  name: string;
+  /**
+   * description is a human-readable description of the scalar and its
+   * encoding format. For instance a big integer or decimal scalar should
+   * specify precisely the expected encoding format.
+   */
+  description: string;
+  /**
+   * field_type is the type of field with which this scalar can be used.
+   * Scalars can be used with one and only one type of field so that
+   * encoding standards and simple and clear. Currently only string and
+   * bytes fields are supported for scalars.
+   */
+  field_type: ScalarType[];
+}
+export interface ScalarDescriptorAminoMsg {
+  type: "/cosmos_proto.ScalarDescriptor";
+  value: ScalarDescriptorAmino;
 }
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
   return {
@@ -146,6 +212,33 @@ export const InterfaceDescriptor = {
     message.name = object.name ?? "";
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
+    return {
+      name: object.name,
+      description: object.description,
+    };
+  },
+  toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    return obj;
+  },
+  fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
+    return InterfaceDescriptor.fromAmino(object.value);
+  },
+  fromProtoMsg(message: InterfaceDescriptorProtoMsg): InterfaceDescriptor {
+    return InterfaceDescriptor.decode(message.value);
+  },
+  toProto(message: InterfaceDescriptor): Uint8Array {
+    return InterfaceDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: InterfaceDescriptor): InterfaceDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos_proto.InterfaceDescriptor",
+      value: InterfaceDescriptor.encode(message).finish(),
+    };
   },
 };
 function createBaseScalarDescriptor(): ScalarDescriptor {
@@ -232,5 +325,40 @@ export const ScalarDescriptor = {
     message.description = object.description ?? "";
     message.fieldType = object.fieldType?.map((e) => e) || [];
     return message;
+  },
+  fromAmino(object: ScalarDescriptorAmino): ScalarDescriptor {
+    return {
+      name: object.name,
+      description: object.description,
+      fieldType: Array.isArray(object?.field_type)
+        ? object.field_type.map((e: any) => scalarTypeFromJSON(e))
+        : [],
+    };
+  },
+  toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.description = message.description;
+    if (message.fieldType) {
+      obj.field_type = message.fieldType.map((e) => scalarTypeToJSON(e));
+    } else {
+      obj.field_type = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ScalarDescriptorAminoMsg): ScalarDescriptor {
+    return ScalarDescriptor.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ScalarDescriptorProtoMsg): ScalarDescriptor {
+    return ScalarDescriptor.decode(message.value);
+  },
+  toProto(message: ScalarDescriptor): Uint8Array {
+    return ScalarDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: ScalarDescriptor): ScalarDescriptorProtoMsg {
+    return {
+      typeUrl: "/cosmos_proto.ScalarDescriptor",
+      value: ScalarDescriptor.encode(message).finish(),
+    };
   },
 };

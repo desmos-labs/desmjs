@@ -1,9 +1,16 @@
 /* eslint-disable */
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Relationship, UserBlock } from "./models";
+import {
+  Relationship,
+  RelationshipAmino,
+  UserBlock,
+  UserBlockAmino,
+} from "./models";
 import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.relationships.v1";
@@ -24,6 +31,31 @@ export interface QueryRelationshipsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryRelationshipsRequestProtoMsg {
+  typeUrl: "/desmos.relationships.v1.QueryRelationshipsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryRelationshipsRequest is the request type for the
+ * Query/Relationships RPC method.
+ */
+export interface QueryRelationshipsRequestAmino {
+  /** subspace to query the relationships for */
+  subspace_id: string;
+  /** optional address of the user for which to query the relationships */
+  user: string;
+  /**
+   * optional address of the counterparty of the relationships (used only if the
+   * user is provided)
+   */
+  counterparty: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryRelationshipsRequestAminoMsg {
+  type: "/desmos.relationships.v1.QueryRelationshipsRequest";
+  value: QueryRelationshipsRequestAmino;
+}
 /**
  * QueryRelationshipsResponse is the response type for the
  * Query/Relationships RPC method.
@@ -31,6 +63,22 @@ export interface QueryRelationshipsRequest {
 export interface QueryRelationshipsResponse {
   relationships: Relationship[];
   pagination?: PageResponse;
+}
+export interface QueryRelationshipsResponseProtoMsg {
+  typeUrl: "/desmos.relationships.v1.QueryRelationshipsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryRelationshipsResponse is the response type for the
+ * Query/Relationships RPC method.
+ */
+export interface QueryRelationshipsResponseAmino {
+  relationships: RelationshipAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryRelationshipsResponseAminoMsg {
+  type: "/desmos.relationships.v1.QueryRelationshipsResponse";
+  value: QueryRelationshipsResponseAmino;
 }
 /**
  * QueryBlocksRequest is the request type for the Query/Blocks RPC
@@ -49,6 +97,31 @@ export interface QueryBlocksRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryBlocksRequestProtoMsg {
+  typeUrl: "/desmos.relationships.v1.QueryBlocksRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryBlocksRequest is the request type for the Query/Blocks RPC
+ * endpoint
+ */
+export interface QueryBlocksRequestAmino {
+  /** subspace to query the blocks for */
+  subspace_id: string;
+  /** optional address of the blocker to query the blocks for */
+  blocker: string;
+  /**
+   * optional address of the blocked user to query the block for (used only if
+   * the blocker is provided)
+   */
+  blocked: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryBlocksRequestAminoMsg {
+  type: "/desmos.relationships.v1.QueryBlocksRequest";
+  value: QueryBlocksRequestAmino;
+}
 /**
  * QueryBlocksResponse is the response type for the Query/Blocks RPC
  * method.
@@ -56,6 +129,22 @@ export interface QueryBlocksRequest {
 export interface QueryBlocksResponse {
   blocks: UserBlock[];
   pagination?: PageResponse;
+}
+export interface QueryBlocksResponseProtoMsg {
+  typeUrl: "/desmos.relationships.v1.QueryBlocksResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryBlocksResponse is the response type for the Query/Blocks RPC
+ * method.
+ */
+export interface QueryBlocksResponseAmino {
+  blocks: UserBlockAmino[];
+  pagination?: PageResponseAmino;
+}
+export interface QueryBlocksResponseAminoMsg {
+  type: "/desmos.relationships.v1.QueryBlocksResponse";
+  value: QueryBlocksResponseAmino;
 }
 function createBaseQueryRelationshipsRequest(): QueryRelationshipsRequest {
   return {
@@ -156,6 +245,49 @@ export const QueryRelationshipsRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryRelationshipsRequestAmino): QueryRelationshipsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      user: object.user,
+      counterparty: object.counterparty,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryRelationshipsRequest): QueryRelationshipsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.user = message.user;
+    obj.counterparty = message.counterparty;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryRelationshipsRequestAminoMsg
+  ): QueryRelationshipsRequest {
+    return QueryRelationshipsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryRelationshipsRequestProtoMsg
+  ): QueryRelationshipsRequest {
+    return QueryRelationshipsRequest.decode(message.value);
+  },
+  toProto(message: QueryRelationshipsRequest): Uint8Array {
+    return QueryRelationshipsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryRelationshipsRequest
+  ): QueryRelationshipsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.QueryRelationshipsRequest",
+      value: QueryRelationshipsRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryRelationshipsResponse(): QueryRelationshipsResponse {
   return {
@@ -240,6 +372,55 @@ export const QueryRelationshipsResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryRelationshipsResponseAmino
+  ): QueryRelationshipsResponse {
+    return {
+      relationships: Array.isArray(object?.relationships)
+        ? object.relationships.map((e: any) => Relationship.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryRelationshipsResponse
+  ): QueryRelationshipsResponseAmino {
+    const obj: any = {};
+    if (message.relationships) {
+      obj.relationships = message.relationships.map((e) =>
+        e ? Relationship.toAmino(e) : undefined
+      );
+    } else {
+      obj.relationships = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryRelationshipsResponseAminoMsg
+  ): QueryRelationshipsResponse {
+    return QueryRelationshipsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryRelationshipsResponseProtoMsg
+  ): QueryRelationshipsResponse {
+    return QueryRelationshipsResponse.decode(message.value);
+  },
+  toProto(message: QueryRelationshipsResponse): Uint8Array {
+    return QueryRelationshipsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryRelationshipsResponse
+  ): QueryRelationshipsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.QueryRelationshipsResponse",
+      value: QueryRelationshipsResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryBlocksRequest(): QueryBlocksRequest {
@@ -335,6 +516,43 @@ export const QueryBlocksRequest = {
         : undefined;
     return message;
   },
+  fromAmino(object: QueryBlocksRequestAmino): QueryBlocksRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      blocker: object.blocker,
+      blocked: object.blocked,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryBlocksRequest): QueryBlocksRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.blocker = message.blocker;
+    obj.blocked = message.blocked;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryBlocksRequestAminoMsg): QueryBlocksRequest {
+    return QueryBlocksRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryBlocksRequestProtoMsg): QueryBlocksRequest {
+    return QueryBlocksRequest.decode(message.value);
+  },
+  toProto(message: QueryBlocksRequest): Uint8Array {
+    return QueryBlocksRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryBlocksRequest): QueryBlocksRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.QueryBlocksRequest",
+      value: QueryBlocksRequest.encode(message).finish(),
+    };
+  },
 };
 function createBaseQueryBlocksResponse(): QueryBlocksResponse {
   return {
@@ -413,6 +631,45 @@ export const QueryBlocksResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryBlocksResponseAmino): QueryBlocksResponse {
+    return {
+      blocks: Array.isArray(object?.blocks)
+        ? object.blocks.map((e: any) => UserBlock.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(message: QueryBlocksResponse): QueryBlocksResponseAmino {
+    const obj: any = {};
+    if (message.blocks) {
+      obj.blocks = message.blocks.map((e) =>
+        e ? UserBlock.toAmino(e) : undefined
+      );
+    } else {
+      obj.blocks = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryBlocksResponseAminoMsg): QueryBlocksResponse {
+    return QueryBlocksResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryBlocksResponseProtoMsg): QueryBlocksResponse {
+    return QueryBlocksResponse.decode(message.value);
+  },
+  toProto(message: QueryBlocksResponse): Uint8Array {
+    return QueryBlocksResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryBlocksResponse): QueryBlocksResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.relationships.v1.QueryBlocksResponse",
+      value: QueryBlocksResponse.encode(message).finish(),
+    };
   },
 };
 /** Query defines the gRPC querier service. */

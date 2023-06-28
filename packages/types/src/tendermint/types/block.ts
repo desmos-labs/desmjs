@@ -1,6 +1,13 @@
 /* eslint-disable */
-import { Header, Data, Commit } from "./types";
-import { EvidenceList } from "./evidence";
+import {
+  Header,
+  HeaderAmino,
+  Data,
+  DataAmino,
+  Commit,
+  CommitAmino,
+} from "./types";
+import { EvidenceList, EvidenceListAmino } from "./evidence";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../helpers";
 export const protobufPackage = "tendermint.types";
@@ -9,6 +16,20 @@ export interface Block {
   data?: Data;
   evidence?: EvidenceList;
   lastCommit?: Commit;
+}
+export interface BlockProtoMsg {
+  typeUrl: "/tendermint.types.Block";
+  value: Uint8Array;
+}
+export interface BlockAmino {
+  header?: HeaderAmino;
+  data?: DataAmino;
+  evidence?: EvidenceListAmino;
+  last_commit?: CommitAmino;
+}
+export interface BlockAminoMsg {
+  type: "/tendermint.types.Block";
+  value: BlockAmino;
 }
 function createBaseBlock(): Block {
   return {
@@ -107,5 +128,44 @@ export const Block = {
         ? Commit.fromPartial(object.lastCommit)
         : undefined;
     return message;
+  },
+  fromAmino(object: BlockAmino): Block {
+    return {
+      header: object?.header ? Header.fromAmino(object.header) : undefined,
+      data: object?.data ? Data.fromAmino(object.data) : undefined,
+      evidence: object?.evidence
+        ? EvidenceList.fromAmino(object.evidence)
+        : undefined,
+      lastCommit: object?.last_commit
+        ? Commit.fromAmino(object.last_commit)
+        : undefined,
+    };
+  },
+  toAmino(message: Block): BlockAmino {
+    const obj: any = {};
+    obj.header = message.header ? Header.toAmino(message.header) : undefined;
+    obj.data = message.data ? Data.toAmino(message.data) : undefined;
+    obj.evidence = message.evidence
+      ? EvidenceList.toAmino(message.evidence)
+      : undefined;
+    obj.last_commit = message.lastCommit
+      ? Commit.toAmino(message.lastCommit)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: BlockAminoMsg): Block {
+    return Block.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BlockProtoMsg): Block {
+    return Block.decode(message.value);
+  },
+  toProto(message: Block): Uint8Array {
+    return Block.encode(message).finish();
+  },
+  toProtoMsg(message: Block): BlockProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.Block",
+      value: Block.encode(message).finish(),
+    };
   },
 };

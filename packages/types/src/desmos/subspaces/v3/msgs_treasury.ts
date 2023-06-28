@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Grant } from "../../../cosmos/authz/v1beta1/authz";
+import { Grant, GrantAmino } from "../../../cosmos/authz/v1beta1/authz";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.subspaces.v3";
@@ -17,11 +17,46 @@ export interface MsgGrantTreasuryAuthorization {
   /** Grant represents the authorization to execute the provided methods */
   grant?: Grant;
 }
+export interface MsgGrantTreasuryAuthorizationProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorization";
+  value: Uint8Array;
+}
+/**
+ * MsgGrantTreasuryAuthorization grants an authorization on behalf of the
+ * treasury to a user
+ */
+export interface MsgGrantTreasuryAuthorizationAmino {
+  /** Id of the subspace where the authorization should be granted */
+  subspace_id: string;
+  /** Address of the user granting a treasury authorization */
+  granter: string;
+  /** Address of the user who is being granted a treasury authorization */
+  grantee: string;
+  /** Grant represents the authorization to execute the provided methods */
+  grant?: GrantAmino;
+}
+export interface MsgGrantTreasuryAuthorizationAminoMsg {
+  type: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorization";
+  value: MsgGrantTreasuryAuthorizationAmino;
+}
 /**
  * MsgGrantTreasuryAuthorizationResponse defines the
  * Msg/MsgGrantTreasuryAuthorization response type
  */
 export interface MsgGrantTreasuryAuthorizationResponse {}
+export interface MsgGrantTreasuryAuthorizationResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgGrantTreasuryAuthorizationResponse defines the
+ * Msg/MsgGrantTreasuryAuthorization response type
+ */
+export interface MsgGrantTreasuryAuthorizationResponseAmino {}
+export interface MsgGrantTreasuryAuthorizationResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse";
+  value: MsgGrantTreasuryAuthorizationResponseAmino;
+}
 /**
  * MsgRevokeTreasuryAuthorization revokes an existing treasury authorization
  * from a user
@@ -36,11 +71,46 @@ export interface MsgRevokeTreasuryAuthorization {
   /** Type url of the authorized message which is being revoked */
   msgTypeUrl: string;
 }
+export interface MsgRevokeTreasuryAuthorizationProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorization";
+  value: Uint8Array;
+}
+/**
+ * MsgRevokeTreasuryAuthorization revokes an existing treasury authorization
+ * from a user
+ */
+export interface MsgRevokeTreasuryAuthorizationAmino {
+  /** Id of the subspace from which the authorization should be revoked */
+  subspace_id: string;
+  /** Address of the user revoking the treasury authorization */
+  granter: string;
+  /** Address of the user who is being revoked the treasury authorization */
+  grantee: string;
+  /** Type url of the authorized message which is being revoked */
+  msg_type_url: string;
+}
+export interface MsgRevokeTreasuryAuthorizationAminoMsg {
+  type: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorization";
+  value: MsgRevokeTreasuryAuthorizationAmino;
+}
 /**
  * MsgRevokeTreasuryAuthorizationResponse defines the
  * Msg/MsgRevokeTreasuryAuthorization response type
  */
 export interface MsgRevokeTreasuryAuthorizationResponse {}
+export interface MsgRevokeTreasuryAuthorizationResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRevokeTreasuryAuthorizationResponse defines the
+ * Msg/MsgRevokeTreasuryAuthorization response type
+ */
+export interface MsgRevokeTreasuryAuthorizationResponseAmino {}
+export interface MsgRevokeTreasuryAuthorizationResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse";
+  value: MsgRevokeTreasuryAuthorizationResponseAmino;
+}
 function createBaseMsgGrantTreasuryAuthorization(): MsgGrantTreasuryAuthorization {
   return {
     subspaceId: Long.UZERO,
@@ -133,6 +203,49 @@ export const MsgGrantTreasuryAuthorization = {
         : undefined;
     return message;
   },
+  fromAmino(
+    object: MsgGrantTreasuryAuthorizationAmino
+  ): MsgGrantTreasuryAuthorization {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object.grantee,
+      grant: object?.grant ? Grant.fromAmino(object.grant) : undefined,
+    };
+  },
+  toAmino(
+    message: MsgGrantTreasuryAuthorization
+  ): MsgGrantTreasuryAuthorizationAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgGrantTreasuryAuthorizationAminoMsg
+  ): MsgGrantTreasuryAuthorization {
+    return MsgGrantTreasuryAuthorization.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgGrantTreasuryAuthorizationProtoMsg
+  ): MsgGrantTreasuryAuthorization {
+    return MsgGrantTreasuryAuthorization.decode(message.value);
+  },
+  toProto(message: MsgGrantTreasuryAuthorization): Uint8Array {
+    return MsgGrantTreasuryAuthorization.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgGrantTreasuryAuthorization
+  ): MsgGrantTreasuryAuthorizationProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorization",
+      value: MsgGrantTreasuryAuthorization.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgGrantTreasuryAuthorizationResponse(): MsgGrantTreasuryAuthorizationResponse {
   return {};
@@ -173,6 +286,38 @@ export const MsgGrantTreasuryAuthorizationResponse = {
   >(_: I): MsgGrantTreasuryAuthorizationResponse {
     const message = createBaseMsgGrantTreasuryAuthorizationResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgGrantTreasuryAuthorizationResponseAmino
+  ): MsgGrantTreasuryAuthorizationResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgGrantTreasuryAuthorizationResponse
+  ): MsgGrantTreasuryAuthorizationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgGrantTreasuryAuthorizationResponseAminoMsg
+  ): MsgGrantTreasuryAuthorizationResponse {
+    return MsgGrantTreasuryAuthorizationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgGrantTreasuryAuthorizationResponseProtoMsg
+  ): MsgGrantTreasuryAuthorizationResponse {
+    return MsgGrantTreasuryAuthorizationResponse.decode(message.value);
+  },
+  toProto(message: MsgGrantTreasuryAuthorizationResponse): Uint8Array {
+    return MsgGrantTreasuryAuthorizationResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgGrantTreasuryAuthorizationResponse
+  ): MsgGrantTreasuryAuthorizationResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse",
+      value: MsgGrantTreasuryAuthorizationResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgRevokeTreasuryAuthorization(): MsgRevokeTreasuryAuthorization {
@@ -263,6 +408,49 @@ export const MsgRevokeTreasuryAuthorization = {
     message.msgTypeUrl = object.msgTypeUrl ?? "";
     return message;
   },
+  fromAmino(
+    object: MsgRevokeTreasuryAuthorizationAmino
+  ): MsgRevokeTreasuryAuthorization {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object.grantee,
+      msgTypeUrl: object.msg_type_url,
+    };
+  },
+  toAmino(
+    message: MsgRevokeTreasuryAuthorization
+  ): MsgRevokeTreasuryAuthorizationAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRevokeTreasuryAuthorizationAminoMsg
+  ): MsgRevokeTreasuryAuthorization {
+    return MsgRevokeTreasuryAuthorization.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRevokeTreasuryAuthorizationProtoMsg
+  ): MsgRevokeTreasuryAuthorization {
+    return MsgRevokeTreasuryAuthorization.decode(message.value);
+  },
+  toProto(message: MsgRevokeTreasuryAuthorization): Uint8Array {
+    return MsgRevokeTreasuryAuthorization.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRevokeTreasuryAuthorization
+  ): MsgRevokeTreasuryAuthorizationProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorization",
+      value: MsgRevokeTreasuryAuthorization.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgRevokeTreasuryAuthorizationResponse(): MsgRevokeTreasuryAuthorizationResponse {
   return {};
@@ -303,5 +491,37 @@ export const MsgRevokeTreasuryAuthorizationResponse = {
   >(_: I): MsgRevokeTreasuryAuthorizationResponse {
     const message = createBaseMsgRevokeTreasuryAuthorizationResponse();
     return message;
+  },
+  fromAmino(
+    _: MsgRevokeTreasuryAuthorizationResponseAmino
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgRevokeTreasuryAuthorizationResponse
+  ): MsgRevokeTreasuryAuthorizationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRevokeTreasuryAuthorizationResponseAminoMsg
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    return MsgRevokeTreasuryAuthorizationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRevokeTreasuryAuthorizationResponseProtoMsg
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    return MsgRevokeTreasuryAuthorizationResponse.decode(message.value);
+  },
+  toProto(message: MsgRevokeTreasuryAuthorizationResponse): Uint8Array {
+    return MsgRevokeTreasuryAuthorizationResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRevokeTreasuryAuthorizationResponse
+  ): MsgRevokeTreasuryAuthorizationResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse",
+      value: MsgRevokeTreasuryAuthorizationResponse.encode(message).finish(),
+    };
   },
 };

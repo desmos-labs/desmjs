@@ -1,8 +1,11 @@
 /* eslint-disable */
-import { DTagTransferRequest } from "./models_dtag_requests";
-import { ChainLink } from "./models_chain_links";
-import { ApplicationLink } from "./models_app_links";
-import { Params } from "./models_params";
+import {
+  DTagTransferRequest,
+  DTagTransferRequestAmino,
+} from "./models_dtag_requests";
+import { ChainLink, ChainLinkAmino } from "./models_chain_links";
+import { ApplicationLink, ApplicationLinkAmino } from "./models_app_links";
+import { Params, ParamsAmino } from "./models_params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.profiles.v3";
@@ -15,11 +18,42 @@ export interface GenesisState {
   ibcPortId: string;
   params?: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/desmos.profiles.v3.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the profiles module's genesis state. */
+export interface GenesisStateAmino {
+  dtag_transfer_requests: DTagTransferRequestAmino[];
+  chain_links: ChainLinkAmino[];
+  application_links: ApplicationLinkAmino[];
+  default_external_addresses: DefaultExternalAddressEntryAmino[];
+  ibc_port_id: string;
+  params?: ParamsAmino;
+}
+export interface GenesisStateAminoMsg {
+  type: "/desmos.profiles.v3.GenesisState";
+  value: GenesisStateAmino;
+}
 /** DefaultExternalAddressEntry contains the data of a default extnernal address */
 export interface DefaultExternalAddressEntry {
   owner: string;
   chainName: string;
   target: string;
+}
+export interface DefaultExternalAddressEntryProtoMsg {
+  typeUrl: "/desmos.profiles.v3.DefaultExternalAddressEntry";
+  value: Uint8Array;
+}
+/** DefaultExternalAddressEntry contains the data of a default extnernal address */
+export interface DefaultExternalAddressEntryAmino {
+  owner: string;
+  chain_name: string;
+  target: string;
+}
+export interface DefaultExternalAddressEntryAminoMsg {
+  type: "/desmos.profiles.v3.DefaultExternalAddressEntry";
+  value: DefaultExternalAddressEntryAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -174,6 +208,79 @@ export const GenesisState = {
         : undefined;
     return message;
   },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      dtagTransferRequests: Array.isArray(object?.dtag_transfer_requests)
+        ? object.dtag_transfer_requests.map((e: any) =>
+            DTagTransferRequest.fromAmino(e)
+          )
+        : [],
+      chainLinks: Array.isArray(object?.chain_links)
+        ? object.chain_links.map((e: any) => ChainLink.fromAmino(e))
+        : [],
+      applicationLinks: Array.isArray(object?.application_links)
+        ? object.application_links.map((e: any) => ApplicationLink.fromAmino(e))
+        : [],
+      defaultExternalAddresses: Array.isArray(
+        object?.default_external_addresses
+      )
+        ? object.default_external_addresses.map((e: any) =>
+            DefaultExternalAddressEntry.fromAmino(e)
+          )
+        : [],
+      ibcPortId: object.ibc_port_id,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.dtagTransferRequests) {
+      obj.dtag_transfer_requests = message.dtagTransferRequests.map((e) =>
+        e ? DTagTransferRequest.toAmino(e) : undefined
+      );
+    } else {
+      obj.dtag_transfer_requests = [];
+    }
+    if (message.chainLinks) {
+      obj.chain_links = message.chainLinks.map((e) =>
+        e ? ChainLink.toAmino(e) : undefined
+      );
+    } else {
+      obj.chain_links = [];
+    }
+    if (message.applicationLinks) {
+      obj.application_links = message.applicationLinks.map((e) =>
+        e ? ApplicationLink.toAmino(e) : undefined
+      );
+    } else {
+      obj.application_links = [];
+    }
+    if (message.defaultExternalAddresses) {
+      obj.default_external_addresses = message.defaultExternalAddresses.map(
+        (e) => (e ? DefaultExternalAddressEntry.toAmino(e) : undefined)
+      );
+    } else {
+      obj.default_external_addresses = [];
+    }
+    obj.ibc_port_id = message.ibcPortId;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.GenesisState",
+      value: GenesisState.encode(message).finish(),
+    };
+  },
 };
 function createBaseDefaultExternalAddressEntry(): DefaultExternalAddressEntry {
   return {
@@ -246,5 +353,44 @@ export const DefaultExternalAddressEntry = {
     message.chainName = object.chainName ?? "";
     message.target = object.target ?? "";
     return message;
+  },
+  fromAmino(
+    object: DefaultExternalAddressEntryAmino
+  ): DefaultExternalAddressEntry {
+    return {
+      owner: object.owner,
+      chainName: object.chain_name,
+      target: object.target,
+    };
+  },
+  toAmino(
+    message: DefaultExternalAddressEntry
+  ): DefaultExternalAddressEntryAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.chain_name = message.chainName;
+    obj.target = message.target;
+    return obj;
+  },
+  fromAminoMsg(
+    object: DefaultExternalAddressEntryAminoMsg
+  ): DefaultExternalAddressEntry {
+    return DefaultExternalAddressEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: DefaultExternalAddressEntryProtoMsg
+  ): DefaultExternalAddressEntry {
+    return DefaultExternalAddressEntry.decode(message.value);
+  },
+  toProto(message: DefaultExternalAddressEntry): Uint8Array {
+    return DefaultExternalAddressEntry.encode(message).finish();
+  },
+  toProtoMsg(
+    message: DefaultExternalAddressEntry
+  ): DefaultExternalAddressEntryProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.DefaultExternalAddressEntry",
+      value: DefaultExternalAddressEntry.encode(message).finish(),
+    };
   },
 };

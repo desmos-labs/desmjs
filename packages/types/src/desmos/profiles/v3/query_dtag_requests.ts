@@ -1,9 +1,14 @@
 /* eslint-disable */
 import {
   PageRequest,
+  PageRequestAmino,
   PageResponse,
+  PageResponseAmino,
 } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DTagTransferRequest } from "./models_dtag_requests";
+import {
+  DTagTransferRequest,
+  DTagTransferRequestAmino,
+} from "./models_dtag_requests";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.profiles.v3";
@@ -20,6 +25,27 @@ export interface QueryIncomingDTagTransferRequestsRequest {
   /** Pagination defines an optional pagination for the request */
   pagination?: PageRequest;
 }
+export interface QueryIncomingDTagTransferRequestsRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryIncomingDTagTransferRequestsRequest is the request type for the
+ * Query/IncomingDTagTransferRequests RPC endpoint
+ */
+export interface QueryIncomingDTagTransferRequestsRequestAmino {
+  /**
+   * (optional) Receiver represents the address of the user to which query the
+   * incoming requests for
+   */
+  receiver: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryIncomingDTagTransferRequestsRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsRequest";
+  value: QueryIncomingDTagTransferRequestsRequestAmino;
+}
 /**
  * QueryIncomingDTagTransferRequestsResponse is the response type for the
  * Query/IncomingDTagTransferRequests RPC method.
@@ -32,6 +58,27 @@ export interface QueryIncomingDTagTransferRequestsResponse {
   requests: DTagTransferRequest[];
   /** Pagination defines the pagination response */
   pagination?: PageResponse;
+}
+export interface QueryIncomingDTagTransferRequestsResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryIncomingDTagTransferRequestsResponse is the response type for the
+ * Query/IncomingDTagTransferRequests RPC method.
+ */
+export interface QueryIncomingDTagTransferRequestsResponseAmino {
+  /**
+   * Requests represent the list of all the DTag transfer requests made towards
+   * the user
+   */
+  requests: DTagTransferRequestAmino[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryIncomingDTagTransferRequestsResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsResponse";
+  value: QueryIncomingDTagTransferRequestsResponseAmino;
 }
 function createBaseQueryIncomingDTagTransferRequestsRequest(): QueryIncomingDTagTransferRequestsRequest {
   return {
@@ -102,6 +149,47 @@ export const QueryIncomingDTagTransferRequestsRequest = {
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryIncomingDTagTransferRequestsRequestAmino
+  ): QueryIncomingDTagTransferRequestsRequest {
+    return {
+      receiver: object.receiver,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryIncomingDTagTransferRequestsRequest
+  ): QueryIncomingDTagTransferRequestsRequestAmino {
+    const obj: any = {};
+    obj.receiver = message.receiver;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryIncomingDTagTransferRequestsRequestAminoMsg
+  ): QueryIncomingDTagTransferRequestsRequest {
+    return QueryIncomingDTagTransferRequestsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryIncomingDTagTransferRequestsRequestProtoMsg
+  ): QueryIncomingDTagTransferRequestsRequest {
+    return QueryIncomingDTagTransferRequestsRequest.decode(message.value);
+  },
+  toProto(message: QueryIncomingDTagTransferRequestsRequest): Uint8Array {
+    return QueryIncomingDTagTransferRequestsRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryIncomingDTagTransferRequestsRequest
+  ): QueryIncomingDTagTransferRequestsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsRequest",
+      value: QueryIncomingDTagTransferRequestsRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryIncomingDTagTransferRequestsResponse(): QueryIncomingDTagTransferRequestsResponse {
@@ -187,5 +275,54 @@ export const QueryIncomingDTagTransferRequestsResponse = {
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
     return message;
+  },
+  fromAmino(
+    object: QueryIncomingDTagTransferRequestsResponseAmino
+  ): QueryIncomingDTagTransferRequestsResponse {
+    return {
+      requests: Array.isArray(object?.requests)
+        ? object.requests.map((e: any) => DTagTransferRequest.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryIncomingDTagTransferRequestsResponse
+  ): QueryIncomingDTagTransferRequestsResponseAmino {
+    const obj: any = {};
+    if (message.requests) {
+      obj.requests = message.requests.map((e) =>
+        e ? DTagTransferRequest.toAmino(e) : undefined
+      );
+    } else {
+      obj.requests = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryIncomingDTagTransferRequestsResponseAminoMsg
+  ): QueryIncomingDTagTransferRequestsResponse {
+    return QueryIncomingDTagTransferRequestsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: QueryIncomingDTagTransferRequestsResponseProtoMsg
+  ): QueryIncomingDTagTransferRequestsResponse {
+    return QueryIncomingDTagTransferRequestsResponse.decode(message.value);
+  },
+  toProto(message: QueryIncomingDTagTransferRequestsResponse): Uint8Array {
+    return QueryIncomingDTagTransferRequestsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: QueryIncomingDTagTransferRequestsResponse
+  ): QueryIncomingDTagTransferRequestsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsResponse",
+      value: QueryIncomingDTagTransferRequestsResponse.encode(message).finish(),
+    };
   },
 };

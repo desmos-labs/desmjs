@@ -1,7 +1,10 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { CompactBitArray } from "../../../cosmos/crypto/multisig/v1beta1/multisig";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
+import {
+  CompactBitArray,
+  CompactBitArrayAmino,
+} from "../../../cosmos/crypto/multisig/v1beta1/multisig";
 import * as _m0 from "protobufjs/minimal";
 import {
   isSet,
@@ -44,6 +47,7 @@ export enum SignatureValueType {
   SIGNATURE_VALUE_TYPE_EVM_PERSONAL_SIGN = 4,
   UNRECOGNIZED = -1,
 }
+export const SignatureValueTypeAmino = SignatureValueType;
 export function signatureValueTypeFromJSON(object: any): SignatureValueType {
   switch (object) {
     case 0:
@@ -103,9 +107,48 @@ export interface ChainLink {
   /** CreationTime represents the time in which the link has been created */
   creationTime?: Timestamp;
 }
+export interface ChainLinkProtoMsg {
+  typeUrl: "/desmos.profiles.v3.ChainLink";
+  value: Uint8Array;
+}
+/**
+ * ChainLink contains the data representing either an inter- or cross- chain
+ * link
+ */
+export interface ChainLinkAmino {
+  /** User defines the destination profile address to link */
+  user: string;
+  /**
+   * Address contains the data of the external chain address to be connected
+   * with the Desmos profile
+   */
+  address?: AnyAmino;
+  /** Proof contains the ownership proof of the external chain address */
+  proof?: ProofAmino;
+  /** ChainConfig contains the configuration of the external chain */
+  chain_config?: ChainConfigAmino;
+  /** CreationTime represents the time in which the link has been created */
+  creation_time?: TimestampAmino;
+}
+export interface ChainLinkAminoMsg {
+  type: "/desmos.profiles.v3.ChainLink";
+  value: ChainLinkAmino;
+}
 /** ChainConfig contains the data of the chain with which the link is made. */
 export interface ChainConfig {
   name: string;
+}
+export interface ChainConfigProtoMsg {
+  typeUrl: "/desmos.profiles.v3.ChainConfig";
+  value: Uint8Array;
+}
+/** ChainConfig contains the data of the chain with which the link is made. */
+export interface ChainConfigAmino {
+  name: string;
+}
+export interface ChainConfigAminoMsg {
+  type: "/desmos.profiles.v3.ChainConfig";
+  value: ChainConfigAmino;
 }
 /**
  * Proof contains all the data used to verify a signature when linking an
@@ -125,6 +168,32 @@ export interface Proof {
    */
   plainText: string;
 }
+export interface ProofProtoMsg {
+  typeUrl: "/desmos.profiles.v3.Proof";
+  value: Uint8Array;
+}
+/**
+ * Proof contains all the data used to verify a signature when linking an
+ * account to a profile
+ */
+export interface ProofAmino {
+  /**
+   * PubKey represents the public key associated with the address for which to
+   * prove the ownership
+   */
+  pub_key?: AnyAmino;
+  /** Signature represents the hex-encoded signature of the PlainText value */
+  signature?: AnyAmino;
+  /**
+   * PlainText represents the hex-encoded value signed in order to produce the
+   * Signature
+   */
+  plain_text: string;
+}
+export interface ProofAminoMsg {
+  type: "/desmos.profiles.v3.Proof";
+  value: ProofAmino;
+}
 /** Bech32Address represents a Bech32-encoded address */
 export interface Bech32Address {
   /** Value represents the Bech-32 encoded address value */
@@ -132,10 +201,38 @@ export interface Bech32Address {
   /** Prefix represents the HRP of the Bech32 address */
   prefix: string;
 }
+export interface Bech32AddressProtoMsg {
+  typeUrl: "/desmos.profiles.v3.Bech32Address";
+  value: Uint8Array;
+}
+/** Bech32Address represents a Bech32-encoded address */
+export interface Bech32AddressAmino {
+  /** Value represents the Bech-32 encoded address value */
+  value: string;
+  /** Prefix represents the HRP of the Bech32 address */
+  prefix: string;
+}
+export interface Bech32AddressAminoMsg {
+  type: "/desmos.profiles.v3.Bech32Address";
+  value: Bech32AddressAmino;
+}
 /** Base58Address represents a Base58-encoded address */
 export interface Base58Address {
   /** Value contains the Base58-encoded address */
   value: string;
+}
+export interface Base58AddressProtoMsg {
+  typeUrl: "/desmos.profiles.v3.Base58Address";
+  value: Uint8Array;
+}
+/** Base58Address represents a Base58-encoded address */
+export interface Base58AddressAmino {
+  /** Value contains the Base58-encoded address */
+  value: string;
+}
+export interface Base58AddressAminoMsg {
+  type: "/desmos.profiles.v3.Base58Address";
+  value: Base58AddressAmino;
 }
 /**
  * HexAddress represents an Hex-encoded address
@@ -150,6 +247,27 @@ export interface HexAddress {
    */
   prefix: string;
 }
+export interface HexAddressProtoMsg {
+  typeUrl: "/desmos.profiles.v3.HexAddress";
+  value: Uint8Array;
+}
+/**
+ * HexAddress represents an Hex-encoded address
+ * NOTE: Currently it only supports keccak256-uncompressed addresses
+ */
+export interface HexAddressAmino {
+  /** Value represents the hex address value */
+  value: string;
+  /**
+   * Prefix represents the optional prefix used during address encoding (e.g.
+   * 0x)
+   */
+  prefix: string;
+}
+export interface HexAddressAminoMsg {
+  type: "/desmos.profiles.v3.HexAddress";
+  value: HexAddressAmino;
+}
 /** SingleSignature is the signature data for a single signer */
 export interface SingleSignature {
   /** Type represents the type of the signature value */
@@ -157,12 +275,42 @@ export interface SingleSignature {
   /** Signature is the raw signature bytes */
   signature: Uint8Array;
 }
+export interface SingleSignatureProtoMsg {
+  typeUrl: "/desmos.profiles.v3.SingleSignature";
+  value: Uint8Array;
+}
+/** SingleSignature is the signature data for a single signer */
+export interface SingleSignatureAmino {
+  /** Type represents the type of the signature value */
+  value_type: SignatureValueType;
+  /** Signature is the raw signature bytes */
+  signature: Uint8Array;
+}
+export interface SingleSignatureAminoMsg {
+  type: "/desmos.profiles.v3.SingleSignature";
+  value: SingleSignatureAmino;
+}
 /** CosmosMultiSignature is the signature data for a multisig public key */
 export interface CosmosMultiSignature {
   /** Bitarray specifies which keys within the multisig are signing */
   bitArray?: CompactBitArray;
   /** Signatures is the signatures of the multi-signature */
   signatures: Any[];
+}
+export interface CosmosMultiSignatureProtoMsg {
+  typeUrl: "/desmos.profiles.v3.CosmosMultiSignature";
+  value: Uint8Array;
+}
+/** CosmosMultiSignature is the signature data for a multisig public key */
+export interface CosmosMultiSignatureAmino {
+  /** Bitarray specifies which keys within the multisig are signing */
+  bit_array?: CompactBitArrayAmino;
+  /** Signatures is the signatures of the multi-signature */
+  signatures: AnyAmino[];
+}
+export interface CosmosMultiSignatureAminoMsg {
+  type: "/desmos.profiles.v3.CosmosMultiSignature";
+  value: CosmosMultiSignatureAmino;
 }
 function createBaseChainLink(): ChainLink {
   return {
@@ -278,6 +426,47 @@ export const ChainLink = {
         : undefined;
     return message;
   },
+  fromAmino(object: ChainLinkAmino): ChainLink {
+    return {
+      user: object.user,
+      address: object?.address ? Any.fromAmino(object.address) : undefined,
+      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined,
+      chainConfig: object?.chain_config
+        ? ChainConfig.fromAmino(object.chain_config)
+        : undefined,
+      creationTime: object?.creation_time
+        ? Timestamp.fromAmino(object.creation_time)
+        : undefined,
+    };
+  },
+  toAmino(message: ChainLink): ChainLinkAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    obj.address = message.address ? Any.toAmino(message.address) : undefined;
+    obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
+    obj.chain_config = message.chainConfig
+      ? ChainConfig.toAmino(message.chainConfig)
+      : undefined;
+    obj.creation_time = message.creationTime
+      ? Timestamp.toAmino(message.creationTime)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ChainLinkAminoMsg): ChainLink {
+    return ChainLink.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ChainLinkProtoMsg): ChainLink {
+    return ChainLink.decode(message.value);
+  },
+  toProto(message: ChainLink): Uint8Array {
+    return ChainLink.encode(message).finish();
+  },
+  toProtoMsg(message: ChainLink): ChainLinkProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.ChainLink",
+      value: ChainLink.encode(message).finish(),
+    };
+  },
 };
 function createBaseChainConfig(): ChainConfig {
   return {
@@ -327,6 +516,31 @@ export const ChainConfig = {
     const message = createBaseChainConfig();
     message.name = object.name ?? "";
     return message;
+  },
+  fromAmino(object: ChainConfigAmino): ChainConfig {
+    return {
+      name: object.name,
+    };
+  },
+  toAmino(message: ChainConfig): ChainConfigAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
+  },
+  fromAminoMsg(object: ChainConfigAminoMsg): ChainConfig {
+    return ChainConfig.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ChainConfigProtoMsg): ChainConfig {
+    return ChainConfig.decode(message.value);
+  },
+  toProto(message: ChainConfig): Uint8Array {
+    return ChainConfig.encode(message).finish();
+  },
+  toProtoMsg(message: ChainConfig): ChainConfigProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.ChainConfig",
+      value: ChainConfig.encode(message).finish(),
+    };
   },
 };
 function createBaseProof(): Proof {
@@ -405,6 +619,39 @@ export const Proof = {
     message.plainText = object.plainText ?? "";
     return message;
   },
+  fromAmino(object: ProofAmino): Proof {
+    return {
+      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
+      signature: object?.signature
+        ? Any.fromAmino(object.signature)
+        : undefined,
+      plainText: object.plain_text,
+    };
+  },
+  toAmino(message: Proof): ProofAmino {
+    const obj: any = {};
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
+    obj.signature = message.signature
+      ? Any.toAmino(message.signature)
+      : undefined;
+    obj.plain_text = message.plainText;
+    return obj;
+  },
+  fromAminoMsg(object: ProofAminoMsg): Proof {
+    return Proof.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProofProtoMsg): Proof {
+    return Proof.decode(message.value);
+  },
+  toProto(message: Proof): Uint8Array {
+    return Proof.encode(message).finish();
+  },
+  toProtoMsg(message: Proof): ProofProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.Proof",
+      value: Proof.encode(message).finish(),
+    };
+  },
 };
 function createBaseBech32Address(): Bech32Address {
   return {
@@ -465,6 +712,33 @@ export const Bech32Address = {
     message.prefix = object.prefix ?? "";
     return message;
   },
+  fromAmino(object: Bech32AddressAmino): Bech32Address {
+    return {
+      value: object.value,
+      prefix: object.prefix,
+    };
+  },
+  toAmino(message: Bech32Address): Bech32AddressAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    obj.prefix = message.prefix;
+    return obj;
+  },
+  fromAminoMsg(object: Bech32AddressAminoMsg): Bech32Address {
+    return Bech32Address.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Bech32AddressProtoMsg): Bech32Address {
+    return Bech32Address.decode(message.value);
+  },
+  toProto(message: Bech32Address): Uint8Array {
+    return Bech32Address.encode(message).finish();
+  },
+  toProtoMsg(message: Bech32Address): Bech32AddressProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.Bech32Address",
+      value: Bech32Address.encode(message).finish(),
+    };
+  },
 };
 function createBaseBase58Address(): Base58Address {
   return {
@@ -514,6 +788,31 @@ export const Base58Address = {
     const message = createBaseBase58Address();
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: Base58AddressAmino): Base58Address {
+    return {
+      value: object.value,
+    };
+  },
+  toAmino(message: Base58Address): Base58AddressAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    return obj;
+  },
+  fromAminoMsg(object: Base58AddressAminoMsg): Base58Address {
+    return Base58Address.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Base58AddressProtoMsg): Base58Address {
+    return Base58Address.decode(message.value);
+  },
+  toProto(message: Base58Address): Uint8Array {
+    return Base58Address.encode(message).finish();
+  },
+  toProtoMsg(message: Base58Address): Base58AddressProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.Base58Address",
+      value: Base58Address.encode(message).finish(),
+    };
   },
 };
 function createBaseHexAddress(): HexAddress {
@@ -574,6 +873,33 @@ export const HexAddress = {
     message.value = object.value ?? "";
     message.prefix = object.prefix ?? "";
     return message;
+  },
+  fromAmino(object: HexAddressAmino): HexAddress {
+    return {
+      value: object.value,
+      prefix: object.prefix,
+    };
+  },
+  toAmino(message: HexAddress): HexAddressAmino {
+    const obj: any = {};
+    obj.value = message.value;
+    obj.prefix = message.prefix;
+    return obj;
+  },
+  fromAminoMsg(object: HexAddressAminoMsg): HexAddress {
+    return HexAddress.fromAmino(object.value);
+  },
+  fromProtoMsg(message: HexAddressProtoMsg): HexAddress {
+    return HexAddress.decode(message.value);
+  },
+  toProto(message: HexAddress): Uint8Array {
+    return HexAddress.encode(message).finish();
+  },
+  toProtoMsg(message: HexAddress): HexAddressProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.HexAddress",
+      value: HexAddress.encode(message).finish(),
+    };
   },
 };
 function createBaseSingleSignature(): SingleSignature {
@@ -642,6 +968,35 @@ export const SingleSignature = {
     message.valueType = object.valueType ?? 0;
     message.signature = object.signature ?? new Uint8Array();
     return message;
+  },
+  fromAmino(object: SingleSignatureAmino): SingleSignature {
+    return {
+      valueType: isSet(object.value_type)
+        ? signatureValueTypeFromJSON(object.value_type)
+        : 0,
+      signature: object.signature,
+    };
+  },
+  toAmino(message: SingleSignature): SingleSignatureAmino {
+    const obj: any = {};
+    obj.value_type = message.valueType;
+    obj.signature = message.signature;
+    return obj;
+  },
+  fromAminoMsg(object: SingleSignatureAminoMsg): SingleSignature {
+    return SingleSignature.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SingleSignatureProtoMsg): SingleSignature {
+    return SingleSignature.decode(message.value);
+  },
+  toProto(message: SingleSignature): Uint8Array {
+    return SingleSignature.encode(message).finish();
+  },
+  toProtoMsg(message: SingleSignature): SingleSignatureProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.SingleSignature",
+      value: SingleSignature.encode(message).finish(),
+    };
   },
 };
 function createBaseCosmosMultiSignature(): CosmosMultiSignature {
@@ -725,5 +1080,44 @@ export const CosmosMultiSignature = {
     message.signatures =
       object.signatures?.map((e) => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: CosmosMultiSignatureAmino): CosmosMultiSignature {
+    return {
+      bitArray: object?.bit_array
+        ? CompactBitArray.fromAmino(object.bit_array)
+        : undefined,
+      signatures: Array.isArray(object?.signatures)
+        ? object.signatures.map((e: any) => Any.fromAmino(e))
+        : [],
+    };
+  },
+  toAmino(message: CosmosMultiSignature): CosmosMultiSignatureAmino {
+    const obj: any = {};
+    obj.bit_array = message.bitArray
+      ? CompactBitArray.toAmino(message.bitArray)
+      : undefined;
+    if (message.signatures) {
+      obj.signatures = message.signatures.map((e) =>
+        e ? Any.toAmino(e) : undefined
+      );
+    } else {
+      obj.signatures = [];
+    }
+    return obj;
+  },
+  fromAminoMsg(object: CosmosMultiSignatureAminoMsg): CosmosMultiSignature {
+    return CosmosMultiSignature.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CosmosMultiSignatureProtoMsg): CosmosMultiSignature {
+    return CosmosMultiSignature.decode(message.value);
+  },
+  toProto(message: CosmosMultiSignature): Uint8Array {
+    return CosmosMultiSignature.encode(message).finish();
+  },
+  toProtoMsg(message: CosmosMultiSignature): CosmosMultiSignatureProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.CosmosMultiSignature",
+      value: CosmosMultiSignature.encode(message).finish(),
+    };
   },
 };

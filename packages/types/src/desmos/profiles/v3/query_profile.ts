@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "desmos.profiles.v3";
@@ -8,9 +8,34 @@ export interface QueryProfileRequest {
   /** Address or DTag of the user to query the profile for */
   user: string;
 }
+export interface QueryProfileRequestProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryProfileRequest";
+  value: Uint8Array;
+}
+/** QueryProfileRequest is the request type for the Query/Profile RPC method. */
+export interface QueryProfileRequestAmino {
+  /** Address or DTag of the user to query the profile for */
+  user: string;
+}
+export interface QueryProfileRequestAminoMsg {
+  type: "/desmos.profiles.v3.QueryProfileRequest";
+  value: QueryProfileRequestAmino;
+}
 /** QueryProfileResponse is the response type for the Query/Profile RPC method. */
 export interface QueryProfileResponse {
   profile?: Any;
+}
+export interface QueryProfileResponseProtoMsg {
+  typeUrl: "/desmos.profiles.v3.QueryProfileResponse";
+  value: Uint8Array;
+}
+/** QueryProfileResponse is the response type for the Query/Profile RPC method. */
+export interface QueryProfileResponseAmino {
+  profile?: AnyAmino;
+}
+export interface QueryProfileResponseAminoMsg {
+  type: "/desmos.profiles.v3.QueryProfileResponse";
+  value: QueryProfileResponseAmino;
 }
 function createBaseQueryProfileRequest(): QueryProfileRequest {
   return {
@@ -60,6 +85,31 @@ export const QueryProfileRequest = {
     const message = createBaseQueryProfileRequest();
     message.user = object.user ?? "";
     return message;
+  },
+  fromAmino(object: QueryProfileRequestAmino): QueryProfileRequest {
+    return {
+      user: object.user,
+    };
+  },
+  toAmino(message: QueryProfileRequest): QueryProfileRequestAmino {
+    const obj: any = {};
+    obj.user = message.user;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProfileRequestAminoMsg): QueryProfileRequest {
+    return QueryProfileRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryProfileRequestProtoMsg): QueryProfileRequest {
+    return QueryProfileRequest.decode(message.value);
+  },
+  toProto(message: QueryProfileRequest): Uint8Array {
+    return QueryProfileRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProfileRequest): QueryProfileRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryProfileRequest",
+      value: QueryProfileRequest.encode(message).finish(),
+    };
   },
 };
 function createBaseQueryProfileResponse(): QueryProfileResponse {
@@ -117,5 +167,30 @@ export const QueryProfileResponse = {
         ? Any.fromPartial(object.profile)
         : undefined;
     return message;
+  },
+  fromAmino(object: QueryProfileResponseAmino): QueryProfileResponse {
+    return {
+      profile: object?.profile ? Any.fromAmino(object.profile) : undefined,
+    };
+  },
+  toAmino(message: QueryProfileResponse): QueryProfileResponseAmino {
+    const obj: any = {};
+    obj.profile = message.profile ? Any.toAmino(message.profile) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProfileResponseAminoMsg): QueryProfileResponse {
+    return QueryProfileResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryProfileResponseProtoMsg): QueryProfileResponse {
+    return QueryProfileResponse.decode(message.value);
+  },
+  toProto(message: QueryProfileResponse): Uint8Array {
+    return QueryProfileResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProfileResponse): QueryProfileResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.profiles.v3.QueryProfileResponse",
+      value: QueryProfileResponse.encode(message).finish(),
+    };
   },
 };

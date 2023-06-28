@@ -21,7 +21,7 @@ export function runConverterTest(
 ) {
   return async () => {
     const converter = converters[data.typeUrl];
-    if (!converter || converter === "not_supported_by_chain") {
+    if (!converter) {
       fail(`Cannot find converter for msg with type url ${data.typeUrl}`);
     }
 

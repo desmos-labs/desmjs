@@ -8,7 +8,7 @@ import {
   ChainConfig,
   Proof,
   SignatureValueType,
-  SingleSignature,
+  SingleSignature
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_chain_links";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 import { MsgLinkChainAccount } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_chain_links";
@@ -19,17 +19,21 @@ import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
 import {
+  assertTxSuccess,
   defaultGasPrice,
+  getAminoSignerAndClient,
+  getDirectSignerAndClient,
+  pollTx,
   TEST_CHAIN_URL,
   testUser1,
-  testUser2,
+  testUser2
 } from "./testutils";
 import {
   getPubKeyBytes,
   getPubKeyRawBytes,
   getSignatureBytes,
   getSignedBytes,
-  SignatureResult,
+  SignatureResult
 } from "./signatureresult";
 import {
   MsgAddReactionEncodeObject,
@@ -41,12 +45,9 @@ import {
   MsgCreateSubspaceEncodeObject,
   MsgLinkChainAccountEncodeObject,
   MsgMultiSendEncodeObject,
-  MsgSaveProfileEncodeObject,
+  MsgSaveProfileEncodeObject
 } from "./encodeobjects";
-import {
-  bech32AddressToAny,
-  singleSignatureToAny,
-} from "./aminomessages/profiles";
+import { bech32AddressToAny, singleSignatureToAny } from "./aminomessages/profiles";
 import { postTargetToAny } from "./aminomessages/reports";
 import { registeredReactionValueToAny } from "./aminomessages/reactions";
 import {
@@ -58,70 +59,12 @@ import {
   MsgCreateReportTypeUrl,
   MsgCreateSubspaceTypeUrl,
   MsgMultiSendTypeUrl,
-  MsgSaveProfileTypeUrl,
+  MsgSaveProfileTypeUrl
 } from "./const";
 import MsgAuthenticateTypeUrl from "./const/desmjs";
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
-
-  /**
-   * Builds a Signer and DesmosClient instance based on a test mnemonic.
-   * The returned signer will sign transactions using the AMINO signing mode.
-   */
-  async function getAminoSignerAndClient(): Promise<[Signer, DesmosClient]> {
-    const signer = await OfflineSignerAdapter.fromMnemonic(
-      SigningMode.AMINO,
-      testUser1.mnemonic
-    );
-    const client = await DesmosClient.connectWithSigner(
-      TEST_CHAIN_URL,
-      signer,
-      {
-        gasPrice: defaultGasPrice,
-        gasAdjustment: 1.5,
-      }
-    );
-    return [signer, client];
-  }
-
-  /**
-   * Builds a Signer and DesmosClient instance based on a test mnemonic.
-   * The returned signer will sign transactions using the DIRECT signing mode.
-   */
-  async function getDirectSignerAndClient(): Promise<[Signer, DesmosClient]> {
-    const signer = await OfflineSignerAdapter.fromMnemonic(
-      SigningMode.DIRECT,
-      testUser1.mnemonic
-    );
-    const client = await DesmosClient.connectWithSigner(
-      TEST_CHAIN_URL,
-      signer,
-      {
-        gasPrice: defaultGasPrice,
-        gasAdjustment: 1.8,
-      }
-    );
-    return [signer, client];
-  }
-
-  async function pollTx(client: DesmosClient, txHash: string): Promise<void> {
-    let timedOut = false;
-    const txPollTimeout = setTimeout(() => {
-      timedOut = true;
-    }, 60000);
-
-    while (!timedOut) {
-      const tx = await client.getTx(txHash);
-      if (tx !== null) {
-        clearTimeout(txPollTimeout);
-        return;
-      }
-      await sleep(3000);
-    }
-
-    throw new Error(`Timed out waiting for tx ${txHash}`);
-  }
 
   describe("SignatureResult utils", () => {
     async function getSignatureResult(): Promise<SignatureResult> {
@@ -813,7 +756,7 @@ describe("DesmosClient", () => {
           },
         } as MsgSaveProfileEncodeObject,
       ]);
-      const response = await client.broadcastTxSync(signResult.txRaw);
+      const response = await client.broadcastTxRawSync(signResult.txRaw);
       await pollTx(client, response.hash);
     });
 
@@ -830,7 +773,8 @@ describe("DesmosClient", () => {
           },
         } as MsgSaveProfileEncodeObject,
       ]);
-      await client.broadcastTxBlock(signResult.txRaw);
+      const response = await client.broadcastTxBlock(signResult.txRaw);
+      assertTxSuccess(response);
     });
   });
 });

@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Any } from "../../../google/protobuf/any";
-import { Params } from "./models";
-import { Timestamp } from "../../../google/protobuf/timestamp";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import { Params, ParamsAmino } from "./models";
+import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import {
   Long,
   isSet,
@@ -26,12 +26,48 @@ export interface MsgCreateReport {
   /** Target of the report */
   target?: Any;
 }
+export interface MsgCreateReportProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgCreateReport";
+  value: Uint8Array;
+}
+/** MsgCreateReport represents the message to be used to create a report */
+export interface MsgCreateReportAmino {
+  /** Id of the subspace for which the report should be stored */
+  subspace_id: string;
+  /** Id of the reason this report has been created for */
+  reasons_ids: number[];
+  /** (optional) Message attached to this report */
+  message: string;
+  /** Address of the reporter */
+  reporter: string;
+  /** Target of the report */
+  target?: AnyAmino;
+}
+export interface MsgCreateReportAminoMsg {
+  type: "/desmos.reports.v1.MsgCreateReport";
+  value: MsgCreateReportAmino;
+}
 /** MsgCreateReportResponse represents the Msg/CreateReport response type */
 export interface MsgCreateReportResponse {
   /** Id of the newly created report */
   reportId: Long;
   /** Time in which the report was created */
   creationDate?: Timestamp;
+}
+export interface MsgCreateReportResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgCreateReportResponse";
+  value: Uint8Array;
+}
+/** MsgCreateReportResponse represents the Msg/CreateReport response type */
+export interface MsgCreateReportResponseAmino {
+  /** Id of the newly created report */
+  report_id: string;
+  /** Time in which the report was created */
+  creation_date?: TimestampAmino;
+}
+export interface MsgCreateReportResponseAminoMsg {
+  type: "/desmos.reports.v1.MsgCreateReportResponse";
+  value: MsgCreateReportResponseAmino;
 }
 /** MsgDeleteReport represents the message to be used when deleting a report */
 export interface MsgDeleteReport {
@@ -42,8 +78,35 @@ export interface MsgDeleteReport {
   /** Address of the user deleting the report */
   signer: string;
 }
+export interface MsgDeleteReportProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgDeleteReport";
+  value: Uint8Array;
+}
+/** MsgDeleteReport represents the message to be used when deleting a report */
+export interface MsgDeleteReportAmino {
+  /** Id of the subspace that contains the report to be deleted */
+  subspace_id: string;
+  /** Id of the report to be deleted */
+  report_id: string;
+  /** Address of the user deleting the report */
+  signer: string;
+}
+export interface MsgDeleteReportAminoMsg {
+  type: "/desmos.reports.v1.MsgDeleteReport";
+  value: MsgDeleteReportAmino;
+}
 /** MsgDeleteReportResponse represents the Msg/DeleteReport response type */
 export interface MsgDeleteReportResponse {}
+export interface MsgDeleteReportResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgDeleteReportResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteReportResponse represents the Msg/DeleteReport response type */
+export interface MsgDeleteReportResponseAmino {}
+export interface MsgDeleteReportResponseAminoMsg {
+  type: "/desmos.reports.v1.MsgDeleteReportResponse";
+  value: MsgDeleteReportResponseAmino;
+}
 /**
  * MsgSupportStandardReason represents the message to be used when wanting to
  * support one reason from the module params
@@ -56,6 +119,26 @@ export interface MsgSupportStandardReason {
   /** Address of the user signing the message */
   signer: string;
 }
+export interface MsgSupportStandardReasonProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgSupportStandardReason";
+  value: Uint8Array;
+}
+/**
+ * MsgSupportStandardReason represents the message to be used when wanting to
+ * support one reason from the module params
+ */
+export interface MsgSupportStandardReasonAmino {
+  /** Id of the subspace for which to support the reason */
+  subspace_id: string;
+  /** Id of the reason that should be supported */
+  standard_reason_id: number;
+  /** Address of the user signing the message */
+  signer: string;
+}
+export interface MsgSupportStandardReasonAminoMsg {
+  type: "/desmos.reports.v1.MsgSupportStandardReason";
+  value: MsgSupportStandardReasonAmino;
+}
 /**
  * MsgSupportStandardReasonResponse represents the Msg/SupportStandardReason
  * response type
@@ -63,6 +146,22 @@ export interface MsgSupportStandardReason {
 export interface MsgSupportStandardReasonResponse {
   /** Id of the newly added reason */
   reasonsIds: number;
+}
+export interface MsgSupportStandardReasonResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgSupportStandardReasonResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgSupportStandardReasonResponse represents the Msg/SupportStandardReason
+ * response type
+ */
+export interface MsgSupportStandardReasonResponseAmino {
+  /** Id of the newly added reason */
+  reasons_ids: number;
+}
+export interface MsgSupportStandardReasonResponseAminoMsg {
+  type: "/desmos.reports.v1.MsgSupportStandardReasonResponse";
+  value: MsgSupportStandardReasonResponseAmino;
 }
 /**
  * MsgAddReason represents the message to be used when adding a new supported
@@ -78,10 +177,45 @@ export interface MsgAddReason {
   /** Address of the user adding the supported reason */
   signer: string;
 }
+export interface MsgAddReasonProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgAddReason";
+  value: Uint8Array;
+}
+/**
+ * MsgAddReason represents the message to be used when adding a new supported
+ * reason
+ */
+export interface MsgAddReasonAmino {
+  /** Id of the subspace for which to add the reason */
+  subspace_id: string;
+  /** Title of the reason */
+  title: string;
+  /** (optional) Extended description of the reason and the cases it applies to */
+  description: string;
+  /** Address of the user adding the supported reason */
+  signer: string;
+}
+export interface MsgAddReasonAminoMsg {
+  type: "/desmos.reports.v1.MsgAddReason";
+  value: MsgAddReasonAmino;
+}
 /** MsgAddReasonResponse represents the Msg/AddReason response type */
 export interface MsgAddReasonResponse {
   /** Id of the newly supported reason */
   reasonId: number;
+}
+export interface MsgAddReasonResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgAddReasonResponse";
+  value: Uint8Array;
+}
+/** MsgAddReasonResponse represents the Msg/AddReason response type */
+export interface MsgAddReasonResponseAmino {
+  /** Id of the newly supported reason */
+  reason_id: number;
+}
+export interface MsgAddReasonResponseAminoMsg {
+  type: "/desmos.reports.v1.MsgAddReasonResponse";
+  value: MsgAddReasonResponseAmino;
 }
 /**
  * MsgRemoveReason represents the message to be used when removing an exiting
@@ -95,8 +229,38 @@ export interface MsgRemoveReason {
   /** Address of the user adding the supported reason */
   signer: string;
 }
+export interface MsgRemoveReasonProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgRemoveReason";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveReason represents the message to be used when removing an exiting
+ * reporting reason
+ */
+export interface MsgRemoveReasonAmino {
+  /** Id of the subspace from which to remove the reason */
+  subspace_id: string;
+  /** Id of the reason to be deleted */
+  reason_id: number;
+  /** Address of the user adding the supported reason */
+  signer: string;
+}
+export interface MsgRemoveReasonAminoMsg {
+  type: "/desmos.reports.v1.MsgRemoveReason";
+  value: MsgRemoveReasonAmino;
+}
 /** MsgRemoveReasonResponse represents the Msg/RemoveReason response type */
 export interface MsgRemoveReasonResponse {}
+export interface MsgRemoveReasonResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgRemoveReasonResponse";
+  value: Uint8Array;
+}
+/** MsgRemoveReasonResponse represents the Msg/RemoveReason response type */
+export interface MsgRemoveReasonResponseAmino {}
+export interface MsgRemoveReasonResponseAminoMsg {
+  type: "/desmos.reports.v1.MsgRemoveReasonResponse";
+  value: MsgRemoveReasonResponseAmino;
+}
 /**
  * MsgUpdateParams is the Msg/UpdateParams request type.
  *
@@ -115,6 +279,32 @@ export interface MsgUpdateParams {
    */
   params?: Params;
 }
+export interface MsgUpdateParamsProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgUpdateParams";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateParams is the Msg/UpdateParams request type.
+ *
+ * Since: Desmos 5.0.0
+ */
+export interface MsgUpdateParamsAmino {
+  /**
+   * authority is the address that controls the module (defaults to x/gov unless
+   * overwritten).
+   */
+  authority: string;
+  /**
+   * params defines the parameters to update.
+   *
+   * NOTE: All parameters must be supplied.
+   */
+  params?: ParamsAmino;
+}
+export interface MsgUpdateParamsAminoMsg {
+  type: "/desmos.reports.v1.MsgUpdateParams";
+  value: MsgUpdateParamsAmino;
+}
 /**
  * MsgUpdateParamsResponse defines the response structure for executing a
  * MsgUpdateParams message.
@@ -122,6 +312,21 @@ export interface MsgUpdateParams {
  * Since: Desmos 5.0.0
  */
 export interface MsgUpdateParamsResponse {}
+export interface MsgUpdateParamsResponseProtoMsg {
+  typeUrl: "/desmos.reports.v1.MsgUpdateParamsResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateParamsResponse defines the response structure for executing a
+ * MsgUpdateParams message.
+ *
+ * Since: Desmos 5.0.0
+ */
+export interface MsgUpdateParamsResponseAmino {}
+export interface MsgUpdateParamsResponseAminoMsg {
+  type: "/desmos.reports.v1.MsgUpdateParamsResponse";
+  value: MsgUpdateParamsResponseAmino;
+}
 function createBaseMsgCreateReport(): MsgCreateReport {
   return {
     subspaceId: Long.UZERO,
@@ -236,6 +441,47 @@ export const MsgCreateReport = {
         : undefined;
     return message;
   },
+  fromAmino(object: MsgCreateReportAmino): MsgCreateReport {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      reasonsIds: Array.isArray(object?.reasons_ids)
+        ? object.reasons_ids.map((e: any) => e)
+        : [],
+      message: object.message,
+      reporter: object.reporter,
+      target: object?.target ? Any.fromAmino(object.target) : undefined,
+    };
+  },
+  toAmino(message: MsgCreateReport): MsgCreateReportAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    if (message.reasonsIds) {
+      obj.reasons_ids = message.reasonsIds.map((e) => e);
+    } else {
+      obj.reasons_ids = [];
+    }
+    obj.message = message.message;
+    obj.reporter = message.reporter;
+    obj.target = message.target ? Any.toAmino(message.target) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateReportAminoMsg): MsgCreateReport {
+    return MsgCreateReport.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateReportProtoMsg): MsgCreateReport {
+    return MsgCreateReport.decode(message.value);
+  },
+  toProto(message: MsgCreateReport): Uint8Array {
+    return MsgCreateReport.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateReport): MsgCreateReportProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgCreateReport",
+      value: MsgCreateReport.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgCreateReportResponse(): MsgCreateReportResponse {
   return {
@@ -310,6 +556,43 @@ export const MsgCreateReportResponse = {
         ? Timestamp.fromPartial(object.creationDate)
         : undefined;
     return message;
+  },
+  fromAmino(object: MsgCreateReportResponseAmino): MsgCreateReportResponse {
+    return {
+      reportId: Long.fromString(object.report_id),
+      creationDate: object?.creation_date
+        ? Timestamp.fromAmino(object.creation_date)
+        : undefined,
+    };
+  },
+  toAmino(message: MsgCreateReportResponse): MsgCreateReportResponseAmino {
+    const obj: any = {};
+    obj.report_id = message.reportId ? message.reportId.toString() : undefined;
+    obj.creation_date = message.creationDate
+      ? Timestamp.toAmino(message.creationDate)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgCreateReportResponseAminoMsg
+  ): MsgCreateReportResponse {
+    return MsgCreateReportResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgCreateReportResponseProtoMsg
+  ): MsgCreateReportResponse {
+    return MsgCreateReportResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateReportResponse): Uint8Array {
+    return MsgCreateReportResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgCreateReportResponse
+  ): MsgCreateReportResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgCreateReportResponse",
+      value: MsgCreateReportResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgDeleteReport(): MsgDeleteReport {
@@ -393,6 +676,37 @@ export const MsgDeleteReport = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgDeleteReportAmino): MsgDeleteReport {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      reportId: Long.fromString(object.report_id),
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgDeleteReport): MsgDeleteReportAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.report_id = message.reportId ? message.reportId.toString() : undefined;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteReportAminoMsg): MsgDeleteReport {
+    return MsgDeleteReport.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteReportProtoMsg): MsgDeleteReport {
+    return MsgDeleteReport.decode(message.value);
+  },
+  toProto(message: MsgDeleteReport): Uint8Array {
+    return MsgDeleteReport.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteReport): MsgDeleteReportProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgDeleteReport",
+      value: MsgDeleteReport.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgDeleteReportResponse(): MsgDeleteReportResponse {
   return {};
@@ -433,6 +747,34 @@ export const MsgDeleteReportResponse = {
   ): MsgDeleteReportResponse {
     const message = createBaseMsgDeleteReportResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteReportResponseAmino): MsgDeleteReportResponse {
+    return {};
+  },
+  toAmino(_: MsgDeleteReportResponse): MsgDeleteReportResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgDeleteReportResponseAminoMsg
+  ): MsgDeleteReportResponse {
+    return MsgDeleteReportResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgDeleteReportResponseProtoMsg
+  ): MsgDeleteReportResponse {
+    return MsgDeleteReportResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteReportResponse): Uint8Array {
+    return MsgDeleteReportResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgDeleteReportResponse
+  ): MsgDeleteReportResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgDeleteReportResponse",
+      value: MsgDeleteReportResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgSupportStandardReason(): MsgSupportStandardReason {
@@ -516,6 +858,43 @@ export const MsgSupportStandardReason = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgSupportStandardReasonAmino): MsgSupportStandardReason {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      standardReasonId: object.standard_reason_id,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgSupportStandardReason): MsgSupportStandardReasonAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.standard_reason_id = message.standardReasonId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgSupportStandardReasonAminoMsg
+  ): MsgSupportStandardReason {
+    return MsgSupportStandardReason.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSupportStandardReasonProtoMsg
+  ): MsgSupportStandardReason {
+    return MsgSupportStandardReason.decode(message.value);
+  },
+  toProto(message: MsgSupportStandardReason): Uint8Array {
+    return MsgSupportStandardReason.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgSupportStandardReason
+  ): MsgSupportStandardReasonProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgSupportStandardReason",
+      value: MsgSupportStandardReason.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgSupportStandardReasonResponse(): MsgSupportStandardReasonResponse {
   return {
@@ -569,6 +948,41 @@ export const MsgSupportStandardReasonResponse = {
     const message = createBaseMsgSupportStandardReasonResponse();
     message.reasonsIds = object.reasonsIds ?? 0;
     return message;
+  },
+  fromAmino(
+    object: MsgSupportStandardReasonResponseAmino
+  ): MsgSupportStandardReasonResponse {
+    return {
+      reasonsIds: object.reasons_ids,
+    };
+  },
+  toAmino(
+    message: MsgSupportStandardReasonResponse
+  ): MsgSupportStandardReasonResponseAmino {
+    const obj: any = {};
+    obj.reasons_ids = message.reasonsIds;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgSupportStandardReasonResponseAminoMsg
+  ): MsgSupportStandardReasonResponse {
+    return MsgSupportStandardReasonResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgSupportStandardReasonResponseProtoMsg
+  ): MsgSupportStandardReasonResponse {
+    return MsgSupportStandardReasonResponse.decode(message.value);
+  },
+  toProto(message: MsgSupportStandardReasonResponse): Uint8Array {
+    return MsgSupportStandardReasonResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgSupportStandardReasonResponse
+  ): MsgSupportStandardReasonResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgSupportStandardReasonResponse",
+      value: MsgSupportStandardReasonResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgAddReason(): MsgAddReason {
@@ -657,6 +1071,39 @@ export const MsgAddReason = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgAddReasonAmino): MsgAddReason {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      title: object.title,
+      description: object.description,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgAddReason): MsgAddReasonAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAddReasonAminoMsg): MsgAddReason {
+    return MsgAddReason.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAddReasonProtoMsg): MsgAddReason {
+    return MsgAddReason.decode(message.value);
+  },
+  toProto(message: MsgAddReason): Uint8Array {
+    return MsgAddReason.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAddReason): MsgAddReasonProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgAddReason",
+      value: MsgAddReason.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgAddReasonResponse(): MsgAddReasonResponse {
   return {
@@ -710,6 +1157,31 @@ export const MsgAddReasonResponse = {
     const message = createBaseMsgAddReasonResponse();
     message.reasonId = object.reasonId ?? 0;
     return message;
+  },
+  fromAmino(object: MsgAddReasonResponseAmino): MsgAddReasonResponse {
+    return {
+      reasonId: object.reason_id,
+    };
+  },
+  toAmino(message: MsgAddReasonResponse): MsgAddReasonResponseAmino {
+    const obj: any = {};
+    obj.reason_id = message.reasonId;
+    return obj;
+  },
+  fromAminoMsg(object: MsgAddReasonResponseAminoMsg): MsgAddReasonResponse {
+    return MsgAddReasonResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgAddReasonResponseProtoMsg): MsgAddReasonResponse {
+    return MsgAddReasonResponse.decode(message.value);
+  },
+  toProto(message: MsgAddReasonResponse): Uint8Array {
+    return MsgAddReasonResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgAddReasonResponse): MsgAddReasonResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgAddReasonResponse",
+      value: MsgAddReasonResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgRemoveReason(): MsgRemoveReason {
@@ -788,6 +1260,37 @@ export const MsgRemoveReason = {
     message.signer = object.signer ?? "";
     return message;
   },
+  fromAmino(object: MsgRemoveReasonAmino): MsgRemoveReason {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      reasonId: object.reason_id,
+      signer: object.signer,
+    };
+  },
+  toAmino(message: MsgRemoveReason): MsgRemoveReasonAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.reason_id = message.reasonId;
+    obj.signer = message.signer;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRemoveReasonAminoMsg): MsgRemoveReason {
+    return MsgRemoveReason.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRemoveReasonProtoMsg): MsgRemoveReason {
+    return MsgRemoveReason.decode(message.value);
+  },
+  toProto(message: MsgRemoveReason): Uint8Array {
+    return MsgRemoveReason.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRemoveReason): MsgRemoveReasonProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgRemoveReason",
+      value: MsgRemoveReason.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgRemoveReasonResponse(): MsgRemoveReasonResponse {
   return {};
@@ -828,6 +1331,34 @@ export const MsgRemoveReasonResponse = {
   ): MsgRemoveReasonResponse {
     const message = createBaseMsgRemoveReasonResponse();
     return message;
+  },
+  fromAmino(_: MsgRemoveReasonResponseAmino): MsgRemoveReasonResponse {
+    return {};
+  },
+  toAmino(_: MsgRemoveReasonResponse): MsgRemoveReasonResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRemoveReasonResponseAminoMsg
+  ): MsgRemoveReasonResponse {
+    return MsgRemoveReasonResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRemoveReasonResponseProtoMsg
+  ): MsgRemoveReasonResponse {
+    return MsgRemoveReasonResponse.decode(message.value);
+  },
+  toProto(message: MsgRemoveReasonResponse): Uint8Array {
+    return MsgRemoveReasonResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRemoveReasonResponse
+  ): MsgRemoveReasonResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgRemoveReasonResponse",
+      value: MsgRemoveReasonResponse.encode(message).finish(),
+    };
   },
 };
 function createBaseMsgUpdateParams(): MsgUpdateParams {
@@ -893,6 +1424,33 @@ export const MsgUpdateParams = {
         : undefined;
     return message;
   },
+  fromAmino(object: MsgUpdateParamsAmino): MsgUpdateParams {
+    return {
+      authority: object.authority,
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+    };
+  },
+  toAmino(message: MsgUpdateParams): MsgUpdateParamsAmino {
+    const obj: any = {};
+    obj.authority = message.authority;
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateParamsAminoMsg): MsgUpdateParams {
+    return MsgUpdateParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateParamsProtoMsg): MsgUpdateParams {
+    return MsgUpdateParams.decode(message.value);
+  },
+  toProto(message: MsgUpdateParams): Uint8Array {
+    return MsgUpdateParams.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateParams): MsgUpdateParamsProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgUpdateParams",
+      value: MsgUpdateParams.encode(message).finish(),
+    };
+  },
 };
 function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
   return {};
@@ -933,6 +1491,34 @@ export const MsgUpdateParamsResponse = {
   ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
+  },
+  fromAmino(_: MsgUpdateParamsResponseAmino): MsgUpdateParamsResponse {
+    return {};
+  },
+  toAmino(_: MsgUpdateParamsResponse): MsgUpdateParamsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgUpdateParamsResponseAminoMsg
+  ): MsgUpdateParamsResponse {
+    return MsgUpdateParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgUpdateParamsResponseProtoMsg
+  ): MsgUpdateParamsResponse {
+    return MsgUpdateParamsResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateParamsResponse): Uint8Array {
+    return MsgUpdateParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgUpdateParamsResponse
+  ): MsgUpdateParamsResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.reports.v1.MsgUpdateParamsResponse",
+      value: MsgUpdateParamsResponse.encode(message).finish(),
+    };
   },
 };
 /** Msg defines the reports Msg service. */
