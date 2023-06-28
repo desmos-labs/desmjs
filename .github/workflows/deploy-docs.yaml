@@ -61,6 +61,8 @@ jobs:
 
       - name: Build docs 🔧
         if: env.GIT_DIFF
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: yarn build-docs
 
       - name: Prepare docs folder 🔧
