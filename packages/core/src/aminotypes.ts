@@ -40,10 +40,7 @@ export interface AminoConverter extends CosmJSAminoConverter {
   ) => EncodeObject;
 }
 
-declare type AminoConverters = Record<
-  string,
-  AminoConverter | "not_supported_by_chain"
->;
+declare type AminoConverters = Record<string, AminoConverter>;
 
 /**
  * Extensions of the {@link CosmJSAminoTypes} that supports
@@ -71,10 +68,6 @@ export class AminoTypes extends CosmJSAminoTypes {
       );
     }
 
-    if (typeof converter === "string") {
-      throw new Error(converter);
-    }
-
     return {
       type: converter.aminoType,
       value: converter.toAmino(value, this),
@@ -83,14 +76,8 @@ export class AminoTypes extends CosmJSAminoTypes {
 
   public override fromAmino({ type, value }: AminoMsg): EncodeObject {
     const matches = Object.entries(this.converters).filter(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ([_typeUrl, converter]) => {
-        if (typeof converter === "object") {
-          return converter.aminoType === type;
-        }
-        return false;
-      }
-    ) as [string, AminoConverter][];
+      ([, converter]) => converter.aminoType === type
+    );
 
     switch (matches.length) {
       case 0: {
@@ -110,8 +97,7 @@ export class AminoTypes extends CosmJSAminoTypes {
       default:
         throw new Error(
           `Multiple types are registered with Amino type identifier '${type}': '${matches
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            .map(([key, _value]) => key)
+            .map(([key]) => key)
             .sort()
             .join("', '")}'. Thus fromAmino cannot be performed.`
         );

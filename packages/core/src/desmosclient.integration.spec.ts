@@ -19,6 +19,7 @@ import { sleep } from "@cosmjs/utils";
 import { DesmosClient } from "./desmosclient";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
 import {
+  assertTxSuccess,
   defaultGasPrice,
   getAminoSignerAndClient,
   getDirectSignerAndClient,
@@ -755,7 +756,7 @@ describe("DesmosClient", () => {
           },
         } as MsgSaveProfileEncodeObject,
       ]);
-      const response = await client.broadcastTxSync(signResult.txRaw);
+      const response = await client.broadcastTxRawSync(signResult.txRaw);
       await pollTx(client, response.hash);
     });
 
@@ -772,7 +773,8 @@ describe("DesmosClient", () => {
           },
         } as MsgSaveProfileEncodeObject,
       ]);
-      await client.broadcastTxBlock(signResult.txRaw);
+      const response = await client.broadcastTxBlock(signResult.txRaw);
+      assertTxSuccess(response);
     });
   });
 });

@@ -709,7 +709,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    * Broadcast transaction to mempool and wait for response.
    * @param tx - The transaction to broadcast.
    */
-  public async broadcastTxSync(tx: TxRaw): Promise<SyncBroadcastResponse> {
+  public async broadcastTxRawSync(tx: TxRaw): Promise<SyncBroadcastResponse> {
     const client = this.forceGetTmClient();
     const response = await client.broadcastTxSync({
       tx: TxRaw.encode(tx).finish(),
@@ -751,7 +751,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       case BroadcastMode.Async:
         return this.broadcastTxAsync(tx);
       case BroadcastMode.Sync:
-        return this.broadcastTxAsync(tx);
+        return this.broadcastTxRawSync(tx);
       case BroadcastMode.Block:
         return this.broadcastTxBlock(tx);
       default:

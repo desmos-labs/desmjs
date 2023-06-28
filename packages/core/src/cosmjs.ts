@@ -22,8 +22,6 @@ export {
   IndexedTx,
   SearchByHeightQuery,
   SearchBySentFromOrToQuery,
-  SearchByTagsQuery,
-  SearchTxFilter,
   SearchTxQuery,
   SequenceResponse,
   StdFee,
