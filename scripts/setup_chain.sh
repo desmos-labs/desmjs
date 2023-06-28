@@ -20,7 +20,7 @@ desmos() {
 	"$SCRIPT_DIR/desmos" --home="$DESMOS_HOME" "$@"
 
   # Wait tx including block
-  sleep 10
+  sleep 2
 }
 
 # Force the script to exit at the first error
