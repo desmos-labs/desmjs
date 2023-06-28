@@ -1,18 +1,49 @@
 import * as fs from "fs";
 import { Project, SyntaxKind } from "ts-morph";
 
+/**
+ * Interface that represents a modification that should be performed to
+ * an object's method.
+ */
 export interface PatchMethod {
+  /**
+   * Name of the object whose method will be changed.
+   */
   readonly object: string;
+  /**
+   * Name of the method that will be changed.
+   */
   readonly methodName: string;
+  /**
+   * New method definition.
+   */
   readonly newDefinition: string;
 }
 
+/**
+ * Interface that represents a modification that should be performed to
+ * an interface's property.
+ */
 export interface PatchInterface {
+  /**
+   * Name of the interface whose property will be changed.
+   */
   readonly name: string;
+  /**
+   * Name of the property that will be changed.
+   */
   readonly prop: string;
+  /**
+   * Name propery deifinition.
+   */
   readonly newDefinition: string;
 }
 
+/**
+ * Function to append some imports to a file.
+ * @param file - File where the imports will be appended.
+ * @param content - The imports to append to the file.
+ */
 export function appendImport(file: string, content: string) {
   // Read the file contents
   const data = fs.readFileSync(file);
@@ -39,7 +70,12 @@ export function appendImport(file: string, content: string) {
   fs.close(fd);
 }
 
-export async function patchObjectMethods(inputFilePath: string, toPatch: PatchMethod[]) {
+/**
+ * Function to modify the methods of one or more objects present in a file.
+ * @param inputFilePath - File that contains the objects to modify.
+ * @param patches - List of {@link PatchMethod} that will be applied to the file.
+ */
+export async function patchObjectMethods(inputFilePath: string, patches: PatchMethod[]) {
   const code = await fs.promises.readFile(inputFilePath, "utf8");
 
   const project = new Project();
@@ -49,7 +85,7 @@ export async function patchObjectMethods(inputFilePath: string, toPatch: PatchMe
     { overwrite: true }
   );
 
-  const patchMap = toPatch.reduce<Record<string, Record<string, PatchMethod>>>((previousValue, currentValue) => {
+  const patchMap = patches.reduce<Record<string, Record<string, PatchMethod>>>((previousValue, currentValue) => {
     const toPatchMethodsMap = previousValue[currentValue.object] ?? {};
     return {
       ...previousValue,
@@ -62,7 +98,7 @@ export async function patchObjectMethods(inputFilePath: string, toPatch: PatchMe
 
 
   const objectLiteralExpressions = sourceFile.getChildrenOfKind(SyntaxKind.VariableStatement);
-  objectLiteralExpressions.forEach((ole, index) => {
+  objectLiteralExpressions.forEach((ole) => {
     const methods = ole.getDescendantsOfKind(SyntaxKind.MethodDeclaration)
     const objectName = ole.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName()
     const methodToPatchInObject = patchMap[objectName];
@@ -82,7 +118,12 @@ export async function patchObjectMethods(inputFilePath: string, toPatch: PatchMe
   await sourceFile.save();
 }
 
-export async function patchInterfaceDefinition(inputFilePath: string, toPatch: PatchInterface[]) {
+/**
+ * Function to modify the definition of one or more interface contained in a file.
+ * @param inputFilePath - File that contains the objects to modify.
+ * @param patches - List of {@link PatchInterface} that will be applied to the file.
+ */
+export async function patchInterfaceDefinition(inputFilePath: string, patches: PatchInterface[]) {
   const code = await fs.promises.readFile(inputFilePath, "utf8");
 
   const project = new Project();
@@ -92,7 +133,7 @@ export async function patchInterfaceDefinition(inputFilePath: string, toPatch: P
     { overwrite: true }
   );
 
-  const patchMap = toPatch.reduce<Record<string, Record<string, PatchInterface>>>((previousValue, currentValue) => {
+  const patchMap = patches.reduce<Record<string, Record<string, PatchInterface>>>((previousValue, currentValue) => {
     const toPatchMethodsMap = previousValue[currentValue.name] ?? {};
     return {
       ...previousValue,

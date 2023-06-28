@@ -6,9 +6,38 @@ import {
 } from "@cosmjs/stargate";
 import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
 
+/**
+ * Interface that represents an object capable of convert
+ * an {@link EncodeObject} from and to {@link AminoMsg}.
+ * NOTE: This is an extension of the {@link CosmJSAminoConverter} from
+ * cosmjs to allow the conversion of objects that have a field with
+ * type {@link Any} like the MsgExec of the x/authz module.
+ */
 export interface AminoConverter extends CosmJSAminoConverter {
-  readonly toAmino: (value: any, aminoTypes?: AminoTypes) => any;
-  readonly fromAmino: (value: any, aminoTypes?: AminoTypes) => any;
+  /**
+   * Converts an {@link EncodeObject} to its amino representation.
+   * @param encodeObject - The object to convert to {@link AminoMsg}.
+   * @param aminoTypes - An object to convert an {@link Any} encoded object
+   * from and to {@link AminoMsg}.
+   * NOTE: This is optional to make the interface backward compatible with
+   * {@link CosmJSAminoConverter}.
+   */
+  readonly toAmino: (
+    encodeObject: EncodeObject,
+    aminoTypes?: AminoTypes
+  ) => AminoMsg;
+  /**
+   * Converts an {@link AminoMsg} to its {@link EncodeObject} representation.
+   * @param aminoMsg - The object to convert to {@link AminoMsg}
+   * @param aminoTypes - An object to convert an {@link Any} encoded object
+   * from and to {@link AminoMsg}.
+   * NOTE: This is optional to make the interface backward compatible with
+   * {@link CosmJSAminoConverter}.
+   */
+  readonly fromAmino: (
+    aminoMsg: AminoMsg,
+    aminoTypes?: AminoTypes
+  ) => EncodeObject;
 }
 
 declare type AminoConverters = Record<
@@ -16,6 +45,11 @@ declare type AminoConverters = Record<
   AminoConverter | "not_supported_by_chain"
 >;
 
+/**
+ * Extensions of the {@link CosmJSAminoTypes} that supports
+ * the amino serialization of messages that have {@link Any} encoed
+ * messages as child like the MsgExec of the x/authz module.
+ */
 export class AminoTypes extends CosmJSAminoTypes {
   private readonly converters;
 
@@ -84,18 +118,24 @@ export class AminoTypes extends CosmJSAminoTypes {
     }
   }
 
-  public fromAny({ typeUrl, value }: Any): AminoMsg {
-    // Convert the Any object to an EncodeObject.
-    const encodeObject: EncodeObject = {
-      typeUrl,
-      value: this.registry.decode({ typeUrl, value }),
-    };
-    // Convert the EncodeObject to Amino.
-    return this.toAmino(encodeObject);
+  /**
+   * Function to convert a {@link Any} encoded object to its
+   * amino representation.
+   * @param anyEncodedObject - The object to convert to amino.
+   */
+  public fromAny(anyEncodedObject: Any): AminoMsg {
+    return this.toAmino({
+      typeUrl: anyEncodedObject.typeUrl,
+      value: this.registry.decode(anyEncodedObject),
+    });
   }
 
-  public toAny({ type, value }: AminoMsg): Any {
-    // Convert the AminoMsg to an EncodeObj
-    return this.registry.encodeAsAny(this.fromAmino({ type, value }));
+  /**
+   * Function to convert a {@link AminoMsg} to its {@link Any}
+   * representation.
+   * @param aminoEncodedObject - The object to convert to {@link Any}.
+   */
+  public toAny(aminoEncodedObject: AminoMsg): Any {
+    return this.registry.encodeAsAny(this.fromAmino(aminoEncodedObject));
   }
 }
