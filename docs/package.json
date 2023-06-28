@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "NODE_OPTIONS=--max_old_space_size=4096 docusaurus start",
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 docusaurus build && echo $DOCS_DOMAIN > build/CNAME",
+    "start": "NODE_OPTIONS=--max_old_space_size=6144 docusaurus start",
+    "build": "NODE_OPTIONS=--max_old_space_size=6144 docusaurus build && echo $DOCS_DOMAIN > build/CNAME",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
