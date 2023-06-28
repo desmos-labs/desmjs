@@ -36,7 +36,7 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 To support the login with different methods, we use the `OpenLoginAdapter` plugin:
 
 ```ts
-import {OpenloginAdapter} from "@web3auth/openlogin-adapter";
+import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 
 const openloginAdapter = new OpenloginAdapter({
   adapterSettings: {
@@ -49,6 +49,9 @@ const openloginAdapter = new OpenloginAdapter({
     }
   }
 });
+
+// Confifure the openlogin adapter on the web3auth instance.
+web3auth.configureAdapter(openloginAdapter);
 ```
 
 ### Building a `DesmosClient` instance using `Web3AuthSigner`
@@ -58,24 +61,35 @@ with the private key obtained from `Web3Auth`. Once you have the `Signer` instan
 a `DesmosClient` instance.
 
 ```ts
-import {SigningMode} from "@desmoslabs/desmjs";
-import {web3AuthSigner} from "@desmoslabs/desmjs-web3auth-web";
+import { PrivateKeySigner, SigningMode } from "@desmoslabs/desmjs";
+import { Web3AuthPrivateKeyProvider } from "@desmoslabs/desmjs-web3auth-web";
 
-const signer = web3AuthSigner(SigningMode.DIRECT, {
-  authMode: "DAPP",
-  clientId: "YOUR WEB3AUTH CLIENT ID",
-  chainConfig: {
-    chainNamespace: "other",
-    blockExplorer: "https://bigdipper.live/desmos",
-    displayName: "Desmos",
-    chainId: "desmos-mainnet",
-    ticker: "DSM",
-    tickerName: "Desmos"
+// Instantiate the Web3AuthPrivateKeyProvider.
+const privateKeyProvider = new Web3AuthPrivateKeyProvider(
+  web3Auth,
+  {
+    modalConfig: {
+      authMode: "DAPP",
+      clientId: "YOUR WEB3AUTH CLIENT ID",
+      chainConfig: {
+        chainNamespace: "other",
+        blockExplorer: "https://bigdipper.live/desmos",
+        displayName: "Desmos",
+        chainId: "desmos-mainnet",
+        ticker: "DSM",
+        tickerName: "Desmos",
+      },
+    },
   }
-}, {
-  adapters: [openloginAdapter],
-});
+);
 
+// Instantiate the signer that uses the Web3AuthPrivateKeyProvider.
+const signer = new PrivateKeySigner(
+  privateKeyProvider,
+  SigningMode.DIRECT
+);
+
+// Connect to the signer.
 await signer.connect();
 
 const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
