@@ -56,7 +56,6 @@ import {
   setupSubspacesExtension,
   setupSupplyExtension,
 } from "./queries";
-import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
 import { SignatureResult } from "./signatureresult";
 import { PublicKey } from "./types/pubkey";
 import {
@@ -67,6 +66,8 @@ import {
   SyncBroadcastResponse,
 } from "./types/responses";
 import { AminoTypes } from "./aminotypes";
+import DesmosRegistry from "./modules/registry";
+import DesmosAminoConverter from "./modules/aminoconverters";
 
 export interface SimulateOptions {
   publicKey?: PublicKey;
@@ -94,7 +95,7 @@ export interface SignTxOptions {
 }
 
 function createDefaultRegistry(): Registry {
-  return new Registry(desmosRegistryTypes);
+  return new Registry(DesmosRegistry);
 }
 
 /**
@@ -223,7 +224,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signer: Signer = new NoOpSigner()
   ) {
     const newAminoTypes = new AminoTypes(
-      createDesmosTypes(),
+      DesmosAminoConverter,
       createDefaultRegistry()
     );
 

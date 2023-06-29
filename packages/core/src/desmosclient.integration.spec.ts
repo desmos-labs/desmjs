@@ -2,7 +2,7 @@
 import { fromBase64, fromUtf8, toHex } from "@cosmjs/encoding";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { MsgSendEncodeObject, SignerData, StdFee } from "@cosmjs/stargate";
-import { AuthInfo, SignDoc, TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
+import { AuthInfo, SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import {
   Bech32Address,
   ChainConfig,
@@ -35,33 +35,32 @@ import {
   getSignedBytes,
   SignatureResult
 } from "./signatureresult";
+import { MsgAuthenticateEncodeObject, MsgAuthenticateTypeUrl } from "./modules/desmjs/v1";
+import {
+  bech32AddressToAny,
+  MsgLinkChainAccountEncodeObject,
+  MsgSaveProfileEncodeObject,
+  MsgSaveProfileTypeUrl,
+  singleSignatureToAny
+} from "./modules/profiles/v3";
+import { MsgCreateSubspaceEncodeObject, MsgCreateSubspaceTypeUrl } from "./modules/subspaces/v3";
+import { MsgCreatePostEncodeObject, MsgCreatePostTypeUrl } from "./modules/posts/v3";
+import { DoNotModify } from "./modules/consts";
+import {
+  MsgAddReasonEncodeObject,
+  MsgAddReasonTypeUrl,
+  MsgCreateReportEncodeObject,
+  MsgCreateReportTypeUrl,
+  postTargetToAny
+} from "./modules/reports/v1";
 import {
   MsgAddReactionEncodeObject,
-  MsgAddReasonEncodeObject,
-  MsgAddRegisteredReactionEncodeObject,
-  MsgAuthenticateEncodeObject,
-  MsgCreatePostEncodeObject,
-  MsgCreateReportEncodeObject,
-  MsgCreateSubspaceEncodeObject,
-  MsgLinkChainAccountEncodeObject,
-  MsgMultiSendEncodeObject,
-  MsgSaveProfileEncodeObject
-} from "./encodeobjects";
-import { bech32AddressToAny, singleSignatureToAny } from "./aminomessages/profiles";
-import { postTargetToAny } from "./aminomessages/reports";
-import { registeredReactionValueToAny } from "./aminomessages/reactions";
-import {
-  DoNotModify,
   MsgAddReactionTypeUrl,
-  MsgAddReasonTypeUrl,
+  MsgAddRegisteredReactionEncodeObject,
   MsgAddRegisteredReactionTypeUrl,
-  MsgCreatePostTypeUrl,
-  MsgCreateReportTypeUrl,
-  MsgCreateSubspaceTypeUrl,
-  MsgMultiSendTypeUrl,
-  MsgSaveProfileTypeUrl
-} from "./const";
-import MsgAuthenticateTypeUrl from "./const/desmjs";
+  registeredReactionValueToAny
+} from "./modules/reactions/v1";
+
 
 describe("DesmosClient", () => {
   jest.setTimeout(60 * 1000);
@@ -245,53 +244,6 @@ describe("DesmosClient", () => {
 
       const result = await profileClient.signTx(profileAddress, [msg]);
       expect(result.txRaw.signatures).toHaveLength(1);
-    });
-
-    it("test MsgMultiSend", async () => {
-      const [signer, client] = await getAminoSignerAndClient();
-      const { address } = (await signer.getAccounts())[0];
-
-      const msg: MsgMultiSendEncodeObject = {
-        typeUrl: MsgMultiSendTypeUrl,
-        value: {
-          inputs: [
-            {
-              address,
-              coins: [
-                {
-                  amount: "2000",
-                  denom: defaultGasPrice.denom,
-                },
-              ],
-            },
-          ],
-          outputs: [
-            {
-              address,
-              coins: [
-                {
-                  amount: "1000",
-                  denom: defaultGasPrice.denom,
-                },
-              ],
-            },
-            {
-              address: "desmos1fjuwp09jt6nq0jxasanze6p968unwtkgzzptad",
-              coins: [
-                {
-                  amount: "1000",
-                  denom: defaultGasPrice.denom,
-                },
-              ],
-            },
-          ],
-        },
-      };
-
-      const signedTx = await client.signTx(address, [msg]);
-      const txBytes = TxRaw.encode(signedTx.txRaw).finish();
-      const broadcastTx = await client.broadcastTx(txBytes);
-      expect(broadcastTx.code).toBe(0);
     });
 
     it("test MsgCreatePost", async () => {
