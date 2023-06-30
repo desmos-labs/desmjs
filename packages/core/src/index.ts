@@ -4,5 +4,9 @@ export * from "./utils";
 export * from "./desmosclient";
 export * from "./signatureresult";
 export * from "./cosmjs";
-export * from "./aminotypes";
+export {
+  AminoTypes,
+  AminoConverter as AminoConverterI,
+  AminoConverters,
+} from "./aminotypes";
 export * from "./modules";
