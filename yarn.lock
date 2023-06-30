@@ -4231,18 +4231,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/amino@npm:0.31.0, @cosmjs/amino@npm:^0.31.0":
-  version: 0.31.0
-  resolution: "@cosmjs/amino@npm:0.31.0"
-  dependencies:
-    "@cosmjs/crypto": ^0.31.0
-    "@cosmjs/encoding": ^0.31.0
-    "@cosmjs/math": ^0.31.0
-    "@cosmjs/utils": ^0.31.0
-  checksum: 5a89404788ac4687bc7066effc411dd0ceb3239ae6c6d54513bd4436ed0ebccf9587c6c25763202dc3946bc0fc941ad9c8eb63c48c1d8211b7cf04a4178a5018
-  languageName: node
-  linkType: hard
-
 "@cosmjs/amino@npm:^0.25.4, @cosmjs/amino@npm:^0.25.6":
   version: 0.25.6
   resolution: "@cosmjs/amino@npm:0.25.6"
@@ -4255,7 +4243,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/cosmwasm-stargate@npm:0.31.0":
+"@cosmjs/amino@npm:^0.31.0":
+  version: 0.31.0
+  resolution: "@cosmjs/amino@npm:0.31.0"
+  dependencies:
+    "@cosmjs/crypto": ^0.31.0
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/math": ^0.31.0
+    "@cosmjs/utils": ^0.31.0
+  checksum: 5a89404788ac4687bc7066effc411dd0ceb3239ae6c6d54513bd4436ed0ebccf9587c6c25763202dc3946bc0fc941ad9c8eb63c48c1d8211b7cf04a4178a5018
+  languageName: node
+  linkType: hard
+
+"@cosmjs/cosmwasm-stargate@npm:^0.31.0":
   version: 0.31.0
   resolution: "@cosmjs/cosmwasm-stargate@npm:0.31.0"
   dependencies:
@@ -4271,21 +4271,6 @@ __metadata:
     long: ^4.0.0
     pako: ^2.0.2
   checksum: 6576c55e4283341962b68c4cc665fbc62d633e0869a7efd9f0a6325777119a316e7268fab70d2c5c25c7013668908f42becfbb3e58a9bf6e963e0169f24ae0e2
-  languageName: node
-  linkType: hard
-
-"@cosmjs/crypto@npm:0.31.0, @cosmjs/crypto@npm:^0.31.0":
-  version: 0.31.0
-  resolution: "@cosmjs/crypto@npm:0.31.0"
-  dependencies:
-    "@cosmjs/encoding": ^0.31.0
-    "@cosmjs/math": ^0.31.0
-    "@cosmjs/utils": ^0.31.0
-    "@noble/hashes": ^1
-    bn.js: ^5.2.0
-    elliptic: ^6.5.4
-    libsodium-wrappers-sumo: ^0.7.11
-  checksum: a89b6ddec70aa407f435e4338f4e51731d589fba81ac71d004657338b3f00f99d4982e3fbbe8e077bd192453748baa1d18f422b456fb6b5a4eec6ab510218e40
   languageName: node
   linkType: hard
 
@@ -4307,14 +4292,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/encoding@npm:0.31.0, @cosmjs/encoding@npm:^0.31.0":
+"@cosmjs/crypto@npm:^0.31.0":
   version: 0.31.0
-  resolution: "@cosmjs/encoding@npm:0.31.0"
+  resolution: "@cosmjs/crypto@npm:0.31.0"
   dependencies:
-    base64-js: ^1.3.0
-    bech32: ^1.1.4
-    readonly-date: ^1.0.0
-  checksum: 82b9a93a76c46e545704a65d66762e63a30e93b97689128a9774fc7f714783a88e166193532cafe3d1be5f9aa7473c5230379fdae381e8772ce49b3ed6382a0e
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/math": ^0.31.0
+    "@cosmjs/utils": ^0.31.0
+    "@noble/hashes": ^1
+    bn.js: ^5.2.0
+    elliptic: ^6.5.4
+    libsodium-wrappers-sumo: ^0.7.11
+  checksum: a89b6ddec70aa407f435e4338f4e51731d589fba81ac71d004657338b3f00f99d4982e3fbbe8e077bd192453748baa1d18f422b456fb6b5a4eec6ab510218e40
   languageName: node
   linkType: hard
 
@@ -4329,6 +4318,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/encoding@npm:^0.31.0":
+  version: 0.31.0
+  resolution: "@cosmjs/encoding@npm:0.31.0"
+  dependencies:
+    base64-js: ^1.3.0
+    bech32: ^1.1.4
+    readonly-date: ^1.0.0
+  checksum: 82b9a93a76c46e545704a65d66762e63a30e93b97689128a9774fc7f714783a88e166193532cafe3d1be5f9aa7473c5230379fdae381e8772ce49b3ed6382a0e
+  languageName: node
+  linkType: hard
+
 "@cosmjs/json-rpc@npm:^0.31.0":
   version: 0.31.0
   resolution: "@cosmjs/json-rpc@npm:0.31.0"
@@ -4336,15 +4336,6 @@ __metadata:
     "@cosmjs/stream": ^0.31.0
     xstream: ^11.14.0
   checksum: d2e5fff7b2b8a3689fb2ed7c1267cafbe2e3526a352555f576a48e7f1d5b9f8424aad244663218095d7b56f3d78b56b6fc573d07ebccf4a504f813923660101d
-  languageName: node
-  linkType: hard
-
-"@cosmjs/math@npm:0.31.0, @cosmjs/math@npm:^0.31.0":
-  version: 0.31.0
-  resolution: "@cosmjs/math@npm:0.31.0"
-  dependencies:
-    bn.js: ^5.2.0
-  checksum: 0917ab11f299d6a1fc372802e832feeaf30296c1e43aa4b911ebbf19c367bfb390e3a43f4aac1992e551275f74e2c91a7639100dfcbf45a10653d023f6e9e8f5
   languageName: node
   linkType: hard
 
@@ -4357,18 +4348,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/proto-signing@npm:0.31.0, @cosmjs/proto-signing@npm:^0.31.0":
+"@cosmjs/math@npm:^0.31.0":
   version: 0.31.0
-  resolution: "@cosmjs/proto-signing@npm:0.31.0"
+  resolution: "@cosmjs/math@npm:0.31.0"
   dependencies:
-    "@cosmjs/amino": ^0.31.0
-    "@cosmjs/crypto": ^0.31.0
-    "@cosmjs/encoding": ^0.31.0
-    "@cosmjs/math": ^0.31.0
-    "@cosmjs/utils": ^0.31.0
-    cosmjs-types: ^0.8.0
-    long: ^4.0.0
-  checksum: b025545671c1248f8e72b92c3d65b89b923e2ddc1dd589116299ab5b05e4fcc611edd5a32f1f2f5725dd167c68b1f64810825f9c95e0685a649453e8add206ec
+    bn.js: ^5.2.0
+  checksum: 0917ab11f299d6a1fc372802e832feeaf30296c1e43aa4b911ebbf19c367bfb390e3a43f4aac1992e551275f74e2c91a7639100dfcbf45a10653d023f6e9e8f5
   languageName: node
   linkType: hard
 
@@ -4380,6 +4365,21 @@ __metadata:
     long: ^4.0.0
     protobufjs: ~6.10.2
   checksum: f0521d1589c3c719a57435811a3d11a2efde2aa8cd106709fafb0c7d09a81adc8359f780840ac0c4c77aa538c7b42cd4351dcacb79a2e4722dff3d32b269d502
+  languageName: node
+  linkType: hard
+
+"@cosmjs/proto-signing@npm:^0.31.0":
+  version: 0.31.0
+  resolution: "@cosmjs/proto-signing@npm:0.31.0"
+  dependencies:
+    "@cosmjs/amino": ^0.31.0
+    "@cosmjs/crypto": ^0.31.0
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/math": ^0.31.0
+    "@cosmjs/utils": ^0.31.0
+    cosmjs-types: ^0.8.0
+    long: ^4.0.0
+  checksum: b025545671c1248f8e72b92c3d65b89b923e2ddc1dd589116299ab5b05e4fcc611edd5a32f1f2f5725dd167c68b1f64810825f9c95e0685a649453e8add206ec
   languageName: node
   linkType: hard
 
@@ -4395,7 +4395,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/stargate@npm:0.31.0, @cosmjs/stargate@npm:^0.31.0":
+"@cosmjs/stargate@npm:^0.31.0":
   version: 0.31.0
   resolution: "@cosmjs/stargate@npm:0.31.0"
   dependencies:
@@ -4424,7 +4424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/tendermint-rpc@npm:0.31.0, @cosmjs/tendermint-rpc@npm:^0.31.0":
+"@cosmjs/tendermint-rpc@npm:^0.31.0":
   version: 0.31.0
   resolution: "@cosmjs/tendermint-rpc@npm:0.31.0"
   dependencies:
@@ -4509,8 +4509,8 @@ __metadata:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
-    "@cosmjs/amino": 0.31.0
-    "@cosmjs/proto-signing": 0.31.0
+    "@cosmjs/amino": ^0.31.0
+    "@cosmjs/proto-signing": ^0.31.0
     "@cosmjs/utils": ^0.31.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.12
@@ -4518,7 +4518,7 @@ __metadata:
     "@types/node": ^20.3.1
     "@types/pino": ^7.0.5
     babel-jest: ^29.5.0
-    cosmjs-types: ^0.5.2
+    cosmjs-types: ^0.8.0
     jest: ^29.5.0
     ts-jest: ^29.1.0
     typescript: ^4.9.5
@@ -4553,10 +4553,10 @@ __metadata:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
-    "@cosmjs/amino": 0.31.0
-    "@cosmjs/encoding": 0.31.0
-    "@cosmjs/proto-signing": 0.31.0
-    "@cosmjs/stargate": 0.31.0
+    "@cosmjs/amino": ^0.31.0
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/proto-signing": ^0.31.0
+    "@cosmjs/stargate": ^0.31.0
     "@cosmjs/utils": ^0.31.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
@@ -4569,7 +4569,7 @@ __metadata:
     "@walletconnect/types": ^2.4.0
     "@walletconnect/utils": ^2.8.3
     babel-jest: ^29.5.0
-    cosmjs-types: ^0.5.2
+    cosmjs-types: ^0.8.0
     dotenv: ^16.3.1
     jest: ^29.5.0
     lokijs: ^1.5.12
@@ -4586,7 +4586,7 @@ __metadata:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
-    "@cosmjs/encoding": 0.31.0
+    "@cosmjs/encoding": ^0.31.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.2
     "@types/keccak": ^3.0.1
@@ -4606,9 +4606,9 @@ __metadata:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
-    "@cosmjs/amino": 0.31.0
-    "@cosmjs/encoding": 0.31.0
-    "@cosmjs/proto-signing": 0.31.0
+    "@cosmjs/amino": ^0.31.0
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/proto-signing": ^0.31.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.2
     "@types/keccak": ^3.0.1
@@ -4616,7 +4616,7 @@ __metadata:
     "@web3auth/base": ^6.1.1
     "@web3auth/modal": ^6.1.1
     "@web3auth/ui": ^6.1.1
-    cosmjs-types: ^0.6.0
+    cosmjs-types: ^0.8.0
     readable-stream: ^4.4.1
     typescript: ^4.9.5
   languageName: unknown
@@ -4629,14 +4629,14 @@ __metadata:
     "@babel/core": ^7.22.5
     "@babel/preset-env": ^7.22.5
     "@babel/preset-typescript": ^7.22.5
-    "@cosmjs/amino": 0.31.0
-    "@cosmjs/cosmwasm-stargate": 0.31.0
-    "@cosmjs/crypto": 0.31.0
-    "@cosmjs/encoding": 0.31.0
-    "@cosmjs/math": 0.31.0
-    "@cosmjs/proto-signing": 0.31.0
-    "@cosmjs/stargate": 0.31.0
-    "@cosmjs/tendermint-rpc": 0.31.0
+    "@cosmjs/amino": ^0.31.0
+    "@cosmjs/cosmwasm-stargate": ^0.31.0
+    "@cosmjs/crypto": ^0.31.0
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/math": ^0.31.0
+    "@cosmjs/proto-signing": ^0.31.0
+    "@cosmjs/stargate": ^0.31.0
+    "@cosmjs/tendermint-rpc": ^0.31.0
     "@cosmjs/utils": ^0.31.0
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.2
@@ -4644,7 +4644,7 @@ __metadata:
     "@types/node": ^20.3.1
     "@types/pino": ^7.0.5
     babel-jest: ^29.5.0
-    cosmjs-types: ^0.5.2
+    cosmjs-types: ^0.8.0
     cosmos-wallet: ^1.2.0
     jest: ^29.5.0
     long: ^4.0.0
@@ -11316,26 +11316,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmjs-types@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "cosmjs-types@npm:0.5.2"
-  dependencies:
-    long: ^4.0.0
-    protobufjs: ~6.11.2
-  checksum: 0362cb2136a17c0f91f0727a55a1f49058bb56665136cf88e4502febf6da59fa2d4ce91ed75bc55907571b9f1cd99546d594002509781b69fe71fe972dbfe4c1
-  languageName: node
-  linkType: hard
-
-"cosmjs-types@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "cosmjs-types@npm:0.6.0"
-  dependencies:
-    long: ^4.0.0
-    protobufjs: ~6.11.2
-  checksum: 06000f10d931bbd23381a2303337f6c203add988d2e4e63307a0b920b2c317197d3e17d4fc535e55e7fdc211e472ee3dff18847bb7f42704d194370a1c6ed581
-  languageName: node
-  linkType: hard
-
 "cosmjs-types@npm:^0.8.0":
   version: 0.8.0
   resolution: "cosmjs-types@npm:0.8.0"
@@ -11885,10 +11865,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "desmjs-monorepo-root@workspace:."
   dependencies:
-    "@cosmjs/cosmwasm-stargate": 0.31.0
-    "@cosmjs/crypto": 0.31.0
-    "@cosmjs/encoding": 0.31.0
-    "@cosmjs/proto-signing": 0.31.0
+    "@cosmjs/cosmwasm-stargate": ^0.31.0
+    "@cosmjs/crypto": ^0.31.0
+    "@cosmjs/encoding": ^0.31.0
+    "@cosmjs/proto-signing": ^0.31.0
     "@cosmjs/utils": ^0.31.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"

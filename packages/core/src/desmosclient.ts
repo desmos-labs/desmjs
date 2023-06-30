@@ -3,12 +3,6 @@ import {
   calculateFee,
   DeliverTxResponse,
   MsgTransferEncodeObject,
-  QueryClient,
-  setupAuthExtension,
-  setupBankExtension,
-  setupIbcExtension,
-  setupStakingExtension,
-  setupTxExtension,
   SignerData,
   SigningStargateClientOptions,
   StdFee,
@@ -35,28 +29,12 @@ import { Coin } from "cosmjs-types/cosmos/base/v1beta1/coin";
 import Long from "long";
 import { Int53, Uint53, Uint64 } from "@cosmjs/math";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
-import {
-  setupWasmExtension,
-  SigningCosmWasmClient,
-} from "@cosmjs/cosmwasm-stargate";
+import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { MsgTransfer } from "cosmjs-types/ibc/applications/transfer/v1/tx";
 import { Height } from "@desmoslabs/desmjs-types/ibc/core/client/v1/client";
 import { assertDefined } from "@cosmjs/utils";
 import { Secp256k1Pubkey } from "@cosmjs/amino/build/pubkeys";
 import { NoOpSigner, Signer, SigningMode } from "./signers";
-import {
-  DesmosQueryClient,
-  profileFromAny,
-  setupAuthzExtension,
-  setupPostsExtension,
-  setupProfilesExtension,
-  setupReactionsExtension,
-  setupRelationshipsExtension,
-  setupReportsExtension,
-  setupSubspacesExtension,
-  setupSupplyExtension,
-} from "./queries";
-import { createDesmosTypes, desmosRegistryTypes } from "./aminomessages";
 import { SignatureResult } from "./signatureresult";
 import { PublicKey } from "./types/pubkey";
 import {
@@ -67,6 +45,10 @@ import {
   SyncBroadcastResponse,
 } from "./types/responses";
 import { AminoTypes } from "./aminotypes";
+import DesmosRegistry from "./modules/registry";
+import DesmosAminoConverter from "./modules/aminoconverters";
+import { buildDesmosQueryClient, DesmosQueryClient } from "./modules/queries";
+import { profileFromAny } from "./modules/profiles/v3";
 
 export interface SimulateOptions {
   publicKey?: PublicKey;
@@ -94,7 +76,7 @@ export interface SignTxOptions {
 }
 
 function createDefaultRegistry(): Registry {
-  return new Registry(desmosRegistryTypes);
+  return new Registry(DesmosRegistry);
 }
 
 /**
@@ -223,7 +205,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     signer: Signer = new NoOpSigner()
   ) {
     const newAminoTypes = new AminoTypes(
-      createDesmosTypes(),
+      DesmosAminoConverter,
       createDefaultRegistry()
     );
 
@@ -271,7 +253,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    */
   public async getProfile(searchAddress: string): Promise<Profile | null> {
     const queryClient = this.forceGetQueryClient();
-    return queryClient.profiles.profile(searchAddress);
+    return queryClient.profilesV3.profile(searchAddress);
   }
 
   /**
@@ -280,25 +262,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    */
   protected override getQueryClient(): DesmosQueryClient | undefined {
     const client = super.getTmClient();
-    return client
-      ? QueryClient.withExtensions(
-          client,
-          setupAuthzExtension,
-          setupAuthExtension,
-          setupBankExtension,
-          setupStakingExtension,
-          setupTxExtension,
-          setupProfilesExtension,
-          setupRelationshipsExtension,
-          setupSubspacesExtension,
-          setupPostsExtension,
-          setupReactionsExtension,
-          setupReportsExtension,
-          setupSupplyExtension,
-          setupWasmExtension,
-          setupIbcExtension
-        )
-      : undefined;
+    return buildDesmosQueryClient(client);
   }
 
   /**
