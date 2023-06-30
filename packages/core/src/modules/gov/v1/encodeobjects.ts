@@ -12,7 +12,7 @@ import {
   MsgSubmitProposalTypeUrl,
   MsgVoteTypeUrl,
   MsgVoteWeightedTypeUrl,
-} from "./const";
+} from "./consts";
 
 export interface MsgSubmitProposalEncodeObject extends EncodeObject {
   typeUrl: typeof MsgSubmitProposalTypeUrl;

@@ -2,10 +2,13 @@ import { fromHex } from "@cosmjs/encoding";
 import { AccountData, Algo, StdFee } from "@cosmjs/amino";
 import Long from "long";
 import { SignClientTypes } from "@walletconnect/types";
-import { createDesmosTypes, desmosRegistryTypes } from "@desmoslabs/desmjs";
+import {
+  AminoTypes,
+  DesmosAminoConverter,
+  DesmosRegistry,
+} from "@desmoslabs/desmjs";
 import { EncodeObject, Registry } from "@cosmjs/proto-signing";
 import { AuthInfo, TxBody } from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import { AminoTypes } from "@cosmjs/stargate";
 import {
   CosmosRPCMethods,
   SignAminoDecodedRpcRequestParams,
@@ -232,7 +235,7 @@ export function decodeDirectSignRequest(
     return DecodeResult.error(paramsDecodeResult.error);
   }
 
-  const registry = new Registry(desmosRegistryTypes);
+  const registry = new Registry(DesmosRegistry);
   const { signDoc, signerAddress } = paramsDecodeResult.value;
   let txBody: TxBody;
   let authInfo: AuthInfo;
@@ -315,7 +318,10 @@ export function decodeAminoSignRequest(
   }
 
   const { signDoc, signerAddress } = paramsDecodeResult.value;
-  const aminoConverter = new AminoTypes(createDesmosTypes());
+  const aminoConverter = new AminoTypes(
+    DesmosAminoConverter,
+    new Registry(DesmosRegistry)
+  );
   const typesWithDecodeResult: [string, EncodeObject | undefined][] =
     signDoc.msgs.map((msg) => {
       try {

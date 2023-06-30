@@ -15,32 +15,26 @@ import { Any } from "@desmoslabs/desmjs-types/google/protobuf/any";
  */
 export interface AminoConverter extends CosmJSAminoConverter {
   /**
-   * Converts an {@link EncodeObject} to its amino representation.
-   * @param encodeObject - The object to convert to {@link AminoMsg}.
+   * Converts an object to its amino representation.
+   * @param value - The object to convert to {@link AminoMsg}.
    * @param aminoTypes - An object to convert an {@link Any} encoded object
    * from and to {@link AminoMsg}.
    * NOTE: This is optional to make the interface backward compatible with
    * {@link CosmJSAminoConverter}.
    */
-  readonly toAmino: (
-    encodeObject: EncodeObject,
-    aminoTypes?: AminoTypes
-  ) => AminoMsg;
+  readonly toAmino: (value: any, aminoTypes?: AminoTypes) => any;
   /**
-   * Converts an {@link AminoMsg} to its {@link EncodeObject} representation.
-   * @param aminoMsg - The object to convert to {@link AminoMsg}
+   * Converts an amino encoded object to its protobuf representation.
+   * @param value - The object to convert.
    * @param aminoTypes - An object to convert an {@link Any} encoded object
    * from and to {@link AminoMsg}.
    * NOTE: This is optional to make the interface backward compatible with
    * {@link CosmJSAminoConverter}.
    */
-  readonly fromAmino: (
-    aminoMsg: AminoMsg,
-    aminoTypes?: AminoTypes
-  ) => EncodeObject;
+  readonly fromAmino: (value: any, aminoTypes?: AminoTypes) => any;
 }
 
-declare type AminoConverters = Record<string, AminoConverter>;
+export type AminoConverters = Record<string, AminoConverter>;
 
 /**
  * Extensions of the {@link CosmJSAminoTypes} that supports
@@ -110,9 +104,11 @@ export class AminoTypes extends CosmJSAminoTypes {
    * @param anyEncodedObject - The object to convert to amino.
    */
   public fromAny(anyEncodedObject: Any): AminoMsg {
+    const decoded = this.registry.decode(anyEncodedObject);
+
     return this.toAmino({
       typeUrl: anyEncodedObject.typeUrl,
-      value: this.registry.decode(anyEncodedObject),
+      value: decoded,
     });
   }
 

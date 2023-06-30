@@ -1,10 +1,6 @@
 import { SignClientTypes } from "@walletconnect/types";
 import { AuthInfo, TxBody } from "cosmjs-types/cosmos/tx/v1beta1/tx";
-import {
-  AminoMsgSaveProfile,
-  MsgSaveProfileEncodeObject,
-  MsgSaveProfileTypeUrl,
-} from "@desmoslabs/desmjs";
+import { Profiles } from "@desmoslabs/desmjs";
 import { MsgSaveProfile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
 import { AminoMsg, Coin, StdFee } from "@cosmjs/amino";
 import Long from "long";
@@ -110,7 +106,7 @@ describe("WalletConnect decode", () => {
       CosmosRPCMethods.SignDirect,
       mockDirectRequestArguments([
         {
-          typeUrl: MsgSaveProfileTypeUrl,
+          typeUrl: Profiles.v3.MsgSaveProfileTypeUrl,
           value: MsgSaveProfile.encode(msgSaveProfile).finish(),
         },
       ])
@@ -126,14 +122,14 @@ describe("WalletConnect decode", () => {
     expect(decodedValue.fee).toEqual(TEST_STD_FEE);
     expect(decodedValue.msgs).toEqual([
       {
-        typeUrl: MsgSaveProfileTypeUrl,
+        typeUrl: Profiles.v3.MsgSaveProfileTypeUrl,
         value: msgSaveProfile,
-      } as MsgSaveProfileEncodeObject,
+      } as Profiles.v3.MsgSaveProfileEncodeObject,
     ]);
   });
 
   it("decode cosmos_signAmino successfully", () => {
-    const msgSaveProfile: AminoMsgSaveProfile = {
+    const msgSaveProfile: Profiles.v3.AminoMsgSaveProfile = {
       type: "desmos/MsgSaveProfile",
       value: {
         bio: "test-bio",
@@ -160,7 +156,7 @@ describe("WalletConnect decode", () => {
     expect(decodedValue.fee).toEqual(TEST_STD_FEE);
     expect(decodedValue.msgs).toEqual([
       {
-        typeUrl: MsgSaveProfileTypeUrl,
+        typeUrl: Profiles.v3.MsgSaveProfileTypeUrl,
         value: {
           bio: msgSaveProfile.value.bio,
           dtag: msgSaveProfile.value.dtag,
@@ -169,7 +165,7 @@ describe("WalletConnect decode", () => {
           coverPicture: msgSaveProfile.value.cover_picture,
           profilePicture: msgSaveProfile.value.profile_picture,
         },
-      } as MsgSaveProfileEncodeObject,
+      } as Profiles.v3.MsgSaveProfileEncodeObject,
     ]);
   });
 });

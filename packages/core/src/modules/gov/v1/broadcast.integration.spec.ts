@@ -16,27 +16,16 @@ import {
   MsgSubmitProposalTypeUrl,
   MsgVoteTypeUrl,
   MsgVoteWeightedTypeUrl,
-} from "./const";
-import {
-  assertTxSuccess,
-  getAminoSignerAndClient,
-  getDirectSignerAndClient,
-  testUser1,
-} from "../../../testutils";
-import { MsgSendTypeUrl } from "../../../const";
-import { TextProposalTypeUrl } from "../v1beta1/const";
-
-interface TestCase {
-  readonly name?: string;
-  readonly typeUrl: string;
-  readonly message: any;
-  readonly signer: string;
-}
+} from "./consts";
+import { testUser1 } from "../../../testutils";
+import { MsgSendTypeUrl } from "../../bank/v1beta1";
+import { TextProposalTypeUrl } from "../v1beta1";
+import { BroadcastTest, runBroadcastTest } from "../../../utils/testutils";
 
 describe("Broadcast /cosmos.gov.v1 messages", () => {
   jest.setTimeout(60 * 1000);
 
-  const testCases: TestCase[] = [
+  const testCases: BroadcastTest[] = [
     {
       typeUrl: MsgVoteTypeUrl,
       message: MsgVote.fromPartial({
@@ -137,32 +126,5 @@ describe("Broadcast /cosmos.gov.v1 messages", () => {
     },
   ];
 
-  testCases.forEach((t) => {
-    it(t.name ?? t.typeUrl, async () => {
-      const [, directClient] = await getDirectSignerAndClient();
-      const [, aminoClient] = await getAminoSignerAndClient();
-
-      const directSignResult = await directClient.signTx(t.signer, [
-        {
-          typeUrl: t.typeUrl,
-          value: t.message,
-        },
-      ]);
-      const directResult = await directClient.broadcastTxBlock(
-        directSignResult.txRaw
-      );
-      assertTxSuccess(directResult);
-
-      const aminoSignResult = await aminoClient.signTx(t.signer, [
-        {
-          typeUrl: t.typeUrl,
-          value: t.message,
-        },
-      ]);
-      const aminoResult = await aminoClient.broadcastTxBlock(
-        aminoSignResult.txRaw
-      );
-      assertTxSuccess(aminoResult);
-    });
-  });
+  testCases.forEach(runBroadcastTest);
 });
