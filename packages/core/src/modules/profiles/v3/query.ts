@@ -13,17 +13,17 @@ import {
   QueryDefaultExternalAddressesResponse,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_chain_links";
 import {
-  QueryApplicationLinksResponse,
   QueryApplicationLinkByClientIDResponse,
   QueryApplicationLinkOwnersResponse,
+  QueryApplicationLinksResponse,
 } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_app_links";
 import { QueryClientImpl } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query";
 import { Profile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/models_profile";
 import { assert } from "@cosmjs/utils";
 import { QueryParamsResponse } from "@desmoslabs/desmjs-types/desmos/profiles/v3/query_params";
 
-export interface ProfilesExtension {
-  readonly profiles: {
+export interface ProfilesV3Extension {
+  readonly profilesV3: {
     /**
      * Queries the profile of a specific user given their DTag or address.
      * If the queried user does not have a profile, the returned response will
@@ -98,14 +98,16 @@ export interface ProfilesExtension {
   };
 }
 
-export function setupProfilesExtension(base: QueryClient): ProfilesExtension {
+export function setupProfilesV3Extension(
+  base: QueryClient
+): ProfilesV3Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
   // This cannot be used for proof verification
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    profiles: {
+    profilesV3: {
       profile: async (user: string) => {
         try {
           const res = await queryService.Profile({ user });

@@ -5,5 +5,6 @@ export interface AminoSendAuthorization extends AminoMsg {
   readonly type: typeof SendAuthorizationAminoType;
   readonly value: {
     readonly spend_limit: Coin[];
+    readonly allow_list?: string[];
   };
 }

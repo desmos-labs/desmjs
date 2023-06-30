@@ -1,18 +1,18 @@
 import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
 import {
+  QueryClientImpl,
   QuerySubspaceResponse,
   QuerySubspacesResponse,
   QueryUserGroupMembersResponse,
   QueryUserGroupResponse,
   QueryUserGroupsResponse,
-  QueryClientImpl,
   QueryUserPermissionsResponse,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/query";
 import Long from "long";
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 
-export interface SubspacesExtension {
-  readonly subspaces: {
+export interface SubspacesV3Extension {
+  readonly subspacesV3: {
     /**
      * Queries all the subspaces inside Desmos
      */
@@ -62,14 +62,16 @@ export interface SubspacesExtension {
   };
 }
 
-export function setupSubspacesExtension(base: QueryClient): SubspacesExtension {
+export function setupSubspacesV3Extension(
+  base: QueryClient
+): SubspacesV3Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
   // This cannot be used for proof verification
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    subspaces: {
+    subspacesV3: {
       subspaces: async (pagination?: PageRequest) =>
         queryService.Subspaces({
           pagination,

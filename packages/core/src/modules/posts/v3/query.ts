@@ -1,18 +1,18 @@
 import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
 import { Long } from "long";
 import {
+  QueryClientImpl,
   QueryPollAnswersResponse,
   QueryPostAttachmentsResponse,
   QuerySectionPostsResponse,
   QuerySubspacePostsResponse,
-  QueryClientImpl,
 } from "@desmoslabs/desmjs-types/desmos/posts/v3/query";
 import { Params, Post } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 
 export interface PostsExtension {
-  readonly posts: {
+  readonly postsV3: {
     /**
      * Queries the posts for the given subspace.
      */
@@ -70,7 +70,7 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    posts: {
+    postsV3: {
       subspacePosts: async (subspaceId: Long, pagination?: PageRequest) =>
         queryService.SubspacePosts({
           subspaceId,

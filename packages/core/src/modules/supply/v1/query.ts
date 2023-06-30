@@ -6,8 +6,8 @@ import {
 } from "@desmoslabs/desmjs-types/desmos/supply/v1/query";
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 
-export interface SupplyExtension {
-  readonly supply: {
+export interface SupplyV1Extension {
+  readonly supplyV1: {
     /**
      * Queries the circulating supply for the given denom, with the optional divider exponent.
      */
@@ -26,14 +26,14 @@ export interface SupplyExtension {
   };
 }
 
-export function setupSupplyExtension(base: QueryClient): SupplyExtension {
+export function setupSupplyV1Extension(base: QueryClient): SupplyV1Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
   // This cannot be used for proof verification
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    supply: {
+    supplyV1: {
       circulatingSupply: async (denom: string, dividerExponent?: Long) =>
         queryService.Circulating({
           denom,

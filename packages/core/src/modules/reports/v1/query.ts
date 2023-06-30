@@ -14,8 +14,8 @@ import {
 import { Any } from "cosmjs-types/google/protobuf/any";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 
-export interface ReportsExtension {
-  readonly reports: {
+export interface ReportsV1Extension {
+  readonly reportsV1: {
     /**
      * Queries the reports with an optional target and reporter.
      */
@@ -47,14 +47,14 @@ export interface ReportsExtension {
   };
 }
 
-export function setupReportsExtension(base: QueryClient): ReportsExtension {
+export function setupReportsV1Extension(base: QueryClient): ReportsV1Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
   // This cannot be used for proof verification
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    reports: {
+    reportsV1: {
       reports: async (
         subspaceId: Long,
         target?: Any,

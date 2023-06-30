@@ -6,7 +6,7 @@ import { Grant } from "cosmjs-types/cosmos/authz/v1beta1/authz";
 /**
  * Represents the Authz extension to be used on QueryClient instances.
  */
-export interface AuthzExtension {
+export interface AuthzV1Beta1Extension {
   readonly authz: {
     readonly grants: (
       granter: string,
@@ -21,7 +21,9 @@ export interface AuthzExtension {
  * Setups the Authz extension on the given base QueryClient.
  * @param base
  */
-export function setupAuthzExtension(base: QueryClient): AuthzExtension {
+export function setupAuthzV1Beta1Extension(
+  base: QueryClient
+): AuthzV1Beta1Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
   // This cannot be used for proof verification

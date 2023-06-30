@@ -7,8 +7,8 @@ import {
 import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 import Long from "long";
 
-export interface RelationshipsExtension {
-  readonly relationships: {
+export interface RelationshipsV1Extension {
+  readonly relationshipsV1: {
     /**
      * Queries the relationships for the user having the given
      * address.
@@ -31,16 +31,16 @@ export interface RelationshipsExtension {
   };
 }
 
-export function setupRelationshipsExtension(
+export function setupRelationshipsV1Extension(
   base: QueryClient
-): RelationshipsExtension {
+): RelationshipsV1Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
   // This cannot be used for proof verification
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    relationships: {
+    relationshipsV1: {
       relationships: async (
         subspaceId: Long,
         user?: string,

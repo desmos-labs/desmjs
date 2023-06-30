@@ -14,7 +14,7 @@ import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 import { assertDefinedAndNotNull } from "@cosmjs/utils";
 
 export interface ReactionsExtension {
-  reactions: {
+  reactionsV1: {
     /**
      * Queries the reactions for the given post.
      */
@@ -66,7 +66,7 @@ export function setupReactionsExtension(base: QueryClient): ReactionsExtension {
   const queryService = new QueryClientImpl(rpc);
 
   return {
-    reactions: {
+    reactionsV1: {
       reactions: async (
         subspaceId: Long,
         postId: Long,
