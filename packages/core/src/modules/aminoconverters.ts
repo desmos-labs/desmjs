@@ -20,7 +20,7 @@ import { AminoConverter as ReportsV1AminoConverter } from "./reports/v1";
 import { AminoConverter as StakingV1Beta1AminoConverter } from "./staking/v1beta1";
 import { AminoConverter as SubspacesV3AminoConverter } from "./subspaces/v3";
 
-const DesmosAminoConverter = {
+export const DesmosAminoConverter = {
   ...createBankAminoConverters(),
   ...createDistributionAminoConverters(),
   ...createStakingAminoConverters(),

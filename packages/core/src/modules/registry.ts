@@ -15,7 +15,7 @@ import { registry as ReportsV1Registry } from "./reports/v1";
 import { registry as StakingV1Beta1Registry } from "./staking/v1beta1";
 import { registry as SubspacesV3Registry } from "./subspaces/v3";
 
-const DesmosRegistry: ReadonlyArray<[string, GeneratedType]> = [
+export const DesmosRegistry: ReadonlyArray<[string, GeneratedType]> = [
   ...defaultRegistryTypes,
   ...wasmTypes,
 
