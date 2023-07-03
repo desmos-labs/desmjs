@@ -4567,7 +4567,7 @@ __metadata:
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.8.6
     "@walletconnect/types": ^2.4.0
-    "@walletconnect/utils": ^2.8.3
+    "@walletconnect/utils": ^2.8.6
     babel-jest: ^29.5.0
     cosmjs-types: ^0.8.0
     dotenv: ^16.3.1
@@ -8469,20 +8469,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/types@npm:2.8.3":
-  version: 2.8.3
-  resolution: "@walletconnect/types@npm:2.8.3"
-  dependencies:
-    "@walletconnect/events": ^1.0.1
-    "@walletconnect/heartbeat": 1.2.1
-    "@walletconnect/jsonrpc-types": 1.0.3
-    "@walletconnect/keyvaluestorage": ^1.0.2
-    "@walletconnect/logger": ^2.0.1
-    events: ^3.3.0
-  checksum: 6bd9c18ea321d2486643e949d03312065a26dcc0b16dc39518f20408c827bf870e1fa00c9494e26d7a9b30f5b59a38f96f1121ab7fce3ee4f5be1748474330d4
-  languageName: node
-  linkType: hard
-
 "@walletconnect/types@npm:2.8.5":
   version: 2.8.5
   resolution: "@walletconnect/types@npm:2.8.5"
@@ -8532,7 +8518,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/utils@npm:2.8.6":
+"@walletconnect/utils@npm:2.8.6, @walletconnect/utils@npm:^2.8.6":
   version: 2.8.6
   resolution: "@walletconnect/utils@npm:2.8.6"
   dependencies:
@@ -8573,28 +8559,6 @@ __metadata:
     query-string: 7.1.3
     uint8arrays: ^3.1.0
   checksum: 64c861e96886cf75d0881254ec3f049d196bf934c24a845f5fa7168f29f746ed57ae30fcdd3fb70f81215f4ac8fdac654edc6dbe7d6bc0226bcb050b30f2219c
-  languageName: node
-  linkType: hard
-
-"@walletconnect/utils@npm:^2.8.3":
-  version: 2.8.3
-  resolution: "@walletconnect/utils@npm:2.8.3"
-  dependencies:
-    "@stablelib/chacha20poly1305": 1.0.1
-    "@stablelib/hkdf": 1.0.1
-    "@stablelib/random": ^1.0.2
-    "@stablelib/sha256": 1.0.1
-    "@stablelib/x25519": ^1.0.3
-    "@walletconnect/relay-api": ^1.0.9
-    "@walletconnect/safe-json": ^1.0.2
-    "@walletconnect/time": ^1.0.2
-    "@walletconnect/types": 2.8.3
-    "@walletconnect/window-getters": ^1.0.1
-    "@walletconnect/window-metadata": ^1.0.1
-    detect-browser: 5.3.0
-    query-string: 7.1.3
-    uint8arrays: ^3.1.0
-  checksum: a3d64f65d0deaa7f659ff138f9152f9e1ffdc0175800b1ae930a746b8c0a1139a534a54aea75effbe0b70b83ff77c27f6090c56ffa125798bada5a40dd97d4ff
   languageName: node
   linkType: hard
 
