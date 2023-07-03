@@ -41,7 +41,7 @@
     "@types/keccak": "^3.0.1",
     "@types/react-native": "^0.72.2",
     "@types/readable-stream": "^2.3.15",
-    "readable-stream": "^4.4.1",
+    "readable-stream": "^4.4.2",
     "typescript": "^4.9.5"
   }
 }
