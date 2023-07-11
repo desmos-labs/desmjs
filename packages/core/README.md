@@ -29,3 +29,4 @@ Represents an abstract signer able to sign a transaction either using `SIGN_MODE
 |     `4.6.x`     |           `v4.6.x`            |
 |     `4.7.x`     |      `v4.7.x`, `v4.8.1`       |
 |     `5.0.x`     |           `v5.0.x`            |
+|     `5.1.x`     |      `v5.1.x`, `v5.2.x`       |

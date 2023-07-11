@@ -1,22 +1,38 @@
+## Version 5.1.0
+### Features
+- Add support to governance v1
+- Reorganized modules export to better support multiple version of a module
+
+### Chore
+- Dropped support to WalletConnect v1
+
 ## Version 5.0.1
+### Bug fixes
 - Fixed authz expiration amino conversion thanks to @williamchong
 - Fixed x/gov messages type url
 
 ## Version 5.0.0
+### Features
 - Updated Desmos to `5.0.0`
 - Added the ability to specify a `gasAdjustment` value when creating a `DesmosClient` instance
 
 ## Version 4.7.10
+### Bug fixes
 - Fix `StakeAuthorizationTypeUrl`
 
 ## Version 4.7.9
+### Features
 - Add methods to broadcast a transaction in async, sync or block mode
 
 ## Version 4.7.8
-- Fixed the Amino to Protobuf converter of `MsgLinkChainAccount`
+### Features
 - Replaced `ts-proto` with `telescope` to generate the messages code from Profo files
 
+### Bug fixes
+- Fixed the Amino to Protobuf converter of `MsgLinkChainAccount`
+
 ## Version 4.7.7
+### Features
 - Allow to simulate a tx with a `DesmosClient` without signer
 - Improve `DesmosClient#signTx` method signature
 
