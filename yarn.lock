@@ -3962,6 +3962,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.22.5":
+  version: 7.22.6
+  resolution: "@babel/runtime@npm:7.22.6"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: e585338287c4514a713babf4fdb8fc2a67adcebab3e7723a739fc62c79cfda875b314c90fd25f827afb150d781af97bc16c85bfdbfa2889f06053879a1ddb597
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.8.4":
   version: 7.20.1
   resolution: "@babel/runtime@npm:7.20.1"
@@ -4707,7 +4716,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^6.1.3
     "@web3auth/modal": ^6.1.1
-    "@web3auth/ui": ^6.1.1
+    "@web3auth/ui": ^6.1.3
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -9092,6 +9101,31 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: ea69fbccd33794b834948777a6398954c76b18b01f5b5a75f1ff8484365e67bd263ab121ab536f3bd7132115bb3f06a078db5c19c98bd2f0a11d16238dac3e8c
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^6.1.3":
+  version: 6.1.3
+  resolution: "@web3auth/ui@npm:6.1.3"
+  dependencies:
+    "@toruslabs/http-helpers": ^4.0.0
+    "@toruslabs/openlogin": ^4.7.0
+    "@toruslabs/openlogin-jrpc": ^4.7.0
+    "@toruslabs/openlogin-utils": ^4.7.0
+    "@web3auth/base": ^6.1.3
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^23.2.7
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^13.0.1
+    react-qrcode-logo: ^2.9.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: b669a98a12b0f80552d9f3e423761aad645299929237c0c3e4568d3dee0d6cf3020f92eb49401ca62a3b36124d441ff0800f30219cf60b3400a9245f7b8db673
   languageName: node
   linkType: hard
 
@@ -14727,6 +14761,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next@npm:^23.2.7":
+  version: 23.2.11
+  resolution: "i18next@npm:23.2.11"
+  dependencies:
+    "@babel/runtime": ^7.22.5
+  checksum: ce4d16db9404a2a1fd929029ff0106dd92c7d719b6157e4551516ef2ab2917688a5ad712326f5869829614b01601839aa2900f40296b6c4a1efa9b802491477f
+  languageName: node
+  linkType: hard
+
 "iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.17, iconv-lite@npm:^0.4.24":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
@@ -19821,6 +19864,24 @@ __metadata:
     react-native:
       optional: true
   checksum: fe3f360e5184bc63861734e94bf625a09b9ec0d28fab41779a68758af258fd1737dde25ff7a88ddb66c1571a3e3de5b3403825a91b4949bf9832a00615acb87a
+  languageName: node
+  linkType: hard
+
+"react-i18next@npm:^13.0.1":
+  version: 13.0.2
+  resolution: "react-i18next@npm:13.0.2"
+  dependencies:
+    "@babel/runtime": ^7.22.5
+    html-parse-stringify: ^3.0.1
+  peerDependencies:
+    i18next: ">= 23.2.3"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: ab8226939f3681efb5a8628f938d90b3311336e69ca9aaf1ea54aad6fac3395516736971a3484234455f3831ecae8555f68c32fa1cd4d38b94ff69769da2b677
   languageName: node
   linkType: hard
 
