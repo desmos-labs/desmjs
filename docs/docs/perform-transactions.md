@@ -111,112 +111,125 @@ Here is the list of messages that can be sent divided by module:
 
 ### Profiles
 
-* [MsgSaveProfileEncodeObject](api/interfaces/desmoslabs_desmjs.MsgSaveProfileEncodeObject.md): 
+#### v3
+
+* [MsgSaveProfileEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgSaveProfileEncodeObject.md): 
 Creates/updates the user's Desmos profile.
-* [MsgDeleteProfileEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeleteProfileEncodeObject.md): 
+* [MsgDeleteProfileEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgDeleteProfileEncodeObject.md): 
 Deletes the user's Desmos profile.
-* [MsgLinkApplicationEncodeObject](api/interfaces/desmoslabs_desmjs.MsgLinkApplicationEncodeObject.md): 
+* [MsgLinkApplicationEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgLinkApplicationEncodeObject.md): 
 Link a centralized application to the user's Desmos profile
-* [MsgUnlinkApplicationEncodeObject](api/interfaces/desmoslabs_desmjs.MsgUnlinkApplicationEncodeObject.md): 
+* [MsgUnlinkApplicationEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgUnlinkApplicationEncodeObject.md): 
 Unlink a centralized application from the user's Desmos profile
-* [MsgLinkChainAccountEncodeObject](api/interfaces/desmoslabs_desmjs.MsgLinkChainAccountEncodeObject.md): 
+* [MsgLinkChainAccountEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgLinkChainAccountEncodeObject.md): 
 Link an external blockchain address to the user's Desmos profile
-* [MsgUnlinkChainAccountEncodeObject](api/interfaces/desmoslabs_desmjs.MsgUnlinkChainAccountEncodeObject.md):
+* [MsgUnlinkChainAccountEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgUnlinkChainAccountEncodeObject.md):
 Unlink an external blockchain address from the user's Desmos profile
-* [MsgRequestDTagTransferEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRequestDTagTransferEncodeObject.md):
+* [MsgRequestDTagTransferEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgRequestDTagTransferEncodeObject.md):
 Create a DTag transfer request
-* [MsgAcceptDTagTransferRequestEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAcceptDTagTransferRequestEncodeObject.md):
+* [MsgAcceptDTagTransferRequestEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgAcceptDTagTransferRequestEncodeObject.md):
 Accept a DTag transfer request
-* [MsgRefuseDTagTransferRequestEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRefuseDTagTransferRequestEncodeObject.md):
+* [MsgRefuseDTagTransferRequestEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgRefuseDTagTransferRequestEncodeObject.md):
 Refuse a DTag transfer request
-* [MsgCancelDTagTransferRequestEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCancelDTagTransferRequestEncodeObject.md):
+* [MsgCancelDTagTransferRequestEncodeObject](api/interfaces/desmoslabs_desmjs.Profiles.v3.MsgCancelDTagTransferRequestEncodeObject.md):
 Cancel a DTag transfer initiate from the user
 
 ### Relationships
 
-* [MsgCreateRelationshipEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCreateRelationshipEncodeObject.md):
+
+#### v1
+
+* [MsgCreateRelationshipEncodeObject](api/interfaces/desmoslabs_desmjs.Relationships.v1.MsgCreateRelationshipEncodeObject.md):
 Create a relationship between two users (A follow B)
-* [MsgDeleteRelationshipEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeleteRelationshipEncodeObject.md):
+* [MsgDeleteRelationshipEncodeObject](api/interfaces/desmoslabs_desmjs.Relationships.v1.MsgDeleteRelationshipEncodeObject.md):
 Delete a relationship between two users (A unfollow B)
-* [MsgBlockUserEncodeObject](api/interfaces/desmoslabs_desmjs.MsgBlockUserEncodeObject.md): 
+* [MsgBlockUserEncodeObject](api/interfaces/desmoslabs_desmjs.Relationships.v1.MsgBlockUserEncodeObject.md): 
 Block a user
-* [MsgUnblockUserEncodeObject](api/interfaces/desmoslabs_desmjs.MsgUnblockUserEncodeObject.md):
+* [MsgUnblockUserEncodeObject](api/interfaces/desmoslabs_desmjs.Relationships.v1.MsgUnblockUserEncodeObject.md):
 Unblock a user
 
 ### Subspaces
 
-* [MsgCreateSubspaceEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCreateSubspaceEncodeObject.md):
+#### v3
+
+* [MsgCreateSubspaceEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgCreateSubspaceEncodeObject.md):
 Creates a subspace
-* [MsgEditSubspaceEncodeObject](api/interfaces/desmoslabs_desmjs.MsgEditSubspaceEncodeObject.md):
+* [MsgEditSubspaceEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgEditSubspaceEncodeObject.md):
 Edit a previously created subspace
-* [MsgDeleteSubspaceEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeleteSubspaceEncodeObject.md):
+* [MsgDeleteSubspaceEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgDeleteSubspaceEncodeObject.md):
 Delete a subspace
-* [MsgCreateSectionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCreateSectionEncodeObject.md):
+* [MsgCreateSectionEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgCreateSectionEncodeObject.md):
 Create a new section
-* [MsgDeleteSectionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeleteSectionEncodeObject.md):
+* [MsgDeleteSectionEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgDeleteSectionEncodeObject.md):
 Delete a section
-* [MsgEditSectionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgEditSectionEncodeObject.md):
+* [MsgEditSectionEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgEditSectionEncodeObject.md):
 Edit a previously created section
-* [MsgMoveSectionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgMoveSectionEncodeObject.md):
+* [MsgMoveSectionEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgMoveSectionEncodeObject.md):
 Move a section to another section
-* [MsgCreateUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCreateUserGroupEncodeObject.md):
+* [MsgCreateUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgCreateUserGroupEncodeObject.md):
 Create a user group
-* [MsgEditUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.MsgEditUserGroupEncodeObject.md):
+* [MsgEditUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgEditUserGroupEncodeObject.md):
 Edit a previously created user group
-* [MsgDeleteUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeleteUserGroupEncodeObject.md):
+* [MsgDeleteUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgDeleteUserGroupEncodeObject.md):
 Delete a user group
-* [MsgMoveUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.MsgMoveUserGroupEncodeObject.md):
+* [MsgMoveUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgMoveUserGroupEncodeObject.md):
 Move a user group to another section
-* [MsgAddUserToUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAddUserToUserGroupEncodeObject.md): 
+* [MsgAddUserToUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgAddUserToUserGroupEncodeObject.md): 
 Add a user to a user group
-* [MsgRemoveUserFromUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRemoveUserFromUserGroupEncodeObject.md): 
+* [MsgRemoveUserFromUserGroupEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgRemoveUserFromUserGroupEncodeObject.md): 
 Remove a user from a user group
-* [MsgSetUserPermissionsEncodeObject](api/interfaces/desmoslabs_desmjs.MsgSetUserPermissionsEncodeObject.md):
+* [MsgSetUserPermissionsEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgSetUserPermissionsEncodeObject.md):
 Set the permissions of a user inside a subspace
-* [MsgSetUserGroupPermissionsEncodeObject](api/interfaces/desmoslabs_desmjs.MsgSetUserGroupPermissionsEncodeObject.md):
+* [MsgSetUserGroupPermissionsEncodeObject](api/interfaces/desmoslabs_desmjs.Subspaces.v3.MsgSetUserGroupPermissionsEncodeObject.md):
 Set the permissions that all members of a group will inherit
 
 ### Posts
 
-* [MsgCreatePostEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCreatePostEncodeObject.md):
+#### v3
+
+* [MsgCreatePostEncodeObject](api/interfaces/desmoslabs_desmjs.Posts.v3.MsgCreatePostEncodeObject.md):
 Create a new post
-* [MsgDeletePostEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeletePostEncodeObject.md):
+* [MsgDeletePostEncodeObject](api/interfaces/desmoslabs_desmjs.Posts.v3.MsgDeletePostEncodeObject.md):
 Delete a post
-* [MsgEditPostEncodeObject](api/interfaces/desmoslabs_desmjs.MsgEditPostEncodeObject.md):
+* [MsgEditPostEncodeObject](api/interfaces/desmoslabs_desmjs.Posts.v3.MsgEditPostEncodeObject.md):
 Edit a previously created post
-* [MsgAddPostAttachmentEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAddPostAttachmentEncodeObject.md):
+* [MsgAddPostAttachmentEncodeObject](api/interfaces/desmoslabs_desmjs.Posts.v3.MsgAddPostAttachmentEncodeObject.md):
 Add an attachment to a post
-* [MsgRemovePostAttachmentEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRemovePostAttachmentEncodeObject.md):
+* [MsgRemovePostAttachmentEncodeObject](api/interfaces/desmoslabs_desmjs.Posts.v3.MsgRemovePostAttachmentEncodeObject.md):
 Remove an attachment from a post
-* [MsgAnswerPollEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAnswerPollEncodeObject.md):
+* [MsgAnswerPollEncodeObject](api/interfaces/desmoslabs_desmjs.Posts.v3.MsgAnswerPollEncodeObject.md):
 Answer a poll
 
 ### Reactions
 
-* [MsgAddReactionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAddReactionEncodeObject.md):
+#### v1
+
+* [MsgAddReactionEncodeObject](api/interfaces/desmoslabs_desmjs.Reactions.v1.MsgAddReactionEncodeObject.md):
 Add a reaction to a post
-* [MsgRemoveReactionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRemoveReactionEncodeObject.md):
+* [MsgRemoveReactionEncodeObject](api/interfaces/desmoslabs_desmjs.Reactions.v1.MsgRemoveReactionEncodeObject.md):
 Remove a reaction from a post
-* [MsgAddRegisteredReactionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAddRegisteredReactionEncodeObject.md):
+* [MsgAddRegisteredReactionEncodeObject](api/interfaces/desmoslabs_desmjs.Reactions.v1.MsgAddRegisteredReactionEncodeObject.md):
 Register a new supported reaction for a subspace
-* [MsgRemoveRegisteredReactionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRemoveRegisteredReactionEncodeObject.md):
+* [MsgRemoveRegisteredReactionEncodeObject](api/interfaces/desmoslabs_desmjs.Reactions.v1.MsgRemoveRegisteredReactionEncodeObject.md):
 Remove a registered reaction from a subspace
-* [MsgEditRegisteredReactionEncodeObject](api/interfaces/desmoslabs_desmjs.MsgEditRegisteredReactionEncodeObject.md):
+* [MsgEditRegisteredReactionEncodeObject](api/interfaces/desmoslabs_desmjs.Reactions.v1.MsgEditRegisteredReactionEncodeObject.md):
 Edit a previously registered reaction
-* [MsgSetReactionsParamsEncodeObject](api/interfaces/desmoslabs_desmjs.MsgSetReactionsParamsEncodeObject.md):
+* [MsgSetReactionsParamsEncodeObject](api/interfaces/desmoslabs_desmjs.Reactions.v1.MsgSetReactionsParamsEncodeObject.md):
 Set the reactions params for a subspace
 
 ### Reports
 
-* [MsgCreateReportEncodeObject](api/interfaces/desmoslabs_desmjs.MsgCreateReportEncodeObject.md):
+#### v1
+
+* [MsgCreateReportEncodeObject](api/interfaces/desmoslabs_desmjs.Reports.v1.MsgCreateReportEncodeObject.md):
 Create a report inside a subspace
-* [MsgDeleteReportEncodeObject](api/interfaces/desmoslabs_desmjs.MsgDeleteReportEncodeObject.md):
+* [MsgDeleteReportEncodeObject](api/interfaces/desmoslabs_desmjs.Reports.v1.MsgDeleteReportEncodeObject.md):
 Delete a previously created report from a subspace
-* [MsgSupportStandardReasonEncodeObject](api/interfaces/desmoslabs_desmjs.MsgSupportStandardReasonEncodeObject.md):
+* [MsgSupportStandardReasonEncodeObject](api/interfaces/desmoslabs_desmjs.Reports.v1.MsgSupportStandardReasonEncodeObject.md):
 Support one reason from the module params
-* [MsgAddReasonEncodeObject](api/interfaces/desmoslabs_desmjs.MsgAddReasonEncodeObject.md):
+* [MsgAddReasonEncodeObject](api/interfaces/desmoslabs_desmjs.Reports.v1.MsgAddReasonEncodeObject.md):
 Add a new supported reason to a subspace
-* [MsgRemoveReasonEncodeObject](api/interfaces/desmoslabs_desmjs.MsgRemoveReasonEncodeObject.md):
+* [MsgRemoveReasonEncodeObject](api/interfaces/desmoslabs_desmjs.Reports.v1.MsgRemoveReasonEncodeObject.md):
 Remove a previously created reason
 
 ## Examples
@@ -228,7 +241,7 @@ Here are some examples that showcase how to interact with the various Desmos mod
 Here an example that showcase how to create a Desmos profile:
 
 ```js
-import { DesmosClient, GasPrice, MsgSaveProfileEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Profiles } from "@desmoslabs/desmjs";
 
 
 const signer = ...; // Your signer
@@ -237,8 +250,8 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm"),
 });
 
-const saveProfile: MsgSaveProfileEncodeObject = {
-  typeUrl: "/desmos.profiles.v3.MsgSaveProfile",
+const saveProfile: Profiles.v3.MsgSaveProfileEncodeObject = {
+  typeUrl: Profiles.v3.MsgSaveProfileTypeUrl,
   value: {
     creator: "desmos...",
     bio: "The price of all saiyans",
@@ -258,7 +271,7 @@ Here an example that showcase how to create a relationships:
 
 ```js
 import Long from "long";
-import { DesmosClient, GasPrice, MsgCreateRelationshipEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Relationships } from "@desmoslabs/desmjs";
 
 
 const signer = ...; // Your signer
@@ -267,8 +280,8 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm"),
 });
 
-const createRelationship: MsgCreateRelationshipEncodeObject = {
-  typeUrl: "/desmos.relationships.v1.MsgCreateRelationship",
+const createRelationship: Relationships.v1.MsgCreateRelationshipEncodeObject = {
+  typeUrl: Relationships.v1.MsgCreateRelationshipTypeUrl,
   value: {
     signer: "desmos...",
     subspaceId: Long.fromNumber(1),
@@ -284,7 +297,7 @@ await client.signAndBroadcast(createRelationship.value.signer, [createRelationsh
 Here an example that showcase how to create a subspace:
 
 ```js
-import { DesmosClient, GasPrice, MsgCreateSubspaceEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Subspaces } from "@desmoslabs/desmjs";
 
 
 const signer = ...; // Your signer
@@ -293,8 +306,8 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm"),
 });
 
-const createSubspace: MsgCreateSubspaceEncodeObject = {
-  typeUrl: "/desmos.subspaces.v3.MsgCreateSubspace",
+const createSubspace: Subspaces.v3.MsgCreateSubspaceEncodeObject = {
+  typeUrl: Subspaces.v3.MsgCreateSubspaceTypeUrl,
   value: {
     creator: "desmos...",
     name: "Desmos subspace",
@@ -316,7 +329,7 @@ Here an example that showcase how to create a post:
 import Long from "long";
 import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { MsgCreatePost } from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
-import { DesmosClient, GasPrice, MsgCreatePostEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Posts } from "@desmoslabs/desmjs";
 
 const signer = ...; // Your signer
 const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
@@ -324,8 +337,8 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm"),
 });
 
-const createPost: MsgCreatePostEncodeObject = {
-  typeUrl: "/desmos.posts.v3.MsgCreatePost",
+const createPost: Posts.v3.MsgCreatePostEncodeObject = {
+  typeUrl: Posts.v3.MsgCreatePostTypeUrl,
   value: MsgCreatePost.fromPartial({
     subspaceId: Long.fromNumber(1),
     author: "desmos...",
@@ -344,7 +357,7 @@ Here an example that showcase how to react to a post:
 ```js
 import Long from "long";
 import { FreeTextValue } from "@desmoslabs/desmjs-types/desmos/reactions/v1/models";
-import { DesmosClient, GasPrice, MsgAddReactionEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Reactions } from "@desmoslabs/desmjs";
 
 const signer = ...; // Your signer
 const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
@@ -352,8 +365,8 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm"),
 });
 
-const addReaction: MsgAddReactionEncodeObject = {
-  typeUrl: "/desmos.reactions.v1.MsgAddReaction",
+const addReaction: Reactions.v1.MsgAddReactionEncodeObject = {
+  typeUrl:  Reactions.v1.MsgAddReactionTypeUrl,
   value: {
     user: "desmos...",
     postId: Long.fromNumber(1),
@@ -377,7 +390,7 @@ Here an example that showcase how to react to a post:
 ```js
 import Long from "long";
 import { RegisteredReactionValue } from "@desmoslabs/desmjs-types/desmos/reactions/v1/models";
-import { DesmosClient, GasPrice, MsgAddReactionEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Reactions } from "@desmoslabs/desmjs";
 
 const signer = ...; // Your signer
 const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
@@ -385,8 +398,8 @@ const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm"),
 });
 
-const addReaction: MsgAddReactionEncodeObject = {
-  typeUrl: "/desmos.reactions.v1.MsgAddReaction",
+const addReaction: Reactions.v1.MsgAddReactionEncodeObject = {
+  typeUrl: Reactions.v1.MsgAddReactionTypeUrl,
   value: {
     user: "desmos...",
     postId: Long.fromNumber(1),
@@ -409,7 +422,7 @@ Here an example that showcase how to report a user inside a subspace:
 
 ```js
 import Long from "long";
-import { DesmosClient, GasPrice, MsgCreateReportEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Reports } from "@desmoslabs/desmjs";
 import { UserTarget } from "@desmoslabs/desmjs-types/desmos/reports/v1/models";
 
 const signer =...; // Your signer
@@ -418,15 +431,15 @@ const client = await DesmosClient.connectWithSigner("https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm")
 });
 
-const reportUser: MsgCreateReportEncodeObject = {
-  typeUrl: "/desmos.reports.v1.MsgCreateReport",
+const reportUser: Reports.v1.MsgCreateReportEncodeObject = {
+  typeUrl: Reports.v1.MsgCreateReportTypeUrl,
   value: {
     reporter: "desmos...",
     subspaceId: Long.fromNumber(1),
     message: "This user have a bad behaviour",
     reasonsIds: [1],
     target: {
-      typeUrl: "/desmos.reports.v1.UserTarget",
+      typeUrl: Reports.v1.UserTargetTypeUrl,
       value: UserTarget.encode({
         user: "desmos..."
       }).finish()
@@ -443,7 +456,7 @@ Here an example that showcase how to report another user post:
 
 ```js
 import Long from "long";
-import { DesmosClient, GasPrice, MsgCreateReportEncodeObject } from "@desmoslabs/desmjs";
+import { DesmosClient, GasPrice, Reports } from "@desmoslabs/desmjs";
 import { PostTarget } from "@desmoslabs/desmjs-types/desmos/reports/v1/models";
 
 const signer =...; // Your signer
@@ -452,15 +465,15 @@ const client = await DesmosClient.connectWithSigner("https://rpc.mainnet.desmos.
   gasPrice: GasPrice.fromString("0.01udsm")
 });
 
-const reportPost: MsgCreateReportEncodeObject = {
-  typeUrl: "/desmos.reports.v1.MsgCreateReport",
+const reportPost: Reports.v1.MsgCreateReportEncodeObject = {
+  typeUrl: Reports.v1.MsgCreateReportTypeUrl,
   value: {
     reporter: "desmos...",
     subspaceId: Long.fromNumber(1),
     message: "This user have a bad behaviour",
     reasonsIds: [1],
     target: {
-      typeUrl: "/desmos.reports.v1.UserTarget",
+      typeUrl: Reports.v1.PostTargetTypeUrl,
       value: PostTarget.encode({
         postId: Long.fromNumber(1)
       }).finish()
