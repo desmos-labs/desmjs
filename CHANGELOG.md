@@ -1,3 +1,7 @@
+## Version 5.1.1
+### Chore
+- Export Web3Auth objects from `@desmoslabs/desmjs-web3auth-mobile`
+
 ## Version 5.1.0
 ### Features
 - Add support to governance v1
