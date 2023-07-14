@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs-web3auth-web",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Web3Auth integration for DesmJS",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>"
@@ -34,11 +34,11 @@
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@web3auth/base": "^6.1.3",
     "@web3auth/modal": "^6.1.1",
-    "@web3auth/ui": "^6.1.1",
+    "@web3auth/ui": "^6.1.3",
     "cosmjs-types": "^0.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
     "@types/jest": "^29.5.2",

@@ -1,6 +1,6 @@
 {
   "name": "@desmoslabs/desmjs",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Core of the desmos DApp SDK",
   "contributors": [
     "Manuel Turetta <manuel@forbole.com>",
@@ -46,7 +46,7 @@
     "long": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.22.9",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
     "@types/jest": "^29.5.2",

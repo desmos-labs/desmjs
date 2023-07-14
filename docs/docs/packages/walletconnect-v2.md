@@ -26,7 +26,7 @@ yarn add @desmoslabs/desmjs-walletconnect-v2 @walletconnect/types
 ## Usage
 ### Initializing a WalletConnect `SignClient` instance
 
-Before creating the [`WalletConnectSigner`](../api/classes/desmoslabs_desmjs_walletconnect.WalletConnectSigner.md)
+Before creating the [`WalletConnectSigner`](../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md)
 you must create an instance of the WalletConnect `SignClient`.  
 
 To initialize a `SignClient` instance you need a [project id](https://docs.walletconnect.com/2.0/cloud/relay) that
