@@ -29,12 +29,14 @@ yarn add @desmoslabs/desmjs-web3auth-mobile
 ### Setup Web3Auth
 
 After installing `@desmoslabs/desmjs-web3auth-mobile`, you can follow
-the [Web3Auth documentation](https://web3auth.io/docs/sdk/react-native/) to set Web3Auth in your project.
+the [Web3Auth documentation](https://web3auth.io/docs/sdk/pnp/react-native) to set Web3Auth in your project.
+**NOTE** You don't need to install `@web3auth/react-native-sdk` since this package already exports all the objects
+exported from `@web3auth/react-native-sdk`
 
 ### Get Web3Auth client id
 
 After setting up the project, you need to get a Web3Auth client id. You can find how to
-get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-client-id).
+get one in the [Web3Auth docs](https://web3auth.io/docs/dashboard-setup/get-client-id).
 
 ## Usage
 
@@ -54,7 +56,9 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 
     ```ts
     import * as WebBrowser from "expo-web-browser";
-    import Web3Auth, {LOGIN_PROVIDER, OPENLOGIN_NETWORK} from "@web3auth/react-native-sdk";
+    // You need to install this package with: yarn add expo-secure-store
+    import * as SecureStore from "expo-secure-store";
+    import { Web3Auth, LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@desmoslabs/desmjs-web3auth-mobile";
 
     const resolvedRedirectUrl =
     Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
@@ -63,10 +67,11 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 
     const clientId = "YOUR WEB3AUTH CLIENT ID";
 
-    const web3auth = new Web3Auth(WebBrowser, {
+    const web3auth = new Web3Auth(WebBrowser, SecureStore, {
         clientId,
         network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
+    await web3auth.init();
     ```
   </TabItem>
 
@@ -74,17 +79,20 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 
     ```ts
     import * as WebBrowser from "@toruslabs/react-native-web-browser";
-    import Web3Auth, {LOGIN_PROVIDER, OPENLOGIN_NETWORK} from "@web3auth/react-native-sdk";
+    // You need to install this package with: yarn add react-native-encrypted-storage
+    import EncryptedStorage from 'react-native-encrypted-storage';
+    import { Web3Auth, LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@desmoslabs/desmjs-web3auth-mobile";
 
     const scheme = "web3authrnbareauth0example"; // Or your desired app redirection scheme
     const resolvedRedirectUrl = `${scheme}://openlogin`;
 
     const clientId = "YOUR WEB3AUTH CLIENT ID";
 
-    const web3auth = new Web3Auth(WebBrowser, {
+    const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
         clientId,
         network: OPENLOGIN_NETWORK.TESTNET, // or other networks
     });
+    await web3auth.init();
     ```
 
   </TabItem>
@@ -93,7 +101,9 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 
     ```ts
     import * as WebBrowser from "expo-web-browser";
-    import Web3Auth, {LOGIN_PROVIDER, OPENLOGIN_NETWORK} from "@web3auth/react-native-sdk";
+    // You need to install this package with: yarn add expo-secure-store
+    import * as SecureStore from "expo-secure-store";
+    import { Web3Auth, LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@desmoslabs/desmjs-web3auth-mobile";
 
     const resolvedRedirectUrl =
     Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
@@ -102,7 +112,7 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 
     const clientId = "YOUR WEB3AUTH CLIENT ID";
 
-    const web3auth = new Web3Auth(WebBrowser, {
+    const web3auth = new Web3Auth(WebBrowser, SecureStore, {
         clientId,
         network: OPENLOGIN_NETWORK.TESTNET, // or other networks
         loginConfig: {
@@ -114,6 +124,7 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
             },
         },
     });
+    await web3auth.init();
     ```
 
   </TabItem>
@@ -122,14 +133,16 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
 
     ```ts
     import * as WebBrowser from "@toruslabs/react-native-web-browser";
-    import Web3Auth, {LOGIN_PROVIDER, OPENLOGIN_NETWORK} from "@web3auth/react-native-sdk";
+    // You need to install this package with: yarn add react-native-encrypted-storage
+    import EncryptedStorage from 'react-native-encrypted-storage';
+    import { Web3Auth, LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@desmoslabs/desmjs-web3auth-mobile";
 
     const scheme = "web3authrnbareauth0example"; // Or your desired app redirection scheme
     const resolvedRedirectUrl = `${scheme}://openlogin`;
 
     const clientId = "YOUR WEB3AUTH CLIENT ID";
 
-    const web3auth = new Web3Auth(WebBrowser, {
+    const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
         clientId,
         network: OPENLOGIN_NETWORK.TESTNET, // or other networks
         loginConfig: {
@@ -141,6 +154,7 @@ get one in the [Web3Auth docs](https://web3auth.io/docs/developer-dashboard/get-
             },
         },
     });
+    await web3auth.init();
     ```
 
   </TabItem>

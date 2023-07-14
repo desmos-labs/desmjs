@@ -14,12 +14,12 @@ that exposes the methods to query the chain.
 
 Here you can find the functions exposed from `DesmosQueryClient` divided by modules:
 
-* [Profile](api/interfaces/desmoslabs_desmjs.ProfilesExtension.md)
-* [Relationships](api/interfaces/desmoslabs_desmjs.RelationshipsExtension.md)
-* [Subspaces](api/interfaces/desmoslabs_desmjs.SubspacesExtension.md)
-* [Posts](api/interfaces/desmoslabs_desmjs.PostsExtension.md)
-* [Reactions](api/interfaces/desmoslabs_desmjs.ReactionsExtension.md)
-* [Reports](api/interfaces/desmoslabs_desmjs.ReportsExtension.md)
+* [Profile v3](api/interfaces/desmoslabs_desmjs.Profiles.v3.ProfilesV3Extension.md)
+* [Relationships v1](api/interfaces/desmoslabs_desmjs.Relationships.v1.RelationshipsV1Extension.md)
+* [Subspaces v3](api/interfaces/desmoslabs_desmjs.Subspaces.v3.SubspacesV3Extension.md)
+* [Posts v3](api/interfaces/desmoslabs_desmjs.Posts.v3.PostsExtension.md)
+* [Reactions v1](api/interfaces/desmoslabs_desmjs.Reactions.v1.ReactionsExtension.md)
+* [Reports v1](api/interfaces/desmoslabs_desmjs.Reports.v1.ReportsV1Extension.md)
 
 **NOTE** Fetching data directly from the chain can be to slow for certain use cases. For such
 cases we provide some GraphQL endpoint to query the data from the chain. Here you can find the
