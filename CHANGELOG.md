@@ -1,3 +1,7 @@
+## Version 5.1.2
+### Bug fixes
+- Fixed a bug that cause the packages to use an older version of the `@desmoslabs/*` dependencies.
+
 ## Version 5.1.1
 ### Chore
 - Export Web3Auth objects from `@desmoslabs/desmjs-web3auth-mobile`
