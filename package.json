@@ -36,7 +36,7 @@
     "build-docs": "DOCS_DOMAIN=desmjs.desmos.network yarn workspace desmjs-documentation build",
     "lint": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint",
     "lint-fix": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint-fix",
-    "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec npm publish"
+    "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec yarn npm publish"
   },
   "devDependencies": {
     "@cosmjs/cosmwasm-stargate": "^0.31.0",
