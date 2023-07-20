@@ -1,3 +1,7 @@
+## Version 5.1.3
+### Chore
+- Set `react-native` as peer dependency in `@desmoslabs/desmjs-web3auth-web`.
+
 ## Version 5.1.2
 ### Bug fixes
 - Fixed a bug that cause the packages to use an older version of the `@desmoslabs/*` dependencies.
