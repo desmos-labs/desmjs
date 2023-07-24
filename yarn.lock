@@ -4460,7 +4460,7 @@ __metadata:
     "@types/readable-stream": ^2.3.15
     "@web3auth/base": ^6.1.4
     "@web3auth/modal": ^6.1.1
-    "@web3auth/ui": ^6.1.3
+    "@web3auth/ui": ^6.1.5
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -8242,23 +8242,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/base@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "@web3auth/base@npm:6.1.3"
-  dependencies:
-    "@toruslabs/http-helpers": ^4.0.0
-    "@toruslabs/openlogin": ^4.7.0
-    "@toruslabs/openlogin-jrpc": ^4.7.0
-    "@toruslabs/openlogin-utils": ^4.7.0
-    jwt-decode: ^3.1.2
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: 92470f71c09371f82648b21f09a792a2365ac5626f8adb1213c9f9b6f3066cb58a33a3fe37c569fc5120aab3bb96509f4d2df5d42ad1701855fd0b9e41f980d6
-  languageName: node
-  linkType: hard
-
 "@web3auth/base@npm:^6.1.4":
   version: 6.1.4
   resolution: "@web3auth/base@npm:6.1.4"
@@ -8477,28 +8460,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/ui@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "@web3auth/ui@npm:6.1.3"
+"@web3auth/ui@npm:^6.1.5":
+  version: 6.1.5
+  resolution: "@web3auth/ui@npm:6.1.5"
   dependencies:
     "@toruslabs/http-helpers": ^4.0.0
     "@toruslabs/openlogin": ^4.7.0
     "@toruslabs/openlogin-jrpc": ^4.7.0
     "@toruslabs/openlogin-utils": ^4.7.0
-    "@web3auth/base": ^6.1.3
+    "@web3auth/base": ^6.1.4
     bowser: ^2.11.0
     classnames: ^2.3.2
     copy-to-clipboard: ^3.3.3
-    i18next: ^23.2.7
+    i18next: ^23.2.11
     lodash.clonedeep: ^4.5.0
     lodash.merge: ^4.6.2
-    react-i18next: ^13.0.1
+    react-i18next: ^13.0.2
     react-qrcode-logo: ^2.9.0
   peerDependencies:
     "@babel/runtime": ^7.x
     react: ^18.x
     react-dom: ^18.x
-  checksum: b669a98a12b0f80552d9f3e423761aad645299929237c0c3e4568d3dee0d6cf3020f92eb49401ca62a3b36124d441ff0800f30219cf60b3400a9245f7b8db673
+  checksum: 7ef4d7863e00efed5edd71e915f4e89fac7149ac2fc1aea7b917543bb669cea40b00c648f4f8c397b0bc0eef2c2241c267741ff4617edb6f42bcc6e4bb71ca98
   languageName: node
   linkType: hard
 
@@ -13746,7 +13729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.2.7":
+"i18next@npm:^23.2.11":
   version: 23.2.11
   resolution: "i18next@npm:23.2.11"
   dependencies:
@@ -18184,7 +18167,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^13.0.1":
+"react-i18next@npm:^13.0.2":
   version: 13.0.2
   resolution: "react-i18next@npm:13.0.2"
   dependencies:
