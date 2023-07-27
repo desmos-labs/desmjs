@@ -159,7 +159,8 @@ export class DesmosClient extends SigningCosmWasmClient {
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee | "auto" | number,
-    memo?: string
+    memo?: string,
+    feeGranter?: string,
   ): Promise<DeliverTxResponse> {
     let usedFee: StdFee;
     if (fee === "auto" || typeof fee === "number") {
@@ -177,7 +178,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     } else {
       usedFee = fee;
     }
-    const txRaw = await this.sign(signerAddress, messages, usedFee, memo);
+    const txRaw = await this.sign(signerAddress, messages, usedFee, memo, feeGranter);
     const txBytes = TxRaw.encode(txRaw).finish();
     return this.broadcastTx(
       txBytes,
@@ -311,11 +312,13 @@ export class DesmosClient extends SigningCosmWasmClient {
     messages: readonly EncodeObject[],
     fee: StdFee | "auto",
     memo?: string,
+    feeGranter?: string,
     explicitSignerData?: SignerData
   ): Promise<TxRaw> {
     const result = await this.signTx(signerAddress, messages, {
       fee,
       memo,
+      feeGranter,
       signerData: explicitSignerData,
     });
     return result.txRaw;
