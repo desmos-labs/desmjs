@@ -86,7 +86,7 @@ function createDefaultRegistry(): Registry {
  */
 function makeSignerInfos(
   signers: ReadonlyArray<{ readonly pubkey: Any; readonly sequence: number }>,
-  signMode: SignMode
+  signMode: SignMode,
 ): SignerInfo[] {
   return signers.map(
     ({ pubkey, sequence }): SignerInfo => ({
@@ -95,7 +95,7 @@ function makeSignerInfos(
         single: { mode: signMode },
       },
       sequence: Long.fromNumber(sequence),
-    })
+    }),
   );
 }
 
@@ -108,7 +108,7 @@ export function makeAuthInfoBytes(
   feeAmount: readonly Coin[],
   gasLimit: number,
   signMode = SignMode.SIGN_MODE_DIRECT,
-  granter?: string
+  granter?: string,
 ): Uint8Array {
   return AuthInfo.encode(
     AuthInfo.fromPartial({
@@ -118,7 +118,7 @@ export function makeAuthInfoBytes(
         gasLimit: Long.fromNumber(gasLimit),
         granter,
       },
-    })
+    }),
   ).finish();
 }
 
@@ -140,7 +140,7 @@ export class DesmosClient extends SigningCosmWasmClient {
 
   public static override async connect(
     endpoint: string,
-    options: Options = {}
+    options: Options = {},
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint37Client.connect(endpoint);
     return new DesmosClient(tmClient, options, undefined);
@@ -149,7 +149,7 @@ export class DesmosClient extends SigningCosmWasmClient {
   public static override async connectWithSigner(
     endpoint: string,
     signer: Signer,
-    options: Options = {}
+    options: Options = {},
   ): Promise<DesmosClient> {
     const tmClient = await Tendermint37Client.connect(endpoint);
     return new DesmosClient(tmClient, options, signer);
@@ -159,20 +159,20 @@ export class DesmosClient extends SigningCosmWasmClient {
     signerAddress: string,
     messages: readonly EncodeObject[],
     fee: StdFee | "auto" | number,
-    memo?: string
+    memo?: string,
   ): Promise<DeliverTxResponse> {
     let usedFee: StdFee;
     if (fee === "auto" || typeof fee === "number") {
       assertDefined(
         this.options.gasPrice,
-        "Gas price must be set in the client options when auto gas is used."
+        "Gas price must be set in the client options when auto gas is used.",
       );
       const gasEstimation = await this.simulate(signerAddress, messages, memo);
       const multiplier =
         typeof fee === "number" ? fee : this.options.gasAdjustment || 1.5;
       usedFee = calculateFee(
         Math.round(gasEstimation * multiplier),
-        this.options.gasPrice
+        this.options.gasPrice,
       );
     } else {
       usedFee = fee;
@@ -182,7 +182,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     return this.broadcastTx(
       txBytes,
       this.broadcastTimeoutMs,
-      this.broadcastPollIntervalMs
+      this.broadcastPollIntervalMs,
     );
   }
 
@@ -194,7 +194,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    */
   public static override async offline(
     signer: Signer,
-    options: Options = {}
+    options: Options = {},
   ): Promise<DesmosClient> {
     return new DesmosClient(undefined, options, signer);
   }
@@ -202,11 +202,11 @@ export class DesmosClient extends SigningCosmWasmClient {
   protected constructor(
     client: Tendermint37Client | undefined,
     options: Options,
-    signer: Signer = new NoOpSigner()
+    signer: Signer = new NoOpSigner(),
   ) {
     const newAminoTypes = new AminoTypes(
       DesmosAminoConverter,
-      createDefaultRegistry()
+      createDefaultRegistry(),
     );
 
     const { registry = createDefaultRegistry(), aminoTypes = newAminoTypes } =
@@ -239,7 +239,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    */
   override async getAccount(searchAddress: string): Promise<Account | null> {
     const account = await this.forceGetQueryClient().auth.account(
-      searchAddress
+      searchAddress,
     );
     if (!account) {
       return null;
@@ -273,7 +273,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     const client = this.getQueryClient();
     if (!client) {
       throw new Error(
-        "Query client not available. You cannot use online functionality in offline mode."
+        "Query client not available. You cannot use online functionality in offline mode.",
       );
     }
 
@@ -311,7 +311,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     messages: readonly EncodeObject[],
     fee: StdFee | "auto",
     memo?: string,
-    explicitSignerData?: SignerData
+    explicitSignerData?: SignerData,
   ): Promise<TxRaw> {
     const result = await this.signTx(signerAddress, messages, {
       fee,
@@ -329,7 +329,7 @@ export class DesmosClient extends SigningCosmWasmClient {
   private async getAccountFromSigner(address: string): Promise<AccountData> {
     const accounts = await this.txSigner.getAccounts();
     const accountFromSigner = accounts.find(
-      (account) => account.address === address
+      (account) => account.address === address,
     );
     if (!accountFromSigner) {
       throw new Error("Failed to retrieve account from signer");
@@ -351,17 +351,17 @@ export class DesmosClient extends SigningCosmWasmClient {
   public async signTx(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    options?: SignTxOptions
+    options?: SignTxOptions,
   ): Promise<SignatureResult> {
     const fee = options?.fee ?? "auto";
     if (this.getQueryClient() === undefined) {
       if (fee === "auto") {
         throw new Error(
-          "can't sign transaction in offline mode with fee === auto"
+          "can't sign transaction in offline mode with fee === auto",
         );
       } else if (options?.signerData === undefined) {
         throw new Error(
-          "can't sign transaction in offline mode without explicitSignerData"
+          "can't sign transaction in offline mode without explicitSignerData",
         );
       }
     }
@@ -386,7 +386,7 @@ export class DesmosClient extends SigningCosmWasmClient {
           txFee,
           options?.memo,
           signerData,
-          options?.feeGranter
+          options?.feeGranter,
         )
       : this.signTxAmino(
           signerAddress,
@@ -394,7 +394,7 @@ export class DesmosClient extends SigningCosmWasmClient {
           txFee,
           options?.memo,
           signerData,
-          options?.feeGranter
+          options?.feeGranter,
         );
   }
 
@@ -407,14 +407,14 @@ export class DesmosClient extends SigningCosmWasmClient {
   public async estimateTxGas(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    options?: SimulateOptions
+    options?: SimulateOptions,
   ): Promise<number> {
     const anyMsgs = messages.map((m) => this.registry.encodeAsAny(m));
 
     let pubKey: Secp256k1Pubkey;
     if (options?.publicKey === undefined) {
       const accountFromSigner = (await this.txSigner.getAccounts()).find(
-        (account) => account.address === signerAddress
+        (account) => account.address === signerAddress,
       );
       if (!accountFromSigner) {
         throw new Error("Failed to retrieve account from signer");
@@ -429,7 +429,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       anyMsgs,
       options?.memo,
       pubKey,
-      sequence
+      sequence,
     );
     assertDefined(gasInfo);
     return Uint53.fromString(gasInfo.gasUsed.toString()).toNumber();
@@ -444,19 +444,19 @@ export class DesmosClient extends SigningCosmWasmClient {
   public async estimateTxFee(
     signerAddress: string,
     messages: readonly EncodeObject[],
-    options?: SimulateOptions
+    options?: SimulateOptions,
   ): Promise<StdFee> {
     const { gasPrice } = this.options;
     if (!gasPrice) {
       throw new Error(
-        "Cannot estimate transaction fees and gas without a gas price"
+        "Cannot estimate transaction fees and gas without a gas price",
       );
     }
 
     const estimated = await this.estimateTxGas(
       signerAddress,
       messages,
-      options
+      options,
     );
     const gasAdjustment = this.options.gasAdjustment || 1.5;
     const gas = Math.ceil(estimated * gasAdjustment);
@@ -488,7 +488,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     fee: StdFee,
     memo: string | undefined,
     { accountNumber, sequence, chainId }: SignerData,
-    feeGranter?: string
+    feeGranter?: string,
   ): Promise<SignatureResult> {
     // Get the signer account
     const signerAccount = await this.getAccountFromSigner(signerAddress);
@@ -501,13 +501,13 @@ export class DesmosClient extends SigningCosmWasmClient {
       chainId,
       memo,
       accountNumber,
-      sequence
+      sequence,
     );
 
     // Sign the data using Amino
     const { signature, signed } = await this.txSigner.signAmino(
       signerAddress,
-      signDoc
+      signDoc,
     );
 
     // Build the signed tx object
@@ -536,7 +536,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       signed.fee.amount,
       signedGasLimit,
       SignMode.SIGN_MODE_LEGACY_AMINO_JSON,
-      feeGranter
+      feeGranter,
     );
 
     return {
@@ -557,7 +557,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     fee: StdFee,
     memo: string | undefined,
     { accountNumber, sequence, chainId }: SignerData,
-    feeGranter?: string
+    feeGranter?: string,
   ): Promise<SignatureResult> {
     // Get the signer account
     const signerAccount = await this.getAccountFromSigner(signerAddress);
@@ -584,7 +584,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       fee.amount,
       gasLimit,
       SignMode.SIGN_MODE_DIRECT,
-      feeGranter
+      feeGranter,
     );
 
     // Build the SignDoc
@@ -592,13 +592,13 @@ export class DesmosClient extends SigningCosmWasmClient {
       txBodyBytes,
       authInfoBytes,
       chainId,
-      accountNumber
+      accountNumber,
     );
 
     // Sign using direct
     const { signature, signed } = await this.txSigner.signDirect(
       signerAddress,
-      signDoc
+      signDoc,
     );
 
     return {
@@ -626,7 +626,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     /** timeout in seconds */
     timeoutTimestamp: number | undefined,
     fee: StdFee | "auto" | number,
-    memo = ""
+    memo = "",
   ): Promise<DeliverTxResponse> {
     const timeoutTimestampNanoseconds = timeoutTimestamp
       ? Long.fromNumber(timeoutTimestamp).multiply(1_000_000_000)
@@ -709,7 +709,7 @@ export class DesmosClient extends SigningCosmWasmClient {
    */
   public async broadcastTransaction(
     tx: TxRaw,
-    mode: BroadcastMode
+    mode: BroadcastMode,
   ): Promise<BroadcastResponse> {
     switch (mode) {
       case BroadcastMode.Async:

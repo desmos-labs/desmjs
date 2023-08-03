@@ -45,14 +45,14 @@ function mockEventRequest(method: string, params?: any): RequestEvent {
 }
 
 function mockDirectRequestArguments(
-  messages: { typeUrl: string; value: Uint8Array }[]
+  messages: { typeUrl: string; value: Uint8Array }[],
 ): SignDirectRpcRequestParams {
   return encodeDirectSignRpcRequestParams(TEST_SIGNER, {
     bodyBytes: TxBody.encode(
       TxBody.fromPartial({
         memo: TEST_MEMO,
         messages,
-      })
+      }),
     ).finish(),
     authInfoBytes: AuthInfo.encode(
       AuthInfo.fromPartial({
@@ -60,7 +60,7 @@ function mockDirectRequestArguments(
           amount: TEST_FEE_AMOUNT,
           gasLimit: TEST_GAS,
         },
-      })
+      }),
     ).finish(),
     chainId: TEST_CHAIN_ID,
     accountNumber: TEST_ACCOUNT_NUMBER,
@@ -68,7 +68,7 @@ function mockDirectRequestArguments(
 }
 
 function mockAminoRequestArguments(
-  msgs: AminoMsg[]
+  msgs: AminoMsg[],
 ): SignAminoRpcRequestParams {
   return encodeAminoSignRpcRequestParams(TEST_SIGNER, {
     fee: TEST_STD_FEE,
@@ -109,7 +109,7 @@ describe("WalletConnect decode", () => {
           typeUrl: Profiles.v3.MsgSaveProfileTypeUrl,
           value: MsgSaveProfile.encode(msgSaveProfile).finish(),
         },
-      ])
+      ]),
     );
     const decodeResult = decodeSessionRequest(requestEvent);
 
@@ -143,7 +143,7 @@ describe("WalletConnect decode", () => {
 
     const requestEvent = mockEventRequest(
       CosmosRPCMethods.SignAmino,
-      mockAminoRequestArguments([msgSaveProfile])
+      mockAminoRequestArguments([msgSaveProfile]),
     );
     const decodeResult = decodeSessionRequest(requestEvent);
 

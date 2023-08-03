@@ -62,7 +62,7 @@ describe("Broadcast /cosmos.gov.v1 messages", () => {
                 amount: [coin(1, "stake")],
                 toAddress: testUser1.address1,
                 fromAddress: "desmos10d07y265gmmuvt4z0w9aw880jnsr700jw674pt",
-              })
+              }),
             ).finish(),
           },
         ],
@@ -88,11 +88,11 @@ describe("Broadcast /cosmos.gov.v1 messages", () => {
                     TextProposal.fromPartial({
                       title: "test",
                       description: "description",
-                    })
+                    }),
                   ).finish(),
                 },
                 authority: "desmos10d07y265gmmuvt4z0w9aw880jnsr700jw674pt",
-              })
+              }),
             ).finish(),
           },
         ],

@@ -15,7 +15,7 @@ export const DesmosBaseFeatures = [
 ];
 
 export async function setupChainInfo(
-  chain: DesmJSChainInfo
+  chain: DesmJSChainInfo,
 ): Promise<ChainInfo> {
   return {
     chainName: chain.chainName,

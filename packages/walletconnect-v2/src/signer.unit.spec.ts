@@ -54,7 +54,7 @@ class MockQrCodeModalController implements QrCodeModalController {
 }
 
 async function mockWalletWalletConnectClient(
-  signMode: SigningMode
+  signMode: SigningMode,
 ): Promise<{ walletClient: SignClient; signer: Signer }> {
   const signer = await OfflineSignerAdapter.generate(signMode);
   const walletClient = await SignClient.init({
@@ -215,7 +215,7 @@ async function mockDAppWalletConnectClient(): Promise<SignClient> {
 }
 
 function mockQrCodeController(
-  walletClient: SignClient
+  walletClient: SignClient,
 ): MockQrCodeModalController {
   return new MockQrCodeModalController((uri, _) => {
     walletClient.pair({ uri });
@@ -228,7 +228,7 @@ describe("WalletConnectSigner", () => {
   it("Connect successfully", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     const dappClient = await mockDAppWalletConnectClient();
     const qrCodeController = mockQrCodeController(walletClient);
@@ -248,7 +248,7 @@ describe("WalletConnectSigner", () => {
   it("Reconnect successfully", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     const dappClient = await mockDAppWalletConnectClient();
 
@@ -271,7 +271,7 @@ describe("WalletConnectSigner", () => {
   it("Disconnect successfully", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     const dappClient = await mockDAppWalletConnectClient();
 
@@ -290,7 +290,7 @@ describe("WalletConnectSigner", () => {
 
   it("Get accounts successfully", async () => {
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     const client = await mockDAppWalletConnectClient();
     const walletConnectSigner = new WalletConnectSigner(client, {
@@ -309,7 +309,7 @@ describe("WalletConnectSigner", () => {
   it("Sign amino successfully", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.AMINO
+      SigningMode.AMINO,
     );
     const dappClient = await mockDAppWalletConnectClient();
 
@@ -332,11 +332,11 @@ describe("WalletConnectSigner", () => {
 
     const signResponse = await walletConnectSigner.signAmino(
       signerAddress,
-      testSignDoc
+      testSignDoc,
     );
     const referenceSignResponse = await signer.signAmino(
       signerAddress,
-      testSignDoc
+      testSignDoc,
     );
 
     expect(signResponse).toMatchObject(referenceSignResponse);
@@ -345,7 +345,7 @@ describe("WalletConnectSigner", () => {
   it("Sign amino with direct signer error", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     const dappClient = await mockDAppWalletConnectClient();
 
@@ -367,17 +367,17 @@ describe("WalletConnectSigner", () => {
     };
 
     await expect(
-      walletConnectSigner.signAmino(signerAddress, testSignDoc)
+      walletConnectSigner.signAmino(signerAddress, testSignDoc),
     ).rejects.toHaveProperty(
       "message",
-      "Missing or invalid. request() method: cosmos_signAmino"
+      "Missing or invalid. request() method: cosmos_signAmino",
     );
   });
 
   it("Sign direct successfully", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     const dappClient = await mockDAppWalletConnectClient();
 
@@ -394,14 +394,14 @@ describe("WalletConnectSigner", () => {
         TxBody.fromPartial({
           memo: "test-memo",
           messages: [],
-        })
+        }),
       ).finish(),
       authInfoBytes: AuthInfo.encode(
         AuthInfo.fromPartial({
           fee: {
             amount: [{ amount: "1000", denom: "udsm" }],
           },
-        })
+        }),
       ).finish(),
       chainId: "test-chain",
       accountNumber: Long.fromNumber(42, true),
@@ -409,11 +409,11 @@ describe("WalletConnectSigner", () => {
 
     const signResponse = await walletConnectSigner.signDirect(
       signerAddress,
-      testSignDoc
+      testSignDoc,
     );
     const referenceSignResponse = await signer.signDirect(
       signerAddress,
-      testSignDoc
+      testSignDoc,
     );
 
     expect(signResponse).toMatchObject(referenceSignResponse);
@@ -422,7 +422,7 @@ describe("WalletConnectSigner", () => {
   it("Sign direct with amino signer error", async () => {
     // Prepare the SignClient used from a Wallet
     const { walletClient, signer } = await mockWalletWalletConnectClient(
-      SigningMode.AMINO
+      SigningMode.AMINO,
     );
     const dappClient = await mockDAppWalletConnectClient();
 
@@ -439,24 +439,24 @@ describe("WalletConnectSigner", () => {
         TxBody.fromPartial({
           memo: "test-memo",
           messages: [],
-        })
+        }),
       ).finish(),
       authInfoBytes: AuthInfo.encode(
         AuthInfo.fromPartial({
           fee: {
             amount: [{ amount: "1000", denom: "udsm" }],
           },
-        })
+        }),
       ).finish(),
       chainId: "test-chain",
       accountNumber: Long.fromNumber(42, true),
     };
 
     await expect(
-      walletConnectSigner.signDirect(signerAddress, testSignDoc)
+      walletConnectSigner.signDirect(signerAddress, testSignDoc),
     ).rejects.toHaveProperty(
       "message",
-      "Missing or invalid. request() method: cosmos_signDirect"
+      "Missing or invalid. request() method: cosmos_signDirect",
     );
   });
 });

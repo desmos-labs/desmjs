@@ -23,7 +23,7 @@ export interface ReportsV1Extension {
       subspaceId: Long,
       target?: Any,
       reporter?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryReportsResponse>;
     /**
      * Queries a specific report given its id.
@@ -34,7 +34,7 @@ export interface ReportsV1Extension {
      */
     reasons: (
       subspaceId: Long,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryReasonsResponse>;
     /**
      * Queries a reporting reason given its id.
@@ -59,7 +59,7 @@ export function setupReportsV1Extension(base: QueryClient): ReportsV1Extension {
         subspaceId: Long,
         target?: Any,
         reporter?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.Reports({
           subspaceId,

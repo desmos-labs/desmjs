@@ -59,7 +59,7 @@ import {
 import { AminoConverters, AminoTypes } from "../../../aminotypes";
 
 export function registeredReactionValueToAny(
-  value: RegisteredReactionValue
+  value: RegisteredReactionValue,
 ): Any {
   return Any.fromPartial({
     typeUrl: RegisteredReactionValueTypeUrl,
@@ -75,7 +75,7 @@ export function freeTextReactionValueToAny(value: FreeTextValue): Any {
 }
 
 export function convertRegisteredReactionValueParamsToAmino(
-  params: RegisteredReactionValueParams | undefined
+  params: RegisteredReactionValueParams | undefined,
 ): AminoRegisteredReactionValueParams {
   return {
     enabled: omitFalse(params?.enabled || false),
@@ -83,7 +83,7 @@ export function convertRegisteredReactionValueParamsToAmino(
 }
 
 export function convertRegisteredReactionValueParamsFromAmino(
-  params: AminoRegisteredReactionValueParams
+  params: AminoRegisteredReactionValueParams,
 ): RegisteredReactionValueParams {
   return {
     enabled: fromOmitFalse(params.enabled),
@@ -91,7 +91,7 @@ export function convertRegisteredReactionValueParamsFromAmino(
 }
 
 export function convertFreeTextValueParamsToAmino(
-  params: FreeTextValueParams | undefined
+  params: FreeTextValueParams | undefined,
 ): AminoFreeTextValueParams {
   return {
     enabled: omitFalse(params?.enabled || false),
@@ -101,7 +101,7 @@ export function convertFreeTextValueParamsToAmino(
 }
 
 export function convertFreeTextValueParamsFromAmino(
-  params: AminoFreeTextValueParams
+  params: AminoFreeTextValueParams,
 ): FreeTextValueParams {
   return {
     enabled: fromOmitFalse(params.enabled),
@@ -117,12 +117,12 @@ export const AminoConverter: AminoConverters = {
   [RegisteredReactionValueTypeUrl]: {
     aminoType: RegisteredReactionValueAminoType,
     toAmino: (
-      reaction: RegisteredReactionValue
+      reaction: RegisteredReactionValue,
     ): AminoRegisteredReaction["value"] => ({
       registered_reaction_id: reaction.registeredReactionId,
     }),
     fromAmino: (
-      reaction: AminoRegisteredReaction["value"]
+      reaction: AminoRegisteredReaction["value"],
     ): RegisteredReactionValue =>
       RegisteredReactionValue.fromPartial({
         registeredReactionId: reaction.registered_reaction_id,
@@ -143,12 +143,12 @@ export const AminoConverter: AminoConverters = {
     aminoType: MsgAddReactionAminoType,
     toAmino: (
       msg: MsgAddReaction,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoMsgAddReaction["value"] => {
       assertDefinedAndNotNull(msg.value, "reaction value not defined");
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert MsgAddReaction.value to amino"
+        "aminoTypes must be defined to convert MsgAddReaction.value to amino",
       );
       return {
         subspace_id: omitZeroLong(msg.subspaceId),
@@ -159,11 +159,11 @@ export const AminoConverter: AminoConverters = {
     },
     fromAmino: (
       msg: AminoMsgAddReaction["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): MsgAddReaction => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert AminoMsgAddReaction.value from amino"
+        "aminoTypes must be defined to convert AminoMsgAddReaction.value from amino",
       );
       return {
         subspaceId: fromOmitZeroLong(msg.subspace_id),
@@ -191,7 +191,7 @@ export const AminoConverter: AminoConverters = {
   [MsgAddRegisteredReactionTypeUrl]: {
     aminoType: MsgAddRegisteredReactionAminoType,
     toAmino: (
-      msg: MsgAddRegisteredReaction
+      msg: MsgAddRegisteredReaction,
     ): AminoMsgAddRegisteredReaction["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       shorthand_code: omitEmptyString(msg.shorthandCode),
@@ -199,7 +199,7 @@ export const AminoConverter: AminoConverters = {
       user: omitEmptyString(msg.user),
     }),
     fromAmino: (
-      msg: AminoMsgAddRegisteredReaction["value"]
+      msg: AminoMsgAddRegisteredReaction["value"],
     ): MsgAddRegisteredReaction => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       shorthandCode: fromOmitEmptyString(msg.shorthand_code),
@@ -210,7 +210,7 @@ export const AminoConverter: AminoConverters = {
   [MsgEditRegisteredReactionTypeUrl]: {
     aminoType: MsgEditRegisteredReactionAminoType,
     toAmino: (
-      msg: MsgEditRegisteredReaction
+      msg: MsgEditRegisteredReaction,
     ): AminoMsgEditRegisteredReaction["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       registered_reaction_id: omitEmptyNumber(msg.registeredReactionId),
@@ -219,7 +219,7 @@ export const AminoConverter: AminoConverters = {
       user: omitEmptyString(msg.user),
     }),
     fromAmino: (
-      msg: AminoMsgEditRegisteredReaction["value"]
+      msg: AminoMsgEditRegisteredReaction["value"],
     ): MsgEditRegisteredReaction => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       registeredReactionId: fromOmitEmptyNumber(msg.registered_reaction_id),
@@ -231,14 +231,14 @@ export const AminoConverter: AminoConverters = {
   [MsgRemoveRegisteredReactionTypeUrl]: {
     aminoType: MsgRemoveRegisteredReactionAminoType,
     toAmino: (
-      msg: MsgRemoveRegisteredReaction
+      msg: MsgRemoveRegisteredReaction,
     ): AminoMsgRemoveRegisteredReaction["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       registered_reaction_id: omitEmptyNumber(msg.registeredReactionId),
       user: omitEmptyString(msg.user),
     }),
     fromAmino: (
-      msg: AminoMsgRemoveRegisteredReaction["value"]
+      msg: AminoMsgRemoveRegisteredReaction["value"],
     ): MsgRemoveRegisteredReaction => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       registeredReactionId: fromOmitEmptyNumber(msg.registered_reaction_id),
@@ -248,21 +248,21 @@ export const AminoConverter: AminoConverters = {
   [MsgSetReactionsParamsTypeUrl]: {
     aminoType: MsgSetReactionsParamsAminoType,
     toAmino: (
-      msg: MsgSetReactionsParams
+      msg: MsgSetReactionsParams,
     ): AminoMsgSetReactionsParams["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       registered_reaction: convertRegisteredReactionValueParamsToAmino(
-        msg.registeredReaction
+        msg.registeredReaction,
       ),
       free_text: convertFreeTextValueParamsToAmino(msg.freeText),
       user: omitEmptyString(msg.user),
     }),
     fromAmino: (
-      msg: AminoMsgSetReactionsParams["value"]
+      msg: AminoMsgSetReactionsParams["value"],
     ): MsgSetReactionsParams => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       registeredReaction: convertRegisteredReactionValueParamsFromAmino(
-        msg.registered_reaction
+        msg.registered_reaction,
       ),
       freeText: convertFreeTextValueParamsFromAmino(msg.free_text),
       user: fromOmitEmptyString(msg.user),

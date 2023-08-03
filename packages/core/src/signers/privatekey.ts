@@ -153,7 +153,7 @@ export interface PrivateKeySignerOptions {
  */
 export class PrivateKeySigner extends Signer {
   private keyProviderStatusListener: Observer<PrivateKeyProviderStatus> = (
-    newStatus
+    newStatus,
   ) => {
     switch (newStatus) {
       case PrivateKeyProviderStatus.Disconnecting:
@@ -193,19 +193,19 @@ export class PrivateKeySigner extends Signer {
   static fromSecp256k1(
     privateKey: string | Uint8Array,
     signingMode: SigningMode,
-    options?: PrivateKeySignerOptions
+    options?: PrivateKeySignerOptions,
   ): PrivateKeySigner {
     return new PrivateKeySigner(
       new Secp256k1KeyProvider(privateKey),
       signingMode,
-      options
+      options,
     );
   }
 
   constructor(
     provider: PrivateKeyProvider,
     signingMode: SigningMode,
-    options?: PrivateKeySignerOptions
+    options?: PrivateKeySignerOptions,
   ) {
     super(PrivateKeySigner.keyProviderStatusToSignerStatus(provider.status));
     this.keyProvider = provider;
@@ -244,13 +244,13 @@ export class PrivateKeySigner extends Signer {
       if (this.signMode === SigningMode.AMINO) {
         this.aminoSigner = await Secp256k1Wallet.fromKey(
           this._privateKey.key,
-          this.prefix
+          this.prefix,
         );
         [this.currentAccount] = await this.aminoSigner.getAccounts();
       } else {
         this.directSigner = await DirectSecp256k1Wallet.fromKey(
           this._privateKey.key,
-          this.prefix
+          this.prefix,
         );
         [this.currentAccount] = await this.directSigner.getAccounts();
       }
@@ -293,7 +293,7 @@ export class PrivateKeySigner extends Signer {
 
   async signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse> {
     this.assertConnected();
 
@@ -306,7 +306,7 @@ export class PrivateKeySigner extends Signer {
 
   async signDirect(
     signerAddress: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
   ): Promise<DirectSignResponse> {
     this.assertConnected();
 
@@ -324,7 +324,7 @@ export class PrivateKeySigner extends Signer {
   get privateKey(): PrivateKey {
     if (this._privateKey === undefined) {
       throw new Error(
-        "can't get private key, check that the signer is connected"
+        "can't get private key, check that the signer is connected",
       );
     }
 
@@ -332,7 +332,7 @@ export class PrivateKeySigner extends Signer {
   }
 
   private static keyProviderStatusToSignerStatus(
-    status: PrivateKeyProviderStatus
+    status: PrivateKeyProviderStatus,
   ): SignerStatus {
     switch (status) {
       case PrivateKeyProviderStatus.NotConnected:

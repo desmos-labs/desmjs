@@ -22,7 +22,7 @@ export interface ReactionsExtension {
       subspaceId: Long,
       postId: Long,
       user?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryReactionsResponse>;
 
     /**
@@ -31,7 +31,7 @@ export interface ReactionsExtension {
     readonly reaction: (
       subspaceId: Long,
       postId: Long,
-      reactionId: number
+      reactionId: number,
     ) => Promise<Reaction | undefined>;
 
     /**
@@ -39,7 +39,7 @@ export interface ReactionsExtension {
      */
     readonly registeredReactions: (
       subspaceId: Long,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryRegisteredReactionsResponse>;
 
     /**
@@ -47,14 +47,14 @@ export interface ReactionsExtension {
      */
     readonly registeredReaction: (
       subspaceId: Long,
-      reactionId: number
+      reactionId: number,
     ) => Promise<RegisteredReaction | undefined>;
 
     /**
      * Queries the reaction params for the given subspace.
      */
     readonly reactionsParams: (
-      subspaceId: Long
+      subspaceId: Long,
     ) => Promise<SubspaceReactionsParams>;
   };
 }
@@ -71,7 +71,7 @@ export function setupReactionsExtension(base: QueryClient): ReactionsExtension {
         subspaceId: Long,
         postId: Long,
         user?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.Reactions({
           subspaceId,

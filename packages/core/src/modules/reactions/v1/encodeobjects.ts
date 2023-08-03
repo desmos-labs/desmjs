@@ -22,7 +22,7 @@ export interface MsgAddReactionEncodeObject extends EncodeObject {
 }
 
 export function isMsgAddReactionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAddReactionEncodeObject {
   return (
     (encodeObject as MsgAddReactionEncodeObject).typeUrl ===
@@ -36,7 +36,7 @@ export interface MsgRemoveReactionEncodeObject extends EncodeObject {
 }
 
 export function isMsgRemoveReactionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRemoveReactionEncodeObject {
   return (
     (encodeObject as MsgRemoveReactionEncodeObject).typeUrl ===
@@ -50,7 +50,7 @@ export interface MsgAddRegisteredReactionEncodeObject extends EncodeObject {
 }
 
 export function isMsgAddRegisteredReactionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAddRegisteredReactionEncodeObject {
   return (
     (encodeObject as MsgAddRegisteredReactionEncodeObject).typeUrl ===
@@ -64,7 +64,7 @@ export interface MsgEditRegisteredReactionEncodeObject extends EncodeObject {
 }
 
 export function isMsgEditRegisteredReactionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgEditRegisteredReactionEncodeObject {
   return (
     (encodeObject as MsgEditRegisteredReactionEncodeObject).typeUrl ===
@@ -78,7 +78,7 @@ export interface MsgRemoveRegisteredReactionEncodeObject extends EncodeObject {
 }
 
 export function isMsgRemoveRegisteredReactionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRemoveRegisteredReactionEncodeObject {
   return (
     (encodeObject as MsgRemoveRegisteredReactionEncodeObject).typeUrl ===
@@ -92,7 +92,7 @@ export interface MsgSetReactionsParamsEncodeObject extends EncodeObject {
 }
 
 export function isMsgSetReactionsParamsEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgSetReactionsParamsEncodeObject {
   return (
     (encodeObject as MsgSetReactionsParamsEncodeObject).typeUrl ===

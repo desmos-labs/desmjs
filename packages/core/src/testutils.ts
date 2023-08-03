@@ -66,7 +66,7 @@ export const testUser2 = {
  */
 export async function signerFromMnemonic(
   mnemonic: string,
-  indexes: number[] = [0]
+  indexes: number[] = [0],
 ): Promise<OfflineSigner> {
   const hdPaths = indexes.map((i) => `m/44'/852'/0'/${i}/0`).map(stringToPath);
 
@@ -85,12 +85,12 @@ export async function signerFromMnemonic(
 export function aminoSignerFromMnemonic(
   mnemonic: string,
   paths: HdPath[] = [DesmosHdPath],
-  prefix: string = "desmos"
+  prefix: string = "desmos",
 ): Promise<OfflineAminoSigner> {
   const hdPaths = paths
     .map(
       (path) =>
-        `m/44'/${path.coinType}'/${path.account}'/${path.change}/${path.index}`
+        `m/44'/${path.coinType}'/${path.account}'/${path.change}/${path.index}`,
     )
     .map(stringToPath);
 
@@ -119,7 +119,7 @@ export async function getAminoSignerAndClient(): Promise<
 > {
   const signer = await OfflineSignerAdapter.fromMnemonic(
     SigningMode.AMINO,
-    testUser1.mnemonic
+    testUser1.mnemonic,
   );
   const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
     gasPrice: defaultGasPrice,
@@ -137,7 +137,7 @@ export async function getDirectSignerAndClient(): Promise<
 > {
   const signer = await OfflineSignerAdapter.fromMnemonic(
     SigningMode.DIRECT,
-    testUser1.mnemonic
+    testUser1.mnemonic,
   );
   const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
     gasPrice: defaultGasPrice,
@@ -148,7 +148,7 @@ export async function getDirectSignerAndClient(): Promise<
 
 export async function pollTx(
   client: DesmosClient,
-  txHash: string
+  txHash: string,
 ): Promise<void> {
   let timedOut = false;
   const txPollTimeout = setTimeout(() => {

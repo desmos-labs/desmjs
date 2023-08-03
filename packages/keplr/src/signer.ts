@@ -162,7 +162,7 @@ export class KeplrSigner extends Signer {
    */
   async signDirect(
     signerAddress: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
   ): Promise<DirectSignResponse> {
     this.assertConnected();
     assert(this.accountData);
@@ -175,7 +175,7 @@ export class KeplrSigner extends Signer {
    */
   async signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse> {
     this.assertConnected();
     assert(this.accountData);

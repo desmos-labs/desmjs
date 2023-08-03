@@ -99,7 +99,7 @@ export class DecodeResult<T> {
  * @param response - The response to decode.
  */
 export function decodeGetAccountsRpcResponse(
-  response: any | undefined
+  response: any | undefined,
 ): DecodeResult<AccountData[]> {
   if (response === undefined) {
     return DecodeResult.error("the response is undefined");
@@ -118,23 +118,23 @@ export function decodeGetAccountsRpcResponse(
     const serializedAccount = accounts[i];
     if (serializedAccount.address === undefined) {
       return DecodeResult.error(
-        `missing address field in account at index ${i}`
+        `missing address field in account at index ${i}`,
       );
     }
     if (serializedAccount.algo === undefined) {
       return DecodeResult.error(
-        `missing address field in account at index ${i}`
+        `missing address field in account at index ${i}`,
       );
     }
     if (serializedAccount.pubkey === undefined) {
       return DecodeResult.error(
-        `missing address field in account at index ${i}`
+        `missing address field in account at index ${i}`,
       );
     }
 
     if (validAccountAlgo.indexOf(serializedAccount.algo) === -1) {
       return DecodeResult.error(
-        `invalid account algo ${serializedAccount.algo} at index ${i}`
+        `invalid account algo ${serializedAccount.algo} at index ${i}`,
       );
     }
 
@@ -153,7 +153,7 @@ export function decodeGetAccountsRpcResponse(
  * @param params - The params to decode.
  */
 export function decodeDirectSignRpcRequestParams(
-  params: any[]
+  params: any[],
 ): DecodeResult<SignDirectDecodedRpcRequestParams> {
   if (params.length === 0) {
     return DecodeResult.error("empty params");
@@ -171,7 +171,7 @@ export function decodeDirectSignRpcRequestParams(
 
   if (missingFields.length > 0) {
     return DecodeResult.error(
-      `missing fields in request: ${missingFields.join(",")}`
+      `missing fields in request: ${missingFields.join(",")}`,
     );
   }
 
@@ -191,7 +191,7 @@ export function decodeDirectSignRpcRequestParams(
  * @param params - The params to decode.
  */
 export function decodeAminoSignRpcRequestParams(
-  params: any[]
+  params: any[],
 ): DecodeResult<SignAminoDecodedRpcRequestParams> {
   if (params.length === 0) {
     return DecodeResult.error("empty params");
@@ -206,7 +206,7 @@ export function decodeAminoSignRpcRequestParams(
 
   if (missingFields.length > 0) {
     return DecodeResult.error(
-      `missing fields in request: ${missingFields.join(",")}`
+      `missing fields in request: ${missingFields.join(",")}`,
     );
   }
 
@@ -221,12 +221,12 @@ export function decodeAminoSignRpcRequestParams(
  * @param request - The request to convert.
  */
 export function decodeDirectSignRequest(
-  request: SignClientTypes.EventArguments["session_request"]
+  request: SignClientTypes.EventArguments["session_request"],
 ): DecodeResult<WalletConnectSignDirectRequest> {
   const { method, params } = request.params.request;
   if (method !== CosmosRPCMethods.SignDirect) {
     return DecodeResult.error(
-      `invalid method, can decode only ${CosmosRPCMethods.SignDirect}`
+      `invalid method, can decode only ${CosmosRPCMethods.SignDirect}`,
     );
   }
 
@@ -277,7 +277,7 @@ export function decodeDirectSignRequest(
 
   // Safe to cast to EncodeObject since here we have just defined decoded objects.
   const msgs = typesWithDecodeResult.map(
-    ([, decoded]) => <EncodeObject>decoded
+    ([, decoded]) => <EncodeObject>decoded,
   );
 
   const fee: StdFee = {
@@ -303,12 +303,12 @@ export function decodeDirectSignRequest(
  * @param request - The request to convert.
  */
 export function decodeAminoSignRequest(
-  request: SignClientTypes.EventArguments["session_request"]
+  request: SignClientTypes.EventArguments["session_request"],
 ): DecodeResult<WalletConnectSignAminoRequest> {
   const { method, params } = request.params.request;
   if (method !== CosmosRPCMethods.SignAmino) {
     return DecodeResult.error(
-      `invalid method, can decode only ${CosmosRPCMethods.SignAmino}`
+      `invalid method, can decode only ${CosmosRPCMethods.SignAmino}`,
     );
   }
 
@@ -320,7 +320,7 @@ export function decodeAminoSignRequest(
   const { signDoc, signerAddress } = paramsDecodeResult.value;
   const aminoConverter = new AminoTypes(
     DesmosAminoConverter,
-    new Registry(DesmosRegistry)
+    new Registry(DesmosRegistry),
   );
   const typesWithDecodeResult: [string, EncodeObject | undefined][] =
     signDoc.msgs.map((msg) => {
@@ -342,7 +342,7 @@ export function decodeAminoSignRequest(
 
   // Safe to cast to EncodeObject since here we have just defined decoded objects.
   const msgs = typesWithDecodeResult.map(
-    ([, encodeObject]) => <EncodeObject>encodeObject
+    ([, encodeObject]) => <EncodeObject>encodeObject,
   );
 
   return DecodeResult.ok({
@@ -364,7 +364,7 @@ export function decodeAminoSignRequest(
  * @param request - The request to decode.
  */
 export function decodeSessionRequest(
-  request: SignClientTypes.EventArguments["session_request"]
+  request: SignClientTypes.EventArguments["session_request"],
 ): DecodeResult<WalletConnectRequest> {
   const { method } = request.params.request;
 

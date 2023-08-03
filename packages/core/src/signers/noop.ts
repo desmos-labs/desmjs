@@ -35,14 +35,14 @@ export class NoOpSigner extends Signer {
 
   signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse> {
     throw new Error("Operation not implemented");
   }
 
   signDirect(
     signerAddress: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
   ): Promise<DirectSignResponse> {
     throw new Error("Operation not implemented");
   }

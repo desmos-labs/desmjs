@@ -8,7 +8,7 @@ export interface MsgAuthenticateEncodeObject extends EncodeObject {
 }
 
 export function isMsgAuthenticateEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAuthenticateEncodeObject {
   return (
     (encodeObject as MsgAuthenticateEncodeObject).typeUrl ===

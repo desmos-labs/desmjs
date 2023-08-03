@@ -12,12 +12,12 @@ import { Currency } from "../types";
 export function convertCoin(
   coin: Coin,
   toExponent: number,
-  currencies: Currency[]
+  currencies: Currency[],
 ): Coin | null {
   const destCoin = currencies.find(
     (currency) =>
       currency.coinMinimalDenom.toLowerCase() === coin.denom.toLowerCase() ||
-      currency.coinDenom.toLowerCase() === coin.denom.toLowerCase()
+      currency.coinDenom.toLowerCase() === coin.denom.toLowerCase(),
   );
 
   if (destCoin === undefined) {
@@ -37,7 +37,7 @@ export function convertCoin(
         // We are going from lowest to higher exponent
         destCoinAmount = Decimal.fromUserInput(
           coin.amount,
-          destCoin.coinDecimals
+          destCoin.coinDecimals,
         )
           .multiply(Uint64.fromNumber(10 ** destCoin.coinDecimals))
           .toString();

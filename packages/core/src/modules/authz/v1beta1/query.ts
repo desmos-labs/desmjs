@@ -12,7 +12,7 @@ export interface AuthzV1Beta1Extension {
       granter: string,
       grantee: string,
       msgTypeUrl?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<Grant[] | undefined>;
   };
 }
@@ -22,7 +22,7 @@ export interface AuthzV1Beta1Extension {
  * @param base
  */
 export function setupAuthzV1Beta1Extension(
-  base: QueryClient
+  base: QueryClient,
 ): AuthzV1Beta1Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
@@ -35,7 +35,7 @@ export function setupAuthzV1Beta1Extension(
         granter: string,
         grantee: string,
         msgTypeUrl?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) => {
         try {
           const { grants } = await queryService.Grants({

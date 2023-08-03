@@ -141,7 +141,7 @@ export abstract class Signer
    */
   public abstract signDirect(
     signerAddress: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
   ): Promise<DirectSignResponse>;
 
   /**
@@ -149,6 +149,6 @@ export abstract class Signer
    */
   public abstract signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse>;
 }

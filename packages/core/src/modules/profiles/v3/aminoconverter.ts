@@ -108,7 +108,7 @@ import { AminoConverters, AminoTypes } from "../../../aminotypes";
 
 function assertDefinedAndNotNull<T>(
   object?: T,
-  message?: string
+  message?: string,
 ): asserts object is T {
   if (object === undefined || object === null) {
     throw new Error(message);
@@ -137,20 +137,20 @@ function convertLinkDataFromAmino(data: AminoLinkData): Data | undefined {
 }
 
 function convertTimeoutHeightToAmino(
-  timeout: Height | undefined
+  timeout: Height | undefined,
 ): AminoTimeoutHeight {
   return {
     revision_height: omitZeroLong(
-      timeout?.revisionHeight || Long.fromNumber(0)
+      timeout?.revisionHeight || Long.fromNumber(0),
     ),
     revision_number: omitZeroLong(
-      timeout?.revisionNumber || Long.fromNumber(0)
+      timeout?.revisionNumber || Long.fromNumber(0),
     ),
   };
 }
 
 function convertTimeoutHeightFromAmino(
-  timeout: AminoTimeoutHeight
+  timeout: AminoTimeoutHeight,
 ): Height | undefined {
   if (!timeout.revision_number && !timeout.revision_height) {
     return undefined;
@@ -192,7 +192,7 @@ export function hexAddressToAny(address: HexAddress): Any {
 // --------------------------------------------------------------------------------------------------------------------
 
 function convertCompactBitArrayToAmino(
-  array: CompactBitArray | undefined
+  array: CompactBitArray | undefined,
 ): string | null {
   if (!array) {
     return null;
@@ -209,7 +209,7 @@ function convertCompactBitArrayToAmino(
 }
 
 function convertCompactBitArrayFromAmino(
-  value: string | null
+  value: string | null,
 ): CompactBitArray {
   if (!value) {
     return {
@@ -242,7 +242,7 @@ export function singleSignatureToAny(signature: SingleSignature): Any {
 }
 
 export function cosmosMultiSignatureToAny(
-  signature: CosmosMultiSignature
+  signature: CosmosMultiSignature,
 ): Any {
   return Any.fromPartial({
     typeUrl: CosmosMultiSignatureTypeUrl,
@@ -255,7 +255,7 @@ export function cosmosMultiSignatureToAny(
 // --------------------------------------------------------------------------------------------------------------------
 
 function convertChainConfigToAmino(
-  config: ChainConfig | undefined
+  config: ChainConfig | undefined,
 ): AminoChainConfig {
   return {
     name: omitEmptyString(config?.name || ""),
@@ -263,7 +263,7 @@ function convertChainConfigToAmino(
 }
 
 function convertChainConfigFromAmino(
-  config: AminoChainConfig
+  config: AminoChainConfig,
 ): ChainConfig | undefined {
   if (!config.name) {
     return undefined;
@@ -296,13 +296,13 @@ function convertPubKeyToAmino(pubKey: Any): AminoPubKey {
 
 function convertProofToAmino(
   proof: Proof,
-  aminoTypes?: AminoTypes
+  aminoTypes?: AminoTypes,
 ): AminoProof {
   assertDefinedAndNotNull(proof.pubKey, "pub key not defined");
   assertDefinedAndNotNull(proof.signature, "signature not defined");
   assertDefined(
     aminoTypes,
-    "aminoTypes can't be undefined to convert Proof.signature to amino"
+    "aminoTypes can't be undefined to convert Proof.signature to amino",
   );
   return {
     signature: aminoTypes.fromAny(proof.signature),
@@ -317,7 +317,7 @@ export function secp256k1PubKeyToAny(pubKey: Secp256k1Pubkey): Any {
     value: Secp256k1PubKey.encode(
       Secp256k1PubKey.fromPartial({
         key: fromBase64(pubKey.value),
-      })
+      }),
     ).finish(),
   });
 }
@@ -328,7 +328,7 @@ export function ed25519PubKeyToAny(pubKey: Ed25519Pubkey): Any {
     value: Ed25519PubKey.encode(
       Ed25519PubKey.fromPartial({
         key: fromBase64(pubKey.value),
-      })
+      }),
     ).finish(),
   });
 }
@@ -347,11 +347,11 @@ function convertPubKeyFromAmino(pubKey: AminoPubKey): Any {
 
 function convertProofFromAmino(
   proof: AminoProof,
-  aminoTypes?: AminoTypes
+  aminoTypes?: AminoTypes,
 ): Proof {
   assertDefined(
     aminoTypes,
-    "aminoTypes can't be undefined to convert AminoProof.signature from amino"
+    "aminoTypes can't be undefined to convert AminoProof.signature from amino",
   );
   return Proof.fromPartial({
     signature: aminoTypes.toAny(proof.signature),
@@ -415,31 +415,31 @@ export const AminoConverter: AminoConverters = {
     aminoType: CosmosMultiSignatureAminoType,
     toAmino: (
       value: CosmosMultiSignature,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoCosmosMultiSignature["value"] => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert CosmosMultiSignature.signatures to amino"
+        "aminoTypes must be defined to convert CosmosMultiSignature.signatures to amino",
       );
       return {
         bit_array: convertCompactBitArrayToAmino(value.bitArray),
         signatures: nullIfEmptyArray(
-          value.signatures.map((s) => aminoTypes.fromAny(s))
+          value.signatures.map((s) => aminoTypes.fromAny(s)),
         ),
       };
     },
     fromAmino: (
       value: AminoCosmosMultiSignature["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): CosmosMultiSignature => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert CosmosMultiSignature.signatures to amino"
+        "aminoTypes must be defined to convert CosmosMultiSignature.signatures to amino",
       );
       return {
         bitArray: convertCompactBitArrayFromAmino(value.bit_array),
         signatures: fromNullIfEmptyArray(
-          value.signatures?.map((s) => aminoTypes.toAny(s)) ?? null
+          value.signatures?.map((s) => aminoTypes.toAny(s)) ?? null,
         ),
       };
     },
@@ -477,13 +477,13 @@ export const AminoConverter: AminoConverters = {
   [MsgRequestDTagTransferTypeUrl]: {
     aminoType: MsgRequestDTagTransferAminoType,
     toAmino: (
-      value: MsgRequestDTagTransfer
+      value: MsgRequestDTagTransfer,
     ): AminoMsgRequestDTagTransfer["value"] => ({
       receiver: omitEmptyString(value.receiver),
       sender: omitEmptyString(value.sender),
     }),
     fromAmino: (
-      msg: AminoMsgRequestDTagTransfer["value"]
+      msg: AminoMsgRequestDTagTransfer["value"],
     ): MsgRequestDTagTransfer => ({
       receiver: fromOmitEmptyString(msg.receiver),
       sender: fromOmitEmptyString(msg.sender),
@@ -492,14 +492,14 @@ export const AminoConverter: AminoConverters = {
   [MsgAcceptDTagTransferRequestTypeUrl]: {
     aminoType: MsgAcceptDTagTransferRequestAminoType,
     toAmino: (
-      value: MsgAcceptDTagTransferRequest
+      value: MsgAcceptDTagTransferRequest,
     ): AminoMsgAcceptDTagTransferRequest["value"] => ({
       new_dtag: omitEmptyString(value.newDtag),
       sender: omitEmptyString(value.sender),
       receiver: omitEmptyString(value.receiver),
     }),
     fromAmino: (
-      msg: AminoMsgAcceptDTagTransferRequest["value"]
+      msg: AminoMsgAcceptDTagTransferRequest["value"],
     ): MsgAcceptDTagTransferRequest => ({
       newDtag: fromOmitEmptyString(msg.new_dtag),
       sender: fromOmitEmptyString(msg.sender),
@@ -509,13 +509,13 @@ export const AminoConverter: AminoConverters = {
   [MsgRefuseDTagTransferRequestTypeUrl]: {
     aminoType: MsgRefuseDTagTransferRequestAminoType,
     toAmino: (
-      value: MsgRefuseDTagTransferRequest
+      value: MsgRefuseDTagTransferRequest,
     ): AminoMsgRefuseDTagTransferRequest["value"] => ({
       sender: omitEmptyString(value.sender),
       receiver: omitEmptyString(value.receiver),
     }),
     fromAmino: (
-      msg: AminoMsgRefuseDTagTransferRequest["value"]
+      msg: AminoMsgRefuseDTagTransferRequest["value"],
     ): MsgRefuseDTagTransferRequest => ({
       sender: fromOmitEmptyString(msg.sender),
       receiver: fromOmitEmptyString(msg.receiver),
@@ -524,13 +524,13 @@ export const AminoConverter: AminoConverters = {
   [MsgCancelDTagTransferRequestTypeUrl]: {
     aminoType: MsgCancelDTagTransferRequestAminoType,
     toAmino: (
-      value: MsgCancelDTagTransferRequest
+      value: MsgCancelDTagTransferRequest,
     ): AminoMsgCancelDTagTransferRequest["value"] => ({
       sender: omitEmptyString(value.sender),
       receiver: omitEmptyString(value.receiver),
     }),
     fromAmino: (
-      msg: AminoMsgCancelDTagTransferRequest["value"]
+      msg: AminoMsgCancelDTagTransferRequest["value"],
     ): MsgCancelDTagTransferRequest => ({
       sender: fromOmitEmptyString(msg.sender),
       receiver: fromOmitEmptyString(msg.receiver),
@@ -560,14 +560,14 @@ export const AminoConverter: AminoConverters = {
   [MsgUnlinkApplicationTypeUrl]: {
     aminoType: MsgUnlinkApplicationAminoType,
     toAmino: (
-      msg: MsgUnlinkApplication
+      msg: MsgUnlinkApplication,
     ): AminoMsgUnlinkApplication["value"] => ({
       signer: omitEmptyString(msg.signer),
       application: omitEmptyString(msg.application),
       username: omitEmptyString(msg.username),
     }),
     fromAmino: (
-      msg: AminoMsgUnlinkApplication["value"]
+      msg: AminoMsgUnlinkApplication["value"],
     ): MsgUnlinkApplication => ({
       signer: fromOmitEmptyString(msg.signer),
       application: fromOmitEmptyString(msg.application),
@@ -578,14 +578,14 @@ export const AminoConverter: AminoConverters = {
     aminoType: MsgLinkChainAccountAminoType,
     toAmino: (
       msg: MsgLinkChainAccount,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoMsgLinkChainAccount["value"] => {
       assertDefinedAndNotNull(msg.chainAddress, "chain address not defined");
       assertDefinedAndNotNull(msg.proof, "proof not defined");
       assertDefinedAndNotNull(msg.chainConfig, "chain config not defined");
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert MsgLinkChainAccount.chainAddress to amino"
+        "aminoTypes must be defined to convert MsgLinkChainAccount.chainAddress to amino",
       );
       return {
         chain_address: aminoTypes.fromAny(msg.chainAddress),
@@ -596,11 +596,11 @@ export const AminoConverter: AminoConverters = {
     },
     fromAmino: (
       msg: AminoMsgLinkChainAccount["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): MsgLinkChainAccount => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert AminoMsgLinkChainAccount.chain_address from amino"
+        "aminoTypes must be defined to convert AminoMsgLinkChainAccount.chain_address from amino",
       );
       return {
         chainAddress: aminoTypes.toAny(msg.chain_address),
@@ -613,14 +613,14 @@ export const AminoConverter: AminoConverters = {
   [MsgUnlinkChainAccountTypeUrl]: {
     aminoType: MsgUnlinkChainAccountAminoType,
     toAmino: (
-      msg: MsgUnlinkChainAccount
+      msg: MsgUnlinkChainAccount,
     ): AminoMsgUnlinkChainAccount["value"] => ({
       chain_name: omitEmptyString(msg.chainName),
       owner: omitEmptyString(msg.owner),
       target: omitEmptyString(msg.target),
     }),
     fromAmino: (
-      msg: AminoMsgUnlinkChainAccount["value"]
+      msg: AminoMsgUnlinkChainAccount["value"],
     ): MsgUnlinkChainAccount => ({
       chainName: fromOmitEmptyString(msg.chain_name),
       owner: fromOmitEmptyString(msg.owner),

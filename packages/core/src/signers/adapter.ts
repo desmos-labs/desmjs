@@ -50,12 +50,12 @@ export class OfflineSignerAdapter extends Signer {
 
   signDirect(
     signerAddress: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
   ): Promise<DirectSignResponse> {
     if (this._signMode === SigningMode.DIRECT) {
       return (this.signer as OfflineDirectSigner).signDirect(
         signerAddress,
-        signDoc
+        signDoc,
       );
     }
 
@@ -64,12 +64,12 @@ export class OfflineSignerAdapter extends Signer {
 
   signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse> {
     if (this._signMode === SigningMode.AMINO) {
       return (this.signer as OfflineAminoSigner).signAmino(
         signerAddress,
-        signDoc
+        signDoc,
       );
     }
 
@@ -82,7 +82,7 @@ export class OfflineSignerAdapter extends Signer {
 
   getCurrentAccount(): Promise<AccountData | undefined> {
     return this.getAccounts().then((accounts) =>
-      accounts.length > 0 ? accounts[0] : undefined
+      accounts.length > 0 ? accounts[0] : undefined,
     );
   }
 
@@ -112,7 +112,7 @@ export class OfflineSignerAdapter extends Signer {
   static fromMnemonic(
     mode: SigningMode,
     mnemonic: string,
-    options?: Partial<OfflineSignerConfig>
+    options?: Partial<OfflineSignerConfig>,
   ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
@@ -139,7 +139,7 @@ export class OfflineSignerAdapter extends Signer {
   static generate(
     mode: SigningMode,
     length?: 12 | 15 | 18 | 21 | 24,
-    options?: Partial<OfflineSignerConfig>
+    options?: Partial<OfflineSignerConfig>,
   ): Promise<OfflineSignerAdapter> {
     if (mode === SigningMode.DIRECT) {
       return DirectSecp256k1HdWallet.generate(length, {

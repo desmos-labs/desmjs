@@ -13,7 +13,7 @@ export interface SupplyV1Extension {
      */
     readonly circulatingSupply: (
       denom: string,
-      dividerExponent?: Long
+      dividerExponent?: Long,
     ) => Promise<QueryCirculatingResponse>;
 
     /**
@@ -21,7 +21,7 @@ export interface SupplyV1Extension {
      */
     readonly totalSupply: (
       denom: string,
-      dividerExponent?: Long
+      dividerExponent?: Long,
     ) => Promise<QueryTotalResponse>;
   };
 }

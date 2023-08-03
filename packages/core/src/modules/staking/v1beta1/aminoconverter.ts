@@ -12,7 +12,7 @@ export const AminoConverter: AminoConverters = {
   [StakeAuthorizationTypeUrl]: {
     aminoType: StakeAuthorizationAminoType,
     toAmino: (
-      stakeAuthorization: StakeAuthorization
+      stakeAuthorization: StakeAuthorization,
     ): AminoStakeAuthorization["value"] => ({
       max_tokens: stakeAuthorization.maxTokens,
       authorization_type: stakeAuthorization.authorizationType,
@@ -20,7 +20,7 @@ export const AminoConverter: AminoConverters = {
       deny_list: stakeAuthorization.denyList,
     }),
     fromAmino: (
-      authorization: AminoStakeAuthorization["value"]
+      authorization: AminoStakeAuthorization["value"],
     ): StakeAuthorization =>
       StakeAuthorization.fromPartial({
         maxTokens: authorization.max_tokens,

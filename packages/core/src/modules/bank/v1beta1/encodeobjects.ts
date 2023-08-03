@@ -8,7 +8,7 @@ export interface MsgMultiSendEncodeObject extends EncodeObject {
 }
 
 export function isMsgMultiSendEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgMultiSendEncodeObject {
   return (
     (encodeObject as MsgMultiSendEncodeObject).typeUrl === MsgMultiSendTypeUrl

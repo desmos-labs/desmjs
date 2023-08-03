@@ -33,7 +33,7 @@ export interface BroadcastTest {
  */
 export function runConverterTest(
   converters: AminoConverters,
-  data: ConverterTestData<any>
+  data: ConverterTestData<any>,
 ) {
   return async () => {
     const converter = converters[data.typeUrl];
@@ -44,7 +44,7 @@ export function runConverterTest(
     // Check toAmino conversion
     const aminoConverted = converter.toAmino(data.msg);
     expect(sortedJsonStringify(aminoConverted)).toBe(
-      data.expectedJsonSerialized
+      data.expectedJsonSerialized,
     );
 
     if (data.testToProtobuf === true) {
@@ -59,7 +59,7 @@ export function runConverterTest(
  */
 export function runAminoTypesTest(
   aminoTypes: AminoTypes,
-  data: ConverterTestData<any>
+  data: ConverterTestData<any>,
 ) {
   return async () => {
     // Check toAmino conversion
@@ -68,7 +68,7 @@ export function runAminoTypesTest(
       value: data.msg,
     });
     expect(sortedJsonStringify(aminoMsg.value)).toBe(
-      data.expectedJsonSerialized
+      data.expectedJsonSerialized,
     );
 
     if (data.testToProtobuf === true) {
@@ -90,7 +90,7 @@ export function runBroadcastTest(test: BroadcastTest) {
       },
     ]);
     const directResult = await directClient.broadcastTxBlock(
-      directSignResult.txRaw
+      directSignResult.txRaw,
     );
     assertTxSuccess(directResult);
   });
@@ -105,7 +105,7 @@ export function runBroadcastTest(test: BroadcastTest) {
       },
     ]);
     const aminoResult = await aminoClient.broadcastTxBlock(
-      aminoSignResult.txRaw
+      aminoSignResult.txRaw,
     );
     assertTxSuccess(aminoResult);
   });

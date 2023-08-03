@@ -9,13 +9,13 @@ export const AminoConverter: AminoConverters = {
   [SendAuthorizationTypeUrl]: {
     aminoType: SendAuthorizationAminoType,
     toAmino: (
-      authorization: SendAuthorization
+      authorization: SendAuthorization,
     ): AminoSendAuthorization["value"] => ({
       spend_limit: authorization.spendLimit,
       allow_list: omitEmptyArray(authorization.allowList),
     }),
     fromAmino: (
-      authorization: AminoSendAuthorization["value"]
+      authorization: AminoSendAuthorization["value"],
     ): SendAuthorization => ({
       spendLimit: authorization.spend_limit,
       allowList: fromOmitEmptyArray(authorization.allow_list),

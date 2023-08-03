@@ -36,7 +36,7 @@ export interface MsgLinkApplicationEncodeObject extends EncodeObject {
 }
 
 export function isMsgLinkApplicationEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgLinkApplicationEncodeObject {
   return (
     (encodeObject as MsgLinkApplicationEncodeObject).typeUrl ===
@@ -50,7 +50,7 @@ export interface MsgUnlinkApplicationEncodeObject extends EncodeObject {
 }
 
 export function isMsgUnlinkApplicationEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgUnlinkApplicationEncodeObject {
   return (
     (encodeObject as MsgUnlinkApplicationEncodeObject).typeUrl ===
@@ -64,7 +64,7 @@ export interface MsgLinkChainAccountEncodeObject extends EncodeObject {
 }
 
 export function isMsgLinkChainAccountEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgLinkChainAccountEncodeObject {
   return (
     (encodeObject as MsgLinkChainAccountEncodeObject).typeUrl ===
@@ -78,7 +78,7 @@ export interface MsgUnlinkChainAccountEncodeObject extends EncodeObject {
 }
 
 export function isMsgUnlinkChainAccountEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgUnlinkChainAccountEncodeObject {
   return (
     (encodeObject as MsgUnlinkChainAccountEncodeObject).typeUrl ===
@@ -92,7 +92,7 @@ export interface MsgRequestDTagTransferEncodeObject extends EncodeObject {
 }
 
 export function isMsgRequestDTagTransferEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRequestDTagTransferEncodeObject {
   return (
     (encodeObject as MsgRequestDTagTransferEncodeObject).typeUrl ===
@@ -106,7 +106,7 @@ export interface MsgCancelDTagTransferRequestEncodeObject extends EncodeObject {
 }
 
 export function isMsgCancelDTagTransferRequestEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCancelDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgCancelDTagTransferRequestEncodeObject).typeUrl ===
@@ -120,7 +120,7 @@ export interface MsgAcceptDTagTransferRequestEncodeObject extends EncodeObject {
 }
 
 export function isMsgAcceptDTagTransferRequestEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAcceptDTagTransferRequestEncodeObject {
   return (
     MsgAcceptDTagTransferRequestTypeUrl ===
@@ -134,7 +134,7 @@ export interface MsgRefuseDTagTransferRequestEncodeObject extends EncodeObject {
 }
 
 export function isMsgRefuseDTagTransferRequestEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRefuseDTagTransferRequestEncodeObject {
   return (
     (encodeObject as MsgRefuseDTagTransferRequestEncodeObject).typeUrl ===
@@ -148,7 +148,7 @@ export interface MsgSaveProfileEncodeObject extends EncodeObject {
 }
 
 export function isMsgSaveProfileEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgSaveProfileEncodeObject {
   return (
     (encodeObject as MsgSaveProfileEncodeObject).typeUrl ===
@@ -162,7 +162,7 @@ export interface MsgDeleteProfileEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeleteProfileEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeleteProfileEncodeObject {
   return (
     (encodeObject as MsgDeleteProfileEncodeObject).typeUrl ===

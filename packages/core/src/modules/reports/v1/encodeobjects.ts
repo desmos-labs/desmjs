@@ -20,7 +20,7 @@ export interface MsgCreateReportEncodeObject extends EncodeObject {
 }
 
 export function isMsgCreateReportEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCreateReportEncodeObject {
   return (
     (encodeObject as MsgCreateReportEncodeObject).typeUrl ===
@@ -34,7 +34,7 @@ export interface MsgDeleteReportEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeleteReportEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeleteReportEncodeObject {
   return (
     (encodeObject as MsgDeleteReportEncodeObject).typeUrl ===
@@ -48,7 +48,7 @@ export interface MsgSupportStandardReasonEncodeObject extends EncodeObject {
 }
 
 export function isMsgSupportStandardReasonEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgSupportStandardReasonEncodeObject {
   return (
     (encodeObject as MsgSupportStandardReasonEncodeObject).typeUrl ===
@@ -62,7 +62,7 @@ export interface MsgAddReasonEncodeObject extends EncodeObject {
 }
 
 export function isMsgAddReasonEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAddReasonEncodeObject {
   return (
     (encodeObject as MsgAddReasonEncodeObject).typeUrl === MsgAddReasonTypeUrl
@@ -75,7 +75,7 @@ export interface MsgRemoveReasonEncodeObject extends EncodeObject {
 }
 
 export function isMsgRemoveReasonEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRemoveReasonEncodeObject {
   return (
     (encodeObject as MsgRemoveReasonEncodeObject).typeUrl ===

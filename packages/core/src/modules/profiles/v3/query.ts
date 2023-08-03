@@ -35,7 +35,7 @@ export interface ProfilesV3Extension {
      */
     readonly incomingDTagTransferRequests: (
       address: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryIncomingDTagTransferRequestsResponse>;
 
     /**
@@ -45,7 +45,7 @@ export interface ProfilesV3Extension {
       user?: string,
       chainName?: string,
       target?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryChainLinksResponse>;
     /**
      * Queries chain link owners for an optional chain name and user.
@@ -54,7 +54,7 @@ export interface ProfilesV3Extension {
     readonly chainLinkOwners: (
       chainName?: string,
       target?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryChainLinkOwnersResponse>;
     /**
      * Queries the default external addresses for an optional user and chain name.
@@ -63,7 +63,7 @@ export interface ProfilesV3Extension {
     readonly defaultExternalAddresses: (
       user?: string,
       chainName?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryDefaultExternalAddressesResponse>;
     /**
      * Queries a single application link for a given user,
@@ -73,14 +73,14 @@ export interface ProfilesV3Extension {
       user?: string,
       application?: string,
       username?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryApplicationLinksResponse>;
     /**
      * Queries a single application link for a given
      * client id.
      */
     readonly applicationLinkByClientID: (
-      clientId: string
+      clientId: string,
     ) => Promise<QueryApplicationLinkByClientIDResponse>;
     /**
      * Queries the application link owners with an optional application and username.
@@ -89,7 +89,7 @@ export interface ProfilesV3Extension {
     readonly applicationLinkOwners: (
       application?: string,
       username?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryApplicationLinkOwnersResponse>;
     /**
      * Queries the module parameters.
@@ -99,7 +99,7 @@ export interface ProfilesV3Extension {
 }
 
 export function setupProfilesV3Extension(
-  base: QueryClient
+  base: QueryClient,
 ): ProfilesV3Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
@@ -118,7 +118,7 @@ export function setupProfilesV3Extension(
       },
       incomingDTagTransferRequests: async (
         receiver: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.IncomingDTagTransferRequests({
           receiver,
@@ -128,7 +128,7 @@ export function setupProfilesV3Extension(
         user?: string,
         chainName?: string,
         target?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.ChainLinks({
           user: user || "",
@@ -139,7 +139,7 @@ export function setupProfilesV3Extension(
       chainLinkOwners: async (
         chainName?: string,
         target?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.ChainLinkOwners({
           chainName: chainName || "",
@@ -149,7 +149,7 @@ export function setupProfilesV3Extension(
       defaultExternalAddresses: async (
         user?: string,
         chainName?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.DefaultExternalAddresses({
           owner: user ?? "",
@@ -160,7 +160,7 @@ export function setupProfilesV3Extension(
         user?: string,
         application?: string,
         username?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.ApplicationLinks({
           user: user || "",
@@ -175,7 +175,7 @@ export function setupProfilesV3Extension(
       applicationLinkOwners: async (
         application?: string,
         username?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.ApplicationLinkOwners({
           application: application || "",

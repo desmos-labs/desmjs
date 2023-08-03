@@ -87,7 +87,7 @@ export class Web3AuthKeyProvider extends PrivateKeyProvider {
   async getPrivateKey(): Promise<PrivateKey> {
     if (this.privateKey === undefined) {
       throw new Error(
-        "can't get private key, Web3AuthKeyProvider not connected"
+        "can't get private key, Web3AuthKeyProvider not connected",
       );
     }
 

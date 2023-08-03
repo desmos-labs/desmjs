@@ -8,7 +8,7 @@ export interface MsgGrantEncodeObject extends EncodeObject {
 }
 
 export function isMsgGrantEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgGrantEncodeObject {
   return (encodeObject as MsgGrantEncodeObject).typeUrl === MsgGrantTypeUrl;
 }
@@ -19,7 +19,7 @@ export interface MsgRevokeEncodeObject extends EncodeObject {
 }
 
 export function isMsgRevoke(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRevokeEncodeObject {
   return (encodeObject as MsgRevokeEncodeObject).typeUrl === MsgRevokeTypeUrl;
 }

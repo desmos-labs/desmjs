@@ -15,7 +15,7 @@ import {
  * @param accounts - Accounts to encode.
  */
 export function encodeGetAccountsRpcResponse(
-  accounts: readonly AccountData[]
+  accounts: readonly AccountData[],
 ): GetAccountsRpcResponse {
   return {
     accounts: accounts.map((account) => ({
@@ -33,7 +33,7 @@ export function encodeGetAccountsRpcResponse(
  */
 export function encodeDirectSignRpcRequestParams(
   signerAddress: string,
-  signDoc: SignDoc
+  signDoc: SignDoc,
 ): SignDirectRpcRequestParams {
   return {
     signerAddress,
@@ -49,7 +49,7 @@ export function encodeDirectSignRpcRequestParams(
  * @param signResponse - Signature to encode.
  */
 export function encodeDirectSignRpcResponse(
-  signResponse: DirectSignResponse
+  signResponse: DirectSignResponse,
 ): SignDirectRpcResponseParams {
   return {
     signature: signResponse.signature,
@@ -63,7 +63,7 @@ export function encodeDirectSignRpcResponse(
  */
 export function encodeAminoSignRpcRequestParams(
   signerAddress: string,
-  signDoc: StdSignDoc
+  signDoc: StdSignDoc,
 ): SignAminoRpcRequestParams {
   return {
     signerAddress,
@@ -76,7 +76,7 @@ export function encodeAminoSignRpcRequestParams(
  * @param signResponse - Signature to encode.
  */
 export function encodeAminoSignRpcResponse(
-  signResponse: AminoSignResponse
+  signResponse: AminoSignResponse,
 ): SignAminoRpcResponseParams {
   return {
     signature: signResponse.signature,
