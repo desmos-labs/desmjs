@@ -32,7 +32,7 @@ jobs:
 
       - name: Setup Protoc 👷
         if: env.GIT_DIFF
-        uses: arduino/setup-protoc@v1
+        uses: arduino/setup-protoc@v2
         with:
           version: "3.x"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
