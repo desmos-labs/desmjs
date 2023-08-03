@@ -41,7 +41,7 @@ function basicAllowanceToAmino(value: BasicAllowance): AminoBasicAllowance {
 }
 
 function basicAllowanceFromAmino(
-  value: AminoBasicAllowance["value"]
+  value: AminoBasicAllowance["value"],
 ): BasicAllowance {
   return BasicAllowance.fromPartial({
     spendLimit: value.spend_limit,
@@ -50,7 +50,7 @@ function basicAllowanceFromAmino(
 }
 
 function periodicAllowanceToAmino(
-  value: PeriodicAllowance
+  value: PeriodicAllowance,
 ): AminoPeriodicAllowance {
   return {
     type: PeriodicAllowanceAminoType,
@@ -65,7 +65,7 @@ function periodicAllowanceToAmino(
 }
 
 function periodicAllowanceFromAmino(
-  value: AminoPeriodicAllowance["value"]
+  value: AminoPeriodicAllowance["value"],
 ): PeriodicAllowance {
   return PeriodicAllowance.fromPartial({
     basic: value.basic ? basicAllowanceFromAmino(value.basic.value) : undefined,
@@ -77,7 +77,7 @@ function periodicAllowanceFromAmino(
 }
 
 function allowedMsgAllowanceToAmino(
-  value: AllowedMsgAllowance
+  value: AllowedMsgAllowance,
 ): AminoAllowedMsgAllowance {
   return {
     type: AllowedMsgAllowanceAminoType,
@@ -91,7 +91,7 @@ function allowedMsgAllowanceToAmino(
 }
 
 function allowedMsgAllowanceFromAmino(
-  value: AminoAllowedMsgAllowance["value"]
+  value: AminoAllowedMsgAllowance["value"],
 ): AllowedMsgAllowance {
   return AllowedMsgAllowance.fromPartial({
     allowance: value.allowance
@@ -121,7 +121,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
       return Any.fromPartial({
         typeUrl: BasicAllowanceTypeUrl,
         value: BasicAllowance.encode(
-          basicAllowanceFromAmino(allowance.value)
+          basicAllowanceFromAmino(allowance.value),
         ).finish(),
       });
 
@@ -129,7 +129,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
       return Any.fromPartial({
         typeUrl: PeriodicAllowanceTypeUrl,
         value: PeriodicAllowance.encode(
-          periodicAllowanceFromAmino(allowance.value)
+          periodicAllowanceFromAmino(allowance.value),
         ).finish(),
       });
 
@@ -137,7 +137,7 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
       return Any.fromPartial({
         typeUrl: AllowedMsgAllowanceTypeUrl,
         value: PeriodicAllowance.encode(
-          periodicAllowanceFromAmino(allowance.value)
+          periodicAllowanceFromAmino(allowance.value),
         ).finish(),
       });
 
@@ -166,7 +166,7 @@ export const AminoConverter: AminoConverters = {
     toAmino: (value: AllowedMsgAllowance): AminoAllowedMsgAllowance["value"] =>
       allowedMsgAllowanceToAmino(value).value,
     fromAmino: (
-      value: AminoAllowedMsgAllowance["value"]
+      value: AminoAllowedMsgAllowance["value"],
     ): AllowedMsgAllowance => allowedMsgAllowanceFromAmino(value),
   },
   [MsgGrantAllowanceTypeUrl]: {

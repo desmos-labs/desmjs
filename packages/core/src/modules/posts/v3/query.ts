@@ -18,7 +18,7 @@ export interface PostsExtension {
      */
     readonly subspacePosts: (
       subspaceId: Long,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QuerySubspacePostsResponse>;
 
     /**
@@ -27,7 +27,7 @@ export interface PostsExtension {
     readonly sectionPosts: (
       subspaceId: Long,
       sectionId: number,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QuerySectionPostsResponse>;
 
     /**
@@ -35,7 +35,7 @@ export interface PostsExtension {
      */
     readonly post: (
       subspaceId: Long,
-      postId: Long
+      postId: Long,
     ) => Promise<Post | undefined>;
 
     /**
@@ -43,7 +43,7 @@ export interface PostsExtension {
      */
     readonly postAttachments: (
       subspaceId: Long,
-      postId: Long
+      postId: Long,
     ) => Promise<QueryPostAttachmentsResponse>;
 
     /**
@@ -53,7 +53,7 @@ export interface PostsExtension {
       subspaceId: Long,
       postId: Long,
       pollId: number,
-      user?: string
+      user?: string,
     ) => Promise<QueryPollAnswersResponse>;
 
     /**
@@ -79,7 +79,7 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
       sectionPosts: async (
         subspaceId: Long,
         sectionId: number,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.SectionPosts({
           subspaceId,
@@ -100,7 +100,7 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
       postAttachments: async (
         subspaceId: Long,
         postId: Long,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.PostAttachments({
           subspaceId,
@@ -112,7 +112,7 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
         postId: Long,
         pollId: number,
         user?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.PollAnswers({
           subspaceId,

@@ -24,7 +24,7 @@ function convertGrant(grant: Grant, aminoTypes?: AminoTypes): AminoGrant {
   const expiration = grant.expiration?.seconds;
   assertDefined(
     aminoTypes,
-    "can't convert Grant to amino, aminoTypes must be defined"
+    "can't convert Grant to amino, aminoTypes must be defined",
   );
 
   return {
@@ -42,7 +42,7 @@ function convertGrant(grant: Grant, aminoTypes?: AminoTypes): AminoGrant {
 function convertAminoGrant(grant: AminoGrant, aminoTypes?: AminoTypes): Grant {
   assertDefined(
     aminoTypes,
-    "can't convert Grant from amino, aminoTypes must be defined"
+    "can't convert Grant from amino, aminoTypes must be defined",
   );
 
   const expiration = grant.expiration
@@ -68,12 +68,12 @@ export const AminoConverter: AminoConverters = {
   [GenericAuthorizationTypeUrl]: {
     aminoType: GenericAuthorizationAminoType,
     toAmino: (
-      value: GenericAuthorization
+      value: GenericAuthorization,
     ): GenericAuthorizationAminoMsg["value"] => ({
       msg: value.msg,
     }),
     fromAmino: (
-      value: GenericAuthorizationAminoMsg["value"]
+      value: GenericAuthorizationAminoMsg["value"],
     ): GenericAuthorization => ({
       msg: value.msg,
     }),
@@ -84,7 +84,7 @@ export const AminoConverter: AminoConverters = {
     aminoType: MsgGrantAminoTpe,
     toAmino: (
       value: MsgGrant,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoMsgGrant["value"] => ({
       grant: value.grant ? convertGrant(value.grant, aminoTypes) : undefined,
       granter: value.granter,
@@ -92,7 +92,7 @@ export const AminoConverter: AminoConverters = {
     }),
     fromAmino: (
       msg: AminoMsgGrant["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): MsgGrant =>
       MsgGrant.fromPartial({
         grant: msg.grant ? convertAminoGrant(msg.grant, aminoTypes) : undefined,

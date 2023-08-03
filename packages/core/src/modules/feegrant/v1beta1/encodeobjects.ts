@@ -11,7 +11,7 @@ export interface MsgGrantAllowanceEncodeObject extends EncodeObject {
 }
 
 export function isMsgGrantAllowance(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgGrantAllowanceEncodeObject {
   return (
     (encodeObject as MsgGrantAllowanceEncodeObject).typeUrl ===
@@ -25,7 +25,7 @@ export interface MsgRevokeAllowanceEncodeObject extends EncodeObject {
 }
 
 export function isMsgRevokeAllowance(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRevokeAllowanceEncodeObject {
   return (
     (encodeObject as MsgRevokeAllowanceEncodeObject).typeUrl ===

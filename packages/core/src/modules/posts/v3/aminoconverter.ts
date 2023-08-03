@@ -97,22 +97,22 @@ export function mediaToAny(media: Media): Any {
 
 function convertPollProvidedAnswerToAmino(
   answer: Poll_ProvidedAnswer,
-  aminoTypes?: AminoTypes
+  aminoTypes?: AminoTypes,
 ): AminoPollProvidedAnswer {
   assertDefined(
     aminoTypes,
-    "aminoTypes must be defined to convert Poll_ProvidedAnswer.attachments to amino"
+    "aminoTypes must be defined to convert Poll_ProvidedAnswer.attachments to amino",
   );
   return {
     text: omitEmptyString(answer.text),
     attachments: nullIfEmptyArray(
-      answer.attachments.map((a) => aminoTypes.fromAny(a))
+      answer.attachments.map((a) => aminoTypes.fromAny(a)),
     ),
   };
 }
 
 function convertPollTallyResultAnswerResultToAmino(
-  result: PollTallyResults_AnswerResult
+  result: PollTallyResults_AnswerResult,
 ): AminoPollTallyResultAnswerResult {
   return {
     answer_index: result.answerIndex,
@@ -121,7 +121,7 @@ function convertPollTallyResultAnswerResultToAmino(
 }
 
 function convertPollTallyResultsToAmino(
-  results: PollTallyResults
+  results: PollTallyResults,
 ): AminoPollTallyResults {
   return {
     results: results.results.map(convertPollTallyResultAnswerResultToAmino),
@@ -129,7 +129,7 @@ function convertPollTallyResultsToAmino(
 }
 
 function convertPollTallyResultAnswerResultFromAmino(
-  result: AminoPollTallyResultAnswerResult
+  result: AminoPollTallyResultAnswerResult,
 ): PollTallyResults_AnswerResult {
   return {
     answerIndex: result.answer_index,
@@ -138,7 +138,7 @@ function convertPollTallyResultAnswerResultFromAmino(
 }
 
 function convertPollTallyResultsFromAmino(
-  results: AminoPollTallyResults
+  results: AminoPollTallyResults,
 ): PollTallyResults {
   return {
     results: results.results.map(convertPollTallyResultAnswerResultFromAmino),
@@ -147,16 +147,16 @@ function convertPollTallyResultsFromAmino(
 
 function convertPollProvidedAnswerFromAmino(
   answer: AminoPollProvidedAnswer,
-  aminoTypes?: AminoTypes
+  aminoTypes?: AminoTypes,
 ): Poll_ProvidedAnswer {
   assertDefined(
     aminoTypes,
-    "aminoTypes must be defined to convert Poll_ProvidedAnswer.attachments from amino"
+    "aminoTypes must be defined to convert Poll_ProvidedAnswer.attachments from amino",
   );
   return {
     text: fromOmitEmptyString(answer.text),
     attachments: fromNullIfEmptyArray(answer.attachments).map((a) =>
-      aminoTypes.toAny(a)
+      aminoTypes.toAny(a),
     ),
   };
 }
@@ -179,15 +179,15 @@ function convertUrlToAmino(url: Url): AminoUrl {
 }
 
 function convertEntitiesToAmino(
-  entities: Entities | undefined
+  entities: Entities | undefined,
 ): AminoEntities | undefined {
   return entities
     ? {
         hashtags: nullIfEmptyArray(
-          entities.hashtags.map(convertTextTagToAmino)
+          entities.hashtags.map(convertTextTagToAmino),
         ),
         mentions: nullIfEmptyArray(
-          entities.mentions.map(convertTextTagToAmino)
+          entities.mentions.map(convertTextTagToAmino),
         ),
         urls: nullIfEmptyArray(entities.urls.map(convertUrlToAmino)),
       }
@@ -212,15 +212,15 @@ function convertUrlFromAmino(url: AminoUrl): Url {
 }
 
 function convertEntitiesFromAmino(
-  entities: AminoEntities | undefined
+  entities: AminoEntities | undefined,
 ): Entities | undefined {
   return entities
     ? {
         hashtags: fromNullIfEmptyArray(entities.hashtags).map(
-          convertTextTagFromAmino
+          convertTextTagFromAmino,
         ),
         mentions: fromNullIfEmptyArray(entities.mentions).map(
-          convertTextTagFromAmino
+          convertTextTagFromAmino,
         ),
         urls: fromNullIfEmptyArray(entities.urls).map(convertUrlFromAmino),
       }
@@ -238,7 +238,7 @@ export const AminoConverter: AminoConverters = {
     toAmino: (poll: Poll, aminoTypes?: AminoTypes): AminoPoll["value"] => ({
       question: poll.question,
       provided_answers: poll.providedAnswers.map((a) =>
-        convertPollProvidedAnswerToAmino(a, aminoTypes)
+        convertPollProvidedAnswerToAmino(a, aminoTypes),
       ),
       end_date: serializeTimestamp(poll.endDate),
       allows_multiple_answers: omitFalse(poll.allowsMultipleAnswers),
@@ -251,7 +251,7 @@ export const AminoConverter: AminoConverters = {
       Poll.fromPartial({
         question: msg.question,
         providedAnswers: msg.provided_answers.map((a) =>
-          convertPollProvidedAnswerFromAmino(a, aminoTypes)
+          convertPollProvidedAnswerFromAmino(a, aminoTypes),
         ),
         endDate: deserializeTimestamp(msg.end_date),
         allowsMultipleAnswers: fromOmitFalse(msg.allows_multiple_answers),
@@ -278,11 +278,11 @@ export const AminoConverter: AminoConverters = {
     aminoType: MsgCreatePostAminoType,
     toAmino: (
       msg: MsgCreatePost,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoMsgCreatePost["value"] => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert post attachments to amino"
+        "aminoTypes must be defined to convert post attachments to amino",
       );
       return {
         subspace_id: omitZeroLong(msg.subspaceId),
@@ -292,7 +292,7 @@ export const AminoConverter: AminoConverters = {
         entities: convertEntitiesToAmino(msg.entities),
         tags: omitEmptyArray(msg.tags),
         attachments: omitEmptyArray(
-          msg.attachments.map((a) => aminoTypes.fromAny(a))
+          msg.attachments.map((a) => aminoTypes.fromAny(a)),
         ),
         author: omitEmptyString(msg.author),
         conversation_id: omitZeroLong(msg.conversationId),
@@ -302,17 +302,17 @@ export const AminoConverter: AminoConverters = {
             type: reference.type,
             post_id: omitZeroLong(reference.postId),
             position: omitZeroLong(reference.position),
-          }))
+          })),
         ),
       };
     },
     fromAmino: (
       msg: AminoMsgCreatePost["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): MsgCreatePost => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert post attachments from amino"
+        "aminoTypes must be defined to convert post attachments from amino",
       );
       return {
         subspaceId: fromOmitZeroLong(msg.subspace_id),
@@ -322,7 +322,7 @@ export const AminoConverter: AminoConverters = {
         entities: convertEntitiesFromAmino(msg.entities),
         tags: fromOmitEmptyArray(msg.tags),
         attachments: fromOmitEmptyArray(msg.attachments).map((a) =>
-          aminoTypes.toAny(a)
+          aminoTypes.toAny(a),
         ),
         author: fromOmitEmptyString(msg.author),
         conversationId: fromOmitZeroLong(msg.conversation_id),
@@ -332,7 +332,7 @@ export const AminoConverter: AminoConverters = {
             type: reference.type,
             postId: fromOmitZeroLong(reference.post_id),
             position: fromOmitZeroLong(reference.position),
-          })
+          }),
         ),
       };
     },
@@ -373,12 +373,12 @@ export const AminoConverter: AminoConverters = {
     aminoType: MsgAddPostAttachmentAminoType,
     toAmino: (
       msg: MsgAddPostAttachment,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoMsgAddPostAttachment["value"] => {
       assertDefinedAndNotNull(msg.content, "attachment content not defined");
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert post content to amino"
+        "aminoTypes must be defined to convert post content to amino",
       );
       return {
         subspace_id: omitZeroLong(msg.subspaceId),
@@ -389,11 +389,11 @@ export const AminoConverter: AminoConverters = {
     },
     fromAmino: (
       msg: AminoMsgAddPostAttachment["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): MsgAddPostAttachment => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert post content from amino"
+        "aminoTypes must be defined to convert post content from amino",
       );
       return {
         subspaceId: fromOmitZeroLong(msg.subspace_id),
@@ -406,7 +406,7 @@ export const AminoConverter: AminoConverters = {
   [MsgRemovePostAttachmentTypeUrl]: {
     aminoType: MsgRemovePostAttachmentAminoType,
     toAmino: (
-      msg: MsgRemovePostAttachment
+      msg: MsgRemovePostAttachment,
     ): AminoMsgRemovePostAttachment["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       post_id: omitZeroLong(msg.postId),
@@ -414,7 +414,7 @@ export const AminoConverter: AminoConverters = {
       editor: omitEmptyString(msg.editor),
     }),
     fromAmino: (
-      msg: AminoMsgRemovePostAttachment["value"]
+      msg: AminoMsgRemovePostAttachment["value"],
     ): MsgRemovePostAttachment => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       postId: fromOmitZeroLong(msg.post_id),

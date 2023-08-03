@@ -90,19 +90,19 @@ export const AminoConverter: AminoConverters = {
   [GenericSubspaceAuthorizationTypeUrl]: {
     aminoType: GenericSubspaceAuthorizationAminoType,
     toAmino: (
-      genericAuthorization: GenericSubspaceAuthorization
+      genericAuthorization: GenericSubspaceAuthorization,
     ): AminoGenericSubspaceAuthorization["value"] => ({
       subspaces_ids: genericAuthorization.subspacesIds.map((id) =>
-        id.toString()
+        id.toString(),
       ),
       msg: genericAuthorization.msg,
     }),
     fromAmino: (
-      authorization: AminoGenericSubspaceAuthorization["value"]
+      authorization: AminoGenericSubspaceAuthorization["value"],
     ): GenericSubspaceAuthorization =>
       GenericSubspaceAuthorization.fromPartial({
         subspacesIds: authorization.subspaces_ids.map((id) =>
-          Long.fromString(id)
+          Long.fromString(id),
         ),
         msg: authorization.msg,
       }),
@@ -269,7 +269,7 @@ export const AminoConverter: AminoConverters = {
   [MsgSetUserGroupPermissionsTypeUrl]: {
     aminoType: MsgSetUserGroupPermissionsAminoType,
     toAmino: (
-      msg: MsgSetUserGroupPermissions
+      msg: MsgSetUserGroupPermissions,
     ): AminoMsgSetUserGroupPermissions["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       group_id: omitEmptyNumber(msg.groupId),
@@ -277,7 +277,7 @@ export const AminoConverter: AminoConverters = {
       signer: omitEmptyString(msg.signer),
     }),
     fromAmino: (
-      msg: AminoMsgSetUserGroupPermissions["value"]
+      msg: AminoMsgSetUserGroupPermissions["value"],
     ): MsgSetUserGroupPermissions => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       groupId: fromOmitEmptyNumber(msg.group_id),
@@ -301,7 +301,7 @@ export const AminoConverter: AminoConverters = {
   [MsgAddUserToUserGroupTypeUrl]: {
     aminoType: MsgAddUserToUserGroupAminoType,
     toAmino: (
-      msg: MsgAddUserToUserGroup
+      msg: MsgAddUserToUserGroup,
     ): AminoMsgAddUserToUserGroup["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       group_id: omitEmptyNumber(msg.groupId),
@@ -309,7 +309,7 @@ export const AminoConverter: AminoConverters = {
       signer: omitEmptyString(msg.signer),
     }),
     fromAmino: (
-      msg: AminoMsgAddUserToUserGroup["value"]
+      msg: AminoMsgAddUserToUserGroup["value"],
     ): MsgAddUserToUserGroup => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       groupId: fromOmitEmptyNumber(msg.group_id),
@@ -320,7 +320,7 @@ export const AminoConverter: AminoConverters = {
   [MsgRemoveUserFromUserGroupTypeUrl]: {
     aminoType: MsgRemoveUserFromUserGroupAminoType,
     toAmino: (
-      msg: MsgRemoveUserFromUserGroup
+      msg: MsgRemoveUserFromUserGroup,
     ): AminoMsgRemoveUserFromUserGroup["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       group_id: omitEmptyNumber(msg.groupId),
@@ -328,7 +328,7 @@ export const AminoConverter: AminoConverters = {
       signer: omitEmptyString(msg.signer),
     }),
     fromAmino: (
-      msg: AminoMsgRemoveUserFromUserGroup["value"]
+      msg: AminoMsgRemoveUserFromUserGroup["value"],
     ): MsgRemoveUserFromUserGroup => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       groupId: fromOmitEmptyNumber(msg.group_id),
@@ -339,7 +339,7 @@ export const AminoConverter: AminoConverters = {
   [MsgSetUserPermissionsTypeUrl]: {
     aminoType: MsgSetUserPermissionsAminoType,
     toAmino: (
-      msg: MsgSetUserPermissions
+      msg: MsgSetUserPermissions,
     ): AminoMsgSetUserPermissions["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       section_id: omitEmptyNumber(msg.sectionId),
@@ -348,7 +348,7 @@ export const AminoConverter: AminoConverters = {
       signer: omitEmptyString(msg.signer),
     }),
     fromAmino: (
-      msg: AminoMsgSetUserPermissions["value"]
+      msg: AminoMsgSetUserPermissions["value"],
     ): MsgSetUserPermissions => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       sectionId: fromOmitEmptyNumber(msg.section_id),

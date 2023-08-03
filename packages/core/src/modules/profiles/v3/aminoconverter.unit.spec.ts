@@ -299,9 +299,9 @@ describe("Profiles converter", () => {
               value: Secp256k1PubKey.encode(
                 Secp256k1PubKey.fromPartial({
                   key: fromBase64(
-                    "AlM85nGILhEbOqowhCRWFnu6YJvi2iN6H6xG/rAZ3obK"
+                    "AlM85nGILhEbOqowhCRWFnu6YJvi2iN6H6xG/rAZ3obK",
                   ),
-                })
+                }),
               ).finish(),
             },
             signature: {
@@ -309,11 +309,11 @@ describe("Profiles converter", () => {
               value: SingleSignature.encode(
                 SingleSignature.fromPartial({
                   signature: fromBase64(
-                    "IiZnnZy0WzY8wlAcibijJkZIRJ2mY6HYPn3ANrs+mhh4N0K0VpTYBapxt87EmjqYSndPIYKcwX7D9Mi47whStA=="
+                    "IiZnnZy0WzY8wlAcibijJkZIRJ2mY6HYPn3ANrs+mhh4N0K0VpTYBapxt87EmjqYSndPIYKcwX7D9Mi47whStA==",
                   ),
                   valueType:
                     SignatureValueType.SIGNATURE_VALUE_TYPE_COSMOS_AMINO,
-                })
+                }),
               ).finish(),
             },
             plainText: "74657874",

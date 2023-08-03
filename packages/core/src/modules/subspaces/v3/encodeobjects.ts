@@ -40,7 +40,7 @@ export interface MsgCreateSubspaceEncodeObject extends EncodeObject {
 }
 
 export function isMsgCreateSubspaceEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCreateSubspaceEncodeObject {
   return (
     (encodeObject as MsgCreateSubspaceEncodeObject).typeUrl ===
@@ -54,7 +54,7 @@ export interface MsgEditSubspaceEncodeObject extends EncodeObject {
 }
 
 export function isMsgEditSubspaceEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgEditSubspaceEncodeObject {
   return (
     (encodeObject as MsgEditSubspaceEncodeObject).typeUrl ===
@@ -68,7 +68,7 @@ export interface MsgDeleteSubspaceEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeleteSubspaceEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeleteSubspaceEncodeObject {
   return (
     (encodeObject as MsgDeleteSubspaceEncodeObject).typeUrl ===
@@ -82,7 +82,7 @@ export interface MsgCreateSectionEncodeObject extends EncodeObject {
 }
 
 export function isMsgCreateSectionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCreateSectionEncodeObject {
   return (
     (encodeObject as MsgCreateSectionEncodeObject).typeUrl ===
@@ -96,7 +96,7 @@ export interface MsgEditSectionEncodeObject extends EncodeObject {
 }
 
 export function isMsgEditSectionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgEditSectionEncodeObject {
   return (
     (encodeObject as MsgEditSectionEncodeObject).typeUrl ===
@@ -110,7 +110,7 @@ export interface MsgMoveSectionEncodeObject extends EncodeObject {
 }
 
 export function isMsgMoveSectionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgMoveSectionEncodeObject {
   return (
     (encodeObject as MsgMoveSectionEncodeObject).typeUrl ===
@@ -124,7 +124,7 @@ export interface MsgDeleteSectionEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeleteSectionEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeleteSectionEncodeObject {
   return (
     (encodeObject as MsgDeleteSectionEncodeObject).typeUrl ===
@@ -138,7 +138,7 @@ export interface MsgCreateUserGroupEncodeObject extends EncodeObject {
 }
 
 export function isMsgCreateUserGroupEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCreateUserGroupEncodeObject {
   return (
     (encodeObject as MsgCreateUserGroupEncodeObject).typeUrl ===
@@ -152,7 +152,7 @@ export interface MsgEditUserGroupEncodeObject extends EncodeObject {
 }
 
 export function isMsgEditUserGroupEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgEditUserGroupEncodeObject {
   return (
     (encodeObject as MsgEditUserGroupEncodeObject).typeUrl ===
@@ -166,7 +166,7 @@ export interface MsgMoveUserGroupEncodeObject extends EncodeObject {
 }
 
 export function isMsgMoveUserGroupEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgMoveUserGroupEncodeObject {
   return (
     (encodeObject as MsgMoveUserGroupEncodeObject).typeUrl ===
@@ -180,7 +180,7 @@ export interface MsgSetUserGroupPermissionsEncodeObject extends EncodeObject {
 }
 
 export function isMsgSetUserGroupPermissionsEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgSetUserGroupPermissionsEncodeObject {
   return (
     (encodeObject as MsgSetUserGroupPermissionsEncodeObject).typeUrl ===
@@ -194,7 +194,7 @@ export interface MsgDeleteUserGroupEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeleteUserGroupEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeleteUserGroupEncodeObject {
   return (
     (encodeObject as MsgDeleteUserGroupEncodeObject).typeUrl ===
@@ -208,7 +208,7 @@ export interface MsgAddUserToUserGroupEncodeObject extends EncodeObject {
 }
 
 export function isMsgAddUserToUserGroupEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAddUserToUserGroupEncodeObject {
   return (
     (encodeObject as MsgAddUserToUserGroupEncodeObject).typeUrl ===
@@ -222,7 +222,7 @@ export interface MsgRemoveUserFromUserGroupEncodeObject extends EncodeObject {
 }
 
 export function isMsgRemoveUserFromUserGroupEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRemoveUserFromUserGroupEncodeObject {
   return (
     (encodeObject as MsgRemoveUserFromUserGroupEncodeObject).typeUrl ===
@@ -236,7 +236,7 @@ export interface MsgSetUserPermissionsEncodeObject extends EncodeObject {
 }
 
 export function isMsgSetUserPermissionsEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgSetUserPermissionsEncodeObject {
   return (
     (encodeObject as MsgSetUserPermissionsEncodeObject).typeUrl ===

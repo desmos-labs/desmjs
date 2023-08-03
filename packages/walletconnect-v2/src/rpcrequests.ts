@@ -22,7 +22,7 @@ import { decodeGetAccountsRpcResponse } from "./decode";
 export async function rpcCosmosGetAccounts(
   client: SignClient,
   session: SessionTypes.Struct,
-  chainId: string
+  chainId: string,
 ): Promise<AccountData[]> {
   const response = await client.request({
     topic: session.topic,
@@ -54,7 +54,7 @@ export async function rpcCosmosSignDirect(
   session: SessionTypes.Struct,
   chainId: string,
   signerAddress: string,
-  signDoc: SignDoc
+  signDoc: SignDoc,
 ): Promise<SignDirectRpcResponseParams> {
   return client.request<SignDirectRpcResponseParams>({
     topic: session.topic,
@@ -79,7 +79,7 @@ export async function rpcCosmosSignAmino(
   session: SessionTypes.Struct,
   chainId: string,
   signerAddress: string,
-  signDoc: StdSignDoc
+  signDoc: StdSignDoc,
 ): Promise<SignAminoRpcResponseParams> {
   return client.request<SignAminoRpcResponseParams>({
     topic: session.topic,

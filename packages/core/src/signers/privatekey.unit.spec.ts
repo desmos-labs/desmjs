@@ -83,11 +83,11 @@ describe("PrivateKeySigner", () => {
   it("Fail to connect to key provider", async () => {
     const signer = new PrivateKeySigner(
       mockConnectFailingSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await expect(signer.connect()).rejects.toHaveProperty(
       "message",
-      "connection failed"
+      "connection failed",
     );
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
@@ -95,11 +95,11 @@ describe("PrivateKeySigner", () => {
   it("Fail to get private key", async () => {
     const signer = new PrivateKeySigner(
       mockFailingGetPrivateKeySecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await expect(signer.connect()).rejects.toHaveProperty(
       "message",
-      "can't get private key"
+      "can't get private key",
     );
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
@@ -107,7 +107,7 @@ describe("PrivateKeySigner", () => {
   it("connect successfully", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await signer.connect();
     expect(signer.status).toBe(SignerStatus.Connected);
@@ -118,12 +118,12 @@ describe("PrivateKeySigner", () => {
   it("disconnect fail", async () => {
     const signer = new PrivateKeySigner(
       mockDisconnectFailingSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await signer.connect();
     await expect(signer.disconnect()).rejects.toHaveProperty(
       "message",
-      "disconnect fail"
+      "disconnect fail",
     );
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
@@ -131,7 +131,7 @@ describe("PrivateKeySigner", () => {
   it("disconnect successfully", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await signer.connect();
     await signer.disconnect();
@@ -141,21 +141,21 @@ describe("PrivateKeySigner", () => {
   it("get current account successfully", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await signer.connect();
     const accounts = await signer.getAccounts();
     const currentAccount = await signer.getCurrentAccount();
     expect(currentAccount).toMatchObject(accounts[0]);
     expect(currentAccount?.address).toBe(
-      "desmos1ekshdkg5q9n0hy6ft978nzwgt9eag8fvr5uc4v"
+      "desmos1ekshdkg5q9n0hy6ft978nzwgt9eag8fvr5uc4v",
     );
   });
 
   it("sign direct successfully", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
@@ -164,7 +164,7 @@ describe("PrivateKeySigner", () => {
         TxBody.fromPartial({
           memo: "test-tx",
           messages: [],
-        })
+        }),
       ).finish(),
       chainId: "test-chain",
       accountNumber: Long.fromNumber(1),
@@ -173,19 +173,19 @@ describe("PrivateKeySigner", () => {
           fee: {
             amount: [{ amount: "1000", denom: "udsm" }],
           },
-        })
+        }),
       ).finish(),
     });
 
     expect(signResult.signature.signature).toBe(
-      "cVE50cHI/AktIvqnACb1eGrQs4SPSzPbSUkOV828c3oD6FNodImRWdl+LQO7qFzwXOGSsVMA7f5Nhbo7AdQo+w=="
+      "cVE50cHI/AktIvqnACb1eGrQs4SPSzPbSUkOV828c3oD6FNodImRWdl+LQO7qFzwXOGSsVMA7f5Nhbo7AdQo+w==",
     );
   });
 
   it("sign amino from direct error", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.DIRECT
+      SigningMode.DIRECT,
     );
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
@@ -200,14 +200,14 @@ describe("PrivateKeySigner", () => {
         sequence: "0",
         account_number: "1",
         chain_id: "test-chain",
-      })
+      }),
     ).rejects.toHaveProperty("message", "sign format not supported");
   });
 
   it("sign amino successfully", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.AMINO
+      SigningMode.AMINO,
     );
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
@@ -224,14 +224,14 @@ describe("PrivateKeySigner", () => {
     });
 
     expect(signResult.signature.signature).toBe(
-      "fWUEK1aQ5/WWW5p78vW61rr95LdvivOfI6GfF9+cYLpU5cy3ohl9AI3DGZ5iYhjXwsz8vJC8sdG0NSWeLwcAgA=="
+      "fWUEK1aQ5/WWW5p78vW61rr95LdvivOfI6GfF9+cYLpU5cy3ohl9AI3DGZ5iYhjXwsz8vJC8sdG0NSWeLwcAgA==",
     );
   });
 
   it("sign direct from amino error", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),
-      SigningMode.AMINO
+      SigningMode.AMINO,
     );
     await signer.connect();
     const currentAccount = await signer.getCurrentAccount();
@@ -241,7 +241,7 @@ describe("PrivateKeySigner", () => {
           TxBody.fromPartial({
             memo: "test-tx",
             messages: [],
-          })
+          }),
         ).finish(),
         chainId: "test-chain",
         accountNumber: Long.fromNumber(1),
@@ -250,9 +250,9 @@ describe("PrivateKeySigner", () => {
             fee: {
               amount: [{ amount: "1000", denom: "udsm" }],
             },
-          })
+          }),
         ).finish(),
-      })
+      }),
     ).rejects.toHaveProperty("message", "sign format not supported");
   });
 });

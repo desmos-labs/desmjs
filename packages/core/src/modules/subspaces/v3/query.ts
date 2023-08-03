@@ -17,7 +17,7 @@ export interface SubspacesV3Extension {
      * Queries all the subspaces inside Desmos
      */
     readonly subspaces: (
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QuerySubspacesResponse>;
 
     /**
@@ -31,7 +31,7 @@ export interface SubspacesV3Extension {
     readonly userGroups: (
       subspaceId: Long,
       sectionId: number,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryUserGroupsResponse>;
 
     /**
@@ -39,7 +39,7 @@ export interface SubspacesV3Extension {
      */
     readonly userGroup: (
       subspaceId: Long,
-      groupId: number
+      groupId: number,
     ) => Promise<QueryUserGroupResponse>;
 
     /**
@@ -48,7 +48,7 @@ export interface SubspacesV3Extension {
     readonly userGroupMembers: (
       subspaceId: Long,
       groupId: number,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryUserGroupMembersResponse>;
 
     /**
@@ -57,13 +57,13 @@ export interface SubspacesV3Extension {
     readonly userPermissions: (
       subspaceId: Long,
       sectionId: number,
-      user: string
+      user: string,
     ) => Promise<QueryUserPermissionsResponse>;
   };
 }
 
 export function setupSubspacesV3Extension(
-  base: QueryClient
+  base: QueryClient,
 ): SubspacesV3Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
@@ -83,7 +83,7 @@ export function setupSubspacesV3Extension(
       userGroups: async (
         subspaceId: Long,
         sectionId: number,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.UserGroups({
           subspaceId,
@@ -98,7 +98,7 @@ export function setupSubspacesV3Extension(
       userGroupMembers: async (
         subspaceId: Long,
         groupId: number,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.UserGroupMembers({
           subspaceId,
@@ -108,7 +108,7 @@ export function setupSubspacesV3Extension(
       userPermissions: async (
         subspaceId: Long,
         sectionId: number,
-        user: string
+        user: string,
       ) =>
         queryService.UserPermissions({
           subspaceId,

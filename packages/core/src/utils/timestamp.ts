@@ -10,6 +10,6 @@ export function timestampFromDate(date: Date): Timestamp {
 
 export function timestampToDate(timestamp: Timestamp): Date {
   return new Date(
-    timestamp.seconds.toNumber() * 1000 + timestamp.nanos / 1000000
+    timestamp.seconds.toNumber() * 1000 + timestamp.nanos / 1000000,
   );
 }

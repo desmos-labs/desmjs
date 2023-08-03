@@ -22,7 +22,7 @@ export interface MsgCreatePostEncodeObject extends EncodeObject {
 }
 
 export function isMsgCreatePostEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCreatePostEncodeObject {
   return (
     (encodeObject as MsgCreatePostEncodeObject).typeUrl === MsgCreatePostTypeUrl
@@ -35,7 +35,7 @@ export interface MsgEditPostEncodeObject extends EncodeObject {
 }
 
 export function isMsgEditPostEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgEditPostEncodeObject {
   return (
     (encodeObject as MsgEditPostEncodeObject).typeUrl === MsgEditPostTypeUrl
@@ -48,7 +48,7 @@ export interface MsgDeletePostEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeletePostEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeletePostEncodeObject {
   return (
     (encodeObject as MsgDeletePostEncodeObject).typeUrl === MsgDeletePostTypeUrl
@@ -61,7 +61,7 @@ export interface MsgAddPostAttachmentEncodeObject extends EncodeObject {
 }
 
 export function isMsgAddPostAttachmentEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAddPostAttachmentEncodeObject {
   return (
     (encodeObject as MsgAddPostAttachmentEncodeObject).typeUrl ===
@@ -75,7 +75,7 @@ export interface MsgRemovePostAttachmentEncodeObject extends EncodeObject {
 }
 
 export function isMsgRemovePostAttachmentEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgRemovePostAttachmentEncodeObject {
   return (
     (encodeObject as MsgRemovePostAttachmentEncodeObject).typeUrl ===
@@ -89,7 +89,7 @@ export interface MsgAnswerPollEncodeObject extends EncodeObject {
 }
 
 export function isMsgAnswerPollEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgAnswerPollEncodeObject {
   return (
     (encodeObject as MsgAnswerPollEncodeObject).typeUrl === MsgAnswerPollTypeUrl

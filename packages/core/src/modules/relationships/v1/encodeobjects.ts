@@ -18,7 +18,7 @@ export interface MsgCreateRelationshipEncodeObject extends EncodeObject {
 }
 
 export function isMsgCreateRelationshipEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgCreateRelationshipEncodeObject {
   return (
     (encodeObject as MsgCreateRelationshipEncodeObject).typeUrl ===
@@ -32,7 +32,7 @@ export interface MsgDeleteRelationshipEncodeObject extends EncodeObject {
 }
 
 export function isMsgDeleteRelationshipEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgDeleteRelationshipEncodeObject {
   return (
     (encodeObject as MsgDeleteRelationshipEncodeObject).typeUrl ===
@@ -46,7 +46,7 @@ export interface MsgBlockUserEncodeObject extends EncodeObject {
 }
 
 export function isMsgBlockUserEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgBlockUserEncodeObject {
   return (
     (encodeObject as MsgBlockUserEncodeObject).typeUrl === MsgBlockUserTypeUrl
@@ -59,7 +59,7 @@ export interface MsgUnblockUserEncodeObject extends EncodeObject {
 }
 
 export function isMsgUnblockUserEncodeObject(
-  encodeObject: EncodeObject
+  encodeObject: EncodeObject,
 ): encodeObject is MsgUnblockUserEncodeObject {
   return (
     (encodeObject as MsgUnblockUserEncodeObject).typeUrl ===

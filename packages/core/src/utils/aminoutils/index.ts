@@ -52,13 +52,13 @@ export function fromOmitZeroLong(value: string | undefined): Long {
 }
 
 export function serializeTimestamp(
-  timestamp: Timestamp | undefined
+  timestamp: Timestamp | undefined,
 ): string | undefined {
   return serializeDate(timestamp ? fromTimestamp(timestamp) : undefined);
 }
 
 export function deserializeTimestamp(
-  timestamp: string | undefined
+  timestamp: string | undefined,
 ): Timestamp | undefined {
   const deserializedDate = deserializeDate(timestamp);
   return deserializedDate ? toTimestamp(deserializedDate) : undefined;
@@ -83,13 +83,13 @@ export function fromOmitFalse(value: boolean | undefined): boolean {
 }
 
 export function toBase64UndefinedIfEmpty(
-  value: Uint8Array
+  value: Uint8Array,
 ): string | undefined {
   return value.length === 0 ? undefined : toBase64(value);
 }
 
 export function fromBase64UndefinedIfEmpty(
-  value: string | undefined
+  value: string | undefined,
 ): Uint8Array {
   return !value ? Uint8Array.of() : fromBase64(value);
 }
@@ -107,7 +107,7 @@ export function fromBase64NullIfEmpty(value: string | null): Uint8Array {
  * @returns `undefined` if it is the default type value, the original value otherwise
  */
 export function omitDefault<T extends string | number | Long>(
-  input: T
+  input: T,
 ): T | undefined {
   if (typeof input === "string") {
     return input === "" ? undefined : input;

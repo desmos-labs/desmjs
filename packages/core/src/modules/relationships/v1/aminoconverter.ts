@@ -36,14 +36,14 @@ export const AminoConverter: AminoConverters = {
   [MsgCreateRelationshipTypeUrl]: {
     aminoType: MsgCreateRelationshipAminoType,
     toAmino: (
-      msg: MsgCreateRelationship
+      msg: MsgCreateRelationship,
     ): AminoMsgCreateRelationship["value"] => ({
       signer: omitEmptyString(msg.signer),
       counterparty: omitEmptyString(msg.counterparty),
       subspace_id: omitZeroLong(msg.subspaceId),
     }),
     fromAmino: (
-      msg: AminoMsgCreateRelationship["value"]
+      msg: AminoMsgCreateRelationship["value"],
     ): MsgCreateRelationship => ({
       signer: fromOmitEmptyString(msg.signer),
       counterparty: fromOmitEmptyString(msg.counterparty),
@@ -53,14 +53,14 @@ export const AminoConverter: AminoConverters = {
   [MsgDeleteRelationshipTypeUrl]: {
     aminoType: MsgDeleteRelationshipAminoType,
     toAmino: (
-      msg: MsgDeleteRelationship
+      msg: MsgDeleteRelationship,
     ): AminoMsgDeleteRelationship["value"] => ({
       signer: omitEmptyString(msg.signer),
       counterparty: omitEmptyString(msg.counterparty),
       subspace_id: omitZeroLong(msg.subspaceId),
     }),
     fromAmino: (
-      msg: AminoMsgDeleteRelationship["value"]
+      msg: AminoMsgDeleteRelationship["value"],
     ): MsgDeleteRelationship => ({
       signer: fromOmitEmptyString(msg.signer),
       counterparty: fromOmitEmptyString(msg.counterparty),

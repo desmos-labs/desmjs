@@ -46,7 +46,7 @@ export class WalletConnectSigner extends Signer {
   private readonly qrCodeModalController: QrCodeModalController;
 
   private readonly sessionDeleteListener = (
-    _: SignClientTypes.EventArguments["session_delete"]
+    _: SignClientTypes.EventArguments["session_delete"],
   ) => {
     this.updateStatus(SignerStatus.Disconnecting);
     this.unsubscribeEvents();
@@ -56,7 +56,7 @@ export class WalletConnectSigner extends Signer {
 
   constructor(
     client: WalletConnectClient,
-    options: WalletConnectSignerOptions
+    options: WalletConnectSignerOptions,
   ) {
     super(SignerStatus.NotConnected);
     this.signingMode = options.signingMode;
@@ -118,7 +118,7 @@ export class WalletConnectSigner extends Signer {
     if (desmosNamespace.methods.indexOf(CosmosRPCMethods.GetAccounts) === -1) {
       this.updateStatus(SignerStatus.NotConnected);
       throw new Error(
-        `can't find ${CosmosRPCMethods.GetAccounts} in the desmos namespace authorized methods`
+        `can't find ${CosmosRPCMethods.GetAccounts} in the desmos namespace authorized methods`,
       );
     }
 
@@ -132,7 +132,7 @@ export class WalletConnectSigner extends Signer {
     } else {
       this.updateStatus(SignerStatus.NotConnected);
       throw new Error(
-        `can't find ${CosmosRPCMethods.SignDirect} or ${CosmosRPCMethods.SignAmino} in the desmos namespace authorized methods`
+        `can't find ${CosmosRPCMethods.SignDirect} or ${CosmosRPCMethods.SignAmino} in the desmos namespace authorized methods`,
       );
     }
 
@@ -146,7 +146,7 @@ export class WalletConnectSigner extends Signer {
     this.accountData = await rpcCosmosGetAccounts(
       this.client,
       session,
-      chain
+      chain,
     ).then((accounts) => {
       if (accounts.length > 0) {
         return accounts[0];
@@ -220,7 +220,7 @@ export class WalletConnectSigner extends Signer {
       this.accountData = await rpcCosmosGetAccounts(
         this.client,
         this.walletConnectSession,
-        this.chain
+        this.chain,
       ).then((accounts) => {
         if (accounts.length > 0) {
           return accounts[0];
@@ -294,7 +294,7 @@ export class WalletConnectSigner extends Signer {
     return rpcCosmosGetAccounts(
       this.client,
       this.walletConnectSession!,
-      this.chain
+      this.chain,
     );
   }
 
@@ -303,7 +303,7 @@ export class WalletConnectSigner extends Signer {
    */
   async signDirect(
     signerAddress: string,
-    signDoc: SignDoc
+    signDoc: SignDoc,
   ): Promise<DirectSignResponse> {
     this.assertConnected();
     assert(this.accountData);
@@ -313,7 +313,7 @@ export class WalletConnectSigner extends Signer {
       this.walletConnectSession!,
       this.chain,
       signerAddress,
-      signDoc
+      signDoc,
     );
 
     return {
@@ -327,7 +327,7 @@ export class WalletConnectSigner extends Signer {
    */
   async signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse> {
     this.assertConnected();
     assert(this.accountData);
@@ -337,7 +337,7 @@ export class WalletConnectSigner extends Signer {
       this.walletConnectSession!,
       this.chain,
       signerAddress,
-      signDoc
+      signDoc,
     );
 
     return {

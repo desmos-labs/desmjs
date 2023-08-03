@@ -19,7 +19,7 @@ export async function rpcCosmosGetAccounts(
   client: SignClient,
   session: SessionTypes.Struct,
   requestId: number,
-  accounts: AccountData[]
+  accounts: AccountData[],
 ): Promise<void> {
   return client.respond({
     topic: session.topic,
@@ -42,7 +42,7 @@ export async function rpcCosmosSignDirect(
   client: SignClient,
   session: SessionTypes.Struct,
   requestId: number,
-  signResponse: DirectSignResponse
+  signResponse: DirectSignResponse,
 ): Promise<void> {
   return client.respond({
     topic: session.topic,
@@ -65,7 +65,7 @@ export async function rpcCosmosSignAmino(
   client: SignClient,
   session: SessionTypes.Struct,
   requestId: number,
-  signResponse: AminoSignResponse
+  signResponse: AminoSignResponse,
 ): Promise<void> {
   return client.respond({
     topic: session.topic,

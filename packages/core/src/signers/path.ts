@@ -28,7 +28,7 @@ export interface PathConfig {
  * @param config - Config to generate the BIP44 derivation path.
  */
 export function makeDesmosPath(
-  config: Partial<PathConfig> | undefined = undefined
+  config: Partial<PathConfig> | undefined = undefined,
 ): HdPath {
   return [
     Slip10RawIndex.hardened(44),

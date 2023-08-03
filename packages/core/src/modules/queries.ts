@@ -54,7 +54,7 @@ export type DesmosQueryClient = QueryClient &
   IbcExtension;
 
 export function buildDesmosQueryClient(
-  tendermintClient: TendermintClient | undefined
+  tendermintClient: TendermintClient | undefined,
 ): DesmosQueryClient | undefined {
   return tendermintClient
     ? QueryClient.withExtensions(
@@ -73,7 +73,7 @@ export function buildDesmosQueryClient(
         setupReportsV1Extension,
         setupSupplyV1Extension,
         setupWasmExtension,
-        setupIbcExtension
+        setupIbcExtension,
       )
     : undefined;
 }

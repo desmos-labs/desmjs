@@ -58,7 +58,7 @@ export class AminoTypes extends CosmJSAminoTypes {
       throw new Error(
         `Type URL '${typeUrl}' does not exist in the Amino message type register. ` +
           "If you need support for this message type, you can pass in additional entries to the AminoTypes constructor. " +
-          "If you think this message type should be included by default, please open an issue at https://github.com/cosmos/cosmjs/issues."
+          "If you think this message type should be included by default, please open an issue at https://github.com/cosmos/cosmjs/issues.",
       );
     }
 
@@ -70,7 +70,7 @@ export class AminoTypes extends CosmJSAminoTypes {
 
   public override fromAmino({ type, value }: AminoMsg): EncodeObject {
     const matches = Object.entries(this.converters).filter(
-      ([, converter]) => converter.aminoType === type
+      ([, converter]) => converter.aminoType === type,
     );
 
     switch (matches.length) {
@@ -78,7 +78,7 @@ export class AminoTypes extends CosmJSAminoTypes {
         throw new Error(
           `Amino type identifier '${type}' does not exist in the Amino message type register. ` +
             "If you need support for this message type, you can pass in additional entries to the AminoTypes constructor. " +
-            "If you think this message type should be included by default, please open an issue at https://github.com/cosmos/cosmjs/issues."
+            "If you think this message type should be included by default, please open an issue at https://github.com/cosmos/cosmjs/issues.",
         );
       }
       case 1: {
@@ -93,7 +93,7 @@ export class AminoTypes extends CosmJSAminoTypes {
           `Multiple types are registered with Amino type identifier '${type}': '${matches
             .map(([key]) => key)
             .sort()
-            .join("', '")}'. Thus fromAmino cannot be performed.`
+            .join("', '")}'. Thus fromAmino cannot be performed.`,
         );
     }
   }

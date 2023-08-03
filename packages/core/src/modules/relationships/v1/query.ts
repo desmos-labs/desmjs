@@ -17,7 +17,7 @@ export interface RelationshipsV1Extension {
       subspaceId: Long,
       user?: string,
       counterparty?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryRelationshipsResponse>;
     /**
      * Queries the user blocks for the user having the given address.
@@ -26,13 +26,13 @@ export interface RelationshipsV1Extension {
       subspaceId: Long,
       blocker?: string,
       blocked?: string,
-      pagination?: PageRequest
+      pagination?: PageRequest,
     ) => Promise<QueryBlocksResponse>;
   };
 }
 
 export function setupRelationshipsV1Extension(
-  base: QueryClient
+  base: QueryClient,
 ): RelationshipsV1Extension {
   const rpc = createProtobufRpcClient(base);
   // Use this service to get easy typed access to query methods
@@ -45,7 +45,7 @@ export function setupRelationshipsV1Extension(
         subspaceId: Long,
         user?: string,
         counterparty?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.Relationships({
           subspaceId,
@@ -57,7 +57,7 @@ export function setupRelationshipsV1Extension(
         subspaceId: Long,
         blocker?: string,
         blocked?: string,
-        pagination?: PageRequest
+        pagination?: PageRequest,
       ) =>
         queryService.Blocks({
           subspaceId,

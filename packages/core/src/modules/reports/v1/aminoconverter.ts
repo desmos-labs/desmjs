@@ -92,12 +92,12 @@ export const AminoConverter: AminoConverters = {
     aminoType: MsgCreateReportAminoType,
     toAmino: (
       msg: MsgCreateReport,
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): AminoMsgCreateReport["value"] => {
       assertDefinedAndNotNull(msg.target, "report target not defined");
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert MsgCreateReport.target to amino"
+        "aminoTypes must be defined to convert MsgCreateReport.target to amino",
       );
       return {
         subspace_id: omitZeroLong(msg.subspaceId),
@@ -109,11 +109,11 @@ export const AminoConverter: AminoConverters = {
     },
     fromAmino: (
       msg: AminoMsgCreateReport["value"],
-      aminoTypes?: AminoTypes
+      aminoTypes?: AminoTypes,
     ): MsgCreateReport => {
       assertDefined(
         aminoTypes,
-        "aminoTypes must be defined to convert AminoMsgCreateReport.target from amino"
+        "aminoTypes must be defined to convert AminoMsgCreateReport.target from amino",
       );
       return {
         subspaceId: fromOmitZeroLong(msg.subspace_id),
@@ -140,14 +140,14 @@ export const AminoConverter: AminoConverters = {
   [MsgSupportStandardReasonTypeUrl]: {
     aminoType: MsgSupportStandardReasonAminoType,
     toAmino: (
-      msg: MsgSupportStandardReason
+      msg: MsgSupportStandardReason,
     ): AminoMsgSupportStandardReason["value"] => ({
       subspace_id: omitZeroLong(msg.subspaceId),
       standard_reason_id: omitEmptyNumber(msg.standardReasonId),
       signer: omitEmptyString(msg.signer),
     }),
     fromAmino: (
-      msg: AminoMsgSupportStandardReason["value"]
+      msg: AminoMsgSupportStandardReason["value"],
     ): MsgSupportStandardReason => ({
       subspaceId: fromOmitZeroLong(msg.subspace_id),
       standardReasonId: fromOmitEmptyNumber(msg.standard_reason_id),

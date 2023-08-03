@@ -30,11 +30,11 @@ describe("Broadcast desmos.profiles.v3 messages", () => {
     // Setup the client associated to the external wallet
     const externalSigner = await OfflineSignerAdapter.fromMnemonic(
       SigningMode.AMINO,
-      testUser2.mnemonic
+      testUser2.mnemonic,
     );
     const externalClient = await DesmosClient.connectWithSigner(
       TEST_CHAIN_URL,
-      externalSigner
+      externalSigner,
     );
     const externalAccounts = await externalSigner.getAccounts();
     const externalAddress = externalAccounts[0].address;
@@ -55,7 +55,7 @@ describe("Broadcast desmos.profiles.v3 messages", () => {
     const saveProfileResult = await profileClient.signAndBroadcast(
       profileAddress,
       [msgSaveProfile],
-      "auto"
+      "auto",
     );
     expect(saveProfileResult.code).toBe(0);
 
@@ -63,7 +63,7 @@ describe("Broadcast desmos.profiles.v3 messages", () => {
     const dummySignatureResult = await externalClient.signTx(
       externalAddress,
       [],
-      { fee: { amount: [], gas: "0" }, memo: profileAddress }
+      { fee: { amount: [], gas: "0" }, memo: profileAddress },
     );
 
     // Build the chain config
@@ -76,7 +76,7 @@ describe("Broadcast desmos.profiles.v3 messages", () => {
       Bech32Address.fromPartial({
         value: externalAddress,
         prefix: "desmos",
-      })
+      }),
     );
 
     // Build the signature
