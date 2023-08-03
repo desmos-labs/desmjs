@@ -1,3 +1,4 @@
+import * as process from "process";
 import SignClient from "@walletconnect/sign-client";
 import {
   OfflineSignerAdapter,
@@ -5,7 +6,6 @@ import {
   SignerStatus,
   SigningMode,
 } from "@desmoslabs/desmjs";
-import * as process from "process";
 import { getSdkError } from "@walletconnect/utils";
 import { StdSignDoc } from "@cosmjs/amino";
 import { AuthInfo, SignDoc, TxBody } from "cosmjs-types/cosmos/tx/v1beta1/tx";
