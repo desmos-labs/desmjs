@@ -1,4 +1,4 @@
-import { TelescopeInput } from "@osmonauts/telescope/types/types";
+import { TelescopeInput } from "@cosmology/telescope/types/types";
 import { join } from "path";
 
 export const OutputPath = join(__dirname, "/../../src");

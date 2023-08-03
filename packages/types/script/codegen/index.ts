@@ -1,4 +1,4 @@
-import telescope from "@osmonauts/telescope";
+import telescope from "@cosmology/telescope";
 import { OutputPath, TelescopeConfig } from "./config";
 import { patchModules } from "./patches";
 

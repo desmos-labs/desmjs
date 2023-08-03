@@ -4300,9 +4300,126 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmwasm/ts-codegen@npm:0.30.1":
-  version: 0.30.1
-  resolution: "@cosmwasm/ts-codegen@npm:0.30.1"
+"@cosmology/ast@npm:^0.89.0":
+  version: 0.89.0
+  resolution: "@cosmology/ast@npm:0.89.0"
+  dependencies:
+    "@babel/parser": ^7.21.4
+    "@babel/runtime": ^7.21.0
+    "@babel/types": 7.21.4
+    "@cosmology/proto-parser": ^0.46.0
+    "@cosmology/types": ^0.37.0
+    "@cosmology/utils": ^0.12.0
+    case: 1.6.3
+    dotty: 0.1.2
+  checksum: ac5ff697f0183aca71b88a99430c351345a17d8cfecb4189f4d169c54c233759e9bca20f01df37892cd3f39c3fc2fbf96a780586ddc03a760b328f4c6889cf56
+  languageName: node
+  linkType: hard
+
+"@cosmology/proto-parser@npm:^0.46.0":
+  version: 0.46.0
+  resolution: "@cosmology/proto-parser@npm:0.46.0"
+  dependencies:
+    "@babel/runtime": ^7.21.0
+    "@cosmology/protobufjs": 6.11.6
+    "@cosmology/types": ^0.37.0
+    dotty: 0.1.2
+    glob: 8.0.3
+    minimatch: 5.1.0
+    mkdirp: 3.0.0
+  checksum: 29e93797abcd7463262451a465a1349e7b06994309ca5161aaa691cc67468c34d0aaa27ac13a2c3e5eaaae9e64c7892c0613207860c2e2b927c689116de9aa5d
+  languageName: node
+  linkType: hard
+
+"@cosmology/protobufjs@npm:6.11.6":
+  version: 6.11.6
+  resolution: "@cosmology/protobufjs@npm:6.11.6"
+  dependencies:
+    "@protobufjs/aspromise": ^1.1.2
+    "@protobufjs/base64": ^1.1.2
+    "@protobufjs/codegen": ^2.0.4
+    "@protobufjs/eventemitter": ^1.1.0
+    "@protobufjs/fetch": ^1.1.0
+    "@protobufjs/float": ^1.0.2
+    "@protobufjs/inquire": ^1.1.0
+    "@protobufjs/path": ^1.1.2
+    "@protobufjs/pool": ^1.1.0
+    "@protobufjs/utf8": ^1.1.0
+    "@types/long": ^4.0.1
+    "@types/node": ">=13.7.0"
+    long: ^4.0.0
+  bin:
+    pbjs: bin/pbjs
+    pbts: bin/pbts
+  checksum: f154aa32845bcecf2ef0b1ab82e8493e8f35854be839b3b0f84e89fc888ee4d5384eb496b11892e93ff73f24996e11a117a26681ad85bb38e634e2bd4582bfe4
+  languageName: node
+  linkType: hard
+
+"@cosmology/telescope@npm:^0.102.1":
+  version: 0.102.1
+  resolution: "@cosmology/telescope@npm:0.102.1"
+  dependencies:
+    "@babel/core": 7.21.4
+    "@babel/generator": 7.21.4
+    "@babel/parser": ^7.21.4
+    "@babel/plugin-proposal-class-properties": 7.18.6
+    "@babel/plugin-proposal-export-default-from": 7.18.10
+    "@babel/plugin-proposal-object-rest-spread": 7.20.7
+    "@babel/plugin-transform-runtime": 7.21.4
+    "@babel/preset-env": 7.21.4
+    "@babel/preset-typescript": ^7.21.4
+    "@babel/runtime": ^7.21.0
+    "@babel/traverse": 7.21.4
+    "@babel/types": 7.21.4
+    "@cosmology/ast": ^0.89.0
+    "@cosmology/proto-parser": ^0.46.0
+    "@cosmology/types": ^0.37.0
+    "@cosmology/utils": ^0.12.0
+    "@cosmwasm/ts-codegen": 0.34.0
+    "@types/parse-package-name": 0.1.0
+    case: 1.6.3
+    dargs: 7.0.0
+    deepmerge: 4.3.1
+    dotty: 0.1.2
+    fuzzy: 0.1.3
+    glob: 8.0.3
+    inquirerer: 0.1.3
+    long: ^5.2.1
+    minimatch: 5.1.0
+    minimist: 1.2.8
+    mkdirp: 3.0.0
+    parse-package-name: 1.0.0
+    rimraf: 5.0.0
+    shelljs: 0.8.5
+  bin:
+    telescope: main/telescope.js
+  checksum: 2c8a48e242aea7f66f00a525fd541d37208652eda8688c9e2613595117c242dbe783721524281c57f2bada5a1f678dce76867f15809ce63cafa263007f2582aa
+  languageName: node
+  linkType: hard
+
+"@cosmology/types@npm:^0.37.0":
+  version: 0.37.0
+  resolution: "@cosmology/types@npm:0.37.0"
+  dependencies:
+    "@babel/runtime": ^7.21.0
+    "@cosmology/utils": ^0.12.0
+    case: 1.6.3
+  checksum: 8f015ba409fc12a027136a9fd51aaac895efcbe8d31377ca56a86e5ada561a8557a4b27f2c186d89105e159f84a690f9bae38362664892fc20cd5c8e3bfe6978
+  languageName: node
+  linkType: hard
+
+"@cosmology/utils@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "@cosmology/utils@npm:0.12.0"
+  dependencies:
+    "@babel/runtime": ^7.21.0
+  checksum: 3f3b010e1916f2dc72cad8c099fd40d0de003c8ae255e1f46d38ef8cb9aa011eb052bafc2b323844db9c7eb74d88e56df237c330844a60ff903a430d755dd1f4
+  languageName: node
+  linkType: hard
+
+"@cosmwasm/ts-codegen@npm:0.34.0":
+  version: 0.34.0
+  resolution: "@cosmwasm/ts-codegen@npm:0.34.0"
   dependencies:
     "@babel/core": 7.18.10
     "@babel/generator": 7.18.12
@@ -4330,10 +4447,10 @@ __metadata:
     parse-package-name: 1.0.0
     rimraf: 3.0.2
     shelljs: 0.8.5
-    wasm-ast-types: ^0.23.1
+    wasm-ast-types: ^0.25.0
   bin:
     cosmwasm-ts-codegen: main/ts-codegen.js
-  checksum: ce0b22511767431d2d24ac3e07e7b91ea3eec60d012a1d20ac7099047766c51f0fc59e6c78b5b2c64d599eb79523e43c1cd7b45e15c0e06f23d784a496e762db
+  checksum: 2132ff6e1a8cbac6ec61f005014ed7a17cba4becb1cf8fdb865428e687739ba2558de1198e6b9f5fe6e323cdfb624a7d44ad3ecbe15a43d12aff7a78d6305dfd
   languageName: node
   linkType: hard
 
@@ -4374,7 +4491,7 @@ __metadata:
   resolution: "@desmoslabs/desmjs-types@workspace:packages/types"
   dependencies:
     "@cosmjs/proto-signing": ^0.31.0
-    "@osmonauts/telescope": ^0.97.0
+    "@cosmology/telescope": ^0.102.1
     "@protobufs/confio": ^0.0.6
     "@protobufs/cosmos_proto": ^0.0.10
     "@protobufs/gogoproto": ^0.0.10
@@ -5880,99 +5997,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@osmonauts/ast@npm:^0.83.0":
-  version: 0.83.0
-  resolution: "@osmonauts/ast@npm:0.83.0"
-  dependencies:
-    "@babel/parser": ^7.21.4
-    "@babel/runtime": ^7.21.0
-    "@babel/types": 7.21.4
-    "@osmonauts/proto-parser": ^0.43.0
-    "@osmonauts/types": ^0.35.0
-    "@osmonauts/utils": ^0.11.1
-    case: 1.6.3
-    dotty: 0.1.2
-  checksum: 229c4ba9f7395a9736b3ef5d5a0192fb395194c8f88b7f9633101171c55109c9f2aeeabdb577698b21f884308ce5266de8a3f6d644b90df4ea8e8b5b4222beda
-  languageName: node
-  linkType: hard
-
-"@osmonauts/proto-parser@npm:^0.43.0":
-  version: 0.43.0
-  resolution: "@osmonauts/proto-parser@npm:0.43.0"
-  dependencies:
-    "@babel/runtime": ^7.21.0
-    "@osmonauts/types": ^0.35.0
-    "@pyramation/protobufjs": 6.11.5
-    dotty: 0.1.2
-    glob: 8.0.3
-    minimatch: 5.1.0
-    mkdirp: 3.0.0
-  checksum: 30a2257c3e0bc5faa951822eef747df98a57795022e285956adb94dc6a258b0501fe45a0ccab9e83f646d64b1d3cc9a188ee3be1b808d6c5017c171cf965ac32
-  languageName: node
-  linkType: hard
-
-"@osmonauts/telescope@npm:^0.97.0":
-  version: 0.97.0
-  resolution: "@osmonauts/telescope@npm:0.97.0"
-  dependencies:
-    "@babel/core": 7.21.4
-    "@babel/generator": 7.21.4
-    "@babel/parser": ^7.21.4
-    "@babel/plugin-proposal-class-properties": 7.18.6
-    "@babel/plugin-proposal-export-default-from": 7.18.10
-    "@babel/plugin-proposal-object-rest-spread": 7.20.7
-    "@babel/plugin-transform-runtime": 7.21.4
-    "@babel/preset-env": 7.21.4
-    "@babel/preset-typescript": ^7.21.4
-    "@babel/runtime": ^7.21.0
-    "@babel/traverse": 7.21.4
-    "@babel/types": 7.21.4
-    "@cosmwasm/ts-codegen": 0.30.1
-    "@osmonauts/ast": ^0.83.0
-    "@osmonauts/proto-parser": ^0.43.0
-    "@osmonauts/types": ^0.35.0
-    "@osmonauts/utils": ^0.11.1
-    "@types/parse-package-name": 0.1.0
-    case: 1.6.3
-    dargs: 7.0.0
-    deepmerge: 4.3.1
-    dotty: 0.1.2
-    fuzzy: 0.1.3
-    glob: 8.0.3
-    inquirerer: 0.1.3
-    long: ^5.2.1
-    minimatch: 5.1.0
-    minimist: 1.2.8
-    mkdirp: 3.0.0
-    parse-package-name: 1.0.0
-    rimraf: 5.0.0
-    shelljs: 0.8.5
-  bin:
-    telescope: main/telescope.js
-  checksum: a93911c93c1e5a818b5cb2c09a01ea4aae2a93202e26dfdd030c839d74b4ab1d4ec9e64d9e37ddb61d55c86d44636b6407aece8b44893628d7e83b0d09bff7ab
-  languageName: node
-  linkType: hard
-
-"@osmonauts/types@npm:^0.35.0":
-  version: 0.35.0
-  resolution: "@osmonauts/types@npm:0.35.0"
-  dependencies:
-    "@babel/runtime": ^7.21.0
-    "@osmonauts/utils": ^0.11.1
-    case: 1.6.3
-  checksum: 22d06af0fff1126a1c66efeef770f376eb5f169ca7e71f1efbf0028835091cb17bda1475f716739cba1bbd1769898069e631bc48792e4e7100dfa8601a27ea00
-  languageName: node
-  linkType: hard
-
-"@osmonauts/utils@npm:^0.11.1":
-  version: 0.11.1
-  resolution: "@osmonauts/utils@npm:0.11.1"
-  dependencies:
-    "@babel/runtime": ^7.21.0
-  checksum: d64b8b59ba94d188c9e9fc763d36bf7099b3b56fb6ca2c264b22d619dd39bfe511dc071d4470f3384b8087d2e5f8224626bcddc5ed60877b25624123e1a27efe
-  languageName: node
-  linkType: hard
-
 "@polka/url@npm:^1.0.0-next.20":
   version: 1.0.0-next.21
   resolution: "@polka/url@npm:1.0.0-next.21"
@@ -6117,30 +6141,6 @@ __metadata:
   bin:
     json2ts: dist/src/cli.js
   checksum: 8b965d0d46551fa985ef00ba4f64c26cd1ea7f63336db6f40722c77b9ba5574a99389ca58eca2294dc62b95ac045611ff0098f1bf2c141a4faf4808112ad6e88
-  languageName: node
-  linkType: hard
-
-"@pyramation/protobufjs@npm:6.11.5":
-  version: 6.11.5
-  resolution: "@pyramation/protobufjs@npm:6.11.5"
-  dependencies:
-    "@protobufjs/aspromise": ^1.1.2
-    "@protobufjs/base64": ^1.1.2
-    "@protobufjs/codegen": ^2.0.4
-    "@protobufjs/eventemitter": ^1.1.0
-    "@protobufjs/fetch": ^1.1.0
-    "@protobufjs/float": ^1.0.2
-    "@protobufjs/inquire": ^1.1.0
-    "@protobufjs/path": ^1.1.2
-    "@protobufjs/pool": ^1.1.0
-    "@protobufjs/utf8": ^1.1.0
-    "@types/long": ^4.0.1
-    "@types/node": ">=13.7.0"
-    long: ^4.0.0
-  bin:
-    pbjs: bin/pbjs
-    pbts: bin/pbts
-  checksum: a044fed370a7482087691e94cb20f7df1c9188c5662abf7491bf64e209b1b9cb02530ee915f16ba7e393b555be7baec8124596238550d81fd732878d1ea16399
   languageName: node
   linkType: hard
 
@@ -21522,9 +21522,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wasm-ast-types@npm:^0.23.1":
-  version: 0.23.1
-  resolution: "wasm-ast-types@npm:0.23.1"
+"wasm-ast-types@npm:^0.25.0":
+  version: 0.25.0
+  resolution: "wasm-ast-types@npm:0.25.0"
   dependencies:
     "@babel/runtime": ^7.18.9
     "@babel/types": 7.18.10
@@ -21532,7 +21532,7 @@ __metadata:
     ast-stringify: 0.1.0
     case: 1.6.3
     deepmerge: 4.2.2
-  checksum: c59ab9d0a446561f649ca955a68090f1a27629dda89dcbdf8ec41e22b49822be7f949d6d1af72cf2ef67815dace5cfd4a44839938c78ec22578974a154d1b2de
+  checksum: e08cf943f0f1ad41e9e092cbc109687476835c33727fe0548b7db1f45b58c82a5e59d828871f590d6f3ea6b5f16a28bd3fca818c570652f1a8301263c91006da
   languageName: node
   linkType: hard
 
