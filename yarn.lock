@@ -4460,7 +4460,7 @@ __metadata:
     "@types/readable-stream": ^4.0.0
     "@web3auth/base": ^6.1.7
     "@web3auth/modal": ^6.1.7
-    "@web3auth/ui": ^6.1.3
+    "@web3auth/ui": ^6.1.7
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -6990,24 +6990,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/openlogin@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "@toruslabs/openlogin@npm:4.7.0"
-  dependencies:
-    "@toruslabs/broadcast-channel": ^7.0.0
-    "@toruslabs/eccrypto": ^3.0.0
-    "@toruslabs/metadata-helpers": ^4.0.0
-    "@toruslabs/openlogin-session-manager": ^1.1.0
-    "@toruslabs/openlogin-utils": ^4.7.0
-    events: ^3.3.0
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: c2d825d9c7eb78cb092d40a2517870b68d5f1288d8ae287eeb594df8bb8ae7e753ac99bed8bd1d8cef9ad86fb10e48f3e8e5b57ff55324812a650aff815be807
-  languageName: node
-  linkType: hard
-
 "@toruslabs/openlogin@npm:^4.7.2":
   version: 4.7.2
   resolution: "@toruslabs/openlogin@npm:4.7.2"
@@ -8319,23 +8301,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/base@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "@web3auth/base@npm:6.1.3"
-  dependencies:
-    "@toruslabs/http-helpers": ^4.0.0
-    "@toruslabs/openlogin": ^4.7.0
-    "@toruslabs/openlogin-jrpc": ^4.7.0
-    "@toruslabs/openlogin-utils": ^4.7.0
-    jwt-decode: ^3.1.2
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: 92470f71c09371f82648b21f09a792a2365ac5626f8adb1213c9f9b6f3066cb58a33a3fe37c569fc5120aab3bb96509f4d2df5d42ad1701855fd0b9e41f980d6
-  languageName: node
-  linkType: hard
-
 "@web3auth/base@npm:^6.1.7":
   version: 6.1.7
   resolution: "@web3auth/base@npm:6.1.7"
@@ -8526,31 +8491,6 @@ __metadata:
     "@babel/runtime": ^7.x
     "@solana/web3.js": ^1.x
   checksum: d4c587e1ed5f8f18bb1f6bd20da74c69e5c038939769bcf5f17ab77614e6589c9e646aec6635965dc0e13ec687a0bee08ac53dc75db15bd08d73a6636afec6cb
-  languageName: node
-  linkType: hard
-
-"@web3auth/ui@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "@web3auth/ui@npm:6.1.3"
-  dependencies:
-    "@toruslabs/http-helpers": ^4.0.0
-    "@toruslabs/openlogin": ^4.7.0
-    "@toruslabs/openlogin-jrpc": ^4.7.0
-    "@toruslabs/openlogin-utils": ^4.7.0
-    "@web3auth/base": ^6.1.3
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    copy-to-clipboard: ^3.3.3
-    i18next: ^23.2.7
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    react-i18next: ^13.0.1
-    react-qrcode-logo: ^2.9.0
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    react: ^18.x
-    react-dom: ^18.x
-  checksum: b669a98a12b0f80552d9f3e423761aad645299929237c0c3e4568d3dee0d6cf3020f92eb49401ca62a3b36124d441ff0800f30219cf60b3400a9245f7b8db673
   languageName: node
   linkType: hard
 
@@ -14081,15 +14021,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.2.7":
-  version: 23.2.11
-  resolution: "i18next@npm:23.2.11"
-  dependencies:
-    "@babel/runtime": ^7.22.5
-  checksum: ce4d16db9404a2a1fd929029ff0106dd92c7d719b6157e4551516ef2ab2917688a5ad712326f5869829614b01601839aa2900f40296b6c4a1efa9b802491477f
-  languageName: node
-  linkType: hard
-
 "i18next@npm:^23.3.0":
   version: 23.4.1
   resolution: "i18next@npm:23.4.1"
@@ -18700,7 +18631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^13.0.1, react-i18next@npm:^13.0.2":
+"react-i18next@npm:^13.0.2":
   version: 13.0.2
   resolution: "react-i18next@npm:13.0.2"
   dependencies:
