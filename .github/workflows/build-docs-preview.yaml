@@ -34,7 +34,7 @@ jobs:
         if: env.GIT_DIFF
         uses: arduino/setup-protoc@v2
         with:
-          version: "3.x"
+          version: "24.0"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js 🔧
