@@ -21,4 +21,5 @@ yarn-error.log*
 
 # Ignore generated API files
 docs/api
+!docs/api/_category_.yml
 

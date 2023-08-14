@@ -4622,7 +4622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/core@npm:2.4.1":
+"@docusaurus/core@npm:2.4.1, @docusaurus/core@npm:^2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/core@npm:2.4.1"
   dependencies:
@@ -4756,7 +4756,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/module-type-aliases@npm:2.4.1":
+"@docusaurus/module-type-aliases@npm:2.4.1, @docusaurus/module-type-aliases@npm:^2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/module-type-aliases@npm:2.4.1"
   dependencies:
@@ -4930,7 +4930,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/preset-classic@npm:2.4.1":
+"@docusaurus/preset-classic@npm:^2.4.1":
   version: 2.4.1
   resolution: "@docusaurus/preset-classic@npm:2.4.1"
   dependencies:
@@ -6715,90 +6715,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-darwin-arm64@npm:1.3.72"
+"@swc/core-darwin-arm64@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-darwin-arm64@npm:1.3.76"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-darwin-x64@npm:1.3.72"
+"@swc/core-darwin-x64@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-darwin-x64@npm:1.3.76"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.72"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.76"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.72"
+"@swc/core-linux-arm64-gnu@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.76"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.72"
+"@swc/core-linux-arm64-musl@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.76"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.72"
+"@swc/core-linux-x64-gnu@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.76"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.72"
+"@swc/core-linux-x64-musl@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.76"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.72"
+"@swc/core-win32-arm64-msvc@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.76"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.72"
+"@swc/core-win32-ia32-msvc@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.76"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.72"
+"@swc/core-win32-x64-msvc@npm:1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.76"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.72":
-  version: 1.3.72
-  resolution: "@swc/core@npm:1.3.72"
+"@swc/core@npm:^1.3.76":
+  version: 1.3.76
+  resolution: "@swc/core@npm:1.3.76"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.72
-    "@swc/core-darwin-x64": 1.3.72
-    "@swc/core-linux-arm-gnueabihf": 1.3.72
-    "@swc/core-linux-arm64-gnu": 1.3.72
-    "@swc/core-linux-arm64-musl": 1.3.72
-    "@swc/core-linux-x64-gnu": 1.3.72
-    "@swc/core-linux-x64-musl": 1.3.72
-    "@swc/core-win32-arm64-msvc": 1.3.72
-    "@swc/core-win32-ia32-msvc": 1.3.72
-    "@swc/core-win32-x64-msvc": 1.3.72
+    "@swc/core-darwin-arm64": 1.3.76
+    "@swc/core-darwin-x64": 1.3.76
+    "@swc/core-linux-arm-gnueabihf": 1.3.76
+    "@swc/core-linux-arm64-gnu": 1.3.76
+    "@swc/core-linux-arm64-musl": 1.3.76
+    "@swc/core-linux-x64-gnu": 1.3.76
+    "@swc/core-linux-x64-musl": 1.3.76
+    "@swc/core-win32-arm64-msvc": 1.3.76
+    "@swc/core-win32-ia32-msvc": 1.3.76
+    "@swc/core-win32-x64-msvc": 1.3.76
   peerDependencies:
     "@swc/helpers": ^0.5.0
   dependenciesMeta:
@@ -6825,7 +6825,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: 8dc1103de987d05ff97ec7acdb5ba0f9442ed658aa4923ba5f81eb6185375f695394a62415fbaf6f2e4685cfba5dec6c736666d8568e1defb5e3a44d65efecb9
+  checksum: f0401ccdd9073fa597c90e2503e6d71fd593593120cd92e2796bafbb43b443e072dbae3349e00fa9ded0d2dd669e463bc8587c41da4979ba31434249a30c36c7
   languageName: node
   linkType: hard
 
@@ -11428,21 +11428,21 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "desmjs-documentation@workspace:docs"
   dependencies:
-    "@docusaurus/core": 2.4.1
-    "@docusaurus/module-type-aliases": 2.4.1
-    "@docusaurus/preset-classic": 2.4.1
-    "@swc/core": ^1.3.72
+    "@docusaurus/core": ^2.4.1
+    "@docusaurus/module-type-aliases": ^2.4.1
+    "@docusaurus/preset-classic": ^2.4.1
+    "@swc/core": ^1.3.76
     "@tsconfig/docusaurus": ^2.0.0
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^2.0.0
-    docusaurus-plugin-typedoc: ^0.18.0
+    docusaurus-plugin-typedoc: ^0.19.2
     prism-react-renderer: ^2.0.6
     react: ^18.2.0
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
-    typedoc: ^0.23.28
-    typedoc-plugin-markdown: ^3.14.0
-    typescript: ^4.9.5
+    typedoc: ^0.24.8
+    typedoc-plugin-markdown: ^3.15.4
+    typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
@@ -11626,13 +11626,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "docusaurus-plugin-typedoc@npm:0.18.0"
+"docusaurus-plugin-typedoc@npm:^0.19.2":
+  version: 0.19.2
+  resolution: "docusaurus-plugin-typedoc@npm:0.19.2"
   peerDependencies:
-    typedoc: ">=0.23.0"
-    typedoc-plugin-markdown: ">=3.13.0"
-  checksum: e5e8780888ad07e71e9c0a98024f4bee6e3e520c7a3417d6b4951aa91c0fb63caa19d1cd5e0712b75d0add7c1fabe2df36b910e3ecb6e4a914c679c0ff75fc16
+    typedoc: ">=0.24.0"
+    typedoc-plugin-markdown: ">=3.15.0"
+  checksum: 347c1b6b509e14dabbb8b4d1224682ea2281995a60b4cf48e456dbbdbcecb4b73cf4fe3e031f1e01ae72dfb3bec935c6eaac7e4ddf3f63587fad2ac8ea028cec
   languageName: node
   linkType: hard
 
@@ -16164,12 +16164,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.2.12":
-  version: 4.2.12
-  resolution: "marked@npm:4.2.12"
+"marked@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "marked@npm:4.3.0"
   bin:
     marked: bin/marked.js
-  checksum: bd551cd61028ee639d4ca2ccdfcc5a6ba4227c1b143c4538f3cde27f569dcb57df8e6313560394645b418b84a7336c07ab1e438b89b6324c29d7d8cdd3102d63
+  checksum: 0db6817893952c3ec710eb9ceafb8468bf5ae38cb0f92b7b083baa13d70b19774674be04db5b817681fa7c5c6a088f61300815e4dd75a59696f4716ad69f6260
   languageName: node
   linkType: hard
 
@@ -16434,15 +16434,6 @@ __metadata:
   dependencies:
     brace-expansion: ^2.0.1
   checksum: 15ce53d31a06361e8b7a629501b5c75491bc2b59712d53e802b1987121d91b433d73fcc5be92974fde66b2b51d8fb28d75a9ae900d249feb792bb1ba2a4f0a90
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^7.1.3":
-  version: 7.3.0
-  resolution: "minimatch@npm:7.3.0"
-  dependencies:
-    brace-expansion: ^2.0.1
-  checksum: c4d9af992958339d5fc593c9ce496f4b9615597e57cdd663e57bd3a745ebd208c2bba19c3290c25ed8dcf259586fa1f68e4e1acf304f8694927b84c5381167d0
   languageName: node
   linkType: hard
 
@@ -21020,30 +21011,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^3.14.0":
-  version: 3.14.0
-  resolution: "typedoc-plugin-markdown@npm:3.14.0"
+"typedoc-plugin-markdown@npm:^3.15.4":
+  version: 3.15.4
+  resolution: "typedoc-plugin-markdown@npm:3.15.4"
   dependencies:
     handlebars: ^4.7.7
   peerDependencies:
-    typedoc: ">=0.23.0"
-  checksum: 6205600052185b4b193ab8a253d9df5ccbc95002c948a07f9024bcd26f0f23fbcc089fda4d6b4c8f4172f4eaca2bf9c32129989f6baaace7261cf4a0e41c976b
+    typedoc: ">=0.24.0"
+  checksum: 0ba19732713a0e0da12ae4eb3ec634e6e7ffb7237451780ae1e8c072276fc682603502086104728477ce03e1168853346046648443a718f7393d1eab0bb23e84
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.23.28":
-  version: 0.23.28
-  resolution: "typedoc@npm:0.23.28"
+"typedoc@npm:^0.24.8":
+  version: 0.24.8
+  resolution: "typedoc@npm:0.24.8"
   dependencies:
     lunr: ^2.3.9
-    marked: ^4.2.12
-    minimatch: ^7.1.3
+    marked: ^4.3.0
+    minimatch: ^9.0.0
     shiki: ^0.14.1
   peerDependencies:
-    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x
   bin:
     typedoc: bin/typedoc
-  checksum: 40eb4e207aac1b734e09400cf03f543642cc7b11000895198dd5a0d3166315759ccf4ac30a2915153597c5c186101c72bac2f1fc12b428184a9274d3a0e44c5e
+  checksum: a46a14497f789fb3594e6c3af2e45276934ac46df40b7ed15a504ee51dc7a8013a2ffb3a54fd73abca6a2b71f97d3ec9ad356fa9aa81d29743e4645a965a2ae0
   languageName: node
   linkType: hard
 
@@ -21057,6 +21048,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^5.1.6":
+  version: 5.1.6
+  resolution: "typescript@npm:5.1.6"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: b2f2c35096035fe1f5facd1e38922ccb8558996331405eb00a5111cc948b2e733163cc22fab5db46992aba7dd520fff637f2c1df4996ff0e134e77d3249a7350
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=701156"
@@ -21064,6 +21065,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 2eee5c37cad4390385db5db5a8e81470e42e8f1401b0358d7390095d6f681b410f2c4a0c496c6ff9ebd775423c7785cdace7bcdad76c7bee283df3d9718c0f20
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^5.1.6#~builtin<compat/typescript>":
+  version: 5.1.6
+  resolution: "typescript@patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=701156"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 21e88b0a0c0226f9cb9fd25b9626fb05b4c0f3fddac521844a13e1f30beb8f14e90bd409a9ac43c812c5946d714d6e0dee12d5d02dfc1c562c5aacfa1f49b606
   languageName: node
   linkType: hard
 

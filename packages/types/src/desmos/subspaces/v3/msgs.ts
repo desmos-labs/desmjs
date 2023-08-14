@@ -784,7 +784,7 @@ function createBaseMsgCreateSubspace(): MsgCreateSubspace {
 export const MsgCreateSubspace = {
   encode(
     message: MsgCreateSubspace,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -844,7 +844,7 @@ export const MsgCreateSubspace = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateSubspace>, I>>(
-    object: I
+    object: I,
   ): MsgCreateSubspace {
     const message = createBaseMsgCreateSubspace();
     message.name = object.name ?? "";
@@ -893,7 +893,7 @@ function createBaseMsgCreateSubspaceResponse(): MsgCreateSubspaceResponse {
 export const MsgCreateSubspaceResponse = {
   encode(
     message: MsgCreateSubspaceResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -902,7 +902,7 @@ export const MsgCreateSubspaceResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateSubspaceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -934,7 +934,7 @@ export const MsgCreateSubspaceResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateSubspaceResponse>, I>>(
-    object: I
+    object: I,
   ): MsgCreateSubspaceResponse {
     const message = createBaseMsgCreateSubspaceResponse();
     message.subspaceId =
@@ -956,12 +956,12 @@ export const MsgCreateSubspaceResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgCreateSubspaceResponseAminoMsg
+    object: MsgCreateSubspaceResponseAminoMsg,
   ): MsgCreateSubspaceResponse {
     return MsgCreateSubspaceResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCreateSubspaceResponseProtoMsg
+    message: MsgCreateSubspaceResponseProtoMsg,
   ): MsgCreateSubspaceResponse {
     return MsgCreateSubspaceResponse.decode(message.value);
   },
@@ -969,7 +969,7 @@ export const MsgCreateSubspaceResponse = {
     return MsgCreateSubspaceResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCreateSubspaceResponse
+    message: MsgCreateSubspaceResponse,
   ): MsgCreateSubspaceResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgCreateSubspaceResponse",
@@ -989,7 +989,7 @@ function createBaseMsgEditSubspace(): MsgEditSubspace {
 export const MsgEditSubspace = {
   encode(
     message: MsgEditSubspace,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1060,7 +1060,7 @@ export const MsgEditSubspace = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditSubspace>, I>>(
-    object: I
+    object: I,
   ): MsgEditSubspace {
     const message = createBaseMsgEditSubspace();
     message.subspaceId =
@@ -1115,13 +1115,13 @@ function createBaseMsgEditSubspaceResponse(): MsgEditSubspaceResponse {
 export const MsgEditSubspaceResponse = {
   encode(
     _: MsgEditSubspaceResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgEditSubspaceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1144,7 +1144,7 @@ export const MsgEditSubspaceResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditSubspaceResponse>, I>>(
-    _: I
+    _: I,
   ): MsgEditSubspaceResponse {
     const message = createBaseMsgEditSubspaceResponse();
     return message;
@@ -1157,12 +1157,12 @@ export const MsgEditSubspaceResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgEditSubspaceResponseAminoMsg
+    object: MsgEditSubspaceResponseAminoMsg,
   ): MsgEditSubspaceResponse {
     return MsgEditSubspaceResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgEditSubspaceResponseProtoMsg
+    message: MsgEditSubspaceResponseProtoMsg,
   ): MsgEditSubspaceResponse {
     return MsgEditSubspaceResponse.decode(message.value);
   },
@@ -1170,7 +1170,7 @@ export const MsgEditSubspaceResponse = {
     return MsgEditSubspaceResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgEditSubspaceResponse
+    message: MsgEditSubspaceResponse,
   ): MsgEditSubspaceResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgEditSubspaceResponse",
@@ -1187,7 +1187,7 @@ function createBaseMsgDeleteSubspace(): MsgDeleteSubspace {
 export const MsgDeleteSubspace = {
   encode(
     message: MsgDeleteSubspace,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1233,7 +1233,7 @@ export const MsgDeleteSubspace = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteSubspace>, I>>(
-    object: I
+    object: I,
   ): MsgDeleteSubspace {
     const message = createBaseMsgDeleteSubspace();
     message.subspaceId =
@@ -1279,13 +1279,13 @@ function createBaseMsgDeleteSubspaceResponse(): MsgDeleteSubspaceResponse {
 export const MsgDeleteSubspaceResponse = {
   encode(
     _: MsgDeleteSubspaceResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteSubspaceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1308,7 +1308,7 @@ export const MsgDeleteSubspaceResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteSubspaceResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeleteSubspaceResponse {
     const message = createBaseMsgDeleteSubspaceResponse();
     return message;
@@ -1321,12 +1321,12 @@ export const MsgDeleteSubspaceResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgDeleteSubspaceResponseAminoMsg
+    object: MsgDeleteSubspaceResponseAminoMsg,
   ): MsgDeleteSubspaceResponse {
     return MsgDeleteSubspaceResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgDeleteSubspaceResponseProtoMsg
+    message: MsgDeleteSubspaceResponseProtoMsg,
   ): MsgDeleteSubspaceResponse {
     return MsgDeleteSubspaceResponse.decode(message.value);
   },
@@ -1334,7 +1334,7 @@ export const MsgDeleteSubspaceResponse = {
     return MsgDeleteSubspaceResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgDeleteSubspaceResponse
+    message: MsgDeleteSubspaceResponse,
   ): MsgDeleteSubspaceResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgDeleteSubspaceResponse",
@@ -1354,7 +1354,7 @@ function createBaseMsgCreateSection(): MsgCreateSection {
 export const MsgCreateSection = {
   encode(
     message: MsgCreateSection,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1426,7 +1426,7 @@ export const MsgCreateSection = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateSection>, I>>(
-    object: I
+    object: I,
   ): MsgCreateSection {
     const message = createBaseMsgCreateSection();
     message.subspaceId =
@@ -1483,7 +1483,7 @@ function createBaseMsgCreateSectionResponse(): MsgCreateSectionResponse {
 export const MsgCreateSectionResponse = {
   encode(
     message: MsgCreateSectionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.sectionId !== 0) {
       writer.uint32(8).uint32(message.sectionId);
@@ -1492,7 +1492,7 @@ export const MsgCreateSectionResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateSectionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1522,7 +1522,7 @@ export const MsgCreateSectionResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateSectionResponse>, I>>(
-    object: I
+    object: I,
   ): MsgCreateSectionResponse {
     const message = createBaseMsgCreateSectionResponse();
     message.sectionId = object.sectionId ?? 0;
@@ -1539,12 +1539,12 @@ export const MsgCreateSectionResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgCreateSectionResponseAminoMsg
+    object: MsgCreateSectionResponseAminoMsg,
   ): MsgCreateSectionResponse {
     return MsgCreateSectionResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCreateSectionResponseProtoMsg
+    message: MsgCreateSectionResponseProtoMsg,
   ): MsgCreateSectionResponse {
     return MsgCreateSectionResponse.decode(message.value);
   },
@@ -1552,7 +1552,7 @@ export const MsgCreateSectionResponse = {
     return MsgCreateSectionResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCreateSectionResponse
+    message: MsgCreateSectionResponse,
   ): MsgCreateSectionResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgCreateSectionResponse",
@@ -1572,7 +1572,7 @@ function createBaseMsgEditSection(): MsgEditSection {
 export const MsgEditSection = {
   encode(
     message: MsgEditSection,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1644,7 +1644,7 @@ export const MsgEditSection = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditSection>, I>>(
-    object: I
+    object: I,
   ): MsgEditSection {
     const message = createBaseMsgEditSection();
     message.subspaceId =
@@ -1699,13 +1699,13 @@ function createBaseMsgEditSectionResponse(): MsgEditSectionResponse {
 export const MsgEditSectionResponse = {
   encode(
     _: MsgEditSectionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgEditSectionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1728,7 +1728,7 @@ export const MsgEditSectionResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditSectionResponse>, I>>(
-    _: I
+    _: I,
   ): MsgEditSectionResponse {
     const message = createBaseMsgEditSectionResponse();
     return message;
@@ -1744,7 +1744,7 @@ export const MsgEditSectionResponse = {
     return MsgEditSectionResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgEditSectionResponseProtoMsg
+    message: MsgEditSectionResponseProtoMsg,
   ): MsgEditSectionResponse {
     return MsgEditSectionResponse.decode(message.value);
   },
@@ -1769,7 +1769,7 @@ function createBaseMsgMoveSection(): MsgMoveSection {
 export const MsgMoveSection = {
   encode(
     message: MsgMoveSection,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1833,7 +1833,7 @@ export const MsgMoveSection = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgMoveSection>, I>>(
-    object: I
+    object: I,
   ): MsgMoveSection {
     const message = createBaseMsgMoveSection();
     message.subspaceId =
@@ -1885,13 +1885,13 @@ function createBaseMsgMoveSectionResponse(): MsgMoveSectionResponse {
 export const MsgMoveSectionResponse = {
   encode(
     _: MsgMoveSectionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgMoveSectionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1914,7 +1914,7 @@ export const MsgMoveSectionResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgMoveSectionResponse>, I>>(
-    _: I
+    _: I,
   ): MsgMoveSectionResponse {
     const message = createBaseMsgMoveSectionResponse();
     return message;
@@ -1930,7 +1930,7 @@ export const MsgMoveSectionResponse = {
     return MsgMoveSectionResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgMoveSectionResponseProtoMsg
+    message: MsgMoveSectionResponseProtoMsg,
   ): MsgMoveSectionResponse {
     return MsgMoveSectionResponse.decode(message.value);
   },
@@ -1954,7 +1954,7 @@ function createBaseMsgDeleteSection(): MsgDeleteSection {
 export const MsgDeleteSection = {
   encode(
     message: MsgDeleteSection,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -2009,7 +2009,7 @@ export const MsgDeleteSection = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteSection>, I>>(
-    object: I
+    object: I,
   ): MsgDeleteSection {
     const message = createBaseMsgDeleteSection();
     message.subspaceId =
@@ -2058,13 +2058,13 @@ function createBaseMsgDeleteSectionResponse(): MsgDeleteSectionResponse {
 export const MsgDeleteSectionResponse = {
   encode(
     _: MsgDeleteSectionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteSectionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2087,7 +2087,7 @@ export const MsgDeleteSectionResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteSectionResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeleteSectionResponse {
     const message = createBaseMsgDeleteSectionResponse();
     return message;
@@ -2100,12 +2100,12 @@ export const MsgDeleteSectionResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgDeleteSectionResponseAminoMsg
+    object: MsgDeleteSectionResponseAminoMsg,
   ): MsgDeleteSectionResponse {
     return MsgDeleteSectionResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgDeleteSectionResponseProtoMsg
+    message: MsgDeleteSectionResponseProtoMsg,
   ): MsgDeleteSectionResponse {
     return MsgDeleteSectionResponse.decode(message.value);
   },
@@ -2113,7 +2113,7 @@ export const MsgDeleteSectionResponse = {
     return MsgDeleteSectionResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgDeleteSectionResponse
+    message: MsgDeleteSectionResponse,
   ): MsgDeleteSectionResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgDeleteSectionResponse",
@@ -2135,7 +2135,7 @@ function createBaseMsgCreateUserGroup(): MsgCreateUserGroup {
 export const MsgCreateUserGroup = {
   encode(
     message: MsgCreateUserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -2235,7 +2235,7 @@ export const MsgCreateUserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateUserGroup>, I>>(
-    object: I
+    object: I,
   ): MsgCreateUserGroup {
     const message = createBaseMsgCreateUserGroup();
     message.subspaceId =
@@ -2310,7 +2310,7 @@ function createBaseMsgCreateUserGroupResponse(): MsgCreateUserGroupResponse {
 export const MsgCreateUserGroupResponse = {
   encode(
     message: MsgCreateUserGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.groupId !== 0) {
       writer.uint32(8).uint32(message.groupId);
@@ -2319,7 +2319,7 @@ export const MsgCreateUserGroupResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateUserGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2349,33 +2349,33 @@ export const MsgCreateUserGroupResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateUserGroupResponse>, I>>(
-    object: I
+    object: I,
   ): MsgCreateUserGroupResponse {
     const message = createBaseMsgCreateUserGroupResponse();
     message.groupId = object.groupId ?? 0;
     return message;
   },
   fromAmino(
-    object: MsgCreateUserGroupResponseAmino
+    object: MsgCreateUserGroupResponseAmino,
   ): MsgCreateUserGroupResponse {
     return {
       groupId: object.group_id,
     };
   },
   toAmino(
-    message: MsgCreateUserGroupResponse
+    message: MsgCreateUserGroupResponse,
   ): MsgCreateUserGroupResponseAmino {
     const obj: any = {};
     obj.group_id = message.groupId;
     return obj;
   },
   fromAminoMsg(
-    object: MsgCreateUserGroupResponseAminoMsg
+    object: MsgCreateUserGroupResponseAminoMsg,
   ): MsgCreateUserGroupResponse {
     return MsgCreateUserGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCreateUserGroupResponseProtoMsg
+    message: MsgCreateUserGroupResponseProtoMsg,
   ): MsgCreateUserGroupResponse {
     return MsgCreateUserGroupResponse.decode(message.value);
   },
@@ -2383,7 +2383,7 @@ export const MsgCreateUserGroupResponse = {
     return MsgCreateUserGroupResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCreateUserGroupResponse
+    message: MsgCreateUserGroupResponse,
   ): MsgCreateUserGroupResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgCreateUserGroupResponse",
@@ -2403,7 +2403,7 @@ function createBaseMsgEditUserGroup(): MsgEditUserGroup {
 export const MsgEditUserGroup = {
   encode(
     message: MsgEditUserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -2475,7 +2475,7 @@ export const MsgEditUserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditUserGroup>, I>>(
-    object: I
+    object: I,
   ): MsgEditUserGroup {
     const message = createBaseMsgEditUserGroup();
     message.subspaceId =
@@ -2530,13 +2530,13 @@ function createBaseMsgEditUserGroupResponse(): MsgEditUserGroupResponse {
 export const MsgEditUserGroupResponse = {
   encode(
     _: MsgEditUserGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgEditUserGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2559,7 +2559,7 @@ export const MsgEditUserGroupResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditUserGroupResponse>, I>>(
-    _: I
+    _: I,
   ): MsgEditUserGroupResponse {
     const message = createBaseMsgEditUserGroupResponse();
     return message;
@@ -2572,12 +2572,12 @@ export const MsgEditUserGroupResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgEditUserGroupResponseAminoMsg
+    object: MsgEditUserGroupResponseAminoMsg,
   ): MsgEditUserGroupResponse {
     return MsgEditUserGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgEditUserGroupResponseProtoMsg
+    message: MsgEditUserGroupResponseProtoMsg,
   ): MsgEditUserGroupResponse {
     return MsgEditUserGroupResponse.decode(message.value);
   },
@@ -2585,7 +2585,7 @@ export const MsgEditUserGroupResponse = {
     return MsgEditUserGroupResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgEditUserGroupResponse
+    message: MsgEditUserGroupResponse,
   ): MsgEditUserGroupResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgEditUserGroupResponse",
@@ -2604,7 +2604,7 @@ function createBaseMsgMoveUserGroup(): MsgMoveUserGroup {
 export const MsgMoveUserGroup = {
   encode(
     message: MsgMoveUserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -2670,7 +2670,7 @@ export const MsgMoveUserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgMoveUserGroup>, I>>(
-    object: I
+    object: I,
   ): MsgMoveUserGroup {
     const message = createBaseMsgMoveUserGroup();
     message.subspaceId =
@@ -2722,13 +2722,13 @@ function createBaseMsgMoveUserGroupResponse(): MsgMoveUserGroupResponse {
 export const MsgMoveUserGroupResponse = {
   encode(
     _: MsgMoveUserGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgMoveUserGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2751,7 +2751,7 @@ export const MsgMoveUserGroupResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgMoveUserGroupResponse>, I>>(
-    _: I
+    _: I,
   ): MsgMoveUserGroupResponse {
     const message = createBaseMsgMoveUserGroupResponse();
     return message;
@@ -2764,12 +2764,12 @@ export const MsgMoveUserGroupResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgMoveUserGroupResponseAminoMsg
+    object: MsgMoveUserGroupResponseAminoMsg,
   ): MsgMoveUserGroupResponse {
     return MsgMoveUserGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgMoveUserGroupResponseProtoMsg
+    message: MsgMoveUserGroupResponseProtoMsg,
   ): MsgMoveUserGroupResponse {
     return MsgMoveUserGroupResponse.decode(message.value);
   },
@@ -2777,7 +2777,7 @@ export const MsgMoveUserGroupResponse = {
     return MsgMoveUserGroupResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgMoveUserGroupResponse
+    message: MsgMoveUserGroupResponse,
   ): MsgMoveUserGroupResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgMoveUserGroupResponse",
@@ -2796,7 +2796,7 @@ function createBaseMsgSetUserGroupPermissions(): MsgSetUserGroupPermissions {
 export const MsgSetUserGroupPermissions = {
   encode(
     message: MsgSetUserGroupPermissions,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -2814,7 +2814,7 @@ export const MsgSetUserGroupPermissions = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSetUserGroupPermissions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2868,7 +2868,7 @@ export const MsgSetUserGroupPermissions = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSetUserGroupPermissions>, I>>(
-    object: I
+    object: I,
   ): MsgSetUserGroupPermissions {
     const message = createBaseMsgSetUserGroupPermissions();
     message.subspaceId =
@@ -2881,7 +2881,7 @@ export const MsgSetUserGroupPermissions = {
     return message;
   },
   fromAmino(
-    object: MsgSetUserGroupPermissionsAmino
+    object: MsgSetUserGroupPermissionsAmino,
   ): MsgSetUserGroupPermissions {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -2893,7 +2893,7 @@ export const MsgSetUserGroupPermissions = {
     };
   },
   toAmino(
-    message: MsgSetUserGroupPermissions
+    message: MsgSetUserGroupPermissions,
   ): MsgSetUserGroupPermissionsAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -2909,12 +2909,12 @@ export const MsgSetUserGroupPermissions = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgSetUserGroupPermissionsAminoMsg
+    object: MsgSetUserGroupPermissionsAminoMsg,
   ): MsgSetUserGroupPermissions {
     return MsgSetUserGroupPermissions.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSetUserGroupPermissionsProtoMsg
+    message: MsgSetUserGroupPermissionsProtoMsg,
   ): MsgSetUserGroupPermissions {
     return MsgSetUserGroupPermissions.decode(message.value);
   },
@@ -2922,7 +2922,7 @@ export const MsgSetUserGroupPermissions = {
     return MsgSetUserGroupPermissions.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSetUserGroupPermissions
+    message: MsgSetUserGroupPermissions,
   ): MsgSetUserGroupPermissionsProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissions",
@@ -2936,13 +2936,13 @@ function createBaseMsgSetUserGroupPermissionsResponse(): MsgSetUserGroupPermissi
 export const MsgSetUserGroupPermissionsResponse = {
   encode(
     _: MsgSetUserGroupPermissionsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSetUserGroupPermissionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2965,29 +2965,29 @@ export const MsgSetUserGroupPermissionsResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgSetUserGroupPermissionsResponse>, I>
+    I extends Exact<DeepPartial<MsgSetUserGroupPermissionsResponse>, I>,
   >(_: I): MsgSetUserGroupPermissionsResponse {
     const message = createBaseMsgSetUserGroupPermissionsResponse();
     return message;
   },
   fromAmino(
-    _: MsgSetUserGroupPermissionsResponseAmino
+    _: MsgSetUserGroupPermissionsResponseAmino,
   ): MsgSetUserGroupPermissionsResponse {
     return {};
   },
   toAmino(
-    _: MsgSetUserGroupPermissionsResponse
+    _: MsgSetUserGroupPermissionsResponse,
   ): MsgSetUserGroupPermissionsResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgSetUserGroupPermissionsResponseAminoMsg
+    object: MsgSetUserGroupPermissionsResponseAminoMsg,
   ): MsgSetUserGroupPermissionsResponse {
     return MsgSetUserGroupPermissionsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSetUserGroupPermissionsResponseProtoMsg
+    message: MsgSetUserGroupPermissionsResponseProtoMsg,
   ): MsgSetUserGroupPermissionsResponse {
     return MsgSetUserGroupPermissionsResponse.decode(message.value);
   },
@@ -2995,7 +2995,7 @@ export const MsgSetUserGroupPermissionsResponse = {
     return MsgSetUserGroupPermissionsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSetUserGroupPermissionsResponse
+    message: MsgSetUserGroupPermissionsResponse,
   ): MsgSetUserGroupPermissionsResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgSetUserGroupPermissionsResponse",
@@ -3013,7 +3013,7 @@ function createBaseMsgDeleteUserGroup(): MsgDeleteUserGroup {
 export const MsgDeleteUserGroup = {
   encode(
     message: MsgDeleteUserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -3068,7 +3068,7 @@ export const MsgDeleteUserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteUserGroup>, I>>(
-    object: I
+    object: I,
   ): MsgDeleteUserGroup {
     const message = createBaseMsgDeleteUserGroup();
     message.subspaceId =
@@ -3117,13 +3117,13 @@ function createBaseMsgDeleteUserGroupResponse(): MsgDeleteUserGroupResponse {
 export const MsgDeleteUserGroupResponse = {
   encode(
     _: MsgDeleteUserGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteUserGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3146,7 +3146,7 @@ export const MsgDeleteUserGroupResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteUserGroupResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeleteUserGroupResponse {
     const message = createBaseMsgDeleteUserGroupResponse();
     return message;
@@ -3159,12 +3159,12 @@ export const MsgDeleteUserGroupResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgDeleteUserGroupResponseAminoMsg
+    object: MsgDeleteUserGroupResponseAminoMsg,
   ): MsgDeleteUserGroupResponse {
     return MsgDeleteUserGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgDeleteUserGroupResponseProtoMsg
+    message: MsgDeleteUserGroupResponseProtoMsg,
   ): MsgDeleteUserGroupResponse {
     return MsgDeleteUserGroupResponse.decode(message.value);
   },
@@ -3172,7 +3172,7 @@ export const MsgDeleteUserGroupResponse = {
     return MsgDeleteUserGroupResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgDeleteUserGroupResponse
+    message: MsgDeleteUserGroupResponse,
   ): MsgDeleteUserGroupResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgDeleteUserGroupResponse",
@@ -3191,7 +3191,7 @@ function createBaseMsgAddUserToUserGroup(): MsgAddUserToUserGroup {
 export const MsgAddUserToUserGroup = {
   encode(
     message: MsgAddUserToUserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -3209,7 +3209,7 @@ export const MsgAddUserToUserGroup = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAddUserToUserGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3257,7 +3257,7 @@ export const MsgAddUserToUserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAddUserToUserGroup>, I>>(
-    object: I
+    object: I,
   ): MsgAddUserToUserGroup {
     const message = createBaseMsgAddUserToUserGroup();
     message.subspaceId =
@@ -3309,13 +3309,13 @@ function createBaseMsgAddUserToUserGroupResponse(): MsgAddUserToUserGroupRespons
 export const MsgAddUserToUserGroupResponse = {
   encode(
     _: MsgAddUserToUserGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAddUserToUserGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3338,29 +3338,29 @@ export const MsgAddUserToUserGroupResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAddUserToUserGroupResponse>, I>>(
-    _: I
+    _: I,
   ): MsgAddUserToUserGroupResponse {
     const message = createBaseMsgAddUserToUserGroupResponse();
     return message;
   },
   fromAmino(
-    _: MsgAddUserToUserGroupResponseAmino
+    _: MsgAddUserToUserGroupResponseAmino,
   ): MsgAddUserToUserGroupResponse {
     return {};
   },
   toAmino(
-    _: MsgAddUserToUserGroupResponse
+    _: MsgAddUserToUserGroupResponse,
   ): MsgAddUserToUserGroupResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgAddUserToUserGroupResponseAminoMsg
+    object: MsgAddUserToUserGroupResponseAminoMsg,
   ): MsgAddUserToUserGroupResponse {
     return MsgAddUserToUserGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgAddUserToUserGroupResponseProtoMsg
+    message: MsgAddUserToUserGroupResponseProtoMsg,
   ): MsgAddUserToUserGroupResponse {
     return MsgAddUserToUserGroupResponse.decode(message.value);
   },
@@ -3368,7 +3368,7 @@ export const MsgAddUserToUserGroupResponse = {
     return MsgAddUserToUserGroupResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgAddUserToUserGroupResponse
+    message: MsgAddUserToUserGroupResponse,
   ): MsgAddUserToUserGroupResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgAddUserToUserGroupResponse",
@@ -3387,7 +3387,7 @@ function createBaseMsgRemoveUserFromUserGroup(): MsgRemoveUserFromUserGroup {
 export const MsgRemoveUserFromUserGroup = {
   encode(
     message: MsgRemoveUserFromUserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -3405,7 +3405,7 @@ export const MsgRemoveUserFromUserGroup = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRemoveUserFromUserGroup {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3453,7 +3453,7 @@ export const MsgRemoveUserFromUserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRemoveUserFromUserGroup>, I>>(
-    object: I
+    object: I,
   ): MsgRemoveUserFromUserGroup {
     const message = createBaseMsgRemoveUserFromUserGroup();
     message.subspaceId =
@@ -3466,7 +3466,7 @@ export const MsgRemoveUserFromUserGroup = {
     return message;
   },
   fromAmino(
-    object: MsgRemoveUserFromUserGroupAmino
+    object: MsgRemoveUserFromUserGroupAmino,
   ): MsgRemoveUserFromUserGroup {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -3476,7 +3476,7 @@ export const MsgRemoveUserFromUserGroup = {
     };
   },
   toAmino(
-    message: MsgRemoveUserFromUserGroup
+    message: MsgRemoveUserFromUserGroup,
   ): MsgRemoveUserFromUserGroupAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -3488,12 +3488,12 @@ export const MsgRemoveUserFromUserGroup = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRemoveUserFromUserGroupAminoMsg
+    object: MsgRemoveUserFromUserGroupAminoMsg,
   ): MsgRemoveUserFromUserGroup {
     return MsgRemoveUserFromUserGroup.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRemoveUserFromUserGroupProtoMsg
+    message: MsgRemoveUserFromUserGroupProtoMsg,
   ): MsgRemoveUserFromUserGroup {
     return MsgRemoveUserFromUserGroup.decode(message.value);
   },
@@ -3501,7 +3501,7 @@ export const MsgRemoveUserFromUserGroup = {
     return MsgRemoveUserFromUserGroup.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRemoveUserFromUserGroup
+    message: MsgRemoveUserFromUserGroup,
   ): MsgRemoveUserFromUserGroupProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup",
@@ -3515,13 +3515,13 @@ function createBaseMsgRemoveUserFromUserGroupResponse(): MsgRemoveUserFromUserGr
 export const MsgRemoveUserFromUserGroupResponse = {
   encode(
     _: MsgRemoveUserFromUserGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRemoveUserFromUserGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3544,29 +3544,29 @@ export const MsgRemoveUserFromUserGroupResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgRemoveUserFromUserGroupResponse>, I>
+    I extends Exact<DeepPartial<MsgRemoveUserFromUserGroupResponse>, I>,
   >(_: I): MsgRemoveUserFromUserGroupResponse {
     const message = createBaseMsgRemoveUserFromUserGroupResponse();
     return message;
   },
   fromAmino(
-    _: MsgRemoveUserFromUserGroupResponseAmino
+    _: MsgRemoveUserFromUserGroupResponseAmino,
   ): MsgRemoveUserFromUserGroupResponse {
     return {};
   },
   toAmino(
-    _: MsgRemoveUserFromUserGroupResponse
+    _: MsgRemoveUserFromUserGroupResponse,
   ): MsgRemoveUserFromUserGroupResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgRemoveUserFromUserGroupResponseAminoMsg
+    object: MsgRemoveUserFromUserGroupResponseAminoMsg,
   ): MsgRemoveUserFromUserGroupResponse {
     return MsgRemoveUserFromUserGroupResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRemoveUserFromUserGroupResponseProtoMsg
+    message: MsgRemoveUserFromUserGroupResponseProtoMsg,
   ): MsgRemoveUserFromUserGroupResponse {
     return MsgRemoveUserFromUserGroupResponse.decode(message.value);
   },
@@ -3574,7 +3574,7 @@ export const MsgRemoveUserFromUserGroupResponse = {
     return MsgRemoveUserFromUserGroupResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRemoveUserFromUserGroupResponse
+    message: MsgRemoveUserFromUserGroupResponse,
   ): MsgRemoveUserFromUserGroupResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroupResponse",
@@ -3594,7 +3594,7 @@ function createBaseMsgSetUserPermissions(): MsgSetUserPermissions {
 export const MsgSetUserPermissions = {
   encode(
     message: MsgSetUserPermissions,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -3615,7 +3615,7 @@ export const MsgSetUserPermissions = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSetUserPermissions {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3674,7 +3674,7 @@ export const MsgSetUserPermissions = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSetUserPermissions>, I>>(
-    object: I
+    object: I,
   ): MsgSetUserPermissions {
     const message = createBaseMsgSetUserPermissions();
     message.subspaceId =
@@ -3735,13 +3735,13 @@ function createBaseMsgSetUserPermissionsResponse(): MsgSetUserPermissionsRespons
 export const MsgSetUserPermissionsResponse = {
   encode(
     _: MsgSetUserPermissionsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSetUserPermissionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -3764,29 +3764,29 @@ export const MsgSetUserPermissionsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSetUserPermissionsResponse>, I>>(
-    _: I
+    _: I,
   ): MsgSetUserPermissionsResponse {
     const message = createBaseMsgSetUserPermissionsResponse();
     return message;
   },
   fromAmino(
-    _: MsgSetUserPermissionsResponseAmino
+    _: MsgSetUserPermissionsResponseAmino,
   ): MsgSetUserPermissionsResponse {
     return {};
   },
   toAmino(
-    _: MsgSetUserPermissionsResponse
+    _: MsgSetUserPermissionsResponse,
   ): MsgSetUserPermissionsResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgSetUserPermissionsResponseAminoMsg
+    object: MsgSetUserPermissionsResponseAminoMsg,
   ): MsgSetUserPermissionsResponse {
     return MsgSetUserPermissionsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSetUserPermissionsResponseProtoMsg
+    message: MsgSetUserPermissionsResponseProtoMsg,
   ): MsgSetUserPermissionsResponse {
     return MsgSetUserPermissionsResponse.decode(message.value);
   },
@@ -3794,7 +3794,7 @@ export const MsgSetUserPermissionsResponse = {
     return MsgSetUserPermissionsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSetUserPermissionsResponse
+    message: MsgSetUserPermissionsResponse,
   ): MsgSetUserPermissionsResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgSetUserPermissionsResponse",
@@ -3806,13 +3806,13 @@ export const MsgSetUserPermissionsResponse = {
 export interface Msg {
   /** CreateSubspace allows to create a subspace */
   CreateSubspace(
-    request: MsgCreateSubspace
+    request: MsgCreateSubspace,
   ): Promise<MsgCreateSubspaceResponse>;
   /** EditSubspace allows to edit a subspace */
   EditSubspace(request: MsgEditSubspace): Promise<MsgEditSubspaceResponse>;
   /** DeleteSubspace allows to delete a subspace */
   DeleteSubspace(
-    request: MsgDeleteSubspace
+    request: MsgDeleteSubspace,
   ): Promise<MsgDeleteSubspaceResponse>;
   /** CreateSection allows to create a new subspace section */
   CreateSection(request: MsgCreateSection): Promise<MsgCreateSectionResponse>;
@@ -3824,7 +3824,7 @@ export interface Msg {
   DeleteSection(request: MsgDeleteSection): Promise<MsgDeleteSectionResponse>;
   /** CreateUserGroup allows to create a user group */
   CreateUserGroup(
-    request: MsgCreateUserGroup
+    request: MsgCreateUserGroup,
   ): Promise<MsgCreateUserGroupResponse>;
   /** EditUserGroup allows to edit a user group */
   EditUserGroup(request: MsgEditUserGroup): Promise<MsgEditUserGroupResponse>;
@@ -3832,54 +3832,54 @@ export interface Msg {
   MoveUserGroup(request: MsgMoveUserGroup): Promise<MsgMoveUserGroupResponse>;
   /** SetUserGroupPermissions allows to set the permissions for a specific group */
   SetUserGroupPermissions(
-    request: MsgSetUserGroupPermissions
+    request: MsgSetUserGroupPermissions,
   ): Promise<MsgSetUserGroupPermissionsResponse>;
   /** DeleteUserGroup allows to delete an existing user group */
   DeleteUserGroup(
-    request: MsgDeleteUserGroup
+    request: MsgDeleteUserGroup,
   ): Promise<MsgDeleteUserGroupResponse>;
   /** AddUserToUserGroup allows to add a specific user to a specific user group */
   AddUserToUserGroup(
-    request: MsgAddUserToUserGroup
+    request: MsgAddUserToUserGroup,
   ): Promise<MsgAddUserToUserGroupResponse>;
   /**
    * RemoveUserFromUserGroup allows to remove a specific user from a specific
    * user group
    */
   RemoveUserFromUserGroup(
-    request: MsgRemoveUserFromUserGroup
+    request: MsgRemoveUserFromUserGroup,
   ): Promise<MsgRemoveUserFromUserGroupResponse>;
   /** SetUserPermissions allows to set the permissions for a specific user */
   SetUserPermissions(
-    request: MsgSetUserPermissions
+    request: MsgSetUserPermissions,
   ): Promise<MsgSetUserPermissionsResponse>;
   /**
    * GrantTreasuryAuthorization allows managers who have the permission to grant
    * a treasury authorization to a user
    */
   GrantTreasuryAuthorization(
-    request: MsgGrantTreasuryAuthorization
+    request: MsgGrantTreasuryAuthorization,
   ): Promise<MsgGrantTreasuryAuthorizationResponse>;
   /**
    * RevokeTreasuryAuthorization allows managers who have the permission to
    * revoke an existing treasury authorization
    */
   RevokeTreasuryAuthorization(
-    request: MsgRevokeTreasuryAuthorization
+    request: MsgRevokeTreasuryAuthorization,
   ): Promise<MsgRevokeTreasuryAuthorizationResponse>;
   /**
    * GrantAllowance allows the granter to grant a fee allowance to the
    * grantee
    */
   GrantAllowance(
-    request: MsgGrantAllowance
+    request: MsgGrantAllowance,
   ): Promise<MsgGrantAllowanceResponse>;
   /**
    * RevokeAllowance allows a granter to revoke any existing treasury allowance
    * that has been granted to the grantee
    */
   RevokeAllowance(
-    request: MsgRevokeAllowance
+    request: MsgRevokeAllowance,
   ): Promise<MsgRevokeAllowanceResponse>;
 }
 export class MsgClientImpl implements Msg {
@@ -3909,16 +3909,16 @@ export class MsgClientImpl implements Msg {
     this.RevokeAllowance = this.RevokeAllowance.bind(this);
   }
   CreateSubspace(
-    request: MsgCreateSubspace
+    request: MsgCreateSubspace,
   ): Promise<MsgCreateSubspaceResponse> {
     const data = MsgCreateSubspace.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "CreateSubspace",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCreateSubspaceResponse.decode(new _m0.Reader(data))
+      MsgCreateSubspaceResponse.decode(new _m0.Reader(data)),
     );
   }
   EditSubspace(request: MsgEditSubspace): Promise<MsgEditSubspaceResponse> {
@@ -3926,23 +3926,23 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "EditSubspace",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgEditSubspaceResponse.decode(new _m0.Reader(data))
+      MsgEditSubspaceResponse.decode(new _m0.Reader(data)),
     );
   }
   DeleteSubspace(
-    request: MsgDeleteSubspace
+    request: MsgDeleteSubspace,
   ): Promise<MsgDeleteSubspaceResponse> {
     const data = MsgDeleteSubspace.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "DeleteSubspace",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgDeleteSubspaceResponse.decode(new _m0.Reader(data))
+      MsgDeleteSubspaceResponse.decode(new _m0.Reader(data)),
     );
   }
   CreateSection(request: MsgCreateSection): Promise<MsgCreateSectionResponse> {
@@ -3950,10 +3950,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "CreateSection",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCreateSectionResponse.decode(new _m0.Reader(data))
+      MsgCreateSectionResponse.decode(new _m0.Reader(data)),
     );
   }
   EditSection(request: MsgEditSection): Promise<MsgEditSectionResponse> {
@@ -3961,10 +3961,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "EditSection",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgEditSectionResponse.decode(new _m0.Reader(data))
+      MsgEditSectionResponse.decode(new _m0.Reader(data)),
     );
   }
   MoveSection(request: MsgMoveSection): Promise<MsgMoveSectionResponse> {
@@ -3972,10 +3972,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "MoveSection",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgMoveSectionResponse.decode(new _m0.Reader(data))
+      MsgMoveSectionResponse.decode(new _m0.Reader(data)),
     );
   }
   DeleteSection(request: MsgDeleteSection): Promise<MsgDeleteSectionResponse> {
@@ -3983,23 +3983,23 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "DeleteSection",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgDeleteSectionResponse.decode(new _m0.Reader(data))
+      MsgDeleteSectionResponse.decode(new _m0.Reader(data)),
     );
   }
   CreateUserGroup(
-    request: MsgCreateUserGroup
+    request: MsgCreateUserGroup,
   ): Promise<MsgCreateUserGroupResponse> {
     const data = MsgCreateUserGroup.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "CreateUserGroup",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCreateUserGroupResponse.decode(new _m0.Reader(data))
+      MsgCreateUserGroupResponse.decode(new _m0.Reader(data)),
     );
   }
   EditUserGroup(request: MsgEditUserGroup): Promise<MsgEditUserGroupResponse> {
@@ -4007,10 +4007,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "EditUserGroup",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgEditUserGroupResponse.decode(new _m0.Reader(data))
+      MsgEditUserGroupResponse.decode(new _m0.Reader(data)),
     );
   }
   MoveUserGroup(request: MsgMoveUserGroup): Promise<MsgMoveUserGroupResponse> {
@@ -4018,127 +4018,127 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "MoveUserGroup",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgMoveUserGroupResponse.decode(new _m0.Reader(data))
+      MsgMoveUserGroupResponse.decode(new _m0.Reader(data)),
     );
   }
   SetUserGroupPermissions(
-    request: MsgSetUserGroupPermissions
+    request: MsgSetUserGroupPermissions,
   ): Promise<MsgSetUserGroupPermissionsResponse> {
     const data = MsgSetUserGroupPermissions.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "SetUserGroupPermissions",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgSetUserGroupPermissionsResponse.decode(new _m0.Reader(data))
+      MsgSetUserGroupPermissionsResponse.decode(new _m0.Reader(data)),
     );
   }
   DeleteUserGroup(
-    request: MsgDeleteUserGroup
+    request: MsgDeleteUserGroup,
   ): Promise<MsgDeleteUserGroupResponse> {
     const data = MsgDeleteUserGroup.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "DeleteUserGroup",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgDeleteUserGroupResponse.decode(new _m0.Reader(data))
+      MsgDeleteUserGroupResponse.decode(new _m0.Reader(data)),
     );
   }
   AddUserToUserGroup(
-    request: MsgAddUserToUserGroup
+    request: MsgAddUserToUserGroup,
   ): Promise<MsgAddUserToUserGroupResponse> {
     const data = MsgAddUserToUserGroup.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "AddUserToUserGroup",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgAddUserToUserGroupResponse.decode(new _m0.Reader(data))
+      MsgAddUserToUserGroupResponse.decode(new _m0.Reader(data)),
     );
   }
   RemoveUserFromUserGroup(
-    request: MsgRemoveUserFromUserGroup
+    request: MsgRemoveUserFromUserGroup,
   ): Promise<MsgRemoveUserFromUserGroupResponse> {
     const data = MsgRemoveUserFromUserGroup.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "RemoveUserFromUserGroup",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgRemoveUserFromUserGroupResponse.decode(new _m0.Reader(data))
+      MsgRemoveUserFromUserGroupResponse.decode(new _m0.Reader(data)),
     );
   }
   SetUserPermissions(
-    request: MsgSetUserPermissions
+    request: MsgSetUserPermissions,
   ): Promise<MsgSetUserPermissionsResponse> {
     const data = MsgSetUserPermissions.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "SetUserPermissions",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgSetUserPermissionsResponse.decode(new _m0.Reader(data))
+      MsgSetUserPermissionsResponse.decode(new _m0.Reader(data)),
     );
   }
   GrantTreasuryAuthorization(
-    request: MsgGrantTreasuryAuthorization
+    request: MsgGrantTreasuryAuthorization,
   ): Promise<MsgGrantTreasuryAuthorizationResponse> {
     const data = MsgGrantTreasuryAuthorization.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "GrantTreasuryAuthorization",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgGrantTreasuryAuthorizationResponse.decode(new _m0.Reader(data))
+      MsgGrantTreasuryAuthorizationResponse.decode(new _m0.Reader(data)),
     );
   }
   RevokeTreasuryAuthorization(
-    request: MsgRevokeTreasuryAuthorization
+    request: MsgRevokeTreasuryAuthorization,
   ): Promise<MsgRevokeTreasuryAuthorizationResponse> {
     const data = MsgRevokeTreasuryAuthorization.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "RevokeTreasuryAuthorization",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgRevokeTreasuryAuthorizationResponse.decode(new _m0.Reader(data))
+      MsgRevokeTreasuryAuthorizationResponse.decode(new _m0.Reader(data)),
     );
   }
   GrantAllowance(
-    request: MsgGrantAllowance
+    request: MsgGrantAllowance,
   ): Promise<MsgGrantAllowanceResponse> {
     const data = MsgGrantAllowance.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "GrantAllowance",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgGrantAllowanceResponse.decode(new _m0.Reader(data))
+      MsgGrantAllowanceResponse.decode(new _m0.Reader(data)),
     );
   }
   RevokeAllowance(
-    request: MsgRevokeAllowance
+    request: MsgRevokeAllowance,
   ): Promise<MsgRevokeAllowanceResponse> {
     const data = MsgRevokeAllowance.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.subspaces.v3.Msg",
       "RevokeAllowance",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgRevokeAllowanceResponse.decode(new _m0.Reader(data))
+      MsgRevokeAllowanceResponse.decode(new _m0.Reader(data)),
     );
   }
 }

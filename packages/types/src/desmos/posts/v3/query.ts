@@ -323,7 +323,7 @@ function createBaseQuerySubspacePostsRequest(): QuerySubspacePostsRequest {
 export const QuerySubspacePostsRequest = {
   encode(
     message: QuerySubspacePostsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -335,7 +335,7 @@ export const QuerySubspacePostsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QuerySubspacePostsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -377,7 +377,7 @@ export const QuerySubspacePostsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QuerySubspacePostsRequest>, I>>(
-    object: I
+    object: I,
   ): QuerySubspacePostsRequest {
     const message = createBaseQuerySubspacePostsRequest();
     message.subspaceId =
@@ -409,12 +409,12 @@ export const QuerySubspacePostsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QuerySubspacePostsRequestAminoMsg
+    object: QuerySubspacePostsRequestAminoMsg,
   ): QuerySubspacePostsRequest {
     return QuerySubspacePostsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QuerySubspacePostsRequestProtoMsg
+    message: QuerySubspacePostsRequestProtoMsg,
   ): QuerySubspacePostsRequest {
     return QuerySubspacePostsRequest.decode(message.value);
   },
@@ -422,7 +422,7 @@ export const QuerySubspacePostsRequest = {
     return QuerySubspacePostsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QuerySubspacePostsRequest
+    message: QuerySubspacePostsRequest,
   ): QuerySubspacePostsRequestProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QuerySubspacePostsRequest",
@@ -439,7 +439,7 @@ function createBaseQuerySubspacePostsResponse(): QuerySubspacePostsResponse {
 export const QuerySubspacePostsResponse = {
   encode(
     message: QuerySubspacePostsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.posts) {
       Post.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -447,14 +447,14 @@ export const QuerySubspacePostsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QuerySubspacePostsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -499,7 +499,7 @@ export const QuerySubspacePostsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QuerySubspacePostsResponse>, I>>(
-    object: I
+    object: I,
   ): QuerySubspacePostsResponse {
     const message = createBaseQuerySubspacePostsResponse();
     message.posts = object.posts?.map((e) => Post.fromPartial(e)) || [];
@@ -510,7 +510,7 @@ export const QuerySubspacePostsResponse = {
     return message;
   },
   fromAmino(
-    object: QuerySubspacePostsResponseAmino
+    object: QuerySubspacePostsResponseAmino,
   ): QuerySubspacePostsResponse {
     return {
       posts: Array.isArray(object?.posts)
@@ -522,7 +522,7 @@ export const QuerySubspacePostsResponse = {
     };
   },
   toAmino(
-    message: QuerySubspacePostsResponse
+    message: QuerySubspacePostsResponse,
   ): QuerySubspacePostsResponseAmino {
     const obj: any = {};
     if (message.posts) {
@@ -536,12 +536,12 @@ export const QuerySubspacePostsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QuerySubspacePostsResponseAminoMsg
+    object: QuerySubspacePostsResponseAminoMsg,
   ): QuerySubspacePostsResponse {
     return QuerySubspacePostsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QuerySubspacePostsResponseProtoMsg
+    message: QuerySubspacePostsResponseProtoMsg,
   ): QuerySubspacePostsResponse {
     return QuerySubspacePostsResponse.decode(message.value);
   },
@@ -549,7 +549,7 @@ export const QuerySubspacePostsResponse = {
     return QuerySubspacePostsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QuerySubspacePostsResponse
+    message: QuerySubspacePostsResponse,
   ): QuerySubspacePostsResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QuerySubspacePostsResponse",
@@ -567,7 +567,7 @@ function createBaseQuerySectionPostsRequest(): QuerySectionPostsRequest {
 export const QuerySectionPostsRequest = {
   encode(
     message: QuerySectionPostsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -582,7 +582,7 @@ export const QuerySectionPostsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QuerySectionPostsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -630,7 +630,7 @@ export const QuerySectionPostsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QuerySectionPostsRequest>, I>>(
-    object: I
+    object: I,
   ): QuerySectionPostsRequest {
     const message = createBaseQuerySectionPostsRequest();
     message.subspaceId =
@@ -665,12 +665,12 @@ export const QuerySectionPostsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QuerySectionPostsRequestAminoMsg
+    object: QuerySectionPostsRequestAminoMsg,
   ): QuerySectionPostsRequest {
     return QuerySectionPostsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QuerySectionPostsRequestProtoMsg
+    message: QuerySectionPostsRequestProtoMsg,
   ): QuerySectionPostsRequest {
     return QuerySectionPostsRequest.decode(message.value);
   },
@@ -678,7 +678,7 @@ export const QuerySectionPostsRequest = {
     return QuerySectionPostsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QuerySectionPostsRequest
+    message: QuerySectionPostsRequest,
   ): QuerySectionPostsRequestProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QuerySectionPostsRequest",
@@ -695,7 +695,7 @@ function createBaseQuerySectionPostsResponse(): QuerySectionPostsResponse {
 export const QuerySectionPostsResponse = {
   encode(
     message: QuerySectionPostsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.posts) {
       Post.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -703,14 +703,14 @@ export const QuerySectionPostsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QuerySectionPostsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -755,7 +755,7 @@ export const QuerySectionPostsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QuerySectionPostsResponse>, I>>(
-    object: I
+    object: I,
   ): QuerySectionPostsResponse {
     const message = createBaseQuerySectionPostsResponse();
     message.posts = object.posts?.map((e) => Post.fromPartial(e)) || [];
@@ -788,12 +788,12 @@ export const QuerySectionPostsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QuerySectionPostsResponseAminoMsg
+    object: QuerySectionPostsResponseAminoMsg,
   ): QuerySectionPostsResponse {
     return QuerySectionPostsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QuerySectionPostsResponseProtoMsg
+    message: QuerySectionPostsResponseProtoMsg,
   ): QuerySectionPostsResponse {
     return QuerySectionPostsResponse.decode(message.value);
   },
@@ -801,7 +801,7 @@ export const QuerySectionPostsResponse = {
     return QuerySectionPostsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QuerySectionPostsResponse
+    message: QuerySectionPostsResponse,
   ): QuerySectionPostsResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QuerySectionPostsResponse",
@@ -818,7 +818,7 @@ function createBaseQueryPostRequest(): QueryPostRequest {
 export const QueryPostRequest = {
   encode(
     message: QueryPostRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -865,7 +865,7 @@ export const QueryPostRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryPostRequest>, I>>(
-    object: I
+    object: I,
   ): QueryPostRequest {
     const message = createBaseQueryPostRequest();
     message.subspaceId =
@@ -916,7 +916,7 @@ function createBaseQueryPostResponse(): QueryPostResponse {
 export const QueryPostResponse = {
   encode(
     message: QueryPostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.post !== undefined) {
       Post.encode(message.post, writer.uint32(10).fork()).ldelim();
@@ -952,7 +952,7 @@ export const QueryPostResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryPostResponse>, I>>(
-    object: I
+    object: I,
   ): QueryPostResponse {
     const message = createBaseQueryPostResponse();
     message.post =
@@ -997,7 +997,7 @@ function createBaseQueryPostAttachmentsRequest(): QueryPostAttachmentsRequest {
 export const QueryPostAttachmentsRequest = {
   encode(
     message: QueryPostAttachmentsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1012,7 +1012,7 @@ export const QueryPostAttachmentsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryPostAttachmentsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1060,7 +1060,7 @@ export const QueryPostAttachmentsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryPostAttachmentsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryPostAttachmentsRequest {
     const message = createBaseQueryPostAttachmentsRequest();
     message.subspaceId =
@@ -1078,7 +1078,7 @@ export const QueryPostAttachmentsRequest = {
     return message;
   },
   fromAmino(
-    object: QueryPostAttachmentsRequestAmino
+    object: QueryPostAttachmentsRequestAmino,
   ): QueryPostAttachmentsRequest {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -1089,7 +1089,7 @@ export const QueryPostAttachmentsRequest = {
     };
   },
   toAmino(
-    message: QueryPostAttachmentsRequest
+    message: QueryPostAttachmentsRequest,
   ): QueryPostAttachmentsRequestAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -1102,12 +1102,12 @@ export const QueryPostAttachmentsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryPostAttachmentsRequestAminoMsg
+    object: QueryPostAttachmentsRequestAminoMsg,
   ): QueryPostAttachmentsRequest {
     return QueryPostAttachmentsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryPostAttachmentsRequestProtoMsg
+    message: QueryPostAttachmentsRequestProtoMsg,
   ): QueryPostAttachmentsRequest {
     return QueryPostAttachmentsRequest.decode(message.value);
   },
@@ -1115,7 +1115,7 @@ export const QueryPostAttachmentsRequest = {
     return QueryPostAttachmentsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryPostAttachmentsRequest
+    message: QueryPostAttachmentsRequest,
   ): QueryPostAttachmentsRequestProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QueryPostAttachmentsRequest",
@@ -1132,7 +1132,7 @@ function createBaseQueryPostAttachmentsResponse(): QueryPostAttachmentsResponse 
 export const QueryPostAttachmentsResponse = {
   encode(
     message: QueryPostAttachmentsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.attachments) {
       Attachment.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1140,14 +1140,14 @@ export const QueryPostAttachmentsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryPostAttachmentsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1182,7 +1182,7 @@ export const QueryPostAttachmentsResponse = {
     const obj: any = {};
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toJSON(e) : undefined
+        e ? Attachment.toJSON(e) : undefined,
       );
     } else {
       obj.attachments = [];
@@ -1194,7 +1194,7 @@ export const QueryPostAttachmentsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryPostAttachmentsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryPostAttachmentsResponse {
     const message = createBaseQueryPostAttachmentsResponse();
     message.attachments =
@@ -1206,7 +1206,7 @@ export const QueryPostAttachmentsResponse = {
     return message;
   },
   fromAmino(
-    object: QueryPostAttachmentsResponseAmino
+    object: QueryPostAttachmentsResponseAmino,
   ): QueryPostAttachmentsResponse {
     return {
       attachments: Array.isArray(object?.attachments)
@@ -1218,12 +1218,12 @@ export const QueryPostAttachmentsResponse = {
     };
   },
   toAmino(
-    message: QueryPostAttachmentsResponse
+    message: QueryPostAttachmentsResponse,
   ): QueryPostAttachmentsResponseAmino {
     const obj: any = {};
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toAmino(e) : undefined
+        e ? Attachment.toAmino(e) : undefined,
       );
     } else {
       obj.attachments = [];
@@ -1234,12 +1234,12 @@ export const QueryPostAttachmentsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryPostAttachmentsResponseAminoMsg
+    object: QueryPostAttachmentsResponseAminoMsg,
   ): QueryPostAttachmentsResponse {
     return QueryPostAttachmentsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryPostAttachmentsResponseProtoMsg
+    message: QueryPostAttachmentsResponseProtoMsg,
   ): QueryPostAttachmentsResponse {
     return QueryPostAttachmentsResponse.decode(message.value);
   },
@@ -1247,7 +1247,7 @@ export const QueryPostAttachmentsResponse = {
     return QueryPostAttachmentsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryPostAttachmentsResponse
+    message: QueryPostAttachmentsResponse,
   ): QueryPostAttachmentsResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QueryPostAttachmentsResponse",
@@ -1267,7 +1267,7 @@ function createBaseQueryPollAnswersRequest(): QueryPollAnswersRequest {
 export const QueryPollAnswersRequest = {
   encode(
     message: QueryPollAnswersRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1288,7 +1288,7 @@ export const QueryPollAnswersRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryPollAnswersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1346,7 +1346,7 @@ export const QueryPollAnswersRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryPollAnswersRequest>, I>>(
-    object: I
+    object: I,
   ): QueryPollAnswersRequest {
     const message = createBaseQueryPollAnswersRequest();
     message.subspaceId =
@@ -1390,12 +1390,12 @@ export const QueryPollAnswersRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryPollAnswersRequestAminoMsg
+    object: QueryPollAnswersRequestAminoMsg,
   ): QueryPollAnswersRequest {
     return QueryPollAnswersRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryPollAnswersRequestProtoMsg
+    message: QueryPollAnswersRequestProtoMsg,
   ): QueryPollAnswersRequest {
     return QueryPollAnswersRequest.decode(message.value);
   },
@@ -1403,7 +1403,7 @@ export const QueryPollAnswersRequest = {
     return QueryPollAnswersRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryPollAnswersRequest
+    message: QueryPollAnswersRequest,
   ): QueryPollAnswersRequestProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QueryPollAnswersRequest",
@@ -1420,7 +1420,7 @@ function createBaseQueryPollAnswersResponse(): QueryPollAnswersResponse {
 export const QueryPollAnswersResponse = {
   encode(
     message: QueryPollAnswersResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.answers) {
       UserAnswer.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1428,14 +1428,14 @@ export const QueryPollAnswersResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryPollAnswersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1470,7 +1470,7 @@ export const QueryPollAnswersResponse = {
     const obj: any = {};
     if (message.answers) {
       obj.answers = message.answers.map((e) =>
-        e ? UserAnswer.toJSON(e) : undefined
+        e ? UserAnswer.toJSON(e) : undefined,
       );
     } else {
       obj.answers = [];
@@ -1482,7 +1482,7 @@ export const QueryPollAnswersResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryPollAnswersResponse>, I>>(
-    object: I
+    object: I,
   ): QueryPollAnswersResponse {
     const message = createBaseQueryPollAnswersResponse();
     message.answers =
@@ -1507,7 +1507,7 @@ export const QueryPollAnswersResponse = {
     const obj: any = {};
     if (message.answers) {
       obj.answers = message.answers.map((e) =>
-        e ? UserAnswer.toAmino(e) : undefined
+        e ? UserAnswer.toAmino(e) : undefined,
       );
     } else {
       obj.answers = [];
@@ -1518,12 +1518,12 @@ export const QueryPollAnswersResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryPollAnswersResponseAminoMsg
+    object: QueryPollAnswersResponseAminoMsg,
   ): QueryPollAnswersResponse {
     return QueryPollAnswersResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryPollAnswersResponseProtoMsg
+    message: QueryPollAnswersResponseProtoMsg,
   ): QueryPollAnswersResponse {
     return QueryPollAnswersResponse.decode(message.value);
   },
@@ -1531,7 +1531,7 @@ export const QueryPollAnswersResponse = {
     return QueryPollAnswersResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryPollAnswersResponse
+    message: QueryPollAnswersResponse,
   ): QueryPollAnswersResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.QueryPollAnswersResponse",
@@ -1545,7 +1545,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 export const QueryParamsRequest = {
   encode(
     _: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -1571,7 +1571,7 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    _: I
+    _: I,
   ): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -1607,7 +1607,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 export const QueryParamsResponse = {
   encode(
     message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1643,7 +1643,7 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params =
@@ -1682,21 +1682,21 @@ export const QueryParamsResponse = {
 export interface Query {
   /** SubspacePosts queries all the posts inside a given subspace */
   SubspacePosts(
-    request: QuerySubspacePostsRequest
+    request: QuerySubspacePostsRequest,
   ): Promise<QuerySubspacePostsResponse>;
   /** SectionPosts queries all the posts inside a given section */
   SectionPosts(
-    request: QuerySectionPostsRequest
+    request: QuerySectionPostsRequest,
   ): Promise<QuerySectionPostsResponse>;
   /** Post queries for a single post inside a given subspace */
   Post(request: QueryPostRequest): Promise<QueryPostResponse>;
   /** PostAttachments queries the attachments of the post having the given id */
   PostAttachments(
-    request: QueryPostAttachmentsRequest
+    request: QueryPostAttachmentsRequest,
   ): Promise<QueryPostAttachmentsResponse>;
   /** PollAnswers queries the answers for the poll having the given id */
   PollAnswers(
-    request: QueryPollAnswersRequest
+    request: QueryPollAnswersRequest,
   ): Promise<QueryPollAnswersResponse>;
   /** Params queries the module parameters */
   Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
@@ -1713,69 +1713,69 @@ export class QueryClientImpl implements Query {
     this.Params = this.Params.bind(this);
   }
   SubspacePosts(
-    request: QuerySubspacePostsRequest
+    request: QuerySubspacePostsRequest,
   ): Promise<QuerySubspacePostsResponse> {
     const data = QuerySubspacePostsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.posts.v3.Query",
       "SubspacePosts",
-      data
+      data,
     );
     return promise.then((data) =>
-      QuerySubspacePostsResponse.decode(new _m0.Reader(data))
+      QuerySubspacePostsResponse.decode(new _m0.Reader(data)),
     );
   }
   SectionPosts(
-    request: QuerySectionPostsRequest
+    request: QuerySectionPostsRequest,
   ): Promise<QuerySectionPostsResponse> {
     const data = QuerySectionPostsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.posts.v3.Query",
       "SectionPosts",
-      data
+      data,
     );
     return promise.then((data) =>
-      QuerySectionPostsResponse.decode(new _m0.Reader(data))
+      QuerySectionPostsResponse.decode(new _m0.Reader(data)),
     );
   }
   Post(request: QueryPostRequest): Promise<QueryPostResponse> {
     const data = QueryPostRequest.encode(request).finish();
     const promise = this.rpc.request("desmos.posts.v3.Query", "Post", data);
     return promise.then((data) =>
-      QueryPostResponse.decode(new _m0.Reader(data))
+      QueryPostResponse.decode(new _m0.Reader(data)),
     );
   }
   PostAttachments(
-    request: QueryPostAttachmentsRequest
+    request: QueryPostAttachmentsRequest,
   ): Promise<QueryPostAttachmentsResponse> {
     const data = QueryPostAttachmentsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.posts.v3.Query",
       "PostAttachments",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryPostAttachmentsResponse.decode(new _m0.Reader(data))
+      QueryPostAttachmentsResponse.decode(new _m0.Reader(data)),
     );
   }
   PollAnswers(
-    request: QueryPollAnswersRequest
+    request: QueryPollAnswersRequest,
   ): Promise<QueryPollAnswersResponse> {
     const data = QueryPollAnswersRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.posts.v3.Query",
       "PollAnswers",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryPollAnswersResponse.decode(new _m0.Reader(data))
+      QueryPollAnswersResponse.decode(new _m0.Reader(data)),
     );
   }
   Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("desmos.posts.v3.Query", "Params", data);
     return promise.then((data) =>
-      QueryParamsResponse.decode(new _m0.Reader(data))
+      QueryParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

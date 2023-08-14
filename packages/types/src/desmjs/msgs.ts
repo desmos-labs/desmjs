@@ -39,7 +39,7 @@ function createBaseMsgAuthenticate(): MsgAuthenticate {
 export const MsgAuthenticate = {
   encode(
     message: MsgAuthenticate,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -82,12 +82,12 @@ export const MsgAuthenticate = {
     message.user !== undefined && (obj.user = message.user);
     message.nonce !== undefined &&
       (obj.nonce = base64FromBytes(
-        message.nonce !== undefined ? message.nonce : new Uint8Array()
+        message.nonce !== undefined ? message.nonce : new Uint8Array(),
       ));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAuthenticate>, I>>(
-    object: I
+    object: I,
   ): MsgAuthenticate {
     const message = createBaseMsgAuthenticate();
     message.user = object.user ?? "";

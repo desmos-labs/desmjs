@@ -12,7 +12,7 @@ with the Desmos chain.
 
 Inside this documentation you will find all the instructions in order to:
 
-* create an instance of [`DesmosClient`](docs/api/classes/desmoslabs_desmjs.DesmosClient.md)
+* create an instance of [`DesmosClient`](docs/api/desmjs/classes/DesmosClient.md)
 * use the various `Signer` implementations
 * query the chain
 * perform transactions

@@ -38,7 +38,7 @@ export interface Query {
    * have been made towards the user with the given address
    */
   IncomingDTagTransferRequests(
-    request: QueryIncomingDTagTransferRequestsRequest
+    request: QueryIncomingDTagTransferRequestsRequest,
   ): Promise<QueryIncomingDTagTransferRequestsResponse>;
   /**
    * ChainLinks queries the chain links associated to the given user, if
@@ -50,35 +50,35 @@ export interface Query {
    * for a specific chain name and external address
    */
   ChainLinkOwners(
-    request: QueryChainLinkOwnersRequest
+    request: QueryChainLinkOwnersRequest,
   ): Promise<QueryChainLinkOwnersResponse>;
   /**
    * DefaultExternalAddresses queries the default addresses associated to the
    * given user and (optionally) chain name
    */
   DefaultExternalAddresses(
-    request: QueryDefaultExternalAddressesRequest
+    request: QueryDefaultExternalAddressesRequest,
   ): Promise<QueryDefaultExternalAddressesResponse>;
   /**
    * ApplicationLinks queries the applications links associated to the given
    * user, if provided. Otherwise, it queries all the application links stored.
    */
   ApplicationLinks(
-    request: QueryApplicationLinksRequest
+    request: QueryApplicationLinksRequest,
   ): Promise<QueryApplicationLinksResponse>;
   /**
    * ApplicationLinkByClientID queries a single application link for a given
    * client id.
    */
   ApplicationLinkByClientID(
-    request: QueryApplicationLinkByClientIDRequest
+    request: QueryApplicationLinkByClientIDRequest,
   ): Promise<QueryApplicationLinkByClientIDResponse>;
   /**
    * ApplicationLinkOwners queries for the owners of applications links,
    * optionally searching for a specific application and username.
    */
   ApplicationLinkOwners(
-    request: QueryApplicationLinkOwnersRequest
+    request: QueryApplicationLinkOwnersRequest,
   ): Promise<QueryApplicationLinkOwnersResponse>;
   /** Params queries the profiles module params */
   Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
@@ -103,102 +103,102 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "Profile",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryProfileResponse.decode(new _m0.Reader(data))
+      QueryProfileResponse.decode(new _m0.Reader(data)),
     );
   }
   IncomingDTagTransferRequests(
-    request: QueryIncomingDTagTransferRequestsRequest
+    request: QueryIncomingDTagTransferRequestsRequest,
   ): Promise<QueryIncomingDTagTransferRequestsResponse> {
     const data =
       QueryIncomingDTagTransferRequestsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "IncomingDTagTransferRequests",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryIncomingDTagTransferRequestsResponse.decode(new _m0.Reader(data))
+      QueryIncomingDTagTransferRequestsResponse.decode(new _m0.Reader(data)),
     );
   }
   ChainLinks(
-    request: QueryChainLinksRequest
+    request: QueryChainLinksRequest,
   ): Promise<QueryChainLinksResponse> {
     const data = QueryChainLinksRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "ChainLinks",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryChainLinksResponse.decode(new _m0.Reader(data))
+      QueryChainLinksResponse.decode(new _m0.Reader(data)),
     );
   }
   ChainLinkOwners(
-    request: QueryChainLinkOwnersRequest
+    request: QueryChainLinkOwnersRequest,
   ): Promise<QueryChainLinkOwnersResponse> {
     const data = QueryChainLinkOwnersRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "ChainLinkOwners",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryChainLinkOwnersResponse.decode(new _m0.Reader(data))
+      QueryChainLinkOwnersResponse.decode(new _m0.Reader(data)),
     );
   }
   DefaultExternalAddresses(
-    request: QueryDefaultExternalAddressesRequest
+    request: QueryDefaultExternalAddressesRequest,
   ): Promise<QueryDefaultExternalAddressesResponse> {
     const data = QueryDefaultExternalAddressesRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "DefaultExternalAddresses",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryDefaultExternalAddressesResponse.decode(new _m0.Reader(data))
+      QueryDefaultExternalAddressesResponse.decode(new _m0.Reader(data)),
     );
   }
   ApplicationLinks(
-    request: QueryApplicationLinksRequest
+    request: QueryApplicationLinksRequest,
   ): Promise<QueryApplicationLinksResponse> {
     const data = QueryApplicationLinksRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "ApplicationLinks",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryApplicationLinksResponse.decode(new _m0.Reader(data))
+      QueryApplicationLinksResponse.decode(new _m0.Reader(data)),
     );
   }
   ApplicationLinkByClientID(
-    request: QueryApplicationLinkByClientIDRequest
+    request: QueryApplicationLinkByClientIDRequest,
   ): Promise<QueryApplicationLinkByClientIDResponse> {
     const data = QueryApplicationLinkByClientIDRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "ApplicationLinkByClientID",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryApplicationLinkByClientIDResponse.decode(new _m0.Reader(data))
+      QueryApplicationLinkByClientIDResponse.decode(new _m0.Reader(data)),
     );
   }
   ApplicationLinkOwners(
-    request: QueryApplicationLinkOwnersRequest
+    request: QueryApplicationLinkOwnersRequest,
   ): Promise<QueryApplicationLinkOwnersResponse> {
     const data = QueryApplicationLinkOwnersRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "ApplicationLinkOwners",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryApplicationLinkOwnersResponse.decode(new _m0.Reader(data))
+      QueryApplicationLinkOwnersResponse.decode(new _m0.Reader(data)),
     );
   }
   Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
@@ -206,10 +206,10 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.profiles.v3.Query",
       "Params",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryParamsResponse.decode(new _m0.Reader(data))
+      QueryParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

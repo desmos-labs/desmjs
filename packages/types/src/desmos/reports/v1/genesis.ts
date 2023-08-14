@@ -69,7 +69,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.subspacesData) {
       SubspaceDataEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -94,7 +94,7 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.subspacesData.push(
-            SubspaceDataEntry.decode(reader, reader.uint32())
+            SubspaceDataEntry.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -131,21 +131,21 @@ export const GenesisState = {
     const obj: any = {};
     if (message.subspacesData) {
       obj.subspacesData = message.subspacesData.map((e) =>
-        e ? SubspaceDataEntry.toJSON(e) : undefined
+        e ? SubspaceDataEntry.toJSON(e) : undefined,
       );
     } else {
       obj.subspacesData = [];
     }
     if (message.reasons) {
       obj.reasons = message.reasons.map((e) =>
-        e ? Reason.toJSON(e) : undefined
+        e ? Reason.toJSON(e) : undefined,
       );
     } else {
       obj.reasons = [];
     }
     if (message.reports) {
       obj.reports = message.reports.map((e) =>
-        e ? Report.toJSON(e) : undefined
+        e ? Report.toJSON(e) : undefined,
       );
     } else {
       obj.reports = [];
@@ -155,7 +155,7 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.subspacesData =
@@ -186,21 +186,21 @@ export const GenesisState = {
     const obj: any = {};
     if (message.subspacesData) {
       obj.subspaces_data = message.subspacesData.map((e) =>
-        e ? SubspaceDataEntry.toAmino(e) : undefined
+        e ? SubspaceDataEntry.toAmino(e) : undefined,
       );
     } else {
       obj.subspaces_data = [];
     }
     if (message.reasons) {
       obj.reasons = message.reasons.map((e) =>
-        e ? Reason.toAmino(e) : undefined
+        e ? Reason.toAmino(e) : undefined,
       );
     } else {
       obj.reasons = [];
     }
     if (message.reports) {
       obj.reports = message.reports.map((e) =>
-        e ? Report.toAmino(e) : undefined
+        e ? Report.toAmino(e) : undefined,
       );
     } else {
       obj.reports = [];
@@ -234,7 +234,7 @@ function createBaseSubspaceDataEntry(): SubspaceDataEntry {
 export const SubspaceDataEntry = {
   encode(
     message: SubspaceDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -292,7 +292,7 @@ export const SubspaceDataEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SubspaceDataEntry>, I>>(
-    object: I
+    object: I,
   ): SubspaceDataEntry {
     const message = createBaseSubspaceDataEntry();
     message.subspaceId =

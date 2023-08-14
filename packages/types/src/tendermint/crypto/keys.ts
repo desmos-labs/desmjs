@@ -35,7 +35,7 @@ function createBasePublicKey(): PublicKey {
 export const PublicKey = {
   encode(
     message: PublicKey,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.ed25519 !== undefined) {
       writer.uint32(10).bytes(message.ed25519);
@@ -90,7 +90,7 @@ export const PublicKey = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PublicKey>, I>>(
-    object: I
+    object: I,
   ): PublicKey {
     const message = createBasePublicKey();
     message.ed25519 = object.ed25519 ?? undefined;

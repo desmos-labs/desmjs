@@ -111,7 +111,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.startingProposalId.isZero()) {
       writer.uint32(8).uint64(message.startingProposalId);
@@ -128,19 +128,19 @@ export const GenesisState = {
     if (message.depositParams !== undefined) {
       DepositParams.encode(
         message.depositParams,
-        writer.uint32(42).fork()
+        writer.uint32(42).fork(),
       ).ldelim();
     }
     if (message.votingParams !== undefined) {
       VotingParams.encode(
         message.votingParams,
-        writer.uint32(50).fork()
+        writer.uint32(50).fork(),
       ).ldelim();
     }
     if (message.tallyParams !== undefined) {
       TallyParams.encode(
         message.tallyParams,
-        writer.uint32(58).fork()
+        writer.uint32(58).fork(),
       ).ldelim();
     }
     if (message.params !== undefined) {
@@ -220,7 +220,7 @@ export const GenesisState = {
       ).toString());
     if (message.deposits) {
       obj.deposits = message.deposits.map((e) =>
-        e ? Deposit.toJSON(e) : undefined
+        e ? Deposit.toJSON(e) : undefined,
       );
     } else {
       obj.deposits = [];
@@ -232,7 +232,7 @@ export const GenesisState = {
     }
     if (message.proposals) {
       obj.proposals = message.proposals.map((e) =>
-        e ? Proposal.toJSON(e) : undefined
+        e ? Proposal.toJSON(e) : undefined,
       );
     } else {
       obj.proposals = [];
@@ -254,7 +254,7 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.startingProposalId =
@@ -316,7 +316,7 @@ export const GenesisState = {
       : undefined;
     if (message.deposits) {
       obj.deposits = message.deposits.map((e) =>
-        e ? Deposit.toAmino(e) : undefined
+        e ? Deposit.toAmino(e) : undefined,
       );
     } else {
       obj.deposits = [];
@@ -328,7 +328,7 @@ export const GenesisState = {
     }
     if (message.proposals) {
       obj.proposals = message.proposals.map((e) =>
-        e ? Proposal.toAmino(e) : undefined
+        e ? Proposal.toAmino(e) : undefined,
       );
     } else {
       obj.proposals = [];

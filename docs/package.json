@@ -16,9 +16,9 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "2.4.1",
-    "@docusaurus/preset-classic": "2.4.1",
-    "@swc/core": "^1.3.72",
+    "@docusaurus/core": "^2.4.1",
+    "@docusaurus/preset-classic": "^2.4.1",
+    "@swc/core": "^1.3.76",
     "@you54f/theme-github-codeblock": "^0.1.1",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.0.6",
@@ -27,12 +27,12 @@
     "swc-loader": "^0.2.3"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.4.1",
+    "@docusaurus/module-type-aliases": "^2.4.1",
     "@tsconfig/docusaurus": "^2.0.0",
-    "docusaurus-plugin-typedoc": "^0.18.0",
-    "typedoc": "^0.23.28",
-    "typedoc-plugin-markdown": "^3.14.0",
-    "typescript": "^4.9.5"
+    "docusaurus-plugin-typedoc": "^0.19.2",
+    "typedoc": "^0.24.8",
+    "typedoc-plugin-markdown": "^3.15.4",
+    "typescript": "^5.1.6"
   },
   "browserslist": {
     "production": [

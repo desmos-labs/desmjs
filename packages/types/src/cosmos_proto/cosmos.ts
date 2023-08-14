@@ -162,7 +162,7 @@ function createBaseInterfaceDescriptor(): InterfaceDescriptor {
 export const InterfaceDescriptor = {
   encode(
     message: InterfaceDescriptor,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -206,7 +206,7 @@ export const InterfaceDescriptor = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<InterfaceDescriptor>, I>>(
-    object: I
+    object: I,
   ): InterfaceDescriptor {
     const message = createBaseInterfaceDescriptor();
     message.name = object.name ?? "";
@@ -251,7 +251,7 @@ function createBaseScalarDescriptor(): ScalarDescriptor {
 export const ScalarDescriptor = {
   encode(
     message: ScalarDescriptor,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -318,7 +318,7 @@ export const ScalarDescriptor = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ScalarDescriptor>, I>>(
-    object: I
+    object: I,
   ): ScalarDescriptor {
     const message = createBaseScalarDescriptor();
     message.name = object.name ?? "";

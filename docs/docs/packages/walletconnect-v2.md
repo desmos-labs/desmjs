@@ -26,7 +26,7 @@ yarn add @desmoslabs/desmjs-walletconnect-v2 @walletconnect/types
 ## Usage
 ### Initializing a WalletConnect `SignClient` instance
 
-Before creating the [`WalletConnectSigner`](../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md)
+Before creating the [`WalletConnectSigner`](../api/walletconnect-v2/classes/WalletConnectSigner.md)
 you must create an instance of the WalletConnect `SignClient`.  
 
 To initialize a `SignClient` instance you need a [project id](https://docs.walletconnect.com/2.0/cloud/relay) that
@@ -80,7 +80,7 @@ If your application needs a custom UI to show the QR code you can see how to cus
 #### Creating a new connection
 
 To create a new connection you can call the
-[`connect`](../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connect) method.  
+[`connect`](../api/walletconnect-v2/classes/WalletConnectSigner.md#connect) method.  
 This will show to the user a QR code that can be scanned from a wallet to connect to your DApp.
 
 ```js
@@ -90,7 +90,7 @@ await signer.connect();
 #### Reconnecting to a session
 
 To reconnect to a previously established session, you can call the
-[`connectToSession`](../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#connecttosession)
+[`connectToSession`](../api/walletconnect-v2/classes/WalletConnectSigner.md#connecttosession)
 method.
 
 ```js
@@ -109,13 +109,13 @@ await signer.connectToSession(sessions[0]);
 ### Disconnecting
 
 When you have finished to perform the operations, or if the user wants to disconnect from your app, you can
-call the [`disconnect`](../api/classes/desmoslabs_desmjs_walletconnect_v2.SignClient.md#disconnect) method
+call the [`disconnect`](../api/walletconnect-v2/classes/SignClient.md#disconnect) method
 to terminate the session.
 
 ## Customize the QR code modal
 
 To customize the UI that present the QR code to the user, you can create an object that implements the
-[`QrCodeModalController`](../api/interfaces/desmoslabs_desmjs_walletconnect_v2.QrCodeModalController.md)
+[`QrCodeModalController`](../api/walletconnect-v2/interfaces/QrCodeModalController.md)
 interface.
 
 ```ts
@@ -134,7 +134,7 @@ const customController: QrCodeModalController = {
 ```
 
 With the custom `QrCodeModalController`, now you can pass it as `qrCodeController` inside the `options` field of
-[`WalletConnectSigner`](../api/classes/desmoslabs_desmjs_walletconnect_v2.WalletConnectSigner.md#constructor).
+[`WalletConnectSigner`](../api/walletconnect-v2/classes/WalletConnectSigner.md#constructor).
 
 ```ts
 import { WalletConnectSigner } from "@desmoslabs/desmjs-walletconnect-v2";

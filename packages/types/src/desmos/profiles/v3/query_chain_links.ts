@@ -258,7 +258,7 @@ function createBaseQueryChainLinksRequest(): QueryChainLinksRequest {
 export const QueryChainLinksRequest = {
   encode(
     message: QueryChainLinksRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -276,7 +276,7 @@ export const QueryChainLinksRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryChainLinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -325,7 +325,7 @@ export const QueryChainLinksRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryChainLinksRequest>, I>>(
-    object: I
+    object: I,
   ): QueryChainLinksRequest {
     const message = createBaseQueryChainLinksRequest();
     message.user = object.user ?? "";
@@ -361,7 +361,7 @@ export const QueryChainLinksRequest = {
     return QueryChainLinksRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryChainLinksRequestProtoMsg
+    message: QueryChainLinksRequestProtoMsg,
   ): QueryChainLinksRequest {
     return QueryChainLinksRequest.decode(message.value);
   },
@@ -384,7 +384,7 @@ function createBaseQueryChainLinksResponse(): QueryChainLinksResponse {
 export const QueryChainLinksResponse = {
   encode(
     message: QueryChainLinksResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.links) {
       ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -392,14 +392,14 @@ export const QueryChainLinksResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryChainLinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -434,7 +434,7 @@ export const QueryChainLinksResponse = {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
-        e ? ChainLink.toJSON(e) : undefined
+        e ? ChainLink.toJSON(e) : undefined,
       );
     } else {
       obj.links = [];
@@ -446,7 +446,7 @@ export const QueryChainLinksResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryChainLinksResponse>, I>>(
-    object: I
+    object: I,
   ): QueryChainLinksResponse {
     const message = createBaseQueryChainLinksResponse();
     message.links = object.links?.map((e) => ChainLink.fromPartial(e)) || [];
@@ -470,7 +470,7 @@ export const QueryChainLinksResponse = {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
-        e ? ChainLink.toAmino(e) : undefined
+        e ? ChainLink.toAmino(e) : undefined,
       );
     } else {
       obj.links = [];
@@ -481,12 +481,12 @@ export const QueryChainLinksResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryChainLinksResponseAminoMsg
+    object: QueryChainLinksResponseAminoMsg,
   ): QueryChainLinksResponse {
     return QueryChainLinksResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryChainLinksResponseProtoMsg
+    message: QueryChainLinksResponseProtoMsg,
   ): QueryChainLinksResponse {
     return QueryChainLinksResponse.decode(message.value);
   },
@@ -494,7 +494,7 @@ export const QueryChainLinksResponse = {
     return QueryChainLinksResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryChainLinksResponse
+    message: QueryChainLinksResponse,
   ): QueryChainLinksResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryChainLinksResponse",
@@ -512,7 +512,7 @@ function createBaseQueryChainLinkOwnersRequest(): QueryChainLinkOwnersRequest {
 export const QueryChainLinkOwnersRequest = {
   encode(
     message: QueryChainLinkOwnersRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
@@ -527,7 +527,7 @@ export const QueryChainLinkOwnersRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryChainLinkOwnersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -571,7 +571,7 @@ export const QueryChainLinkOwnersRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersRequest>, I>>(
-    object: I
+    object: I,
   ): QueryChainLinkOwnersRequest {
     const message = createBaseQueryChainLinkOwnersRequest();
     message.chainName = object.chainName ?? "";
@@ -583,7 +583,7 @@ export const QueryChainLinkOwnersRequest = {
     return message;
   },
   fromAmino(
-    object: QueryChainLinkOwnersRequestAmino
+    object: QueryChainLinkOwnersRequestAmino,
   ): QueryChainLinkOwnersRequest {
     return {
       chainName: object.chain_name,
@@ -594,7 +594,7 @@ export const QueryChainLinkOwnersRequest = {
     };
   },
   toAmino(
-    message: QueryChainLinkOwnersRequest
+    message: QueryChainLinkOwnersRequest,
   ): QueryChainLinkOwnersRequestAmino {
     const obj: any = {};
     obj.chain_name = message.chainName;
@@ -605,12 +605,12 @@ export const QueryChainLinkOwnersRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryChainLinkOwnersRequestAminoMsg
+    object: QueryChainLinkOwnersRequestAminoMsg,
   ): QueryChainLinkOwnersRequest {
     return QueryChainLinkOwnersRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryChainLinkOwnersRequestProtoMsg
+    message: QueryChainLinkOwnersRequestProtoMsg,
   ): QueryChainLinkOwnersRequest {
     return QueryChainLinkOwnersRequest.decode(message.value);
   },
@@ -618,7 +618,7 @@ export const QueryChainLinkOwnersRequest = {
     return QueryChainLinkOwnersRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryChainLinkOwnersRequest
+    message: QueryChainLinkOwnersRequest,
   ): QueryChainLinkOwnersRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryChainLinkOwnersRequest",
@@ -635,25 +635,25 @@ function createBaseQueryChainLinkOwnersResponse(): QueryChainLinkOwnersResponse 
 export const QueryChainLinkOwnersResponse = {
   encode(
     message: QueryChainLinkOwnersResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.owners) {
       QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
         v!,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryChainLinkOwnersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -665,8 +665,8 @@ export const QueryChainLinkOwnersResponse = {
           message.owners.push(
             QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.decode(
               reader,
-              reader.uint32()
-            )
+              reader.uint32(),
+            ),
           );
           break;
         case 2:
@@ -683,7 +683,7 @@ export const QueryChainLinkOwnersResponse = {
     return {
       owners: Array.isArray(object?.owners)
         ? object.owners.map((e: any) =>
-            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromJSON(e)
+            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromJSON(e),
           )
         : [],
       pagination: isSet(object.pagination)
@@ -697,7 +697,7 @@ export const QueryChainLinkOwnersResponse = {
       obj.owners = message.owners.map((e) =>
         e
           ? QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.toJSON(e)
-          : undefined
+          : undefined,
       );
     } else {
       obj.owners = [];
@@ -709,12 +709,12 @@ export const QueryChainLinkOwnersResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryChainLinkOwnersResponse>, I>>(
-    object: I
+    object: I,
   ): QueryChainLinkOwnersResponse {
     const message = createBaseQueryChainLinkOwnersResponse();
     message.owners =
       object.owners?.map((e) =>
-        QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromPartial(e)
+        QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromPartial(e),
       ) || [];
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
@@ -723,12 +723,12 @@ export const QueryChainLinkOwnersResponse = {
     return message;
   },
   fromAmino(
-    object: QueryChainLinkOwnersResponseAmino
+    object: QueryChainLinkOwnersResponseAmino,
   ): QueryChainLinkOwnersResponse {
     return {
       owners: Array.isArray(object?.owners)
         ? object.owners.map((e: any) =>
-            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromAmino(e)
+            QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromAmino(e),
           )
         : [],
       pagination: object?.pagination
@@ -737,14 +737,14 @@ export const QueryChainLinkOwnersResponse = {
     };
   },
   toAmino(
-    message: QueryChainLinkOwnersResponse
+    message: QueryChainLinkOwnersResponse,
   ): QueryChainLinkOwnersResponseAmino {
     const obj: any = {};
     if (message.owners) {
       obj.owners = message.owners.map((e) =>
         e
           ? QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.toAmino(e)
-          : undefined
+          : undefined,
       );
     } else {
       obj.owners = [];
@@ -755,12 +755,12 @@ export const QueryChainLinkOwnersResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryChainLinkOwnersResponseAminoMsg
+    object: QueryChainLinkOwnersResponseAminoMsg,
   ): QueryChainLinkOwnersResponse {
     return QueryChainLinkOwnersResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryChainLinkOwnersResponseProtoMsg
+    message: QueryChainLinkOwnersResponseProtoMsg,
   ): QueryChainLinkOwnersResponse {
     return QueryChainLinkOwnersResponse.decode(message.value);
   },
@@ -768,7 +768,7 @@ export const QueryChainLinkOwnersResponse = {
     return QueryChainLinkOwnersResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryChainLinkOwnersResponse
+    message: QueryChainLinkOwnersResponse,
   ): QueryChainLinkOwnersResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryChainLinkOwnersResponse",
@@ -786,7 +786,7 @@ function createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails(): QueryCh
 export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
   encode(
     message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -801,7 +801,7 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -844,7 +844,7 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     I extends Exact<
       DeepPartial<QueryChainLinkOwnersResponse_ChainLinkOwnerDetails>,
       I
-    >
+    >,
   >(object: I): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     const message =
       createBaseQueryChainLinkOwnersResponse_ChainLinkOwnerDetails();
@@ -854,7 +854,7 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     return message;
   },
   fromAmino(
-    object: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino
+    object: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino,
   ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     return {
       user: object.user,
@@ -863,7 +863,7 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     };
   },
   toAmino(
-    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
   ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAmino {
     const obj: any = {};
     obj.user = message.user;
@@ -872,34 +872,34 @@ export const QueryChainLinkOwnersResponse_ChainLinkOwnerDetails = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAminoMsg
+    object: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsAminoMsg,
   ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     return QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.fromAmino(
-      object.value
+      object.value,
     );
   },
   fromProtoMsg(
-    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsProtoMsg
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsProtoMsg,
   ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetails {
     return QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.decode(
-      message.value
+      message.value,
     );
   },
   toProto(
-    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
   ): Uint8Array {
     return QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
-      message
+      message,
     ).finish();
   },
   toProtoMsg(
-    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails
+    message: QueryChainLinkOwnersResponse_ChainLinkOwnerDetails,
   ): QueryChainLinkOwnersResponse_ChainLinkOwnerDetailsProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.ChainLinkOwnerDetails",
       value:
         QueryChainLinkOwnersResponse_ChainLinkOwnerDetails.encode(
-          message
+          message,
         ).finish(),
     };
   },
@@ -914,7 +914,7 @@ function createBaseQueryDefaultExternalAddressesRequest(): QueryDefaultExternalA
 export const QueryDefaultExternalAddressesRequest = {
   encode(
     message: QueryDefaultExternalAddressesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -929,7 +929,7 @@ export const QueryDefaultExternalAddressesRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryDefaultExternalAddressesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -973,7 +973,7 @@ export const QueryDefaultExternalAddressesRequest = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryDefaultExternalAddressesRequest>, I>
+    I extends Exact<DeepPartial<QueryDefaultExternalAddressesRequest>, I>,
   >(object: I): QueryDefaultExternalAddressesRequest {
     const message = createBaseQueryDefaultExternalAddressesRequest();
     message.owner = object.owner ?? "";
@@ -985,7 +985,7 @@ export const QueryDefaultExternalAddressesRequest = {
     return message;
   },
   fromAmino(
-    object: QueryDefaultExternalAddressesRequestAmino
+    object: QueryDefaultExternalAddressesRequestAmino,
   ): QueryDefaultExternalAddressesRequest {
     return {
       owner: object.owner,
@@ -996,7 +996,7 @@ export const QueryDefaultExternalAddressesRequest = {
     };
   },
   toAmino(
-    message: QueryDefaultExternalAddressesRequest
+    message: QueryDefaultExternalAddressesRequest,
   ): QueryDefaultExternalAddressesRequestAmino {
     const obj: any = {};
     obj.owner = message.owner;
@@ -1007,12 +1007,12 @@ export const QueryDefaultExternalAddressesRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryDefaultExternalAddressesRequestAminoMsg
+    object: QueryDefaultExternalAddressesRequestAminoMsg,
   ): QueryDefaultExternalAddressesRequest {
     return QueryDefaultExternalAddressesRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryDefaultExternalAddressesRequestProtoMsg
+    message: QueryDefaultExternalAddressesRequestProtoMsg,
   ): QueryDefaultExternalAddressesRequest {
     return QueryDefaultExternalAddressesRequest.decode(message.value);
   },
@@ -1020,7 +1020,7 @@ export const QueryDefaultExternalAddressesRequest = {
     return QueryDefaultExternalAddressesRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryDefaultExternalAddressesRequest
+    message: QueryDefaultExternalAddressesRequest,
   ): QueryDefaultExternalAddressesRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryDefaultExternalAddressesRequest",
@@ -1037,7 +1037,7 @@ function createBaseQueryDefaultExternalAddressesResponse(): QueryDefaultExternal
 export const QueryDefaultExternalAddressesResponse = {
   encode(
     message: QueryDefaultExternalAddressesResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.links) {
       ChainLink.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1045,14 +1045,14 @@ export const QueryDefaultExternalAddressesResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryDefaultExternalAddressesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1087,7 +1087,7 @@ export const QueryDefaultExternalAddressesResponse = {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
-        e ? ChainLink.toJSON(e) : undefined
+        e ? ChainLink.toJSON(e) : undefined,
       );
     } else {
       obj.links = [];
@@ -1099,7 +1099,7 @@ export const QueryDefaultExternalAddressesResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryDefaultExternalAddressesResponse>, I>
+    I extends Exact<DeepPartial<QueryDefaultExternalAddressesResponse>, I>,
   >(object: I): QueryDefaultExternalAddressesResponse {
     const message = createBaseQueryDefaultExternalAddressesResponse();
     message.links = object.links?.map((e) => ChainLink.fromPartial(e)) || [];
@@ -1110,7 +1110,7 @@ export const QueryDefaultExternalAddressesResponse = {
     return message;
   },
   fromAmino(
-    object: QueryDefaultExternalAddressesResponseAmino
+    object: QueryDefaultExternalAddressesResponseAmino,
   ): QueryDefaultExternalAddressesResponse {
     return {
       links: Array.isArray(object?.links)
@@ -1122,12 +1122,12 @@ export const QueryDefaultExternalAddressesResponse = {
     };
   },
   toAmino(
-    message: QueryDefaultExternalAddressesResponse
+    message: QueryDefaultExternalAddressesResponse,
   ): QueryDefaultExternalAddressesResponseAmino {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
-        e ? ChainLink.toAmino(e) : undefined
+        e ? ChainLink.toAmino(e) : undefined,
       );
     } else {
       obj.links = [];
@@ -1138,12 +1138,12 @@ export const QueryDefaultExternalAddressesResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryDefaultExternalAddressesResponseAminoMsg
+    object: QueryDefaultExternalAddressesResponseAminoMsg,
   ): QueryDefaultExternalAddressesResponse {
     return QueryDefaultExternalAddressesResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryDefaultExternalAddressesResponseProtoMsg
+    message: QueryDefaultExternalAddressesResponseProtoMsg,
   ): QueryDefaultExternalAddressesResponse {
     return QueryDefaultExternalAddressesResponse.decode(message.value);
   },
@@ -1151,7 +1151,7 @@ export const QueryDefaultExternalAddressesResponse = {
     return QueryDefaultExternalAddressesResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryDefaultExternalAddressesResponse
+    message: QueryDefaultExternalAddressesResponse,
   ): QueryDefaultExternalAddressesResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryDefaultExternalAddressesResponse",

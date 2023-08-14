@@ -203,19 +203,72 @@ module.exports = {
     [
       "docusaurus-plugin-typedoc",
       {
-        entryPoints: [
-          "../packages/core",
-          "../packages/keplr",
-          "../packages/types",
-          "../packages/walletconnect",
-          "../packages/walletconnect-v2",
-          "../packages/web3auth-mobile",
-          "../packages/web3auth-web",
-        ],
-        entryPointStrategy: "packages",
+        id: "types",
+        entryPoints: ["../packages/types/src/index.ts"],
+        tsconfig: "../packages/types/tsconfig.json",
+        out: "api/types",
         sidebar: {
-          fullNames: true,
-          position: 99,
+          categoryLabel: "Types",
+        },
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "desmjs",
+        entryPoints: ["../packages/core/src/index.ts"],
+        tsconfig: "../packages/core/tsconfig.json",
+        out: "api/desmjs",
+        sidebar: {
+          categoryLabel: "Desmjs",
+        },
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "keplr",
+        entryPoints: ["../packages/keplr/src/index.ts"],
+        tsconfig: "../packages/keplr/tsconfig.json",
+        out: "api/keplr",
+        sidebar: {
+          categoryLabel: "Keplr",
+        },
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "walletconnect-v2",
+        entryPoints: ["../packages/walletconnect-v2/src/index.ts"],
+        tsconfig: "../packages/walletconnect-v2/tsconfig.json",
+        out: "api/walletconnect-v2",
+        sidebar: {
+          categoryLabel: "WalletConnect v2",
+        },
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "web3auth-mobile",
+        entryPoints: ["../packages/web3auth-mobile/src/index.ts"],
+        tsconfig: "../packages/web3auth-mobile/tsconfig.json",
+        out: "api/web3auth-mobile",
+        sidebar: {
+          categoryLabel: "Web3Auth Mobile",
+        },
+      },
+    ],
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "web3auth-web",
+        entryPoints: ["../packages/web3auth-web/src/index.ts"],
+        tsconfig: "../packages/web3auth-web/tsconfig.json",
+        out: "api/web3auth-web",
+        sidebar: {
+          categoryLabel: "Web3Auth Web",
         },
       },
     ],

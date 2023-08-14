@@ -324,7 +324,7 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
 export const MsgSubmitProposal = {
   encode(
     message: MsgSubmitProposal,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.messages) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -396,14 +396,14 @@ export const MsgSubmitProposal = {
     const obj: any = {};
     if (message.messages) {
       obj.messages = message.messages.map((e) =>
-        e ? Any.toJSON(e) : undefined
+        e ? Any.toJSON(e) : undefined,
       );
     } else {
       obj.messages = [];
     }
     if (message.initialDeposit) {
       obj.initialDeposit = message.initialDeposit.map((e) =>
-        e ? Coin.toJSON(e) : undefined
+        e ? Coin.toJSON(e) : undefined,
       );
     } else {
       obj.initialDeposit = [];
@@ -415,7 +415,7 @@ export const MsgSubmitProposal = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSubmitProposal>, I>>(
-    object: I
+    object: I,
   ): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
     message.messages = object.messages?.map((e) => Any.fromPartial(e)) || [];
@@ -429,11 +429,11 @@ export const MsgSubmitProposal = {
   },
   fromAmino(
     object: MsgSubmitProposalAmino,
-    converter?: AminoConverter
+    converter?: AminoConverter,
   ): MsgSubmitProposal {
     if (converter === undefined) {
       throw new Error(
-        "Can't convert to MsgSubmitProposal from amino without an AminoConverter instance"
+        "Can't convert to MsgSubmitProposal from amino without an AminoConverter instance",
       );
     }
     return {
@@ -449,11 +449,11 @@ export const MsgSubmitProposal = {
   },
   toAmino(
     message: MsgSubmitProposal,
-    converter?: AminoConverter
+    converter?: AminoConverter,
   ): MsgSubmitProposalAmino {
     if (converter === undefined) {
       throw new Error(
-        "Can't convert to MsgSubmitProposal to amino without an AminoConverter instance"
+        "Can't convert to MsgSubmitProposal to amino without an AminoConverter instance",
       );
     }
 
@@ -463,7 +463,7 @@ export const MsgSubmitProposal = {
     }
     if (message.initialDeposit) {
       obj.initial_deposit = message.initialDeposit.map((e) =>
-        e ? Coin.toAmino(e) : undefined
+        e ? Coin.toAmino(e) : undefined,
       );
     } else {
       obj.initial_deposit = [];
@@ -506,7 +506,7 @@ function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
 export const MsgSubmitProposalResponse = {
   encode(
     message: MsgSubmitProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -515,7 +515,7 @@ export const MsgSubmitProposalResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSubmitProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -547,7 +547,7 @@ export const MsgSubmitProposalResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSubmitProposalResponse>, I>>(
-    object: I
+    object: I,
   ): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
     message.proposalId =
@@ -569,12 +569,12 @@ export const MsgSubmitProposalResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgSubmitProposalResponseAminoMsg
+    object: MsgSubmitProposalResponseAminoMsg,
   ): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgSubmitProposalResponse
+    message: MsgSubmitProposalResponse,
   ): MsgSubmitProposalResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgSubmitProposalResponse",
@@ -582,7 +582,7 @@ export const MsgSubmitProposalResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgSubmitProposalResponseProtoMsg
+    message: MsgSubmitProposalResponseProtoMsg,
   ): MsgSubmitProposalResponse {
     return MsgSubmitProposalResponse.decode(message.value);
   },
@@ -590,7 +590,7 @@ export const MsgSubmitProposalResponse = {
     return MsgSubmitProposalResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSubmitProposalResponse
+    message: MsgSubmitProposalResponse,
   ): MsgSubmitProposalResponseProtoMsg {
     return {
       typeUrl: "/cosmos.gov.v1.MsgSubmitProposalResponse",
@@ -607,7 +607,7 @@ function createBaseMsgExecLegacyContent(): MsgExecLegacyContent {
 export const MsgExecLegacyContent = {
   encode(
     message: MsgExecLegacyContent,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(10).fork()).ldelim();
@@ -619,7 +619,7 @@ export const MsgExecLegacyContent = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgExecLegacyContent {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -654,7 +654,7 @@ export const MsgExecLegacyContent = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgExecLegacyContent>, I>>(
-    object: I
+    object: I,
   ): MsgExecLegacyContent {
     const message = createBaseMsgExecLegacyContent();
     message.content =
@@ -666,11 +666,11 @@ export const MsgExecLegacyContent = {
   },
   fromAmino(
     object: MsgExecLegacyContentAmino,
-    aminoConverter?: AminoConverter
+    aminoConverter?: AminoConverter,
   ): MsgExecLegacyContent {
     if (aminoConverter === undefined) {
       throw new Error(
-        "Can't convert to MsgExecLegacyContent from amino without an AminoConverter instance"
+        "Can't convert to MsgExecLegacyContent from amino without an AminoConverter instance",
       );
     }
 
@@ -683,11 +683,11 @@ export const MsgExecLegacyContent = {
   },
   toAmino(
     message: MsgExecLegacyContent,
-    converter?: AminoConverter
+    converter?: AminoConverter,
   ): MsgExecLegacyContentAmino {
     if (converter === undefined) {
       throw new Error(
-        "Can't convert to MsgExecLegacyContent from amino without an AminoConverter instance"
+        "Can't convert to MsgExecLegacyContent from amino without an AminoConverter instance",
       );
     }
 
@@ -726,13 +726,13 @@ function createBaseMsgExecLegacyContentResponse(): MsgExecLegacyContentResponse 
 export const MsgExecLegacyContentResponse = {
   encode(
     _: MsgExecLegacyContentResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgExecLegacyContentResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -755,13 +755,13 @@ export const MsgExecLegacyContentResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgExecLegacyContentResponse>, I>>(
-    _: I
+    _: I,
   ): MsgExecLegacyContentResponse {
     const message = createBaseMsgExecLegacyContentResponse();
     return message;
   },
   fromAmino(
-    _: MsgExecLegacyContentResponseAmino
+    _: MsgExecLegacyContentResponseAmino,
   ): MsgExecLegacyContentResponse {
     return {};
   },
@@ -770,12 +770,12 @@ export const MsgExecLegacyContentResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgExecLegacyContentResponseAminoMsg
+    object: MsgExecLegacyContentResponseAminoMsg,
   ): MsgExecLegacyContentResponse {
     return MsgExecLegacyContentResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgExecLegacyContentResponse
+    message: MsgExecLegacyContentResponse,
   ): MsgExecLegacyContentResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgExecLegacyContentResponse",
@@ -783,7 +783,7 @@ export const MsgExecLegacyContentResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgExecLegacyContentResponseProtoMsg
+    message: MsgExecLegacyContentResponseProtoMsg,
   ): MsgExecLegacyContentResponse {
     return MsgExecLegacyContentResponse.decode(message.value);
   },
@@ -791,7 +791,7 @@ export const MsgExecLegacyContentResponse = {
     return MsgExecLegacyContentResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgExecLegacyContentResponse
+    message: MsgExecLegacyContentResponse,
   ): MsgExecLegacyContentResponseProtoMsg {
     return {
       typeUrl: "/cosmos.gov.v1.MsgExecLegacyContentResponse",
@@ -810,7 +810,7 @@ function createBaseMsgVote(): MsgVote {
 export const MsgVote = {
   encode(
     message: MsgVote,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -929,7 +929,7 @@ function createBaseMsgVoteResponse(): MsgVoteResponse {
 export const MsgVoteResponse = {
   encode(
     _: MsgVoteResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -955,7 +955,7 @@ export const MsgVoteResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(
-    _: I
+    _: I,
   ): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
@@ -1000,7 +1000,7 @@ function createBaseMsgVoteWeighted(): MsgVoteWeighted {
 export const MsgVoteWeighted = {
   encode(
     message: MsgVoteWeighted,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1031,7 +1031,7 @@ export const MsgVoteWeighted = {
           break;
         case 3:
           message.options.push(
-            WeightedVoteOption.decode(reader, reader.uint32())
+            WeightedVoteOption.decode(reader, reader.uint32()),
           );
           break;
         case 4:
@@ -1063,7 +1063,7 @@ export const MsgVoteWeighted = {
     message.voter !== undefined && (obj.voter = message.voter);
     if (message.options) {
       obj.options = message.options.map((e) =>
-        e ? WeightedVoteOption.toJSON(e) : undefined
+        e ? WeightedVoteOption.toJSON(e) : undefined,
       );
     } else {
       obj.options = [];
@@ -1072,7 +1072,7 @@ export const MsgVoteWeighted = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgVoteWeighted>, I>>(
-    object: I
+    object: I,
   ): MsgVoteWeighted {
     const message = createBaseMsgVoteWeighted();
     message.proposalId =
@@ -1103,7 +1103,7 @@ export const MsgVoteWeighted = {
     obj.voter = message.voter;
     if (message.options) {
       obj.options = message.options.map((e) =>
-        e ? WeightedVoteOption.toAmino(e) : undefined
+        e ? WeightedVoteOption.toAmino(e) : undefined,
       );
     } else {
       obj.options = [];
@@ -1141,13 +1141,13 @@ function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
 export const MsgVoteWeightedResponse = {
   encode(
     _: MsgVoteWeightedResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgVoteWeightedResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1170,7 +1170,7 @@ export const MsgVoteWeightedResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgVoteWeightedResponse>, I>>(
-    _: I
+    _: I,
   ): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
@@ -1183,12 +1183,12 @@ export const MsgVoteWeightedResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgVoteWeightedResponseAminoMsg
+    object: MsgVoteWeightedResponseAminoMsg,
   ): MsgVoteWeightedResponse {
     return MsgVoteWeightedResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgVoteWeightedResponse
+    message: MsgVoteWeightedResponse,
   ): MsgVoteWeightedResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgVoteWeightedResponse",
@@ -1196,7 +1196,7 @@ export const MsgVoteWeightedResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgVoteWeightedResponseProtoMsg
+    message: MsgVoteWeightedResponseProtoMsg,
   ): MsgVoteWeightedResponse {
     return MsgVoteWeightedResponse.decode(message.value);
   },
@@ -1204,7 +1204,7 @@ export const MsgVoteWeightedResponse = {
     return MsgVoteWeightedResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgVoteWeightedResponse
+    message: MsgVoteWeightedResponse,
   ): MsgVoteWeightedResponseProtoMsg {
     return {
       typeUrl: "/cosmos.gov.v1.MsgVoteWeightedResponse",
@@ -1222,7 +1222,7 @@ function createBaseMsgDeposit(): MsgDeposit {
 export const MsgDeposit = {
   encode(
     message: MsgDeposit,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -1282,7 +1282,7 @@ export const MsgDeposit = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeposit>, I>>(
-    object: I
+    object: I,
   ): MsgDeposit {
     const message = createBaseMsgDeposit();
     message.proposalId =
@@ -1343,7 +1343,7 @@ function createBaseMsgDepositResponse(): MsgDepositResponse {
 export const MsgDepositResponse = {
   encode(
     _: MsgDepositResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -1369,7 +1369,7 @@ export const MsgDepositResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
@@ -1412,7 +1412,7 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 export const MsgUpdateParams = {
   encode(
     message: MsgUpdateParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -1456,7 +1456,7 @@ export const MsgUpdateParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
-    object: I
+    object: I,
   ): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -1506,13 +1506,13 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 export const MsgUpdateParamsResponse = {
   encode(
     _: MsgUpdateParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUpdateParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1535,7 +1535,7 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -1548,12 +1548,12 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUpdateParamsResponseAminoMsg
+    object: MsgUpdateParamsResponseAminoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgUpdateParamsResponse
+    message: MsgUpdateParamsResponse,
   ): MsgUpdateParamsResponseAminoMsg {
     return {
       type: "cosmos-sdk/v1/MsgUpdateParamsResponse",
@@ -1561,7 +1561,7 @@ export const MsgUpdateParamsResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgUpdateParamsResponseProtoMsg
+    message: MsgUpdateParamsResponseProtoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.decode(message.value);
   },
@@ -1569,7 +1569,7 @@ export const MsgUpdateParamsResponse = {
     return MsgUpdateParamsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUpdateParamsResponse
+    message: MsgUpdateParamsResponse,
   ): MsgUpdateParamsResponseProtoMsg {
     return {
       typeUrl: "/cosmos.gov.v1.MsgUpdateParamsResponse",
@@ -1581,14 +1581,14 @@ export const MsgUpdateParamsResponse = {
 export interface Msg {
   /** SubmitProposal defines a method to create new proposal given the messages. */
   SubmitProposal(
-    request: MsgSubmitProposal
+    request: MsgSubmitProposal,
   ): Promise<MsgSubmitProposalResponse>;
   /**
    * ExecLegacyContent defines a Msg to be in included in a MsgSubmitProposal
    * to execute a legacy content-based proposal.
    */
   ExecLegacyContent(
-    request: MsgExecLegacyContent
+    request: MsgExecLegacyContent,
   ): Promise<MsgExecLegacyContentResponse>;
   /** Vote defines a method to add a vote on a specific proposal. */
   Vote(request: MsgVote): Promise<MsgVoteResponse>;
@@ -1616,29 +1616,29 @@ export class MsgClientImpl implements Msg {
     this.UpdateParams = this.UpdateParams.bind(this);
   }
   SubmitProposal(
-    request: MsgSubmitProposal
+    request: MsgSubmitProposal,
   ): Promise<MsgSubmitProposalResponse> {
     const data = MsgSubmitProposal.encode(request).finish();
     const promise = this.rpc.request(
       "cosmos.gov.v1.Msg",
       "SubmitProposal",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgSubmitProposalResponse.decode(new _m0.Reader(data))
+      MsgSubmitProposalResponse.decode(new _m0.Reader(data)),
     );
   }
   ExecLegacyContent(
-    request: MsgExecLegacyContent
+    request: MsgExecLegacyContent,
   ): Promise<MsgExecLegacyContentResponse> {
     const data = MsgExecLegacyContent.encode(request).finish();
     const promise = this.rpc.request(
       "cosmos.gov.v1.Msg",
       "ExecLegacyContent",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgExecLegacyContentResponse.decode(new _m0.Reader(data))
+      MsgExecLegacyContentResponse.decode(new _m0.Reader(data)),
     );
   }
   Vote(request: MsgVote): Promise<MsgVoteResponse> {
@@ -1650,21 +1650,21 @@ export class MsgClientImpl implements Msg {
     const data = MsgVoteWeighted.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "VoteWeighted", data);
     return promise.then((data) =>
-      MsgVoteWeightedResponse.decode(new _m0.Reader(data))
+      MsgVoteWeightedResponse.decode(new _m0.Reader(data)),
     );
   }
   Deposit(request: MsgDeposit): Promise<MsgDepositResponse> {
     const data = MsgDeposit.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "Deposit", data);
     return promise.then((data) =>
-      MsgDepositResponse.decode(new _m0.Reader(data))
+      MsgDepositResponse.decode(new _m0.Reader(data)),
     );
   }
   UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
     const data = MsgUpdateParams.encode(request).finish();
     const promise = this.rpc.request("cosmos.gov.v1.Msg", "UpdateParams", data);
     return promise.then((data) =>
-      MsgUpdateParamsResponse.decode(new _m0.Reader(data))
+      MsgUpdateParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

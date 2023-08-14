@@ -195,12 +195,12 @@ function createBaseParams(): Params {
 export const Params = {
   encode(
     message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.nickname !== undefined) {
       NicknameParams.encode(
         message.nickname,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     if (message.dtag !== undefined) {
@@ -215,7 +215,7 @@ export const Params = {
     if (message.appLinks !== undefined) {
       AppLinksParams.encode(
         message.appLinks,
-        writer.uint32(42).fork()
+        writer.uint32(42).fork(),
       ).ldelim();
     }
     return writer;
@@ -363,7 +363,7 @@ function createBaseNicknameParams(): NicknameParams {
 export const NicknameParams = {
   encode(
     message: NicknameParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.minLength.length !== 0) {
       writer.uint32(10).bytes(message.minLength);
@@ -407,16 +407,16 @@ export const NicknameParams = {
     const obj: any = {};
     message.minLength !== undefined &&
       (obj.minLength = base64FromBytes(
-        message.minLength !== undefined ? message.minLength : new Uint8Array()
+        message.minLength !== undefined ? message.minLength : new Uint8Array(),
       ));
     message.maxLength !== undefined &&
       (obj.maxLength = base64FromBytes(
-        message.maxLength !== undefined ? message.maxLength : new Uint8Array()
+        message.maxLength !== undefined ? message.maxLength : new Uint8Array(),
       ));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<NicknameParams>, I>>(
-    object: I
+    object: I,
   ): NicknameParams {
     const message = createBaseNicknameParams();
     message.minLength = object.minLength ?? new Uint8Array();
@@ -461,7 +461,7 @@ function createBaseDTagParams(): DTagParams {
 export const DTagParams = {
   encode(
     message: DTagParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.regEx !== "") {
       writer.uint32(10).string(message.regEx);
@@ -513,16 +513,16 @@ export const DTagParams = {
     message.regEx !== undefined && (obj.regEx = message.regEx);
     message.minLength !== undefined &&
       (obj.minLength = base64FromBytes(
-        message.minLength !== undefined ? message.minLength : new Uint8Array()
+        message.minLength !== undefined ? message.minLength : new Uint8Array(),
       ));
     message.maxLength !== undefined &&
       (obj.maxLength = base64FromBytes(
-        message.maxLength !== undefined ? message.maxLength : new Uint8Array()
+        message.maxLength !== undefined ? message.maxLength : new Uint8Array(),
       ));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<DTagParams>, I>>(
-    object: I
+    object: I,
   ): DTagParams {
     const message = createBaseDTagParams();
     message.regEx = object.regEx ?? "";
@@ -568,7 +568,7 @@ function createBaseBioParams(): BioParams {
 export const BioParams = {
   encode(
     message: BioParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.maxLength.length !== 0) {
       writer.uint32(26).bytes(message.maxLength);
@@ -603,12 +603,12 @@ export const BioParams = {
     const obj: any = {};
     message.maxLength !== undefined &&
       (obj.maxLength = base64FromBytes(
-        message.maxLength !== undefined ? message.maxLength : new Uint8Array()
+        message.maxLength !== undefined ? message.maxLength : new Uint8Array(),
       ));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<BioParams>, I>>(
-    object: I
+    object: I,
   ): BioParams {
     const message = createBaseBioParams();
     message.maxLength = object.maxLength ?? new Uint8Array();
@@ -653,7 +653,7 @@ function createBaseOracleParams(): OracleParams {
 export const OracleParams = {
   encode(
     message: OracleParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.scriptId.isZero()) {
       writer.uint32(8).uint64(message.scriptId);
@@ -743,7 +743,7 @@ export const OracleParams = {
       (obj.executeGas = (message.executeGas || Long.UZERO).toString());
     if (message.feeAmount) {
       obj.feeAmount = message.feeAmount.map((e) =>
-        e ? Coin.toJSON(e) : undefined
+        e ? Coin.toJSON(e) : undefined,
       );
     } else {
       obj.feeAmount = [];
@@ -751,7 +751,7 @@ export const OracleParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<OracleParams>, I>>(
-    object: I
+    object: I,
   ): OracleParams {
     const message = createBaseOracleParams();
     message.scriptId =
@@ -802,7 +802,7 @@ export const OracleParams = {
       : undefined;
     if (message.feeAmount) {
       obj.fee_amount = message.feeAmount.map((e) =>
-        e ? Coin.toAmino(e) : undefined
+        e ? Coin.toAmino(e) : undefined,
       );
     } else {
       obj.fee_amount = [];
@@ -833,12 +833,12 @@ function createBaseAppLinksParams(): AppLinksParams {
 export const AppLinksParams = {
   encode(
     message: AppLinksParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.validityDuration !== undefined) {
       Duration.encode(
         message.validityDuration,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     return writer;
@@ -876,7 +876,7 @@ export const AppLinksParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<AppLinksParams>, I>>(
-    object: I
+    object: I,
   ): AppLinksParams {
     const message = createBaseAppLinksParams();
     message.validityDuration =

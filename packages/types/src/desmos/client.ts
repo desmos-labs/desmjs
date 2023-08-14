@@ -57,7 +57,7 @@ export const getSigningDesmosClient = async ({
     {
       registry,
       aminoTypes,
-    }
+    },
   );
   return client;
 };

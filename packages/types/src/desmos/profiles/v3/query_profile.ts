@@ -45,7 +45,7 @@ function createBaseQueryProfileRequest(): QueryProfileRequest {
 export const QueryProfileRequest = {
   encode(
     message: QueryProfileRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -80,7 +80,7 @@ export const QueryProfileRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryProfileRequest>, I>>(
-    object: I
+    object: I,
   ): QueryProfileRequest {
     const message = createBaseQueryProfileRequest();
     message.user = object.user ?? "";
@@ -120,7 +120,7 @@ function createBaseQueryProfileResponse(): QueryProfileResponse {
 export const QueryProfileResponse = {
   encode(
     message: QueryProfileResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.profile !== undefined) {
       Any.encode(message.profile, writer.uint32(10).fork()).ldelim();
@@ -129,7 +129,7 @@ export const QueryProfileResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryProfileResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -159,7 +159,7 @@ export const QueryProfileResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryProfileResponse>, I>>(
-    object: I
+    object: I,
   ): QueryProfileResponse {
     const message = createBaseQueryProfileResponse();
     message.profile =

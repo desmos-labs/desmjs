@@ -49,7 +49,7 @@ export const getSigningCosmosClient = async ({
     {
       registry,
       aminoTypes,
-    }
+    },
   );
   return client;
 };

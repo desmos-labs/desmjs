@@ -536,7 +536,7 @@ function createBaseWeightedVoteOption(): WeightedVoteOption {
 export const WeightedVoteOption = {
   encode(
     message: WeightedVoteOption,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
@@ -580,7 +580,7 @@ export const WeightedVoteOption = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<WeightedVoteOption>, I>>(
-    object: I
+    object: I,
   ): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
     message.option = object.option ?? 0;
@@ -631,7 +631,7 @@ function createBaseDeposit(): Deposit {
 export const Deposit = {
   encode(
     message: Deposit,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
@@ -764,7 +764,7 @@ function createBaseProposal(): Proposal {
 export const Proposal = {
   encode(
     message: Proposal,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -778,7 +778,7 @@ export const Proposal = {
     if (message.finalTallyResult !== undefined) {
       TallyResult.encode(
         message.finalTallyResult,
-        writer.uint32(34).fork()
+        writer.uint32(34).fork(),
       ).ldelim();
     }
     if (message.submitTime !== undefined) {
@@ -787,7 +787,7 @@ export const Proposal = {
     if (message.depositEndTime !== undefined) {
       Timestamp.encode(
         message.depositEndTime,
-        writer.uint32(50).fork()
+        writer.uint32(50).fork(),
       ).ldelim();
     }
     for (const v of message.totalDeposit) {
@@ -796,13 +796,13 @@ export const Proposal = {
     if (message.votingStartTime !== undefined) {
       Timestamp.encode(
         message.votingStartTime,
-        writer.uint32(66).fork()
+        writer.uint32(66).fork(),
       ).ldelim();
     }
     if (message.votingEndTime !== undefined) {
       Timestamp.encode(
         message.votingEndTime,
-        writer.uint32(74).fork()
+        writer.uint32(74).fork(),
       ).ldelim();
     }
     if (message.metadata !== "") {
@@ -838,7 +838,7 @@ export const Proposal = {
         case 4:
           message.finalTallyResult = TallyResult.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 5:
@@ -912,7 +912,7 @@ export const Proposal = {
       (obj.id = (message.id || Long.UZERO).toString());
     if (message.messages) {
       obj.messages = message.messages.map((e) =>
-        e ? Any.toJSON(e) : undefined
+        e ? Any.toJSON(e) : undefined,
       );
     } else {
       obj.messages = [];
@@ -927,18 +927,18 @@ export const Proposal = {
       (obj.submitTime = fromTimestamp(message.submitTime).toISOString());
     message.depositEndTime !== undefined &&
       (obj.depositEndTime = fromTimestamp(
-        message.depositEndTime
+        message.depositEndTime,
       ).toISOString());
     if (message.totalDeposit) {
       obj.totalDeposit = message.totalDeposit.map((e) =>
-        e ? Coin.toJSON(e) : undefined
+        e ? Coin.toJSON(e) : undefined,
       );
     } else {
       obj.totalDeposit = [];
     }
     message.votingStartTime !== undefined &&
       (obj.votingStartTime = fromTimestamp(
-        message.votingStartTime
+        message.votingStartTime,
       ).toISOString());
     message.votingEndTime !== undefined &&
       (obj.votingEndTime = fromTimestamp(message.votingEndTime).toISOString());
@@ -1020,7 +1020,7 @@ export const Proposal = {
     obj.id = message.id ? message.id.toString() : undefined;
     if (message.messages) {
       obj.messages = message.messages.map((e) =>
-        e ? Any.toAmino(e) : undefined
+        e ? Any.toAmino(e) : undefined,
       );
     } else {
       obj.messages = [];
@@ -1037,7 +1037,7 @@ export const Proposal = {
       : undefined;
     if (message.totalDeposit) {
       obj.total_deposit = message.totalDeposit.map((e) =>
-        e ? Coin.toAmino(e) : undefined
+        e ? Coin.toAmino(e) : undefined,
       );
     } else {
       obj.total_deposit = [];
@@ -1087,7 +1087,7 @@ function createBaseTallyResult(): TallyResult {
 export const TallyResult = {
   encode(
     message: TallyResult,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.yesCount !== "") {
       writer.uint32(10).string(message.yesCount);
@@ -1152,7 +1152,7 @@ export const TallyResult = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<TallyResult>, I>>(
-    object: I
+    object: I,
   ): TallyResult {
     const message = createBaseTallyResult();
     message.yesCount = object.yesCount ?? "";
@@ -1238,7 +1238,7 @@ export const Vote = {
           break;
         case 4:
           message.options.push(
-            WeightedVoteOption.decode(reader, reader.uint32())
+            WeightedVoteOption.decode(reader, reader.uint32()),
           );
           break;
         case 5:
@@ -1270,7 +1270,7 @@ export const Vote = {
     message.voter !== undefined && (obj.voter = message.voter);
     if (message.options) {
       obj.options = message.options.map((e) =>
-        e ? WeightedVoteOption.toJSON(e) : undefined
+        e ? WeightedVoteOption.toJSON(e) : undefined,
       );
     } else {
       obj.options = [];
@@ -1308,7 +1308,7 @@ export const Vote = {
     obj.voter = message.voter;
     if (message.options) {
       obj.options = message.options.map((e) =>
-        e ? WeightedVoteOption.toAmino(e) : undefined
+        e ? WeightedVoteOption.toAmino(e) : undefined,
       );
     } else {
       obj.options = [];
@@ -1347,7 +1347,7 @@ function createBaseDepositParams(): DepositParams {
 export const DepositParams = {
   encode(
     message: DepositParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1355,7 +1355,7 @@ export const DepositParams = {
     if (message.maxDepositPeriod !== undefined) {
       Duration.encode(
         message.maxDepositPeriod,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
@@ -1394,7 +1394,7 @@ export const DepositParams = {
     const obj: any = {};
     if (message.minDeposit) {
       obj.minDeposit = message.minDeposit.map((e) =>
-        e ? Coin.toJSON(e) : undefined
+        e ? Coin.toJSON(e) : undefined,
       );
     } else {
       obj.minDeposit = [];
@@ -1406,7 +1406,7 @@ export const DepositParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<DepositParams>, I>>(
-    object: I
+    object: I,
   ): DepositParams {
     const message = createBaseDepositParams();
     message.minDeposit =
@@ -1431,7 +1431,7 @@ export const DepositParams = {
     const obj: any = {};
     if (message.minDeposit) {
       obj.min_deposit = message.minDeposit.map((e) =>
-        e ? Coin.toAmino(e) : undefined
+        e ? Coin.toAmino(e) : undefined,
       );
     } else {
       obj.min_deposit = [];
@@ -1471,7 +1471,7 @@ function createBaseVotingParams(): VotingParams {
 export const VotingParams = {
   encode(
     message: VotingParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
@@ -1511,7 +1511,7 @@ export const VotingParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<VotingParams>, I>>(
-    object: I
+    object: I,
   ): VotingParams {
     const message = createBaseVotingParams();
     message.votingPeriod =
@@ -1566,7 +1566,7 @@ function createBaseTallyParams(): TallyParams {
 export const TallyParams = {
   encode(
     message: TallyParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.quorum !== "") {
       writer.uint32(10).string(message.quorum);
@@ -1620,7 +1620,7 @@ export const TallyParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<TallyParams>, I>>(
-    object: I
+    object: I,
   ): TallyParams {
     const message = createBaseTallyParams();
     message.quorum = object.quorum ?? "";
@@ -1681,7 +1681,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(
     message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1689,7 +1689,7 @@ export const Params = {
     if (message.maxDepositPeriod !== undefined) {
       Duration.encode(
         message.maxDepositPeriod,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     if (message.votingPeriod !== undefined) {
@@ -1796,7 +1796,7 @@ export const Params = {
     const obj: any = {};
     if (message.minDeposit) {
       obj.minDeposit = message.minDeposit.map((e) =>
-        e ? Coin.toJSON(e) : undefined
+        e ? Coin.toJSON(e) : undefined,
       );
     } else {
       obj.minDeposit = [];
@@ -1869,7 +1869,7 @@ export const Params = {
     const obj: any = {};
     if (message.minDeposit) {
       obj.min_deposit = message.minDeposit.map((e) =>
-        e ? Coin.toAmino(e) : undefined
+        e ? Coin.toAmino(e) : undefined,
       );
     } else {
       obj.min_deposit = [];

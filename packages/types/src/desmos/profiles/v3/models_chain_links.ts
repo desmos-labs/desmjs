@@ -324,7 +324,7 @@ function createBaseChainLink(): ChainLink {
 export const ChainLink = {
   encode(
     message: ChainLink,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -338,7 +338,7 @@ export const ChainLink = {
     if (message.chainConfig !== undefined) {
       ChainConfig.encode(
         message.chainConfig,
-        writer.uint32(34).fork()
+        writer.uint32(34).fork(),
       ).ldelim();
     }
     if (message.creationTime !== undefined) {
@@ -404,7 +404,7 @@ export const ChainLink = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ChainLink>, I>>(
-    object: I
+    object: I,
   ): ChainLink {
     const message = createBaseChainLink();
     message.user = object.user ?? "";
@@ -476,7 +476,7 @@ function createBaseChainConfig(): ChainConfig {
 export const ChainConfig = {
   encode(
     message: ChainConfig,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -511,7 +511,7 @@ export const ChainConfig = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ChainConfig>, I>>(
-    object: I
+    object: I,
   ): ChainConfig {
     const message = createBaseChainConfig();
     message.name = object.name ?? "";
@@ -662,7 +662,7 @@ function createBaseBech32Address(): Bech32Address {
 export const Bech32Address = {
   encode(
     message: Bech32Address,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
@@ -705,7 +705,7 @@ export const Bech32Address = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Bech32Address>, I>>(
-    object: I
+    object: I,
   ): Bech32Address {
     const message = createBaseBech32Address();
     message.value = object.value ?? "";
@@ -748,7 +748,7 @@ function createBaseBase58Address(): Base58Address {
 export const Base58Address = {
   encode(
     message: Base58Address,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
@@ -783,7 +783,7 @@ export const Base58Address = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Base58Address>, I>>(
-    object: I
+    object: I,
   ): Base58Address {
     const message = createBaseBase58Address();
     message.value = object.value ?? "";
@@ -824,7 +824,7 @@ function createBaseHexAddress(): HexAddress {
 export const HexAddress = {
   encode(
     message: HexAddress,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
@@ -867,7 +867,7 @@ export const HexAddress = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<HexAddress>, I>>(
-    object: I
+    object: I,
   ): HexAddress {
     const message = createBaseHexAddress();
     message.value = object.value ?? "";
@@ -911,7 +911,7 @@ function createBaseSingleSignature(): SingleSignature {
 export const SingleSignature = {
   encode(
     message: SingleSignature,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.valueType !== 0) {
       writer.uint32(8).int32(message.valueType);
@@ -957,12 +957,12 @@ export const SingleSignature = {
       (obj.valueType = signatureValueTypeToJSON(message.valueType));
     message.signature !== undefined &&
       (obj.signature = base64FromBytes(
-        message.signature !== undefined ? message.signature : new Uint8Array()
+        message.signature !== undefined ? message.signature : new Uint8Array(),
       ));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SingleSignature>, I>>(
-    object: I
+    object: I,
   ): SingleSignature {
     const message = createBaseSingleSignature();
     message.valueType = object.valueType ?? 0;
@@ -1008,12 +1008,12 @@ function createBaseCosmosMultiSignature(): CosmosMultiSignature {
 export const CosmosMultiSignature = {
   encode(
     message: CosmosMultiSignature,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.bitArray !== undefined) {
       CompactBitArray.encode(
         message.bitArray,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     for (const v of message.signatures) {
@@ -1023,7 +1023,7 @@ export const CosmosMultiSignature = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): CosmosMultiSignature {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1062,7 +1062,7 @@ export const CosmosMultiSignature = {
         : undefined);
     if (message.signatures) {
       obj.signatures = message.signatures.map((e) =>
-        e ? Any.toJSON(e) : undefined
+        e ? Any.toJSON(e) : undefined,
       );
     } else {
       obj.signatures = [];
@@ -1070,7 +1070,7 @@ export const CosmosMultiSignature = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CosmosMultiSignature>, I>>(
-    object: I
+    object: I,
   ): CosmosMultiSignature {
     const message = createBaseCosmosMultiSignature();
     message.bitArray =
@@ -1098,7 +1098,7 @@ export const CosmosMultiSignature = {
       : undefined;
     if (message.signatures) {
       obj.signatures = message.signatures.map((e) =>
-        e ? Any.toAmino(e) : undefined
+        e ? Any.toAmino(e) : undefined,
       );
     } else {
       obj.signatures = [];

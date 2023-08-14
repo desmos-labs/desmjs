@@ -111,7 +111,7 @@ function createBaseQueryTotalRequest(): QueryTotalRequest {
 export const QueryTotalRequest = {
   encode(
     message: QueryTotalRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -159,7 +159,7 @@ export const QueryTotalRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryTotalRequest>, I>>(
-    object: I
+    object: I,
   ): QueryTotalRequest {
     const message = createBaseQueryTotalRequest();
     message.denom = object.denom ?? "";
@@ -207,7 +207,7 @@ function createBaseQueryTotalResponse(): QueryTotalResponse {
 export const QueryTotalResponse = {
   encode(
     message: QueryTotalResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.totalSupply !== "") {
       writer.uint32(10).string(message.totalSupply);
@@ -243,7 +243,7 @@ export const QueryTotalResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryTotalResponse>, I>>(
-    object: I
+    object: I,
   ): QueryTotalResponse {
     const message = createBaseQueryTotalResponse();
     message.totalSupply = object.totalSupply ?? "";
@@ -284,7 +284,7 @@ function createBaseQueryCirculatingRequest(): QueryCirculatingRequest {
 export const QueryCirculatingRequest = {
   encode(
     message: QueryCirculatingRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
@@ -296,7 +296,7 @@ export const QueryCirculatingRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryCirculatingRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -335,7 +335,7 @@ export const QueryCirculatingRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryCirculatingRequest>, I>>(
-    object: I
+    object: I,
   ): QueryCirculatingRequest {
     const message = createBaseQueryCirculatingRequest();
     message.denom = object.denom ?? "";
@@ -360,12 +360,12 @@ export const QueryCirculatingRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryCirculatingRequestAminoMsg
+    object: QueryCirculatingRequestAminoMsg,
   ): QueryCirculatingRequest {
     return QueryCirculatingRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryCirculatingRequestProtoMsg
+    message: QueryCirculatingRequestProtoMsg,
   ): QueryCirculatingRequest {
     return QueryCirculatingRequest.decode(message.value);
   },
@@ -373,7 +373,7 @@ export const QueryCirculatingRequest = {
     return QueryCirculatingRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryCirculatingRequest
+    message: QueryCirculatingRequest,
   ): QueryCirculatingRequestProtoMsg {
     return {
       typeUrl: "/desmos.supply.v1.QueryCirculatingRequest",
@@ -389,7 +389,7 @@ function createBaseQueryCirculatingResponse(): QueryCirculatingResponse {
 export const QueryCirculatingResponse = {
   encode(
     message: QueryCirculatingResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.circulatingSupply !== "") {
       writer.uint32(10).string(message.circulatingSupply);
@@ -398,7 +398,7 @@ export const QueryCirculatingResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryCirculatingResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -430,7 +430,7 @@ export const QueryCirculatingResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryCirculatingResponse>, I>>(
-    object: I
+    object: I,
   ): QueryCirculatingResponse {
     const message = createBaseQueryCirculatingResponse();
     message.circulatingSupply = object.circulatingSupply ?? "";
@@ -447,12 +447,12 @@ export const QueryCirculatingResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryCirculatingResponseAminoMsg
+    object: QueryCirculatingResponseAminoMsg,
   ): QueryCirculatingResponse {
     return QueryCirculatingResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryCirculatingResponseProtoMsg
+    message: QueryCirculatingResponseProtoMsg,
   ): QueryCirculatingResponse {
     return QueryCirculatingResponse.decode(message.value);
   },
@@ -460,7 +460,7 @@ export const QueryCirculatingResponse = {
     return QueryCirculatingResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryCirculatingResponse
+    message: QueryCirculatingResponse,
   ): QueryCirculatingResponseProtoMsg {
     return {
       typeUrl: "/desmos.supply.v1.QueryCirculatingResponse",
@@ -477,7 +477,7 @@ export interface Query {
    * given denom
    */
   Circulating(
-    request: QueryCirculatingRequest
+    request: QueryCirculatingRequest,
   ): Promise<QueryCirculatingResponse>;
 }
 export class QueryClientImpl implements Query {
@@ -491,20 +491,20 @@ export class QueryClientImpl implements Query {
     const data = QueryTotalRequest.encode(request).finish();
     const promise = this.rpc.request("desmos.supply.v1.Query", "Total", data);
     return promise.then((data) =>
-      QueryTotalResponse.decode(new _m0.Reader(data))
+      QueryTotalResponse.decode(new _m0.Reader(data)),
     );
   }
   Circulating(
-    request: QueryCirculatingRequest
+    request: QueryCirculatingRequest,
   ): Promise<QueryCirculatingResponse> {
     const data = QueryCirculatingRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.supply.v1.Query",
       "Circulating",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryCirculatingResponse.decode(new _m0.Reader(data))
+      QueryCirculatingResponse.decode(new _m0.Reader(data)),
     );
   }
 }

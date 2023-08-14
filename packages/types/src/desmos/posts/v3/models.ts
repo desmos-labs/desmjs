@@ -556,7 +556,7 @@ export const Post = {
     if (message.lastEditedDate !== undefined) {
       Timestamp.encode(
         message.lastEditedDate,
-        writer.uint32(106).fork()
+        writer.uint32(106).fork(),
       ).ldelim();
     }
     return writer;
@@ -597,7 +597,7 @@ export const Post = {
           break;
         case 10:
           message.referencedPosts.push(
-            PostReference.decode(reader, reader.uint32())
+            PostReference.decode(reader, reader.uint32()),
           );
           break;
         case 11:
@@ -673,7 +673,7 @@ export const Post = {
       (obj.conversationId = (message.conversationId || Long.UZERO).toString());
     if (message.referencedPosts) {
       obj.referencedPosts = message.referencedPosts.map((e) =>
-        e ? PostReference.toJSON(e) : undefined
+        e ? PostReference.toJSON(e) : undefined,
       );
     } else {
       obj.referencedPosts = [];
@@ -684,7 +684,7 @@ export const Post = {
       (obj.creationDate = fromTimestamp(message.creationDate).toISOString());
     message.lastEditedDate !== undefined &&
       (obj.lastEditedDate = fromTimestamp(
-        message.lastEditedDate
+        message.lastEditedDate,
       ).toISOString());
     return obj;
   },
@@ -774,7 +774,7 @@ export const Post = {
       : undefined;
     if (message.referencedPosts) {
       obj.referenced_posts = message.referencedPosts.map((e) =>
-        e ? PostReference.toAmino(e) : undefined
+        e ? PostReference.toAmino(e) : undefined,
       );
     } else {
       obj.referenced_posts = [];
@@ -814,7 +814,7 @@ function createBasePostReference(): PostReference {
 export const PostReference = {
   encode(
     message: PostReference,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
@@ -870,7 +870,7 @@ export const PostReference = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PostReference>, I>>(
-    object: I
+    object: I,
   ): PostReference {
     const message = createBasePostReference();
     message.type = object.type ?? 0;
@@ -924,7 +924,7 @@ function createBaseEntities(): Entities {
 export const Entities = {
   encode(
     message: Entities,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.hashtags) {
       TextTag.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -977,14 +977,14 @@ export const Entities = {
     const obj: any = {};
     if (message.hashtags) {
       obj.hashtags = message.hashtags.map((e) =>
-        e ? TextTag.toJSON(e) : undefined
+        e ? TextTag.toJSON(e) : undefined,
       );
     } else {
       obj.hashtags = [];
     }
     if (message.mentions) {
       obj.mentions = message.mentions.map((e) =>
-        e ? TextTag.toJSON(e) : undefined
+        e ? TextTag.toJSON(e) : undefined,
       );
     } else {
       obj.mentions = [];
@@ -1022,14 +1022,14 @@ export const Entities = {
     const obj: any = {};
     if (message.hashtags) {
       obj.hashtags = message.hashtags.map((e) =>
-        e ? TextTag.toAmino(e) : undefined
+        e ? TextTag.toAmino(e) : undefined,
       );
     } else {
       obj.hashtags = [];
     }
     if (message.mentions) {
       obj.mentions = message.mentions.map((e) =>
-        e ? TextTag.toAmino(e) : undefined
+        e ? TextTag.toAmino(e) : undefined,
       );
     } else {
       obj.mentions = [];
@@ -1067,7 +1067,7 @@ function createBaseTextTag(): TextTag {
 export const TextTag = {
   encode(
     message: TextTag,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.start.isZero()) {
       writer.uint32(8).uint64(message.start);
@@ -1287,7 +1287,7 @@ function createBaseAttachment(): Attachment {
 export const Attachment = {
   encode(
     message: Attachment,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1351,7 +1351,7 @@ export const Attachment = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Attachment>, I>>(
-    object: I
+    object: I,
   ): Attachment {
     const message = createBaseAttachment();
     message.subspaceId =
@@ -1515,7 +1515,7 @@ export const Poll = {
     if (message.finalTallyResults !== undefined) {
       PollTallyResults.encode(
         message.finalTallyResults,
-        writer.uint32(50).fork()
+        writer.uint32(50).fork(),
       ).ldelim();
     }
     return writer;
@@ -1532,7 +1532,7 @@ export const Poll = {
           break;
         case 2:
           message.providedAnswers.push(
-            Poll_ProvidedAnswer.decode(reader, reader.uint32())
+            Poll_ProvidedAnswer.decode(reader, reader.uint32()),
           );
           break;
         case 3:
@@ -1547,7 +1547,7 @@ export const Poll = {
         case 6:
           message.finalTallyResults = PollTallyResults.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -1562,7 +1562,7 @@ export const Poll = {
       question: isSet(object.question) ? String(object.question) : "",
       providedAnswers: Array.isArray(object?.providedAnswers)
         ? object.providedAnswers.map((e: any) =>
-            Poll_ProvidedAnswer.fromJSON(e)
+            Poll_ProvidedAnswer.fromJSON(e),
           )
         : [],
       endDate: isSet(object.endDate)
@@ -1584,7 +1584,7 @@ export const Poll = {
     message.question !== undefined && (obj.question = message.question);
     if (message.providedAnswers) {
       obj.providedAnswers = message.providedAnswers.map((e) =>
-        e ? Poll_ProvidedAnswer.toJSON(e) : undefined
+        e ? Poll_ProvidedAnswer.toJSON(e) : undefined,
       );
     } else {
       obj.providedAnswers = [];
@@ -1625,7 +1625,7 @@ export const Poll = {
       question: object.question,
       providedAnswers: Array.isArray(object?.provided_answers)
         ? object.provided_answers.map((e: any) =>
-            Poll_ProvidedAnswer.fromAmino(e)
+            Poll_ProvidedAnswer.fromAmino(e),
           )
         : [],
       endDate: object?.end_date
@@ -1643,7 +1643,7 @@ export const Poll = {
     obj.question = message.question;
     if (message.providedAnswers) {
       obj.provided_answers = message.providedAnswers.map((e) =>
-        e ? Poll_ProvidedAnswer.toAmino(e) : undefined
+        e ? Poll_ProvidedAnswer.toAmino(e) : undefined,
       );
     } else {
       obj.provided_answers = [];
@@ -1683,7 +1683,7 @@ function createBasePoll_ProvidedAnswer(): Poll_ProvidedAnswer {
 export const Poll_ProvidedAnswer = {
   encode(
     message: Poll_ProvidedAnswer,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.text !== "") {
       writer.uint32(10).string(message.text);
@@ -1726,7 +1726,7 @@ export const Poll_ProvidedAnswer = {
     message.text !== undefined && (obj.text = message.text);
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Any.toJSON(e) : undefined
+        e ? Any.toJSON(e) : undefined,
       );
     } else {
       obj.attachments = [];
@@ -1734,7 +1734,7 @@ export const Poll_ProvidedAnswer = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Poll_ProvidedAnswer>, I>>(
-    object: I
+    object: I,
   ): Poll_ProvidedAnswer {
     const message = createBasePoll_ProvidedAnswer();
     message.text = object.text ?? "";
@@ -1755,7 +1755,7 @@ export const Poll_ProvidedAnswer = {
     obj.text = message.text;
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Any.toAmino(e) : undefined
+        e ? Any.toAmino(e) : undefined,
       );
     } else {
       obj.attachments = [];
@@ -1790,7 +1790,7 @@ function createBaseUserAnswer(): UserAnswer {
 export const UserAnswer = {
   encode(
     message: UserAnswer,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1876,7 +1876,7 @@ export const UserAnswer = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserAnswer>, I>>(
-    object: I
+    object: I,
   ): UserAnswer {
     const message = createBaseUserAnswer();
     message.subspaceId =
@@ -1942,12 +1942,12 @@ function createBasePollTallyResults(): PollTallyResults {
 export const PollTallyResults = {
   encode(
     message: PollTallyResults,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.results) {
       PollTallyResults_AnswerResult.encode(
         v!,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     return writer;
@@ -1961,7 +1961,7 @@ export const PollTallyResults = {
       switch (tag >>> 3) {
         case 1:
           message.results.push(
-            PollTallyResults_AnswerResult.decode(reader, reader.uint32())
+            PollTallyResults_AnswerResult.decode(reader, reader.uint32()),
           );
           break;
         default:
@@ -1975,7 +1975,7 @@ export const PollTallyResults = {
     return {
       results: Array.isArray(object?.results)
         ? object.results.map((e: any) =>
-            PollTallyResults_AnswerResult.fromJSON(e)
+            PollTallyResults_AnswerResult.fromJSON(e),
           )
         : [],
     };
@@ -1984,7 +1984,7 @@ export const PollTallyResults = {
     const obj: any = {};
     if (message.results) {
       obj.results = message.results.map((e) =>
-        e ? PollTallyResults_AnswerResult.toJSON(e) : undefined
+        e ? PollTallyResults_AnswerResult.toJSON(e) : undefined,
       );
     } else {
       obj.results = [];
@@ -1992,12 +1992,12 @@ export const PollTallyResults = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PollTallyResults>, I>>(
-    object: I
+    object: I,
   ): PollTallyResults {
     const message = createBasePollTallyResults();
     message.results =
       object.results?.map((e) =>
-        PollTallyResults_AnswerResult.fromPartial(e)
+        PollTallyResults_AnswerResult.fromPartial(e),
       ) || [];
     return message;
   },
@@ -2005,7 +2005,7 @@ export const PollTallyResults = {
     return {
       results: Array.isArray(object?.results)
         ? object.results.map((e: any) =>
-            PollTallyResults_AnswerResult.fromAmino(e)
+            PollTallyResults_AnswerResult.fromAmino(e),
           )
         : [],
     };
@@ -2014,7 +2014,7 @@ export const PollTallyResults = {
     const obj: any = {};
     if (message.results) {
       obj.results = message.results.map((e) =>
-        e ? PollTallyResults_AnswerResult.toAmino(e) : undefined
+        e ? PollTallyResults_AnswerResult.toAmino(e) : undefined,
       );
     } else {
       obj.results = [];
@@ -2046,7 +2046,7 @@ function createBasePollTallyResults_AnswerResult(): PollTallyResults_AnswerResul
 export const PollTallyResults_AnswerResult = {
   encode(
     message: PollTallyResults_AnswerResult,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.answerIndex !== 0) {
       writer.uint32(8).uint32(message.answerIndex);
@@ -2058,7 +2058,7 @@ export const PollTallyResults_AnswerResult = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): PollTallyResults_AnswerResult {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2094,7 +2094,7 @@ export const PollTallyResults_AnswerResult = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PollTallyResults_AnswerResult>, I>>(
-    object: I
+    object: I,
   ): PollTallyResults_AnswerResult {
     const message = createBasePollTallyResults_AnswerResult();
     message.answerIndex = object.answerIndex ?? 0;
@@ -2105,7 +2105,7 @@ export const PollTallyResults_AnswerResult = {
     return message;
   },
   fromAmino(
-    object: PollTallyResults_AnswerResultAmino
+    object: PollTallyResults_AnswerResultAmino,
   ): PollTallyResults_AnswerResult {
     return {
       answerIndex: object.answer_index,
@@ -2113,7 +2113,7 @@ export const PollTallyResults_AnswerResult = {
     };
   },
   toAmino(
-    message: PollTallyResults_AnswerResult
+    message: PollTallyResults_AnswerResult,
   ): PollTallyResults_AnswerResultAmino {
     const obj: any = {};
     obj.answer_index = message.answerIndex;
@@ -2121,12 +2121,12 @@ export const PollTallyResults_AnswerResult = {
     return obj;
   },
   fromAminoMsg(
-    object: PollTallyResults_AnswerResultAminoMsg
+    object: PollTallyResults_AnswerResultAminoMsg,
   ): PollTallyResults_AnswerResult {
     return PollTallyResults_AnswerResult.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: PollTallyResults_AnswerResultProtoMsg
+    message: PollTallyResults_AnswerResultProtoMsg,
   ): PollTallyResults_AnswerResult {
     return PollTallyResults_AnswerResult.decode(message.value);
   },
@@ -2134,7 +2134,7 @@ export const PollTallyResults_AnswerResult = {
     return PollTallyResults_AnswerResult.encode(message).finish();
   },
   toProtoMsg(
-    message: PollTallyResults_AnswerResult
+    message: PollTallyResults_AnswerResult,
   ): PollTallyResults_AnswerResultProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.AnswerResult",
@@ -2150,7 +2150,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(
     message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.maxTextLength !== 0) {
       writer.uint32(8).uint32(message.maxTextLength);

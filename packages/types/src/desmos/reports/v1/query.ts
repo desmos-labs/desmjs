@@ -226,7 +226,7 @@ function createBaseQueryReportsRequest(): QueryReportsRequest {
 export const QueryReportsRequest = {
   encode(
     message: QueryReportsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -294,7 +294,7 @@ export const QueryReportsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReportsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReportsRequest {
     const message = createBaseQueryReportsRequest();
     message.subspaceId =
@@ -359,7 +359,7 @@ function createBaseQueryReportsResponse(): QueryReportsResponse {
 export const QueryReportsResponse = {
   encode(
     message: QueryReportsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.reports) {
       Report.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -367,14 +367,14 @@ export const QueryReportsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReportsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -409,7 +409,7 @@ export const QueryReportsResponse = {
     const obj: any = {};
     if (message.reports) {
       obj.reports = message.reports.map((e) =>
-        e ? Report.toJSON(e) : undefined
+        e ? Report.toJSON(e) : undefined,
       );
     } else {
       obj.reports = [];
@@ -421,7 +421,7 @@ export const QueryReportsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReportsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReportsResponse {
     const message = createBaseQueryReportsResponse();
     message.reports = object.reports?.map((e) => Report.fromPartial(e)) || [];
@@ -445,7 +445,7 @@ export const QueryReportsResponse = {
     const obj: any = {};
     if (message.reports) {
       obj.reports = message.reports.map((e) =>
-        e ? Report.toAmino(e) : undefined
+        e ? Report.toAmino(e) : undefined,
       );
     } else {
       obj.reports = [];
@@ -480,7 +480,7 @@ function createBaseQueryReportRequest(): QueryReportRequest {
 export const QueryReportRequest = {
   encode(
     message: QueryReportRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -529,7 +529,7 @@ export const QueryReportRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReportRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReportRequest {
     const message = createBaseQueryReportRequest();
     message.subspaceId =
@@ -580,7 +580,7 @@ function createBaseQueryReportResponse(): QueryReportResponse {
 export const QueryReportResponse = {
   encode(
     message: QueryReportResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.report !== undefined) {
       Report.encode(message.report, writer.uint32(10).fork()).ldelim();
@@ -616,7 +616,7 @@ export const QueryReportResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReportResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReportResponse {
     const message = createBaseQueryReportResponse();
     message.report =
@@ -660,7 +660,7 @@ function createBaseQueryReasonsRequest(): QueryReasonsRequest {
 export const QueryReasonsRequest = {
   encode(
     message: QueryReasonsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -711,7 +711,7 @@ export const QueryReasonsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReasonsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReasonsRequest {
     const message = createBaseQueryReasonsRequest();
     message.subspaceId =
@@ -767,7 +767,7 @@ function createBaseQueryReasonsResponse(): QueryReasonsResponse {
 export const QueryReasonsResponse = {
   encode(
     message: QueryReasonsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.reasons) {
       Reason.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -775,14 +775,14 @@ export const QueryReasonsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReasonsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -817,7 +817,7 @@ export const QueryReasonsResponse = {
     const obj: any = {};
     if (message.reasons) {
       obj.reasons = message.reasons.map((e) =>
-        e ? Reason.toJSON(e) : undefined
+        e ? Reason.toJSON(e) : undefined,
       );
     } else {
       obj.reasons = [];
@@ -829,7 +829,7 @@ export const QueryReasonsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReasonsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReasonsResponse {
     const message = createBaseQueryReasonsResponse();
     message.reasons = object.reasons?.map((e) => Reason.fromPartial(e)) || [];
@@ -853,7 +853,7 @@ export const QueryReasonsResponse = {
     const obj: any = {};
     if (message.reasons) {
       obj.reasons = message.reasons.map((e) =>
-        e ? Reason.toAmino(e) : undefined
+        e ? Reason.toAmino(e) : undefined,
       );
     } else {
       obj.reasons = [];
@@ -888,7 +888,7 @@ function createBaseQueryReasonRequest(): QueryReasonRequest {
 export const QueryReasonRequest = {
   encode(
     message: QueryReasonRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -935,7 +935,7 @@ export const QueryReasonRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReasonRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReasonRequest {
     const message = createBaseQueryReasonRequest();
     message.subspaceId =
@@ -983,7 +983,7 @@ function createBaseQueryReasonResponse(): QueryReasonResponse {
 export const QueryReasonResponse = {
   encode(
     message: QueryReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.reason !== undefined) {
       Reason.encode(message.reason, writer.uint32(10).fork()).ldelim();
@@ -1019,7 +1019,7 @@ export const QueryReasonResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReasonResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReasonResponse {
     const message = createBaseQueryReasonResponse();
     message.reason =
@@ -1060,7 +1060,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 export const QueryParamsRequest = {
   encode(
     _: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -1086,7 +1086,7 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    _: I
+    _: I,
   ): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -1122,7 +1122,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 export const QueryParamsResponse = {
   encode(
     message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1158,7 +1158,7 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params =
@@ -1221,17 +1221,17 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.reports.v1.Query",
       "Reports",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryReportsResponse.decode(new _m0.Reader(data))
+      QueryReportsResponse.decode(new _m0.Reader(data)),
     );
   }
   Report(request: QueryReportRequest): Promise<QueryReportResponse> {
     const data = QueryReportRequest.encode(request).finish();
     const promise = this.rpc.request("desmos.reports.v1.Query", "Report", data);
     return promise.then((data) =>
-      QueryReportResponse.decode(new _m0.Reader(data))
+      QueryReportResponse.decode(new _m0.Reader(data)),
     );
   }
   Reasons(request: QueryReasonsRequest): Promise<QueryReasonsResponse> {
@@ -1239,24 +1239,24 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.reports.v1.Query",
       "Reasons",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryReasonsResponse.decode(new _m0.Reader(data))
+      QueryReasonsResponse.decode(new _m0.Reader(data)),
     );
   }
   Reason(request: QueryReasonRequest): Promise<QueryReasonResponse> {
     const data = QueryReasonRequest.encode(request).finish();
     const promise = this.rpc.request("desmos.reports.v1.Query", "Reason", data);
     return promise.then((data) =>
-      QueryReasonResponse.decode(new _m0.Reader(data))
+      QueryReasonResponse.decode(new _m0.Reader(data)),
     );
   }
   Params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("desmos.reports.v1.Query", "Params", data);
     return promise.then((data) =>
-      QueryParamsResponse.decode(new _m0.Reader(data))
+      QueryParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

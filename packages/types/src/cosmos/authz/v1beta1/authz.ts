@@ -122,7 +122,7 @@ function createBaseGenericAuthorization(): GenericAuthorization {
 export const GenericAuthorization = {
   encode(
     message: GenericAuthorization,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.msg !== "") {
       writer.uint32(10).string(message.msg);
@@ -131,7 +131,7 @@ export const GenericAuthorization = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): GenericAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -160,7 +160,7 @@ export const GenericAuthorization = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenericAuthorization>, I>>(
-    object: I
+    object: I,
   ): GenericAuthorization {
     const message = createBaseGenericAuthorization();
     message.msg = object.msg ?? "";
@@ -319,7 +319,7 @@ function createBaseGrantAuthorization(): GrantAuthorization {
 export const GrantAuthorization = {
   encode(
     message: GrantAuthorization,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -386,7 +386,7 @@ export const GrantAuthorization = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GrantAuthorization>, I>>(
-    object: I
+    object: I,
   ): GrantAuthorization {
     const message = createBaseGrantAuthorization();
     message.granter = object.granter ?? "";
@@ -455,7 +455,7 @@ function createBaseGrantQueueItem(): GrantQueueItem {
 export const GrantQueueItem = {
   encode(
     message: GrantQueueItem,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.msgTypeUrls) {
       writer.uint32(10).string(v!);
@@ -496,7 +496,7 @@ export const GrantQueueItem = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GrantQueueItem>, I>>(
-    object: I
+    object: I,
   ): GrantQueueItem {
     const message = createBaseGrantQueueItem();
     message.msgTypeUrls = object.msgTypeUrls?.map((e) => e) || [];

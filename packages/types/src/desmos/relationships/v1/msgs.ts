@@ -198,7 +198,7 @@ function createBaseMsgCreateRelationship(): MsgCreateRelationship {
 export const MsgCreateRelationship = {
   encode(
     message: MsgCreateRelationship,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.signer !== "") {
       writer.uint32(10).string(message.signer);
@@ -213,7 +213,7 @@ export const MsgCreateRelationship = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateRelationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -258,7 +258,7 @@ export const MsgCreateRelationship = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateRelationship>, I>>(
-    object: I
+    object: I,
   ): MsgCreateRelationship {
     const message = createBaseMsgCreateRelationship();
     message.signer = object.signer ?? "";
@@ -307,13 +307,13 @@ function createBaseMsgCreateRelationshipResponse(): MsgCreateRelationshipRespons
 export const MsgCreateRelationshipResponse = {
   encode(
     _: MsgCreateRelationshipResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateRelationshipResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -336,29 +336,29 @@ export const MsgCreateRelationshipResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateRelationshipResponse>, I>>(
-    _: I
+    _: I,
   ): MsgCreateRelationshipResponse {
     const message = createBaseMsgCreateRelationshipResponse();
     return message;
   },
   fromAmino(
-    _: MsgCreateRelationshipResponseAmino
+    _: MsgCreateRelationshipResponseAmino,
   ): MsgCreateRelationshipResponse {
     return {};
   },
   toAmino(
-    _: MsgCreateRelationshipResponse
+    _: MsgCreateRelationshipResponse,
   ): MsgCreateRelationshipResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgCreateRelationshipResponseAminoMsg
+    object: MsgCreateRelationshipResponseAminoMsg,
   ): MsgCreateRelationshipResponse {
     return MsgCreateRelationshipResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCreateRelationshipResponseProtoMsg
+    message: MsgCreateRelationshipResponseProtoMsg,
   ): MsgCreateRelationshipResponse {
     return MsgCreateRelationshipResponse.decode(message.value);
   },
@@ -366,7 +366,7 @@ export const MsgCreateRelationshipResponse = {
     return MsgCreateRelationshipResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCreateRelationshipResponse
+    message: MsgCreateRelationshipResponse,
   ): MsgCreateRelationshipResponseProtoMsg {
     return {
       typeUrl: "/desmos.relationships.v1.MsgCreateRelationshipResponse",
@@ -384,7 +384,7 @@ function createBaseMsgDeleteRelationship(): MsgDeleteRelationship {
 export const MsgDeleteRelationship = {
   encode(
     message: MsgDeleteRelationship,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.signer !== "") {
       writer.uint32(10).string(message.signer);
@@ -399,7 +399,7 @@ export const MsgDeleteRelationship = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteRelationship {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -444,7 +444,7 @@ export const MsgDeleteRelationship = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationship>, I>>(
-    object: I
+    object: I,
   ): MsgDeleteRelationship {
     const message = createBaseMsgDeleteRelationship();
     message.signer = object.signer ?? "";
@@ -493,13 +493,13 @@ function createBaseMsgDeleteRelationshipResponse(): MsgDeleteRelationshipRespons
 export const MsgDeleteRelationshipResponse = {
   encode(
     _: MsgDeleteRelationshipResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteRelationshipResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -522,29 +522,29 @@ export const MsgDeleteRelationshipResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteRelationshipResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeleteRelationshipResponse {
     const message = createBaseMsgDeleteRelationshipResponse();
     return message;
   },
   fromAmino(
-    _: MsgDeleteRelationshipResponseAmino
+    _: MsgDeleteRelationshipResponseAmino,
   ): MsgDeleteRelationshipResponse {
     return {};
   },
   toAmino(
-    _: MsgDeleteRelationshipResponse
+    _: MsgDeleteRelationshipResponse,
   ): MsgDeleteRelationshipResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgDeleteRelationshipResponseAminoMsg
+    object: MsgDeleteRelationshipResponseAminoMsg,
   ): MsgDeleteRelationshipResponse {
     return MsgDeleteRelationshipResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgDeleteRelationshipResponseProtoMsg
+    message: MsgDeleteRelationshipResponseProtoMsg,
   ): MsgDeleteRelationshipResponse {
     return MsgDeleteRelationshipResponse.decode(message.value);
   },
@@ -552,7 +552,7 @@ export const MsgDeleteRelationshipResponse = {
     return MsgDeleteRelationshipResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgDeleteRelationshipResponse
+    message: MsgDeleteRelationshipResponse,
   ): MsgDeleteRelationshipResponseProtoMsg {
     return {
       typeUrl: "/desmos.relationships.v1.MsgDeleteRelationshipResponse",
@@ -571,7 +571,7 @@ function createBaseMsgBlockUser(): MsgBlockUser {
 export const MsgBlockUser = {
   encode(
     message: MsgBlockUser,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.blocker !== "") {
       writer.uint32(10).string(message.blocker);
@@ -633,7 +633,7 @@ export const MsgBlockUser = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgBlockUser>, I>>(
-    object: I
+    object: I,
   ): MsgBlockUser {
     const message = createBaseMsgBlockUser();
     message.blocker = object.blocker ?? "";
@@ -685,13 +685,13 @@ function createBaseMsgBlockUserResponse(): MsgBlockUserResponse {
 export const MsgBlockUserResponse = {
   encode(
     _: MsgBlockUserResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgBlockUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -714,7 +714,7 @@ export const MsgBlockUserResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgBlockUserResponse>, I>>(
-    _: I
+    _: I,
   ): MsgBlockUserResponse {
     const message = createBaseMsgBlockUserResponse();
     return message;
@@ -752,7 +752,7 @@ function createBaseMsgUnblockUser(): MsgUnblockUser {
 export const MsgUnblockUser = {
   encode(
     message: MsgUnblockUser,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.blocker !== "") {
       writer.uint32(10).string(message.blocker);
@@ -806,7 +806,7 @@ export const MsgUnblockUser = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUnblockUser>, I>>(
-    object: I
+    object: I,
   ): MsgUnblockUser {
     const message = createBaseMsgUnblockUser();
     message.blocker = object.blocker ?? "";
@@ -855,13 +855,13 @@ function createBaseMsgUnblockUserResponse(): MsgUnblockUserResponse {
 export const MsgUnblockUserResponse = {
   encode(
     _: MsgUnblockUserResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUnblockUserResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -884,7 +884,7 @@ export const MsgUnblockUserResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUnblockUserResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUnblockUserResponse {
     const message = createBaseMsgUnblockUserResponse();
     return message;
@@ -900,7 +900,7 @@ export const MsgUnblockUserResponse = {
     return MsgUnblockUserResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgUnblockUserResponseProtoMsg
+    message: MsgUnblockUserResponseProtoMsg,
   ): MsgUnblockUserResponse {
     return MsgUnblockUserResponse.decode(message.value);
   },
@@ -918,11 +918,11 @@ export const MsgUnblockUserResponse = {
 export interface Msg {
   /** CreateRelationship defines a method for creating a new relationship */
   CreateRelationship(
-    request: MsgCreateRelationship
+    request: MsgCreateRelationship,
   ): Promise<MsgCreateRelationshipResponse>;
   /** DeleteRelationship defines a method for deleting a relationship */
   DeleteRelationship(
-    request: MsgDeleteRelationship
+    request: MsgDeleteRelationship,
   ): Promise<MsgDeleteRelationshipResponse>;
   /** BlockUser defines a method for blocking a user */
   BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse>;
@@ -939,29 +939,29 @@ export class MsgClientImpl implements Msg {
     this.UnblockUser = this.UnblockUser.bind(this);
   }
   CreateRelationship(
-    request: MsgCreateRelationship
+    request: MsgCreateRelationship,
   ): Promise<MsgCreateRelationshipResponse> {
     const data = MsgCreateRelationship.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.relationships.v1.Msg",
       "CreateRelationship",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCreateRelationshipResponse.decode(new _m0.Reader(data))
+      MsgCreateRelationshipResponse.decode(new _m0.Reader(data)),
     );
   }
   DeleteRelationship(
-    request: MsgDeleteRelationship
+    request: MsgDeleteRelationship,
   ): Promise<MsgDeleteRelationshipResponse> {
     const data = MsgDeleteRelationship.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.relationships.v1.Msg",
       "DeleteRelationship",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgDeleteRelationshipResponse.decode(new _m0.Reader(data))
+      MsgDeleteRelationshipResponse.decode(new _m0.Reader(data)),
     );
   }
   BlockUser(request: MsgBlockUser): Promise<MsgBlockUserResponse> {
@@ -969,10 +969,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.relationships.v1.Msg",
       "BlockUser",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgBlockUserResponse.decode(new _m0.Reader(data))
+      MsgBlockUserResponse.decode(new _m0.Reader(data)),
     );
   }
   UnblockUser(request: MsgUnblockUser): Promise<MsgUnblockUserResponse> {
@@ -980,10 +980,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.relationships.v1.Msg",
       "UnblockUser",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgUnblockUserResponse.decode(new _m0.Reader(data))
+      MsgUnblockUserResponse.decode(new _m0.Reader(data)),
     );
   }
 }

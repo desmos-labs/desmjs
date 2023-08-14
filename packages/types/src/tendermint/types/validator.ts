@@ -74,7 +74,7 @@ function createBaseValidatorSet(): ValidatorSet {
 export const ValidatorSet = {
   encode(
     message: ValidatorSet,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.validators) {
       Validator.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -127,7 +127,7 @@ export const ValidatorSet = {
     const obj: any = {};
     if (message.validators) {
       obj.validators = message.validators.map((e) =>
-        e ? Validator.toJSON(e) : undefined
+        e ? Validator.toJSON(e) : undefined,
       );
     } else {
       obj.validators = [];
@@ -143,7 +143,7 @@ export const ValidatorSet = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ValidatorSet>, I>>(
-    object: I
+    object: I,
   ): ValidatorSet {
     const message = createBaseValidatorSet();
     message.validators =
@@ -173,7 +173,7 @@ export const ValidatorSet = {
     const obj: any = {};
     if (message.validators) {
       obj.validators = message.validators.map((e) =>
-        e ? Validator.toAmino(e) : undefined
+        e ? Validator.toAmino(e) : undefined,
       );
     } else {
       obj.validators = [];
@@ -213,7 +213,7 @@ function createBaseValidator(): Validator {
 export const Validator = {
   encode(
     message: Validator,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
@@ -275,7 +275,7 @@ export const Validator = {
     const obj: any = {};
     message.address !== undefined &&
       (obj.address = base64FromBytes(
-        message.address !== undefined ? message.address : new Uint8Array()
+        message.address !== undefined ? message.address : new Uint8Array(),
       ));
     message.pubKey !== undefined &&
       (obj.pubKey = message.pubKey
@@ -290,7 +290,7 @@ export const Validator = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Validator>, I>>(
-    object: I
+    object: I,
   ): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
@@ -355,7 +355,7 @@ function createBaseSimpleValidator(): SimpleValidator {
 export const SimpleValidator = {
   encode(
     message: SimpleValidator,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
@@ -406,7 +406,7 @@ export const SimpleValidator = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SimpleValidator>, I>>(
-    object: I
+    object: I,
   ): SimpleValidator {
     const message = createBaseSimpleValidator();
     message.pubKey =

@@ -244,7 +244,7 @@ function createBaseQueryApplicationLinksRequest(): QueryApplicationLinksRequest 
 export const QueryApplicationLinksRequest = {
   encode(
     message: QueryApplicationLinksRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -262,7 +262,7 @@ export const QueryApplicationLinksRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinksRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -312,7 +312,7 @@ export const QueryApplicationLinksRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksRequest>, I>>(
-    object: I
+    object: I,
   ): QueryApplicationLinksRequest {
     const message = createBaseQueryApplicationLinksRequest();
     message.user = object.user ?? "";
@@ -325,7 +325,7 @@ export const QueryApplicationLinksRequest = {
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinksRequestAmino
+    object: QueryApplicationLinksRequestAmino,
   ): QueryApplicationLinksRequest {
     return {
       user: object.user,
@@ -337,7 +337,7 @@ export const QueryApplicationLinksRequest = {
     };
   },
   toAmino(
-    message: QueryApplicationLinksRequest
+    message: QueryApplicationLinksRequest,
   ): QueryApplicationLinksRequestAmino {
     const obj: any = {};
     obj.user = message.user;
@@ -349,12 +349,12 @@ export const QueryApplicationLinksRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinksRequestAminoMsg
+    object: QueryApplicationLinksRequestAminoMsg,
   ): QueryApplicationLinksRequest {
     return QueryApplicationLinksRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryApplicationLinksRequestProtoMsg
+    message: QueryApplicationLinksRequestProtoMsg,
   ): QueryApplicationLinksRequest {
     return QueryApplicationLinksRequest.decode(message.value);
   },
@@ -362,7 +362,7 @@ export const QueryApplicationLinksRequest = {
     return QueryApplicationLinksRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinksRequest
+    message: QueryApplicationLinksRequest,
   ): QueryApplicationLinksRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryApplicationLinksRequest",
@@ -379,7 +379,7 @@ function createBaseQueryApplicationLinksResponse(): QueryApplicationLinksRespons
 export const QueryApplicationLinksResponse = {
   encode(
     message: QueryApplicationLinksResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.links) {
       ApplicationLink.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -387,14 +387,14 @@ export const QueryApplicationLinksResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinksResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -429,7 +429,7 @@ export const QueryApplicationLinksResponse = {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
-        e ? ApplicationLink.toJSON(e) : undefined
+        e ? ApplicationLink.toJSON(e) : undefined,
       );
     } else {
       obj.links = [];
@@ -441,7 +441,7 @@ export const QueryApplicationLinksResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryApplicationLinksResponse>, I>>(
-    object: I
+    object: I,
   ): QueryApplicationLinksResponse {
     const message = createBaseQueryApplicationLinksResponse();
     message.links =
@@ -453,7 +453,7 @@ export const QueryApplicationLinksResponse = {
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinksResponseAmino
+    object: QueryApplicationLinksResponseAmino,
   ): QueryApplicationLinksResponse {
     return {
       links: Array.isArray(object?.links)
@@ -465,12 +465,12 @@ export const QueryApplicationLinksResponse = {
     };
   },
   toAmino(
-    message: QueryApplicationLinksResponse
+    message: QueryApplicationLinksResponse,
   ): QueryApplicationLinksResponseAmino {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map((e) =>
-        e ? ApplicationLink.toAmino(e) : undefined
+        e ? ApplicationLink.toAmino(e) : undefined,
       );
     } else {
       obj.links = [];
@@ -481,12 +481,12 @@ export const QueryApplicationLinksResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinksResponseAminoMsg
+    object: QueryApplicationLinksResponseAminoMsg,
   ): QueryApplicationLinksResponse {
     return QueryApplicationLinksResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryApplicationLinksResponseProtoMsg
+    message: QueryApplicationLinksResponseProtoMsg,
   ): QueryApplicationLinksResponse {
     return QueryApplicationLinksResponse.decode(message.value);
   },
@@ -494,7 +494,7 @@ export const QueryApplicationLinksResponse = {
     return QueryApplicationLinksResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinksResponse
+    message: QueryApplicationLinksResponse,
   ): QueryApplicationLinksResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryApplicationLinksResponse",
@@ -510,7 +510,7 @@ function createBaseQueryApplicationLinkByClientIDRequest(): QueryApplicationLink
 export const QueryApplicationLinkByClientIDRequest = {
   encode(
     message: QueryApplicationLinkByClientIDRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -519,7 +519,7 @@ export const QueryApplicationLinkByClientIDRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinkByClientIDRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -548,33 +548,33 @@ export const QueryApplicationLinkByClientIDRequest = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDRequest>, I>
+    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDRequest>, I>,
   >(object: I): QueryApplicationLinkByClientIDRequest {
     const message = createBaseQueryApplicationLinkByClientIDRequest();
     message.clientId = object.clientId ?? "";
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinkByClientIDRequestAmino
+    object: QueryApplicationLinkByClientIDRequestAmino,
   ): QueryApplicationLinkByClientIDRequest {
     return {
       clientId: object.client_id,
     };
   },
   toAmino(
-    message: QueryApplicationLinkByClientIDRequest
+    message: QueryApplicationLinkByClientIDRequest,
   ): QueryApplicationLinkByClientIDRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinkByClientIDRequestAminoMsg
+    object: QueryApplicationLinkByClientIDRequestAminoMsg,
   ): QueryApplicationLinkByClientIDRequest {
     return QueryApplicationLinkByClientIDRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryApplicationLinkByClientIDRequestProtoMsg
+    message: QueryApplicationLinkByClientIDRequestProtoMsg,
   ): QueryApplicationLinkByClientIDRequest {
     return QueryApplicationLinkByClientIDRequest.decode(message.value);
   },
@@ -582,7 +582,7 @@ export const QueryApplicationLinkByClientIDRequest = {
     return QueryApplicationLinkByClientIDRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinkByClientIDRequest
+    message: QueryApplicationLinkByClientIDRequest,
   ): QueryApplicationLinkByClientIDRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryApplicationLinkByClientIDRequest",
@@ -598,7 +598,7 @@ function createBaseQueryApplicationLinkByClientIDResponse(): QueryApplicationLin
 export const QueryApplicationLinkByClientIDResponse = {
   encode(
     message: QueryApplicationLinkByClientIDResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.link !== undefined) {
       ApplicationLink.encode(message.link, writer.uint32(10).fork()).ldelim();
@@ -607,7 +607,7 @@ export const QueryApplicationLinkByClientIDResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinkByClientIDResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -641,7 +641,7 @@ export const QueryApplicationLinkByClientIDResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDResponse>, I>
+    I extends Exact<DeepPartial<QueryApplicationLinkByClientIDResponse>, I>,
   >(object: I): QueryApplicationLinkByClientIDResponse {
     const message = createBaseQueryApplicationLinkByClientIDResponse();
     message.link =
@@ -651,26 +651,26 @@ export const QueryApplicationLinkByClientIDResponse = {
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinkByClientIDResponseAmino
+    object: QueryApplicationLinkByClientIDResponseAmino,
   ): QueryApplicationLinkByClientIDResponse {
     return {
       link: object?.link ? ApplicationLink.fromAmino(object.link) : undefined,
     };
   },
   toAmino(
-    message: QueryApplicationLinkByClientIDResponse
+    message: QueryApplicationLinkByClientIDResponse,
   ): QueryApplicationLinkByClientIDResponseAmino {
     const obj: any = {};
     obj.link = message.link ? ApplicationLink.toAmino(message.link) : undefined;
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinkByClientIDResponseAminoMsg
+    object: QueryApplicationLinkByClientIDResponseAminoMsg,
   ): QueryApplicationLinkByClientIDResponse {
     return QueryApplicationLinkByClientIDResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryApplicationLinkByClientIDResponseProtoMsg
+    message: QueryApplicationLinkByClientIDResponseProtoMsg,
   ): QueryApplicationLinkByClientIDResponse {
     return QueryApplicationLinkByClientIDResponse.decode(message.value);
   },
@@ -678,7 +678,7 @@ export const QueryApplicationLinkByClientIDResponse = {
     return QueryApplicationLinkByClientIDResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinkByClientIDResponse
+    message: QueryApplicationLinkByClientIDResponse,
   ): QueryApplicationLinkByClientIDResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryApplicationLinkByClientIDResponse",
@@ -696,7 +696,7 @@ function createBaseQueryApplicationLinkOwnersRequest(): QueryApplicationLinkOwne
 export const QueryApplicationLinkOwnersRequest = {
   encode(
     message: QueryApplicationLinkOwnersRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.application !== "") {
       writer.uint32(10).string(message.application);
@@ -711,7 +711,7 @@ export const QueryApplicationLinkOwnersRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinkOwnersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -756,7 +756,7 @@ export const QueryApplicationLinkOwnersRequest = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkOwnersRequest>, I>
+    I extends Exact<DeepPartial<QueryApplicationLinkOwnersRequest>, I>,
   >(object: I): QueryApplicationLinkOwnersRequest {
     const message = createBaseQueryApplicationLinkOwnersRequest();
     message.application = object.application ?? "";
@@ -768,7 +768,7 @@ export const QueryApplicationLinkOwnersRequest = {
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinkOwnersRequestAmino
+    object: QueryApplicationLinkOwnersRequestAmino,
   ): QueryApplicationLinkOwnersRequest {
     return {
       application: object.application,
@@ -779,7 +779,7 @@ export const QueryApplicationLinkOwnersRequest = {
     };
   },
   toAmino(
-    message: QueryApplicationLinkOwnersRequest
+    message: QueryApplicationLinkOwnersRequest,
   ): QueryApplicationLinkOwnersRequestAmino {
     const obj: any = {};
     obj.application = message.application;
@@ -790,12 +790,12 @@ export const QueryApplicationLinkOwnersRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinkOwnersRequestAminoMsg
+    object: QueryApplicationLinkOwnersRequestAminoMsg,
   ): QueryApplicationLinkOwnersRequest {
     return QueryApplicationLinkOwnersRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryApplicationLinkOwnersRequestProtoMsg
+    message: QueryApplicationLinkOwnersRequestProtoMsg,
   ): QueryApplicationLinkOwnersRequest {
     return QueryApplicationLinkOwnersRequest.decode(message.value);
   },
@@ -803,7 +803,7 @@ export const QueryApplicationLinkOwnersRequest = {
     return QueryApplicationLinkOwnersRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinkOwnersRequest
+    message: QueryApplicationLinkOwnersRequest,
   ): QueryApplicationLinkOwnersRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryApplicationLinkOwnersRequest",
@@ -820,25 +820,25 @@ function createBaseQueryApplicationLinkOwnersResponse(): QueryApplicationLinkOwn
 export const QueryApplicationLinkOwnersResponse = {
   encode(
     message: QueryApplicationLinkOwnersResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.owners) {
       QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
         v!,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinkOwnersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -850,8 +850,8 @@ export const QueryApplicationLinkOwnersResponse = {
           message.owners.push(
             QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.decode(
               reader,
-              reader.uint32()
-            )
+              reader.uint32(),
+            ),
           );
           break;
         case 2:
@@ -869,8 +869,8 @@ export const QueryApplicationLinkOwnersResponse = {
       owners: Array.isArray(object?.owners)
         ? object.owners.map((e: any) =>
             QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromJSON(
-              e
-            )
+              e,
+            ),
           )
         : [],
       pagination: isSet(object.pagination)
@@ -884,9 +884,9 @@ export const QueryApplicationLinkOwnersResponse = {
       obj.owners = message.owners.map((e) =>
         e
           ? QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.toJSON(
-              e
+              e,
             )
-          : undefined
+          : undefined,
       );
     } else {
       obj.owners = [];
@@ -898,14 +898,14 @@ export const QueryApplicationLinkOwnersResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryApplicationLinkOwnersResponse>, I>
+    I extends Exact<DeepPartial<QueryApplicationLinkOwnersResponse>, I>,
   >(object: I): QueryApplicationLinkOwnersResponse {
     const message = createBaseQueryApplicationLinkOwnersResponse();
     message.owners =
       object.owners?.map((e) =>
         QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromPartial(
-          e
-        )
+          e,
+        ),
       ) || [];
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
@@ -914,14 +914,14 @@ export const QueryApplicationLinkOwnersResponse = {
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinkOwnersResponseAmino
+    object: QueryApplicationLinkOwnersResponseAmino,
   ): QueryApplicationLinkOwnersResponse {
     return {
       owners: Array.isArray(object?.owners)
         ? object.owners.map((e: any) =>
             QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromAmino(
-              e
-            )
+              e,
+            ),
           )
         : [],
       pagination: object?.pagination
@@ -930,16 +930,16 @@ export const QueryApplicationLinkOwnersResponse = {
     };
   },
   toAmino(
-    message: QueryApplicationLinkOwnersResponse
+    message: QueryApplicationLinkOwnersResponse,
   ): QueryApplicationLinkOwnersResponseAmino {
     const obj: any = {};
     if (message.owners) {
       obj.owners = message.owners.map((e) =>
         e
           ? QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.toAmino(
-              e
+              e,
             )
-          : undefined
+          : undefined,
       );
     } else {
       obj.owners = [];
@@ -950,12 +950,12 @@ export const QueryApplicationLinkOwnersResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinkOwnersResponseAminoMsg
+    object: QueryApplicationLinkOwnersResponseAminoMsg,
   ): QueryApplicationLinkOwnersResponse {
     return QueryApplicationLinkOwnersResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryApplicationLinkOwnersResponseProtoMsg
+    message: QueryApplicationLinkOwnersResponseProtoMsg,
   ): QueryApplicationLinkOwnersResponse {
     return QueryApplicationLinkOwnersResponse.decode(message.value);
   },
@@ -963,7 +963,7 @@ export const QueryApplicationLinkOwnersResponse = {
     return QueryApplicationLinkOwnersResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinkOwnersResponse
+    message: QueryApplicationLinkOwnersResponse,
   ): QueryApplicationLinkOwnersResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryApplicationLinkOwnersResponse",
@@ -981,7 +981,7 @@ function createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetail
 export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
   encode(
     message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -996,7 +996,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1022,7 +1022,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     return message;
   },
   fromJSON(
-    object: any
+    object: any,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     return {
       user: isSet(object.user) ? String(object.user) : "",
@@ -1031,7 +1031,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     };
   },
   toJSON(
-    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
   ): unknown {
     const obj: any = {};
     message.user !== undefined && (obj.user = message.user);
@@ -1044,7 +1044,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     I extends Exact<
       DeepPartial<QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails>,
       I
-    >
+    >,
   >(object: I): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     const message =
       createBaseQueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails();
@@ -1054,7 +1054,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     return message;
   },
   fromAmino(
-    object: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino
+    object: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     return {
       user: object.user,
@@ -1063,7 +1063,7 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     };
   },
   toAmino(
-    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAmino {
     const obj: any = {};
     obj.user = message.user;
@@ -1072,34 +1072,34 @@ export const QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAminoMsg
+    object: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsAminoMsg,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     return QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.fromAmino(
-      object.value
+      object.value,
     );
   },
   fromProtoMsg(
-    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsProtoMsg
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsProtoMsg,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails {
     return QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.decode(
-      message.value
+      message.value,
     );
   },
   toProto(
-    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
   ): Uint8Array {
     return QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
-      message
+      message,
     ).finish();
   },
   toProtoMsg(
-    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails
+    message: QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails,
   ): QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetailsProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.ApplicationLinkOwnerDetails",
       value:
         QueryApplicationLinkOwnersResponse_ApplicationLinkOwnerDetails.encode(
-          message
+          message,
         ).finish(),
     };
   },

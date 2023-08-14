@@ -158,7 +158,7 @@ function createBaseMsgLinkApplication(): MsgLinkApplication {
 export const MsgLinkApplication = {
   encode(
     message: MsgLinkApplication,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -259,7 +259,7 @@ export const MsgLinkApplication = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgLinkApplication>, I>>(
-    object: I
+    object: I,
   ): MsgLinkApplication {
     const message = createBaseMsgLinkApplication();
     message.sender = object.sender ?? "";
@@ -334,13 +334,13 @@ function createBaseMsgLinkApplicationResponse(): MsgLinkApplicationResponse {
 export const MsgLinkApplicationResponse = {
   encode(
     _: MsgLinkApplicationResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgLinkApplicationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -363,7 +363,7 @@ export const MsgLinkApplicationResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgLinkApplicationResponse>, I>>(
-    _: I
+    _: I,
   ): MsgLinkApplicationResponse {
     const message = createBaseMsgLinkApplicationResponse();
     return message;
@@ -376,12 +376,12 @@ export const MsgLinkApplicationResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgLinkApplicationResponseAminoMsg
+    object: MsgLinkApplicationResponseAminoMsg,
   ): MsgLinkApplicationResponse {
     return MsgLinkApplicationResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgLinkApplicationResponseProtoMsg
+    message: MsgLinkApplicationResponseProtoMsg,
   ): MsgLinkApplicationResponse {
     return MsgLinkApplicationResponse.decode(message.value);
   },
@@ -389,7 +389,7 @@ export const MsgLinkApplicationResponse = {
     return MsgLinkApplicationResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgLinkApplicationResponse
+    message: MsgLinkApplicationResponse,
   ): MsgLinkApplicationResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgLinkApplicationResponse",
@@ -407,7 +407,7 @@ function createBaseMsgUnlinkApplication(): MsgUnlinkApplication {
 export const MsgUnlinkApplication = {
   encode(
     message: MsgUnlinkApplication,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.application !== "") {
       writer.uint32(10).string(message.application);
@@ -422,7 +422,7 @@ export const MsgUnlinkApplication = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUnlinkApplication {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -462,7 +462,7 @@ export const MsgUnlinkApplication = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUnlinkApplication>, I>>(
-    object: I
+    object: I,
   ): MsgUnlinkApplication {
     const message = createBaseMsgUnlinkApplication();
     message.application = object.application ?? "";
@@ -506,13 +506,13 @@ function createBaseMsgUnlinkApplicationResponse(): MsgUnlinkApplicationResponse 
 export const MsgUnlinkApplicationResponse = {
   encode(
     _: MsgUnlinkApplicationResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUnlinkApplicationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -535,13 +535,13 @@ export const MsgUnlinkApplicationResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUnlinkApplicationResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUnlinkApplicationResponse {
     const message = createBaseMsgUnlinkApplicationResponse();
     return message;
   },
   fromAmino(
-    _: MsgUnlinkApplicationResponseAmino
+    _: MsgUnlinkApplicationResponseAmino,
   ): MsgUnlinkApplicationResponse {
     return {};
   },
@@ -550,12 +550,12 @@ export const MsgUnlinkApplicationResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUnlinkApplicationResponseAminoMsg
+    object: MsgUnlinkApplicationResponseAminoMsg,
   ): MsgUnlinkApplicationResponse {
     return MsgUnlinkApplicationResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgUnlinkApplicationResponseProtoMsg
+    message: MsgUnlinkApplicationResponseProtoMsg,
   ): MsgUnlinkApplicationResponse {
     return MsgUnlinkApplicationResponse.decode(message.value);
   },
@@ -563,7 +563,7 @@ export const MsgUnlinkApplicationResponse = {
     return MsgUnlinkApplicationResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUnlinkApplicationResponse
+    message: MsgUnlinkApplicationResponse,
   ): MsgUnlinkApplicationResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgUnlinkApplicationResponse",

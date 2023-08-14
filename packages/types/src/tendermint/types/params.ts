@@ -196,7 +196,7 @@ function createBaseConsensusParams(): ConsensusParams {
 export const ConsensusParams = {
   encode(
     message: ConsensusParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
@@ -204,13 +204,13 @@ export const ConsensusParams = {
     if (message.evidence !== undefined) {
       EvidenceParams.encode(
         message.evidence,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     if (message.validator !== undefined) {
       ValidatorParams.encode(
         message.validator,
-        writer.uint32(26).fork()
+        writer.uint32(26).fork(),
       ).ldelim();
     }
     if (message.version !== undefined) {
@@ -281,7 +281,7 @@ export const ConsensusParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ConsensusParams>, I>>(
-    object: I
+    object: I,
   ): ConsensusParams {
     const message = createBaseConsensusParams();
     message.block =
@@ -355,7 +355,7 @@ function createBaseBlockParams(): BlockParams {
 export const BlockParams = {
   encode(
     message: BlockParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.maxBytes.isZero()) {
       writer.uint32(8).int64(message.maxBytes);
@@ -402,7 +402,7 @@ export const BlockParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<BlockParams>, I>>(
-    object: I
+    object: I,
   ): BlockParams {
     const message = createBaseBlockParams();
     message.maxBytes =
@@ -453,7 +453,7 @@ function createBaseEvidenceParams(): EvidenceParams {
 export const EvidenceParams = {
   encode(
     message: EvidenceParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.maxAgeNumBlocks.isZero()) {
       writer.uint32(8).int64(message.maxAgeNumBlocks);
@@ -461,7 +461,7 @@ export const EvidenceParams = {
     if (message.maxAgeDuration !== undefined) {
       Duration.encode(
         message.maxAgeDuration,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     if (!message.maxBytes.isZero()) {
@@ -518,7 +518,7 @@ export const EvidenceParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<EvidenceParams>, I>>(
-    object: I
+    object: I,
   ): EvidenceParams {
     const message = createBaseEvidenceParams();
     message.maxAgeNumBlocks =
@@ -579,7 +579,7 @@ function createBaseValidatorParams(): ValidatorParams {
 export const ValidatorParams = {
   encode(
     message: ValidatorParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.pubKeyTypes) {
       writer.uint32(10).string(v!);
@@ -620,7 +620,7 @@ export const ValidatorParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ValidatorParams>, I>>(
-    object: I
+    object: I,
   ): ValidatorParams {
     const message = createBaseValidatorParams();
     message.pubKeyTypes = object.pubKeyTypes?.map((e) => e) || [];
@@ -666,7 +666,7 @@ function createBaseVersionParams(): VersionParams {
 export const VersionParams = {
   encode(
     message: VersionParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.app.isZero()) {
       writer.uint32(8).uint64(message.app);
@@ -702,7 +702,7 @@ export const VersionParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<VersionParams>, I>>(
-    object: I
+    object: I,
   ): VersionParams {
     const message = createBaseVersionParams();
     message.app =
@@ -746,7 +746,7 @@ function createBaseHashedParams(): HashedParams {
 export const HashedParams = {
   encode(
     message: HashedParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.blockMaxBytes.isZero()) {
       writer.uint32(8).int64(message.blockMaxBytes);
@@ -795,7 +795,7 @@ export const HashedParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<HashedParams>, I>>(
-    object: I
+    object: I,
   ): HashedParams {
     const message = createBaseHashedParams();
     message.blockMaxBytes =

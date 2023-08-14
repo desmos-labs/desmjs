@@ -209,7 +209,7 @@ function createBaseUserGrantee(): UserGrantee {
 export const UserGrantee = {
   encode(
     message: UserGrantee,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -244,7 +244,7 @@ export const UserGrantee = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserGrantee>, I>>(
-    object: I
+    object: I,
   ): UserGrantee {
     const message = createBaseUserGrantee();
     message.user = object.user ?? "";
@@ -284,7 +284,7 @@ function createBaseGroupGrantee(): GroupGrantee {
 export const GroupGrantee = {
   encode(
     message: GroupGrantee,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.groupId !== 0) {
       writer.uint32(8).uint32(message.groupId);
@@ -320,7 +320,7 @@ export const GroupGrantee = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GroupGrantee>, I>>(
-    object: I
+    object: I,
   ): GroupGrantee {
     const message = createBaseGroupGrantee();
     message.groupId = object.groupId ?? 0;

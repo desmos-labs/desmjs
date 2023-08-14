@@ -149,7 +149,7 @@ function createBaseMsgGrant(): MsgGrant {
 export const MsgGrant = {
   encode(
     message: MsgGrant,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -254,7 +254,7 @@ function createBaseMsgExecResponse(): MsgExecResponse {
 export const MsgExecResponse = {
   encode(
     message: MsgExecResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.results) {
       writer.uint32(10).bytes(v!);
@@ -289,7 +289,7 @@ export const MsgExecResponse = {
     const obj: any = {};
     if (message.results) {
       obj.results = message.results.map((e) =>
-        base64FromBytes(e !== undefined ? e : new Uint8Array())
+        base64FromBytes(e !== undefined ? e : new Uint8Array()),
       );
     } else {
       obj.results = [];
@@ -297,7 +297,7 @@ export const MsgExecResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgExecResponse>, I>>(
-    object: I
+    object: I,
   ): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     message.results = object.results?.map((e) => e) || [];
@@ -350,7 +350,7 @@ function createBaseMsgExec(): MsgExec {
 export const MsgExec = {
   encode(
     message: MsgExec,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
@@ -450,7 +450,7 @@ function createBaseMsgGrantResponse(): MsgGrantResponse {
 export const MsgGrantResponse = {
   encode(
     _: MsgGrantResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -476,7 +476,7 @@ export const MsgGrantResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgGrantResponse>, I>>(
-    _: I
+    _: I,
   ): MsgGrantResponse {
     const message = createBaseMsgGrantResponse();
     return message;
@@ -520,7 +520,7 @@ function createBaseMsgRevoke(): MsgRevoke {
 export const MsgRevoke = {
   encode(
     message: MsgRevoke,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
@@ -571,7 +571,7 @@ export const MsgRevoke = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRevoke>, I>>(
-    object: I
+    object: I,
   ): MsgRevoke {
     const message = createBaseMsgRevoke();
     message.granter = object.granter ?? "";
@@ -621,7 +621,7 @@ function createBaseMsgRevokeResponse(): MsgRevokeResponse {
 export const MsgRevokeResponse = {
   encode(
     _: MsgRevokeResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -647,7 +647,7 @@ export const MsgRevokeResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRevokeResponse>, I>>(
-    _: I
+    _: I,
   ): MsgRevokeResponse {
     const message = createBaseMsgRevokeResponse();
     return message;
@@ -714,7 +714,7 @@ export class MsgClientImpl implements Msg {
     const data = MsgGrant.encode(request).finish();
     const promise = this.rpc.request("cosmos.authz.v1beta1.Msg", "Grant", data);
     return promise.then((data) =>
-      MsgGrantResponse.decode(new _m0.Reader(data))
+      MsgGrantResponse.decode(new _m0.Reader(data)),
     );
   }
   Exec(request: MsgExec): Promise<MsgExecResponse> {
@@ -727,10 +727,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "cosmos.authz.v1beta1.Msg",
       "Revoke",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgRevokeResponse.decode(new _m0.Reader(data))
+      MsgRevokeResponse.decode(new _m0.Reader(data)),
     );
   }
 }

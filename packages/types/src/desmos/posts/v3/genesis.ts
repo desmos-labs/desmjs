@@ -122,7 +122,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.subspacesData) {
       SubspaceDataEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -156,7 +156,7 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.subspacesData.push(
-            SubspaceDataEntry.decode(reader, reader.uint32())
+            SubspaceDataEntry.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -170,7 +170,7 @@ export const GenesisState = {
           break;
         case 5:
           message.activePolls.push(
-            ActivePollData.decode(reader, reader.uint32())
+            ActivePollData.decode(reader, reader.uint32()),
           );
           break;
         case 6:
@@ -213,14 +213,14 @@ export const GenesisState = {
     const obj: any = {};
     if (message.subspacesData) {
       obj.subspacesData = message.subspacesData.map((e) =>
-        e ? SubspaceDataEntry.toJSON(e) : undefined
+        e ? SubspaceDataEntry.toJSON(e) : undefined,
       );
     } else {
       obj.subspacesData = [];
     }
     if (message.postsData) {
       obj.postsData = message.postsData.map((e) =>
-        e ? PostDataEntry.toJSON(e) : undefined
+        e ? PostDataEntry.toJSON(e) : undefined,
       );
     } else {
       obj.postsData = [];
@@ -232,21 +232,21 @@ export const GenesisState = {
     }
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toJSON(e) : undefined
+        e ? Attachment.toJSON(e) : undefined,
       );
     } else {
       obj.attachments = [];
     }
     if (message.activePolls) {
       obj.activePolls = message.activePolls.map((e) =>
-        e ? ActivePollData.toJSON(e) : undefined
+        e ? ActivePollData.toJSON(e) : undefined,
       );
     } else {
       obj.activePolls = [];
     }
     if (message.userAnswers) {
       obj.userAnswers = message.userAnswers.map((e) =>
-        e ? UserAnswer.toJSON(e) : undefined
+        e ? UserAnswer.toJSON(e) : undefined,
       );
     } else {
       obj.userAnswers = [];
@@ -256,7 +256,7 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.subspacesData =
@@ -303,14 +303,14 @@ export const GenesisState = {
     const obj: any = {};
     if (message.subspacesData) {
       obj.subspaces_data = message.subspacesData.map((e) =>
-        e ? SubspaceDataEntry.toAmino(e) : undefined
+        e ? SubspaceDataEntry.toAmino(e) : undefined,
       );
     } else {
       obj.subspaces_data = [];
     }
     if (message.postsData) {
       obj.posts_data = message.postsData.map((e) =>
-        e ? PostDataEntry.toAmino(e) : undefined
+        e ? PostDataEntry.toAmino(e) : undefined,
       );
     } else {
       obj.posts_data = [];
@@ -322,21 +322,21 @@ export const GenesisState = {
     }
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Attachment.toAmino(e) : undefined
+        e ? Attachment.toAmino(e) : undefined,
       );
     } else {
       obj.attachments = [];
     }
     if (message.activePolls) {
       obj.active_polls = message.activePolls.map((e) =>
-        e ? ActivePollData.toAmino(e) : undefined
+        e ? ActivePollData.toAmino(e) : undefined,
       );
     } else {
       obj.active_polls = [];
     }
     if (message.userAnswers) {
       obj.user_answers = message.userAnswers.map((e) =>
-        e ? UserAnswer.toAmino(e) : undefined
+        e ? UserAnswer.toAmino(e) : undefined,
       );
     } else {
       obj.user_answers = [];
@@ -369,7 +369,7 @@ function createBaseSubspaceDataEntry(): SubspaceDataEntry {
 export const SubspaceDataEntry = {
   encode(
     message: SubspaceDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -418,7 +418,7 @@ export const SubspaceDataEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SubspaceDataEntry>, I>>(
-    object: I
+    object: I,
   ): SubspaceDataEntry {
     const message = createBaseSubspaceDataEntry();
     message.subspaceId =
@@ -473,7 +473,7 @@ function createBasePostDataEntry(): PostDataEntry {
 export const PostDataEntry = {
   encode(
     message: PostDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -531,7 +531,7 @@ export const PostDataEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PostDataEntry>, I>>(
-    object: I
+    object: I,
   ): PostDataEntry {
     const message = createBasePostDataEntry();
     message.subspaceId =
@@ -588,7 +588,7 @@ function createBaseActivePollData(): ActivePollData {
 export const ActivePollData = {
   encode(
     message: ActivePollData,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -654,7 +654,7 @@ export const ActivePollData = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ActivePollData>, I>>(
-    object: I
+    object: I,
   ): ActivePollData {
     const message = createBaseActivePollData();
     message.subspaceId =

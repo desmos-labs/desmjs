@@ -89,7 +89,7 @@ function createBaseQueryIncomingDTagTransferRequestsRequest(): QueryIncomingDTag
 export const QueryIncomingDTagTransferRequestsRequest = {
   encode(
     message: QueryIncomingDTagTransferRequestsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.receiver !== "") {
       writer.uint32(10).string(message.receiver);
@@ -101,7 +101,7 @@ export const QueryIncomingDTagTransferRequestsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryIncomingDTagTransferRequestsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -140,7 +140,7 @@ export const QueryIncomingDTagTransferRequestsRequest = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryIncomingDTagTransferRequestsRequest>, I>
+    I extends Exact<DeepPartial<QueryIncomingDTagTransferRequestsRequest>, I>,
   >(object: I): QueryIncomingDTagTransferRequestsRequest {
     const message = createBaseQueryIncomingDTagTransferRequestsRequest();
     message.receiver = object.receiver ?? "";
@@ -151,7 +151,7 @@ export const QueryIncomingDTagTransferRequestsRequest = {
     return message;
   },
   fromAmino(
-    object: QueryIncomingDTagTransferRequestsRequestAmino
+    object: QueryIncomingDTagTransferRequestsRequestAmino,
   ): QueryIncomingDTagTransferRequestsRequest {
     return {
       receiver: object.receiver,
@@ -161,7 +161,7 @@ export const QueryIncomingDTagTransferRequestsRequest = {
     };
   },
   toAmino(
-    message: QueryIncomingDTagTransferRequestsRequest
+    message: QueryIncomingDTagTransferRequestsRequest,
   ): QueryIncomingDTagTransferRequestsRequestAmino {
     const obj: any = {};
     obj.receiver = message.receiver;
@@ -171,12 +171,12 @@ export const QueryIncomingDTagTransferRequestsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryIncomingDTagTransferRequestsRequestAminoMsg
+    object: QueryIncomingDTagTransferRequestsRequestAminoMsg,
   ): QueryIncomingDTagTransferRequestsRequest {
     return QueryIncomingDTagTransferRequestsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryIncomingDTagTransferRequestsRequestProtoMsg
+    message: QueryIncomingDTagTransferRequestsRequestProtoMsg,
   ): QueryIncomingDTagTransferRequestsRequest {
     return QueryIncomingDTagTransferRequestsRequest.decode(message.value);
   },
@@ -184,7 +184,7 @@ export const QueryIncomingDTagTransferRequestsRequest = {
     return QueryIncomingDTagTransferRequestsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryIncomingDTagTransferRequestsRequest
+    message: QueryIncomingDTagTransferRequestsRequest,
   ): QueryIncomingDTagTransferRequestsRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsRequest",
@@ -201,7 +201,7 @@ function createBaseQueryIncomingDTagTransferRequestsResponse(): QueryIncomingDTa
 export const QueryIncomingDTagTransferRequestsResponse = {
   encode(
     message: QueryIncomingDTagTransferRequestsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.requests) {
       DTagTransferRequest.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -209,14 +209,14 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryIncomingDTagTransferRequestsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -226,7 +226,7 @@ export const QueryIncomingDTagTransferRequestsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.requests.push(
-            DTagTransferRequest.decode(reader, reader.uint32())
+            DTagTransferRequest.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -253,7 +253,7 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     const obj: any = {};
     if (message.requests) {
       obj.requests = message.requests.map((e) =>
-        e ? DTagTransferRequest.toJSON(e) : undefined
+        e ? DTagTransferRequest.toJSON(e) : undefined,
       );
     } else {
       obj.requests = [];
@@ -265,7 +265,7 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryIncomingDTagTransferRequestsResponse>, I>
+    I extends Exact<DeepPartial<QueryIncomingDTagTransferRequestsResponse>, I>,
   >(object: I): QueryIncomingDTagTransferRequestsResponse {
     const message = createBaseQueryIncomingDTagTransferRequestsResponse();
     message.requests =
@@ -277,7 +277,7 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     return message;
   },
   fromAmino(
-    object: QueryIncomingDTagTransferRequestsResponseAmino
+    object: QueryIncomingDTagTransferRequestsResponseAmino,
   ): QueryIncomingDTagTransferRequestsResponse {
     return {
       requests: Array.isArray(object?.requests)
@@ -289,12 +289,12 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     };
   },
   toAmino(
-    message: QueryIncomingDTagTransferRequestsResponse
+    message: QueryIncomingDTagTransferRequestsResponse,
   ): QueryIncomingDTagTransferRequestsResponseAmino {
     const obj: any = {};
     if (message.requests) {
       obj.requests = message.requests.map((e) =>
-        e ? DTagTransferRequest.toAmino(e) : undefined
+        e ? DTagTransferRequest.toAmino(e) : undefined,
       );
     } else {
       obj.requests = [];
@@ -305,12 +305,12 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryIncomingDTagTransferRequestsResponseAminoMsg
+    object: QueryIncomingDTagTransferRequestsResponseAminoMsg,
   ): QueryIncomingDTagTransferRequestsResponse {
     return QueryIncomingDTagTransferRequestsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryIncomingDTagTransferRequestsResponseProtoMsg
+    message: QueryIncomingDTagTransferRequestsResponseProtoMsg,
   ): QueryIncomingDTagTransferRequestsResponse {
     return QueryIncomingDTagTransferRequestsResponse.decode(message.value);
   },
@@ -318,7 +318,7 @@ export const QueryIncomingDTagTransferRequestsResponse = {
     return QueryIncomingDTagTransferRequestsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryIncomingDTagTransferRequestsResponse
+    message: QueryIncomingDTagTransferRequestsResponse,
   ): QueryIncomingDTagTransferRequestsResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.QueryIncomingDTagTransferRequestsResponse",

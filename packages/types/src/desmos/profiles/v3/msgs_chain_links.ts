@@ -174,7 +174,7 @@ function createBaseMsgLinkChainAccount(): MsgLinkChainAccount {
 export const MsgLinkChainAccount = {
   encode(
     message: MsgLinkChainAccount,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.chainAddress !== undefined) {
       Any.encode(message.chainAddress, writer.uint32(10).fork()).ldelim();
@@ -185,7 +185,7 @@ export const MsgLinkChainAccount = {
     if (message.chainConfig !== undefined) {
       ChainConfig.encode(
         message.chainConfig,
-        writer.uint32(26).fork()
+        writer.uint32(26).fork(),
       ).ldelim();
     }
     if (message.signer !== "") {
@@ -247,7 +247,7 @@ export const MsgLinkChainAccount = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgLinkChainAccount>, I>>(
-    object: I
+    object: I,
   ): MsgLinkChainAccount {
     const message = createBaseMsgLinkChainAccount();
     message.chainAddress =
@@ -311,13 +311,13 @@ function createBaseMsgLinkChainAccountResponse(): MsgLinkChainAccountResponse {
 export const MsgLinkChainAccountResponse = {
   encode(
     _: MsgLinkChainAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgLinkChainAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -340,7 +340,7 @@ export const MsgLinkChainAccountResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgLinkChainAccountResponse>, I>>(
-    _: I
+    _: I,
   ): MsgLinkChainAccountResponse {
     const message = createBaseMsgLinkChainAccountResponse();
     return message;
@@ -353,12 +353,12 @@ export const MsgLinkChainAccountResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgLinkChainAccountResponseAminoMsg
+    object: MsgLinkChainAccountResponseAminoMsg,
   ): MsgLinkChainAccountResponse {
     return MsgLinkChainAccountResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgLinkChainAccountResponseProtoMsg
+    message: MsgLinkChainAccountResponseProtoMsg,
   ): MsgLinkChainAccountResponse {
     return MsgLinkChainAccountResponse.decode(message.value);
   },
@@ -366,7 +366,7 @@ export const MsgLinkChainAccountResponse = {
     return MsgLinkChainAccountResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgLinkChainAccountResponse
+    message: MsgLinkChainAccountResponse,
   ): MsgLinkChainAccountResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgLinkChainAccountResponse",
@@ -384,7 +384,7 @@ function createBaseMsgUnlinkChainAccount(): MsgUnlinkChainAccount {
 export const MsgUnlinkChainAccount = {
   encode(
     message: MsgUnlinkChainAccount,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -399,7 +399,7 @@ export const MsgUnlinkChainAccount = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUnlinkChainAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -438,7 +438,7 @@ export const MsgUnlinkChainAccount = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUnlinkChainAccount>, I>>(
-    object: I
+    object: I,
   ): MsgUnlinkChainAccount {
     const message = createBaseMsgUnlinkChainAccount();
     message.owner = object.owner ?? "";
@@ -482,13 +482,13 @@ function createBaseMsgUnlinkChainAccountResponse(): MsgUnlinkChainAccountRespons
 export const MsgUnlinkChainAccountResponse = {
   encode(
     _: MsgUnlinkChainAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUnlinkChainAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -511,29 +511,29 @@ export const MsgUnlinkChainAccountResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUnlinkChainAccountResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUnlinkChainAccountResponse {
     const message = createBaseMsgUnlinkChainAccountResponse();
     return message;
   },
   fromAmino(
-    _: MsgUnlinkChainAccountResponseAmino
+    _: MsgUnlinkChainAccountResponseAmino,
   ): MsgUnlinkChainAccountResponse {
     return {};
   },
   toAmino(
-    _: MsgUnlinkChainAccountResponse
+    _: MsgUnlinkChainAccountResponse,
   ): MsgUnlinkChainAccountResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgUnlinkChainAccountResponseAminoMsg
+    object: MsgUnlinkChainAccountResponseAminoMsg,
   ): MsgUnlinkChainAccountResponse {
     return MsgUnlinkChainAccountResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgUnlinkChainAccountResponseProtoMsg
+    message: MsgUnlinkChainAccountResponseProtoMsg,
   ): MsgUnlinkChainAccountResponse {
     return MsgUnlinkChainAccountResponse.decode(message.value);
   },
@@ -541,7 +541,7 @@ export const MsgUnlinkChainAccountResponse = {
     return MsgUnlinkChainAccountResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUnlinkChainAccountResponse
+    message: MsgUnlinkChainAccountResponse,
   ): MsgUnlinkChainAccountResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgUnlinkChainAccountResponse",
@@ -559,7 +559,7 @@ function createBaseMsgSetDefaultExternalAddress(): MsgSetDefaultExternalAddress 
 export const MsgSetDefaultExternalAddress = {
   encode(
     message: MsgSetDefaultExternalAddress,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
@@ -574,7 +574,7 @@ export const MsgSetDefaultExternalAddress = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSetDefaultExternalAddress {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -613,7 +613,7 @@ export const MsgSetDefaultExternalAddress = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSetDefaultExternalAddress>, I>>(
-    object: I
+    object: I,
   ): MsgSetDefaultExternalAddress {
     const message = createBaseMsgSetDefaultExternalAddress();
     message.chainName = object.chainName ?? "";
@@ -622,7 +622,7 @@ export const MsgSetDefaultExternalAddress = {
     return message;
   },
   fromAmino(
-    object: MsgSetDefaultExternalAddressAmino
+    object: MsgSetDefaultExternalAddressAmino,
   ): MsgSetDefaultExternalAddress {
     return {
       chainName: object.chain_name,
@@ -631,7 +631,7 @@ export const MsgSetDefaultExternalAddress = {
     };
   },
   toAmino(
-    message: MsgSetDefaultExternalAddress
+    message: MsgSetDefaultExternalAddress,
   ): MsgSetDefaultExternalAddressAmino {
     const obj: any = {};
     obj.chain_name = message.chainName;
@@ -640,12 +640,12 @@ export const MsgSetDefaultExternalAddress = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgSetDefaultExternalAddressAminoMsg
+    object: MsgSetDefaultExternalAddressAminoMsg,
   ): MsgSetDefaultExternalAddress {
     return MsgSetDefaultExternalAddress.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSetDefaultExternalAddressProtoMsg
+    message: MsgSetDefaultExternalAddressProtoMsg,
   ): MsgSetDefaultExternalAddress {
     return MsgSetDefaultExternalAddress.decode(message.value);
   },
@@ -653,7 +653,7 @@ export const MsgSetDefaultExternalAddress = {
     return MsgSetDefaultExternalAddress.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSetDefaultExternalAddress
+    message: MsgSetDefaultExternalAddress,
   ): MsgSetDefaultExternalAddressProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgSetDefaultExternalAddress",
@@ -667,13 +667,13 @@ function createBaseMsgSetDefaultExternalAddressResponse(): MsgSetDefaultExternal
 export const MsgSetDefaultExternalAddressResponse = {
   encode(
     _: MsgSetDefaultExternalAddressResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSetDefaultExternalAddressResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -696,29 +696,29 @@ export const MsgSetDefaultExternalAddressResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgSetDefaultExternalAddressResponse>, I>
+    I extends Exact<DeepPartial<MsgSetDefaultExternalAddressResponse>, I>,
   >(_: I): MsgSetDefaultExternalAddressResponse {
     const message = createBaseMsgSetDefaultExternalAddressResponse();
     return message;
   },
   fromAmino(
-    _: MsgSetDefaultExternalAddressResponseAmino
+    _: MsgSetDefaultExternalAddressResponseAmino,
   ): MsgSetDefaultExternalAddressResponse {
     return {};
   },
   toAmino(
-    _: MsgSetDefaultExternalAddressResponse
+    _: MsgSetDefaultExternalAddressResponse,
   ): MsgSetDefaultExternalAddressResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgSetDefaultExternalAddressResponseAminoMsg
+    object: MsgSetDefaultExternalAddressResponseAminoMsg,
   ): MsgSetDefaultExternalAddressResponse {
     return MsgSetDefaultExternalAddressResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSetDefaultExternalAddressResponseProtoMsg
+    message: MsgSetDefaultExternalAddressResponseProtoMsg,
   ): MsgSetDefaultExternalAddressResponse {
     return MsgSetDefaultExternalAddressResponse.decode(message.value);
   },
@@ -726,7 +726,7 @@ export const MsgSetDefaultExternalAddressResponse = {
     return MsgSetDefaultExternalAddressResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSetDefaultExternalAddressResponse
+    message: MsgSetDefaultExternalAddressResponse,
   ): MsgSetDefaultExternalAddressResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgSetDefaultExternalAddressResponse",

@@ -189,7 +189,7 @@ function createBaseReport(): Report {
 export const Report = {
   encode(
     message: Report,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -375,7 +375,7 @@ function createBaseUserTarget(): UserTarget {
 export const UserTarget = {
   encode(
     message: UserTarget,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -410,7 +410,7 @@ export const UserTarget = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserTarget>, I>>(
-    object: I
+    object: I,
   ): UserTarget {
     const message = createBaseUserTarget();
     message.user = object.user ?? "";
@@ -450,7 +450,7 @@ function createBasePostTarget(): PostTarget {
 export const PostTarget = {
   encode(
     message: PostTarget,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.postId.isZero()) {
       writer.uint32(8).uint64(message.postId);
@@ -486,7 +486,7 @@ export const PostTarget = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PostTarget>, I>>(
-    object: I
+    object: I,
   ): PostTarget {
     const message = createBasePostTarget();
     message.postId =
@@ -532,7 +532,7 @@ function createBaseReason(): Reason {
 export const Reason = {
   encode(
     message: Reason,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -647,7 +647,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(
     message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.standardReasons) {
       StandardReason.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -663,7 +663,7 @@ export const Params = {
       switch (tag >>> 3) {
         case 1:
           message.standardReasons.push(
-            StandardReason.decode(reader, reader.uint32())
+            StandardReason.decode(reader, reader.uint32()),
           );
           break;
         default:
@@ -684,7 +684,7 @@ export const Params = {
     const obj: any = {};
     if (message.standardReasons) {
       obj.standardReasons = message.standardReasons.map((e) =>
-        e ? StandardReason.toJSON(e) : undefined
+        e ? StandardReason.toJSON(e) : undefined,
       );
     } else {
       obj.standardReasons = [];
@@ -708,7 +708,7 @@ export const Params = {
     const obj: any = {};
     if (message.standardReasons) {
       obj.standard_reasons = message.standardReasons.map((e) =>
-        e ? StandardReason.toAmino(e) : undefined
+        e ? StandardReason.toAmino(e) : undefined,
       );
     } else {
       obj.standard_reasons = [];
@@ -741,7 +741,7 @@ function createBaseStandardReason(): StandardReason {
 export const StandardReason = {
   encode(
     message: StandardReason,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
@@ -793,7 +793,7 @@ export const StandardReason = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<StandardReason>, I>>(
-    object: I
+    object: I,
   ): StandardReason {
     const message = createBaseStandardReason();
     message.id = object.id ?? 0;

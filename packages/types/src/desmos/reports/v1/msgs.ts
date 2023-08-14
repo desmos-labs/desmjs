@@ -339,7 +339,7 @@ function createBaseMsgCreateReport(): MsgCreateReport {
 export const MsgCreateReport = {
   encode(
     message: MsgCreateReport,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -425,7 +425,7 @@ export const MsgCreateReport = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateReport>, I>>(
-    object: I
+    object: I,
   ): MsgCreateReport {
     const message = createBaseMsgCreateReport();
     message.subspaceId =
@@ -492,7 +492,7 @@ function createBaseMsgCreateReportResponse(): MsgCreateReportResponse {
 export const MsgCreateReportResponse = {
   encode(
     message: MsgCreateReportResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.reportId.isZero()) {
       writer.uint32(8).uint64(message.reportId);
@@ -504,7 +504,7 @@ export const MsgCreateReportResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -544,7 +544,7 @@ export const MsgCreateReportResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateReportResponse>, I>>(
-    object: I
+    object: I,
   ): MsgCreateReportResponse {
     const message = createBaseMsgCreateReportResponse();
     message.reportId =
@@ -574,12 +574,12 @@ export const MsgCreateReportResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgCreateReportResponseAminoMsg
+    object: MsgCreateReportResponseAminoMsg,
   ): MsgCreateReportResponse {
     return MsgCreateReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCreateReportResponseProtoMsg
+    message: MsgCreateReportResponseProtoMsg,
   ): MsgCreateReportResponse {
     return MsgCreateReportResponse.decode(message.value);
   },
@@ -587,7 +587,7 @@ export const MsgCreateReportResponse = {
     return MsgCreateReportResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCreateReportResponse
+    message: MsgCreateReportResponse,
   ): MsgCreateReportResponseProtoMsg {
     return {
       typeUrl: "/desmos.reports.v1.MsgCreateReportResponse",
@@ -605,7 +605,7 @@ function createBaseMsgDeleteReport(): MsgDeleteReport {
 export const MsgDeleteReport = {
   encode(
     message: MsgDeleteReport,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -662,7 +662,7 @@ export const MsgDeleteReport = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteReport>, I>>(
-    object: I
+    object: I,
   ): MsgDeleteReport {
     const message = createBaseMsgDeleteReport();
     message.subspaceId =
@@ -714,13 +714,13 @@ function createBaseMsgDeleteReportResponse(): MsgDeleteReportResponse {
 export const MsgDeleteReportResponse = {
   encode(
     _: MsgDeleteReportResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteReportResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -743,7 +743,7 @@ export const MsgDeleteReportResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteReportResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeleteReportResponse {
     const message = createBaseMsgDeleteReportResponse();
     return message;
@@ -756,12 +756,12 @@ export const MsgDeleteReportResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgDeleteReportResponseAminoMsg
+    object: MsgDeleteReportResponseAminoMsg,
   ): MsgDeleteReportResponse {
     return MsgDeleteReportResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgDeleteReportResponseProtoMsg
+    message: MsgDeleteReportResponseProtoMsg,
   ): MsgDeleteReportResponse {
     return MsgDeleteReportResponse.decode(message.value);
   },
@@ -769,7 +769,7 @@ export const MsgDeleteReportResponse = {
     return MsgDeleteReportResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgDeleteReportResponse
+    message: MsgDeleteReportResponse,
   ): MsgDeleteReportResponseProtoMsg {
     return {
       typeUrl: "/desmos.reports.v1.MsgDeleteReportResponse",
@@ -787,7 +787,7 @@ function createBaseMsgSupportStandardReason(): MsgSupportStandardReason {
 export const MsgSupportStandardReason = {
   encode(
     message: MsgSupportStandardReason,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -802,7 +802,7 @@ export const MsgSupportStandardReason = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSupportStandardReason {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -847,7 +847,7 @@ export const MsgSupportStandardReason = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSupportStandardReason>, I>>(
-    object: I
+    object: I,
   ): MsgSupportStandardReason {
     const message = createBaseMsgSupportStandardReason();
     message.subspaceId =
@@ -875,12 +875,12 @@ export const MsgSupportStandardReason = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgSupportStandardReasonAminoMsg
+    object: MsgSupportStandardReasonAminoMsg,
   ): MsgSupportStandardReason {
     return MsgSupportStandardReason.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSupportStandardReasonProtoMsg
+    message: MsgSupportStandardReasonProtoMsg,
   ): MsgSupportStandardReason {
     return MsgSupportStandardReason.decode(message.value);
   },
@@ -888,7 +888,7 @@ export const MsgSupportStandardReason = {
     return MsgSupportStandardReason.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSupportStandardReason
+    message: MsgSupportStandardReason,
   ): MsgSupportStandardReasonProtoMsg {
     return {
       typeUrl: "/desmos.reports.v1.MsgSupportStandardReason",
@@ -904,7 +904,7 @@ function createBaseMsgSupportStandardReasonResponse(): MsgSupportStandardReasonR
 export const MsgSupportStandardReasonResponse = {
   encode(
     message: MsgSupportStandardReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.reasonsIds !== 0) {
       writer.uint32(8).uint32(message.reasonsIds);
@@ -913,7 +913,7 @@ export const MsgSupportStandardReasonResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSupportStandardReasonResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -943,33 +943,33 @@ export const MsgSupportStandardReasonResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgSupportStandardReasonResponse>, I>
+    I extends Exact<DeepPartial<MsgSupportStandardReasonResponse>, I>,
   >(object: I): MsgSupportStandardReasonResponse {
     const message = createBaseMsgSupportStandardReasonResponse();
     message.reasonsIds = object.reasonsIds ?? 0;
     return message;
   },
   fromAmino(
-    object: MsgSupportStandardReasonResponseAmino
+    object: MsgSupportStandardReasonResponseAmino,
   ): MsgSupportStandardReasonResponse {
     return {
       reasonsIds: object.reasons_ids,
     };
   },
   toAmino(
-    message: MsgSupportStandardReasonResponse
+    message: MsgSupportStandardReasonResponse,
   ): MsgSupportStandardReasonResponseAmino {
     const obj: any = {};
     obj.reasons_ids = message.reasonsIds;
     return obj;
   },
   fromAminoMsg(
-    object: MsgSupportStandardReasonResponseAminoMsg
+    object: MsgSupportStandardReasonResponseAminoMsg,
   ): MsgSupportStandardReasonResponse {
     return MsgSupportStandardReasonResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSupportStandardReasonResponseProtoMsg
+    message: MsgSupportStandardReasonResponseProtoMsg,
   ): MsgSupportStandardReasonResponse {
     return MsgSupportStandardReasonResponse.decode(message.value);
   },
@@ -977,7 +977,7 @@ export const MsgSupportStandardReasonResponse = {
     return MsgSupportStandardReasonResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSupportStandardReasonResponse
+    message: MsgSupportStandardReasonResponse,
   ): MsgSupportStandardReasonResponseProtoMsg {
     return {
       typeUrl: "/desmos.reports.v1.MsgSupportStandardReasonResponse",
@@ -996,7 +996,7 @@ function createBaseMsgAddReason(): MsgAddReason {
 export const MsgAddReason = {
   encode(
     message: MsgAddReason,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1059,7 +1059,7 @@ export const MsgAddReason = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAddReason>, I>>(
-    object: I
+    object: I,
   ): MsgAddReason {
     const message = createBaseMsgAddReason();
     message.subspaceId =
@@ -1113,7 +1113,7 @@ function createBaseMsgAddReasonResponse(): MsgAddReasonResponse {
 export const MsgAddReasonResponse = {
   encode(
     message: MsgAddReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.reasonId !== 0) {
       writer.uint32(8).uint32(message.reasonId);
@@ -1122,7 +1122,7 @@ export const MsgAddReasonResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAddReasonResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1152,7 +1152,7 @@ export const MsgAddReasonResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAddReasonResponse>, I>>(
-    object: I
+    object: I,
   ): MsgAddReasonResponse {
     const message = createBaseMsgAddReasonResponse();
     message.reasonId = object.reasonId ?? 0;
@@ -1194,7 +1194,7 @@ function createBaseMsgRemoveReason(): MsgRemoveReason {
 export const MsgRemoveReason = {
   encode(
     message: MsgRemoveReason,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1249,7 +1249,7 @@ export const MsgRemoveReason = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRemoveReason>, I>>(
-    object: I
+    object: I,
   ): MsgRemoveReason {
     const message = createBaseMsgRemoveReason();
     message.subspaceId =
@@ -1298,13 +1298,13 @@ function createBaseMsgRemoveReasonResponse(): MsgRemoveReasonResponse {
 export const MsgRemoveReasonResponse = {
   encode(
     _: MsgRemoveReasonResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRemoveReasonResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1327,7 +1327,7 @@ export const MsgRemoveReasonResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRemoveReasonResponse>, I>>(
-    _: I
+    _: I,
   ): MsgRemoveReasonResponse {
     const message = createBaseMsgRemoveReasonResponse();
     return message;
@@ -1340,12 +1340,12 @@ export const MsgRemoveReasonResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRemoveReasonResponseAminoMsg
+    object: MsgRemoveReasonResponseAminoMsg,
   ): MsgRemoveReasonResponse {
     return MsgRemoveReasonResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRemoveReasonResponseProtoMsg
+    message: MsgRemoveReasonResponseProtoMsg,
   ): MsgRemoveReasonResponse {
     return MsgRemoveReasonResponse.decode(message.value);
   },
@@ -1353,7 +1353,7 @@ export const MsgRemoveReasonResponse = {
     return MsgRemoveReasonResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRemoveReasonResponse
+    message: MsgRemoveReasonResponse,
   ): MsgRemoveReasonResponseProtoMsg {
     return {
       typeUrl: "/desmos.reports.v1.MsgRemoveReasonResponse",
@@ -1370,7 +1370,7 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 export const MsgUpdateParams = {
   encode(
     message: MsgUpdateParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -1414,7 +1414,7 @@ export const MsgUpdateParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
-    object: I
+    object: I,
   ): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -1458,13 +1458,13 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 export const MsgUpdateParamsResponse = {
   encode(
     _: MsgUpdateParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUpdateParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1487,7 +1487,7 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -1500,12 +1500,12 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUpdateParamsResponseAminoMsg
+    object: MsgUpdateParamsResponseAminoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgUpdateParamsResponseProtoMsg
+    message: MsgUpdateParamsResponseProtoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.decode(message.value);
   },
@@ -1513,7 +1513,7 @@ export const MsgUpdateParamsResponse = {
     return MsgUpdateParamsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUpdateParamsResponse
+    message: MsgUpdateParamsResponse,
   ): MsgUpdateParamsResponseProtoMsg {
     return {
       typeUrl: "/desmos.reports.v1.MsgUpdateParamsResponse",
@@ -1532,7 +1532,7 @@ export interface Msg {
    * the module params
    */
   SupportStandardReason(
-    request: MsgSupportStandardReason
+    request: MsgSupportStandardReason,
   ): Promise<MsgSupportStandardReasonResponse>;
   /** AddReason allows to add a new supported reporting reason */
   AddReason(request: MsgAddReason): Promise<MsgAddReasonResponse>;
@@ -1563,10 +1563,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.reports.v1.Msg",
       "CreateReport",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCreateReportResponse.decode(new _m0.Reader(data))
+      MsgCreateReportResponse.decode(new _m0.Reader(data)),
     );
   }
   DeleteReport(request: MsgDeleteReport): Promise<MsgDeleteReportResponse> {
@@ -1574,23 +1574,23 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.reports.v1.Msg",
       "DeleteReport",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgDeleteReportResponse.decode(new _m0.Reader(data))
+      MsgDeleteReportResponse.decode(new _m0.Reader(data)),
     );
   }
   SupportStandardReason(
-    request: MsgSupportStandardReason
+    request: MsgSupportStandardReason,
   ): Promise<MsgSupportStandardReasonResponse> {
     const data = MsgSupportStandardReason.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.reports.v1.Msg",
       "SupportStandardReason",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgSupportStandardReasonResponse.decode(new _m0.Reader(data))
+      MsgSupportStandardReasonResponse.decode(new _m0.Reader(data)),
     );
   }
   AddReason(request: MsgAddReason): Promise<MsgAddReasonResponse> {
@@ -1598,10 +1598,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.reports.v1.Msg",
       "AddReason",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgAddReasonResponse.decode(new _m0.Reader(data))
+      MsgAddReasonResponse.decode(new _m0.Reader(data)),
     );
   }
   RemoveReason(request: MsgRemoveReason): Promise<MsgRemoveReasonResponse> {
@@ -1609,10 +1609,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.reports.v1.Msg",
       "RemoveReason",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgRemoveReasonResponse.decode(new _m0.Reader(data))
+      MsgRemoveReasonResponse.decode(new _m0.Reader(data)),
     );
   }
   UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
@@ -1620,10 +1620,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.reports.v1.Msg",
       "UpdateParams",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgUpdateParamsResponse.decode(new _m0.Reader(data))
+      MsgUpdateParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }
