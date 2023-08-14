@@ -81,7 +81,7 @@ export async function patchModule(outputPath: string): Promise<void> {
     },
     {
       object: 'FieldDescriptorProto',
-      methodName: 'toAmino',
+      methodName: 'fromAmino',
       newDefinition: "fromAmino(object: FieldDescriptorProtoAmino): FieldDescriptorProto {\n" +
         "    return {\n" +
         "      name: object.name,\n" +
@@ -101,7 +101,7 @@ export async function patchModule(outputPath: string): Promise<void> {
         "        ? FieldOptions.fromAmino(object.options)\n" +
         "        : undefined,\n" +
         "    };\n" +
-        "  },"
+        "  }"
     }
   ]);
 
