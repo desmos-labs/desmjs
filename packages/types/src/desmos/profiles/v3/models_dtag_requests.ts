@@ -50,7 +50,7 @@ function createBaseDTagTransferRequest(): DTagTransferRequest {
 export const DTagTransferRequest = {
   encode(
     message: DTagTransferRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.dtagToTrade !== "") {
       writer.uint32(10).string(message.dtagToTrade);
@@ -102,7 +102,7 @@ export const DTagTransferRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<DTagTransferRequest>, I>>(
-    object: I
+    object: I,
   ): DTagTransferRequest {
     const message = createBaseDTagTransferRequest();
     message.dtagToTrade = object.dtagToTrade ?? "";

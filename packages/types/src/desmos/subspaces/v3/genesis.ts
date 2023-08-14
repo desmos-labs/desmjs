@@ -98,7 +98,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.initialSubspaceId.isZero()) {
       writer.uint32(8).uint64(message.initialSubspaceId);
@@ -138,7 +138,7 @@ export const GenesisState = {
           break;
         case 2:
           message.subspacesData.push(
-            SubspaceData.decode(reader, reader.uint32())
+            SubspaceData.decode(reader, reader.uint32()),
           );
           break;
         case 3:
@@ -149,7 +149,7 @@ export const GenesisState = {
           break;
         case 5:
           message.userPermissions.push(
-            UserPermission.decode(reader, reader.uint32())
+            UserPermission.decode(reader, reader.uint32()),
           );
           break;
         case 6:
@@ -157,7 +157,7 @@ export const GenesisState = {
           break;
         case 7:
           message.userGroupsMembers.push(
-            UserGroupMemberEntry.decode(reader, reader.uint32())
+            UserGroupMemberEntry.decode(reader, reader.uint32()),
           );
           break;
         case 8:
@@ -192,7 +192,7 @@ export const GenesisState = {
         : [],
       userGroupsMembers: Array.isArray(object?.userGroupsMembers)
         ? object.userGroupsMembers.map((e: any) =>
-            UserGroupMemberEntry.fromJSON(e)
+            UserGroupMemberEntry.fromJSON(e),
           )
         : [],
       grants: Array.isArray(object?.grants)
@@ -208,42 +208,42 @@ export const GenesisState = {
       ).toString());
     if (message.subspacesData) {
       obj.subspacesData = message.subspacesData.map((e) =>
-        e ? SubspaceData.toJSON(e) : undefined
+        e ? SubspaceData.toJSON(e) : undefined,
       );
     } else {
       obj.subspacesData = [];
     }
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map((e) =>
-        e ? Subspace.toJSON(e) : undefined
+        e ? Subspace.toJSON(e) : undefined,
       );
     } else {
       obj.subspaces = [];
     }
     if (message.sections) {
       obj.sections = message.sections.map((e) =>
-        e ? Section.toJSON(e) : undefined
+        e ? Section.toJSON(e) : undefined,
       );
     } else {
       obj.sections = [];
     }
     if (message.userPermissions) {
       obj.userPermissions = message.userPermissions.map((e) =>
-        e ? UserPermission.toJSON(e) : undefined
+        e ? UserPermission.toJSON(e) : undefined,
       );
     } else {
       obj.userPermissions = [];
     }
     if (message.userGroups) {
       obj.userGroups = message.userGroups.map((e) =>
-        e ? UserGroup.toJSON(e) : undefined
+        e ? UserGroup.toJSON(e) : undefined,
       );
     } else {
       obj.userGroups = [];
     }
     if (message.userGroupsMembers) {
       obj.userGroupsMembers = message.userGroupsMembers.map((e) =>
-        e ? UserGroupMemberEntry.toJSON(e) : undefined
+        e ? UserGroupMemberEntry.toJSON(e) : undefined,
       );
     } else {
       obj.userGroupsMembers = [];
@@ -256,7 +256,7 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.initialSubspaceId =
@@ -276,7 +276,7 @@ export const GenesisState = {
       object.userGroups?.map((e) => UserGroup.fromPartial(e)) || [];
     message.userGroupsMembers =
       object.userGroupsMembers?.map((e) =>
-        UserGroupMemberEntry.fromPartial(e)
+        UserGroupMemberEntry.fromPartial(e),
       ) || [];
     message.grants = object.grants?.map((e) => Grant.fromPartial(e)) || [];
     return message;
@@ -301,7 +301,7 @@ export const GenesisState = {
         : [],
       userGroupsMembers: Array.isArray(object?.user_groups_members)
         ? object.user_groups_members.map((e: any) =>
-            UserGroupMemberEntry.fromAmino(e)
+            UserGroupMemberEntry.fromAmino(e),
           )
         : [],
       grants: Array.isArray(object?.grants)
@@ -316,49 +316,49 @@ export const GenesisState = {
       : undefined;
     if (message.subspacesData) {
       obj.subspaces_data = message.subspacesData.map((e) =>
-        e ? SubspaceData.toAmino(e) : undefined
+        e ? SubspaceData.toAmino(e) : undefined,
       );
     } else {
       obj.subspaces_data = [];
     }
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map((e) =>
-        e ? Subspace.toAmino(e) : undefined
+        e ? Subspace.toAmino(e) : undefined,
       );
     } else {
       obj.subspaces = [];
     }
     if (message.sections) {
       obj.sections = message.sections.map((e) =>
-        e ? Section.toAmino(e) : undefined
+        e ? Section.toAmino(e) : undefined,
       );
     } else {
       obj.sections = [];
     }
     if (message.userPermissions) {
       obj.user_permissions = message.userPermissions.map((e) =>
-        e ? UserPermission.toAmino(e) : undefined
+        e ? UserPermission.toAmino(e) : undefined,
       );
     } else {
       obj.user_permissions = [];
     }
     if (message.userGroups) {
       obj.user_groups = message.userGroups.map((e) =>
-        e ? UserGroup.toAmino(e) : undefined
+        e ? UserGroup.toAmino(e) : undefined,
       );
     } else {
       obj.user_groups = [];
     }
     if (message.userGroupsMembers) {
       obj.user_groups_members = message.userGroupsMembers.map((e) =>
-        e ? UserGroupMemberEntry.toAmino(e) : undefined
+        e ? UserGroupMemberEntry.toAmino(e) : undefined,
       );
     } else {
       obj.user_groups_members = [];
     }
     if (message.grants) {
       obj.grants = message.grants.map((e) =>
-        e ? Grant.toAmino(e) : undefined
+        e ? Grant.toAmino(e) : undefined,
       );
     } else {
       obj.grants = [];
@@ -391,7 +391,7 @@ function createBaseSubspaceData(): SubspaceData {
 export const SubspaceData = {
   encode(
     message: SubspaceData,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -449,7 +449,7 @@ export const SubspaceData = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SubspaceData>, I>>(
-    object: I
+    object: I,
   ): SubspaceData {
     const message = createBaseSubspaceData();
     message.subspaceId =
@@ -502,7 +502,7 @@ function createBaseUserGroupMemberEntry(): UserGroupMemberEntry {
 export const UserGroupMemberEntry = {
   encode(
     message: UserGroupMemberEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -517,7 +517,7 @@ export const UserGroupMemberEntry = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): UserGroupMemberEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -560,7 +560,7 @@ export const UserGroupMemberEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserGroupMemberEntry>, I>>(
-    object: I
+    object: I,
   ): UserGroupMemberEntry {
     const message = createBaseUserGroupMemberEntry();
     message.subspaceId =

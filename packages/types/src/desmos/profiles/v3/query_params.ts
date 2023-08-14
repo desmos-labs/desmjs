@@ -37,7 +37,7 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 export const QueryParamsRequest = {
   encode(
     _: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
@@ -63,7 +63,7 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    _: I
+    _: I,
   ): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -99,7 +99,7 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 export const QueryParamsResponse = {
   encode(
     message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -135,7 +135,7 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     message.params =

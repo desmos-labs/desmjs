@@ -37,7 +37,7 @@ export const getSigningIbcClient = async ({
     {
       registry,
       aminoTypes,
-    }
+    },
   );
   return client;
 };

@@ -27,7 +27,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.authorization) {
       GrantAuthorization.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -43,7 +43,7 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.authorization.push(
-            GrantAuthorization.decode(reader, reader.uint32())
+            GrantAuthorization.decode(reader, reader.uint32()),
           );
           break;
         default:
@@ -64,7 +64,7 @@ export const GenesisState = {
     const obj: any = {};
     if (message.authorization) {
       obj.authorization = message.authorization.map((e) =>
-        e ? GrantAuthorization.toJSON(e) : undefined
+        e ? GrantAuthorization.toJSON(e) : undefined,
       );
     } else {
       obj.authorization = [];
@@ -72,7 +72,7 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.authorization =
@@ -90,7 +90,7 @@ export const GenesisState = {
     const obj: any = {};
     if (message.authorization) {
       obj.authorization = message.authorization.map((e) =>
-        e ? GrantAuthorization.toAmino(e) : undefined
+        e ? GrantAuthorization.toAmino(e) : undefined,
       );
     } else {
       obj.authorization = [];

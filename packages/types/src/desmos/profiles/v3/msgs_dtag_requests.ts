@@ -217,7 +217,7 @@ function createBaseMsgRequestDTagTransfer(): MsgRequestDTagTransfer {
 export const MsgRequestDTagTransfer = {
   encode(
     message: MsgRequestDTagTransfer,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.receiver !== "") {
       writer.uint32(10).string(message.receiver);
@@ -229,7 +229,7 @@ export const MsgRequestDTagTransfer = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRequestDTagTransfer {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -263,7 +263,7 @@ export const MsgRequestDTagTransfer = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRequestDTagTransfer>, I>>(
-    object: I
+    object: I,
   ): MsgRequestDTagTransfer {
     const message = createBaseMsgRequestDTagTransfer();
     message.receiver = object.receiver ?? "";
@@ -286,7 +286,7 @@ export const MsgRequestDTagTransfer = {
     return MsgRequestDTagTransfer.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRequestDTagTransferProtoMsg
+    message: MsgRequestDTagTransferProtoMsg,
   ): MsgRequestDTagTransfer {
     return MsgRequestDTagTransfer.decode(message.value);
   },
@@ -306,13 +306,13 @@ function createBaseMsgRequestDTagTransferResponse(): MsgRequestDTagTransferRespo
 export const MsgRequestDTagTransferResponse = {
   encode(
     _: MsgRequestDTagTransferResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRequestDTagTransferResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -335,29 +335,29 @@ export const MsgRequestDTagTransferResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRequestDTagTransferResponse>, I>>(
-    _: I
+    _: I,
   ): MsgRequestDTagTransferResponse {
     const message = createBaseMsgRequestDTagTransferResponse();
     return message;
   },
   fromAmino(
-    _: MsgRequestDTagTransferResponseAmino
+    _: MsgRequestDTagTransferResponseAmino,
   ): MsgRequestDTagTransferResponse {
     return {};
   },
   toAmino(
-    _: MsgRequestDTagTransferResponse
+    _: MsgRequestDTagTransferResponse,
   ): MsgRequestDTagTransferResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgRequestDTagTransferResponseAminoMsg
+    object: MsgRequestDTagTransferResponseAminoMsg,
   ): MsgRequestDTagTransferResponse {
     return MsgRequestDTagTransferResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRequestDTagTransferResponseProtoMsg
+    message: MsgRequestDTagTransferResponseProtoMsg,
   ): MsgRequestDTagTransferResponse {
     return MsgRequestDTagTransferResponse.decode(message.value);
   },
@@ -365,7 +365,7 @@ export const MsgRequestDTagTransferResponse = {
     return MsgRequestDTagTransferResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRequestDTagTransferResponse
+    message: MsgRequestDTagTransferResponse,
   ): MsgRequestDTagTransferResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgRequestDTagTransferResponse",
@@ -382,7 +382,7 @@ function createBaseMsgCancelDTagTransferRequest(): MsgCancelDTagTransferRequest 
 export const MsgCancelDTagTransferRequest = {
   encode(
     message: MsgCancelDTagTransferRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.receiver !== "") {
       writer.uint32(10).string(message.receiver);
@@ -394,7 +394,7 @@ export const MsgCancelDTagTransferRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCancelDTagTransferRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -428,7 +428,7 @@ export const MsgCancelDTagTransferRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCancelDTagTransferRequest>, I>>(
-    object: I
+    object: I,
   ): MsgCancelDTagTransferRequest {
     const message = createBaseMsgCancelDTagTransferRequest();
     message.receiver = object.receiver ?? "";
@@ -436,7 +436,7 @@ export const MsgCancelDTagTransferRequest = {
     return message;
   },
   fromAmino(
-    object: MsgCancelDTagTransferRequestAmino
+    object: MsgCancelDTagTransferRequestAmino,
   ): MsgCancelDTagTransferRequest {
     return {
       receiver: object.receiver,
@@ -444,7 +444,7 @@ export const MsgCancelDTagTransferRequest = {
     };
   },
   toAmino(
-    message: MsgCancelDTagTransferRequest
+    message: MsgCancelDTagTransferRequest,
   ): MsgCancelDTagTransferRequestAmino {
     const obj: any = {};
     obj.receiver = message.receiver;
@@ -452,12 +452,12 @@ export const MsgCancelDTagTransferRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgCancelDTagTransferRequestAminoMsg
+    object: MsgCancelDTagTransferRequestAminoMsg,
   ): MsgCancelDTagTransferRequest {
     return MsgCancelDTagTransferRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCancelDTagTransferRequestProtoMsg
+    message: MsgCancelDTagTransferRequestProtoMsg,
   ): MsgCancelDTagTransferRequest {
     return MsgCancelDTagTransferRequest.decode(message.value);
   },
@@ -465,7 +465,7 @@ export const MsgCancelDTagTransferRequest = {
     return MsgCancelDTagTransferRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCancelDTagTransferRequest
+    message: MsgCancelDTagTransferRequest,
   ): MsgCancelDTagTransferRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgCancelDTagTransferRequest",
@@ -479,13 +479,13 @@ function createBaseMsgCancelDTagTransferRequestResponse(): MsgCancelDTagTransfer
 export const MsgCancelDTagTransferRequestResponse = {
   encode(
     _: MsgCancelDTagTransferRequestResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCancelDTagTransferRequestResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -508,29 +508,29 @@ export const MsgCancelDTagTransferRequestResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgCancelDTagTransferRequestResponse>, I>
+    I extends Exact<DeepPartial<MsgCancelDTagTransferRequestResponse>, I>,
   >(_: I): MsgCancelDTagTransferRequestResponse {
     const message = createBaseMsgCancelDTagTransferRequestResponse();
     return message;
   },
   fromAmino(
-    _: MsgCancelDTagTransferRequestResponseAmino
+    _: MsgCancelDTagTransferRequestResponseAmino,
   ): MsgCancelDTagTransferRequestResponse {
     return {};
   },
   toAmino(
-    _: MsgCancelDTagTransferRequestResponse
+    _: MsgCancelDTagTransferRequestResponse,
   ): MsgCancelDTagTransferRequestResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgCancelDTagTransferRequestResponseAminoMsg
+    object: MsgCancelDTagTransferRequestResponseAminoMsg,
   ): MsgCancelDTagTransferRequestResponse {
     return MsgCancelDTagTransferRequestResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgCancelDTagTransferRequestResponseProtoMsg
+    message: MsgCancelDTagTransferRequestResponseProtoMsg,
   ): MsgCancelDTagTransferRequestResponse {
     return MsgCancelDTagTransferRequestResponse.decode(message.value);
   },
@@ -538,7 +538,7 @@ export const MsgCancelDTagTransferRequestResponse = {
     return MsgCancelDTagTransferRequestResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCancelDTagTransferRequestResponse
+    message: MsgCancelDTagTransferRequestResponse,
   ): MsgCancelDTagTransferRequestResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgCancelDTagTransferRequestResponse",
@@ -556,7 +556,7 @@ function createBaseMsgAcceptDTagTransferRequest(): MsgAcceptDTagTransferRequest 
 export const MsgAcceptDTagTransferRequest = {
   encode(
     message: MsgAcceptDTagTransferRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.newDtag !== "") {
       writer.uint32(10).string(message.newDtag);
@@ -571,7 +571,7 @@ export const MsgAcceptDTagTransferRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAcceptDTagTransferRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -610,7 +610,7 @@ export const MsgAcceptDTagTransferRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAcceptDTagTransferRequest>, I>>(
-    object: I
+    object: I,
   ): MsgAcceptDTagTransferRequest {
     const message = createBaseMsgAcceptDTagTransferRequest();
     message.newDtag = object.newDtag ?? "";
@@ -619,7 +619,7 @@ export const MsgAcceptDTagTransferRequest = {
     return message;
   },
   fromAmino(
-    object: MsgAcceptDTagTransferRequestAmino
+    object: MsgAcceptDTagTransferRequestAmino,
   ): MsgAcceptDTagTransferRequest {
     return {
       newDtag: object.new_dtag,
@@ -628,7 +628,7 @@ export const MsgAcceptDTagTransferRequest = {
     };
   },
   toAmino(
-    message: MsgAcceptDTagTransferRequest
+    message: MsgAcceptDTagTransferRequest,
   ): MsgAcceptDTagTransferRequestAmino {
     const obj: any = {};
     obj.new_dtag = message.newDtag;
@@ -637,12 +637,12 @@ export const MsgAcceptDTagTransferRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgAcceptDTagTransferRequestAminoMsg
+    object: MsgAcceptDTagTransferRequestAminoMsg,
   ): MsgAcceptDTagTransferRequest {
     return MsgAcceptDTagTransferRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgAcceptDTagTransferRequestProtoMsg
+    message: MsgAcceptDTagTransferRequestProtoMsg,
   ): MsgAcceptDTagTransferRequest {
     return MsgAcceptDTagTransferRequest.decode(message.value);
   },
@@ -650,7 +650,7 @@ export const MsgAcceptDTagTransferRequest = {
     return MsgAcceptDTagTransferRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgAcceptDTagTransferRequest
+    message: MsgAcceptDTagTransferRequest,
   ): MsgAcceptDTagTransferRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgAcceptDTagTransferRequest",
@@ -664,13 +664,13 @@ function createBaseMsgAcceptDTagTransferRequestResponse(): MsgAcceptDTagTransfer
 export const MsgAcceptDTagTransferRequestResponse = {
   encode(
     _: MsgAcceptDTagTransferRequestResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAcceptDTagTransferRequestResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -693,29 +693,29 @@ export const MsgAcceptDTagTransferRequestResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgAcceptDTagTransferRequestResponse>, I>
+    I extends Exact<DeepPartial<MsgAcceptDTagTransferRequestResponse>, I>,
   >(_: I): MsgAcceptDTagTransferRequestResponse {
     const message = createBaseMsgAcceptDTagTransferRequestResponse();
     return message;
   },
   fromAmino(
-    _: MsgAcceptDTagTransferRequestResponseAmino
+    _: MsgAcceptDTagTransferRequestResponseAmino,
   ): MsgAcceptDTagTransferRequestResponse {
     return {};
   },
   toAmino(
-    _: MsgAcceptDTagTransferRequestResponse
+    _: MsgAcceptDTagTransferRequestResponse,
   ): MsgAcceptDTagTransferRequestResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgAcceptDTagTransferRequestResponseAminoMsg
+    object: MsgAcceptDTagTransferRequestResponseAminoMsg,
   ): MsgAcceptDTagTransferRequestResponse {
     return MsgAcceptDTagTransferRequestResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgAcceptDTagTransferRequestResponseProtoMsg
+    message: MsgAcceptDTagTransferRequestResponseProtoMsg,
   ): MsgAcceptDTagTransferRequestResponse {
     return MsgAcceptDTagTransferRequestResponse.decode(message.value);
   },
@@ -723,7 +723,7 @@ export const MsgAcceptDTagTransferRequestResponse = {
     return MsgAcceptDTagTransferRequestResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgAcceptDTagTransferRequestResponse
+    message: MsgAcceptDTagTransferRequestResponse,
   ): MsgAcceptDTagTransferRequestResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgAcceptDTagTransferRequestResponse",
@@ -740,7 +740,7 @@ function createBaseMsgRefuseDTagTransferRequest(): MsgRefuseDTagTransferRequest 
 export const MsgRefuseDTagTransferRequest = {
   encode(
     message: MsgRefuseDTagTransferRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
@@ -752,7 +752,7 @@ export const MsgRefuseDTagTransferRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRefuseDTagTransferRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -786,7 +786,7 @@ export const MsgRefuseDTagTransferRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRefuseDTagTransferRequest>, I>>(
-    object: I
+    object: I,
   ): MsgRefuseDTagTransferRequest {
     const message = createBaseMsgRefuseDTagTransferRequest();
     message.sender = object.sender ?? "";
@@ -794,7 +794,7 @@ export const MsgRefuseDTagTransferRequest = {
     return message;
   },
   fromAmino(
-    object: MsgRefuseDTagTransferRequestAmino
+    object: MsgRefuseDTagTransferRequestAmino,
   ): MsgRefuseDTagTransferRequest {
     return {
       sender: object.sender,
@@ -802,7 +802,7 @@ export const MsgRefuseDTagTransferRequest = {
     };
   },
   toAmino(
-    message: MsgRefuseDTagTransferRequest
+    message: MsgRefuseDTagTransferRequest,
   ): MsgRefuseDTagTransferRequestAmino {
     const obj: any = {};
     obj.sender = message.sender;
@@ -810,12 +810,12 @@ export const MsgRefuseDTagTransferRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRefuseDTagTransferRequestAminoMsg
+    object: MsgRefuseDTagTransferRequestAminoMsg,
   ): MsgRefuseDTagTransferRequest {
     return MsgRefuseDTagTransferRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRefuseDTagTransferRequestProtoMsg
+    message: MsgRefuseDTagTransferRequestProtoMsg,
   ): MsgRefuseDTagTransferRequest {
     return MsgRefuseDTagTransferRequest.decode(message.value);
   },
@@ -823,7 +823,7 @@ export const MsgRefuseDTagTransferRequest = {
     return MsgRefuseDTagTransferRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRefuseDTagTransferRequest
+    message: MsgRefuseDTagTransferRequest,
   ): MsgRefuseDTagTransferRequestProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgRefuseDTagTransferRequest",
@@ -837,13 +837,13 @@ function createBaseMsgRefuseDTagTransferRequestResponse(): MsgRefuseDTagTransfer
 export const MsgRefuseDTagTransferRequestResponse = {
   encode(
     _: MsgRefuseDTagTransferRequestResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRefuseDTagTransferRequestResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -866,29 +866,29 @@ export const MsgRefuseDTagTransferRequestResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgRefuseDTagTransferRequestResponse>, I>
+    I extends Exact<DeepPartial<MsgRefuseDTagTransferRequestResponse>, I>,
   >(_: I): MsgRefuseDTagTransferRequestResponse {
     const message = createBaseMsgRefuseDTagTransferRequestResponse();
     return message;
   },
   fromAmino(
-    _: MsgRefuseDTagTransferRequestResponseAmino
+    _: MsgRefuseDTagTransferRequestResponseAmino,
   ): MsgRefuseDTagTransferRequestResponse {
     return {};
   },
   toAmino(
-    _: MsgRefuseDTagTransferRequestResponse
+    _: MsgRefuseDTagTransferRequestResponse,
   ): MsgRefuseDTagTransferRequestResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgRefuseDTagTransferRequestResponseAminoMsg
+    object: MsgRefuseDTagTransferRequestResponseAminoMsg,
   ): MsgRefuseDTagTransferRequestResponse {
     return MsgRefuseDTagTransferRequestResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRefuseDTagTransferRequestResponseProtoMsg
+    message: MsgRefuseDTagTransferRequestResponseProtoMsg,
   ): MsgRefuseDTagTransferRequestResponse {
     return MsgRefuseDTagTransferRequestResponse.decode(message.value);
   },
@@ -896,7 +896,7 @@ export const MsgRefuseDTagTransferRequestResponse = {
     return MsgRefuseDTagTransferRequestResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRefuseDTagTransferRequestResponse
+    message: MsgRefuseDTagTransferRequestResponse,
   ): MsgRefuseDTagTransferRequestResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgRefuseDTagTransferRequestResponse",

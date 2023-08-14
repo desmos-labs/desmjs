@@ -118,7 +118,7 @@ function createBaseMsgGrantAllowance(): MsgGrantAllowance {
 export const MsgGrantAllowance = {
   encode(
     message: MsgGrantAllowance,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -186,7 +186,7 @@ export const MsgGrantAllowance = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgGrantAllowance>, I>>(
-    object: I
+    object: I,
   ): MsgGrantAllowance {
     const message = createBaseMsgGrantAllowance();
     message.subspaceId =
@@ -248,13 +248,13 @@ function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
 export const MsgGrantAllowanceResponse = {
   encode(
     _: MsgGrantAllowanceResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgGrantAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -277,7 +277,7 @@ export const MsgGrantAllowanceResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgGrantAllowanceResponse>, I>>(
-    _: I
+    _: I,
   ): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
@@ -290,12 +290,12 @@ export const MsgGrantAllowanceResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgGrantAllowanceResponseAminoMsg
+    object: MsgGrantAllowanceResponseAminoMsg,
   ): MsgGrantAllowanceResponse {
     return MsgGrantAllowanceResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgGrantAllowanceResponseProtoMsg
+    message: MsgGrantAllowanceResponseProtoMsg,
   ): MsgGrantAllowanceResponse {
     return MsgGrantAllowanceResponse.decode(message.value);
   },
@@ -303,7 +303,7 @@ export const MsgGrantAllowanceResponse = {
     return MsgGrantAllowanceResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgGrantAllowanceResponse
+    message: MsgGrantAllowanceResponse,
   ): MsgGrantAllowanceResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgGrantAllowanceResponse",
@@ -321,7 +321,7 @@ function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
 export const MsgRevokeAllowance = {
   encode(
     message: MsgRevokeAllowance,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -376,7 +376,7 @@ export const MsgRevokeAllowance = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRevokeAllowance>, I>>(
-    object: I
+    object: I,
   ): MsgRevokeAllowance {
     const message = createBaseMsgRevokeAllowance();
     message.subspaceId =
@@ -428,13 +428,13 @@ function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {
 export const MsgRevokeAllowanceResponse = {
   encode(
     _: MsgRevokeAllowanceResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRevokeAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -457,7 +457,7 @@ export const MsgRevokeAllowanceResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRevokeAllowanceResponse>, I>>(
-    _: I
+    _: I,
   ): MsgRevokeAllowanceResponse {
     const message = createBaseMsgRevokeAllowanceResponse();
     return message;
@@ -470,12 +470,12 @@ export const MsgRevokeAllowanceResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRevokeAllowanceResponseAminoMsg
+    object: MsgRevokeAllowanceResponseAminoMsg,
   ): MsgRevokeAllowanceResponse {
     return MsgRevokeAllowanceResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRevokeAllowanceResponseProtoMsg
+    message: MsgRevokeAllowanceResponseProtoMsg,
   ): MsgRevokeAllowanceResponse {
     return MsgRevokeAllowanceResponse.decode(message.value);
   },
@@ -483,7 +483,7 @@ export const MsgRevokeAllowanceResponse = {
     return MsgRevokeAllowanceResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRevokeAllowanceResponse
+    message: MsgRevokeAllowanceResponse,
   ): MsgRevokeAllowanceResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowanceResponse",

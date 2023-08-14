@@ -166,7 +166,7 @@ function createBaseSubspace(): Subspace {
 export const Subspace = {
   encode(
     message: Subspace,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -324,7 +324,7 @@ function createBaseSection(): Section {
 export const Section = {
   encode(
     message: Section,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -456,7 +456,7 @@ function createBaseUserGroup(): UserGroup {
 export const UserGroup = {
   encode(
     message: UserGroup,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -542,7 +542,7 @@ export const UserGroup = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserGroup>, I>>(
-    object: I
+    object: I,
   ): UserGroup {
     const message = createBaseUserGroup();
     message.subspaceId =
@@ -611,7 +611,7 @@ function createBaseUserPermission(): UserPermission {
 export const UserPermission = {
   encode(
     message: UserPermission,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -680,7 +680,7 @@ export const UserPermission = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserPermission>, I>>(
-    object: I
+    object: I,
   ): UserPermission {
     const message = createBaseUserPermission();
     message.subspaceId =

@@ -289,7 +289,7 @@ function createBaseQueryReactionsRequest(): QueryReactionsRequest {
 export const QueryReactionsRequest = {
   encode(
     message: QueryReactionsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -307,7 +307,7 @@ export const QueryReactionsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReactionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -360,7 +360,7 @@ export const QueryReactionsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReactionsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReactionsRequest {
     const message = createBaseQueryReactionsRequest();
     message.subspaceId =
@@ -425,7 +425,7 @@ function createBaseQueryReactionsResponse(): QueryReactionsResponse {
 export const QueryReactionsResponse = {
   encode(
     message: QueryReactionsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.reactions) {
       Reaction.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -433,14 +433,14 @@ export const QueryReactionsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReactionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -475,7 +475,7 @@ export const QueryReactionsResponse = {
     const obj: any = {};
     if (message.reactions) {
       obj.reactions = message.reactions.map((e) =>
-        e ? Reaction.toJSON(e) : undefined
+        e ? Reaction.toJSON(e) : undefined,
       );
     } else {
       obj.reactions = [];
@@ -487,7 +487,7 @@ export const QueryReactionsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReactionsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReactionsResponse {
     const message = createBaseQueryReactionsResponse();
     message.reactions =
@@ -512,7 +512,7 @@ export const QueryReactionsResponse = {
     const obj: any = {};
     if (message.reactions) {
       obj.reactions = message.reactions.map((e) =>
-        e ? Reaction.toAmino(e) : undefined
+        e ? Reaction.toAmino(e) : undefined,
       );
     } else {
       obj.reactions = [];
@@ -526,7 +526,7 @@ export const QueryReactionsResponse = {
     return QueryReactionsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryReactionsResponseProtoMsg
+    message: QueryReactionsResponseProtoMsg,
   ): QueryReactionsResponse {
     return QueryReactionsResponse.decode(message.value);
   },
@@ -550,7 +550,7 @@ function createBaseQueryReactionRequest(): QueryReactionRequest {
 export const QueryReactionRequest = {
   encode(
     message: QueryReactionRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -565,7 +565,7 @@ export const QueryReactionRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReactionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -609,7 +609,7 @@ export const QueryReactionRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReactionRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReactionRequest {
     const message = createBaseQueryReactionRequest();
     message.subspaceId =
@@ -663,7 +663,7 @@ function createBaseQueryReactionResponse(): QueryReactionResponse {
 export const QueryReactionResponse = {
   encode(
     message: QueryReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.reaction !== undefined) {
       Reaction.encode(message.reaction, writer.uint32(10).fork()).ldelim();
@@ -672,7 +672,7 @@ export const QueryReactionResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -706,7 +706,7 @@ export const QueryReactionResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReactionResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReactionResponse {
     const message = createBaseQueryReactionResponse();
     message.reaction =
@@ -754,7 +754,7 @@ function createBaseQueryRegisteredReactionsRequest(): QueryRegisteredReactionsRe
 export const QueryRegisteredReactionsRequest = {
   encode(
     message: QueryRegisteredReactionsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -766,7 +766,7 @@ export const QueryRegisteredReactionsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryRegisteredReactionsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -808,7 +808,7 @@ export const QueryRegisteredReactionsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryRegisteredReactionsRequest {
     const message = createBaseQueryRegisteredReactionsRequest();
     message.subspaceId =
@@ -822,7 +822,7 @@ export const QueryRegisteredReactionsRequest = {
     return message;
   },
   fromAmino(
-    object: QueryRegisteredReactionsRequestAmino
+    object: QueryRegisteredReactionsRequestAmino,
   ): QueryRegisteredReactionsRequest {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -832,7 +832,7 @@ export const QueryRegisteredReactionsRequest = {
     };
   },
   toAmino(
-    message: QueryRegisteredReactionsRequest
+    message: QueryRegisteredReactionsRequest,
   ): QueryRegisteredReactionsRequestAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -844,12 +844,12 @@ export const QueryRegisteredReactionsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryRegisteredReactionsRequestAminoMsg
+    object: QueryRegisteredReactionsRequestAminoMsg,
   ): QueryRegisteredReactionsRequest {
     return QueryRegisteredReactionsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryRegisteredReactionsRequestProtoMsg
+    message: QueryRegisteredReactionsRequestProtoMsg,
   ): QueryRegisteredReactionsRequest {
     return QueryRegisteredReactionsRequest.decode(message.value);
   },
@@ -857,7 +857,7 @@ export const QueryRegisteredReactionsRequest = {
     return QueryRegisteredReactionsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryRegisteredReactionsRequest
+    message: QueryRegisteredReactionsRequest,
   ): QueryRegisteredReactionsRequestProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.QueryRegisteredReactionsRequest",
@@ -874,7 +874,7 @@ function createBaseQueryRegisteredReactionsResponse(): QueryRegisteredReactionsR
 export const QueryRegisteredReactionsResponse = {
   encode(
     message: QueryRegisteredReactionsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.registeredReactions) {
       RegisteredReaction.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -882,14 +882,14 @@ export const QueryRegisteredReactionsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryRegisteredReactionsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -899,7 +899,7 @@ export const QueryRegisteredReactionsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.registeredReactions.push(
-            RegisteredReaction.decode(reader, reader.uint32())
+            RegisteredReaction.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -916,7 +916,7 @@ export const QueryRegisteredReactionsResponse = {
     return {
       registeredReactions: Array.isArray(object?.registeredReactions)
         ? object.registeredReactions.map((e: any) =>
-            RegisteredReaction.fromJSON(e)
+            RegisteredReaction.fromJSON(e),
           )
         : [],
       pagination: isSet(object.pagination)
@@ -928,7 +928,7 @@ export const QueryRegisteredReactionsResponse = {
     const obj: any = {};
     if (message.registeredReactions) {
       obj.registeredReactions = message.registeredReactions.map((e) =>
-        e ? RegisteredReaction.toJSON(e) : undefined
+        e ? RegisteredReaction.toJSON(e) : undefined,
       );
     } else {
       obj.registeredReactions = [];
@@ -940,12 +940,12 @@ export const QueryRegisteredReactionsResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryRegisteredReactionsResponse>, I>
+    I extends Exact<DeepPartial<QueryRegisteredReactionsResponse>, I>,
   >(object: I): QueryRegisteredReactionsResponse {
     const message = createBaseQueryRegisteredReactionsResponse();
     message.registeredReactions =
       object.registeredReactions?.map((e) =>
-        RegisteredReaction.fromPartial(e)
+        RegisteredReaction.fromPartial(e),
       ) || [];
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
@@ -954,12 +954,12 @@ export const QueryRegisteredReactionsResponse = {
     return message;
   },
   fromAmino(
-    object: QueryRegisteredReactionsResponseAmino
+    object: QueryRegisteredReactionsResponseAmino,
   ): QueryRegisteredReactionsResponse {
     return {
       registeredReactions: Array.isArray(object?.registered_reactions)
         ? object.registered_reactions.map((e: any) =>
-            RegisteredReaction.fromAmino(e)
+            RegisteredReaction.fromAmino(e),
           )
         : [],
       pagination: object?.pagination
@@ -968,12 +968,12 @@ export const QueryRegisteredReactionsResponse = {
     };
   },
   toAmino(
-    message: QueryRegisteredReactionsResponse
+    message: QueryRegisteredReactionsResponse,
   ): QueryRegisteredReactionsResponseAmino {
     const obj: any = {};
     if (message.registeredReactions) {
       obj.registered_reactions = message.registeredReactions.map((e) =>
-        e ? RegisteredReaction.toAmino(e) : undefined
+        e ? RegisteredReaction.toAmino(e) : undefined,
       );
     } else {
       obj.registered_reactions = [];
@@ -984,12 +984,12 @@ export const QueryRegisteredReactionsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryRegisteredReactionsResponseAminoMsg
+    object: QueryRegisteredReactionsResponseAminoMsg,
   ): QueryRegisteredReactionsResponse {
     return QueryRegisteredReactionsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryRegisteredReactionsResponseProtoMsg
+    message: QueryRegisteredReactionsResponseProtoMsg,
   ): QueryRegisteredReactionsResponse {
     return QueryRegisteredReactionsResponse.decode(message.value);
   },
@@ -997,7 +997,7 @@ export const QueryRegisteredReactionsResponse = {
     return QueryRegisteredReactionsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryRegisteredReactionsResponse
+    message: QueryRegisteredReactionsResponse,
   ): QueryRegisteredReactionsResponseProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.QueryRegisteredReactionsResponse",
@@ -1014,7 +1014,7 @@ function createBaseQueryRegisteredReactionRequest(): QueryRegisteredReactionRequ
 export const QueryRegisteredReactionRequest = {
   encode(
     message: QueryRegisteredReactionRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1026,7 +1026,7 @@ export const QueryRegisteredReactionRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryRegisteredReactionRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1064,7 +1064,7 @@ export const QueryRegisteredReactionRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionRequest>, I>>(
-    object: I
+    object: I,
   ): QueryRegisteredReactionRequest {
     const message = createBaseQueryRegisteredReactionRequest();
     message.subspaceId =
@@ -1075,7 +1075,7 @@ export const QueryRegisteredReactionRequest = {
     return message;
   },
   fromAmino(
-    object: QueryRegisteredReactionRequestAmino
+    object: QueryRegisteredReactionRequestAmino,
   ): QueryRegisteredReactionRequest {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -1083,7 +1083,7 @@ export const QueryRegisteredReactionRequest = {
     };
   },
   toAmino(
-    message: QueryRegisteredReactionRequest
+    message: QueryRegisteredReactionRequest,
   ): QueryRegisteredReactionRequestAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -1093,12 +1093,12 @@ export const QueryRegisteredReactionRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryRegisteredReactionRequestAminoMsg
+    object: QueryRegisteredReactionRequestAminoMsg,
   ): QueryRegisteredReactionRequest {
     return QueryRegisteredReactionRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryRegisteredReactionRequestProtoMsg
+    message: QueryRegisteredReactionRequestProtoMsg,
   ): QueryRegisteredReactionRequest {
     return QueryRegisteredReactionRequest.decode(message.value);
   },
@@ -1106,7 +1106,7 @@ export const QueryRegisteredReactionRequest = {
     return QueryRegisteredReactionRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryRegisteredReactionRequest
+    message: QueryRegisteredReactionRequest,
   ): QueryRegisteredReactionRequestProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.QueryRegisteredReactionRequest",
@@ -1122,19 +1122,19 @@ function createBaseQueryRegisteredReactionResponse(): QueryRegisteredReactionRes
 export const QueryRegisteredReactionResponse = {
   encode(
     message: QueryRegisteredReactionResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.registeredReaction !== undefined) {
       RegisteredReaction.encode(
         message.registeredReaction,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryRegisteredReactionResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1145,7 +1145,7 @@ export const QueryRegisteredReactionResponse = {
         case 1:
           message.registeredReaction = RegisteredReaction.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -1171,7 +1171,7 @@ export const QueryRegisteredReactionResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryRegisteredReactionResponse>, I>>(
-    object: I
+    object: I,
   ): QueryRegisteredReactionResponse {
     const message = createBaseQueryRegisteredReactionResponse();
     message.registeredReaction =
@@ -1182,7 +1182,7 @@ export const QueryRegisteredReactionResponse = {
     return message;
   },
   fromAmino(
-    object: QueryRegisteredReactionResponseAmino
+    object: QueryRegisteredReactionResponseAmino,
   ): QueryRegisteredReactionResponse {
     return {
       registeredReaction: object?.registered_reaction
@@ -1191,7 +1191,7 @@ export const QueryRegisteredReactionResponse = {
     };
   },
   toAmino(
-    message: QueryRegisteredReactionResponse
+    message: QueryRegisteredReactionResponse,
   ): QueryRegisteredReactionResponseAmino {
     const obj: any = {};
     obj.registered_reaction = message.registeredReaction
@@ -1200,12 +1200,12 @@ export const QueryRegisteredReactionResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryRegisteredReactionResponseAminoMsg
+    object: QueryRegisteredReactionResponseAminoMsg,
   ): QueryRegisteredReactionResponse {
     return QueryRegisteredReactionResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryRegisteredReactionResponseProtoMsg
+    message: QueryRegisteredReactionResponseProtoMsg,
   ): QueryRegisteredReactionResponse {
     return QueryRegisteredReactionResponse.decode(message.value);
   },
@@ -1213,7 +1213,7 @@ export const QueryRegisteredReactionResponse = {
     return QueryRegisteredReactionResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryRegisteredReactionResponse
+    message: QueryRegisteredReactionResponse,
   ): QueryRegisteredReactionResponseProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.QueryRegisteredReactionResponse",
@@ -1229,7 +1229,7 @@ function createBaseQueryReactionsParamsRequest(): QueryReactionsParamsRequest {
 export const QueryReactionsParamsRequest = {
   encode(
     message: QueryReactionsParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1238,7 +1238,7 @@ export const QueryReactionsParamsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReactionsParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1270,7 +1270,7 @@ export const QueryReactionsParamsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryReactionsParamsRequest {
     const message = createBaseQueryReactionsParamsRequest();
     message.subspaceId =
@@ -1280,14 +1280,14 @@ export const QueryReactionsParamsRequest = {
     return message;
   },
   fromAmino(
-    object: QueryReactionsParamsRequestAmino
+    object: QueryReactionsParamsRequestAmino,
   ): QueryReactionsParamsRequest {
     return {
       subspaceId: Long.fromString(object.subspace_id),
     };
   },
   toAmino(
-    message: QueryReactionsParamsRequest
+    message: QueryReactionsParamsRequest,
   ): QueryReactionsParamsRequestAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -1296,12 +1296,12 @@ export const QueryReactionsParamsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryReactionsParamsRequestAminoMsg
+    object: QueryReactionsParamsRequestAminoMsg,
   ): QueryReactionsParamsRequest {
     return QueryReactionsParamsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryReactionsParamsRequestProtoMsg
+    message: QueryReactionsParamsRequestProtoMsg,
   ): QueryReactionsParamsRequest {
     return QueryReactionsParamsRequest.decode(message.value);
   },
@@ -1309,7 +1309,7 @@ export const QueryReactionsParamsRequest = {
     return QueryReactionsParamsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryReactionsParamsRequest
+    message: QueryReactionsParamsRequest,
   ): QueryReactionsParamsRequestProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.QueryReactionsParamsRequest",
@@ -1325,19 +1325,19 @@ function createBaseQueryReactionsParamsResponse(): QueryReactionsParamsResponse 
 export const QueryReactionsParamsResponse = {
   encode(
     message: QueryReactionsParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.params !== undefined) {
       SubspaceReactionsParams.encode(
         message.params,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryReactionsParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1348,7 +1348,7 @@ export const QueryReactionsParamsResponse = {
         case 1:
           message.params = SubspaceReactionsParams.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -1374,7 +1374,7 @@ export const QueryReactionsParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryReactionsParamsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryReactionsParamsResponse {
     const message = createBaseQueryReactionsParamsResponse();
     message.params =
@@ -1384,7 +1384,7 @@ export const QueryReactionsParamsResponse = {
     return message;
   },
   fromAmino(
-    object: QueryReactionsParamsResponseAmino
+    object: QueryReactionsParamsResponseAmino,
   ): QueryReactionsParamsResponse {
     return {
       params: object?.params
@@ -1393,7 +1393,7 @@ export const QueryReactionsParamsResponse = {
     };
   },
   toAmino(
-    message: QueryReactionsParamsResponse
+    message: QueryReactionsParamsResponse,
   ): QueryReactionsParamsResponseAmino {
     const obj: any = {};
     obj.params = message.params
@@ -1402,12 +1402,12 @@ export const QueryReactionsParamsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryReactionsParamsResponseAminoMsg
+    object: QueryReactionsParamsResponseAminoMsg,
   ): QueryReactionsParamsResponse {
     return QueryReactionsParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryReactionsParamsResponseProtoMsg
+    message: QueryReactionsParamsResponseProtoMsg,
   ): QueryReactionsParamsResponse {
     return QueryReactionsParamsResponse.decode(message.value);
   },
@@ -1415,7 +1415,7 @@ export const QueryReactionsParamsResponse = {
     return QueryReactionsParamsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryReactionsParamsResponse
+    message: QueryReactionsParamsResponse,
   ): QueryReactionsParamsResponseProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.QueryReactionsParamsResponse",
@@ -1431,15 +1431,15 @@ export interface Query {
   Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse>;
   /** RegisteredReactions allows to query the registered reaction of a subspace */
   RegisteredReactions(
-    request: QueryRegisteredReactionsRequest
+    request: QueryRegisteredReactionsRequest,
   ): Promise<QueryRegisteredReactionsResponse>;
   /** RegisteredReaction allows to query the registered reaction of a subspace */
   RegisteredReaction(
-    request: QueryRegisteredReactionRequest
+    request: QueryRegisteredReactionRequest,
   ): Promise<QueryRegisteredReactionResponse>;
   /** ReactionsParams allows to query the reaction params of a subspace */
   ReactionsParams(
-    request: QueryReactionsParamsRequest
+    request: QueryReactionsParamsRequest,
   ): Promise<QueryReactionsParamsResponse>;
 }
 export class QueryClientImpl implements Query {
@@ -1457,10 +1457,10 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.reactions.v1.Query",
       "Reactions",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryReactionsResponse.decode(new _m0.Reader(data))
+      QueryReactionsResponse.decode(new _m0.Reader(data)),
     );
   }
   Reaction(request: QueryReactionRequest): Promise<QueryReactionResponse> {
@@ -1468,49 +1468,49 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.reactions.v1.Query",
       "Reaction",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryReactionResponse.decode(new _m0.Reader(data))
+      QueryReactionResponse.decode(new _m0.Reader(data)),
     );
   }
   RegisteredReactions(
-    request: QueryRegisteredReactionsRequest
+    request: QueryRegisteredReactionsRequest,
   ): Promise<QueryRegisteredReactionsResponse> {
     const data = QueryRegisteredReactionsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.reactions.v1.Query",
       "RegisteredReactions",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryRegisteredReactionsResponse.decode(new _m0.Reader(data))
+      QueryRegisteredReactionsResponse.decode(new _m0.Reader(data)),
     );
   }
   RegisteredReaction(
-    request: QueryRegisteredReactionRequest
+    request: QueryRegisteredReactionRequest,
   ): Promise<QueryRegisteredReactionResponse> {
     const data = QueryRegisteredReactionRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.reactions.v1.Query",
       "RegisteredReaction",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryRegisteredReactionResponse.decode(new _m0.Reader(data))
+      QueryRegisteredReactionResponse.decode(new _m0.Reader(data)),
     );
   }
   ReactionsParams(
-    request: QueryReactionsParamsRequest
+    request: QueryReactionsParamsRequest,
   ): Promise<QueryReactionsParamsResponse> {
     const data = QueryReactionsParamsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.reactions.v1.Query",
       "ReactionsParams",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryReactionsParamsResponse.decode(new _m0.Reader(data))
+      QueryReactionsParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

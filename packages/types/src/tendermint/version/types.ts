@@ -151,7 +151,7 @@ function createBaseConsensus(): Consensus {
 export const Consensus = {
   encode(
     message: Consensus,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.block.isZero()) {
       writer.uint32(8).uint64(message.block);
@@ -196,7 +196,7 @@ export const Consensus = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Consensus>, I>>(
-    object: I
+    object: I,
   ): Consensus {
     const message = createBaseConsensus();
     message.block =

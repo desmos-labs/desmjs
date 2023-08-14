@@ -68,7 +68,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.dtagTransferRequests) {
       DTagTransferRequest.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -99,7 +99,7 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.dtagTransferRequests.push(
-            DTagTransferRequest.decode(reader, reader.uint32())
+            DTagTransferRequest.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -107,12 +107,12 @@ export const GenesisState = {
           break;
         case 3:
           message.applicationLinks.push(
-            ApplicationLink.decode(reader, reader.uint32())
+            ApplicationLink.decode(reader, reader.uint32()),
           );
           break;
         case 4:
           message.defaultExternalAddresses.push(
-            DefaultExternalAddressEntry.decode(reader, reader.uint32())
+            DefaultExternalAddressEntry.decode(reader, reader.uint32()),
           );
           break;
         case 5:
@@ -132,7 +132,7 @@ export const GenesisState = {
     return {
       dtagTransferRequests: Array.isArray(object?.dtagTransferRequests)
         ? object.dtagTransferRequests.map((e: any) =>
-            DTagTransferRequest.fromJSON(e)
+            DTagTransferRequest.fromJSON(e),
           )
         : [],
       chainLinks: Array.isArray(object?.chainLinks)
@@ -143,7 +143,7 @@ export const GenesisState = {
         : [],
       defaultExternalAddresses: Array.isArray(object?.defaultExternalAddresses)
         ? object.defaultExternalAddresses.map((e: any) =>
-            DefaultExternalAddressEntry.fromJSON(e)
+            DefaultExternalAddressEntry.fromJSON(e),
           )
         : [],
       ibcPortId: isSet(object.ibcPortId) ? String(object.ibcPortId) : "",
@@ -154,28 +154,28 @@ export const GenesisState = {
     const obj: any = {};
     if (message.dtagTransferRequests) {
       obj.dtagTransferRequests = message.dtagTransferRequests.map((e) =>
-        e ? DTagTransferRequest.toJSON(e) : undefined
+        e ? DTagTransferRequest.toJSON(e) : undefined,
       );
     } else {
       obj.dtagTransferRequests = [];
     }
     if (message.chainLinks) {
       obj.chainLinks = message.chainLinks.map((e) =>
-        e ? ChainLink.toJSON(e) : undefined
+        e ? ChainLink.toJSON(e) : undefined,
       );
     } else {
       obj.chainLinks = [];
     }
     if (message.applicationLinks) {
       obj.applicationLinks = message.applicationLinks.map((e) =>
-        e ? ApplicationLink.toJSON(e) : undefined
+        e ? ApplicationLink.toJSON(e) : undefined,
       );
     } else {
       obj.applicationLinks = [];
     }
     if (message.defaultExternalAddresses) {
-      obj.defaultExternalAddresses = message.defaultExternalAddresses.map((e) =>
-        e ? DefaultExternalAddressEntry.toJSON(e) : undefined
+      obj.defaultExternalAddresses = message.defaultExternalAddresses.map(
+        (e) => (e ? DefaultExternalAddressEntry.toJSON(e) : undefined),
       );
     } else {
       obj.defaultExternalAddresses = [];
@@ -186,12 +186,12 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.dtagTransferRequests =
       object.dtagTransferRequests?.map((e) =>
-        DTagTransferRequest.fromPartial(e)
+        DTagTransferRequest.fromPartial(e),
       ) || [];
     message.chainLinks =
       object.chainLinks?.map((e) => ChainLink.fromPartial(e)) || [];
@@ -199,7 +199,7 @@ export const GenesisState = {
       object.applicationLinks?.map((e) => ApplicationLink.fromPartial(e)) || [];
     message.defaultExternalAddresses =
       object.defaultExternalAddresses?.map((e) =>
-        DefaultExternalAddressEntry.fromPartial(e)
+        DefaultExternalAddressEntry.fromPartial(e),
       ) || [];
     message.ibcPortId = object.ibcPortId ?? "";
     message.params =
@@ -212,7 +212,7 @@ export const GenesisState = {
     return {
       dtagTransferRequests: Array.isArray(object?.dtag_transfer_requests)
         ? object.dtag_transfer_requests.map((e: any) =>
-            DTagTransferRequest.fromAmino(e)
+            DTagTransferRequest.fromAmino(e),
           )
         : [],
       chainLinks: Array.isArray(object?.chain_links)
@@ -222,10 +222,10 @@ export const GenesisState = {
         ? object.application_links.map((e: any) => ApplicationLink.fromAmino(e))
         : [],
       defaultExternalAddresses: Array.isArray(
-        object?.default_external_addresses
+        object?.default_external_addresses,
       )
         ? object.default_external_addresses.map((e: any) =>
-            DefaultExternalAddressEntry.fromAmino(e)
+            DefaultExternalAddressEntry.fromAmino(e),
           )
         : [],
       ibcPortId: object.ibc_port_id,
@@ -236,28 +236,28 @@ export const GenesisState = {
     const obj: any = {};
     if (message.dtagTransferRequests) {
       obj.dtag_transfer_requests = message.dtagTransferRequests.map((e) =>
-        e ? DTagTransferRequest.toAmino(e) : undefined
+        e ? DTagTransferRequest.toAmino(e) : undefined,
       );
     } else {
       obj.dtag_transfer_requests = [];
     }
     if (message.chainLinks) {
       obj.chain_links = message.chainLinks.map((e) =>
-        e ? ChainLink.toAmino(e) : undefined
+        e ? ChainLink.toAmino(e) : undefined,
       );
     } else {
       obj.chain_links = [];
     }
     if (message.applicationLinks) {
       obj.application_links = message.applicationLinks.map((e) =>
-        e ? ApplicationLink.toAmino(e) : undefined
+        e ? ApplicationLink.toAmino(e) : undefined,
       );
     } else {
       obj.application_links = [];
     }
     if (message.defaultExternalAddresses) {
       obj.default_external_addresses = message.defaultExternalAddresses.map(
-        (e) => (e ? DefaultExternalAddressEntry.toAmino(e) : undefined)
+        (e) => (e ? DefaultExternalAddressEntry.toAmino(e) : undefined),
       );
     } else {
       obj.default_external_addresses = [];
@@ -292,7 +292,7 @@ function createBaseDefaultExternalAddressEntry(): DefaultExternalAddressEntry {
 export const DefaultExternalAddressEntry = {
   encode(
     message: DefaultExternalAddressEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
@@ -307,7 +307,7 @@ export const DefaultExternalAddressEntry = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): DefaultExternalAddressEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -346,7 +346,7 @@ export const DefaultExternalAddressEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<DefaultExternalAddressEntry>, I>>(
-    object: I
+    object: I,
   ): DefaultExternalAddressEntry {
     const message = createBaseDefaultExternalAddressEntry();
     message.owner = object.owner ?? "";
@@ -355,7 +355,7 @@ export const DefaultExternalAddressEntry = {
     return message;
   },
   fromAmino(
-    object: DefaultExternalAddressEntryAmino
+    object: DefaultExternalAddressEntryAmino,
   ): DefaultExternalAddressEntry {
     return {
       owner: object.owner,
@@ -364,7 +364,7 @@ export const DefaultExternalAddressEntry = {
     };
   },
   toAmino(
-    message: DefaultExternalAddressEntry
+    message: DefaultExternalAddressEntry,
   ): DefaultExternalAddressEntryAmino {
     const obj: any = {};
     obj.owner = message.owner;
@@ -373,12 +373,12 @@ export const DefaultExternalAddressEntry = {
     return obj;
   },
   fromAminoMsg(
-    object: DefaultExternalAddressEntryAminoMsg
+    object: DefaultExternalAddressEntryAminoMsg,
   ): DefaultExternalAddressEntry {
     return DefaultExternalAddressEntry.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: DefaultExternalAddressEntryProtoMsg
+    message: DefaultExternalAddressEntryProtoMsg,
   ): DefaultExternalAddressEntry {
     return DefaultExternalAddressEntry.decode(message.value);
   },
@@ -386,7 +386,7 @@ export const DefaultExternalAddressEntry = {
     return DefaultExternalAddressEntry.encode(message).finish();
   },
   toProtoMsg(
-    message: DefaultExternalAddressEntry
+    message: DefaultExternalAddressEntry,
   ): DefaultExternalAddressEntryProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.DefaultExternalAddressEntry",

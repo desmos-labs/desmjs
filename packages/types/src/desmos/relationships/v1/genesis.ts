@@ -35,7 +35,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.relationships) {
       Relationship.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -54,7 +54,7 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.relationships.push(
-            Relationship.decode(reader, reader.uint32())
+            Relationship.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -81,14 +81,14 @@ export const GenesisState = {
     const obj: any = {};
     if (message.relationships) {
       obj.relationships = message.relationships.map((e) =>
-        e ? Relationship.toJSON(e) : undefined
+        e ? Relationship.toJSON(e) : undefined,
       );
     } else {
       obj.relationships = [];
     }
     if (message.blocks) {
       obj.blocks = message.blocks.map((e) =>
-        e ? UserBlock.toJSON(e) : undefined
+        e ? UserBlock.toJSON(e) : undefined,
       );
     } else {
       obj.blocks = [];
@@ -96,7 +96,7 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.relationships =
@@ -118,14 +118,14 @@ export const GenesisState = {
     const obj: any = {};
     if (message.relationships) {
       obj.relationships = message.relationships.map((e) =>
-        e ? Relationship.toAmino(e) : undefined
+        e ? Relationship.toAmino(e) : undefined,
       );
     } else {
       obj.relationships = [];
     }
     if (message.blocks) {
       obj.blocks = message.blocks.map((e) =>
-        e ? UserBlock.toAmino(e) : undefined
+        e ? UserBlock.toAmino(e) : undefined,
       );
     } else {
       obj.blocks = [];

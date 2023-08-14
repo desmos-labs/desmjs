@@ -78,7 +78,7 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 export const MsgUpdateParams = {
   encode(
     message: MsgUpdateParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -122,7 +122,7 @@ export const MsgUpdateParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
-    object: I
+    object: I,
   ): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -166,13 +166,13 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 export const MsgUpdateParamsResponse = {
   encode(
     _: MsgUpdateParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUpdateParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -195,7 +195,7 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -208,12 +208,12 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUpdateParamsResponseAminoMsg
+    object: MsgUpdateParamsResponseAminoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgUpdateParamsResponseProtoMsg
+    message: MsgUpdateParamsResponseProtoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.decode(message.value);
   },
@@ -221,7 +221,7 @@ export const MsgUpdateParamsResponse = {
     return MsgUpdateParamsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUpdateParamsResponse
+    message: MsgUpdateParamsResponse,
   ): MsgUpdateParamsResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgUpdateParamsResponse",

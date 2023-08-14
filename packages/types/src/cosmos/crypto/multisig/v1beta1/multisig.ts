@@ -68,7 +68,7 @@ function createBaseMultiSignature(): MultiSignature {
 export const MultiSignature = {
   encode(
     message: MultiSignature,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.signatures) {
       writer.uint32(10).bytes(v!);
@@ -103,7 +103,7 @@ export const MultiSignature = {
     const obj: any = {};
     if (message.signatures) {
       obj.signatures = message.signatures.map((e) =>
-        base64FromBytes(e !== undefined ? e : new Uint8Array())
+        base64FromBytes(e !== undefined ? e : new Uint8Array()),
       );
     } else {
       obj.signatures = [];
@@ -111,7 +111,7 @@ export const MultiSignature = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MultiSignature>, I>>(
-    object: I
+    object: I,
   ): MultiSignature {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map((e) => e) || [];
@@ -164,7 +164,7 @@ function createBaseCompactBitArray(): CompactBitArray {
 export const CompactBitArray = {
   encode(
     message: CompactBitArray,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.extraBitsStored !== 0) {
       writer.uint32(8).uint32(message.extraBitsStored);
@@ -210,12 +210,12 @@ export const CompactBitArray = {
       (obj.extraBitsStored = Math.round(message.extraBitsStored));
     message.elems !== undefined &&
       (obj.elems = base64FromBytes(
-        message.elems !== undefined ? message.elems : new Uint8Array()
+        message.elems !== undefined ? message.elems : new Uint8Array(),
       ));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CompactBitArray>, I>>(
-    object: I
+    object: I,
   ): CompactBitArray {
     const message = createBaseCompactBitArray();
     message.extraBitsStored = object.extraBitsStored ?? 0;

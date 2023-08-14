@@ -463,7 +463,7 @@ function createBaseMsgCreatePost(): MsgCreatePost {
 export const MsgCreatePost = {
   encode(
     message: MsgCreatePost,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -539,7 +539,7 @@ export const MsgCreatePost = {
           break;
         case 11:
           message.referencedPosts.push(
-            PostReference.decode(reader, reader.uint32())
+            PostReference.decode(reader, reader.uint32()),
           );
           break;
         default:
@@ -597,7 +597,7 @@ export const MsgCreatePost = {
     }
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Any.toJSON(e) : undefined
+        e ? Any.toJSON(e) : undefined,
       );
     } else {
       obj.attachments = [];
@@ -609,7 +609,7 @@ export const MsgCreatePost = {
       (obj.replySettings = replySettingToJSON(message.replySettings));
     if (message.referencedPosts) {
       obj.referencedPosts = message.referencedPosts.map((e) =>
-        e ? PostReference.toJSON(e) : undefined
+        e ? PostReference.toJSON(e) : undefined,
       );
     } else {
       obj.referencedPosts = [];
@@ -617,7 +617,7 @@ export const MsgCreatePost = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreatePost>, I>>(
-    object: I
+    object: I,
   ): MsgCreatePost {
     const message = createBaseMsgCreatePost();
     message.subspaceId =
@@ -685,7 +685,7 @@ export const MsgCreatePost = {
     }
     if (message.attachments) {
       obj.attachments = message.attachments.map((e) =>
-        e ? Any.toAmino(e) : undefined
+        e ? Any.toAmino(e) : undefined,
       );
     } else {
       obj.attachments = [];
@@ -697,7 +697,7 @@ export const MsgCreatePost = {
     obj.reply_settings = message.replySettings;
     if (message.referencedPosts) {
       obj.referenced_posts = message.referencedPosts.map((e) =>
-        e ? PostReference.toAmino(e) : undefined
+        e ? PostReference.toAmino(e) : undefined,
       );
     } else {
       obj.referenced_posts = [];
@@ -729,7 +729,7 @@ function createBaseMsgCreatePostResponse(): MsgCreatePostResponse {
 export const MsgCreatePostResponse = {
   encode(
     message: MsgCreatePostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.postId.isZero()) {
       writer.uint32(8).uint64(message.postId);
@@ -741,7 +741,7 @@ export const MsgCreatePostResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreatePostResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -779,7 +779,7 @@ export const MsgCreatePostResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreatePostResponse>, I>>(
-    object: I
+    object: I,
   ): MsgCreatePostResponse {
     const message = createBaseMsgCreatePostResponse();
     message.postId =
@@ -837,7 +837,7 @@ function createBaseMsgEditPost(): MsgEditPost {
 export const MsgEditPost = {
   encode(
     message: MsgEditPost,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -927,7 +927,7 @@ export const MsgEditPost = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditPost>, I>>(
-    object: I
+    object: I,
   ): MsgEditPost {
     const message = createBaseMsgEditPost();
     message.subspaceId =
@@ -1001,7 +1001,7 @@ function createBaseMsgEditPostResponse(): MsgEditPostResponse {
 export const MsgEditPostResponse = {
   encode(
     message: MsgEditPostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.editDate !== undefined) {
       Timestamp.encode(message.editDate, writer.uint32(10).fork()).ldelim();
@@ -1039,7 +1039,7 @@ export const MsgEditPostResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgEditPostResponse>, I>>(
-    object: I
+    object: I,
   ): MsgEditPostResponse {
     const message = createBaseMsgEditPostResponse();
     message.editDate =
@@ -1088,7 +1088,7 @@ function createBaseMsgDeletePost(): MsgDeletePost {
 export const MsgDeletePost = {
   encode(
     message: MsgDeletePost,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1143,7 +1143,7 @@ export const MsgDeletePost = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeletePost>, I>>(
-    object: I
+    object: I,
   ): MsgDeletePost {
     const message = createBaseMsgDeletePost();
     message.subspaceId =
@@ -1195,13 +1195,13 @@ function createBaseMsgDeletePostResponse(): MsgDeletePostResponse {
 export const MsgDeletePostResponse = {
   encode(
     _: MsgDeletePostResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeletePostResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1224,7 +1224,7 @@ export const MsgDeletePostResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeletePostResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeletePostResponse {
     const message = createBaseMsgDeletePostResponse();
     return message;
@@ -1263,7 +1263,7 @@ function createBaseMsgAddPostAttachment(): MsgAddPostAttachment {
 export const MsgAddPostAttachment = {
   encode(
     message: MsgAddPostAttachment,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1281,7 +1281,7 @@ export const MsgAddPostAttachment = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAddPostAttachment {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1330,7 +1330,7 @@ export const MsgAddPostAttachment = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAddPostAttachment>, I>>(
-    object: I
+    object: I,
   ): MsgAddPostAttachment {
     const message = createBaseMsgAddPostAttachment();
     message.subspaceId =
@@ -1391,7 +1391,7 @@ function createBaseMsgAddPostAttachmentResponse(): MsgAddPostAttachmentResponse 
 export const MsgAddPostAttachmentResponse = {
   encode(
     message: MsgAddPostAttachmentResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.attachmentId !== 0) {
       writer.uint32(8).uint32(message.attachmentId);
@@ -1403,7 +1403,7 @@ export const MsgAddPostAttachmentResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAddPostAttachmentResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1443,7 +1443,7 @@ export const MsgAddPostAttachmentResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAddPostAttachmentResponse>, I>>(
-    object: I
+    object: I,
   ): MsgAddPostAttachmentResponse {
     const message = createBaseMsgAddPostAttachmentResponse();
     message.attachmentId = object.attachmentId ?? 0;
@@ -1454,7 +1454,7 @@ export const MsgAddPostAttachmentResponse = {
     return message;
   },
   fromAmino(
-    object: MsgAddPostAttachmentResponseAmino
+    object: MsgAddPostAttachmentResponseAmino,
   ): MsgAddPostAttachmentResponse {
     return {
       attachmentId: object.attachment_id,
@@ -1464,7 +1464,7 @@ export const MsgAddPostAttachmentResponse = {
     };
   },
   toAmino(
-    message: MsgAddPostAttachmentResponse
+    message: MsgAddPostAttachmentResponse,
   ): MsgAddPostAttachmentResponseAmino {
     const obj: any = {};
     obj.attachment_id = message.attachmentId;
@@ -1474,12 +1474,12 @@ export const MsgAddPostAttachmentResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgAddPostAttachmentResponseAminoMsg
+    object: MsgAddPostAttachmentResponseAminoMsg,
   ): MsgAddPostAttachmentResponse {
     return MsgAddPostAttachmentResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgAddPostAttachmentResponseProtoMsg
+    message: MsgAddPostAttachmentResponseProtoMsg,
   ): MsgAddPostAttachmentResponse {
     return MsgAddPostAttachmentResponse.decode(message.value);
   },
@@ -1487,7 +1487,7 @@ export const MsgAddPostAttachmentResponse = {
     return MsgAddPostAttachmentResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgAddPostAttachmentResponse
+    message: MsgAddPostAttachmentResponse,
   ): MsgAddPostAttachmentResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.MsgAddPostAttachmentResponse",
@@ -1506,7 +1506,7 @@ function createBaseMsgRemovePostAttachment(): MsgRemovePostAttachment {
 export const MsgRemovePostAttachment = {
   encode(
     message: MsgRemovePostAttachment,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1524,7 +1524,7 @@ export const MsgRemovePostAttachment = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRemovePostAttachment {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1575,7 +1575,7 @@ export const MsgRemovePostAttachment = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRemovePostAttachment>, I>>(
-    object: I
+    object: I,
   ): MsgRemovePostAttachment {
     const message = createBaseMsgRemovePostAttachment();
     message.subspaceId =
@@ -1609,12 +1609,12 @@ export const MsgRemovePostAttachment = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRemovePostAttachmentAminoMsg
+    object: MsgRemovePostAttachmentAminoMsg,
   ): MsgRemovePostAttachment {
     return MsgRemovePostAttachment.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRemovePostAttachmentProtoMsg
+    message: MsgRemovePostAttachmentProtoMsg,
   ): MsgRemovePostAttachment {
     return MsgRemovePostAttachment.decode(message.value);
   },
@@ -1622,7 +1622,7 @@ export const MsgRemovePostAttachment = {
     return MsgRemovePostAttachment.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRemovePostAttachment
+    message: MsgRemovePostAttachment,
   ): MsgRemovePostAttachmentProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.MsgRemovePostAttachment",
@@ -1638,7 +1638,7 @@ function createBaseMsgRemovePostAttachmentResponse(): MsgRemovePostAttachmentRes
 export const MsgRemovePostAttachmentResponse = {
   encode(
     message: MsgRemovePostAttachmentResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.editDate !== undefined) {
       Timestamp.encode(message.editDate, writer.uint32(10).fork()).ldelim();
@@ -1647,7 +1647,7 @@ export const MsgRemovePostAttachmentResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRemovePostAttachmentResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1679,7 +1679,7 @@ export const MsgRemovePostAttachmentResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRemovePostAttachmentResponse>, I>>(
-    object: I
+    object: I,
   ): MsgRemovePostAttachmentResponse {
     const message = createBaseMsgRemovePostAttachmentResponse();
     message.editDate =
@@ -1689,7 +1689,7 @@ export const MsgRemovePostAttachmentResponse = {
     return message;
   },
   fromAmino(
-    object: MsgRemovePostAttachmentResponseAmino
+    object: MsgRemovePostAttachmentResponseAmino,
   ): MsgRemovePostAttachmentResponse {
     return {
       editDate: object?.edit_date
@@ -1698,7 +1698,7 @@ export const MsgRemovePostAttachmentResponse = {
     };
   },
   toAmino(
-    message: MsgRemovePostAttachmentResponse
+    message: MsgRemovePostAttachmentResponse,
   ): MsgRemovePostAttachmentResponseAmino {
     const obj: any = {};
     obj.edit_date = message.editDate
@@ -1707,12 +1707,12 @@ export const MsgRemovePostAttachmentResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRemovePostAttachmentResponseAminoMsg
+    object: MsgRemovePostAttachmentResponseAminoMsg,
   ): MsgRemovePostAttachmentResponse {
     return MsgRemovePostAttachmentResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRemovePostAttachmentResponseProtoMsg
+    message: MsgRemovePostAttachmentResponseProtoMsg,
   ): MsgRemovePostAttachmentResponse {
     return MsgRemovePostAttachmentResponse.decode(message.value);
   },
@@ -1720,7 +1720,7 @@ export const MsgRemovePostAttachmentResponse = {
     return MsgRemovePostAttachmentResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRemovePostAttachmentResponse
+    message: MsgRemovePostAttachmentResponse,
   ): MsgRemovePostAttachmentResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.MsgRemovePostAttachmentResponse",
@@ -1740,7 +1740,7 @@ function createBaseMsgAnswerPoll(): MsgAnswerPoll {
 export const MsgAnswerPoll = {
   encode(
     message: MsgAnswerPoll,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -1826,7 +1826,7 @@ export const MsgAnswerPoll = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAnswerPoll>, I>>(
-    object: I
+    object: I,
   ): MsgAnswerPoll {
     const message = createBaseMsgAnswerPoll();
     message.subspaceId =
@@ -1890,13 +1890,13 @@ function createBaseMsgAnswerPollResponse(): MsgAnswerPollResponse {
 export const MsgAnswerPollResponse = {
   encode(
     _: MsgAnswerPollResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgAnswerPollResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1919,7 +1919,7 @@ export const MsgAnswerPollResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgAnswerPollResponse>, I>>(
-    _: I
+    _: I,
   ): MsgAnswerPollResponse {
     const message = createBaseMsgAnswerPollResponse();
     return message;
@@ -1956,7 +1956,7 @@ function createBaseMsgUpdateParams(): MsgUpdateParams {
 export const MsgUpdateParams = {
   encode(
     message: MsgUpdateParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -2000,7 +2000,7 @@ export const MsgUpdateParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParams>, I>>(
-    object: I
+    object: I,
   ): MsgUpdateParams {
     const message = createBaseMsgUpdateParams();
     message.authority = object.authority ?? "";
@@ -2044,13 +2044,13 @@ function createBaseMsgUpdateParamsResponse(): MsgUpdateParamsResponse {
 export const MsgUpdateParamsResponse = {
   encode(
     _: MsgUpdateParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUpdateParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2073,7 +2073,7 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateParamsResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUpdateParamsResponse {
     const message = createBaseMsgUpdateParamsResponse();
     return message;
@@ -2086,12 +2086,12 @@ export const MsgUpdateParamsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUpdateParamsResponseAminoMsg
+    object: MsgUpdateParamsResponseAminoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgUpdateParamsResponseProtoMsg
+    message: MsgUpdateParamsResponseProtoMsg,
   ): MsgUpdateParamsResponse {
     return MsgUpdateParamsResponse.decode(message.value);
   },
@@ -2099,7 +2099,7 @@ export const MsgUpdateParamsResponse = {
     return MsgUpdateParamsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUpdateParamsResponse
+    message: MsgUpdateParamsResponse,
   ): MsgUpdateParamsResponseProtoMsg {
     return {
       typeUrl: "/desmos.posts.v3.MsgUpdateParamsResponse",
@@ -2117,11 +2117,11 @@ export interface Msg {
   DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse>;
   /** AddPostAttachment allows to add a new attachment to a post */
   AddPostAttachment(
-    request: MsgAddPostAttachment
+    request: MsgAddPostAttachment,
   ): Promise<MsgAddPostAttachmentResponse>;
   /** RemovePostAttachment allows to remove an attachment from a post */
   RemovePostAttachment(
-    request: MsgRemovePostAttachment
+    request: MsgRemovePostAttachment,
   ): Promise<MsgRemovePostAttachmentResponse>;
   /** AnswerPoll allows to answer a post poll */
   AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse>;
@@ -2150,54 +2150,54 @@ export class MsgClientImpl implements Msg {
     const data = MsgCreatePost.encode(request).finish();
     const promise = this.rpc.request("desmos.posts.v3.Msg", "CreatePost", data);
     return promise.then((data) =>
-      MsgCreatePostResponse.decode(new _m0.Reader(data))
+      MsgCreatePostResponse.decode(new _m0.Reader(data)),
     );
   }
   EditPost(request: MsgEditPost): Promise<MsgEditPostResponse> {
     const data = MsgEditPost.encode(request).finish();
     const promise = this.rpc.request("desmos.posts.v3.Msg", "EditPost", data);
     return promise.then((data) =>
-      MsgEditPostResponse.decode(new _m0.Reader(data))
+      MsgEditPostResponse.decode(new _m0.Reader(data)),
     );
   }
   DeletePost(request: MsgDeletePost): Promise<MsgDeletePostResponse> {
     const data = MsgDeletePost.encode(request).finish();
     const promise = this.rpc.request("desmos.posts.v3.Msg", "DeletePost", data);
     return promise.then((data) =>
-      MsgDeletePostResponse.decode(new _m0.Reader(data))
+      MsgDeletePostResponse.decode(new _m0.Reader(data)),
     );
   }
   AddPostAttachment(
-    request: MsgAddPostAttachment
+    request: MsgAddPostAttachment,
   ): Promise<MsgAddPostAttachmentResponse> {
     const data = MsgAddPostAttachment.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.posts.v3.Msg",
       "AddPostAttachment",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgAddPostAttachmentResponse.decode(new _m0.Reader(data))
+      MsgAddPostAttachmentResponse.decode(new _m0.Reader(data)),
     );
   }
   RemovePostAttachment(
-    request: MsgRemovePostAttachment
+    request: MsgRemovePostAttachment,
   ): Promise<MsgRemovePostAttachmentResponse> {
     const data = MsgRemovePostAttachment.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.posts.v3.Msg",
       "RemovePostAttachment",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgRemovePostAttachmentResponse.decode(new _m0.Reader(data))
+      MsgRemovePostAttachmentResponse.decode(new _m0.Reader(data)),
     );
   }
   AnswerPoll(request: MsgAnswerPoll): Promise<MsgAnswerPollResponse> {
     const data = MsgAnswerPoll.encode(request).finish();
     const promise = this.rpc.request("desmos.posts.v3.Msg", "AnswerPoll", data);
     return promise.then((data) =>
-      MsgAnswerPollResponse.decode(new _m0.Reader(data))
+      MsgAnswerPollResponse.decode(new _m0.Reader(data)),
     );
   }
   UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
@@ -2205,10 +2205,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "desmos.posts.v3.Msg",
       "UpdateParams",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgUpdateParamsResponse.decode(new _m0.Reader(data))
+      MsgUpdateParamsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

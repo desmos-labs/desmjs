@@ -89,7 +89,7 @@ function createBaseProfile(): Profile {
 export const Profile = {
   encode(
     message: Profile,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
@@ -244,7 +244,7 @@ function createBasePictures(): Pictures {
 export const Pictures = {
   encode(
     message: Pictures,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.profile !== "") {
       writer.uint32(10).string(message.profile);

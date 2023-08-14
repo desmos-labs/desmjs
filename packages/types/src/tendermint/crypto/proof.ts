@@ -181,11 +181,11 @@ export const Proof = {
       (obj.index = (message.index || Long.ZERO).toString());
     message.leafHash !== undefined &&
       (obj.leafHash = base64FromBytes(
-        message.leafHash !== undefined ? message.leafHash : new Uint8Array()
+        message.leafHash !== undefined ? message.leafHash : new Uint8Array(),
       ));
     if (message.aunts) {
       obj.aunts = message.aunts.map((e) =>
-        base64FromBytes(e !== undefined ? e : new Uint8Array())
+        base64FromBytes(e !== undefined ? e : new Uint8Array()),
       );
     } else {
       obj.aunts = [];
@@ -253,7 +253,7 @@ function createBaseValueOp(): ValueOp {
 export const ValueOp = {
   encode(
     message: ValueOp,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -293,7 +293,7 @@ export const ValueOp = {
     const obj: any = {};
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.proof !== undefined &&
       (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
@@ -346,7 +346,7 @@ function createBaseDominoOp(): DominoOp {
 export const DominoOp = {
   encode(
     message: DominoOp,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
@@ -443,7 +443,7 @@ function createBaseProofOp(): ProofOp {
 export const ProofOp = {
   encode(
     message: ProofOp,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
@@ -493,11 +493,11 @@ export const ProofOp = {
     message.type !== undefined && (obj.type = message.type);
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.data !== undefined &&
       (obj.data = base64FromBytes(
-        message.data !== undefined ? message.data : new Uint8Array()
+        message.data !== undefined ? message.data : new Uint8Array(),
       ));
     return obj;
   },
@@ -546,7 +546,7 @@ function createBaseProofOps(): ProofOps {
 export const ProofOps = {
   encode(
     message: ProofOps,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.ops) {
       ProofOp.encode(v!, writer.uint32(10).fork()).ldelim();

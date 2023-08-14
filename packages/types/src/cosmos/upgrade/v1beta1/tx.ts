@@ -108,7 +108,7 @@ function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
 export const MsgSoftwareUpgrade = {
   encode(
     message: MsgSoftwareUpgrade,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -152,7 +152,7 @@ export const MsgSoftwareUpgrade = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgrade>, I>>(
-    object: I
+    object: I,
   ): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
@@ -202,13 +202,13 @@ function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
 export const MsgSoftwareUpgradeResponse = {
   encode(
     _: MsgSoftwareUpgradeResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSoftwareUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -231,7 +231,7 @@ export const MsgSoftwareUpgradeResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgradeResponse>, I>>(
-    _: I
+    _: I,
   ): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
@@ -244,12 +244,12 @@ export const MsgSoftwareUpgradeResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgSoftwareUpgradeResponseAminoMsg
+    object: MsgSoftwareUpgradeResponseAminoMsg,
   ): MsgSoftwareUpgradeResponse {
     return MsgSoftwareUpgradeResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgSoftwareUpgradeResponse
+    message: MsgSoftwareUpgradeResponse,
   ): MsgSoftwareUpgradeResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgSoftwareUpgradeResponse",
@@ -257,7 +257,7 @@ export const MsgSoftwareUpgradeResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgSoftwareUpgradeResponseProtoMsg
+    message: MsgSoftwareUpgradeResponseProtoMsg,
   ): MsgSoftwareUpgradeResponse {
     return MsgSoftwareUpgradeResponse.decode(message.value);
   },
@@ -265,7 +265,7 @@ export const MsgSoftwareUpgradeResponse = {
     return MsgSoftwareUpgradeResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSoftwareUpgradeResponse
+    message: MsgSoftwareUpgradeResponse,
   ): MsgSoftwareUpgradeResponseProtoMsg {
     return {
       typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse",
@@ -281,7 +281,7 @@ function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
 export const MsgCancelUpgrade = {
   encode(
     message: MsgCancelUpgrade,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
@@ -316,7 +316,7 @@ export const MsgCancelUpgrade = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCancelUpgrade>, I>>(
-    object: I
+    object: I,
   ): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
@@ -360,13 +360,13 @@ function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
 export const MsgCancelUpgradeResponse = {
   encode(
     _: MsgCancelUpgradeResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCancelUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -389,7 +389,7 @@ export const MsgCancelUpgradeResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCancelUpgradeResponse>, I>>(
-    _: I
+    _: I,
   ): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
@@ -402,12 +402,12 @@ export const MsgCancelUpgradeResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgCancelUpgradeResponseAminoMsg
+    object: MsgCancelUpgradeResponseAminoMsg,
   ): MsgCancelUpgradeResponse {
     return MsgCancelUpgradeResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgCancelUpgradeResponse
+    message: MsgCancelUpgradeResponse,
   ): MsgCancelUpgradeResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCancelUpgradeResponse",
@@ -415,7 +415,7 @@ export const MsgCancelUpgradeResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgCancelUpgradeResponseProtoMsg
+    message: MsgCancelUpgradeResponseProtoMsg,
   ): MsgCancelUpgradeResponse {
     return MsgCancelUpgradeResponse.decode(message.value);
   },
@@ -423,7 +423,7 @@ export const MsgCancelUpgradeResponse = {
     return MsgCancelUpgradeResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCancelUpgradeResponse
+    message: MsgCancelUpgradeResponse,
   ): MsgCancelUpgradeResponseProtoMsg {
     return {
       typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse",
@@ -439,7 +439,7 @@ export interface Msg {
    * Since: cosmos-sdk 0.46
    */
   SoftwareUpgrade(
-    request: MsgSoftwareUpgrade
+    request: MsgSoftwareUpgrade,
   ): Promise<MsgSoftwareUpgradeResponse>;
   /**
    * CancelUpgrade is a governance operation for cancelling a previously
@@ -457,16 +457,16 @@ export class MsgClientImpl implements Msg {
     this.CancelUpgrade = this.CancelUpgrade.bind(this);
   }
   SoftwareUpgrade(
-    request: MsgSoftwareUpgrade
+    request: MsgSoftwareUpgrade,
   ): Promise<MsgSoftwareUpgradeResponse> {
     const data = MsgSoftwareUpgrade.encode(request).finish();
     const promise = this.rpc.request(
       "cosmos.upgrade.v1beta1.Msg",
       "SoftwareUpgrade",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgSoftwareUpgradeResponse.decode(new _m0.Reader(data))
+      MsgSoftwareUpgradeResponse.decode(new _m0.Reader(data)),
     );
   }
   CancelUpgrade(request: MsgCancelUpgrade): Promise<MsgCancelUpgradeResponse> {
@@ -474,10 +474,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "cosmos.upgrade.v1beta1.Msg",
       "CancelUpgrade",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCancelUpgradeResponse.decode(new _m0.Reader(data))
+      MsgCancelUpgradeResponse.decode(new _m0.Reader(data)),
     );
   }
 }

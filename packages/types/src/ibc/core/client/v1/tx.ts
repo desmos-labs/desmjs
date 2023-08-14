@@ -228,7 +228,7 @@ function createBaseMsgCreateClient(): MsgCreateClient {
 export const MsgCreateClient = {
   encode(
     message: MsgCreateClient,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -289,7 +289,7 @@ export const MsgCreateClient = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateClient>, I>>(
-    object: I
+    object: I,
   ): MsgCreateClient {
     const message = createBaseMsgCreateClient();
     message.clientState =
@@ -353,13 +353,13 @@ function createBaseMsgCreateClientResponse(): MsgCreateClientResponse {
 export const MsgCreateClientResponse = {
   encode(
     _: MsgCreateClientResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgCreateClientResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -382,7 +382,7 @@ export const MsgCreateClientResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgCreateClientResponse>, I>>(
-    _: I
+    _: I,
   ): MsgCreateClientResponse {
     const message = createBaseMsgCreateClientResponse();
     return message;
@@ -395,12 +395,12 @@ export const MsgCreateClientResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgCreateClientResponseAminoMsg
+    object: MsgCreateClientResponseAminoMsg,
   ): MsgCreateClientResponse {
     return MsgCreateClientResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgCreateClientResponse
+    message: MsgCreateClientResponse,
   ): MsgCreateClientResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgCreateClientResponse",
@@ -408,7 +408,7 @@ export const MsgCreateClientResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgCreateClientResponseProtoMsg
+    message: MsgCreateClientResponseProtoMsg,
   ): MsgCreateClientResponse {
     return MsgCreateClientResponse.decode(message.value);
   },
@@ -416,7 +416,7 @@ export const MsgCreateClientResponse = {
     return MsgCreateClientResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgCreateClientResponse
+    message: MsgCreateClientResponse,
   ): MsgCreateClientResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse",
@@ -434,7 +434,7 @@ function createBaseMsgUpdateClient(): MsgUpdateClient {
 export const MsgUpdateClient = {
   encode(
     message: MsgUpdateClient,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -490,7 +490,7 @@ export const MsgUpdateClient = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateClient>, I>>(
-    object: I
+    object: I,
   ): MsgUpdateClient {
     const message = createBaseMsgUpdateClient();
     message.clientId = object.clientId ?? "";
@@ -547,13 +547,13 @@ function createBaseMsgUpdateClientResponse(): MsgUpdateClientResponse {
 export const MsgUpdateClientResponse = {
   encode(
     _: MsgUpdateClientResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUpdateClientResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -576,7 +576,7 @@ export const MsgUpdateClientResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpdateClientResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUpdateClientResponse {
     const message = createBaseMsgUpdateClientResponse();
     return message;
@@ -589,12 +589,12 @@ export const MsgUpdateClientResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUpdateClientResponseAminoMsg
+    object: MsgUpdateClientResponseAminoMsg,
   ): MsgUpdateClientResponse {
     return MsgUpdateClientResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgUpdateClientResponse
+    message: MsgUpdateClientResponse,
   ): MsgUpdateClientResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpdateClientResponse",
@@ -602,7 +602,7 @@ export const MsgUpdateClientResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgUpdateClientResponseProtoMsg
+    message: MsgUpdateClientResponseProtoMsg,
   ): MsgUpdateClientResponse {
     return MsgUpdateClientResponse.decode(message.value);
   },
@@ -610,7 +610,7 @@ export const MsgUpdateClientResponse = {
     return MsgUpdateClientResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUpdateClientResponse
+    message: MsgUpdateClientResponse,
   ): MsgUpdateClientResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse",
@@ -631,7 +631,7 @@ function createBaseMsgUpgradeClient(): MsgUpgradeClient {
 export const MsgUpgradeClient = {
   encode(
     message: MsgUpgradeClient,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -718,19 +718,19 @@ export const MsgUpgradeClient = {
       (obj.proofUpgradeClient = base64FromBytes(
         message.proofUpgradeClient !== undefined
           ? message.proofUpgradeClient
-          : new Uint8Array()
+          : new Uint8Array(),
       ));
     message.proofUpgradeConsensusState !== undefined &&
       (obj.proofUpgradeConsensusState = base64FromBytes(
         message.proofUpgradeConsensusState !== undefined
           ? message.proofUpgradeConsensusState
-          : new Uint8Array()
+          : new Uint8Array(),
       ));
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpgradeClient>, I>>(
-    object: I
+    object: I,
   ): MsgUpgradeClient {
     const message = createBaseMsgUpgradeClient();
     message.clientId = object.clientId ?? "";
@@ -804,13 +804,13 @@ function createBaseMsgUpgradeClientResponse(): MsgUpgradeClientResponse {
 export const MsgUpgradeClientResponse = {
   encode(
     _: MsgUpgradeClientResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgUpgradeClientResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -833,7 +833,7 @@ export const MsgUpgradeClientResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgUpgradeClientResponse>, I>>(
-    _: I
+    _: I,
   ): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
@@ -846,12 +846,12 @@ export const MsgUpgradeClientResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgUpgradeClientResponseAminoMsg
+    object: MsgUpgradeClientResponseAminoMsg,
   ): MsgUpgradeClientResponse {
     return MsgUpgradeClientResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgUpgradeClientResponse
+    message: MsgUpgradeClientResponse,
   ): MsgUpgradeClientResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgUpgradeClientResponse",
@@ -859,7 +859,7 @@ export const MsgUpgradeClientResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgUpgradeClientResponseProtoMsg
+    message: MsgUpgradeClientResponseProtoMsg,
   ): MsgUpgradeClientResponse {
     return MsgUpgradeClientResponse.decode(message.value);
   },
@@ -867,7 +867,7 @@ export const MsgUpgradeClientResponse = {
     return MsgUpgradeClientResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgUpgradeClientResponse
+    message: MsgUpgradeClientResponse,
   ): MsgUpgradeClientResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse",
@@ -885,7 +885,7 @@ function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
 export const MsgSubmitMisbehaviour = {
   encode(
     message: MsgSubmitMisbehaviour,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -900,7 +900,7 @@ export const MsgSubmitMisbehaviour = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSubmitMisbehaviour {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -944,7 +944,7 @@ export const MsgSubmitMisbehaviour = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSubmitMisbehaviour>, I>>(
-    object: I
+    object: I,
   ): MsgSubmitMisbehaviour {
     const message = createBaseMsgSubmitMisbehaviour();
     message.clientId = object.clientId ?? "";
@@ -1001,13 +1001,13 @@ function createBaseMsgSubmitMisbehaviourResponse(): MsgSubmitMisbehaviourRespons
 export const MsgSubmitMisbehaviourResponse = {
   encode(
     _: MsgSubmitMisbehaviourResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSubmitMisbehaviourResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1030,29 +1030,29 @@ export const MsgSubmitMisbehaviourResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSubmitMisbehaviourResponse>, I>>(
-    _: I
+    _: I,
   ): MsgSubmitMisbehaviourResponse {
     const message = createBaseMsgSubmitMisbehaviourResponse();
     return message;
   },
   fromAmino(
-    _: MsgSubmitMisbehaviourResponseAmino
+    _: MsgSubmitMisbehaviourResponseAmino,
   ): MsgSubmitMisbehaviourResponse {
     return {};
   },
   toAmino(
-    _: MsgSubmitMisbehaviourResponse
+    _: MsgSubmitMisbehaviourResponse,
   ): MsgSubmitMisbehaviourResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgSubmitMisbehaviourResponseAminoMsg
+    object: MsgSubmitMisbehaviourResponseAminoMsg,
   ): MsgSubmitMisbehaviourResponse {
     return MsgSubmitMisbehaviourResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: MsgSubmitMisbehaviourResponse
+    message: MsgSubmitMisbehaviourResponse,
   ): MsgSubmitMisbehaviourResponseAminoMsg {
     return {
       type: "cosmos-sdk/MsgSubmitMisbehaviourResponse",
@@ -1060,7 +1060,7 @@ export const MsgSubmitMisbehaviourResponse = {
     };
   },
   fromProtoMsg(
-    message: MsgSubmitMisbehaviourResponseProtoMsg
+    message: MsgSubmitMisbehaviourResponseProtoMsg,
   ): MsgSubmitMisbehaviourResponse {
     return MsgSubmitMisbehaviourResponse.decode(message.value);
   },
@@ -1068,7 +1068,7 @@ export const MsgSubmitMisbehaviourResponse = {
     return MsgSubmitMisbehaviourResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgSubmitMisbehaviourResponse
+    message: MsgSubmitMisbehaviourResponse,
   ): MsgSubmitMisbehaviourResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse",
@@ -1086,7 +1086,7 @@ export interface Msg {
   UpgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse>;
   /** SubmitMisbehaviour defines a rpc handler method for MsgSubmitMisbehaviour. */
   SubmitMisbehaviour(
-    request: MsgSubmitMisbehaviour
+    request: MsgSubmitMisbehaviour,
   ): Promise<MsgSubmitMisbehaviourResponse>;
 }
 export class MsgClientImpl implements Msg {
@@ -1103,10 +1103,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "ibc.core.client.v1.Msg",
       "CreateClient",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgCreateClientResponse.decode(new _m0.Reader(data))
+      MsgCreateClientResponse.decode(new _m0.Reader(data)),
     );
   }
   UpdateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse> {
@@ -1114,10 +1114,10 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "ibc.core.client.v1.Msg",
       "UpdateClient",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgUpdateClientResponse.decode(new _m0.Reader(data))
+      MsgUpdateClientResponse.decode(new _m0.Reader(data)),
     );
   }
   UpgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse> {
@@ -1125,23 +1125,23 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request(
       "ibc.core.client.v1.Msg",
       "UpgradeClient",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgUpgradeClientResponse.decode(new _m0.Reader(data))
+      MsgUpgradeClientResponse.decode(new _m0.Reader(data)),
     );
   }
   SubmitMisbehaviour(
-    request: MsgSubmitMisbehaviour
+    request: MsgSubmitMisbehaviour,
   ): Promise<MsgSubmitMisbehaviourResponse> {
     const data = MsgSubmitMisbehaviour.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Msg",
       "SubmitMisbehaviour",
-      data
+      data,
     );
     return promise.then((data) =>
-      MsgSubmitMisbehaviourResponse.decode(new _m0.Reader(data))
+      MsgSubmitMisbehaviourResponse.decode(new _m0.Reader(data)),
     );
   }
 }

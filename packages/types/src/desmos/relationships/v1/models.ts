@@ -92,7 +92,7 @@ function createBaseRelationship(): Relationship {
 export const Relationship = {
   encode(
     message: Relationship,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
@@ -149,7 +149,7 @@ export const Relationship = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Relationship>, I>>(
-    object: I
+    object: I,
   ): Relationship {
     const message = createBaseRelationship();
     message.creator = object.creator ?? "";
@@ -203,7 +203,7 @@ function createBaseUserBlock(): UserBlock {
 export const UserBlock = {
   encode(
     message: UserBlock,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.blocker !== "") {
       writer.uint32(10).string(message.blocker);
@@ -265,7 +265,7 @@ export const UserBlock = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UserBlock>, I>>(
-    object: I
+    object: I,
   ): UserBlock {
     const message = createBaseUserBlock();
     message.blocker = object.blocker ?? "";

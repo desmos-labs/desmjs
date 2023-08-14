@@ -157,7 +157,7 @@ function createBaseQueryRelationshipsRequest(): QueryRelationshipsRequest {
 export const QueryRelationshipsRequest = {
   encode(
     message: QueryRelationshipsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -175,7 +175,7 @@ export const QueryRelationshipsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryRelationshipsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -230,7 +230,7 @@ export const QueryRelationshipsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryRelationshipsRequest>, I>>(
-    object: I
+    object: I,
   ): QueryRelationshipsRequest {
     const message = createBaseQueryRelationshipsRequest();
     message.subspaceId =
@@ -268,12 +268,12 @@ export const QueryRelationshipsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryRelationshipsRequestAminoMsg
+    object: QueryRelationshipsRequestAminoMsg,
   ): QueryRelationshipsRequest {
     return QueryRelationshipsRequest.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryRelationshipsRequestProtoMsg
+    message: QueryRelationshipsRequestProtoMsg,
   ): QueryRelationshipsRequest {
     return QueryRelationshipsRequest.decode(message.value);
   },
@@ -281,7 +281,7 @@ export const QueryRelationshipsRequest = {
     return QueryRelationshipsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryRelationshipsRequest
+    message: QueryRelationshipsRequest,
   ): QueryRelationshipsRequestProtoMsg {
     return {
       typeUrl: "/desmos.relationships.v1.QueryRelationshipsRequest",
@@ -298,7 +298,7 @@ function createBaseQueryRelationshipsResponse(): QueryRelationshipsResponse {
 export const QueryRelationshipsResponse = {
   encode(
     message: QueryRelationshipsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.relationships) {
       Relationship.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -306,14 +306,14 @@ export const QueryRelationshipsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryRelationshipsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -323,7 +323,7 @@ export const QueryRelationshipsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.relationships.push(
-            Relationship.decode(reader, reader.uint32())
+            Relationship.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -350,7 +350,7 @@ export const QueryRelationshipsResponse = {
     const obj: any = {};
     if (message.relationships) {
       obj.relationships = message.relationships.map((e) =>
-        e ? Relationship.toJSON(e) : undefined
+        e ? Relationship.toJSON(e) : undefined,
       );
     } else {
       obj.relationships = [];
@@ -362,7 +362,7 @@ export const QueryRelationshipsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryRelationshipsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryRelationshipsResponse {
     const message = createBaseQueryRelationshipsResponse();
     message.relationships =
@@ -374,7 +374,7 @@ export const QueryRelationshipsResponse = {
     return message;
   },
   fromAmino(
-    object: QueryRelationshipsResponseAmino
+    object: QueryRelationshipsResponseAmino,
   ): QueryRelationshipsResponse {
     return {
       relationships: Array.isArray(object?.relationships)
@@ -386,12 +386,12 @@ export const QueryRelationshipsResponse = {
     };
   },
   toAmino(
-    message: QueryRelationshipsResponse
+    message: QueryRelationshipsResponse,
   ): QueryRelationshipsResponseAmino {
     const obj: any = {};
     if (message.relationships) {
       obj.relationships = message.relationships.map((e) =>
-        e ? Relationship.toAmino(e) : undefined
+        e ? Relationship.toAmino(e) : undefined,
       );
     } else {
       obj.relationships = [];
@@ -402,12 +402,12 @@ export const QueryRelationshipsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryRelationshipsResponseAminoMsg
+    object: QueryRelationshipsResponseAminoMsg,
   ): QueryRelationshipsResponse {
     return QueryRelationshipsResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: QueryRelationshipsResponseProtoMsg
+    message: QueryRelationshipsResponseProtoMsg,
   ): QueryRelationshipsResponse {
     return QueryRelationshipsResponse.decode(message.value);
   },
@@ -415,7 +415,7 @@ export const QueryRelationshipsResponse = {
     return QueryRelationshipsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryRelationshipsResponse
+    message: QueryRelationshipsResponse,
   ): QueryRelationshipsResponseProtoMsg {
     return {
       typeUrl: "/desmos.relationships.v1.QueryRelationshipsResponse",
@@ -434,7 +434,7 @@ function createBaseQueryBlocksRequest(): QueryBlocksRequest {
 export const QueryBlocksRequest = {
   encode(
     message: QueryBlocksRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -501,7 +501,7 @@ export const QueryBlocksRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryBlocksRequest>, I>>(
-    object: I
+    object: I,
   ): QueryBlocksRequest {
     const message = createBaseQueryBlocksRequest();
     message.subspaceId =
@@ -563,7 +563,7 @@ function createBaseQueryBlocksResponse(): QueryBlocksResponse {
 export const QueryBlocksResponse = {
   encode(
     message: QueryBlocksResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.blocks) {
       UserBlock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -571,7 +571,7 @@ export const QueryBlocksResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
@@ -610,7 +610,7 @@ export const QueryBlocksResponse = {
     const obj: any = {};
     if (message.blocks) {
       obj.blocks = message.blocks.map((e) =>
-        e ? UserBlock.toJSON(e) : undefined
+        e ? UserBlock.toJSON(e) : undefined,
       );
     } else {
       obj.blocks = [];
@@ -622,7 +622,7 @@ export const QueryBlocksResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryBlocksResponse>, I>>(
-    object: I
+    object: I,
   ): QueryBlocksResponse {
     const message = createBaseQueryBlocksResponse();
     message.blocks = object.blocks?.map((e) => UserBlock.fromPartial(e)) || [];
@@ -646,7 +646,7 @@ export const QueryBlocksResponse = {
     const obj: any = {};
     if (message.blocks) {
       obj.blocks = message.blocks.map((e) =>
-        e ? UserBlock.toAmino(e) : undefined
+        e ? UserBlock.toAmino(e) : undefined,
       );
     } else {
       obj.blocks = [];
@@ -676,7 +676,7 @@ export const QueryBlocksResponse = {
 export interface Query {
   /** Relationships queries all relationships present inside a specific subspace */
   Relationships(
-    request: QueryRelationshipsRequest
+    request: QueryRelationshipsRequest,
   ): Promise<QueryRelationshipsResponse>;
   /**
    * Blocks queries the blocks for the given user, if provided.
@@ -692,16 +692,16 @@ export class QueryClientImpl implements Query {
     this.Blocks = this.Blocks.bind(this);
   }
   Relationships(
-    request: QueryRelationshipsRequest
+    request: QueryRelationshipsRequest,
   ): Promise<QueryRelationshipsResponse> {
     const data = QueryRelationshipsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "desmos.relationships.v1.Query",
       "Relationships",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryRelationshipsResponse.decode(new _m0.Reader(data))
+      QueryRelationshipsResponse.decode(new _m0.Reader(data)),
     );
   }
   Blocks(request: QueryBlocksRequest): Promise<QueryBlocksResponse> {
@@ -709,10 +709,10 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request(
       "desmos.relationships.v1.Query",
       "Blocks",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryBlocksResponse.decode(new _m0.Reader(data))
+      QueryBlocksResponse.decode(new _m0.Reader(data)),
     );
   }
 }

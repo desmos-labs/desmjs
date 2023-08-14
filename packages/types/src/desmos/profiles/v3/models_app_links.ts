@@ -29,7 +29,7 @@ export enum ApplicationLinkState {
 }
 export const ApplicationLinkStateAmino = ApplicationLinkState;
 export function applicationLinkStateFromJSON(
-  object: any
+  object: any,
 ): ApplicationLinkState {
   switch (object) {
     case 0:
@@ -54,7 +54,7 @@ export function applicationLinkStateFromJSON(
   }
 }
 export function applicationLinkStateToJSON(
-  object: ApplicationLinkState
+  object: ApplicationLinkState,
 ): string {
   switch (object) {
     case ApplicationLinkState.APPLICATION_LINK_STATE_INITIALIZED_UNSPECIFIED:
@@ -306,7 +306,7 @@ function createBaseApplicationLink(): ApplicationLink {
 export const ApplicationLink = {
   encode(
     message: ApplicationLink,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.user !== "") {
       writer.uint32(10).string(message.user);
@@ -320,7 +320,7 @@ export const ApplicationLink = {
     if (message.oracleRequest !== undefined) {
       OracleRequest.encode(
         message.oracleRequest,
-        writer.uint32(34).fork()
+        writer.uint32(34).fork(),
       ).ldelim();
     }
     if (message.result !== undefined) {
@@ -332,7 +332,7 @@ export const ApplicationLink = {
     if (message.expirationTime !== undefined) {
       Timestamp.encode(
         message.expirationTime,
-        writer.uint32(58).fork()
+        writer.uint32(58).fork(),
       ).ldelim();
     }
     return writer;
@@ -408,12 +408,12 @@ export const ApplicationLink = {
       (obj.creationTime = fromTimestamp(message.creationTime).toISOString());
     message.expirationTime !== undefined &&
       (obj.expirationTime = fromTimestamp(
-        message.expirationTime
+        message.expirationTime,
       ).toISOString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ApplicationLink>, I>>(
-    object: I
+    object: I,
   ): ApplicationLink {
     const message = createBaseApplicationLink();
     message.user = object.user ?? "";
@@ -586,7 +586,7 @@ function createBaseOracleRequest(): OracleRequest {
 export const OracleRequest = {
   encode(
     message: OracleRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
@@ -597,7 +597,7 @@ export const OracleRequest = {
     if (message.callData !== undefined) {
       OracleRequest_CallData.encode(
         message.callData,
-        writer.uint32(26).fork()
+        writer.uint32(26).fork(),
       ).ldelim();
     }
     if (message.clientId !== "") {
@@ -621,7 +621,7 @@ export const OracleRequest = {
         case 3:
           message.callData = OracleRequest_CallData.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 4:
@@ -660,7 +660,7 @@ export const OracleRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<OracleRequest>, I>>(
-    object: I
+    object: I,
   ): OracleRequest {
     const message = createBaseOracleRequest();
     message.id =
@@ -725,7 +725,7 @@ function createBaseOracleRequest_CallData(): OracleRequest_CallData {
 export const OracleRequest_CallData = {
   encode(
     message: OracleRequest_CallData,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.application !== "") {
       writer.uint32(10).string(message.application);
@@ -737,7 +737,7 @@ export const OracleRequest_CallData = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): OracleRequest_CallData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -772,7 +772,7 @@ export const OracleRequest_CallData = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<OracleRequest_CallData>, I>>(
-    object: I
+    object: I,
   ): OracleRequest_CallData {
     const message = createBaseOracleRequest_CallData();
     message.application = object.application ?? "";
@@ -795,7 +795,7 @@ export const OracleRequest_CallData = {
     return OracleRequest_CallData.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: OracleRequest_CallDataProtoMsg
+    message: OracleRequest_CallDataProtoMsg,
   ): OracleRequest_CallData {
     return OracleRequest_CallData.decode(message.value);
   },
@@ -818,7 +818,7 @@ function createBaseResult(): Result {
 export const Result = {
   encode(
     message: Result,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.success !== undefined) {
       Result_Success.encode(message.success, writer.uint32(10).fork()).ldelim();
@@ -927,7 +927,7 @@ function createBaseResult_Success(): Result_Success {
 export const Result_Success = {
   encode(
     message: Result_Success,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.value !== "") {
       writer.uint32(10).string(message.value);
@@ -970,7 +970,7 @@ export const Result_Success = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Result_Success>, I>>(
-    object: I
+    object: I,
   ): Result_Success {
     const message = createBaseResult_Success();
     message.value = object.value ?? "";
@@ -1013,7 +1013,7 @@ function createBaseResult_Failed(): Result_Failed {
 export const Result_Failed = {
   encode(
     message: Result_Failed,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.error !== "") {
       writer.uint32(10).string(message.error);
@@ -1048,7 +1048,7 @@ export const Result_Failed = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Result_Failed>, I>>(
-    object: I
+    object: I,
   ): Result_Failed {
     const message = createBaseResult_Failed();
     message.error = object.error ?? "";

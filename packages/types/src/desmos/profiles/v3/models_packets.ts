@@ -93,7 +93,7 @@ function createBaseLinkChainAccountPacketData(): LinkChainAccountPacketData {
 export const LinkChainAccountPacketData = {
   encode(
     message: LinkChainAccountPacketData,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.sourceAddress !== undefined) {
       Any.encode(message.sourceAddress, writer.uint32(10).fork()).ldelim();
@@ -104,7 +104,7 @@ export const LinkChainAccountPacketData = {
     if (message.sourceChainConfig !== undefined) {
       ChainConfig.encode(
         message.sourceChainConfig,
-        writer.uint32(26).fork()
+        writer.uint32(26).fork(),
       ).ldelim();
     }
     if (message.destinationAddress !== "") {
@@ -117,7 +117,7 @@ export const LinkChainAccountPacketData = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): LinkChainAccountPacketData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -134,7 +134,7 @@ export const LinkChainAccountPacketData = {
         case 3:
           message.sourceChainConfig = ChainConfig.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 4:
@@ -192,7 +192,7 @@ export const LinkChainAccountPacketData = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<LinkChainAccountPacketData>, I>>(
-    object: I
+    object: I,
   ): LinkChainAccountPacketData {
     const message = createBaseLinkChainAccountPacketData();
     message.sourceAddress =
@@ -216,7 +216,7 @@ export const LinkChainAccountPacketData = {
     return message;
   },
   fromAmino(
-    object: LinkChainAccountPacketDataAmino
+    object: LinkChainAccountPacketDataAmino,
   ): LinkChainAccountPacketData {
     return {
       sourceAddress: object?.source_address
@@ -235,7 +235,7 @@ export const LinkChainAccountPacketData = {
     };
   },
   toAmino(
-    message: LinkChainAccountPacketData
+    message: LinkChainAccountPacketData,
   ): LinkChainAccountPacketDataAmino {
     const obj: any = {};
     obj.source_address = message.sourceAddress
@@ -254,12 +254,12 @@ export const LinkChainAccountPacketData = {
     return obj;
   },
   fromAminoMsg(
-    object: LinkChainAccountPacketDataAminoMsg
+    object: LinkChainAccountPacketDataAminoMsg,
   ): LinkChainAccountPacketData {
     return LinkChainAccountPacketData.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: LinkChainAccountPacketDataProtoMsg
+    message: LinkChainAccountPacketDataProtoMsg,
   ): LinkChainAccountPacketData {
     return LinkChainAccountPacketData.decode(message.value);
   },
@@ -267,7 +267,7 @@ export const LinkChainAccountPacketData = {
     return LinkChainAccountPacketData.encode(message).finish();
   },
   toProtoMsg(
-    message: LinkChainAccountPacketData
+    message: LinkChainAccountPacketData,
   ): LinkChainAccountPacketDataProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.LinkChainAccountPacketData",
@@ -283,7 +283,7 @@ function createBaseLinkChainAccountPacketAck(): LinkChainAccountPacketAck {
 export const LinkChainAccountPacketAck = {
   encode(
     message: LinkChainAccountPacketAck,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.sourceAddress !== "") {
       writer.uint32(10).string(message.sourceAddress);
@@ -292,7 +292,7 @@ export const LinkChainAccountPacketAck = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): LinkChainAccountPacketAck {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -324,7 +324,7 @@ export const LinkChainAccountPacketAck = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<LinkChainAccountPacketAck>, I>>(
-    object: I
+    object: I,
   ): LinkChainAccountPacketAck {
     const message = createBaseLinkChainAccountPacketAck();
     message.sourceAddress = object.sourceAddress ?? "";
@@ -341,12 +341,12 @@ export const LinkChainAccountPacketAck = {
     return obj;
   },
   fromAminoMsg(
-    object: LinkChainAccountPacketAckAminoMsg
+    object: LinkChainAccountPacketAckAminoMsg,
   ): LinkChainAccountPacketAck {
     return LinkChainAccountPacketAck.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: LinkChainAccountPacketAckProtoMsg
+    message: LinkChainAccountPacketAckProtoMsg,
   ): LinkChainAccountPacketAck {
     return LinkChainAccountPacketAck.decode(message.value);
   },
@@ -354,7 +354,7 @@ export const LinkChainAccountPacketAck = {
     return LinkChainAccountPacketAck.encode(message).finish();
   },
   toProtoMsg(
-    message: LinkChainAccountPacketAck
+    message: LinkChainAccountPacketAck,
   ): LinkChainAccountPacketAckProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.LinkChainAccountPacketAck",

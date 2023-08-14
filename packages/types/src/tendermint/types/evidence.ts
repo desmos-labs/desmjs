@@ -99,18 +99,18 @@ function createBaseEvidence(): Evidence {
 export const Evidence = {
   encode(
     message: Evidence,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.duplicateVoteEvidence !== undefined) {
       DuplicateVoteEvidence.encode(
         message.duplicateVoteEvidence,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     if (message.lightClientAttackEvidence !== undefined) {
       LightClientAttackEvidence.encode(
         message.lightClientAttackEvidence,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
@@ -125,13 +125,13 @@ export const Evidence = {
         case 1:
           message.duplicateVoteEvidence = DuplicateVoteEvidence.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 2:
           message.lightClientAttackEvidence = LightClientAttackEvidence.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -174,7 +174,7 @@ export const Evidence = {
       object.lightClientAttackEvidence !== undefined &&
       object.lightClientAttackEvidence !== null
         ? LightClientAttackEvidence.fromPartial(
-            object.lightClientAttackEvidence
+            object.lightClientAttackEvidence,
           )
         : undefined;
     return message;
@@ -186,7 +186,7 @@ export const Evidence = {
         : undefined,
       lightClientAttackEvidence: object?.light_client_attack_evidence
         ? LightClientAttackEvidence.fromAmino(
-            object.light_client_attack_evidence
+            object.light_client_attack_evidence,
           )
         : undefined,
     };
@@ -229,7 +229,7 @@ function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
 export const DuplicateVoteEvidence = {
   encode(
     message: DuplicateVoteEvidence,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.voteA !== undefined) {
       Vote.encode(message.voteA, writer.uint32(10).fork()).ldelim();
@@ -250,7 +250,7 @@ export const DuplicateVoteEvidence = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): DuplicateVoteEvidence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -312,7 +312,7 @@ export const DuplicateVoteEvidence = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<DuplicateVoteEvidence>, I>>(
-    object: I
+    object: I,
   ): DuplicateVoteEvidence {
     const message = createBaseDuplicateVoteEvidence();
     message.voteA =
@@ -391,12 +391,12 @@ function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
 export const LightClientAttackEvidence = {
   encode(
     message: LightClientAttackEvidence,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.conflictingBlock !== undefined) {
       LightBlock.encode(
         message.conflictingBlock,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     if (!message.commonHeight.isZero()) {
@@ -415,7 +415,7 @@ export const LightClientAttackEvidence = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): LightClientAttackEvidence {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -431,7 +431,7 @@ export const LightClientAttackEvidence = {
           break;
         case 3:
           message.byzantineValidators.push(
-            Validator.decode(reader, reader.uint32())
+            Validator.decode(reader, reader.uint32()),
           );
           break;
         case 4:
@@ -476,7 +476,7 @@ export const LightClientAttackEvidence = {
       (obj.commonHeight = (message.commonHeight || Long.ZERO).toString());
     if (message.byzantineValidators) {
       obj.byzantineValidators = message.byzantineValidators.map((e) =>
-        e ? Validator.toJSON(e) : undefined
+        e ? Validator.toJSON(e) : undefined,
       );
     } else {
       obj.byzantineValidators = [];
@@ -490,7 +490,7 @@ export const LightClientAttackEvidence = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<LightClientAttackEvidence>, I>>(
-    object: I
+    object: I,
   ): LightClientAttackEvidence {
     const message = createBaseLightClientAttackEvidence();
     message.conflictingBlock =
@@ -538,7 +538,7 @@ export const LightClientAttackEvidence = {
       : undefined;
     if (message.byzantineValidators) {
       obj.byzantine_validators = message.byzantineValidators.map((e) =>
-        e ? Validator.toAmino(e) : undefined
+        e ? Validator.toAmino(e) : undefined,
       );
     } else {
       obj.byzantine_validators = [];
@@ -552,12 +552,12 @@ export const LightClientAttackEvidence = {
     return obj;
   },
   fromAminoMsg(
-    object: LightClientAttackEvidenceAminoMsg
+    object: LightClientAttackEvidenceAminoMsg,
   ): LightClientAttackEvidence {
     return LightClientAttackEvidence.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: LightClientAttackEvidenceProtoMsg
+    message: LightClientAttackEvidenceProtoMsg,
   ): LightClientAttackEvidence {
     return LightClientAttackEvidence.decode(message.value);
   },
@@ -565,7 +565,7 @@ export const LightClientAttackEvidence = {
     return LightClientAttackEvidence.encode(message).finish();
   },
   toProtoMsg(
-    message: LightClientAttackEvidence
+    message: LightClientAttackEvidence,
   ): LightClientAttackEvidenceProtoMsg {
     return {
       typeUrl: "/tendermint.types.LightClientAttackEvidence",
@@ -581,7 +581,7 @@ function createBaseEvidenceList(): EvidenceList {
 export const EvidenceList = {
   encode(
     message: EvidenceList,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.evidence) {
       Evidence.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -616,7 +616,7 @@ export const EvidenceList = {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map((e) =>
-        e ? Evidence.toJSON(e) : undefined
+        e ? Evidence.toJSON(e) : undefined,
       );
     } else {
       obj.evidence = [];
@@ -624,7 +624,7 @@ export const EvidenceList = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<EvidenceList>, I>>(
-    object: I
+    object: I,
   ): EvidenceList {
     const message = createBaseEvidenceList();
     message.evidence =
@@ -642,7 +642,7 @@ export const EvidenceList = {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map((e) =>
-        e ? Evidence.toAmino(e) : undefined
+        e ? Evidence.toAmino(e) : undefined,
       );
     } else {
       obj.evidence = [];

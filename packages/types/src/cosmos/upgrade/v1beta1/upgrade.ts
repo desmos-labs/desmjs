@@ -215,7 +215,7 @@ export const Plan = {
     if (message.upgradedClientState !== undefined) {
       Any.encode(
         message.upgradedClientState,
-        writer.uint32(42).fork()
+        writer.uint32(42).fork(),
       ).ldelim();
     }
     return writer;
@@ -347,7 +347,7 @@ function createBaseSoftwareUpgradeProposal(): SoftwareUpgradeProposal {
 export const SoftwareUpgradeProposal = {
   encode(
     message: SoftwareUpgradeProposal,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -362,7 +362,7 @@ export const SoftwareUpgradeProposal = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): SoftwareUpgradeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -403,7 +403,7 @@ export const SoftwareUpgradeProposal = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SoftwareUpgradeProposal>, I>>(
-    object: I
+    object: I,
   ): SoftwareUpgradeProposal {
     const message = createBaseSoftwareUpgradeProposal();
     message.title = object.title ?? "";
@@ -429,12 +429,12 @@ export const SoftwareUpgradeProposal = {
     return obj;
   },
   fromAminoMsg(
-    object: SoftwareUpgradeProposalAminoMsg
+    object: SoftwareUpgradeProposalAminoMsg,
   ): SoftwareUpgradeProposal {
     return SoftwareUpgradeProposal.fromAmino(object.value);
   },
   toAminoMsg(
-    message: SoftwareUpgradeProposal
+    message: SoftwareUpgradeProposal,
   ): SoftwareUpgradeProposalAminoMsg {
     return {
       type: "cosmos-sdk/SoftwareUpgradeProposal",
@@ -442,7 +442,7 @@ export const SoftwareUpgradeProposal = {
     };
   },
   fromProtoMsg(
-    message: SoftwareUpgradeProposalProtoMsg
+    message: SoftwareUpgradeProposalProtoMsg,
   ): SoftwareUpgradeProposal {
     return SoftwareUpgradeProposal.decode(message.value);
   },
@@ -450,7 +450,7 @@ export const SoftwareUpgradeProposal = {
     return SoftwareUpgradeProposal.encode(message).finish();
   },
   toProtoMsg(
-    message: SoftwareUpgradeProposal
+    message: SoftwareUpgradeProposal,
   ): SoftwareUpgradeProposalProtoMsg {
     return {
       typeUrl: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
@@ -467,7 +467,7 @@ function createBaseCancelSoftwareUpgradeProposal(): CancelSoftwareUpgradeProposa
 export const CancelSoftwareUpgradeProposal = {
   encode(
     message: CancelSoftwareUpgradeProposal,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -479,7 +479,7 @@ export const CancelSoftwareUpgradeProposal = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): CancelSoftwareUpgradeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -514,7 +514,7 @@ export const CancelSoftwareUpgradeProposal = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CancelSoftwareUpgradeProposal>, I>>(
-    object: I
+    object: I,
   ): CancelSoftwareUpgradeProposal {
     const message = createBaseCancelSoftwareUpgradeProposal();
     message.title = object.title ?? "";
@@ -522,7 +522,7 @@ export const CancelSoftwareUpgradeProposal = {
     return message;
   },
   fromAmino(
-    object: CancelSoftwareUpgradeProposalAmino
+    object: CancelSoftwareUpgradeProposalAmino,
   ): CancelSoftwareUpgradeProposal {
     return {
       title: object.title,
@@ -530,7 +530,7 @@ export const CancelSoftwareUpgradeProposal = {
     };
   },
   toAmino(
-    message: CancelSoftwareUpgradeProposal
+    message: CancelSoftwareUpgradeProposal,
   ): CancelSoftwareUpgradeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
@@ -538,12 +538,12 @@ export const CancelSoftwareUpgradeProposal = {
     return obj;
   },
   fromAminoMsg(
-    object: CancelSoftwareUpgradeProposalAminoMsg
+    object: CancelSoftwareUpgradeProposalAminoMsg,
   ): CancelSoftwareUpgradeProposal {
     return CancelSoftwareUpgradeProposal.fromAmino(object.value);
   },
   toAminoMsg(
-    message: CancelSoftwareUpgradeProposal
+    message: CancelSoftwareUpgradeProposal,
   ): CancelSoftwareUpgradeProposalAminoMsg {
     return {
       type: "cosmos-sdk/CancelSoftwareUpgradeProposal",
@@ -551,7 +551,7 @@ export const CancelSoftwareUpgradeProposal = {
     };
   },
   fromProtoMsg(
-    message: CancelSoftwareUpgradeProposalProtoMsg
+    message: CancelSoftwareUpgradeProposalProtoMsg,
   ): CancelSoftwareUpgradeProposal {
     return CancelSoftwareUpgradeProposal.decode(message.value);
   },
@@ -559,7 +559,7 @@ export const CancelSoftwareUpgradeProposal = {
     return CancelSoftwareUpgradeProposal.encode(message).finish();
   },
   toProtoMsg(
-    message: CancelSoftwareUpgradeProposal
+    message: CancelSoftwareUpgradeProposal,
   ): CancelSoftwareUpgradeProposalProtoMsg {
     return {
       typeUrl: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal",
@@ -576,7 +576,7 @@ function createBaseModuleVersion(): ModuleVersion {
 export const ModuleVersion = {
   encode(
     message: ModuleVersion,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
@@ -622,7 +622,7 @@ export const ModuleVersion = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ModuleVersion>, I>>(
-    object: I
+    object: I,
   ): ModuleVersion {
     const message = createBaseModuleVersion();
     message.name = object.name ?? "";

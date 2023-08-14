@@ -219,7 +219,7 @@ function createBaseReaction(): Reaction {
 export const Reaction = {
   encode(
     message: Reaction,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -352,7 +352,7 @@ function createBaseRegisteredReactionValue(): RegisteredReactionValue {
 export const RegisteredReactionValue = {
   encode(
     message: RegisteredReactionValue,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.registeredReactionId !== 0) {
       writer.uint32(8).uint32(message.registeredReactionId);
@@ -361,7 +361,7 @@ export const RegisteredReactionValue = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): RegisteredReactionValue {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -393,7 +393,7 @@ export const RegisteredReactionValue = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<RegisteredReactionValue>, I>>(
-    object: I
+    object: I,
   ): RegisteredReactionValue {
     const message = createBaseRegisteredReactionValue();
     message.registeredReactionId = object.registeredReactionId ?? 0;
@@ -410,12 +410,12 @@ export const RegisteredReactionValue = {
     return obj;
   },
   fromAminoMsg(
-    object: RegisteredReactionValueAminoMsg
+    object: RegisteredReactionValueAminoMsg,
   ): RegisteredReactionValue {
     return RegisteredReactionValue.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: RegisteredReactionValueProtoMsg
+    message: RegisteredReactionValueProtoMsg,
   ): RegisteredReactionValue {
     return RegisteredReactionValue.decode(message.value);
   },
@@ -423,7 +423,7 @@ export const RegisteredReactionValue = {
     return RegisteredReactionValue.encode(message).finish();
   },
   toProtoMsg(
-    message: RegisteredReactionValue
+    message: RegisteredReactionValue,
   ): RegisteredReactionValueProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.RegisteredReactionValue",
@@ -439,7 +439,7 @@ function createBaseFreeTextValue(): FreeTextValue {
 export const FreeTextValue = {
   encode(
     message: FreeTextValue,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.text !== "") {
       writer.uint32(10).string(message.text);
@@ -474,7 +474,7 @@ export const FreeTextValue = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<FreeTextValue>, I>>(
-    object: I
+    object: I,
   ): FreeTextValue {
     const message = createBaseFreeTextValue();
     message.text = object.text ?? "";
@@ -517,7 +517,7 @@ function createBaseRegisteredReaction(): RegisteredReaction {
 export const RegisteredReaction = {
   encode(
     message: RegisteredReaction,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -585,7 +585,7 @@ export const RegisteredReaction = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<RegisteredReaction>, I>>(
-    object: I
+    object: I,
   ): RegisteredReaction {
     const message = createBaseRegisteredReaction();
     message.subspaceId =
@@ -641,7 +641,7 @@ function createBaseSubspaceReactionsParams(): SubspaceReactionsParams {
 export const SubspaceReactionsParams = {
   encode(
     message: SubspaceReactionsParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -649,20 +649,20 @@ export const SubspaceReactionsParams = {
     if (message.registeredReaction !== undefined) {
       RegisteredReactionValueParams.encode(
         message.registeredReaction,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     if (message.freeText !== undefined) {
       FreeTextValueParams.encode(
         message.freeText,
-        writer.uint32(26).fork()
+        writer.uint32(26).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): SubspaceReactionsParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -676,13 +676,13 @@ export const SubspaceReactionsParams = {
         case 2:
           message.registeredReaction = RegisteredReactionValueParams.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 3:
           message.freeText = FreeTextValueParams.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -720,7 +720,7 @@ export const SubspaceReactionsParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SubspaceReactionsParams>, I>>(
-    object: I
+    object: I,
   ): SubspaceReactionsParams {
     const message = createBaseSubspaceReactionsParams();
     message.subspaceId =
@@ -763,12 +763,12 @@ export const SubspaceReactionsParams = {
     return obj;
   },
   fromAminoMsg(
-    object: SubspaceReactionsParamsAminoMsg
+    object: SubspaceReactionsParamsAminoMsg,
   ): SubspaceReactionsParams {
     return SubspaceReactionsParams.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: SubspaceReactionsParamsProtoMsg
+    message: SubspaceReactionsParamsProtoMsg,
   ): SubspaceReactionsParams {
     return SubspaceReactionsParams.decode(message.value);
   },
@@ -776,7 +776,7 @@ export const SubspaceReactionsParams = {
     return SubspaceReactionsParams.encode(message).finish();
   },
   toProtoMsg(
-    message: SubspaceReactionsParams
+    message: SubspaceReactionsParams,
   ): SubspaceReactionsParamsProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.SubspaceReactionsParams",
@@ -794,7 +794,7 @@ function createBaseFreeTextValueParams(): FreeTextValueParams {
 export const FreeTextValueParams = {
   encode(
     message: FreeTextValueParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
@@ -846,7 +846,7 @@ export const FreeTextValueParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<FreeTextValueParams>, I>>(
-    object: I
+    object: I,
   ): FreeTextValueParams {
     const message = createBaseFreeTextValueParams();
     message.enabled = object.enabled ?? false;
@@ -892,7 +892,7 @@ function createBaseRegisteredReactionValueParams(): RegisteredReactionValueParam
 export const RegisteredReactionValueParams = {
   encode(
     message: RegisteredReactionValueParams,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
@@ -901,7 +901,7 @@ export const RegisteredReactionValueParams = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): RegisteredReactionValueParams {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -930,33 +930,33 @@ export const RegisteredReactionValueParams = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<RegisteredReactionValueParams>, I>>(
-    object: I
+    object: I,
   ): RegisteredReactionValueParams {
     const message = createBaseRegisteredReactionValueParams();
     message.enabled = object.enabled ?? false;
     return message;
   },
   fromAmino(
-    object: RegisteredReactionValueParamsAmino
+    object: RegisteredReactionValueParamsAmino,
   ): RegisteredReactionValueParams {
     return {
       enabled: object.enabled,
     };
   },
   toAmino(
-    message: RegisteredReactionValueParams
+    message: RegisteredReactionValueParams,
   ): RegisteredReactionValueParamsAmino {
     const obj: any = {};
     obj.enabled = message.enabled;
     return obj;
   },
   fromAminoMsg(
-    object: RegisteredReactionValueParamsAminoMsg
+    object: RegisteredReactionValueParamsAminoMsg,
   ): RegisteredReactionValueParams {
     return RegisteredReactionValueParams.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: RegisteredReactionValueParamsProtoMsg
+    message: RegisteredReactionValueParamsProtoMsg,
   ): RegisteredReactionValueParams {
     return RegisteredReactionValueParams.decode(message.value);
   },
@@ -964,7 +964,7 @@ export const RegisteredReactionValueParams = {
     return RegisteredReactionValueParams.encode(message).finish();
   },
   toProtoMsg(
-    message: RegisteredReactionValueParams
+    message: RegisteredReactionValueParams,
   ): RegisteredReactionValueParamsProtoMsg {
     return {
       typeUrl: "/desmos.reactions.v1.RegisteredReactionValueParams",

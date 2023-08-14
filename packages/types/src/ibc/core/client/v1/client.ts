@@ -257,7 +257,7 @@ function createBaseIdentifiedClientState(): IdentifiedClientState {
 export const IdentifiedClientState = {
   encode(
     message: IdentifiedClientState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -269,7 +269,7 @@ export const IdentifiedClientState = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): IdentifiedClientState {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -308,7 +308,7 @@ export const IdentifiedClientState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<IdentifiedClientState>, I>>(
-    object: I
+    object: I,
   ): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
     message.clientId = object.clientId ?? "";
@@ -365,7 +365,7 @@ function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
 export const ConsensusStateWithHeight = {
   encode(
     message: ConsensusStateWithHeight,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.height !== undefined) {
       Height.encode(message.height, writer.uint32(10).fork()).ldelim();
@@ -377,7 +377,7 @@ export const ConsensusStateWithHeight = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): ConsensusStateWithHeight {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -417,7 +417,7 @@ export const ConsensusStateWithHeight = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ConsensusStateWithHeight>, I>>(
-    object: I
+    object: I,
   ): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
     message.height =
@@ -447,12 +447,12 @@ export const ConsensusStateWithHeight = {
     return obj;
   },
   fromAminoMsg(
-    object: ConsensusStateWithHeightAminoMsg
+    object: ConsensusStateWithHeightAminoMsg,
   ): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.fromAmino(object.value);
   },
   toAminoMsg(
-    message: ConsensusStateWithHeight
+    message: ConsensusStateWithHeight,
   ): ConsensusStateWithHeightAminoMsg {
     return {
       type: "cosmos-sdk/ConsensusStateWithHeight",
@@ -460,7 +460,7 @@ export const ConsensusStateWithHeight = {
     };
   },
   fromProtoMsg(
-    message: ConsensusStateWithHeightProtoMsg
+    message: ConsensusStateWithHeightProtoMsg,
   ): ConsensusStateWithHeight {
     return ConsensusStateWithHeight.decode(message.value);
   },
@@ -468,7 +468,7 @@ export const ConsensusStateWithHeight = {
     return ConsensusStateWithHeight.encode(message).finish();
   },
   toProtoMsg(
-    message: ConsensusStateWithHeight
+    message: ConsensusStateWithHeight,
   ): ConsensusStateWithHeightProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight",
@@ -485,7 +485,7 @@ function createBaseClientConsensusStates(): ClientConsensusStates {
 export const ClientConsensusStates = {
   encode(
     message: ClientConsensusStates,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -497,7 +497,7 @@ export const ClientConsensusStates = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): ClientConsensusStates {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -510,7 +510,7 @@ export const ClientConsensusStates = {
           break;
         case 2:
           message.consensusStates.push(
-            ConsensusStateWithHeight.decode(reader, reader.uint32())
+            ConsensusStateWithHeight.decode(reader, reader.uint32()),
           );
           break;
         default:
@@ -525,7 +525,7 @@ export const ClientConsensusStates = {
       clientId: isSet(object.clientId) ? String(object.clientId) : "",
       consensusStates: Array.isArray(object?.consensusStates)
         ? object.consensusStates.map((e: any) =>
-            ConsensusStateWithHeight.fromJSON(e)
+            ConsensusStateWithHeight.fromJSON(e),
           )
         : [],
     };
@@ -535,7 +535,7 @@ export const ClientConsensusStates = {
     message.clientId !== undefined && (obj.clientId = message.clientId);
     if (message.consensusStates) {
       obj.consensusStates = message.consensusStates.map((e) =>
-        e ? ConsensusStateWithHeight.toJSON(e) : undefined
+        e ? ConsensusStateWithHeight.toJSON(e) : undefined,
       );
     } else {
       obj.consensusStates = [];
@@ -543,13 +543,13 @@ export const ClientConsensusStates = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ClientConsensusStates>, I>>(
-    object: I
+    object: I,
   ): ClientConsensusStates {
     const message = createBaseClientConsensusStates();
     message.clientId = object.clientId ?? "";
     message.consensusStates =
       object.consensusStates?.map((e) =>
-        ConsensusStateWithHeight.fromPartial(e)
+        ConsensusStateWithHeight.fromPartial(e),
       ) || [];
     return message;
   },
@@ -558,7 +558,7 @@ export const ClientConsensusStates = {
       clientId: object.client_id,
       consensusStates: Array.isArray(object?.consensus_states)
         ? object.consensus_states.map((e: any) =>
-            ConsensusStateWithHeight.fromAmino(e)
+            ConsensusStateWithHeight.fromAmino(e),
           )
         : [],
     };
@@ -568,7 +568,7 @@ export const ClientConsensusStates = {
     obj.client_id = message.clientId;
     if (message.consensusStates) {
       obj.consensus_states = message.consensusStates.map((e) =>
-        e ? ConsensusStateWithHeight.toAmino(e) : undefined
+        e ? ConsensusStateWithHeight.toAmino(e) : undefined,
       );
     } else {
       obj.consensus_states = [];
@@ -608,7 +608,7 @@ function createBaseClientUpdateProposal(): ClientUpdateProposal {
 export const ClientUpdateProposal = {
   encode(
     message: ClientUpdateProposal,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -626,7 +626,7 @@ export const ClientUpdateProposal = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): ClientUpdateProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -677,7 +677,7 @@ export const ClientUpdateProposal = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ClientUpdateProposal>, I>>(
-    object: I
+    object: I,
   ): ClientUpdateProposal {
     const message = createBaseClientUpdateProposal();
     message.title = object.title ?? "";
@@ -735,7 +735,7 @@ function createBaseUpgradeProposal(): UpgradeProposal {
 export const UpgradeProposal = {
   encode(
     message: UpgradeProposal,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
@@ -749,7 +749,7 @@ export const UpgradeProposal = {
     if (message.upgradedClientState !== undefined) {
       Any.encode(
         message.upgradedClientState,
-        writer.uint32(34).fork()
+        writer.uint32(34).fork(),
       ).ldelim();
     }
     return writer;
@@ -804,7 +804,7 @@ export const UpgradeProposal = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<UpgradeProposal>, I>>(
-    object: I
+    object: I,
   ): UpgradeProposal {
     const message = createBaseUpgradeProposal();
     message.title = object.title ?? "";
@@ -871,7 +871,7 @@ function createBaseHeight(): Height {
 export const Height = {
   encode(
     message: Height,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.revisionNumber.isZero()) {
       writer.uint32(8).uint64(message.revisionNumber);
@@ -977,7 +977,7 @@ function createBaseParams(): Params {
 export const Params = {
   encode(
     message: Params,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.allowedClients) {
       writer.uint32(10).string(v!);

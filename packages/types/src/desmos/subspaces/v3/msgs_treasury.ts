@@ -122,7 +122,7 @@ function createBaseMsgGrantTreasuryAuthorization(): MsgGrantTreasuryAuthorizatio
 export const MsgGrantTreasuryAuthorization = {
   encode(
     message: MsgGrantTreasuryAuthorization,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -140,7 +140,7 @@ export const MsgGrantTreasuryAuthorization = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgGrantTreasuryAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -188,7 +188,7 @@ export const MsgGrantTreasuryAuthorization = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgGrantTreasuryAuthorization>, I>>(
-    object: I
+    object: I,
   ): MsgGrantTreasuryAuthorization {
     const message = createBaseMsgGrantTreasuryAuthorization();
     message.subspaceId =
@@ -204,7 +204,7 @@ export const MsgGrantTreasuryAuthorization = {
     return message;
   },
   fromAmino(
-    object: MsgGrantTreasuryAuthorizationAmino
+    object: MsgGrantTreasuryAuthorizationAmino,
   ): MsgGrantTreasuryAuthorization {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -214,7 +214,7 @@ export const MsgGrantTreasuryAuthorization = {
     };
   },
   toAmino(
-    message: MsgGrantTreasuryAuthorization
+    message: MsgGrantTreasuryAuthorization,
   ): MsgGrantTreasuryAuthorizationAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -226,12 +226,12 @@ export const MsgGrantTreasuryAuthorization = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgGrantTreasuryAuthorizationAminoMsg
+    object: MsgGrantTreasuryAuthorizationAminoMsg,
   ): MsgGrantTreasuryAuthorization {
     return MsgGrantTreasuryAuthorization.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgGrantTreasuryAuthorizationProtoMsg
+    message: MsgGrantTreasuryAuthorizationProtoMsg,
   ): MsgGrantTreasuryAuthorization {
     return MsgGrantTreasuryAuthorization.decode(message.value);
   },
@@ -239,7 +239,7 @@ export const MsgGrantTreasuryAuthorization = {
     return MsgGrantTreasuryAuthorization.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgGrantTreasuryAuthorization
+    message: MsgGrantTreasuryAuthorization,
   ): MsgGrantTreasuryAuthorizationProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorization",
@@ -253,13 +253,13 @@ function createBaseMsgGrantTreasuryAuthorizationResponse(): MsgGrantTreasuryAuth
 export const MsgGrantTreasuryAuthorizationResponse = {
   encode(
     _: MsgGrantTreasuryAuthorizationResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgGrantTreasuryAuthorizationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -282,29 +282,29 @@ export const MsgGrantTreasuryAuthorizationResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgGrantTreasuryAuthorizationResponse>, I>
+    I extends Exact<DeepPartial<MsgGrantTreasuryAuthorizationResponse>, I>,
   >(_: I): MsgGrantTreasuryAuthorizationResponse {
     const message = createBaseMsgGrantTreasuryAuthorizationResponse();
     return message;
   },
   fromAmino(
-    _: MsgGrantTreasuryAuthorizationResponseAmino
+    _: MsgGrantTreasuryAuthorizationResponseAmino,
   ): MsgGrantTreasuryAuthorizationResponse {
     return {};
   },
   toAmino(
-    _: MsgGrantTreasuryAuthorizationResponse
+    _: MsgGrantTreasuryAuthorizationResponse,
   ): MsgGrantTreasuryAuthorizationResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgGrantTreasuryAuthorizationResponseAminoMsg
+    object: MsgGrantTreasuryAuthorizationResponseAminoMsg,
   ): MsgGrantTreasuryAuthorizationResponse {
     return MsgGrantTreasuryAuthorizationResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgGrantTreasuryAuthorizationResponseProtoMsg
+    message: MsgGrantTreasuryAuthorizationResponseProtoMsg,
   ): MsgGrantTreasuryAuthorizationResponse {
     return MsgGrantTreasuryAuthorizationResponse.decode(message.value);
   },
@@ -312,7 +312,7 @@ export const MsgGrantTreasuryAuthorizationResponse = {
     return MsgGrantTreasuryAuthorizationResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgGrantTreasuryAuthorizationResponse
+    message: MsgGrantTreasuryAuthorizationResponse,
   ): MsgGrantTreasuryAuthorizationResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse",
@@ -331,7 +331,7 @@ function createBaseMsgRevokeTreasuryAuthorization(): MsgRevokeTreasuryAuthorizat
 export const MsgRevokeTreasuryAuthorization = {
   encode(
     message: MsgRevokeTreasuryAuthorization,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -349,7 +349,7 @@ export const MsgRevokeTreasuryAuthorization = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRevokeTreasuryAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -396,7 +396,7 @@ export const MsgRevokeTreasuryAuthorization = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgRevokeTreasuryAuthorization>, I>>(
-    object: I
+    object: I,
   ): MsgRevokeTreasuryAuthorization {
     const message = createBaseMsgRevokeTreasuryAuthorization();
     message.subspaceId =
@@ -409,7 +409,7 @@ export const MsgRevokeTreasuryAuthorization = {
     return message;
   },
   fromAmino(
-    object: MsgRevokeTreasuryAuthorizationAmino
+    object: MsgRevokeTreasuryAuthorizationAmino,
   ): MsgRevokeTreasuryAuthorization {
     return {
       subspaceId: Long.fromString(object.subspace_id),
@@ -419,7 +419,7 @@ export const MsgRevokeTreasuryAuthorization = {
     };
   },
   toAmino(
-    message: MsgRevokeTreasuryAuthorization
+    message: MsgRevokeTreasuryAuthorization,
   ): MsgRevokeTreasuryAuthorizationAmino {
     const obj: any = {};
     obj.subspace_id = message.subspaceId
@@ -431,12 +431,12 @@ export const MsgRevokeTreasuryAuthorization = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgRevokeTreasuryAuthorizationAminoMsg
+    object: MsgRevokeTreasuryAuthorizationAminoMsg,
   ): MsgRevokeTreasuryAuthorization {
     return MsgRevokeTreasuryAuthorization.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRevokeTreasuryAuthorizationProtoMsg
+    message: MsgRevokeTreasuryAuthorizationProtoMsg,
   ): MsgRevokeTreasuryAuthorization {
     return MsgRevokeTreasuryAuthorization.decode(message.value);
   },
@@ -444,7 +444,7 @@ export const MsgRevokeTreasuryAuthorization = {
     return MsgRevokeTreasuryAuthorization.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRevokeTreasuryAuthorization
+    message: MsgRevokeTreasuryAuthorization,
   ): MsgRevokeTreasuryAuthorizationProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorization",
@@ -458,13 +458,13 @@ function createBaseMsgRevokeTreasuryAuthorizationResponse(): MsgRevokeTreasuryAu
 export const MsgRevokeTreasuryAuthorizationResponse = {
   encode(
     _: MsgRevokeTreasuryAuthorizationResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgRevokeTreasuryAuthorizationResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -487,29 +487,29 @@ export const MsgRevokeTreasuryAuthorizationResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<MsgRevokeTreasuryAuthorizationResponse>, I>
+    I extends Exact<DeepPartial<MsgRevokeTreasuryAuthorizationResponse>, I>,
   >(_: I): MsgRevokeTreasuryAuthorizationResponse {
     const message = createBaseMsgRevokeTreasuryAuthorizationResponse();
     return message;
   },
   fromAmino(
-    _: MsgRevokeTreasuryAuthorizationResponseAmino
+    _: MsgRevokeTreasuryAuthorizationResponseAmino,
   ): MsgRevokeTreasuryAuthorizationResponse {
     return {};
   },
   toAmino(
-    _: MsgRevokeTreasuryAuthorizationResponse
+    _: MsgRevokeTreasuryAuthorizationResponse,
   ): MsgRevokeTreasuryAuthorizationResponseAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: MsgRevokeTreasuryAuthorizationResponseAminoMsg
+    object: MsgRevokeTreasuryAuthorizationResponseAminoMsg,
   ): MsgRevokeTreasuryAuthorizationResponse {
     return MsgRevokeTreasuryAuthorizationResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgRevokeTreasuryAuthorizationResponseProtoMsg
+    message: MsgRevokeTreasuryAuthorizationResponseProtoMsg,
   ): MsgRevokeTreasuryAuthorizationResponse {
     return MsgRevokeTreasuryAuthorizationResponse.decode(message.value);
   },
@@ -517,7 +517,7 @@ export const MsgRevokeTreasuryAuthorizationResponse = {
     return MsgRevokeTreasuryAuthorizationResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgRevokeTreasuryAuthorizationResponse
+    message: MsgRevokeTreasuryAuthorizationResponse,
   ): MsgRevokeTreasuryAuthorizationResponseProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse",

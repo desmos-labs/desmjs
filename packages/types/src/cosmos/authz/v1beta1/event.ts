@@ -64,7 +64,7 @@ function createBaseEventGrant(): EventGrant {
 export const EventGrant = {
   encode(
     message: EventGrant,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
@@ -115,7 +115,7 @@ export const EventGrant = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<EventGrant>, I>>(
-    object: I
+    object: I,
   ): EventGrant {
     const message = createBaseEventGrant();
     message.msgTypeUrl = object.msgTypeUrl ?? "";
@@ -169,7 +169,7 @@ function createBaseEventRevoke(): EventRevoke {
 export const EventRevoke = {
   encode(
     message: EventRevoke,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
@@ -220,7 +220,7 @@ export const EventRevoke = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<EventRevoke>, I>>(
-    object: I
+    object: I,
   ): EventRevoke {
     const message = createBaseEventRevoke();
     message.msgTypeUrl = object.msgTypeUrl ?? "";

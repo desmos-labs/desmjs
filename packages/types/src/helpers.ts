@@ -59,7 +59,7 @@ export interface AminoHeight {
 }
 
 export function omitDefault<T extends string | number | Long>(
-  input: T
+  input: T,
 ): T | undefined {
   if (typeof input === "string") {
     return input === "" ? undefined : input;
@@ -139,7 +139,7 @@ export interface Params {
 
 export const setPaginationParams = (
   options: Params,
-  pagination?: PageRequest
+  pagination?: PageRequest,
 ) => {
   if (!pagination) {
     return options;
@@ -154,7 +154,7 @@ export const setPaginationParams = (
 
     // Uint8Array to String
     options.params["pagination.key"] = Buffer.from(pagination.key).toString(
-      "base64"
+      "base64",
     );
   }
   if (typeof pagination?.limit !== "undefined") {
@@ -203,7 +203,7 @@ export interface Rpc {
   request(
     service: string,
     method: string,
-    data: Uint8Array
+    data: Uint8Array,
   ): Promise<Uint8Array>;
 }
 

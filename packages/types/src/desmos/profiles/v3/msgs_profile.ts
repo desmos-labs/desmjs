@@ -125,7 +125,7 @@ function createBaseMsgSaveProfile(): MsgSaveProfile {
 export const MsgSaveProfile = {
   encode(
     message: MsgSaveProfile,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.dtag !== "") {
       writer.uint32(10).string(message.dtag);
@@ -206,7 +206,7 @@ export const MsgSaveProfile = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSaveProfile>, I>>(
-    object: I
+    object: I,
   ): MsgSaveProfile {
     const message = createBaseMsgSaveProfile();
     message.dtag = object.dtag ?? "";
@@ -259,13 +259,13 @@ function createBaseMsgSaveProfileResponse(): MsgSaveProfileResponse {
 export const MsgSaveProfileResponse = {
   encode(
     _: MsgSaveProfileResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgSaveProfileResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -288,7 +288,7 @@ export const MsgSaveProfileResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgSaveProfileResponse>, I>>(
-    _: I
+    _: I,
   ): MsgSaveProfileResponse {
     const message = createBaseMsgSaveProfileResponse();
     return message;
@@ -304,7 +304,7 @@ export const MsgSaveProfileResponse = {
     return MsgSaveProfileResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgSaveProfileResponseProtoMsg
+    message: MsgSaveProfileResponseProtoMsg,
   ): MsgSaveProfileResponse {
     return MsgSaveProfileResponse.decode(message.value);
   },
@@ -326,7 +326,7 @@ function createBaseMsgDeleteProfile(): MsgDeleteProfile {
 export const MsgDeleteProfile = {
   encode(
     message: MsgDeleteProfile,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
@@ -361,7 +361,7 @@ export const MsgDeleteProfile = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteProfile>, I>>(
-    object: I
+    object: I,
   ): MsgDeleteProfile {
     const message = createBaseMsgDeleteProfile();
     message.creator = object.creator ?? "";
@@ -399,13 +399,13 @@ function createBaseMsgDeleteProfileResponse(): MsgDeleteProfileResponse {
 export const MsgDeleteProfileResponse = {
   encode(
     _: MsgDeleteProfileResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): MsgDeleteProfileResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -428,7 +428,7 @@ export const MsgDeleteProfileResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<MsgDeleteProfileResponse>, I>>(
-    _: I
+    _: I,
   ): MsgDeleteProfileResponse {
     const message = createBaseMsgDeleteProfileResponse();
     return message;
@@ -441,12 +441,12 @@ export const MsgDeleteProfileResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: MsgDeleteProfileResponseAminoMsg
+    object: MsgDeleteProfileResponseAminoMsg,
   ): MsgDeleteProfileResponse {
     return MsgDeleteProfileResponse.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: MsgDeleteProfileResponseProtoMsg
+    message: MsgDeleteProfileResponseProtoMsg,
   ): MsgDeleteProfileResponse {
     return MsgDeleteProfileResponse.decode(message.value);
   },
@@ -454,7 +454,7 @@ export const MsgDeleteProfileResponse = {
     return MsgDeleteProfileResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: MsgDeleteProfileResponse
+    message: MsgDeleteProfileResponse,
   ): MsgDeleteProfileResponseProtoMsg {
     return {
       typeUrl: "/desmos.profiles.v3.MsgDeleteProfileResponse",

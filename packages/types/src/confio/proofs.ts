@@ -616,7 +616,7 @@ function createBaseExistenceProof(): ExistenceProof {
 export const ExistenceProof = {
   encode(
     message: ExistenceProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -674,11 +674,11 @@ export const ExistenceProof = {
     const obj: any = {};
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.value !== undefined &&
       (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array()
+        message.value !== undefined ? message.value : new Uint8Array(),
       ));
     message.leaf !== undefined &&
       (obj.leaf = message.leaf ? LeafOp.toJSON(message.leaf) : undefined);
@@ -690,7 +690,7 @@ export const ExistenceProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ExistenceProof>, I>>(
-    object: I
+    object: I,
   ): ExistenceProof {
     const message = createBaseExistenceProof();
     message.key = object.key ?? new Uint8Array();
@@ -750,7 +750,7 @@ function createBaseNonExistenceProof(): NonExistenceProof {
 export const NonExistenceProof = {
   encode(
     message: NonExistenceProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -801,7 +801,7 @@ export const NonExistenceProof = {
     const obj: any = {};
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.left !== undefined &&
       (obj.left = message.left
@@ -814,7 +814,7 @@ export const NonExistenceProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<NonExistenceProof>, I>>(
-    object: I
+    object: I,
   ): NonExistenceProof {
     const message = createBaseNonExistenceProof();
     message.key = object.key ?? new Uint8Array();
@@ -871,7 +871,7 @@ function createBaseCommitmentProof(): CommitmentProof {
 export const CommitmentProof = {
   encode(
     message: CommitmentProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.exist !== undefined) {
       ExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -879,7 +879,7 @@ export const CommitmentProof = {
     if (message.nonexist !== undefined) {
       NonExistenceProof.encode(
         message.nonexist,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     if (message.batch !== undefined) {
@@ -888,7 +888,7 @@ export const CommitmentProof = {
     if (message.compressed !== undefined) {
       CompressedBatchProof.encode(
         message.compressed,
-        writer.uint32(34).fork()
+        writer.uint32(34).fork(),
       ).ldelim();
     }
     return writer;
@@ -912,7 +912,7 @@ export const CommitmentProof = {
         case 4:
           message.compressed = CompressedBatchProof.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -959,7 +959,7 @@ export const CommitmentProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CommitmentProof>, I>>(
-    object: I
+    object: I,
   ): CommitmentProof {
     const message = createBaseCommitmentProof();
     message.exist =
@@ -1034,7 +1034,7 @@ function createBaseLeafOp(): LeafOp {
 export const LeafOp = {
   encode(
     message: LeafOp,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
@@ -1108,7 +1108,7 @@ export const LeafOp = {
       (obj.length = lengthOpToJSON(message.length));
     message.prefix !== undefined &&
       (obj.prefix = base64FromBytes(
-        message.prefix !== undefined ? message.prefix : new Uint8Array()
+        message.prefix !== undefined ? message.prefix : new Uint8Array(),
       ));
     return obj;
   },
@@ -1169,7 +1169,7 @@ function createBaseInnerOp(): InnerOp {
 export const InnerOp = {
   encode(
     message: InnerOp,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.hash !== 0) {
       writer.uint32(8).int32(message.hash);
@@ -1221,11 +1221,11 @@ export const InnerOp = {
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     message.prefix !== undefined &&
       (obj.prefix = base64FromBytes(
-        message.prefix !== undefined ? message.prefix : new Uint8Array()
+        message.prefix !== undefined ? message.prefix : new Uint8Array(),
       ));
     message.suffix !== undefined &&
       (obj.suffix = base64FromBytes(
-        message.suffix !== undefined ? message.suffix : new Uint8Array()
+        message.suffix !== undefined ? message.suffix : new Uint8Array(),
       ));
     return obj;
   },
@@ -1277,7 +1277,7 @@ function createBaseProofSpec(): ProofSpec {
 export const ProofSpec = {
   encode(
     message: ProofSpec,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.leafSpec !== undefined) {
       LeafOp.encode(message.leafSpec, writer.uint32(10).fork()).ldelim();
@@ -1348,7 +1348,7 @@ export const ProofSpec = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<ProofSpec>, I>>(
-    object: I
+    object: I,
   ): ProofSpec {
     const message = createBaseProofSpec();
     message.leafSpec =
@@ -1416,7 +1416,7 @@ function createBaseInnerSpec(): InnerSpec {
 export const InnerSpec = {
   encode(
     message: InnerSpec,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.childOrder) {
@@ -1512,13 +1512,15 @@ export const InnerSpec = {
       (obj.maxPrefixLength = Math.round(message.maxPrefixLength));
     message.emptyChild !== undefined &&
       (obj.emptyChild = base64FromBytes(
-        message.emptyChild !== undefined ? message.emptyChild : new Uint8Array()
+        message.emptyChild !== undefined
+          ? message.emptyChild
+          : new Uint8Array(),
       ));
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<InnerSpec>, I>>(
-    object: I
+    object: I,
   ): InnerSpec {
     const message = createBaseInnerSpec();
     message.childOrder = object.childOrder?.map((e) => e) || [];
@@ -1579,7 +1581,7 @@ function createBaseBatchProof(): BatchProof {
 export const BatchProof = {
   encode(
     message: BatchProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.entries) {
       BatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1614,7 +1616,7 @@ export const BatchProof = {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map((e) =>
-        e ? BatchEntry.toJSON(e) : undefined
+        e ? BatchEntry.toJSON(e) : undefined,
       );
     } else {
       obj.entries = [];
@@ -1622,7 +1624,7 @@ export const BatchProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<BatchProof>, I>>(
-    object: I
+    object: I,
   ): BatchProof {
     const message = createBaseBatchProof();
     message.entries =
@@ -1640,7 +1642,7 @@ export const BatchProof = {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map((e) =>
-        e ? BatchEntry.toAmino(e) : undefined
+        e ? BatchEntry.toAmino(e) : undefined,
       );
     } else {
       obj.entries = [];
@@ -1672,7 +1674,7 @@ function createBaseBatchEntry(): BatchEntry {
 export const BatchEntry = {
   encode(
     message: BatchEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.exist !== undefined) {
       ExistenceProof.encode(message.exist, writer.uint32(10).fork()).ldelim();
@@ -1680,7 +1682,7 @@ export const BatchEntry = {
     if (message.nonexist !== undefined) {
       NonExistenceProof.encode(
         message.nonexist,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
@@ -1728,7 +1730,7 @@ export const BatchEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<BatchEntry>, I>>(
-    object: I
+    object: I,
   ): BatchEntry {
     const message = createBaseBatchEntry();
     message.exist =
@@ -1784,7 +1786,7 @@ function createBaseCompressedBatchProof(): CompressedBatchProof {
 export const CompressedBatchProof = {
   encode(
     message: CompressedBatchProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.entries) {
       CompressedBatchEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1796,7 +1798,7 @@ export const CompressedBatchProof = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): CompressedBatchProof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1806,7 +1808,7 @@ export const CompressedBatchProof = {
       switch (tag >>> 3) {
         case 1:
           message.entries.push(
-            CompressedBatchEntry.decode(reader, reader.uint32())
+            CompressedBatchEntry.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -1833,14 +1835,14 @@ export const CompressedBatchProof = {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map((e) =>
-        e ? CompressedBatchEntry.toJSON(e) : undefined
+        e ? CompressedBatchEntry.toJSON(e) : undefined,
       );
     } else {
       obj.entries = [];
     }
     if (message.lookupInners) {
       obj.lookupInners = message.lookupInners.map((e) =>
-        e ? InnerOp.toJSON(e) : undefined
+        e ? InnerOp.toJSON(e) : undefined,
       );
     } else {
       obj.lookupInners = [];
@@ -1848,7 +1850,7 @@ export const CompressedBatchProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CompressedBatchProof>, I>>(
-    object: I
+    object: I,
   ): CompressedBatchProof {
     const message = createBaseCompressedBatchProof();
     message.entries =
@@ -1871,14 +1873,14 @@ export const CompressedBatchProof = {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map((e) =>
-        e ? CompressedBatchEntry.toAmino(e) : undefined
+        e ? CompressedBatchEntry.toAmino(e) : undefined,
       );
     } else {
       obj.entries = [];
     }
     if (message.lookupInners) {
       obj.lookup_inners = message.lookupInners.map((e) =>
-        e ? InnerOp.toAmino(e) : undefined
+        e ? InnerOp.toAmino(e) : undefined,
       );
     } else {
       obj.lookup_inners = [];
@@ -1910,25 +1912,25 @@ function createBaseCompressedBatchEntry(): CompressedBatchEntry {
 export const CompressedBatchEntry = {
   encode(
     message: CompressedBatchEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.exist !== undefined) {
       CompressedExistenceProof.encode(
         message.exist,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     if (message.nonexist !== undefined) {
       CompressedNonExistenceProof.encode(
         message.nonexist,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): CompressedBatchEntry {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1939,13 +1941,13 @@ export const CompressedBatchEntry = {
         case 1:
           message.exist = CompressedExistenceProof.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 2:
           message.nonexist = CompressedNonExistenceProof.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -1978,7 +1980,7 @@ export const CompressedBatchEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CompressedBatchEntry>, I>>(
-    object: I
+    object: I,
   ): CompressedBatchEntry {
     const message = createBaseCompressedBatchEntry();
     message.exist =
@@ -2038,7 +2040,7 @@ function createBaseCompressedExistenceProof(): CompressedExistenceProof {
 export const CompressedExistenceProof = {
   encode(
     message: CompressedExistenceProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -2058,7 +2060,7 @@ export const CompressedExistenceProof = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): CompressedExistenceProof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2108,11 +2110,11 @@ export const CompressedExistenceProof = {
     const obj: any = {};
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.value !== undefined &&
       (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array()
+        message.value !== undefined ? message.value : new Uint8Array(),
       ));
     message.leaf !== undefined &&
       (obj.leaf = message.leaf ? LeafOp.toJSON(message.leaf) : undefined);
@@ -2124,7 +2126,7 @@ export const CompressedExistenceProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CompressedExistenceProof>, I>>(
-    object: I
+    object: I,
   ): CompressedExistenceProof {
     const message = createBaseCompressedExistenceProof();
     message.key = object.key ?? new Uint8Array();
@@ -2157,12 +2159,12 @@ export const CompressedExistenceProof = {
     return obj;
   },
   fromAminoMsg(
-    object: CompressedExistenceProofAminoMsg
+    object: CompressedExistenceProofAminoMsg,
   ): CompressedExistenceProof {
     return CompressedExistenceProof.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: CompressedExistenceProofProtoMsg
+    message: CompressedExistenceProofProtoMsg,
   ): CompressedExistenceProof {
     return CompressedExistenceProof.decode(message.value);
   },
@@ -2170,7 +2172,7 @@ export const CompressedExistenceProof = {
     return CompressedExistenceProof.encode(message).finish();
   },
   toProtoMsg(
-    message: CompressedExistenceProof
+    message: CompressedExistenceProof,
   ): CompressedExistenceProofProtoMsg {
     return {
       typeUrl: "/ics23.CompressedExistenceProof",
@@ -2188,7 +2190,7 @@ function createBaseCompressedNonExistenceProof(): CompressedNonExistenceProof {
 export const CompressedNonExistenceProof = {
   encode(
     message: CompressedNonExistenceProof,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -2196,20 +2198,20 @@ export const CompressedNonExistenceProof = {
     if (message.left !== undefined) {
       CompressedExistenceProof.encode(
         message.left,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     if (message.right !== undefined) {
       CompressedExistenceProof.encode(
         message.right,
-        writer.uint32(26).fork()
+        writer.uint32(26).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): CompressedNonExistenceProof {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2223,13 +2225,13 @@ export const CompressedNonExistenceProof = {
         case 2:
           message.left = CompressedExistenceProof.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         case 3:
           message.right = CompressedExistenceProof.decode(
             reader,
-            reader.uint32()
+            reader.uint32(),
           );
           break;
         default:
@@ -2254,7 +2256,7 @@ export const CompressedNonExistenceProof = {
     const obj: any = {};
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.left !== undefined &&
       (obj.left = message.left
@@ -2267,7 +2269,7 @@ export const CompressedNonExistenceProof = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<CompressedNonExistenceProof>, I>>(
-    object: I
+    object: I,
   ): CompressedNonExistenceProof {
     const message = createBaseCompressedNonExistenceProof();
     message.key = object.key ?? new Uint8Array();
@@ -2282,7 +2284,7 @@ export const CompressedNonExistenceProof = {
     return message;
   },
   fromAmino(
-    object: CompressedNonExistenceProofAmino
+    object: CompressedNonExistenceProofAmino,
   ): CompressedNonExistenceProof {
     return {
       key: object.key,
@@ -2295,7 +2297,7 @@ export const CompressedNonExistenceProof = {
     };
   },
   toAmino(
-    message: CompressedNonExistenceProof
+    message: CompressedNonExistenceProof,
   ): CompressedNonExistenceProofAmino {
     const obj: any = {};
     obj.key = message.key;
@@ -2308,12 +2310,12 @@ export const CompressedNonExistenceProof = {
     return obj;
   },
   fromAminoMsg(
-    object: CompressedNonExistenceProofAminoMsg
+    object: CompressedNonExistenceProofAminoMsg,
   ): CompressedNonExistenceProof {
     return CompressedNonExistenceProof.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: CompressedNonExistenceProofProtoMsg
+    message: CompressedNonExistenceProofProtoMsg,
   ): CompressedNonExistenceProof {
     return CompressedNonExistenceProof.decode(message.value);
   },
@@ -2321,7 +2323,7 @@ export const CompressedNonExistenceProof = {
     return CompressedNonExistenceProof.encode(message).finish();
   },
   toProtoMsg(
-    message: CompressedNonExistenceProof
+    message: CompressedNonExistenceProof,
   ): CompressedNonExistenceProofProtoMsg {
     return {
       typeUrl: "/ics23.CompressedNonExistenceProof",

@@ -84,7 +84,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   encode(
     message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.subspacesData) {
       SubspaceDataEntry.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -112,12 +112,12 @@ export const GenesisState = {
       switch (tag >>> 3) {
         case 1:
           message.subspacesData.push(
-            SubspaceDataEntry.decode(reader, reader.uint32())
+            SubspaceDataEntry.decode(reader, reader.uint32()),
           );
           break;
         case 2:
           message.registeredReactions.push(
-            RegisteredReaction.decode(reader, reader.uint32())
+            RegisteredReaction.decode(reader, reader.uint32()),
           );
           break;
         case 3:
@@ -128,7 +128,7 @@ export const GenesisState = {
           break;
         case 5:
           message.subspacesParams.push(
-            SubspaceReactionsParams.decode(reader, reader.uint32())
+            SubspaceReactionsParams.decode(reader, reader.uint32()),
           );
           break;
         default:
@@ -145,7 +145,7 @@ export const GenesisState = {
         : [],
       registeredReactions: Array.isArray(object?.registeredReactions)
         ? object.registeredReactions.map((e: any) =>
-            RegisteredReaction.fromJSON(e)
+            RegisteredReaction.fromJSON(e),
           )
         : [],
       postsData: Array.isArray(object?.postsData)
@@ -156,7 +156,7 @@ export const GenesisState = {
         : [],
       subspacesParams: Array.isArray(object?.subspacesParams)
         ? object.subspacesParams.map((e: any) =>
-            SubspaceReactionsParams.fromJSON(e)
+            SubspaceReactionsParams.fromJSON(e),
           )
         : [],
     };
@@ -165,35 +165,35 @@ export const GenesisState = {
     const obj: any = {};
     if (message.subspacesData) {
       obj.subspacesData = message.subspacesData.map((e) =>
-        e ? SubspaceDataEntry.toJSON(e) : undefined
+        e ? SubspaceDataEntry.toJSON(e) : undefined,
       );
     } else {
       obj.subspacesData = [];
     }
     if (message.registeredReactions) {
       obj.registeredReactions = message.registeredReactions.map((e) =>
-        e ? RegisteredReaction.toJSON(e) : undefined
+        e ? RegisteredReaction.toJSON(e) : undefined,
       );
     } else {
       obj.registeredReactions = [];
     }
     if (message.postsData) {
       obj.postsData = message.postsData.map((e) =>
-        e ? PostDataEntry.toJSON(e) : undefined
+        e ? PostDataEntry.toJSON(e) : undefined,
       );
     } else {
       obj.postsData = [];
     }
     if (message.reactions) {
       obj.reactions = message.reactions.map((e) =>
-        e ? Reaction.toJSON(e) : undefined
+        e ? Reaction.toJSON(e) : undefined,
       );
     } else {
       obj.reactions = [];
     }
     if (message.subspacesParams) {
       obj.subspacesParams = message.subspacesParams.map((e) =>
-        e ? SubspaceReactionsParams.toJSON(e) : undefined
+        e ? SubspaceReactionsParams.toJSON(e) : undefined,
       );
     } else {
       obj.subspacesParams = [];
@@ -201,14 +201,14 @@ export const GenesisState = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I
+    object: I,
   ): GenesisState {
     const message = createBaseGenesisState();
     message.subspacesData =
       object.subspacesData?.map((e) => SubspaceDataEntry.fromPartial(e)) || [];
     message.registeredReactions =
       object.registeredReactions?.map((e) =>
-        RegisteredReaction.fromPartial(e)
+        RegisteredReaction.fromPartial(e),
       ) || [];
     message.postsData =
       object.postsData?.map((e) => PostDataEntry.fromPartial(e)) || [];
@@ -216,7 +216,7 @@ export const GenesisState = {
       object.reactions?.map((e) => Reaction.fromPartial(e)) || [];
     message.subspacesParams =
       object.subspacesParams?.map((e) =>
-        SubspaceReactionsParams.fromPartial(e)
+        SubspaceReactionsParams.fromPartial(e),
       ) || [];
     return message;
   },
@@ -227,7 +227,7 @@ export const GenesisState = {
         : [],
       registeredReactions: Array.isArray(object?.registered_reactions)
         ? object.registered_reactions.map((e: any) =>
-            RegisteredReaction.fromAmino(e)
+            RegisteredReaction.fromAmino(e),
           )
         : [],
       postsData: Array.isArray(object?.posts_data)
@@ -238,7 +238,7 @@ export const GenesisState = {
         : [],
       subspacesParams: Array.isArray(object?.subspaces_params)
         ? object.subspaces_params.map((e: any) =>
-            SubspaceReactionsParams.fromAmino(e)
+            SubspaceReactionsParams.fromAmino(e),
           )
         : [],
     };
@@ -247,35 +247,35 @@ export const GenesisState = {
     const obj: any = {};
     if (message.subspacesData) {
       obj.subspaces_data = message.subspacesData.map((e) =>
-        e ? SubspaceDataEntry.toAmino(e) : undefined
+        e ? SubspaceDataEntry.toAmino(e) : undefined,
       );
     } else {
       obj.subspaces_data = [];
     }
     if (message.registeredReactions) {
       obj.registered_reactions = message.registeredReactions.map((e) =>
-        e ? RegisteredReaction.toAmino(e) : undefined
+        e ? RegisteredReaction.toAmino(e) : undefined,
       );
     } else {
       obj.registered_reactions = [];
     }
     if (message.postsData) {
       obj.posts_data = message.postsData.map((e) =>
-        e ? PostDataEntry.toAmino(e) : undefined
+        e ? PostDataEntry.toAmino(e) : undefined,
       );
     } else {
       obj.posts_data = [];
     }
     if (message.reactions) {
       obj.reactions = message.reactions.map((e) =>
-        e ? Reaction.toAmino(e) : undefined
+        e ? Reaction.toAmino(e) : undefined,
       );
     } else {
       obj.reactions = [];
     }
     if (message.subspacesParams) {
       obj.subspaces_params = message.subspacesParams.map((e) =>
-        e ? SubspaceReactionsParams.toAmino(e) : undefined
+        e ? SubspaceReactionsParams.toAmino(e) : undefined,
       );
     } else {
       obj.subspaces_params = [];
@@ -307,7 +307,7 @@ function createBaseSubspaceDataEntry(): SubspaceDataEntry {
 export const SubspaceDataEntry = {
   encode(
     message: SubspaceDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -356,7 +356,7 @@ export const SubspaceDataEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<SubspaceDataEntry>, I>>(
-    object: I
+    object: I,
   ): SubspaceDataEntry {
     const message = createBaseSubspaceDataEntry();
     message.subspaceId =
@@ -406,7 +406,7 @@ function createBasePostDataEntry(): PostDataEntry {
 export const PostDataEntry = {
   encode(
     message: PostDataEntry,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (!message.subspaceId.isZero()) {
       writer.uint32(8).uint64(message.subspaceId);
@@ -462,7 +462,7 @@ export const PostDataEntry = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PostDataEntry>, I>>(
-    object: I
+    object: I,
   ): PostDataEntry {
     const message = createBasePostDataEntry();
     message.subspaceId =

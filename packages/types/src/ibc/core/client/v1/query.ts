@@ -505,7 +505,7 @@ function createBaseQueryClientStateRequest(): QueryClientStateRequest {
 export const QueryClientStateRequest = {
   encode(
     message: QueryClientStateRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -514,7 +514,7 @@ export const QueryClientStateRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -543,7 +543,7 @@ export const QueryClientStateRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientStateRequest>, I>>(
-    object: I
+    object: I,
   ): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
     message.clientId = object.clientId ?? "";
@@ -560,12 +560,12 @@ export const QueryClientStateRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientStateRequestAminoMsg
+    object: QueryClientStateRequestAminoMsg,
   ): QueryClientStateRequest {
     return QueryClientStateRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientStateRequest
+    message: QueryClientStateRequest,
   ): QueryClientStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientStateRequest",
@@ -573,7 +573,7 @@ export const QueryClientStateRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryClientStateRequestProtoMsg
+    message: QueryClientStateRequestProtoMsg,
   ): QueryClientStateRequest {
     return QueryClientStateRequest.decode(message.value);
   },
@@ -581,7 +581,7 @@ export const QueryClientStateRequest = {
     return QueryClientStateRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientStateRequest
+    message: QueryClientStateRequest,
   ): QueryClientStateRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
@@ -599,7 +599,7 @@ function createBaseQueryClientStateResponse(): QueryClientStateResponse {
 export const QueryClientStateResponse = {
   encode(
     message: QueryClientStateResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -614,7 +614,7 @@ export const QueryClientStateResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -659,7 +659,7 @@ export const QueryClientStateResponse = {
         : undefined);
     message.proof !== undefined &&
       (obj.proof = base64FromBytes(
-        message.proof !== undefined ? message.proof : new Uint8Array()
+        message.proof !== undefined ? message.proof : new Uint8Array(),
       ));
     message.proofHeight !== undefined &&
       (obj.proofHeight = message.proofHeight
@@ -668,7 +668,7 @@ export const QueryClientStateResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientStateResponse>, I>>(
-    object: I
+    object: I,
   ): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
     message.clientState =
@@ -705,12 +705,12 @@ export const QueryClientStateResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientStateResponseAminoMsg
+    object: QueryClientStateResponseAminoMsg,
   ): QueryClientStateResponse {
     return QueryClientStateResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientStateResponse
+    message: QueryClientStateResponse,
   ): QueryClientStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientStateResponse",
@@ -718,7 +718,7 @@ export const QueryClientStateResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryClientStateResponseProtoMsg
+    message: QueryClientStateResponseProtoMsg,
   ): QueryClientStateResponse {
     return QueryClientStateResponse.decode(message.value);
   },
@@ -726,7 +726,7 @@ export const QueryClientStateResponse = {
     return QueryClientStateResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientStateResponse
+    message: QueryClientStateResponse,
   ): QueryClientStateResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientStateResponse",
@@ -742,7 +742,7 @@ function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
 export const QueryClientStatesRequest = {
   encode(
     message: QueryClientStatesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -751,7 +751,7 @@ export const QueryClientStatesRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientStatesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -785,7 +785,7 @@ export const QueryClientStatesRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientStatesRequest>, I>>(
-    object: I
+    object: I,
   ): QueryClientStatesRequest {
     const message = createBaseQueryClientStatesRequest();
     message.pagination =
@@ -809,12 +809,12 @@ export const QueryClientStatesRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientStatesRequestAminoMsg
+    object: QueryClientStatesRequestAminoMsg,
   ): QueryClientStatesRequest {
     return QueryClientStatesRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientStatesRequest
+    message: QueryClientStatesRequest,
   ): QueryClientStatesRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientStatesRequest",
@@ -822,7 +822,7 @@ export const QueryClientStatesRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryClientStatesRequestProtoMsg
+    message: QueryClientStatesRequestProtoMsg,
   ): QueryClientStatesRequest {
     return QueryClientStatesRequest.decode(message.value);
   },
@@ -830,7 +830,7 @@ export const QueryClientStatesRequest = {
     return QueryClientStatesRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientStatesRequest
+    message: QueryClientStatesRequest,
   ): QueryClientStatesRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest",
@@ -847,7 +847,7 @@ function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
 export const QueryClientStatesResponse = {
   encode(
     message: QueryClientStatesResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.clientStates) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -855,14 +855,14 @@ export const QueryClientStatesResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientStatesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -872,7 +872,7 @@ export const QueryClientStatesResponse = {
       switch (tag >>> 3) {
         case 1:
           message.clientStates.push(
-            IdentifiedClientState.decode(reader, reader.uint32())
+            IdentifiedClientState.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -899,7 +899,7 @@ export const QueryClientStatesResponse = {
     const obj: any = {};
     if (message.clientStates) {
       obj.clientStates = message.clientStates.map((e) =>
-        e ? IdentifiedClientState.toJSON(e) : undefined
+        e ? IdentifiedClientState.toJSON(e) : undefined,
       );
     } else {
       obj.clientStates = [];
@@ -911,7 +911,7 @@ export const QueryClientStatesResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientStatesResponse>, I>>(
-    object: I
+    object: I,
   ): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
     message.clientStates =
@@ -927,7 +927,7 @@ export const QueryClientStatesResponse = {
     return {
       clientStates: Array.isArray(object?.client_states)
         ? object.client_states.map((e: any) =>
-            IdentifiedClientState.fromAmino(e)
+            IdentifiedClientState.fromAmino(e),
           )
         : [],
       pagination: object?.pagination
@@ -939,7 +939,7 @@ export const QueryClientStatesResponse = {
     const obj: any = {};
     if (message.clientStates) {
       obj.client_states = message.clientStates.map((e) =>
-        e ? IdentifiedClientState.toAmino(e) : undefined
+        e ? IdentifiedClientState.toAmino(e) : undefined,
       );
     } else {
       obj.client_states = [];
@@ -950,12 +950,12 @@ export const QueryClientStatesResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientStatesResponseAminoMsg
+    object: QueryClientStatesResponseAminoMsg,
   ): QueryClientStatesResponse {
     return QueryClientStatesResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientStatesResponse
+    message: QueryClientStatesResponse,
   ): QueryClientStatesResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientStatesResponse",
@@ -963,7 +963,7 @@ export const QueryClientStatesResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryClientStatesResponseProtoMsg
+    message: QueryClientStatesResponseProtoMsg,
   ): QueryClientStatesResponse {
     return QueryClientStatesResponse.decode(message.value);
   },
@@ -971,7 +971,7 @@ export const QueryClientStatesResponse = {
     return QueryClientStatesResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientStatesResponse
+    message: QueryClientStatesResponse,
   ): QueryClientStatesResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse",
@@ -990,7 +990,7 @@ function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
 export const QueryConsensusStateRequest = {
   encode(
     message: QueryConsensusStateRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -1008,7 +1008,7 @@ export const QueryConsensusStateRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1061,7 +1061,7 @@ export const QueryConsensusStateRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryConsensusStateRequest>, I>>(
-    object: I
+    object: I,
   ): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
@@ -1077,7 +1077,7 @@ export const QueryConsensusStateRequest = {
     return message;
   },
   fromAmino(
-    object: QueryConsensusStateRequestAmino
+    object: QueryConsensusStateRequestAmino,
   ): QueryConsensusStateRequest {
     return {
       clientId: object.client_id,
@@ -1087,7 +1087,7 @@ export const QueryConsensusStateRequest = {
     };
   },
   toAmino(
-    message: QueryConsensusStateRequest
+    message: QueryConsensusStateRequest,
   ): QueryConsensusStateRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -1101,12 +1101,12 @@ export const QueryConsensusStateRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryConsensusStateRequestAminoMsg
+    object: QueryConsensusStateRequestAminoMsg,
   ): QueryConsensusStateRequest {
     return QueryConsensusStateRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryConsensusStateRequest
+    message: QueryConsensusStateRequest,
   ): QueryConsensusStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConsensusStateRequest",
@@ -1114,7 +1114,7 @@ export const QueryConsensusStateRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryConsensusStateRequestProtoMsg
+    message: QueryConsensusStateRequestProtoMsg,
   ): QueryConsensusStateRequest {
     return QueryConsensusStateRequest.decode(message.value);
   },
@@ -1122,7 +1122,7 @@ export const QueryConsensusStateRequest = {
     return QueryConsensusStateRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryConsensusStateRequest
+    message: QueryConsensusStateRequest,
   ): QueryConsensusStateRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
@@ -1140,7 +1140,7 @@ function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
 export const QueryConsensusStateResponse = {
   encode(
     message: QueryConsensusStateResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -1155,7 +1155,7 @@ export const QueryConsensusStateResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1200,7 +1200,7 @@ export const QueryConsensusStateResponse = {
         : undefined);
     message.proof !== undefined &&
       (obj.proof = base64FromBytes(
-        message.proof !== undefined ? message.proof : new Uint8Array()
+        message.proof !== undefined ? message.proof : new Uint8Array(),
       ));
     message.proofHeight !== undefined &&
       (obj.proofHeight = message.proofHeight
@@ -1209,7 +1209,7 @@ export const QueryConsensusStateResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryConsensusStateResponse>, I>>(
-    object: I
+    object: I,
   ): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
     message.consensusState =
@@ -1224,7 +1224,7 @@ export const QueryConsensusStateResponse = {
     return message;
   },
   fromAmino(
-    object: QueryConsensusStateResponseAmino
+    object: QueryConsensusStateResponseAmino,
   ): QueryConsensusStateResponse {
     return {
       consensusState: object?.consensus_state
@@ -1237,7 +1237,7 @@ export const QueryConsensusStateResponse = {
     };
   },
   toAmino(
-    message: QueryConsensusStateResponse
+    message: QueryConsensusStateResponse,
   ): QueryConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState
@@ -1250,12 +1250,12 @@ export const QueryConsensusStateResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryConsensusStateResponseAminoMsg
+    object: QueryConsensusStateResponseAminoMsg,
   ): QueryConsensusStateResponse {
     return QueryConsensusStateResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryConsensusStateResponse
+    message: QueryConsensusStateResponse,
   ): QueryConsensusStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConsensusStateResponse",
@@ -1263,7 +1263,7 @@ export const QueryConsensusStateResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryConsensusStateResponseProtoMsg
+    message: QueryConsensusStateResponseProtoMsg,
   ): QueryConsensusStateResponse {
     return QueryConsensusStateResponse.decode(message.value);
   },
@@ -1271,7 +1271,7 @@ export const QueryConsensusStateResponse = {
     return QueryConsensusStateResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryConsensusStateResponse
+    message: QueryConsensusStateResponse,
   ): QueryConsensusStateResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse",
@@ -1288,7 +1288,7 @@ function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
 export const QueryConsensusStatesRequest = {
   encode(
     message: QueryConsensusStatesRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -1300,7 +1300,7 @@ export const QueryConsensusStatesRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryConsensusStatesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1339,7 +1339,7 @@ export const QueryConsensusStatesRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryConsensusStatesRequest>, I>>(
-    object: I
+    object: I,
   ): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
     message.clientId = object.clientId ?? "";
@@ -1350,7 +1350,7 @@ export const QueryConsensusStatesRequest = {
     return message;
   },
   fromAmino(
-    object: QueryConsensusStatesRequestAmino
+    object: QueryConsensusStatesRequestAmino,
   ): QueryConsensusStatesRequest {
     return {
       clientId: object.client_id,
@@ -1360,7 +1360,7 @@ export const QueryConsensusStatesRequest = {
     };
   },
   toAmino(
-    message: QueryConsensusStatesRequest
+    message: QueryConsensusStatesRequest,
   ): QueryConsensusStatesRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -1370,12 +1370,12 @@ export const QueryConsensusStatesRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryConsensusStatesRequestAminoMsg
+    object: QueryConsensusStatesRequestAminoMsg,
   ): QueryConsensusStatesRequest {
     return QueryConsensusStatesRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryConsensusStatesRequest
+    message: QueryConsensusStatesRequest,
   ): QueryConsensusStatesRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConsensusStatesRequest",
@@ -1383,7 +1383,7 @@ export const QueryConsensusStatesRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryConsensusStatesRequestProtoMsg
+    message: QueryConsensusStatesRequestProtoMsg,
   ): QueryConsensusStatesRequest {
     return QueryConsensusStatesRequest.decode(message.value);
   },
@@ -1391,7 +1391,7 @@ export const QueryConsensusStatesRequest = {
     return QueryConsensusStatesRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryConsensusStatesRequest
+    message: QueryConsensusStatesRequest,
   ): QueryConsensusStatesRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
@@ -1408,7 +1408,7 @@ function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse 
 export const QueryConsensusStatesResponse = {
   encode(
     message: QueryConsensusStatesResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.consensusStates) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1416,14 +1416,14 @@ export const QueryConsensusStatesResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryConsensusStatesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1433,7 +1433,7 @@ export const QueryConsensusStatesResponse = {
       switch (tag >>> 3) {
         case 1:
           message.consensusStates.push(
-            ConsensusStateWithHeight.decode(reader, reader.uint32())
+            ConsensusStateWithHeight.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -1450,7 +1450,7 @@ export const QueryConsensusStatesResponse = {
     return {
       consensusStates: Array.isArray(object?.consensusStates)
         ? object.consensusStates.map((e: any) =>
-            ConsensusStateWithHeight.fromJSON(e)
+            ConsensusStateWithHeight.fromJSON(e),
           )
         : [],
       pagination: isSet(object.pagination)
@@ -1462,7 +1462,7 @@ export const QueryConsensusStatesResponse = {
     const obj: any = {};
     if (message.consensusStates) {
       obj.consensusStates = message.consensusStates.map((e) =>
-        e ? ConsensusStateWithHeight.toJSON(e) : undefined
+        e ? ConsensusStateWithHeight.toJSON(e) : undefined,
       );
     } else {
       obj.consensusStates = [];
@@ -1474,12 +1474,12 @@ export const QueryConsensusStatesResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryConsensusStatesResponse>, I>>(
-    object: I
+    object: I,
   ): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
     message.consensusStates =
       object.consensusStates?.map((e) =>
-        ConsensusStateWithHeight.fromPartial(e)
+        ConsensusStateWithHeight.fromPartial(e),
       ) || [];
     message.pagination =
       object.pagination !== undefined && object.pagination !== null
@@ -1488,12 +1488,12 @@ export const QueryConsensusStatesResponse = {
     return message;
   },
   fromAmino(
-    object: QueryConsensusStatesResponseAmino
+    object: QueryConsensusStatesResponseAmino,
   ): QueryConsensusStatesResponse {
     return {
       consensusStates: Array.isArray(object?.consensus_states)
         ? object.consensus_states.map((e: any) =>
-            ConsensusStateWithHeight.fromAmino(e)
+            ConsensusStateWithHeight.fromAmino(e),
           )
         : [],
       pagination: object?.pagination
@@ -1502,12 +1502,12 @@ export const QueryConsensusStatesResponse = {
     };
   },
   toAmino(
-    message: QueryConsensusStatesResponse
+    message: QueryConsensusStatesResponse,
   ): QueryConsensusStatesResponseAmino {
     const obj: any = {};
     if (message.consensusStates) {
       obj.consensus_states = message.consensusStates.map((e) =>
-        e ? ConsensusStateWithHeight.toAmino(e) : undefined
+        e ? ConsensusStateWithHeight.toAmino(e) : undefined,
       );
     } else {
       obj.consensus_states = [];
@@ -1518,12 +1518,12 @@ export const QueryConsensusStatesResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryConsensusStatesResponseAminoMsg
+    object: QueryConsensusStatesResponseAminoMsg,
   ): QueryConsensusStatesResponse {
     return QueryConsensusStatesResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryConsensusStatesResponse
+    message: QueryConsensusStatesResponse,
   ): QueryConsensusStatesResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConsensusStatesResponse",
@@ -1531,7 +1531,7 @@ export const QueryConsensusStatesResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryConsensusStatesResponseProtoMsg
+    message: QueryConsensusStatesResponseProtoMsg,
   ): QueryConsensusStatesResponse {
     return QueryConsensusStatesResponse.decode(message.value);
   },
@@ -1539,7 +1539,7 @@ export const QueryConsensusStatesResponse = {
     return QueryConsensusStatesResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryConsensusStatesResponse
+    message: QueryConsensusStatesResponse,
   ): QueryConsensusStatesResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse",
@@ -1556,7 +1556,7 @@ function createBaseQueryConsensusStateHeightsRequest(): QueryConsensusStateHeigh
 export const QueryConsensusStateHeightsRequest = {
   encode(
     message: QueryConsensusStateHeightsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -1568,7 +1568,7 @@ export const QueryConsensusStateHeightsRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryConsensusStateHeightsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1607,7 +1607,7 @@ export const QueryConsensusStateHeightsRequest = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryConsensusStateHeightsRequest>, I>
+    I extends Exact<DeepPartial<QueryConsensusStateHeightsRequest>, I>,
   >(object: I): QueryConsensusStateHeightsRequest {
     const message = createBaseQueryConsensusStateHeightsRequest();
     message.clientId = object.clientId ?? "";
@@ -1618,7 +1618,7 @@ export const QueryConsensusStateHeightsRequest = {
     return message;
   },
   fromAmino(
-    object: QueryConsensusStateHeightsRequestAmino
+    object: QueryConsensusStateHeightsRequestAmino,
   ): QueryConsensusStateHeightsRequest {
     return {
       clientId: object.client_id,
@@ -1628,7 +1628,7 @@ export const QueryConsensusStateHeightsRequest = {
     };
   },
   toAmino(
-    message: QueryConsensusStateHeightsRequest
+    message: QueryConsensusStateHeightsRequest,
   ): QueryConsensusStateHeightsRequestAmino {
     const obj: any = {};
     obj.client_id = message.clientId;
@@ -1638,12 +1638,12 @@ export const QueryConsensusStateHeightsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryConsensusStateHeightsRequestAminoMsg
+    object: QueryConsensusStateHeightsRequestAminoMsg,
   ): QueryConsensusStateHeightsRequest {
     return QueryConsensusStateHeightsRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryConsensusStateHeightsRequest
+    message: QueryConsensusStateHeightsRequest,
   ): QueryConsensusStateHeightsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryConsensusStateHeightsRequest",
@@ -1651,7 +1651,7 @@ export const QueryConsensusStateHeightsRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryConsensusStateHeightsRequestProtoMsg
+    message: QueryConsensusStateHeightsRequestProtoMsg,
   ): QueryConsensusStateHeightsRequest {
     return QueryConsensusStateHeightsRequest.decode(message.value);
   },
@@ -1659,7 +1659,7 @@ export const QueryConsensusStateHeightsRequest = {
     return QueryConsensusStateHeightsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryConsensusStateHeightsRequest
+    message: QueryConsensusStateHeightsRequest,
   ): QueryConsensusStateHeightsRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStateHeightsRequest",
@@ -1676,7 +1676,7 @@ function createBaseQueryConsensusStateHeightsResponse(): QueryConsensusStateHeig
 export const QueryConsensusStateHeightsResponse = {
   encode(
     message: QueryConsensusStateHeightsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.consensusStateHeights) {
       Height.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1684,14 +1684,14 @@ export const QueryConsensusStateHeightsResponse = {
     if (message.pagination !== undefined) {
       PageResponse.encode(
         message.pagination,
-        writer.uint32(18).fork()
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryConsensusStateHeightsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1701,7 +1701,7 @@ export const QueryConsensusStateHeightsResponse = {
       switch (tag >>> 3) {
         case 1:
           message.consensusStateHeights.push(
-            Height.decode(reader, reader.uint32())
+            Height.decode(reader, reader.uint32()),
           );
           break;
         case 2:
@@ -1728,7 +1728,7 @@ export const QueryConsensusStateHeightsResponse = {
     const obj: any = {};
     if (message.consensusStateHeights) {
       obj.consensusStateHeights = message.consensusStateHeights.map((e) =>
-        e ? Height.toJSON(e) : undefined
+        e ? Height.toJSON(e) : undefined,
       );
     } else {
       obj.consensusStateHeights = [];
@@ -1740,7 +1740,7 @@ export const QueryConsensusStateHeightsResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryConsensusStateHeightsResponse>, I>
+    I extends Exact<DeepPartial<QueryConsensusStateHeightsResponse>, I>,
   >(object: I): QueryConsensusStateHeightsResponse {
     const message = createBaseQueryConsensusStateHeightsResponse();
     message.consensusStateHeights =
@@ -1752,7 +1752,7 @@ export const QueryConsensusStateHeightsResponse = {
     return message;
   },
   fromAmino(
-    object: QueryConsensusStateHeightsResponseAmino
+    object: QueryConsensusStateHeightsResponseAmino,
   ): QueryConsensusStateHeightsResponse {
     return {
       consensusStateHeights: Array.isArray(object?.consensus_state_heights)
@@ -1764,12 +1764,12 @@ export const QueryConsensusStateHeightsResponse = {
     };
   },
   toAmino(
-    message: QueryConsensusStateHeightsResponse
+    message: QueryConsensusStateHeightsResponse,
   ): QueryConsensusStateHeightsResponseAmino {
     const obj: any = {};
     if (message.consensusStateHeights) {
       obj.consensus_state_heights = message.consensusStateHeights.map((e) =>
-        e ? Height.toAmino(e) : undefined
+        e ? Height.toAmino(e) : undefined,
       );
     } else {
       obj.consensus_state_heights = [];
@@ -1780,12 +1780,12 @@ export const QueryConsensusStateHeightsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryConsensusStateHeightsResponseAminoMsg
+    object: QueryConsensusStateHeightsResponseAminoMsg,
   ): QueryConsensusStateHeightsResponse {
     return QueryConsensusStateHeightsResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryConsensusStateHeightsResponse
+    message: QueryConsensusStateHeightsResponse,
   ): QueryConsensusStateHeightsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryConsensusStateHeightsResponse",
@@ -1793,7 +1793,7 @@ export const QueryConsensusStateHeightsResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryConsensusStateHeightsResponseProtoMsg
+    message: QueryConsensusStateHeightsResponseProtoMsg,
   ): QueryConsensusStateHeightsResponse {
     return QueryConsensusStateHeightsResponse.decode(message.value);
   },
@@ -1801,7 +1801,7 @@ export const QueryConsensusStateHeightsResponse = {
     return QueryConsensusStateHeightsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryConsensusStateHeightsResponse
+    message: QueryConsensusStateHeightsResponse,
   ): QueryConsensusStateHeightsResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryConsensusStateHeightsResponse",
@@ -1817,7 +1817,7 @@ function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
 export const QueryClientStatusRequest = {
   encode(
     message: QueryClientStatusRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
@@ -1826,7 +1826,7 @@ export const QueryClientStatusRequest = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientStatusRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1855,7 +1855,7 @@ export const QueryClientStatusRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientStatusRequest>, I>>(
-    object: I
+    object: I,
   ): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
     message.clientId = object.clientId ?? "";
@@ -1872,12 +1872,12 @@ export const QueryClientStatusRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientStatusRequestAminoMsg
+    object: QueryClientStatusRequestAminoMsg,
   ): QueryClientStatusRequest {
     return QueryClientStatusRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientStatusRequest
+    message: QueryClientStatusRequest,
   ): QueryClientStatusRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientStatusRequest",
@@ -1885,7 +1885,7 @@ export const QueryClientStatusRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryClientStatusRequestProtoMsg
+    message: QueryClientStatusRequestProtoMsg,
   ): QueryClientStatusRequest {
     return QueryClientStatusRequest.decode(message.value);
   },
@@ -1893,7 +1893,7 @@ export const QueryClientStatusRequest = {
     return QueryClientStatusRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientStatusRequest
+    message: QueryClientStatusRequest,
   ): QueryClientStatusRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
@@ -1909,7 +1909,7 @@ function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
 export const QueryClientStatusResponse = {
   encode(
     message: QueryClientStatusResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.status !== "") {
       writer.uint32(10).string(message.status);
@@ -1918,7 +1918,7 @@ export const QueryClientStatusResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientStatusResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -1947,7 +1947,7 @@ export const QueryClientStatusResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientStatusResponse>, I>>(
-    object: I
+    object: I,
   ): QueryClientStatusResponse {
     const message = createBaseQueryClientStatusResponse();
     message.status = object.status ?? "";
@@ -1964,12 +1964,12 @@ export const QueryClientStatusResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientStatusResponseAminoMsg
+    object: QueryClientStatusResponseAminoMsg,
   ): QueryClientStatusResponse {
     return QueryClientStatusResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientStatusResponse
+    message: QueryClientStatusResponse,
   ): QueryClientStatusResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientStatusResponse",
@@ -1977,7 +1977,7 @@ export const QueryClientStatusResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryClientStatusResponseProtoMsg
+    message: QueryClientStatusResponseProtoMsg,
   ): QueryClientStatusResponse {
     return QueryClientStatusResponse.decode(message.value);
   },
@@ -1985,7 +1985,7 @@ export const QueryClientStatusResponse = {
     return QueryClientStatusResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientStatusResponse
+    message: QueryClientStatusResponse,
   ): QueryClientStatusResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
@@ -1999,13 +1999,13 @@ function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
 export const QueryClientParamsRequest = {
   encode(
     _: QueryClientParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientParamsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2028,7 +2028,7 @@ export const QueryClientParamsRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientParamsRequest>, I>>(
-    _: I
+    _: I,
   ): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
     return message;
@@ -2041,12 +2041,12 @@ export const QueryClientParamsRequest = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientParamsRequestAminoMsg
+    object: QueryClientParamsRequestAminoMsg,
   ): QueryClientParamsRequest {
     return QueryClientParamsRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientParamsRequest
+    message: QueryClientParamsRequest,
   ): QueryClientParamsRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientParamsRequest",
@@ -2054,7 +2054,7 @@ export const QueryClientParamsRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryClientParamsRequestProtoMsg
+    message: QueryClientParamsRequestProtoMsg,
   ): QueryClientParamsRequest {
     return QueryClientParamsRequest.decode(message.value);
   },
@@ -2062,7 +2062,7 @@ export const QueryClientParamsRequest = {
     return QueryClientParamsRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientParamsRequest
+    message: QueryClientParamsRequest,
   ): QueryClientParamsRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest",
@@ -2078,7 +2078,7 @@ function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
 export const QueryClientParamsResponse = {
   encode(
     message: QueryClientParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -2087,7 +2087,7 @@ export const QueryClientParamsResponse = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryClientParamsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2117,7 +2117,7 @@ export const QueryClientParamsResponse = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryClientParamsResponse>, I>>(
-    object: I
+    object: I,
   ): QueryClientParamsResponse {
     const message = createBaseQueryClientParamsResponse();
     message.params =
@@ -2137,12 +2137,12 @@ export const QueryClientParamsResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryClientParamsResponseAminoMsg
+    object: QueryClientParamsResponseAminoMsg,
   ): QueryClientParamsResponse {
     return QueryClientParamsResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryClientParamsResponse
+    message: QueryClientParamsResponse,
   ): QueryClientParamsResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryClientParamsResponse",
@@ -2150,7 +2150,7 @@ export const QueryClientParamsResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryClientParamsResponseProtoMsg
+    message: QueryClientParamsResponseProtoMsg,
   ): QueryClientParamsResponse {
     return QueryClientParamsResponse.decode(message.value);
   },
@@ -2158,7 +2158,7 @@ export const QueryClientParamsResponse = {
     return QueryClientParamsResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryClientParamsResponse
+    message: QueryClientParamsResponse,
   ): QueryClientParamsResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse",
@@ -2172,13 +2172,13 @@ function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRe
 export const QueryUpgradedClientStateRequest = {
   encode(
     _: QueryUpgradedClientStateRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryUpgradedClientStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2201,29 +2201,29 @@ export const QueryUpgradedClientStateRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<QueryUpgradedClientStateRequest>, I>>(
-    _: I
+    _: I,
   ): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
     return message;
   },
   fromAmino(
-    _: QueryUpgradedClientStateRequestAmino
+    _: QueryUpgradedClientStateRequestAmino,
   ): QueryUpgradedClientStateRequest {
     return {};
   },
   toAmino(
-    _: QueryUpgradedClientStateRequest
+    _: QueryUpgradedClientStateRequest,
   ): QueryUpgradedClientStateRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: QueryUpgradedClientStateRequestAminoMsg
+    object: QueryUpgradedClientStateRequestAminoMsg,
   ): QueryUpgradedClientStateRequest {
     return QueryUpgradedClientStateRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryUpgradedClientStateRequest
+    message: QueryUpgradedClientStateRequest,
   ): QueryUpgradedClientStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryUpgradedClientStateRequest",
@@ -2231,7 +2231,7 @@ export const QueryUpgradedClientStateRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryUpgradedClientStateRequestProtoMsg
+    message: QueryUpgradedClientStateRequestProtoMsg,
   ): QueryUpgradedClientStateRequest {
     return QueryUpgradedClientStateRequest.decode(message.value);
   },
@@ -2239,7 +2239,7 @@ export const QueryUpgradedClientStateRequest = {
     return QueryUpgradedClientStateRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryUpgradedClientStateRequest
+    message: QueryUpgradedClientStateRequest,
   ): QueryUpgradedClientStateRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest",
@@ -2255,19 +2255,19 @@ function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateR
 export const QueryUpgradedClientStateResponse = {
   encode(
     message: QueryUpgradedClientStateResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.upgradedClientState !== undefined) {
       Any.encode(
         message.upgradedClientState,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryUpgradedClientStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2301,7 +2301,7 @@ export const QueryUpgradedClientStateResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryUpgradedClientStateResponse>, I>
+    I extends Exact<DeepPartial<QueryUpgradedClientStateResponse>, I>,
   >(object: I): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
     message.upgradedClientState =
@@ -2312,7 +2312,7 @@ export const QueryUpgradedClientStateResponse = {
     return message;
   },
   fromAmino(
-    object: QueryUpgradedClientStateResponseAmino
+    object: QueryUpgradedClientStateResponseAmino,
   ): QueryUpgradedClientStateResponse {
     return {
       upgradedClientState: object?.upgraded_client_state
@@ -2321,7 +2321,7 @@ export const QueryUpgradedClientStateResponse = {
     };
   },
   toAmino(
-    message: QueryUpgradedClientStateResponse
+    message: QueryUpgradedClientStateResponse,
   ): QueryUpgradedClientStateResponseAmino {
     const obj: any = {};
     obj.upgraded_client_state = message.upgradedClientState
@@ -2330,12 +2330,12 @@ export const QueryUpgradedClientStateResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryUpgradedClientStateResponseAminoMsg
+    object: QueryUpgradedClientStateResponseAminoMsg,
   ): QueryUpgradedClientStateResponse {
     return QueryUpgradedClientStateResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryUpgradedClientStateResponse
+    message: QueryUpgradedClientStateResponse,
   ): QueryUpgradedClientStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryUpgradedClientStateResponse",
@@ -2343,7 +2343,7 @@ export const QueryUpgradedClientStateResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryUpgradedClientStateResponseProtoMsg
+    message: QueryUpgradedClientStateResponseProtoMsg,
   ): QueryUpgradedClientStateResponse {
     return QueryUpgradedClientStateResponse.decode(message.value);
   },
@@ -2351,7 +2351,7 @@ export const QueryUpgradedClientStateResponse = {
     return QueryUpgradedClientStateResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryUpgradedClientStateResponse
+    message: QueryUpgradedClientStateResponse,
   ): QueryUpgradedClientStateResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse",
@@ -2365,13 +2365,13 @@ function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusS
 export const QueryUpgradedConsensusStateRequest = {
   encode(
     _: QueryUpgradedConsensusStateRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryUpgradedConsensusStateRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2394,29 +2394,29 @@ export const QueryUpgradedConsensusStateRequest = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>
+    I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>,
   >(_: I): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     return message;
   },
   fromAmino(
-    _: QueryUpgradedConsensusStateRequestAmino
+    _: QueryUpgradedConsensusStateRequestAmino,
   ): QueryUpgradedConsensusStateRequest {
     return {};
   },
   toAmino(
-    _: QueryUpgradedConsensusStateRequest
+    _: QueryUpgradedConsensusStateRequest,
   ): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
     return obj;
   },
   fromAminoMsg(
-    object: QueryUpgradedConsensusStateRequestAminoMsg
+    object: QueryUpgradedConsensusStateRequestAminoMsg,
   ): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryUpgradedConsensusStateRequest
+    message: QueryUpgradedConsensusStateRequest,
   ): QueryUpgradedConsensusStateRequestAminoMsg {
     return {
       type: "cosmos-sdk/QueryUpgradedConsensusStateRequest",
@@ -2424,7 +2424,7 @@ export const QueryUpgradedConsensusStateRequest = {
     };
   },
   fromProtoMsg(
-    message: QueryUpgradedConsensusStateRequestProtoMsg
+    message: QueryUpgradedConsensusStateRequestProtoMsg,
   ): QueryUpgradedConsensusStateRequest {
     return QueryUpgradedConsensusStateRequest.decode(message.value);
   },
@@ -2432,7 +2432,7 @@ export const QueryUpgradedConsensusStateRequest = {
     return QueryUpgradedConsensusStateRequest.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryUpgradedConsensusStateRequest
+    message: QueryUpgradedConsensusStateRequest,
   ): QueryUpgradedConsensusStateRequestProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest",
@@ -2448,19 +2448,19 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
 export const QueryUpgradedConsensusStateResponse = {
   encode(
     message: QueryUpgradedConsensusStateResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.upgradedConsensusState !== undefined) {
       Any.encode(
         message.upgradedConsensusState,
-        writer.uint32(10).fork()
+        writer.uint32(10).fork(),
       ).ldelim();
     }
     return writer;
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): QueryUpgradedConsensusStateResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -2494,7 +2494,7 @@ export const QueryUpgradedConsensusStateResponse = {
     return obj;
   },
   fromPartial<
-    I extends Exact<DeepPartial<QueryUpgradedConsensusStateResponse>, I>
+    I extends Exact<DeepPartial<QueryUpgradedConsensusStateResponse>, I>,
   >(object: I): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState =
@@ -2505,7 +2505,7 @@ export const QueryUpgradedConsensusStateResponse = {
     return message;
   },
   fromAmino(
-    object: QueryUpgradedConsensusStateResponseAmino
+    object: QueryUpgradedConsensusStateResponseAmino,
   ): QueryUpgradedConsensusStateResponse {
     return {
       upgradedConsensusState: object?.upgraded_consensus_state
@@ -2514,7 +2514,7 @@ export const QueryUpgradedConsensusStateResponse = {
     };
   },
   toAmino(
-    message: QueryUpgradedConsensusStateResponse
+    message: QueryUpgradedConsensusStateResponse,
   ): QueryUpgradedConsensusStateResponseAmino {
     const obj: any = {};
     obj.upgraded_consensus_state = message.upgradedConsensusState
@@ -2523,12 +2523,12 @@ export const QueryUpgradedConsensusStateResponse = {
     return obj;
   },
   fromAminoMsg(
-    object: QueryUpgradedConsensusStateResponseAminoMsg
+    object: QueryUpgradedConsensusStateResponseAminoMsg,
   ): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.fromAmino(object.value);
   },
   toAminoMsg(
-    message: QueryUpgradedConsensusStateResponse
+    message: QueryUpgradedConsensusStateResponse,
   ): QueryUpgradedConsensusStateResponseAminoMsg {
     return {
       type: "cosmos-sdk/QueryUpgradedConsensusStateResponse",
@@ -2536,7 +2536,7 @@ export const QueryUpgradedConsensusStateResponse = {
     };
   },
   fromProtoMsg(
-    message: QueryUpgradedConsensusStateResponseProtoMsg
+    message: QueryUpgradedConsensusStateResponseProtoMsg,
   ): QueryUpgradedConsensusStateResponse {
     return QueryUpgradedConsensusStateResponse.decode(message.value);
   },
@@ -2544,7 +2544,7 @@ export const QueryUpgradedConsensusStateResponse = {
     return QueryUpgradedConsensusStateResponse.encode(message).finish();
   },
   toProtoMsg(
-    message: QueryUpgradedConsensusStateResponse
+    message: QueryUpgradedConsensusStateResponse,
   ): QueryUpgradedConsensusStateResponseProtoMsg {
     return {
       typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse",
@@ -2556,45 +2556,45 @@ export const QueryUpgradedConsensusStateResponse = {
 export interface Query {
   /** ClientState queries an IBC light client. */
   ClientState(
-    request: QueryClientStateRequest
+    request: QueryClientStateRequest,
   ): Promise<QueryClientStateResponse>;
   /** ClientStates queries all the IBC light clients of a chain. */
   ClientStates(
-    request?: QueryClientStatesRequest
+    request?: QueryClientStatesRequest,
   ): Promise<QueryClientStatesResponse>;
   /**
    * ConsensusState queries a consensus state associated with a client state at
    * a given height.
    */
   ConsensusState(
-    request: QueryConsensusStateRequest
+    request: QueryConsensusStateRequest,
   ): Promise<QueryConsensusStateResponse>;
   /**
    * ConsensusStates queries all the consensus state associated with a given
    * client.
    */
   ConsensusStates(
-    request: QueryConsensusStatesRequest
+    request: QueryConsensusStatesRequest,
   ): Promise<QueryConsensusStatesResponse>;
   /** ConsensusStateHeights queries the height of every consensus states associated with a given client. */
   ConsensusStateHeights(
-    request: QueryConsensusStateHeightsRequest
+    request: QueryConsensusStateHeightsRequest,
   ): Promise<QueryConsensusStateHeightsResponse>;
   /** Status queries the status of an IBC client. */
   ClientStatus(
-    request: QueryClientStatusRequest
+    request: QueryClientStatusRequest,
   ): Promise<QueryClientStatusResponse>;
   /** ClientParams queries all parameters of the ibc client submodule. */
   ClientParams(
-    request?: QueryClientParamsRequest
+    request?: QueryClientParamsRequest,
   ): Promise<QueryClientParamsResponse>;
   /** UpgradedClientState queries an Upgraded IBC light client. */
   UpgradedClientState(
-    request?: QueryUpgradedClientStateRequest
+    request?: QueryUpgradedClientStateRequest,
   ): Promise<QueryUpgradedClientStateResponse>;
   /** UpgradedConsensusState queries an Upgraded IBC consensus state. */
   UpgradedConsensusState(
-    request?: QueryUpgradedConsensusStateRequest
+    request?: QueryUpgradedConsensusStateRequest,
   ): Promise<QueryUpgradedConsensusStateResponse>;
 }
 export class QueryClientImpl implements Query {
@@ -2612,122 +2612,122 @@ export class QueryClientImpl implements Query {
     this.UpgradedConsensusState = this.UpgradedConsensusState.bind(this);
   }
   ClientState(
-    request: QueryClientStateRequest
+    request: QueryClientStateRequest,
   ): Promise<QueryClientStateResponse> {
     const data = QueryClientStateRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ClientState",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryClientStateResponse.decode(new _m0.Reader(data))
+      QueryClientStateResponse.decode(new _m0.Reader(data)),
     );
   }
   ClientStates(
     request: QueryClientStatesRequest = {
       pagination: undefined,
-    }
+    },
   ): Promise<QueryClientStatesResponse> {
     const data = QueryClientStatesRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ClientStates",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryClientStatesResponse.decode(new _m0.Reader(data))
+      QueryClientStatesResponse.decode(new _m0.Reader(data)),
     );
   }
   ConsensusState(
-    request: QueryConsensusStateRequest
+    request: QueryConsensusStateRequest,
   ): Promise<QueryConsensusStateResponse> {
     const data = QueryConsensusStateRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ConsensusState",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryConsensusStateResponse.decode(new _m0.Reader(data))
+      QueryConsensusStateResponse.decode(new _m0.Reader(data)),
     );
   }
   ConsensusStates(
-    request: QueryConsensusStatesRequest
+    request: QueryConsensusStatesRequest,
   ): Promise<QueryConsensusStatesResponse> {
     const data = QueryConsensusStatesRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ConsensusStates",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryConsensusStatesResponse.decode(new _m0.Reader(data))
+      QueryConsensusStatesResponse.decode(new _m0.Reader(data)),
     );
   }
   ConsensusStateHeights(
-    request: QueryConsensusStateHeightsRequest
+    request: QueryConsensusStateHeightsRequest,
   ): Promise<QueryConsensusStateHeightsResponse> {
     const data = QueryConsensusStateHeightsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ConsensusStateHeights",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryConsensusStateHeightsResponse.decode(new _m0.Reader(data))
+      QueryConsensusStateHeightsResponse.decode(new _m0.Reader(data)),
     );
   }
   ClientStatus(
-    request: QueryClientStatusRequest
+    request: QueryClientStatusRequest,
   ): Promise<QueryClientStatusResponse> {
     const data = QueryClientStatusRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ClientStatus",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryClientStatusResponse.decode(new _m0.Reader(data))
+      QueryClientStatusResponse.decode(new _m0.Reader(data)),
     );
   }
   ClientParams(
-    request: QueryClientParamsRequest = {}
+    request: QueryClientParamsRequest = {},
   ): Promise<QueryClientParamsResponse> {
     const data = QueryClientParamsRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "ClientParams",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryClientParamsResponse.decode(new _m0.Reader(data))
+      QueryClientParamsResponse.decode(new _m0.Reader(data)),
     );
   }
   UpgradedClientState(
-    request: QueryUpgradedClientStateRequest = {}
+    request: QueryUpgradedClientStateRequest = {},
   ): Promise<QueryUpgradedClientStateResponse> {
     const data = QueryUpgradedClientStateRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "UpgradedClientState",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryUpgradedClientStateResponse.decode(new _m0.Reader(data))
+      QueryUpgradedClientStateResponse.decode(new _m0.Reader(data)),
     );
   }
   UpgradedConsensusState(
-    request: QueryUpgradedConsensusStateRequest = {}
+    request: QueryUpgradedConsensusStateRequest = {},
   ): Promise<QueryUpgradedConsensusStateResponse> {
     const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
     const promise = this.rpc.request(
       "ibc.core.client.v1.Query",
       "UpgradedConsensusState",
-      data
+      data,
     );
     return promise.then((data) =>
-      QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data))
+      QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data)),
     );
   }
 }

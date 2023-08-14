@@ -45,7 +45,7 @@ function createBaseGenericSubspaceAuthorization(): GenericSubspaceAuthorization 
 export const GenericSubspaceAuthorization = {
   encode(
     message: GenericSubspaceAuthorization,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.subspacesIds) {
@@ -59,7 +59,7 @@ export const GenericSubspaceAuthorization = {
   },
   decode(
     input: _m0.Reader | Uint8Array,
-    length?: number
+    length?: number,
   ): GenericSubspaceAuthorization {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
@@ -99,7 +99,7 @@ export const GenericSubspaceAuthorization = {
     const obj: any = {};
     if (message.subspacesIds) {
       obj.subspacesIds = message.subspacesIds.map((e) =>
-        (e || Long.UZERO).toString()
+        (e || Long.UZERO).toString(),
       );
     } else {
       obj.subspacesIds = [];
@@ -108,7 +108,7 @@ export const GenericSubspaceAuthorization = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenericSubspaceAuthorization>, I>>(
-    object: I
+    object: I,
   ): GenericSubspaceAuthorization {
     const message = createBaseGenericSubspaceAuthorization();
     message.subspacesIds =
@@ -117,7 +117,7 @@ export const GenericSubspaceAuthorization = {
     return message;
   },
   fromAmino(
-    object: GenericSubspaceAuthorizationAmino
+    object: GenericSubspaceAuthorizationAmino,
   ): GenericSubspaceAuthorization {
     return {
       subspacesIds: Array.isArray(object?.subspaces_ids)
@@ -127,7 +127,7 @@ export const GenericSubspaceAuthorization = {
     };
   },
   toAmino(
-    message: GenericSubspaceAuthorization
+    message: GenericSubspaceAuthorization,
   ): GenericSubspaceAuthorizationAmino {
     const obj: any = {};
     if (message.subspacesIds) {
@@ -139,12 +139,12 @@ export const GenericSubspaceAuthorization = {
     return obj;
   },
   fromAminoMsg(
-    object: GenericSubspaceAuthorizationAminoMsg
+    object: GenericSubspaceAuthorizationAminoMsg,
   ): GenericSubspaceAuthorization {
     return GenericSubspaceAuthorization.fromAmino(object.value);
   },
   fromProtoMsg(
-    message: GenericSubspaceAuthorizationProtoMsg
+    message: GenericSubspaceAuthorizationProtoMsg,
   ): GenericSubspaceAuthorization {
     return GenericSubspaceAuthorization.decode(message.value);
   },
@@ -152,7 +152,7 @@ export const GenericSubspaceAuthorization = {
     return GenericSubspaceAuthorization.encode(message).finish();
   },
   toProtoMsg(
-    message: GenericSubspaceAuthorization
+    message: GenericSubspaceAuthorization,
   ): GenericSubspaceAuthorizationProtoMsg {
     return {
       typeUrl: "/desmos.subspaces.v3.authz.GenericSubspaceAuthorization",

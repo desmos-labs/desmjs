@@ -295,7 +295,7 @@ export const Any = {
     message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
     message.value !== undefined &&
       (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array()
+        message.value !== undefined ? message.value : new Uint8Array(),
       ));
     return obj;
   },

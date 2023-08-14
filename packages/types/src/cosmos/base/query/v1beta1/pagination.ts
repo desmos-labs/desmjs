@@ -163,7 +163,7 @@ function createBasePageRequest(): PageRequest {
 export const PageRequest = {
   encode(
     message: PageRequest,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -224,7 +224,7 @@ export const PageRequest = {
     const obj: any = {};
     message.key !== undefined &&
       (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array()
+        message.key !== undefined ? message.key : new Uint8Array(),
       ));
     message.offset !== undefined &&
       (obj.offset = (message.offset || Long.UZERO).toString());
@@ -235,7 +235,7 @@ export const PageRequest = {
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PageRequest>, I>>(
-    object: I
+    object: I,
   ): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array();
@@ -300,7 +300,7 @@ function createBasePageResponse(): PageResponse {
 export const PageResponse = {
   encode(
     message: PageResponse,
-    writer: _m0.Writer = _m0.Writer.create()
+    writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.nextKey.length !== 0) {
       writer.uint32(10).bytes(message.nextKey);
@@ -342,14 +342,14 @@ export const PageResponse = {
     const obj: any = {};
     message.nextKey !== undefined &&
       (obj.nextKey = base64FromBytes(
-        message.nextKey !== undefined ? message.nextKey : new Uint8Array()
+        message.nextKey !== undefined ? message.nextKey : new Uint8Array(),
       ));
     message.total !== undefined &&
       (obj.total = (message.total || Long.UZERO).toString());
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<PageResponse>, I>>(
-    object: I
+    object: I,
   ): PageResponse {
     const message = createBasePageResponse();
     message.nextKey = object.nextKey ?? new Uint8Array();
