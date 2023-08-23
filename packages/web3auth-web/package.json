@@ -33,7 +33,7 @@
     "@cosmjs/proto-signing": "^0.31.0",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@web3auth/base": "^6.1.7",
-    "@web3auth/modal": "^6.1.7",
+    "@web3auth/modal": "^6.1.8",
     "@web3auth/ui": "^6.1.7",
     "cosmjs-types": "^0.8.0"
   },
