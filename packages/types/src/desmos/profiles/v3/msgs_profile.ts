@@ -67,7 +67,7 @@ export interface MsgSaveProfileAmino {
   creator: string;
 }
 export interface MsgSaveProfileAminoMsg {
-  type: "/desmos.profiles.v3.MsgSaveProfile";
+  type: "desmos/MsgSaveProfile";
   value: MsgSaveProfileAmino;
 }
 /** MsgSaveProfileResponse defines the Msg/SaveProfile response type. */
@@ -97,7 +97,7 @@ export interface MsgDeleteProfileAmino {
   creator: string;
 }
 export interface MsgDeleteProfileAminoMsg {
-  type: "/desmos.profiles.v3.MsgDeleteProfile";
+  type: "desmos/MsgDeleteProfile";
   value: MsgDeleteProfileAmino;
 }
 /** MsgDeleteProfileResponse defines the Msg/DeleteProfile response type. */
@@ -240,6 +240,12 @@ export const MsgSaveProfile = {
   fromAminoMsg(object: MsgSaveProfileAminoMsg): MsgSaveProfile {
     return MsgSaveProfile.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgSaveProfile): MsgSaveProfileAminoMsg {
+    return {
+      type: "desmos/MsgSaveProfile",
+      value: MsgSaveProfile.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgSaveProfileProtoMsg): MsgSaveProfile {
     return MsgSaveProfile.decode(message.value);
   },
@@ -379,6 +385,12 @@ export const MsgDeleteProfile = {
   },
   fromAminoMsg(object: MsgDeleteProfileAminoMsg): MsgDeleteProfile {
     return MsgDeleteProfile.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteProfile): MsgDeleteProfileAminoMsg {
+    return {
+      type: "desmos/MsgDeleteProfile",
+      value: MsgDeleteProfile.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgDeleteProfileProtoMsg): MsgDeleteProfile {
     return MsgDeleteProfile.decode(message.value);

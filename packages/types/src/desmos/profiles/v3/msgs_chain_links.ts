@@ -48,7 +48,7 @@ export interface MsgLinkChainAccountAmino {
   signer: string;
 }
 export interface MsgLinkChainAccountAminoMsg {
-  type: "/desmos.profiles.v3.MsgLinkChainAccount";
+  type: "desmos/MsgLinkChainAccount";
   value: MsgLinkChainAccountAmino;
 }
 /** MsgLinkChainAccountResponse defines the Msg/LinkAccount response type. */
@@ -98,7 +98,7 @@ export interface MsgUnlinkChainAccountAmino {
   target: string;
 }
 export interface MsgUnlinkChainAccountAminoMsg {
-  type: "/desmos.profiles.v3.MsgUnlinkChainAccount";
+  type: "desmos/MsgUnlinkChainAccount";
   value: MsgUnlinkChainAccountAmino;
 }
 /** MsgUnlinkChainAccountResponse defines the Msg/UnlinkAccount response type. */
@@ -142,7 +142,7 @@ export interface MsgSetDefaultExternalAddressAmino {
   signer: string;
 }
 export interface MsgSetDefaultExternalAddressAminoMsg {
-  type: "/desmos.profiles.v3.MsgSetDefaultExternalAddress";
+  type: "desmos/MsgSetDefaultExternalAddress";
   value: MsgSetDefaultExternalAddressAmino;
 }
 /**
@@ -291,6 +291,12 @@ export const MsgLinkChainAccount = {
   },
   fromAminoMsg(object: MsgLinkChainAccountAminoMsg): MsgLinkChainAccount {
     return MsgLinkChainAccount.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgLinkChainAccount): MsgLinkChainAccountAminoMsg {
+    return {
+      type: "desmos/MsgLinkChainAccount",
+      value: MsgLinkChainAccount.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgLinkChainAccountProtoMsg): MsgLinkChainAccount {
     return MsgLinkChainAccount.decode(message.value);
@@ -462,6 +468,12 @@ export const MsgUnlinkChainAccount = {
   },
   fromAminoMsg(object: MsgUnlinkChainAccountAminoMsg): MsgUnlinkChainAccount {
     return MsgUnlinkChainAccount.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUnlinkChainAccount): MsgUnlinkChainAccountAminoMsg {
+    return {
+      type: "desmos/MsgUnlinkChainAccount",
+      value: MsgUnlinkChainAccount.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgUnlinkChainAccountProtoMsg): MsgUnlinkChainAccount {
     return MsgUnlinkChainAccount.decode(message.value);
@@ -643,6 +655,14 @@ export const MsgSetDefaultExternalAddress = {
     object: MsgSetDefaultExternalAddressAminoMsg,
   ): MsgSetDefaultExternalAddress {
     return MsgSetDefaultExternalAddress.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgSetDefaultExternalAddress,
+  ): MsgSetDefaultExternalAddressAminoMsg {
+    return {
+      type: "desmos/MsgSetDefaultExternalAddress",
+      value: MsgSetDefaultExternalAddress.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgSetDefaultExternalAddressProtoMsg,

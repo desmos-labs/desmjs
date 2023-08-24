@@ -1,19 +1,9 @@
 /* eslint-disable */
+import { Grant, GrantAmino } from "../../../cosmos/authz/v1beta1/authz";
+import { Any, AnyAmino } from "../../../google/protobuf/any";
+import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
-import {
-  MsgGrantAllowance,
-  MsgGrantAllowanceResponse,
-  MsgRevokeAllowance,
-  MsgRevokeAllowanceResponse,
-} from "./msgs_feegrant";
-import {
-  MsgGrantTreasuryAuthorization,
-  MsgGrantTreasuryAuthorizationResponse,
-  MsgRevokeTreasuryAuthorization,
-  MsgRevokeTreasuryAuthorizationResponse,
-} from "./msgs_treasury";
-
 export const protobufPackage = "desmos.subspaces.v3";
 /** MsgCreateSubspace represents the message used to create a subspace */
 export interface MsgCreateSubspace {
@@ -48,7 +38,7 @@ export interface MsgCreateSubspaceAmino {
   creator: string;
 }
 export interface MsgCreateSubspaceAminoMsg {
-  type: "/desmos.subspaces.v3.MsgCreateSubspace";
+  type: "desmos/MsgCreateSubspace";
   value: MsgCreateSubspaceAmino;
 }
 /** MsgCreateSubspaceResponse defines the Msg/CreateSubspace response type */
@@ -118,7 +108,7 @@ export interface MsgEditSubspaceAmino {
   signer: string;
 }
 export interface MsgEditSubspaceAminoMsg {
-  type: "/desmos.subspaces.v3.MsgEditSubspace";
+  type: "desmos/MsgEditSubspace";
   value: MsgEditSubspaceAmino;
 }
 /** MsgEditSubspaceResponse defines the Msg/EditSubspace response type */
@@ -152,7 +142,7 @@ export interface MsgDeleteSubspaceAmino {
   signer: string;
 }
 export interface MsgDeleteSubspaceAminoMsg {
-  type: "/desmos.subspaces.v3.MsgDeleteSubspace";
+  type: "desmos/MsgDeleteSubspace";
   value: MsgDeleteSubspaceAmino;
 }
 /** MsgDeleteSubspaceResponse defines the Msg/DeleteSubspace response type */
@@ -204,7 +194,7 @@ export interface MsgCreateSectionAmino {
   creator: string;
 }
 export interface MsgCreateSectionAminoMsg {
-  type: "/desmos.subspaces.v3.MsgCreateSection";
+  type: "desmos/MsgCreateSection";
   value: MsgCreateSectionAmino;
 }
 /** MsgCreateSectionResponse represents the Msg/CreateSection response type */
@@ -262,7 +252,7 @@ export interface MsgEditSectionAmino {
   editor: string;
 }
 export interface MsgEditSectionAminoMsg {
-  type: "/desmos.subspaces.v3.MsgEditSection";
+  type: "desmos/MsgEditSection";
   value: MsgEditSectionAmino;
 }
 /** MsgEditSectionResponse represents the Msg/EditSection response type */
@@ -310,7 +300,7 @@ export interface MsgMoveSectionAmino {
   signer: string;
 }
 export interface MsgMoveSectionAminoMsg {
-  type: "/desmos.subspaces.v3.MsgMoveSection";
+  type: "desmos/MsgMoveSection";
   value: MsgMoveSectionAmino;
 }
 /** MsgMoveSectionResponse */
@@ -348,7 +338,7 @@ export interface MsgDeleteSectionAmino {
   signer: string;
 }
 export interface MsgDeleteSectionAminoMsg {
-  type: "/desmos.subspaces.v3.MsgDeleteSection";
+  type: "desmos/MsgDeleteSection";
   value: MsgDeleteSectionAmino;
 }
 /** MsgDeleteSectionResponse represents the Msg/DeleteSection response type */
@@ -402,7 +392,7 @@ export interface MsgCreateUserGroupAmino {
   creator: string;
 }
 export interface MsgCreateUserGroupAminoMsg {
-  type: "/desmos.subspaces.v3.MsgCreateUserGroup";
+  type: "desmos/MsgCreateUserGroup";
   value: MsgCreateUserGroupAmino;
 }
 /** MsgCreateUserGroupResponse defines the Msg/CreateUserGroup response type */
@@ -452,7 +442,7 @@ export interface MsgEditUserGroupAmino {
   signer: string;
 }
 export interface MsgEditUserGroupAminoMsg {
-  type: "/desmos.subspaces.v3.MsgEditUserGroup";
+  type: "desmos/MsgEditUserGroup";
   value: MsgEditUserGroupAmino;
 }
 /** MsgEditUserGroupResponse defines the Msg/EditUserGroup response type */
@@ -469,7 +459,7 @@ export interface MsgEditUserGroupResponseAminoMsg {
 }
 /**
  * MsgMoveUserGroup represents the message used to move one user group from a
- * section to anoter
+ * section to another
  */
 export interface MsgMoveUserGroup {
   /** Id of the subspace inside which the group to move is */
@@ -487,7 +477,7 @@ export interface MsgMoveUserGroupProtoMsg {
 }
 /**
  * MsgMoveUserGroup represents the message used to move one user group from a
- * section to anoter
+ * section to another
  */
 export interface MsgMoveUserGroupAmino {
   /** Id of the subspace inside which the group to move is */
@@ -500,7 +490,7 @@ export interface MsgMoveUserGroupAmino {
   signer: string;
 }
 export interface MsgMoveUserGroupAminoMsg {
-  type: "/desmos.subspaces.v3.MsgMoveUserGroup";
+  type: "desmos/MsgMoveUserGroup";
   value: MsgMoveUserGroupAmino;
 }
 /** MsgMoveUserGroupResponse defines the Msg/MoveUserGroup response type */
@@ -548,7 +538,7 @@ export interface MsgSetUserGroupPermissionsAmino {
   signer: string;
 }
 export interface MsgSetUserGroupPermissionsAminoMsg {
-  type: "/desmos.subspaces.v3.MsgSetUserGroupPermissions";
+  type: "desmos/MsgSetUserGroupPermissions";
   value: MsgSetUserGroupPermissionsAmino;
 }
 /**
@@ -592,7 +582,7 @@ export interface MsgDeleteUserGroupAmino {
   signer: string;
 }
 export interface MsgDeleteUserGroupAminoMsg {
-  type: "/desmos.subspaces.v3.MsgDeleteUserGroup";
+  type: "desmos/MsgDeleteUserGroup";
   value: MsgDeleteUserGroupAmino;
 }
 /** MsgDeleteUserGroupResponse defines the Msg/DeleteUserGroup response type */
@@ -640,7 +630,7 @@ export interface MsgAddUserToUserGroupAmino {
   signer: string;
 }
 export interface MsgAddUserToUserGroupAminoMsg {
-  type: "/desmos.subspaces.v3.MsgAddUserToUserGroup";
+  type: "desmos/MsgAddUserToUserGroup";
   value: MsgAddUserToUserGroupAmino;
 }
 /**
@@ -694,7 +684,7 @@ export interface MsgRemoveUserFromUserGroupAmino {
   signer: string;
 }
 export interface MsgRemoveUserFromUserGroupAminoMsg {
-  type: "/desmos.subspaces.v3.MsgRemoveUserFromUserGroup";
+  type: "desmos/MsgRemoveUserFromUserGroup";
   value: MsgRemoveUserFromUserGroupAmino;
 }
 /**
@@ -752,7 +742,7 @@ export interface MsgSetUserPermissionsAmino {
   signer: string;
 }
 export interface MsgSetUserPermissionsAminoMsg {
-  type: "/desmos.subspaces.v3.MsgSetUserPermissions";
+  type: "desmos/MsgSetUserPermissions";
   value: MsgSetUserPermissionsAmino;
 }
 /**
@@ -772,6 +762,290 @@ export interface MsgSetUserPermissionsResponseAmino {}
 export interface MsgSetUserPermissionsResponseAminoMsg {
   type: "/desmos.subspaces.v3.MsgSetUserPermissionsResponse";
   value: MsgSetUserPermissionsResponseAmino;
+}
+/**
+ * MsgGrantAllowance adds grants for the grantee to spend up allowance of fees
+ * from the treasury inside the given subspace
+ */
+export interface MsgGrantAllowance {
+  /** Id of the subspace inside which where the allowance should be granted */
+  subspaceId: Long;
+  /** Address of the user granting the allowance */
+  granter: string;
+  /** Target being granted the allowance */
+  grantee?: Any;
+  /** Allowance can be any allowance type that implements AllowanceI */
+  allowance?: Any;
+}
+export interface MsgGrantAllowanceProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgGrantAllowance";
+  value: Uint8Array;
+}
+/**
+ * MsgGrantAllowance adds grants for the grantee to spend up allowance of fees
+ * from the treasury inside the given subspace
+ */
+export interface MsgGrantAllowanceAmino {
+  /** Id of the subspace inside which where the allowance should be granted */
+  subspace_id: string;
+  /** Address of the user granting the allowance */
+  granter: string;
+  /** Target being granted the allowance */
+  grantee?: AnyAmino;
+  /** Allowance can be any allowance type that implements AllowanceI */
+  allowance?: AnyAmino;
+}
+export interface MsgGrantAllowanceAminoMsg {
+  type: "desmos/MsgGrantAllowance";
+  value: MsgGrantAllowanceAmino;
+}
+/**
+ * MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response
+ * type.
+ */
+export interface MsgGrantAllowanceResponse {}
+export interface MsgGrantAllowanceResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgGrantAllowanceResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response
+ * type.
+ */
+export interface MsgGrantAllowanceResponseAmino {}
+export interface MsgGrantAllowanceResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgGrantAllowanceResponse";
+  value: MsgGrantAllowanceResponseAmino;
+}
+/**
+ * MsgRevokeAllowance removes any existing allowance to the grantee inside the
+ * subspace
+ */
+export interface MsgRevokeAllowance {
+  /** If of the subspace inside which the allowance to be deleted is */
+  subspaceId: Long;
+  /** Address of the user that created the allowance */
+  granter: string;
+  /** Target being revoked the allowance */
+  grantee?: Any;
+}
+export interface MsgRevokeAllowanceProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowance";
+  value: Uint8Array;
+}
+/**
+ * MsgRevokeAllowance removes any existing allowance to the grantee inside the
+ * subspace
+ */
+export interface MsgRevokeAllowanceAmino {
+  /** If of the subspace inside which the allowance to be deleted is */
+  subspace_id: string;
+  /** Address of the user that created the allowance */
+  granter: string;
+  /** Target being revoked the allowance */
+  grantee?: AnyAmino;
+}
+export interface MsgRevokeAllowanceAminoMsg {
+  type: "desmos/MsgRevokeAllowance";
+  value: MsgRevokeAllowanceAmino;
+}
+/**
+ * MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse
+ * response type.
+ */
+export interface MsgRevokeAllowanceResponse {}
+export interface MsgRevokeAllowanceResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowanceResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse
+ * response type.
+ */
+export interface MsgRevokeAllowanceResponseAmino {}
+export interface MsgRevokeAllowanceResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgRevokeAllowanceResponse";
+  value: MsgRevokeAllowanceResponseAmino;
+}
+/**
+ * MsgGrantTreasuryAuthorization grants an authorization on behalf of the
+ * treasury to a user
+ */
+export interface MsgGrantTreasuryAuthorization {
+  /** Id of the subspace where the authorization should be granted */
+  subspaceId: Long;
+  /** Address of the user granting a treasury authorization */
+  granter: string;
+  /** Address of the user who is being granted a treasury authorization */
+  grantee: string;
+  /** Grant represents the authorization to execute the provided methods */
+  grant?: Grant;
+}
+export interface MsgGrantTreasuryAuthorizationProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorization";
+  value: Uint8Array;
+}
+/**
+ * MsgGrantTreasuryAuthorization grants an authorization on behalf of the
+ * treasury to a user
+ */
+export interface MsgGrantTreasuryAuthorizationAmino {
+  /** Id of the subspace where the authorization should be granted */
+  subspace_id: string;
+  /** Address of the user granting a treasury authorization */
+  granter: string;
+  /** Address of the user who is being granted a treasury authorization */
+  grantee: string;
+  /** Grant represents the authorization to execute the provided methods */
+  grant?: GrantAmino;
+}
+export interface MsgGrantTreasuryAuthorizationAminoMsg {
+  type: "desmos/MsgGrantTreasuryAuthorization";
+  value: MsgGrantTreasuryAuthorizationAmino;
+}
+/**
+ * MsgGrantTreasuryAuthorizationResponse defines the
+ * Msg/MsgGrantTreasuryAuthorization response type
+ */
+export interface MsgGrantTreasuryAuthorizationResponse {}
+export interface MsgGrantTreasuryAuthorizationResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgGrantTreasuryAuthorizationResponse defines the
+ * Msg/MsgGrantTreasuryAuthorization response type
+ */
+export interface MsgGrantTreasuryAuthorizationResponseAmino {}
+export interface MsgGrantTreasuryAuthorizationResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse";
+  value: MsgGrantTreasuryAuthorizationResponseAmino;
+}
+/**
+ * MsgRevokeTreasuryAuthorization revokes an existing treasury authorization
+ * from a user
+ */
+export interface MsgRevokeTreasuryAuthorization {
+  /** Id of the subspace from which the authorization should be revoked */
+  subspaceId: Long;
+  /** Address of the user revoking the treasury authorization */
+  granter: string;
+  /** Address of the user who is being revoked the treasury authorization */
+  grantee: string;
+  /** Type url of the authorized message which is being revoked */
+  msgTypeUrl: string;
+}
+export interface MsgRevokeTreasuryAuthorizationProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorization";
+  value: Uint8Array;
+}
+/**
+ * MsgRevokeTreasuryAuthorization revokes an existing treasury authorization
+ * from a user
+ */
+export interface MsgRevokeTreasuryAuthorizationAmino {
+  /** Id of the subspace from which the authorization should be revoked */
+  subspace_id: string;
+  /** Address of the user revoking the treasury authorization */
+  granter: string;
+  /** Address of the user who is being revoked the treasury authorization */
+  grantee: string;
+  /** Type url of the authorized message which is being revoked */
+  msg_type_url: string;
+}
+export interface MsgRevokeTreasuryAuthorizationAminoMsg {
+  type: "desmos/MsgRevokeTreasuryAuthorization";
+  value: MsgRevokeTreasuryAuthorizationAmino;
+}
+/**
+ * MsgRevokeTreasuryAuthorizationResponse defines the
+ * Msg/MsgRevokeTreasuryAuthorization response type
+ */
+export interface MsgRevokeTreasuryAuthorizationResponse {}
+export interface MsgRevokeTreasuryAuthorizationResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRevokeTreasuryAuthorizationResponse defines the
+ * Msg/MsgRevokeTreasuryAuthorization response type
+ */
+export interface MsgRevokeTreasuryAuthorizationResponseAmino {}
+export interface MsgRevokeTreasuryAuthorizationResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse";
+  value: MsgRevokeTreasuryAuthorizationResponseAmino;
+}
+/**
+ * MsgUpdateSubspaceFeeTokens represents the message to be used to update the
+ * accepted fee tokens inside a given subspace, using an on-chain governance
+ * proposal
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgUpdateSubspaceFeeTokens {
+  /** Id of the subspace where the list of allowed fee tokens will be updated */
+  subspaceId: Long;
+  /**
+   * List of tokens allowed to be fee tokens inside the given subspace,
+   * represented as their gas prices
+   */
+  additionalFeeTokens: Coin[];
+  /**
+   * authority is the address that controls the module (defaults to x/gov unless
+   * overwritten).
+   */
+  authority: string;
+}
+export interface MsgUpdateSubspaceFeeTokensProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateSubspaceFeeTokens represents the message to be used to update the
+ * accepted fee tokens inside a given subspace, using an on-chain governance
+ * proposal
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgUpdateSubspaceFeeTokensAmino {
+  /** Id of the subspace where the list of allowed fee tokens will be updated */
+  subspace_id: string;
+  /**
+   * List of tokens allowed to be fee tokens inside the given subspace,
+   * represented as their gas prices
+   */
+  additional_fee_tokens: CoinAmino[];
+  /**
+   * authority is the address that controls the module (defaults to x/gov unless
+   * overwritten).
+   */
+  authority: string;
+}
+export interface MsgUpdateSubspaceFeeTokensAminoMsg {
+  type: "desmos/MsgUpdateSubspaceFeeTokens";
+  value: MsgUpdateSubspaceFeeTokensAmino;
+}
+/**
+ * MsgUpdateSubspaceFeeTokensResponse represents the Msg/UpdateSubspaceFeeTokens
+ * response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgUpdateSubspaceFeeTokensResponse {}
+export interface MsgUpdateSubspaceFeeTokensResponseProtoMsg {
+  typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokensResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateSubspaceFeeTokensResponse represents the Msg/UpdateSubspaceFeeTokens
+ * response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgUpdateSubspaceFeeTokensResponseAmino {}
+export interface MsgUpdateSubspaceFeeTokensResponseAminoMsg {
+  type: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokensResponse";
+  value: MsgUpdateSubspaceFeeTokensResponseAmino;
 }
 function createBaseMsgCreateSubspace(): MsgCreateSubspace {
   return {
@@ -871,6 +1145,12 @@ export const MsgCreateSubspace = {
   },
   fromAminoMsg(object: MsgCreateSubspaceAminoMsg): MsgCreateSubspace {
     return MsgCreateSubspace.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateSubspace): MsgCreateSubspaceAminoMsg {
+    return {
+      type: "desmos/MsgCreateSubspace",
+      value: MsgCreateSubspace.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgCreateSubspaceProtoMsg): MsgCreateSubspace {
     return MsgCreateSubspace.decode(message.value);
@@ -1096,6 +1376,12 @@ export const MsgEditSubspace = {
   fromAminoMsg(object: MsgEditSubspaceAminoMsg): MsgEditSubspace {
     return MsgEditSubspace.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgEditSubspace): MsgEditSubspaceAminoMsg {
+    return {
+      type: "desmos/MsgEditSubspace",
+      value: MsgEditSubspace.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgEditSubspaceProtoMsg): MsgEditSubspace {
     return MsgEditSubspace.decode(message.value);
   },
@@ -1259,6 +1545,12 @@ export const MsgDeleteSubspace = {
   },
   fromAminoMsg(object: MsgDeleteSubspaceAminoMsg): MsgDeleteSubspace {
     return MsgDeleteSubspace.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteSubspace): MsgDeleteSubspaceAminoMsg {
+    return {
+      type: "desmos/MsgDeleteSubspace",
+      value: MsgDeleteSubspace.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgDeleteSubspaceProtoMsg): MsgDeleteSubspace {
     return MsgDeleteSubspace.decode(message.value);
@@ -1461,6 +1753,12 @@ export const MsgCreateSection = {
   },
   fromAminoMsg(object: MsgCreateSectionAminoMsg): MsgCreateSection {
     return MsgCreateSection.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateSection): MsgCreateSectionAminoMsg {
+    return {
+      type: "desmos/MsgCreateSection",
+      value: MsgCreateSection.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgCreateSectionProtoMsg): MsgCreateSection {
     return MsgCreateSection.decode(message.value);
@@ -1680,6 +1978,12 @@ export const MsgEditSection = {
   fromAminoMsg(object: MsgEditSectionAminoMsg): MsgEditSection {
     return MsgEditSection.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgEditSection): MsgEditSectionAminoMsg {
+    return {
+      type: "desmos/MsgEditSection",
+      value: MsgEditSection.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgEditSectionProtoMsg): MsgEditSection {
     return MsgEditSection.decode(message.value);
   },
@@ -1866,6 +2170,12 @@ export const MsgMoveSection = {
   fromAminoMsg(object: MsgMoveSectionAminoMsg): MsgMoveSection {
     return MsgMoveSection.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgMoveSection): MsgMoveSectionAminoMsg {
+    return {
+      type: "desmos/MsgMoveSection",
+      value: MsgMoveSection.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgMoveSectionProtoMsg): MsgMoveSection {
     return MsgMoveSection.decode(message.value);
   },
@@ -2038,6 +2348,12 @@ export const MsgDeleteSection = {
   },
   fromAminoMsg(object: MsgDeleteSectionAminoMsg): MsgDeleteSection {
     return MsgDeleteSection.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteSection): MsgDeleteSectionAminoMsg {
+    return {
+      type: "desmos/MsgDeleteSection",
+      value: MsgDeleteSection.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgDeleteSectionProtoMsg): MsgDeleteSection {
     return MsgDeleteSection.decode(message.value);
@@ -2289,6 +2605,12 @@ export const MsgCreateUserGroup = {
   fromAminoMsg(object: MsgCreateUserGroupAminoMsg): MsgCreateUserGroup {
     return MsgCreateUserGroup.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgCreateUserGroup): MsgCreateUserGroupAminoMsg {
+    return {
+      type: "desmos/MsgCreateUserGroup",
+      value: MsgCreateUserGroup.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgCreateUserGroupProtoMsg): MsgCreateUserGroup {
     return MsgCreateUserGroup.decode(message.value);
   },
@@ -2511,6 +2833,12 @@ export const MsgEditUserGroup = {
   fromAminoMsg(object: MsgEditUserGroupAminoMsg): MsgEditUserGroup {
     return MsgEditUserGroup.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgEditUserGroup): MsgEditUserGroupAminoMsg {
+    return {
+      type: "desmos/MsgEditUserGroup",
+      value: MsgEditUserGroup.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgEditUserGroupProtoMsg): MsgEditUserGroup {
     return MsgEditUserGroup.decode(message.value);
   },
@@ -2702,6 +3030,12 @@ export const MsgMoveUserGroup = {
   },
   fromAminoMsg(object: MsgMoveUserGroupAminoMsg): MsgMoveUserGroup {
     return MsgMoveUserGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgMoveUserGroup): MsgMoveUserGroupAminoMsg {
+    return {
+      type: "desmos/MsgMoveUserGroup",
+      value: MsgMoveUserGroup.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgMoveUserGroupProtoMsg): MsgMoveUserGroup {
     return MsgMoveUserGroup.decode(message.value);
@@ -2913,6 +3247,14 @@ export const MsgSetUserGroupPermissions = {
   ): MsgSetUserGroupPermissions {
     return MsgSetUserGroupPermissions.fromAmino(object.value);
   },
+  toAminoMsg(
+    message: MsgSetUserGroupPermissions,
+  ): MsgSetUserGroupPermissionsAminoMsg {
+    return {
+      type: "desmos/MsgSetUserGroupPermissions",
+      value: MsgSetUserGroupPermissions.toAmino(message),
+    };
+  },
   fromProtoMsg(
     message: MsgSetUserGroupPermissionsProtoMsg,
   ): MsgSetUserGroupPermissions {
@@ -3097,6 +3439,12 @@ export const MsgDeleteUserGroup = {
   },
   fromAminoMsg(object: MsgDeleteUserGroupAminoMsg): MsgDeleteUserGroup {
     return MsgDeleteUserGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteUserGroup): MsgDeleteUserGroupAminoMsg {
+    return {
+      type: "desmos/MsgDeleteUserGroup",
+      value: MsgDeleteUserGroup.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgDeleteUserGroupProtoMsg): MsgDeleteUserGroup {
     return MsgDeleteUserGroup.decode(message.value);
@@ -3289,6 +3637,12 @@ export const MsgAddUserToUserGroup = {
   },
   fromAminoMsg(object: MsgAddUserToUserGroupAminoMsg): MsgAddUserToUserGroup {
     return MsgAddUserToUserGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgAddUserToUserGroup): MsgAddUserToUserGroupAminoMsg {
+    return {
+      type: "desmos/MsgAddUserToUserGroup",
+      value: MsgAddUserToUserGroup.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgAddUserToUserGroupProtoMsg): MsgAddUserToUserGroup {
     return MsgAddUserToUserGroup.decode(message.value);
@@ -3491,6 +3845,14 @@ export const MsgRemoveUserFromUserGroup = {
     object: MsgRemoveUserFromUserGroupAminoMsg,
   ): MsgRemoveUserFromUserGroup {
     return MsgRemoveUserFromUserGroup.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRemoveUserFromUserGroup,
+  ): MsgRemoveUserFromUserGroupAminoMsg {
+    return {
+      type: "desmos/MsgRemoveUserFromUserGroup",
+      value: MsgRemoveUserFromUserGroup.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgRemoveUserFromUserGroupProtoMsg,
@@ -3716,6 +4078,12 @@ export const MsgSetUserPermissions = {
   fromAminoMsg(object: MsgSetUserPermissionsAminoMsg): MsgSetUserPermissions {
     return MsgSetUserPermissions.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgSetUserPermissions): MsgSetUserPermissionsAminoMsg {
+    return {
+      type: "desmos/MsgSetUserPermissions",
+      value: MsgSetUserPermissions.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgSetUserPermissionsProtoMsg): MsgSetUserPermissions {
     return MsgSetUserPermissions.decode(message.value);
   },
@@ -3802,6 +4170,1052 @@ export const MsgSetUserPermissionsResponse = {
     };
   },
 };
+function createBaseMsgGrantAllowance(): MsgGrantAllowance {
+  return {
+    subspaceId: Long.UZERO,
+    granter: "",
+    grantee: undefined,
+    allowance: undefined,
+  };
+}
+export const MsgGrantAllowance = {
+  encode(
+    message: MsgGrantAllowance,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.granter !== "") {
+      writer.uint32(18).string(message.granter);
+    }
+    if (message.grantee !== undefined) {
+      Any.encode(message.grantee, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.allowance !== undefined) {
+      Any.encode(message.allowance, writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGrantAllowance {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGrantAllowance();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.granter = reader.string();
+          break;
+        case 3:
+          message.grantee = Any.decode(reader, reader.uint32());
+          break;
+        case 4:
+          message.allowance = Any.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgGrantAllowance {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? Any.fromJSON(object.grantee) : undefined,
+      allowance: isSet(object.allowance)
+        ? Any.fromJSON(object.allowance)
+        : undefined,
+    };
+  },
+  toJSON(message: MsgGrantAllowance): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined &&
+      (obj.grantee = message.grantee ? Any.toJSON(message.grantee) : undefined);
+    message.allowance !== undefined &&
+      (obj.allowance = message.allowance
+        ? Any.toJSON(message.allowance)
+        : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgGrantAllowance>, I>>(
+    object: I,
+  ): MsgGrantAllowance {
+    const message = createBaseMsgGrantAllowance();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.granter = object.granter ?? "";
+    message.grantee =
+      object.grantee !== undefined && object.grantee !== null
+        ? Any.fromPartial(object.grantee)
+        : undefined;
+    message.allowance =
+      object.allowance !== undefined && object.allowance !== null
+        ? Any.fromPartial(object.allowance)
+        : undefined;
+    return message;
+  },
+  fromAmino(object: MsgGrantAllowanceAmino): MsgGrantAllowance {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object?.grantee ? Any.fromAmino(object.grantee) : undefined,
+      allowance: object?.allowance
+        ? Any.fromAmino(object.allowance)
+        : undefined,
+    };
+  },
+  toAmino(message: MsgGrantAllowance): MsgGrantAllowanceAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee ? Any.toAmino(message.grantee) : undefined;
+    obj.allowance = message.allowance
+      ? Any.toAmino(message.allowance)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgGrantAllowanceAminoMsg): MsgGrantAllowance {
+    return MsgGrantAllowance.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgGrantAllowance): MsgGrantAllowanceAminoMsg {
+    return {
+      type: "desmos/MsgGrantAllowance",
+      value: MsgGrantAllowance.toAmino(message),
+    };
+  },
+  fromProtoMsg(message: MsgGrantAllowanceProtoMsg): MsgGrantAllowance {
+    return MsgGrantAllowance.decode(message.value);
+  },
+  toProto(message: MsgGrantAllowance): Uint8Array {
+    return MsgGrantAllowance.encode(message).finish();
+  },
+  toProtoMsg(message: MsgGrantAllowance): MsgGrantAllowanceProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgGrantAllowance",
+      value: MsgGrantAllowance.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgGrantAllowanceResponse(): MsgGrantAllowanceResponse {
+  return {};
+}
+export const MsgGrantAllowanceResponse = {
+  encode(
+    _: MsgGrantAllowanceResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgGrantAllowanceResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGrantAllowanceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgGrantAllowanceResponse {
+    return {};
+  },
+  toJSON(_: MsgGrantAllowanceResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgGrantAllowanceResponse>, I>>(
+    _: I,
+  ): MsgGrantAllowanceResponse {
+    const message = createBaseMsgGrantAllowanceResponse();
+    return message;
+  },
+  fromAmino(_: MsgGrantAllowanceResponseAmino): MsgGrantAllowanceResponse {
+    return {};
+  },
+  toAmino(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgGrantAllowanceResponseAminoMsg,
+  ): MsgGrantAllowanceResponse {
+    return MsgGrantAllowanceResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgGrantAllowanceResponseProtoMsg,
+  ): MsgGrantAllowanceResponse {
+    return MsgGrantAllowanceResponse.decode(message.value);
+  },
+  toProto(message: MsgGrantAllowanceResponse): Uint8Array {
+    return MsgGrantAllowanceResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgGrantAllowanceResponse,
+  ): MsgGrantAllowanceResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgGrantAllowanceResponse",
+      value: MsgGrantAllowanceResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
+  return {
+    subspaceId: Long.UZERO,
+    granter: "",
+    grantee: undefined,
+  };
+}
+export const MsgRevokeAllowance = {
+  encode(
+    message: MsgRevokeAllowance,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.granter !== "") {
+      writer.uint32(18).string(message.granter);
+    }
+    if (message.grantee !== undefined) {
+      Any.encode(message.grantee, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRevokeAllowance {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRevokeAllowance();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.granter = reader.string();
+          break;
+        case 3:
+          message.grantee = Any.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgRevokeAllowance {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? Any.fromJSON(object.grantee) : undefined,
+    };
+  },
+  toJSON(message: MsgRevokeAllowance): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined &&
+      (obj.grantee = message.grantee ? Any.toJSON(message.grantee) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeAllowance>, I>>(
+    object: I,
+  ): MsgRevokeAllowance {
+    const message = createBaseMsgRevokeAllowance();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.granter = object.granter ?? "";
+    message.grantee =
+      object.grantee !== undefined && object.grantee !== null
+        ? Any.fromPartial(object.grantee)
+        : undefined;
+    return message;
+  },
+  fromAmino(object: MsgRevokeAllowanceAmino): MsgRevokeAllowance {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object?.grantee ? Any.fromAmino(object.grantee) : undefined,
+    };
+  },
+  toAmino(message: MsgRevokeAllowance): MsgRevokeAllowanceAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee ? Any.toAmino(message.grantee) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgRevokeAllowanceAminoMsg): MsgRevokeAllowance {
+    return MsgRevokeAllowance.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgRevokeAllowance): MsgRevokeAllowanceAminoMsg {
+    return {
+      type: "desmos/MsgRevokeAllowance",
+      value: MsgRevokeAllowance.toAmino(message),
+    };
+  },
+  fromProtoMsg(message: MsgRevokeAllowanceProtoMsg): MsgRevokeAllowance {
+    return MsgRevokeAllowance.decode(message.value);
+  },
+  toProto(message: MsgRevokeAllowance): Uint8Array {
+    return MsgRevokeAllowance.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRevokeAllowance): MsgRevokeAllowanceProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowance",
+      value: MsgRevokeAllowance.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRevokeAllowanceResponse(): MsgRevokeAllowanceResponse {
+  return {};
+}
+export const MsgRevokeAllowanceResponse = {
+  encode(
+    _: MsgRevokeAllowanceResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRevokeAllowanceResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRevokeAllowanceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgRevokeAllowanceResponse {
+    return {};
+  },
+  toJSON(_: MsgRevokeAllowanceResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeAllowanceResponse>, I>>(
+    _: I,
+  ): MsgRevokeAllowanceResponse {
+    const message = createBaseMsgRevokeAllowanceResponse();
+    return message;
+  },
+  fromAmino(_: MsgRevokeAllowanceResponseAmino): MsgRevokeAllowanceResponse {
+    return {};
+  },
+  toAmino(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRevokeAllowanceResponseAminoMsg,
+  ): MsgRevokeAllowanceResponse {
+    return MsgRevokeAllowanceResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRevokeAllowanceResponseProtoMsg,
+  ): MsgRevokeAllowanceResponse {
+    return MsgRevokeAllowanceResponse.decode(message.value);
+  },
+  toProto(message: MsgRevokeAllowanceResponse): Uint8Array {
+    return MsgRevokeAllowanceResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRevokeAllowanceResponse,
+  ): MsgRevokeAllowanceResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowanceResponse",
+      value: MsgRevokeAllowanceResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgGrantTreasuryAuthorization(): MsgGrantTreasuryAuthorization {
+  return {
+    subspaceId: Long.UZERO,
+    granter: "",
+    grantee: "",
+    grant: undefined,
+  };
+}
+export const MsgGrantTreasuryAuthorization = {
+  encode(
+    message: MsgGrantTreasuryAuthorization,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.granter !== "") {
+      writer.uint32(18).string(message.granter);
+    }
+    if (message.grantee !== "") {
+      writer.uint32(26).string(message.grantee);
+    }
+    if (message.grant !== undefined) {
+      Grant.encode(message.grant, writer.uint32(34).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgGrantTreasuryAuthorization {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGrantTreasuryAuthorization();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.granter = reader.string();
+          break;
+        case 3:
+          message.grantee = reader.string();
+          break;
+        case 4:
+          message.grant = Grant.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgGrantTreasuryAuthorization {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      grant: isSet(object.grant) ? Grant.fromJSON(object.grant) : undefined,
+    };
+  },
+  toJSON(message: MsgGrantTreasuryAuthorization): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.grant !== undefined &&
+      (obj.grant = message.grant ? Grant.toJSON(message.grant) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgGrantTreasuryAuthorization>, I>>(
+    object: I,
+  ): MsgGrantTreasuryAuthorization {
+    const message = createBaseMsgGrantTreasuryAuthorization();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
+    message.grant =
+      object.grant !== undefined && object.grant !== null
+        ? Grant.fromPartial(object.grant)
+        : undefined;
+    return message;
+  },
+  fromAmino(
+    object: MsgGrantTreasuryAuthorizationAmino,
+  ): MsgGrantTreasuryAuthorization {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object.grantee,
+      grant: object?.grant ? Grant.fromAmino(object.grant) : undefined,
+    };
+  },
+  toAmino(
+    message: MsgGrantTreasuryAuthorization,
+  ): MsgGrantTreasuryAuthorizationAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgGrantTreasuryAuthorizationAminoMsg,
+  ): MsgGrantTreasuryAuthorization {
+    return MsgGrantTreasuryAuthorization.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgGrantTreasuryAuthorization,
+  ): MsgGrantTreasuryAuthorizationAminoMsg {
+    return {
+      type: "desmos/MsgGrantTreasuryAuthorization",
+      value: MsgGrantTreasuryAuthorization.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgGrantTreasuryAuthorizationProtoMsg,
+  ): MsgGrantTreasuryAuthorization {
+    return MsgGrantTreasuryAuthorization.decode(message.value);
+  },
+  toProto(message: MsgGrantTreasuryAuthorization): Uint8Array {
+    return MsgGrantTreasuryAuthorization.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgGrantTreasuryAuthorization,
+  ): MsgGrantTreasuryAuthorizationProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorization",
+      value: MsgGrantTreasuryAuthorization.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgGrantTreasuryAuthorizationResponse(): MsgGrantTreasuryAuthorizationResponse {
+  return {};
+}
+export const MsgGrantTreasuryAuthorizationResponse = {
+  encode(
+    _: MsgGrantTreasuryAuthorizationResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgGrantTreasuryAuthorizationResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGrantTreasuryAuthorizationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgGrantTreasuryAuthorizationResponse {
+    return {};
+  },
+  toJSON(_: MsgGrantTreasuryAuthorizationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgGrantTreasuryAuthorizationResponse>, I>,
+  >(_: I): MsgGrantTreasuryAuthorizationResponse {
+    const message = createBaseMsgGrantTreasuryAuthorizationResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgGrantTreasuryAuthorizationResponseAmino,
+  ): MsgGrantTreasuryAuthorizationResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgGrantTreasuryAuthorizationResponse,
+  ): MsgGrantTreasuryAuthorizationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgGrantTreasuryAuthorizationResponseAminoMsg,
+  ): MsgGrantTreasuryAuthorizationResponse {
+    return MsgGrantTreasuryAuthorizationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgGrantTreasuryAuthorizationResponseProtoMsg,
+  ): MsgGrantTreasuryAuthorizationResponse {
+    return MsgGrantTreasuryAuthorizationResponse.decode(message.value);
+  },
+  toProto(message: MsgGrantTreasuryAuthorizationResponse): Uint8Array {
+    return MsgGrantTreasuryAuthorizationResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgGrantTreasuryAuthorizationResponse,
+  ): MsgGrantTreasuryAuthorizationResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgGrantTreasuryAuthorizationResponse",
+      value: MsgGrantTreasuryAuthorizationResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRevokeTreasuryAuthorization(): MsgRevokeTreasuryAuthorization {
+  return {
+    subspaceId: Long.UZERO,
+    granter: "",
+    grantee: "",
+    msgTypeUrl: "",
+  };
+}
+export const MsgRevokeTreasuryAuthorization = {
+  encode(
+    message: MsgRevokeTreasuryAuthorization,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.granter !== "") {
+      writer.uint32(18).string(message.granter);
+    }
+    if (message.grantee !== "") {
+      writer.uint32(26).string(message.grantee);
+    }
+    if (message.msgTypeUrl !== "") {
+      writer.uint32(34).string(message.msgTypeUrl);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRevokeTreasuryAuthorization {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRevokeTreasuryAuthorization();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.granter = reader.string();
+          break;
+        case 3:
+          message.grantee = reader.string();
+          break;
+        case 4:
+          message.msgTypeUrl = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgRevokeTreasuryAuthorization {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "",
+    };
+  },
+  toJSON(message: MsgRevokeTreasuryAuthorization): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.granter !== undefined && (obj.granter = message.granter);
+    message.grantee !== undefined && (obj.grantee = message.grantee);
+    message.msgTypeUrl !== undefined && (obj.msgTypeUrl = message.msgTypeUrl);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgRevokeTreasuryAuthorization>, I>>(
+    object: I,
+  ): MsgRevokeTreasuryAuthorization {
+    const message = createBaseMsgRevokeTreasuryAuthorization();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
+    message.msgTypeUrl = object.msgTypeUrl ?? "";
+    return message;
+  },
+  fromAmino(
+    object: MsgRevokeTreasuryAuthorizationAmino,
+  ): MsgRevokeTreasuryAuthorization {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      granter: object.granter,
+      grantee: object.grantee,
+      msgTypeUrl: object.msg_type_url,
+    };
+  },
+  toAmino(
+    message: MsgRevokeTreasuryAuthorization,
+  ): MsgRevokeTreasuryAuthorizationAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRevokeTreasuryAuthorizationAminoMsg,
+  ): MsgRevokeTreasuryAuthorization {
+    return MsgRevokeTreasuryAuthorization.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRevokeTreasuryAuthorization,
+  ): MsgRevokeTreasuryAuthorizationAminoMsg {
+    return {
+      type: "desmos/MsgRevokeTreasuryAuthorization",
+      value: MsgRevokeTreasuryAuthorization.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgRevokeTreasuryAuthorizationProtoMsg,
+  ): MsgRevokeTreasuryAuthorization {
+    return MsgRevokeTreasuryAuthorization.decode(message.value);
+  },
+  toProto(message: MsgRevokeTreasuryAuthorization): Uint8Array {
+    return MsgRevokeTreasuryAuthorization.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRevokeTreasuryAuthorization,
+  ): MsgRevokeTreasuryAuthorizationProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorization",
+      value: MsgRevokeTreasuryAuthorization.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRevokeTreasuryAuthorizationResponse(): MsgRevokeTreasuryAuthorizationResponse {
+  return {};
+}
+export const MsgRevokeTreasuryAuthorizationResponse = {
+  encode(
+    _: MsgRevokeTreasuryAuthorizationResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRevokeTreasuryAuthorizationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgRevokeTreasuryAuthorizationResponse {
+    return {};
+  },
+  toJSON(_: MsgRevokeTreasuryAuthorizationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgRevokeTreasuryAuthorizationResponse>, I>,
+  >(_: I): MsgRevokeTreasuryAuthorizationResponse {
+    const message = createBaseMsgRevokeTreasuryAuthorizationResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgRevokeTreasuryAuthorizationResponseAmino,
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgRevokeTreasuryAuthorizationResponse,
+  ): MsgRevokeTreasuryAuthorizationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRevokeTreasuryAuthorizationResponseAminoMsg,
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    return MsgRevokeTreasuryAuthorizationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRevokeTreasuryAuthorizationResponseProtoMsg,
+  ): MsgRevokeTreasuryAuthorizationResponse {
+    return MsgRevokeTreasuryAuthorizationResponse.decode(message.value);
+  },
+  toProto(message: MsgRevokeTreasuryAuthorizationResponse): Uint8Array {
+    return MsgRevokeTreasuryAuthorizationResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRevokeTreasuryAuthorizationResponse,
+  ): MsgRevokeTreasuryAuthorizationResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgRevokeTreasuryAuthorizationResponse",
+      value: MsgRevokeTreasuryAuthorizationResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgUpdateSubspaceFeeTokens(): MsgUpdateSubspaceFeeTokens {
+  return {
+    subspaceId: Long.UZERO,
+    additionalFeeTokens: [],
+    authority: "",
+  };
+}
+export const MsgUpdateSubspaceFeeTokens = {
+  encode(
+    message: MsgUpdateSubspaceFeeTokens,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    for (const v of message.additionalFeeTokens) {
+      Coin.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.authority !== "") {
+      writer.uint32(26).string(message.authority);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateSubspaceFeeTokens {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateSubspaceFeeTokens();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.additionalFeeTokens.push(
+            Coin.decode(reader, reader.uint32()),
+          );
+          break;
+        case 3:
+          message.authority = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgUpdateSubspaceFeeTokens {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      additionalFeeTokens: Array.isArray(object?.additionalFeeTokens)
+        ? object.additionalFeeTokens.map((e: any) => Coin.fromJSON(e))
+        : [],
+      authority: isSet(object.authority) ? String(object.authority) : "",
+    };
+  },
+  toJSON(message: MsgUpdateSubspaceFeeTokens): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    if (message.additionalFeeTokens) {
+      obj.additionalFeeTokens = message.additionalFeeTokens.map((e) =>
+        e ? Coin.toJSON(e) : undefined,
+      );
+    } else {
+      obj.additionalFeeTokens = [];
+    }
+    message.authority !== undefined && (obj.authority = message.authority);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateSubspaceFeeTokens>, I>>(
+    object: I,
+  ): MsgUpdateSubspaceFeeTokens {
+    const message = createBaseMsgUpdateSubspaceFeeTokens();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.additionalFeeTokens =
+      object.additionalFeeTokens?.map((e) => Coin.fromPartial(e)) || [];
+    message.authority = object.authority ?? "";
+    return message;
+  },
+  fromAmino(
+    object: MsgUpdateSubspaceFeeTokensAmino,
+  ): MsgUpdateSubspaceFeeTokens {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      additionalFeeTokens: Array.isArray(object?.additional_fee_tokens)
+        ? object.additional_fee_tokens.map((e: any) => Coin.fromAmino(e))
+        : [],
+      authority: object.authority,
+    };
+  },
+  toAmino(
+    message: MsgUpdateSubspaceFeeTokens,
+  ): MsgUpdateSubspaceFeeTokensAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    if (message.additionalFeeTokens) {
+      obj.additional_fee_tokens = message.additionalFeeTokens.map((e) =>
+        e ? Coin.toAmino(e) : undefined,
+      );
+    } else {
+      obj.additional_fee_tokens = [];
+    }
+    obj.authority = message.authority;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgUpdateSubspaceFeeTokensAminoMsg,
+  ): MsgUpdateSubspaceFeeTokens {
+    return MsgUpdateSubspaceFeeTokens.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgUpdateSubspaceFeeTokens,
+  ): MsgUpdateSubspaceFeeTokensAminoMsg {
+    return {
+      type: "desmos/MsgUpdateSubspaceFeeTokens",
+      value: MsgUpdateSubspaceFeeTokens.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgUpdateSubspaceFeeTokensProtoMsg,
+  ): MsgUpdateSubspaceFeeTokens {
+    return MsgUpdateSubspaceFeeTokens.decode(message.value);
+  },
+  toProto(message: MsgUpdateSubspaceFeeTokens): Uint8Array {
+    return MsgUpdateSubspaceFeeTokens.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgUpdateSubspaceFeeTokens,
+  ): MsgUpdateSubspaceFeeTokensProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
+      value: MsgUpdateSubspaceFeeTokens.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgUpdateSubspaceFeeTokensResponse(): MsgUpdateSubspaceFeeTokensResponse {
+  return {};
+}
+export const MsgUpdateSubspaceFeeTokensResponse = {
+  encode(
+    _: MsgUpdateSubspaceFeeTokensResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateSubspaceFeeTokensResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateSubspaceFeeTokensResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgUpdateSubspaceFeeTokensResponse {
+    return {};
+  },
+  toJSON(_: MsgUpdateSubspaceFeeTokensResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgUpdateSubspaceFeeTokensResponse>, I>,
+  >(_: I): MsgUpdateSubspaceFeeTokensResponse {
+    const message = createBaseMsgUpdateSubspaceFeeTokensResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgUpdateSubspaceFeeTokensResponseAmino,
+  ): MsgUpdateSubspaceFeeTokensResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgUpdateSubspaceFeeTokensResponse,
+  ): MsgUpdateSubspaceFeeTokensResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgUpdateSubspaceFeeTokensResponseAminoMsg,
+  ): MsgUpdateSubspaceFeeTokensResponse {
+    return MsgUpdateSubspaceFeeTokensResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgUpdateSubspaceFeeTokensResponseProtoMsg,
+  ): MsgUpdateSubspaceFeeTokensResponse {
+    return MsgUpdateSubspaceFeeTokensResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateSubspaceFeeTokensResponse): Uint8Array {
+    return MsgUpdateSubspaceFeeTokensResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgUpdateSubspaceFeeTokensResponse,
+  ): MsgUpdateSubspaceFeeTokensResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokensResponse",
+      value: MsgUpdateSubspaceFeeTokensResponse.encode(message).finish(),
+    };
+  },
+};
 /** Msg defines subspaces Msg service. */
 export interface Msg {
   /** CreateSubspace allows to create a subspace */
@@ -3881,6 +5295,15 @@ export interface Msg {
   RevokeAllowance(
     request: MsgRevokeAllowance,
   ): Promise<MsgRevokeAllowanceResponse>;
+  /**
+   * UpdateSubspaceFeeTokens allows subspace admins to update the list of fee
+   * tokens inside the subspace via a governance proposal
+   *
+   * Since: Desmos 6.0.0
+   */
+  UpdateSubspaceFeeTokens(
+    request: MsgUpdateSubspaceFeeTokens,
+  ): Promise<MsgUpdateSubspaceFeeTokensResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -3907,6 +5330,7 @@ export class MsgClientImpl implements Msg {
       this.RevokeTreasuryAuthorization.bind(this);
     this.GrantAllowance = this.GrantAllowance.bind(this);
     this.RevokeAllowance = this.RevokeAllowance.bind(this);
+    this.UpdateSubspaceFeeTokens = this.UpdateSubspaceFeeTokens.bind(this);
   }
   CreateSubspace(
     request: MsgCreateSubspace,
@@ -4139,6 +5563,19 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgRevokeAllowanceResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  UpdateSubspaceFeeTokens(
+    request: MsgUpdateSubspaceFeeTokens,
+  ): Promise<MsgUpdateSubspaceFeeTokensResponse> {
+    const data = MsgUpdateSubspaceFeeTokens.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.subspaces.v3.Msg",
+      "UpdateSubspaceFeeTokens",
+      data,
+    );
+    return promise.then((data) =>
+      MsgUpdateSubspaceFeeTokensResponse.decode(new _m0.Reader(data)),
     );
   }
 }

@@ -36,7 +36,7 @@ export interface MsgAddReactionAmino {
   user: string;
 }
 export interface MsgAddReactionAminoMsg {
-  type: "/desmos.reactions.v1.MsgAddReaction";
+  type: "desmos/MsgAddReaction";
   value: MsgAddReactionAmino;
 }
 /** MsgAddReactionResponse represents the Msg/AddReaction response type */
@@ -90,7 +90,7 @@ export interface MsgRemoveReactionAmino {
   user: string;
 }
 export interface MsgRemoveReactionAminoMsg {
-  type: "/desmos.reactions.v1.MsgRemoveReaction";
+  type: "desmos/MsgRemoveReaction";
   value: MsgRemoveReactionAmino;
 }
 /** MsgRemoveReactionResponse represents the Msg/RemoveReaction response type */
@@ -138,7 +138,7 @@ export interface MsgAddRegisteredReactionAmino {
   user: string;
 }
 export interface MsgAddRegisteredReactionAminoMsg {
-  type: "/desmos.reactions.v1.MsgAddRegisteredReaction";
+  type: "desmos/MsgAddRegisteredReaction";
   value: MsgAddRegisteredReactionAmino;
 }
 /**
@@ -202,7 +202,7 @@ export interface MsgEditRegisteredReactionAmino {
   user: string;
 }
 export interface MsgEditRegisteredReactionAminoMsg {
-  type: "/desmos.reactions.v1.MsgEditRegisteredReaction";
+  type: "desmos/MsgEditRegisteredReaction";
   value: MsgEditRegisteredReactionAmino;
 }
 /**
@@ -252,7 +252,7 @@ export interface MsgRemoveRegisteredReactionAmino {
   user: string;
 }
 export interface MsgRemoveRegisteredReactionAminoMsg {
-  type: "/desmos.reactions.v1.MsgRemoveRegisteredReaction";
+  type: "desmos/MsgRemoveRegisteredReaction";
   value: MsgRemoveRegisteredReactionAmino;
 }
 /**
@@ -306,7 +306,7 @@ export interface MsgSetReactionsParamsAmino {
   user: string;
 }
 export interface MsgSetReactionsParamsAminoMsg {
-  type: "/desmos.reactions.v1.MsgSetReactionsParams";
+  type: "desmos/MsgSetReactionsParams";
   value: MsgSetReactionsParamsAmino;
 }
 /**
@@ -440,6 +440,12 @@ export const MsgAddReaction = {
   },
   fromAminoMsg(object: MsgAddReactionAminoMsg): MsgAddReaction {
     return MsgAddReaction.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgAddReaction): MsgAddReactionAminoMsg {
+    return {
+      type: "desmos/MsgAddReaction",
+      value: MsgAddReaction.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgAddReactionProtoMsg): MsgAddReaction {
     return MsgAddReaction.decode(message.value);
@@ -646,6 +652,12 @@ export const MsgRemoveReaction = {
   fromAminoMsg(object: MsgRemoveReactionAminoMsg): MsgRemoveReaction {
     return MsgRemoveReaction.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgRemoveReaction): MsgRemoveReactionAminoMsg {
+    return {
+      type: "desmos/MsgRemoveReaction",
+      value: MsgRemoveReaction.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgRemoveReactionProtoMsg): MsgRemoveReaction {
     return MsgRemoveReaction.decode(message.value);
   },
@@ -844,6 +856,14 @@ export const MsgAddRegisteredReaction = {
     object: MsgAddRegisteredReactionAminoMsg,
   ): MsgAddRegisteredReaction {
     return MsgAddRegisteredReaction.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgAddRegisteredReaction,
+  ): MsgAddRegisteredReactionAminoMsg {
+    return {
+      type: "desmos/MsgAddRegisteredReaction",
+      value: MsgAddRegisteredReaction.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgAddRegisteredReactionProtoMsg,
@@ -1085,6 +1105,14 @@ export const MsgEditRegisteredReaction = {
   ): MsgEditRegisteredReaction {
     return MsgEditRegisteredReaction.fromAmino(object.value);
   },
+  toAminoMsg(
+    message: MsgEditRegisteredReaction,
+  ): MsgEditRegisteredReactionAminoMsg {
+    return {
+      type: "desmos/MsgEditRegisteredReaction",
+      value: MsgEditRegisteredReaction.toAmino(message),
+    };
+  },
   fromProtoMsg(
     message: MsgEditRegisteredReactionProtoMsg,
   ): MsgEditRegisteredReaction {
@@ -1280,6 +1308,14 @@ export const MsgRemoveRegisteredReaction = {
     object: MsgRemoveRegisteredReactionAminoMsg,
   ): MsgRemoveRegisteredReaction {
     return MsgRemoveRegisteredReaction.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRemoveRegisteredReaction,
+  ): MsgRemoveRegisteredReactionAminoMsg {
+    return {
+      type: "desmos/MsgRemoveRegisteredReaction",
+      value: MsgRemoveRegisteredReaction.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgRemoveRegisteredReactionProtoMsg,
@@ -1516,6 +1552,12 @@ export const MsgSetReactionsParams = {
   },
   fromAminoMsg(object: MsgSetReactionsParamsAminoMsg): MsgSetReactionsParams {
     return MsgSetReactionsParams.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgSetReactionsParams): MsgSetReactionsParamsAminoMsg {
+    return {
+      type: "desmos/MsgSetReactionsParams",
+      value: MsgSetReactionsParams.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgSetReactionsParamsProtoMsg): MsgSetReactionsParams {
     return MsgSetReactionsParams.decode(message.value);

@@ -67,7 +67,7 @@ export interface MsgLinkApplicationAmino {
   timeout_timestamp: string;
 }
 export interface MsgLinkApplicationAminoMsg {
-  type: "/desmos.profiles.v3.MsgLinkApplication";
+  type: "desmos/MsgLinkApplication";
   value: MsgLinkApplicationAmino;
 }
 /**
@@ -123,7 +123,7 @@ export interface MsgUnlinkApplicationAmino {
   signer: string;
 }
 export interface MsgUnlinkApplicationAminoMsg {
-  type: "/desmos.profiles.v3.MsgUnlinkApplication";
+  type: "desmos/MsgUnlinkApplication";
   value: MsgUnlinkApplicationAmino;
 }
 /**
@@ -315,6 +315,12 @@ export const MsgLinkApplication = {
   fromAminoMsg(object: MsgLinkApplicationAminoMsg): MsgLinkApplication {
     return MsgLinkApplication.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgLinkApplication): MsgLinkApplicationAminoMsg {
+    return {
+      type: "desmos/MsgLinkApplication",
+      value: MsgLinkApplication.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgLinkApplicationProtoMsg): MsgLinkApplication {
     return MsgLinkApplication.decode(message.value);
   },
@@ -486,6 +492,12 @@ export const MsgUnlinkApplication = {
   },
   fromAminoMsg(object: MsgUnlinkApplicationAminoMsg): MsgUnlinkApplication {
     return MsgUnlinkApplication.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUnlinkApplication): MsgUnlinkApplicationAminoMsg {
+    return {
+      type: "desmos/MsgUnlinkApplication",
+      value: MsgUnlinkApplication.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgUnlinkApplicationProtoMsg): MsgUnlinkApplication {
     return MsgUnlinkApplication.decode(message.value);

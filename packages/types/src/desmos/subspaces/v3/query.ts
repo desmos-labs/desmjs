@@ -12,8 +12,9 @@ import {
   SectionAmino,
   UserGroup,
   UserGroupAmino,
+  Grant,
+  GrantAmino,
 } from "./models";
-import { Grant, GrantAmino } from "./models_feegrant";
 import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 export const protobufPackage = "desmos.subspaces.v3";

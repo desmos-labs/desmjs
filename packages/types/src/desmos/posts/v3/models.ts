@@ -142,6 +142,8 @@ export interface Post {
   creationDate?: Timestamp;
   /** (optional) Last edited time of the post */
   lastEditedDate?: Timestamp;
+  /** Owner of the post */
+  owner: string;
 }
 export interface PostProtoMsg {
   typeUrl: "/desmos.posts.v3.Post";
@@ -175,6 +177,8 @@ export interface PostAmino {
   creation_date?: TimestampAmino;
   /** (optional) Last edited time of the post */
   last_edited_date?: TimestampAmino;
+  /** Owner of the post */
+  owner: string;
 }
 export interface PostAminoMsg {
   type: "/desmos.posts.v3.Post";
@@ -495,8 +499,44 @@ export interface ParamsAmino {
   max_text_length: number;
 }
 export interface ParamsAminoMsg {
-  type: "/desmos.posts.v3.Params";
+  type: "desmos/x/posts/Params";
   value: ParamsAmino;
+}
+/**
+ * PostOwnerTransferRequest represents a request to transfer the ownership of a
+ * post from the sender to the receiver
+ */
+export interface PostOwnerTransferRequest {
+  /** Id of the subspace that holds the post to transfer */
+  subspaceId: Long;
+  /** Id of the post which will be transferred */
+  postId: Long;
+  /** Address of the sender */
+  sender: string;
+  /** Address of the receiver */
+  receiver: string;
+}
+export interface PostOwnerTransferRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.PostOwnerTransferRequest";
+  value: Uint8Array;
+}
+/**
+ * PostOwnerTransferRequest represents a request to transfer the ownership of a
+ * post from the sender to the receiver
+ */
+export interface PostOwnerTransferRequestAmino {
+  /** Id of the subspace that holds the post to transfer */
+  subspace_id: string;
+  /** Id of the post which will be transferred */
+  post_id: string;
+  /** Address of the sender */
+  sender: string;
+  /** Address of the receiver */
+  receiver: string;
+}
+export interface PostOwnerTransferRequestAminoMsg {
+  type: "/desmos.posts.v3.PostOwnerTransferRequest";
+  value: PostOwnerTransferRequestAmino;
 }
 function createBasePost(): Post {
   return {
@@ -513,6 +553,7 @@ function createBasePost(): Post {
     replySettings: 0,
     creationDate: undefined,
     lastEditedDate: undefined,
+    owner: "",
   };
 }
 export const Post = {
@@ -558,6 +599,9 @@ export const Post = {
         message.lastEditedDate,
         writer.uint32(106).fork(),
       ).ldelim();
+    }
+    if (message.owner !== "") {
+      writer.uint32(114).string(message.owner);
     }
     return writer;
   },
@@ -609,6 +653,9 @@ export const Post = {
         case 13:
           message.lastEditedDate = Timestamp.decode(reader, reader.uint32());
           break;
+        case 14:
+          message.owner = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -647,6 +694,7 @@ export const Post = {
       lastEditedDate: isSet(object.lastEditedDate)
         ? fromJsonTimestamp(object.lastEditedDate)
         : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
   toJSON(message: Post): unknown {
@@ -686,6 +734,7 @@ export const Post = {
       (obj.lastEditedDate = fromTimestamp(
         message.lastEditedDate,
       ).toISOString());
+    message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<Post>, I>>(object: I): Post {
@@ -722,6 +771,7 @@ export const Post = {
       object.lastEditedDate !== undefined && object.lastEditedDate !== null
         ? Timestamp.fromPartial(object.lastEditedDate)
         : undefined;
+    message.owner = object.owner ?? "";
     return message;
   },
   fromAmino(object: PostAmino): Post {
@@ -749,6 +799,7 @@ export const Post = {
       lastEditedDate: object?.last_edited_date
         ? Timestamp.fromAmino(object.last_edited_date)
         : undefined,
+      owner: object.owner,
     };
   },
   toAmino(message: Post): PostAmino {
@@ -786,6 +837,7 @@ export const Post = {
     obj.last_edited_date = message.lastEditedDate
       ? Timestamp.toAmino(message.lastEditedDate)
       : undefined;
+    obj.owner = message.owner;
     return obj;
   },
   fromAminoMsg(object: PostAminoMsg): Post {
@@ -2205,6 +2257,12 @@ export const Params = {
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "desmos/x/posts/Params",
+      value: Params.toAmino(message),
+    };
+  },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
   },
@@ -2215,6 +2273,138 @@ export const Params = {
     return {
       typeUrl: "/desmos.posts.v3.Params",
       value: Params.encode(message).finish(),
+    };
+  },
+};
+function createBasePostOwnerTransferRequest(): PostOwnerTransferRequest {
+  return {
+    subspaceId: Long.UZERO,
+    postId: Long.UZERO,
+    sender: "",
+    receiver: "",
+  };
+}
+export const PostOwnerTransferRequest = {
+  encode(
+    message: PostOwnerTransferRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (!message.postId.isZero()) {
+      writer.uint32(16).uint64(message.postId);
+    }
+    if (message.sender !== "") {
+      writer.uint32(26).string(message.sender);
+    }
+    if (message.receiver !== "") {
+      writer.uint32(34).string(message.receiver);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PostOwnerTransferRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePostOwnerTransferRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.postId = reader.uint64() as Long;
+          break;
+        case 3:
+          message.sender = reader.string();
+          break;
+        case 4:
+          message.receiver = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): PostOwnerTransferRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+    };
+  },
+  toJSON(message: PostOwnerTransferRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<PostOwnerTransferRequest>, I>>(
+    object: I,
+  ): PostOwnerTransferRequest {
+    const message = createBasePostOwnerTransferRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    return message;
+  },
+  fromAmino(object: PostOwnerTransferRequestAmino): PostOwnerTransferRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      sender: object.sender,
+      receiver: object.receiver,
+    };
+  },
+  toAmino(message: PostOwnerTransferRequest): PostOwnerTransferRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    return obj;
+  },
+  fromAminoMsg(
+    object: PostOwnerTransferRequestAminoMsg,
+  ): PostOwnerTransferRequest {
+    return PostOwnerTransferRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: PostOwnerTransferRequestProtoMsg,
+  ): PostOwnerTransferRequest {
+    return PostOwnerTransferRequest.decode(message.value);
+  },
+  toProto(message: PostOwnerTransferRequest): Uint8Array {
+    return PostOwnerTransferRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: PostOwnerTransferRequest,
+  ): PostOwnerTransferRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.PostOwnerTransferRequest",
+      value: PostOwnerTransferRequest.encode(message).finish(),
     };
   },
 };

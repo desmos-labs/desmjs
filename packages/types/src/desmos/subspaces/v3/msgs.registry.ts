@@ -16,12 +16,12 @@ import {
   MsgAddUserToUserGroup,
   MsgRemoveUserFromUserGroup,
   MsgSetUserPermissions,
-} from "./msgs";
-import {
   MsgGrantTreasuryAuthorization,
   MsgRevokeTreasuryAuthorization,
-} from "./msgs_treasury";
-import { MsgGrantAllowance, MsgRevokeAllowance } from "./msgs_feegrant";
+  MsgGrantAllowance,
+  MsgRevokeAllowance,
+  MsgUpdateSubspaceFeeTokens,
+} from "./msgs";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [
   ["/desmos.subspaces.v3.MsgCreateSubspace", MsgCreateSubspace],
   ["/desmos.subspaces.v3.MsgEditSubspace", MsgEditSubspace],
@@ -54,6 +54,10 @@ export const registry: ReadonlyArray<[string, GeneratedType]> = [
   ],
   ["/desmos.subspaces.v3.MsgGrantAllowance", MsgGrantAllowance],
   ["/desmos.subspaces.v3.MsgRevokeAllowance", MsgRevokeAllowance],
+  [
+    "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
+    MsgUpdateSubspaceFeeTokens,
+  ],
 ];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {
@@ -176,6 +180,12 @@ export const MessageComposer = {
         value: MsgRevokeAllowance.encode(value).finish(),
       };
     },
+    updateSubspaceFeeTokens(value: MsgUpdateSubspaceFeeTokens) {
+      return {
+        typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
+        value: MsgUpdateSubspaceFeeTokens.encode(value).finish(),
+      };
+    },
   },
   withTypeUrl: {
     createSubspace(value: MsgCreateSubspace) {
@@ -289,6 +299,12 @@ export const MessageComposer = {
     revokeAllowance(value: MsgRevokeAllowance) {
       return {
         typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowance",
+        value,
+      };
+    },
+    updateSubspaceFeeTokens(value: MsgUpdateSubspaceFeeTokens) {
+      return {
+        typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
         value,
       };
     },
@@ -408,6 +424,12 @@ export const MessageComposer = {
         value: MsgRevokeAllowance.toJSON(value),
       };
     },
+    updateSubspaceFeeTokens(value: MsgUpdateSubspaceFeeTokens) {
+      return {
+        typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
+        value: MsgUpdateSubspaceFeeTokens.toJSON(value),
+      };
+    },
   },
   fromJSON: {
     createSubspace(value: any) {
@@ -524,6 +546,12 @@ export const MessageComposer = {
         value: MsgRevokeAllowance.fromJSON(value),
       };
     },
+    updateSubspaceFeeTokens(value: any) {
+      return {
+        typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
+        value: MsgUpdateSubspaceFeeTokens.fromJSON(value),
+      };
+    },
   },
   fromPartial: {
     createSubspace(value: MsgCreateSubspace) {
@@ -638,6 +666,12 @@ export const MessageComposer = {
       return {
         typeUrl: "/desmos.subspaces.v3.MsgRevokeAllowance",
         value: MsgRevokeAllowance.fromPartial(value),
+      };
+    },
+    updateSubspaceFeeTokens(value: MsgUpdateSubspaceFeeTokens) {
+      return {
+        typeUrl: "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens",
+        value: MsgUpdateSubspaceFeeTokens.fromPartial(value),
       };
     },
   },

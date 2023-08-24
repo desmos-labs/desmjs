@@ -45,15 +45,24 @@ export const TelescopeConfig: TelescopeInput = {
           "desmos.profiles.v2",
           "desmos.subspaces.v1",
           "desmos.subspaces.v2.*",
-
           "desmos.profiles.v3.client",
           "desmos.reactions.v1.client",
+
+          // Ignore module protos
+          "desmos.posts.module.*",
+          "desmos.profiles.module.*",
+          "desmos.reactions.module.*",
+          "desmos.relationships.module.*",
+          "desmos.reports.module.*",
+          "desmos.subspaces.module.*",
+          "desmos.supply.module.*",
+          "desmos.tokenfactory.module.*",
 
           // Ignore unused cosmos deps
           "cosmos.app.*",
           "cosmos.auth.*",
           "cosmos.authz.module.*",
-          "cosmos.bank.*",
+          "cosmos.bank.module.*",
           "cosmos.base.abci.*",
           "cosmos.base.node.*",
           "cosmos.base.kv.*",

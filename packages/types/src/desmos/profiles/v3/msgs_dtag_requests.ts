@@ -39,7 +39,7 @@ export interface MsgRequestDTagTransferAmino {
   sender: string;
 }
 export interface MsgRequestDTagTransferAminoMsg {
-  type: "/desmos.profiles.v3.MsgRequestDTagTransfer";
+  type: "desmos/MsgRequestDTagTransfer";
   value: MsgRequestDTagTransferAmino;
 }
 /**
@@ -85,7 +85,7 @@ export interface MsgCancelDTagTransferRequestAmino {
   sender: string;
 }
 export interface MsgCancelDTagTransferRequestAminoMsg {
-  type: "/desmos.profiles.v3.MsgCancelDTagTransferRequest";
+  type: "desmos/MsgCancelDTagTransferRequest";
   value: MsgCancelDTagTransferRequestAmino;
 }
 /**
@@ -141,7 +141,7 @@ export interface MsgAcceptDTagTransferRequestAmino {
   receiver: string;
 }
 export interface MsgAcceptDTagTransferRequestAminoMsg {
-  type: "/desmos.profiles.v3.MsgAcceptDTagTransferRequest";
+  type: "desmos/MsgAcceptDTagTransferRequest";
   value: MsgAcceptDTagTransferRequestAmino;
 }
 /**
@@ -187,7 +187,7 @@ export interface MsgRefuseDTagTransferRequestAmino {
   receiver: string;
 }
 export interface MsgRefuseDTagTransferRequestAminoMsg {
-  type: "/desmos.profiles.v3.MsgRefuseDTagTransferRequest";
+  type: "desmos/MsgRefuseDTagTransferRequest";
   value: MsgRefuseDTagTransferRequestAmino;
 }
 /**
@@ -284,6 +284,12 @@ export const MsgRequestDTagTransfer = {
   },
   fromAminoMsg(object: MsgRequestDTagTransferAminoMsg): MsgRequestDTagTransfer {
     return MsgRequestDTagTransfer.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgRequestDTagTransfer): MsgRequestDTagTransferAminoMsg {
+    return {
+      type: "desmos/MsgRequestDTagTransfer",
+      value: MsgRequestDTagTransfer.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgRequestDTagTransferProtoMsg,
@@ -455,6 +461,14 @@ export const MsgCancelDTagTransferRequest = {
     object: MsgCancelDTagTransferRequestAminoMsg,
   ): MsgCancelDTagTransferRequest {
     return MsgCancelDTagTransferRequest.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgCancelDTagTransferRequest,
+  ): MsgCancelDTagTransferRequestAminoMsg {
+    return {
+      type: "desmos/MsgCancelDTagTransferRequest",
+      value: MsgCancelDTagTransferRequest.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgCancelDTagTransferRequestProtoMsg,
@@ -641,6 +655,14 @@ export const MsgAcceptDTagTransferRequest = {
   ): MsgAcceptDTagTransferRequest {
     return MsgAcceptDTagTransferRequest.fromAmino(object.value);
   },
+  toAminoMsg(
+    message: MsgAcceptDTagTransferRequest,
+  ): MsgAcceptDTagTransferRequestAminoMsg {
+    return {
+      type: "desmos/MsgAcceptDTagTransferRequest",
+      value: MsgAcceptDTagTransferRequest.toAmino(message),
+    };
+  },
   fromProtoMsg(
     message: MsgAcceptDTagTransferRequestProtoMsg,
   ): MsgAcceptDTagTransferRequest {
@@ -813,6 +835,14 @@ export const MsgRefuseDTagTransferRequest = {
     object: MsgRefuseDTagTransferRequestAminoMsg,
   ): MsgRefuseDTagTransferRequest {
     return MsgRefuseDTagTransferRequest.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRefuseDTagTransferRequest,
+  ): MsgRefuseDTagTransferRequestAminoMsg {
+    return {
+      type: "desmos/MsgRefuseDTagTransferRequest",
+      value: MsgRefuseDTagTransferRequest.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgRefuseDTagTransferRequestProtoMsg,

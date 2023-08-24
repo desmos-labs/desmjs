@@ -78,7 +78,7 @@ export interface MsgCreatePostAmino {
   referenced_posts: PostReferenceAmino[];
 }
 export interface MsgCreatePostAminoMsg {
-  type: "/desmos.posts.v3.MsgCreatePost";
+  type: "desmos/MsgCreatePost";
   value: MsgCreatePostAmino;
 }
 /** MsgCreatePostResponse defines the Msg/CreatePost response type. */
@@ -156,7 +156,7 @@ export interface MsgEditPostAmino {
   editor: string;
 }
 export interface MsgEditPostAminoMsg {
-  type: "/desmos.posts.v3.MsgEditPost";
+  type: "desmos/MsgEditPost";
   value: MsgEditPostAmino;
 }
 /** MsgCreatePostResponse defines the Msg/EditPost response type. */
@@ -200,7 +200,7 @@ export interface MsgDeletePostAmino {
   signer: string;
 }
 export interface MsgDeletePostAminoMsg {
-  type: "/desmos.posts.v3.MsgDeletePost";
+  type: "desmos/MsgDeletePost";
   value: MsgDeletePostAmino;
 }
 /** MsgDeletePostResponse represents the Msg/DeletePost response type */
@@ -248,7 +248,7 @@ export interface MsgAddPostAttachmentAmino {
   editor: string;
 }
 export interface MsgAddPostAttachmentAminoMsg {
-  type: "/desmos.posts.v3.MsgAddPostAttachment";
+  type: "desmos/MsgAddPostAttachment";
   value: MsgAddPostAttachmentAmino;
 }
 /** MsgAddPostAttachmentResponse defines the Msg/AddPostAttachment response type. */
@@ -306,7 +306,7 @@ export interface MsgRemovePostAttachmentAmino {
   editor: string;
 }
 export interface MsgRemovePostAttachmentAminoMsg {
-  type: "/desmos.posts.v3.MsgRemovePostAttachment";
+  type: "desmos/MsgRemovePostAttachment";
   value: MsgRemovePostAttachmentAmino;
 }
 /**
@@ -364,7 +364,7 @@ export interface MsgAnswerPollAmino {
   signer: string;
 }
 export interface MsgAnswerPollAminoMsg {
-  type: "/desmos.posts.v3.MsgAnswerPoll";
+  type: "desmos/MsgAnswerPoll";
   value: MsgAnswerPollAmino;
 }
 /** MsgAnswerPollResponse represents the MSg/AnswerPoll response type */
@@ -420,7 +420,7 @@ export interface MsgUpdateParamsAmino {
   params?: ParamsAmino;
 }
 export interface MsgUpdateParamsAminoMsg {
-  type: "/desmos.posts.v3.MsgUpdateParams";
+  type: "desmos/x/posts/MsgUpdateParams";
   value: MsgUpdateParamsAmino;
 }
 /**
@@ -444,6 +444,316 @@ export interface MsgUpdateParamsResponseAmino {}
 export interface MsgUpdateParamsResponseAminoMsg {
   type: "/desmos.posts.v3.MsgUpdateParamsResponse";
   value: MsgUpdateParamsResponseAmino;
+}
+/**
+ * MsgMovePost moves a post to another subspace
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgMovePost {
+  /** Id of the subspace where the post is currently located */
+  subspaceId: Long;
+  /** Id of the post to be moved */
+  postId: Long;
+  /** Id of the target subspace to which the post will be moved */
+  targetSubspaceId: Long;
+  /** Id of the target section to which the post will be moved */
+  targetSectionId: number;
+  /** Address of the post owner */
+  owner: string;
+}
+export interface MsgMovePostProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgMovePost";
+  value: Uint8Array;
+}
+/**
+ * MsgMovePost moves a post to another subspace
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgMovePostAmino {
+  /** Id of the subspace where the post is currently located */
+  subspace_id: string;
+  /** Id of the post to be moved */
+  post_id: string;
+  /** Id of the target subspace to which the post will be moved */
+  target_subspace_id: string;
+  /** Id of the target section to which the post will be moved */
+  target_section_id: number;
+  /** Address of the post owner */
+  owner: string;
+}
+export interface MsgMovePostAminoMsg {
+  type: "desmos/MsgMovePost";
+  value: MsgMovePostAmino;
+}
+/**
+ * MsgMovePostResponse defines the Msg/MsgMovePost response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgMovePostResponse {
+  /** New id of the post in the target subspace */
+  postId: Long;
+}
+export interface MsgMovePostResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgMovePostResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgMovePostResponse defines the Msg/MsgMovePost response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgMovePostResponseAmino {
+  /** New id of the post in the target subspace */
+  post_id: string;
+}
+export interface MsgMovePostResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgMovePostResponse";
+  value: MsgMovePostResponseAmino;
+}
+/**
+ * MsgRequestPostOwnerTransfer represent a message used to transfer a post
+ * ownership to receiver
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRequestPostOwnerTransfer {
+  /** Id of the subspace that holds the post which ownership should be transfered */
+  subspaceId: Long;
+  /** Id of the post which will be transferred */
+  postId: Long;
+  /** Address of the post ownership receiver */
+  receiver: string;
+  /** Address of the sender who is creating a transfer request */
+  sender: string;
+}
+export interface MsgRequestPostOwnerTransferProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgRequestPostOwnerTransfer";
+  value: Uint8Array;
+}
+/**
+ * MsgRequestPostOwnerTransfer represent a message used to transfer a post
+ * ownership to receiver
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRequestPostOwnerTransferAmino {
+  /** Id of the subspace that holds the post which ownership should be transfered */
+  subspace_id: string;
+  /** Id of the post which will be transferred */
+  post_id: string;
+  /** Address of the post ownership receiver */
+  receiver: string;
+  /** Address of the sender who is creating a transfer request */
+  sender: string;
+}
+export interface MsgRequestPostOwnerTransferAminoMsg {
+  type: "desmos/MsgRequestPostOwnerTransfer";
+  value: MsgRequestPostOwnerTransferAmino;
+}
+/**
+ * MsgRequestPostOwnerTransferResponse defines the Msg/RequestPostOwnerTransfer
+ * response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRequestPostOwnerTransferResponse {}
+export interface MsgRequestPostOwnerTransferResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgRequestPostOwnerTransferResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRequestPostOwnerTransferResponse defines the Msg/RequestPostOwnerTransfer
+ * response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRequestPostOwnerTransferResponseAmino {}
+export interface MsgRequestPostOwnerTransferResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgRequestPostOwnerTransferResponse";
+  value: MsgRequestPostOwnerTransferResponseAmino;
+}
+/**
+ * MsgCancelPostOwnerTransferRequest represents a message used to cancel a
+ * outgoing post transfer request
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgCancelPostOwnerTransferRequest {
+  /**
+   * Id of the subspace that holds the post for which the request should be
+   * canceled
+   */
+  subspaceId: Long;
+  /** Id of the post for which the request will be cancelled */
+  postId: Long;
+  /** Address of the transfer request sender */
+  sender: string;
+}
+export interface MsgCancelPostOwnerTransferRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgCancelPostOwnerTransferRequest";
+  value: Uint8Array;
+}
+/**
+ * MsgCancelPostOwnerTransferRequest represents a message used to cancel a
+ * outgoing post transfer request
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgCancelPostOwnerTransferRequestAmino {
+  /**
+   * Id of the subspace that holds the post for which the request should be
+   * canceled
+   */
+  subspace_id: string;
+  /** Id of the post for which the request will be cancelled */
+  post_id: string;
+  /** Address of the transfer request sender */
+  sender: string;
+}
+export interface MsgCancelPostOwnerTransferRequestAminoMsg {
+  type: "desmos/MsgCancelPostOwnerTransfer";
+  value: MsgCancelPostOwnerTransferRequestAmino;
+}
+/**
+ * MsgCancelPostOwnerTransferRequestResponse defines the
+ * Msg/CancelPostOwnerTransferRequest response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgCancelPostOwnerTransferRequestResponse {}
+export interface MsgCancelPostOwnerTransferRequestResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgCancelPostOwnerTransferRequestResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgCancelPostOwnerTransferRequestResponse defines the
+ * Msg/CancelPostOwnerTransferRequest response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgCancelPostOwnerTransferRequestResponseAmino {}
+export interface MsgCancelPostOwnerTransferRequestResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgCancelPostOwnerTransferRequestResponse";
+  value: MsgCancelPostOwnerTransferRequestResponseAmino;
+}
+/**
+ * MsgAcceptPostOwnerTransferRequest represents a message used to accept a
+ * incoming post transfer request
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgAcceptPostOwnerTransferRequest {
+  /** Id of the subspace holding the post for which the request will be accepted */
+  subspaceId: Long;
+  /** Id of the post for which the request will be accepted */
+  postId: Long;
+  /** Address of the request receiver */
+  receiver: string;
+}
+export interface MsgAcceptPostOwnerTransferRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgAcceptPostOwnerTransferRequest";
+  value: Uint8Array;
+}
+/**
+ * MsgAcceptPostOwnerTransferRequest represents a message used to accept a
+ * incoming post transfer request
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgAcceptPostOwnerTransferRequestAmino {
+  /** Id of the subspace holding the post for which the request will be accepted */
+  subspace_id: string;
+  /** Id of the post for which the request will be accepted */
+  post_id: string;
+  /** Address of the request receiver */
+  receiver: string;
+}
+export interface MsgAcceptPostOwnerTransferRequestAminoMsg {
+  type: "desmos/MsgAcceptPostOwnerTransfer";
+  value: MsgAcceptPostOwnerTransferRequestAmino;
+}
+/**
+ * MsgAcceptPostOwnerTransferRequestResponse defines the
+ * Msg/AcceptPostOwnerTransferRequest response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgAcceptPostOwnerTransferRequestResponse {}
+export interface MsgAcceptPostOwnerTransferRequestResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgAcceptPostOwnerTransferRequestResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgAcceptPostOwnerTransferRequestResponse defines the
+ * Msg/AcceptPostOwnerTransferRequest response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgAcceptPostOwnerTransferRequestResponseAmino {}
+export interface MsgAcceptPostOwnerTransferRequestResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgAcceptPostOwnerTransferRequestResponse";
+  value: MsgAcceptPostOwnerTransferRequestResponseAmino;
+}
+/**
+ * MsgRefusePostOwnerTransferRequest represents a message used to refuse a
+ * incoming post transfer request
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRefusePostOwnerTransferRequest {
+  /** Id of the subspace holding the post for which the request will be refused */
+  subspaceId: Long;
+  /** Id of the post for which the request will be refused */
+  postId: Long;
+  /** Address of the request receiver */
+  receiver: string;
+}
+export interface MsgRefusePostOwnerTransferRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgRefusePostOwnerTransferRequest";
+  value: Uint8Array;
+}
+/**
+ * MsgRefusePostOwnerTransferRequest represents a message used to refuse a
+ * incoming post transfer request
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRefusePostOwnerTransferRequestAmino {
+  /** Id of the subspace holding the post for which the request will be refused */
+  subspace_id: string;
+  /** Id of the post for which the request will be refused */
+  post_id: string;
+  /** Address of the request receiver */
+  receiver: string;
+}
+export interface MsgRefusePostOwnerTransferRequestAminoMsg {
+  type: "desmos/MsgRefusePostOwnerTransfer";
+  value: MsgRefusePostOwnerTransferRequestAmino;
+}
+/**
+ * MsgRefusePostOwnerTransferRequest defines the
+ * Msg/RefusePostOwnerTransferRequest response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRefusePostOwnerTransferRequestResponse {}
+export interface MsgRefusePostOwnerTransferRequestResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.MsgRefusePostOwnerTransferRequestResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRefusePostOwnerTransferRequest defines the
+ * Msg/RefusePostOwnerTransferRequest response type
+ *
+ * Since: Desmos 6.0.0
+ */
+export interface MsgRefusePostOwnerTransferRequestResponseAmino {}
+export interface MsgRefusePostOwnerTransferRequestResponseAminoMsg {
+  type: "/desmos.posts.v3.MsgRefusePostOwnerTransferRequestResponse";
+  value: MsgRefusePostOwnerTransferRequestResponseAmino;
 }
 function createBaseMsgCreatePost(): MsgCreatePost {
   return {
@@ -706,6 +1016,12 @@ export const MsgCreatePost = {
   },
   fromAminoMsg(object: MsgCreatePostAminoMsg): MsgCreatePost {
     return MsgCreatePost.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreatePost): MsgCreatePostAminoMsg {
+    return {
+      type: "desmos/MsgCreatePost",
+      value: MsgCreatePost.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgCreatePostProtoMsg): MsgCreatePost {
     return MsgCreatePost.decode(message.value);
@@ -980,6 +1296,12 @@ export const MsgEditPost = {
   fromAminoMsg(object: MsgEditPostAminoMsg): MsgEditPost {
     return MsgEditPost.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgEditPost): MsgEditPostAminoMsg {
+    return {
+      type: "desmos/MsgEditPost",
+      value: MsgEditPost.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgEditPostProtoMsg): MsgEditPost {
     return MsgEditPost.decode(message.value);
   },
@@ -1176,6 +1498,12 @@ export const MsgDeletePost = {
   fromAminoMsg(object: MsgDeletePostAminoMsg): MsgDeletePost {
     return MsgDeletePost.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgDeletePost): MsgDeletePostAminoMsg {
+    return {
+      type: "desmos/MsgDeletePost",
+      value: MsgDeletePost.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgDeletePostProtoMsg): MsgDeletePost {
     return MsgDeletePost.decode(message.value);
   },
@@ -1368,6 +1696,12 @@ export const MsgAddPostAttachment = {
   },
   fromAminoMsg(object: MsgAddPostAttachmentAminoMsg): MsgAddPostAttachment {
     return MsgAddPostAttachment.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgAddPostAttachment): MsgAddPostAttachmentAminoMsg {
+    return {
+      type: "desmos/MsgAddPostAttachment",
+      value: MsgAddPostAttachment.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgAddPostAttachmentProtoMsg): MsgAddPostAttachment {
     return MsgAddPostAttachment.decode(message.value);
@@ -1612,6 +1946,14 @@ export const MsgRemovePostAttachment = {
     object: MsgRemovePostAttachmentAminoMsg,
   ): MsgRemovePostAttachment {
     return MsgRemovePostAttachment.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRemovePostAttachment,
+  ): MsgRemovePostAttachmentAminoMsg {
+    return {
+      type: "desmos/MsgRemovePostAttachment",
+      value: MsgRemovePostAttachment.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgRemovePostAttachmentProtoMsg,
@@ -1871,6 +2213,12 @@ export const MsgAnswerPoll = {
   fromAminoMsg(object: MsgAnswerPollAminoMsg): MsgAnswerPoll {
     return MsgAnswerPoll.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgAnswerPoll): MsgAnswerPollAminoMsg {
+    return {
+      type: "desmos/MsgAnswerPoll",
+      value: MsgAnswerPoll.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgAnswerPollProtoMsg): MsgAnswerPoll {
     return MsgAnswerPoll.decode(message.value);
   },
@@ -2025,6 +2373,12 @@ export const MsgUpdateParams = {
   fromAminoMsg(object: MsgUpdateParamsAminoMsg): MsgUpdateParams {
     return MsgUpdateParams.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgUpdateParams): MsgUpdateParamsAminoMsg {
+    return {
+      type: "desmos/x/posts/MsgUpdateParams",
+      value: MsgUpdateParams.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgUpdateParamsProtoMsg): MsgUpdateParams {
     return MsgUpdateParams.decode(message.value);
   },
@@ -2107,6 +2461,1071 @@ export const MsgUpdateParamsResponse = {
     };
   },
 };
+function createBaseMsgMovePost(): MsgMovePost {
+  return {
+    subspaceId: Long.UZERO,
+    postId: Long.UZERO,
+    targetSubspaceId: Long.UZERO,
+    targetSectionId: 0,
+    owner: "",
+  };
+}
+export const MsgMovePost = {
+  encode(
+    message: MsgMovePost,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (!message.postId.isZero()) {
+      writer.uint32(16).uint64(message.postId);
+    }
+    if (!message.targetSubspaceId.isZero()) {
+      writer.uint32(24).uint64(message.targetSubspaceId);
+    }
+    if (message.targetSectionId !== 0) {
+      writer.uint32(32).uint32(message.targetSectionId);
+    }
+    if (message.owner !== "") {
+      writer.uint32(42).string(message.owner);
+    }
+    return writer;
+  },
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMovePost {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgMovePost();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.postId = reader.uint64() as Long;
+          break;
+        case 3:
+          message.targetSubspaceId = reader.uint64() as Long;
+          break;
+        case 4:
+          message.targetSectionId = reader.uint32();
+          break;
+        case 5:
+          message.owner = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgMovePost {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      targetSubspaceId: isSet(object.targetSubspaceId)
+        ? Long.fromValue(object.targetSubspaceId)
+        : Long.UZERO,
+      targetSectionId: isSet(object.targetSectionId)
+        ? Number(object.targetSectionId)
+        : 0,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+    };
+  },
+  toJSON(message: MsgMovePost): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.targetSubspaceId !== undefined &&
+      (obj.targetSubspaceId = (
+        message.targetSubspaceId || Long.UZERO
+      ).toString());
+    message.targetSectionId !== undefined &&
+      (obj.targetSectionId = Math.round(message.targetSectionId));
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgMovePost>, I>>(
+    object: I,
+  ): MsgMovePost {
+    const message = createBaseMsgMovePost();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    message.targetSubspaceId =
+      object.targetSubspaceId !== undefined && object.targetSubspaceId !== null
+        ? Long.fromValue(object.targetSubspaceId)
+        : Long.UZERO;
+    message.targetSectionId = object.targetSectionId ?? 0;
+    message.owner = object.owner ?? "";
+    return message;
+  },
+  fromAmino(object: MsgMovePostAmino): MsgMovePost {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      targetSubspaceId: Long.fromString(object.target_subspace_id),
+      targetSectionId: object.target_section_id,
+      owner: object.owner,
+    };
+  },
+  toAmino(message: MsgMovePost): MsgMovePostAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.target_subspace_id = message.targetSubspaceId
+      ? message.targetSubspaceId.toString()
+      : undefined;
+    obj.target_section_id = message.targetSectionId;
+    obj.owner = message.owner;
+    return obj;
+  },
+  fromAminoMsg(object: MsgMovePostAminoMsg): MsgMovePost {
+    return MsgMovePost.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgMovePost): MsgMovePostAminoMsg {
+    return {
+      type: "desmos/MsgMovePost",
+      value: MsgMovePost.toAmino(message),
+    };
+  },
+  fromProtoMsg(message: MsgMovePostProtoMsg): MsgMovePost {
+    return MsgMovePost.decode(message.value);
+  },
+  toProto(message: MsgMovePost): Uint8Array {
+    return MsgMovePost.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMovePost): MsgMovePostProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgMovePost",
+      value: MsgMovePost.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgMovePostResponse(): MsgMovePostResponse {
+  return {
+    postId: Long.UZERO,
+  };
+}
+export const MsgMovePostResponse = {
+  encode(
+    message: MsgMovePostResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.postId.isZero()) {
+      writer.uint32(8).uint64(message.postId);
+    }
+    return writer;
+  },
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgMovePostResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgMovePostResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.postId = reader.uint64() as Long;
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgMovePostResponse {
+    return {
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+    };
+  },
+  toJSON(message: MsgMovePostResponse): unknown {
+    const obj: any = {};
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgMovePostResponse>, I>>(
+    object: I,
+  ): MsgMovePostResponse {
+    const message = createBaseMsgMovePostResponse();
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    return message;
+  },
+  fromAmino(object: MsgMovePostResponseAmino): MsgMovePostResponse {
+    return {
+      postId: Long.fromString(object.post_id),
+    };
+  },
+  toAmino(message: MsgMovePostResponse): MsgMovePostResponseAmino {
+    const obj: any = {};
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgMovePostResponseAminoMsg): MsgMovePostResponse {
+    return MsgMovePostResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgMovePostResponseProtoMsg): MsgMovePostResponse {
+    return MsgMovePostResponse.decode(message.value);
+  },
+  toProto(message: MsgMovePostResponse): Uint8Array {
+    return MsgMovePostResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgMovePostResponse): MsgMovePostResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgMovePostResponse",
+      value: MsgMovePostResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRequestPostOwnerTransfer(): MsgRequestPostOwnerTransfer {
+  return {
+    subspaceId: Long.UZERO,
+    postId: Long.UZERO,
+    receiver: "",
+    sender: "",
+  };
+}
+export const MsgRequestPostOwnerTransfer = {
+  encode(
+    message: MsgRequestPostOwnerTransfer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (!message.postId.isZero()) {
+      writer.uint32(16).uint64(message.postId);
+    }
+    if (message.receiver !== "") {
+      writer.uint32(26).string(message.receiver);
+    }
+    if (message.sender !== "") {
+      writer.uint32(34).string(message.sender);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRequestPostOwnerTransfer {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRequestPostOwnerTransfer();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.postId = reader.uint64() as Long;
+          break;
+        case 3:
+          message.receiver = reader.string();
+          break;
+        case 4:
+          message.sender = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgRequestPostOwnerTransfer {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+    };
+  },
+  toJSON(message: MsgRequestPostOwnerTransfer): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    message.sender !== undefined && (obj.sender = message.sender);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgRequestPostOwnerTransfer>, I>>(
+    object: I,
+  ): MsgRequestPostOwnerTransfer {
+    const message = createBaseMsgRequestPostOwnerTransfer();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    message.receiver = object.receiver ?? "";
+    message.sender = object.sender ?? "";
+    return message;
+  },
+  fromAmino(
+    object: MsgRequestPostOwnerTransferAmino,
+  ): MsgRequestPostOwnerTransfer {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      receiver: object.receiver,
+      sender: object.sender,
+    };
+  },
+  toAmino(
+    message: MsgRequestPostOwnerTransfer,
+  ): MsgRequestPostOwnerTransferAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.receiver = message.receiver;
+    obj.sender = message.sender;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRequestPostOwnerTransferAminoMsg,
+  ): MsgRequestPostOwnerTransfer {
+    return MsgRequestPostOwnerTransfer.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRequestPostOwnerTransfer,
+  ): MsgRequestPostOwnerTransferAminoMsg {
+    return {
+      type: "desmos/MsgRequestPostOwnerTransfer",
+      value: MsgRequestPostOwnerTransfer.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgRequestPostOwnerTransferProtoMsg,
+  ): MsgRequestPostOwnerTransfer {
+    return MsgRequestPostOwnerTransfer.decode(message.value);
+  },
+  toProto(message: MsgRequestPostOwnerTransfer): Uint8Array {
+    return MsgRequestPostOwnerTransfer.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRequestPostOwnerTransfer,
+  ): MsgRequestPostOwnerTransferProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgRequestPostOwnerTransfer",
+      value: MsgRequestPostOwnerTransfer.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRequestPostOwnerTransferResponse(): MsgRequestPostOwnerTransferResponse {
+  return {};
+}
+export const MsgRequestPostOwnerTransferResponse = {
+  encode(
+    _: MsgRequestPostOwnerTransferResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRequestPostOwnerTransferResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRequestPostOwnerTransferResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgRequestPostOwnerTransferResponse {
+    return {};
+  },
+  toJSON(_: MsgRequestPostOwnerTransferResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgRequestPostOwnerTransferResponse>, I>,
+  >(_: I): MsgRequestPostOwnerTransferResponse {
+    const message = createBaseMsgRequestPostOwnerTransferResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgRequestPostOwnerTransferResponseAmino,
+  ): MsgRequestPostOwnerTransferResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgRequestPostOwnerTransferResponse,
+  ): MsgRequestPostOwnerTransferResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRequestPostOwnerTransferResponseAminoMsg,
+  ): MsgRequestPostOwnerTransferResponse {
+    return MsgRequestPostOwnerTransferResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRequestPostOwnerTransferResponseProtoMsg,
+  ): MsgRequestPostOwnerTransferResponse {
+    return MsgRequestPostOwnerTransferResponse.decode(message.value);
+  },
+  toProto(message: MsgRequestPostOwnerTransferResponse): Uint8Array {
+    return MsgRequestPostOwnerTransferResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRequestPostOwnerTransferResponse,
+  ): MsgRequestPostOwnerTransferResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgRequestPostOwnerTransferResponse",
+      value: MsgRequestPostOwnerTransferResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgCancelPostOwnerTransferRequest(): MsgCancelPostOwnerTransferRequest {
+  return {
+    subspaceId: Long.UZERO,
+    postId: Long.UZERO,
+    sender: "",
+  };
+}
+export const MsgCancelPostOwnerTransferRequest = {
+  encode(
+    message: MsgCancelPostOwnerTransferRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (!message.postId.isZero()) {
+      writer.uint32(16).uint64(message.postId);
+    }
+    if (message.sender !== "") {
+      writer.uint32(26).string(message.sender);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgCancelPostOwnerTransferRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCancelPostOwnerTransferRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.postId = reader.uint64() as Long;
+          break;
+        case 3:
+          message.sender = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgCancelPostOwnerTransferRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+    };
+  },
+  toJSON(message: MsgCancelPostOwnerTransferRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.sender !== undefined && (obj.sender = message.sender);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgCancelPostOwnerTransferRequest>, I>,
+  >(object: I): MsgCancelPostOwnerTransferRequest {
+    const message = createBaseMsgCancelPostOwnerTransferRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    message.sender = object.sender ?? "";
+    return message;
+  },
+  fromAmino(
+    object: MsgCancelPostOwnerTransferRequestAmino,
+  ): MsgCancelPostOwnerTransferRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      sender: object.sender,
+    };
+  },
+  toAmino(
+    message: MsgCancelPostOwnerTransferRequest,
+  ): MsgCancelPostOwnerTransferRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.sender = message.sender;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgCancelPostOwnerTransferRequestAminoMsg,
+  ): MsgCancelPostOwnerTransferRequest {
+    return MsgCancelPostOwnerTransferRequest.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgCancelPostOwnerTransferRequest,
+  ): MsgCancelPostOwnerTransferRequestAminoMsg {
+    return {
+      type: "desmos/MsgCancelPostOwnerTransfer",
+      value: MsgCancelPostOwnerTransferRequest.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgCancelPostOwnerTransferRequestProtoMsg,
+  ): MsgCancelPostOwnerTransferRequest {
+    return MsgCancelPostOwnerTransferRequest.decode(message.value);
+  },
+  toProto(message: MsgCancelPostOwnerTransferRequest): Uint8Array {
+    return MsgCancelPostOwnerTransferRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgCancelPostOwnerTransferRequest,
+  ): MsgCancelPostOwnerTransferRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgCancelPostOwnerTransferRequest",
+      value: MsgCancelPostOwnerTransferRequest.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgCancelPostOwnerTransferRequestResponse(): MsgCancelPostOwnerTransferRequestResponse {
+  return {};
+}
+export const MsgCancelPostOwnerTransferRequestResponse = {
+  encode(
+    _: MsgCancelPostOwnerTransferRequestResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgCancelPostOwnerTransferRequestResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCancelPostOwnerTransferRequestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgCancelPostOwnerTransferRequestResponse {
+    return {};
+  },
+  toJSON(_: MsgCancelPostOwnerTransferRequestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgCancelPostOwnerTransferRequestResponse>, I>,
+  >(_: I): MsgCancelPostOwnerTransferRequestResponse {
+    const message = createBaseMsgCancelPostOwnerTransferRequestResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgCancelPostOwnerTransferRequestResponseAmino,
+  ): MsgCancelPostOwnerTransferRequestResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgCancelPostOwnerTransferRequestResponse,
+  ): MsgCancelPostOwnerTransferRequestResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgCancelPostOwnerTransferRequestResponseAminoMsg,
+  ): MsgCancelPostOwnerTransferRequestResponse {
+    return MsgCancelPostOwnerTransferRequestResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgCancelPostOwnerTransferRequestResponseProtoMsg,
+  ): MsgCancelPostOwnerTransferRequestResponse {
+    return MsgCancelPostOwnerTransferRequestResponse.decode(message.value);
+  },
+  toProto(message: MsgCancelPostOwnerTransferRequestResponse): Uint8Array {
+    return MsgCancelPostOwnerTransferRequestResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgCancelPostOwnerTransferRequestResponse,
+  ): MsgCancelPostOwnerTransferRequestResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgCancelPostOwnerTransferRequestResponse",
+      value: MsgCancelPostOwnerTransferRequestResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgAcceptPostOwnerTransferRequest(): MsgAcceptPostOwnerTransferRequest {
+  return {
+    subspaceId: Long.UZERO,
+    postId: Long.UZERO,
+    receiver: "",
+  };
+}
+export const MsgAcceptPostOwnerTransferRequest = {
+  encode(
+    message: MsgAcceptPostOwnerTransferRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (!message.postId.isZero()) {
+      writer.uint32(16).uint64(message.postId);
+    }
+    if (message.receiver !== "") {
+      writer.uint32(26).string(message.receiver);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAcceptPostOwnerTransferRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAcceptPostOwnerTransferRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.postId = reader.uint64() as Long;
+          break;
+        case 3:
+          message.receiver = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgAcceptPostOwnerTransferRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+    };
+  },
+  toJSON(message: MsgAcceptPostOwnerTransferRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgAcceptPostOwnerTransferRequest>, I>,
+  >(object: I): MsgAcceptPostOwnerTransferRequest {
+    const message = createBaseMsgAcceptPostOwnerTransferRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    message.receiver = object.receiver ?? "";
+    return message;
+  },
+  fromAmino(
+    object: MsgAcceptPostOwnerTransferRequestAmino,
+  ): MsgAcceptPostOwnerTransferRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      receiver: object.receiver,
+    };
+  },
+  toAmino(
+    message: MsgAcceptPostOwnerTransferRequest,
+  ): MsgAcceptPostOwnerTransferRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.receiver = message.receiver;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgAcceptPostOwnerTransferRequestAminoMsg,
+  ): MsgAcceptPostOwnerTransferRequest {
+    return MsgAcceptPostOwnerTransferRequest.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgAcceptPostOwnerTransferRequest,
+  ): MsgAcceptPostOwnerTransferRequestAminoMsg {
+    return {
+      type: "desmos/MsgAcceptPostOwnerTransfer",
+      value: MsgAcceptPostOwnerTransferRequest.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgAcceptPostOwnerTransferRequestProtoMsg,
+  ): MsgAcceptPostOwnerTransferRequest {
+    return MsgAcceptPostOwnerTransferRequest.decode(message.value);
+  },
+  toProto(message: MsgAcceptPostOwnerTransferRequest): Uint8Array {
+    return MsgAcceptPostOwnerTransferRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgAcceptPostOwnerTransferRequest,
+  ): MsgAcceptPostOwnerTransferRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgAcceptPostOwnerTransferRequest",
+      value: MsgAcceptPostOwnerTransferRequest.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgAcceptPostOwnerTransferRequestResponse(): MsgAcceptPostOwnerTransferRequestResponse {
+  return {};
+}
+export const MsgAcceptPostOwnerTransferRequestResponse = {
+  encode(
+    _: MsgAcceptPostOwnerTransferRequestResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAcceptPostOwnerTransferRequestResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAcceptPostOwnerTransferRequestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgAcceptPostOwnerTransferRequestResponse {
+    return {};
+  },
+  toJSON(_: MsgAcceptPostOwnerTransferRequestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgAcceptPostOwnerTransferRequestResponse>, I>,
+  >(_: I): MsgAcceptPostOwnerTransferRequestResponse {
+    const message = createBaseMsgAcceptPostOwnerTransferRequestResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgAcceptPostOwnerTransferRequestResponseAmino,
+  ): MsgAcceptPostOwnerTransferRequestResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgAcceptPostOwnerTransferRequestResponse,
+  ): MsgAcceptPostOwnerTransferRequestResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgAcceptPostOwnerTransferRequestResponseAminoMsg,
+  ): MsgAcceptPostOwnerTransferRequestResponse {
+    return MsgAcceptPostOwnerTransferRequestResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgAcceptPostOwnerTransferRequestResponseProtoMsg,
+  ): MsgAcceptPostOwnerTransferRequestResponse {
+    return MsgAcceptPostOwnerTransferRequestResponse.decode(message.value);
+  },
+  toProto(message: MsgAcceptPostOwnerTransferRequestResponse): Uint8Array {
+    return MsgAcceptPostOwnerTransferRequestResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgAcceptPostOwnerTransferRequestResponse,
+  ): MsgAcceptPostOwnerTransferRequestResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgAcceptPostOwnerTransferRequestResponse",
+      value: MsgAcceptPostOwnerTransferRequestResponse.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRefusePostOwnerTransferRequest(): MsgRefusePostOwnerTransferRequest {
+  return {
+    subspaceId: Long.UZERO,
+    postId: Long.UZERO,
+    receiver: "",
+  };
+}
+export const MsgRefusePostOwnerTransferRequest = {
+  encode(
+    message: MsgRefusePostOwnerTransferRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (!message.postId.isZero()) {
+      writer.uint32(16).uint64(message.postId);
+    }
+    if (message.receiver !== "") {
+      writer.uint32(26).string(message.receiver);
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRefusePostOwnerTransferRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRefusePostOwnerTransferRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.postId = reader.uint64() as Long;
+          break;
+        case 3:
+          message.receiver = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): MsgRefusePostOwnerTransferRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      postId: isSet(object.postId) ? Long.fromValue(object.postId) : Long.UZERO,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+    };
+  },
+  toJSON(message: MsgRefusePostOwnerTransferRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.postId !== undefined &&
+      (obj.postId = (message.postId || Long.UZERO).toString());
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgRefusePostOwnerTransferRequest>, I>,
+  >(object: I): MsgRefusePostOwnerTransferRequest {
+    const message = createBaseMsgRefusePostOwnerTransferRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.postId =
+      object.postId !== undefined && object.postId !== null
+        ? Long.fromValue(object.postId)
+        : Long.UZERO;
+    message.receiver = object.receiver ?? "";
+    return message;
+  },
+  fromAmino(
+    object: MsgRefusePostOwnerTransferRequestAmino,
+  ): MsgRefusePostOwnerTransferRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      postId: Long.fromString(object.post_id),
+      receiver: object.receiver,
+    };
+  },
+  toAmino(
+    message: MsgRefusePostOwnerTransferRequest,
+  ): MsgRefusePostOwnerTransferRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.receiver = message.receiver;
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRefusePostOwnerTransferRequestAminoMsg,
+  ): MsgRefusePostOwnerTransferRequest {
+    return MsgRefusePostOwnerTransferRequest.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgRefusePostOwnerTransferRequest,
+  ): MsgRefusePostOwnerTransferRequestAminoMsg {
+    return {
+      type: "desmos/MsgRefusePostOwnerTransfer",
+      value: MsgRefusePostOwnerTransferRequest.toAmino(message),
+    };
+  },
+  fromProtoMsg(
+    message: MsgRefusePostOwnerTransferRequestProtoMsg,
+  ): MsgRefusePostOwnerTransferRequest {
+    return MsgRefusePostOwnerTransferRequest.decode(message.value);
+  },
+  toProto(message: MsgRefusePostOwnerTransferRequest): Uint8Array {
+    return MsgRefusePostOwnerTransferRequest.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRefusePostOwnerTransferRequest,
+  ): MsgRefusePostOwnerTransferRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgRefusePostOwnerTransferRequest",
+      value: MsgRefusePostOwnerTransferRequest.encode(message).finish(),
+    };
+  },
+};
+function createBaseMsgRefusePostOwnerTransferRequestResponse(): MsgRefusePostOwnerTransferRequestResponse {
+  return {};
+}
+export const MsgRefusePostOwnerTransferRequestResponse = {
+  encode(
+    _: MsgRefusePostOwnerTransferRequestResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRefusePostOwnerTransferRequestResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRefusePostOwnerTransferRequestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(_: any): MsgRefusePostOwnerTransferRequestResponse {
+    return {};
+  },
+  toJSON(_: MsgRefusePostOwnerTransferRequestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<MsgRefusePostOwnerTransferRequestResponse>, I>,
+  >(_: I): MsgRefusePostOwnerTransferRequestResponse {
+    const message = createBaseMsgRefusePostOwnerTransferRequestResponse();
+    return message;
+  },
+  fromAmino(
+    _: MsgRefusePostOwnerTransferRequestResponseAmino,
+  ): MsgRefusePostOwnerTransferRequestResponse {
+    return {};
+  },
+  toAmino(
+    _: MsgRefusePostOwnerTransferRequestResponse,
+  ): MsgRefusePostOwnerTransferRequestResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(
+    object: MsgRefusePostOwnerTransferRequestResponseAminoMsg,
+  ): MsgRefusePostOwnerTransferRequestResponse {
+    return MsgRefusePostOwnerTransferRequestResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(
+    message: MsgRefusePostOwnerTransferRequestResponseProtoMsg,
+  ): MsgRefusePostOwnerTransferRequestResponse {
+    return MsgRefusePostOwnerTransferRequestResponse.decode(message.value);
+  },
+  toProto(message: MsgRefusePostOwnerTransferRequestResponse): Uint8Array {
+    return MsgRefusePostOwnerTransferRequestResponse.encode(message).finish();
+  },
+  toProtoMsg(
+    message: MsgRefusePostOwnerTransferRequestResponse,
+  ): MsgRefusePostOwnerTransferRequestResponseProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.MsgRefusePostOwnerTransferRequestResponse",
+      value: MsgRefusePostOwnerTransferRequestResponse.encode(message).finish(),
+    };
+  },
+};
 /** Msg defines the posts Msg service. */
 export interface Msg {
   /** CreatePost allows to create a new post */
@@ -2133,6 +3552,48 @@ export interface Msg {
    * Since: Desmos 5.0.0
    */
   UpdateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse>;
+  /**
+   * MovePost allows users to move their own posts to another subspace
+   *
+   * Since: Desmos 6.0.0
+   */
+  MovePost(request: MsgMovePost): Promise<MsgMovePostResponse>;
+  /**
+   * RequestPostOwnerTransfer allows sender to send a request to transfer a post
+   * ownership to receiver
+   *
+   * Since: Desmos 6.0.0
+   */
+  RequestPostOwnerTransfer(
+    request: MsgRequestPostOwnerTransfer,
+  ): Promise<MsgRequestPostOwnerTransferResponse>;
+  /**
+   * CancelPostOwnerTransferRequest allows sender to cancel an outgoing post
+   * owner transfer request
+   *
+   * Since: Desmos 6.0.0
+   */
+  CancelPostOwnerTransferRequest(
+    request: MsgCancelPostOwnerTransferRequest,
+  ): Promise<MsgCancelPostOwnerTransferRequestResponse>;
+  /**
+   * AcceptPostOwnerTransferRequest allows receiver to accept an incoming post
+   * transfer request
+   *
+   * Since: Desmos 6.0.0
+   */
+  AcceptPostOwnerTransferRequest(
+    request: MsgAcceptPostOwnerTransferRequest,
+  ): Promise<MsgAcceptPostOwnerTransferRequestResponse>;
+  /**
+   * RefusePostOwnerTransferRequest allows receiver to refuse an incoming post
+   * transfer request
+   *
+   * Since: Desmos 6.0.0
+   */
+  RefusePostOwnerTransferRequest(
+    request: MsgRefusePostOwnerTransferRequest,
+  ): Promise<MsgRefusePostOwnerTransferRequestResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -2145,6 +3606,14 @@ export class MsgClientImpl implements Msg {
     this.RemovePostAttachment = this.RemovePostAttachment.bind(this);
     this.AnswerPoll = this.AnswerPoll.bind(this);
     this.UpdateParams = this.UpdateParams.bind(this);
+    this.MovePost = this.MovePost.bind(this);
+    this.RequestPostOwnerTransfer = this.RequestPostOwnerTransfer.bind(this);
+    this.CancelPostOwnerTransferRequest =
+      this.CancelPostOwnerTransferRequest.bind(this);
+    this.AcceptPostOwnerTransferRequest =
+      this.AcceptPostOwnerTransferRequest.bind(this);
+    this.RefusePostOwnerTransferRequest =
+      this.RefusePostOwnerTransferRequest.bind(this);
   }
   CreatePost(request: MsgCreatePost): Promise<MsgCreatePostResponse> {
     const data = MsgCreatePost.encode(request).finish();
@@ -2209,6 +3678,65 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgUpdateParamsResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  MovePost(request: MsgMovePost): Promise<MsgMovePostResponse> {
+    const data = MsgMovePost.encode(request).finish();
+    const promise = this.rpc.request("desmos.posts.v3.Msg", "MovePost", data);
+    return promise.then((data) =>
+      MsgMovePostResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  RequestPostOwnerTransfer(
+    request: MsgRequestPostOwnerTransfer,
+  ): Promise<MsgRequestPostOwnerTransferResponse> {
+    const data = MsgRequestPostOwnerTransfer.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "RequestPostOwnerTransfer",
+      data,
+    );
+    return promise.then((data) =>
+      MsgRequestPostOwnerTransferResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  CancelPostOwnerTransferRequest(
+    request: MsgCancelPostOwnerTransferRequest,
+  ): Promise<MsgCancelPostOwnerTransferRequestResponse> {
+    const data = MsgCancelPostOwnerTransferRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "CancelPostOwnerTransferRequest",
+      data,
+    );
+    return promise.then((data) =>
+      MsgCancelPostOwnerTransferRequestResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  AcceptPostOwnerTransferRequest(
+    request: MsgAcceptPostOwnerTransferRequest,
+  ): Promise<MsgAcceptPostOwnerTransferRequestResponse> {
+    const data = MsgAcceptPostOwnerTransferRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "AcceptPostOwnerTransferRequest",
+      data,
+    );
+    return promise.then((data) =>
+      MsgAcceptPostOwnerTransferRequestResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  RefusePostOwnerTransferRequest(
+    request: MsgRefusePostOwnerTransferRequest,
+  ): Promise<MsgRefusePostOwnerTransferRequestResponse> {
+    const data = MsgRefusePostOwnerTransferRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Msg",
+      "RefusePostOwnerTransferRequest",
+      data,
+    );
+    return promise.then((data) =>
+      MsgRefusePostOwnerTransferRequestResponse.decode(new _m0.Reader(data)),
     );
   }
 }

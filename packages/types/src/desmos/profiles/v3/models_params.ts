@@ -32,7 +32,7 @@ export interface ParamsAmino {
   app_links?: AppLinksParamsAmino;
 }
 export interface ParamsAminoMsg {
-  type: "/desmos.profiles.v3.Params";
+  type: "desmos/x/profiles/Params";
   value: ParamsAmino;
 }
 /** NicknameParams defines the parameters related to the profiles nicknames */
@@ -340,6 +340,12 @@ export const Params = {
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "desmos/x/profiles/Params",
+      value: Params.toAmino(message),
+    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

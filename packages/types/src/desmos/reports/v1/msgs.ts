@@ -44,7 +44,7 @@ export interface MsgCreateReportAmino {
   target?: AnyAmino;
 }
 export interface MsgCreateReportAminoMsg {
-  type: "/desmos.reports.v1.MsgCreateReport";
+  type: "desmos/MsgCreateReport";
   value: MsgCreateReportAmino;
 }
 /** MsgCreateReportResponse represents the Msg/CreateReport response type */
@@ -92,7 +92,7 @@ export interface MsgDeleteReportAmino {
   signer: string;
 }
 export interface MsgDeleteReportAminoMsg {
-  type: "/desmos.reports.v1.MsgDeleteReport";
+  type: "desmos/MsgDeleteReport";
   value: MsgDeleteReportAmino;
 }
 /** MsgDeleteReportResponse represents the Msg/DeleteReport response type */
@@ -136,7 +136,7 @@ export interface MsgSupportStandardReasonAmino {
   signer: string;
 }
 export interface MsgSupportStandardReasonAminoMsg {
-  type: "/desmos.reports.v1.MsgSupportStandardReason";
+  type: "desmos/MsgSupportStandardReason";
   value: MsgSupportStandardReasonAmino;
 }
 /**
@@ -196,7 +196,7 @@ export interface MsgAddReasonAmino {
   signer: string;
 }
 export interface MsgAddReasonAminoMsg {
-  type: "/desmos.reports.v1.MsgAddReason";
+  type: "desmos/MsgAddReason";
   value: MsgAddReasonAmino;
 }
 /** MsgAddReasonResponse represents the Msg/AddReason response type */
@@ -246,7 +246,7 @@ export interface MsgRemoveReasonAmino {
   signer: string;
 }
 export interface MsgRemoveReasonAminoMsg {
-  type: "/desmos.reports.v1.MsgRemoveReason";
+  type: "desmos/MsgRemoveReason";
   value: MsgRemoveReasonAmino;
 }
 /** MsgRemoveReasonResponse represents the Msg/RemoveReason response type */
@@ -302,7 +302,7 @@ export interface MsgUpdateParamsAmino {
   params?: ParamsAmino;
 }
 export interface MsgUpdateParamsAminoMsg {
-  type: "/desmos.reports.v1.MsgUpdateParams";
+  type: "desmos/x/reports/MsgUpdateParams";
   value: MsgUpdateParamsAmino;
 }
 /**
@@ -469,6 +469,12 @@ export const MsgCreateReport = {
   },
   fromAminoMsg(object: MsgCreateReportAminoMsg): MsgCreateReport {
     return MsgCreateReport.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateReport): MsgCreateReportAminoMsg {
+    return {
+      type: "desmos/MsgCreateReport",
+      value: MsgCreateReport.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgCreateReportProtoMsg): MsgCreateReport {
     return MsgCreateReport.decode(message.value);
@@ -695,6 +701,12 @@ export const MsgDeleteReport = {
   fromAminoMsg(object: MsgDeleteReportAminoMsg): MsgDeleteReport {
     return MsgDeleteReport.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgDeleteReport): MsgDeleteReportAminoMsg {
+    return {
+      type: "desmos/MsgDeleteReport",
+      value: MsgDeleteReport.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgDeleteReportProtoMsg): MsgDeleteReport {
     return MsgDeleteReport.decode(message.value);
   },
@@ -878,6 +890,14 @@ export const MsgSupportStandardReason = {
     object: MsgSupportStandardReasonAminoMsg,
   ): MsgSupportStandardReason {
     return MsgSupportStandardReason.fromAmino(object.value);
+  },
+  toAminoMsg(
+    message: MsgSupportStandardReason,
+  ): MsgSupportStandardReasonAminoMsg {
+    return {
+      type: "desmos/MsgSupportStandardReason",
+      value: MsgSupportStandardReason.toAmino(message),
+    };
   },
   fromProtoMsg(
     message: MsgSupportStandardReasonProtoMsg,
@@ -1092,6 +1112,12 @@ export const MsgAddReason = {
   fromAminoMsg(object: MsgAddReasonAminoMsg): MsgAddReason {
     return MsgAddReason.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgAddReason): MsgAddReasonAminoMsg {
+    return {
+      type: "desmos/MsgAddReason",
+      value: MsgAddReason.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgAddReasonProtoMsg): MsgAddReason {
     return MsgAddReason.decode(message.value);
   },
@@ -1279,6 +1305,12 @@ export const MsgRemoveReason = {
   fromAminoMsg(object: MsgRemoveReasonAminoMsg): MsgRemoveReason {
     return MsgRemoveReason.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgRemoveReason): MsgRemoveReasonAminoMsg {
+    return {
+      type: "desmos/MsgRemoveReason",
+      value: MsgRemoveReason.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgRemoveReasonProtoMsg): MsgRemoveReason {
     return MsgRemoveReason.decode(message.value);
   },
@@ -1438,6 +1470,12 @@ export const MsgUpdateParams = {
   },
   fromAminoMsg(object: MsgUpdateParamsAminoMsg): MsgUpdateParams {
     return MsgUpdateParams.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateParams): MsgUpdateParamsAminoMsg {
+    return {
+      type: "desmos/x/reports/MsgUpdateParams",
+      value: MsgUpdateParams.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgUpdateParamsProtoMsg): MsgUpdateParams {
     return MsgUpdateParams.decode(message.value);
