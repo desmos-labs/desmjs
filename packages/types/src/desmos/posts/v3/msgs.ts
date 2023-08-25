@@ -472,14 +472,10 @@ export interface MsgMovePostProtoMsg {
  * Since: Desmos 6.0.0
  */
 export interface MsgMovePostAmino {
-  /** Id of the subspace where the post is currently located */
-  subspace_id: string;
-  /** Id of the post to be moved */
-  post_id: string;
-  /** Id of the target subspace to which the post will be moved */
-  target_subspace_id: string;
-  /** Id of the target section to which the post will be moved */
-  target_section_id: number;
+  subspace_id?: string;
+  post_id?: string;
+  target_subspace_id?: string;
+  target_section_id?: number;
   /** Address of the post owner */
   owner: string;
 }
@@ -540,10 +536,8 @@ export interface MsgRequestPostOwnerTransferProtoMsg {
  * Since: Desmos 6.0.0
  */
 export interface MsgRequestPostOwnerTransferAmino {
-  /** Id of the subspace that holds the post which ownership should be transfered */
-  subspace_id: string;
-  /** Id of the post which will be transferred */
-  post_id: string;
+  subspace_id?: string;
+  post_id?: string;
   /** Address of the post ownership receiver */
   receiver: string;
   /** Address of the sender who is creating a transfer request */
@@ -603,13 +597,8 @@ export interface MsgCancelPostOwnerTransferRequestProtoMsg {
  * Since: Desmos 6.0.0
  */
 export interface MsgCancelPostOwnerTransferRequestAmino {
-  /**
-   * Id of the subspace that holds the post for which the request should be
-   * canceled
-   */
-  subspace_id: string;
-  /** Id of the post for which the request will be cancelled */
-  post_id: string;
+  subspace_id?: string;
+  post_id?: string;
   /** Address of the transfer request sender */
   sender: string;
 }
@@ -664,10 +653,8 @@ export interface MsgAcceptPostOwnerTransferRequestProtoMsg {
  * Since: Desmos 6.0.0
  */
 export interface MsgAcceptPostOwnerTransferRequestAmino {
-  /** Id of the subspace holding the post for which the request will be accepted */
-  subspace_id: string;
-  /** Id of the post for which the request will be accepted */
-  post_id: string;
+  subspace_id?: string;
+  post_id?: string;
   /** Address of the request receiver */
   receiver: string;
 }
@@ -722,10 +709,8 @@ export interface MsgRefusePostOwnerTransferRequestProtoMsg {
  * Since: Desmos 6.0.0
  */
 export interface MsgRefusePostOwnerTransferRequestAmino {
-  /** Id of the subspace holding the post for which the request will be refused */
-  subspace_id: string;
-  /** Id of the post for which the request will be refused */
-  post_id: string;
+  subspace_id?: string;
+  post_id?: string;
   /** Address of the request receiver */
   receiver: string;
 }
@@ -2573,23 +2558,24 @@ export const MsgMovePost = {
   },
   fromAmino(object: MsgMovePostAmino): MsgMovePost {
     return {
-      subspaceId: Long.fromString(object.subspace_id),
-      postId: Long.fromString(object.post_id),
-      targetSubspaceId: Long.fromString(object.target_subspace_id),
-      targetSectionId: object.target_section_id,
+      subspaceId: Long.fromString(object.subspace_id ?? "0"),
+      postId: Long.fromString(object.post_id ?? "0"),
+      targetSubspaceId: Long.fromString(object.target_subspace_id ?? "0"),
+      targetSectionId: object.target_section_id ?? 0,
       owner: object.owner,
     };
   },
   toAmino(message: MsgMovePost): MsgMovePostAmino {
     const obj: any = {};
-    obj.subspace_id = message.subspaceId
+    obj.subspace_id = message.subspaceId.gt(0)
       ? message.subspaceId.toString()
       : undefined;
-    obj.post_id = message.postId ? message.postId.toString() : undefined;
-    obj.target_subspace_id = message.targetSubspaceId
+    obj.post_id = message.postId.gt(0) ? message.postId.toString() : undefined;
+    obj.target_subspace_id = message.targetSubspaceId.gt(0)
       ? message.targetSubspaceId.toString()
       : undefined;
-    obj.target_section_id = message.targetSectionId;
+    obj.target_section_id =
+      message.targetSectionId > 0 ? message.targetSectionId : undefined;
     obj.owner = message.owner;
     return obj;
   },
@@ -2790,8 +2776,8 @@ export const MsgRequestPostOwnerTransfer = {
     object: MsgRequestPostOwnerTransferAmino,
   ): MsgRequestPostOwnerTransfer {
     return {
-      subspaceId: Long.fromString(object.subspace_id),
-      postId: Long.fromString(object.post_id),
+      subspaceId: Long.fromString(object.subspace_id ?? "0"),
+      postId: Long.fromString(object.post_id ?? "0"),
       receiver: object.receiver,
       sender: object.sender,
     };
@@ -2800,10 +2786,10 @@ export const MsgRequestPostOwnerTransfer = {
     message: MsgRequestPostOwnerTransfer,
   ): MsgRequestPostOwnerTransferAmino {
     const obj: any = {};
-    obj.subspace_id = message.subspaceId
+    obj.subspace_id = message.subspaceId.gt(0)
       ? message.subspaceId.toString()
       : undefined;
-    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.post_id = message.postId.gt(0) ? message.postId.toString() : undefined;
     obj.receiver = message.receiver;
     obj.sender = message.sender;
     return obj;
@@ -2997,8 +2983,8 @@ export const MsgCancelPostOwnerTransferRequest = {
     object: MsgCancelPostOwnerTransferRequestAmino,
   ): MsgCancelPostOwnerTransferRequest {
     return {
-      subspaceId: Long.fromString(object.subspace_id),
-      postId: Long.fromString(object.post_id),
+      subspaceId: Long.fromString(object.subspace_id ?? "0"),
+      postId: Long.fromString(object.post_id ?? "0"),
       sender: object.sender,
     };
   },
@@ -3006,10 +2992,10 @@ export const MsgCancelPostOwnerTransferRequest = {
     message: MsgCancelPostOwnerTransferRequest,
   ): MsgCancelPostOwnerTransferRequestAmino {
     const obj: any = {};
-    obj.subspace_id = message.subspaceId
+    obj.subspace_id = message.subspaceId.gt(0)
       ? message.subspaceId.toString()
       : undefined;
-    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.post_id = message.postId.gt(0) ? message.postId.toString() : undefined;
     obj.sender = message.sender;
     return obj;
   },
@@ -3202,8 +3188,8 @@ export const MsgAcceptPostOwnerTransferRequest = {
     object: MsgAcceptPostOwnerTransferRequestAmino,
   ): MsgAcceptPostOwnerTransferRequest {
     return {
-      subspaceId: Long.fromString(object.subspace_id),
-      postId: Long.fromString(object.post_id),
+      subspaceId: Long.fromString(object.subspace_id ?? "0"),
+      postId: Long.fromString(object.post_id ?? "0"),
       receiver: object.receiver,
     };
   },
@@ -3211,10 +3197,10 @@ export const MsgAcceptPostOwnerTransferRequest = {
     message: MsgAcceptPostOwnerTransferRequest,
   ): MsgAcceptPostOwnerTransferRequestAmino {
     const obj: any = {};
-    obj.subspace_id = message.subspaceId
+    obj.subspace_id = message.subspaceId.gt(0)
       ? message.subspaceId.toString()
       : undefined;
-    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.post_id = message.postId.gt(0) ? message.postId.toString() : undefined;
     obj.receiver = message.receiver;
     return obj;
   },
@@ -3407,8 +3393,8 @@ export const MsgRefusePostOwnerTransferRequest = {
     object: MsgRefusePostOwnerTransferRequestAmino,
   ): MsgRefusePostOwnerTransferRequest {
     return {
-      subspaceId: Long.fromString(object.subspace_id),
-      postId: Long.fromString(object.post_id),
+      subspaceId: Long.fromString(object.subspace_id ?? "0"),
+      postId: Long.fromString(object.post_id ?? "0"),
       receiver: object.receiver,
     };
   },
@@ -3416,10 +3402,10 @@ export const MsgRefusePostOwnerTransferRequest = {
     message: MsgRefusePostOwnerTransferRequest,
   ): MsgRefusePostOwnerTransferRequestAmino {
     const obj: any = {};
-    obj.subspace_id = message.subspaceId
+    obj.subspace_id = message.subspaceId.gt(0)
       ? message.subspaceId.toString()
       : undefined;
-    obj.post_id = message.postId ? message.postId.toString() : undefined;
+    obj.post_id = message.postId.gt(0) ? message.postId.toString() : undefined;
     obj.receiver = message.receiver;
     return obj;
   },
