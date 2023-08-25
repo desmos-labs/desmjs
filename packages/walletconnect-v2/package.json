@@ -31,7 +31,7 @@
     "@cosmjs/amino": "^0.31.0",
     "@cosmjs/encoding": "^0.31.1",
     "@cosmjs/proto-signing": "^0.31.0",
-    "@cosmjs/stargate": "^0.31.0",
+    "@cosmjs/stargate": "^0.31.1",
     "@cosmjs/utils": "^0.31.0",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
