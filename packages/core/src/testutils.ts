@@ -2,9 +2,29 @@ import { calculateFee, GasPrice } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet, OfflineSigner } from "@cosmjs/proto-signing";
 import { stringToPath } from "@cosmjs/crypto";
 import { OfflineAminoSigner, Secp256k1HdWallet } from "@cosmjs/amino";
+import Long from "long";
+import { MsgCreateSubspaceResponse } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
+import { MsgSaveProfile } from "@desmoslabs/desmjs-types/desmos/profiles/v3/msgs_profile";
+import {
+  MsgCreatePost,
+  MsgCreatePostResponse,
+} from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
+import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
 import { DesmosClient } from "./desmosclient";
 import { BlockBroadcastResponse } from "./types/responses";
+import {
+  MsgCreateSubspaceEncodeObject,
+  MsgCreateSubspaceTypeUrl,
+} from "./modules/subspaces/v3";
+import {
+  MsgSaveProfileEncodeObject,
+  MsgSaveProfileTypeUrl,
+} from "./modules/profiles/v3";
+import {
+  MsgCreatePostEncodeObject,
+  MsgCreatePostTypeUrl,
+} from "./modules/posts/v3";
 
 export type HdPath = {
   coinType: number;
@@ -120,10 +140,16 @@ export async function getAminoSignerAndClient(): Promise<
   const signer = await OfflineSignerAdapter.fromMnemonic(
     SigningMode.AMINO,
     testUser1.mnemonic,
+    {
+      hdPath: [
+        stringToPath("m/44'/852'/0'/0/0"),
+        stringToPath("m/44'/852'/1'/0/0"),
+      ],
+    },
   );
   const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
     gasPrice: defaultGasPrice,
-    gasAdjustment: 1.5,
+    gasAdjustment: 1.8,
   });
   return [signer, client];
 }
@@ -138,6 +164,12 @@ export async function getDirectSignerAndClient(): Promise<
   const signer = await OfflineSignerAdapter.fromMnemonic(
     SigningMode.DIRECT,
     testUser1.mnemonic,
+    {
+      hdPath: [
+        stringToPath("m/44'/852'/0'/0/0"),
+        stringToPath("m/44'/852'/1'/0/0"),
+      ],
+    },
   );
   const client = await DesmosClient.connectWithSigner(TEST_CHAIN_URL, signer, {
     gasPrice: defaultGasPrice,
@@ -176,4 +208,102 @@ export async function pollTx(
 export function assertTxSuccess(response: BlockBroadcastResponse) {
   expect(response.checkTx.log).toBe("[]");
   expect(response.checkTx.code).toBe(0);
+}
+
+/**
+ * Function to perform a broadcast tx test case where is tested both the
+ * direct and amino encoding.
+ * @param name - Test name.
+ * @param testCase - Function that implements the test case.
+ */
+export function broadcastTest(
+  name: string,
+  testCase: (
+    signer: Signer,
+    client: DesmosClient,
+    address: string[],
+  ) => Promise<void>,
+) {
+  it(`${name} Direct`, async () => {
+    const [signer, client] = await getDirectSignerAndClient();
+    const addresses = (await signer.getAccounts()).map((a) => a.address);
+    await testCase(signer, client, addresses);
+  });
+
+  it(`${name} Amino`, async () => {
+    const [signer, client] = await getAminoSignerAndClient();
+    const addresses = (await signer.getAccounts()).map((a) => a.address);
+    await testCase(signer, client, addresses);
+  });
+}
+
+/**
+ * Function to create a profile for the provided address.
+ */
+export async function createTestProfile(client: DesmosClient, address: string) {
+  const msgCreateProfile: MsgSaveProfileEncodeObject = {
+    typeUrl: MsgSaveProfileTypeUrl,
+    value: MsgSaveProfile.fromPartial({
+      dtag: address.substring(0, 22),
+      creator: address,
+    }),
+  };
+  await client.signAndBroadcast(address, [msgCreateProfile], "auto");
+}
+
+/**
+ * Function to create a test subspace.
+ */
+export async function createTestSubspace(
+  client: DesmosClient,
+  creator: string,
+): Promise<Long> {
+  // Create a subspace
+  const msgCreateSubspace: MsgCreateSubspaceEncodeObject = {
+    typeUrl: MsgCreateSubspaceTypeUrl,
+    value: {
+      name: "Test Subspace",
+      description: "Test subspaces",
+      owner: creator,
+      creator,
+    },
+  };
+  const response = await client.signAndBroadcast(
+    creator,
+    [msgCreateSubspace],
+    "auto",
+  );
+  const { subspaceId } = MsgCreateSubspaceResponse.decode(
+    response.msgResponses[0].value,
+  );
+  return subspaceId;
+}
+
+/**
+ * Function to create a test post in a subspace.
+ */
+export async function createTestPost(
+  client: DesmosClient,
+  creator: string,
+  subspaceId: Long,
+): Promise<Long> {
+  const msgCreatePost: MsgCreatePostEncodeObject = {
+    typeUrl: MsgCreatePostTypeUrl,
+    value: MsgCreatePost.fromPartial({
+      subspaceId,
+      sectionId: 0,
+      text: "Test post",
+      author: creator,
+      replySettings: ReplySetting.REPLY_SETTING_EVERYONE,
+    }),
+  };
+  const createPostResponse = await client.signAndBroadcast(
+    creator,
+    [msgCreatePost],
+    "auto",
+  );
+  const { postId } = MsgCreatePostResponse.decode(
+    createPostResponse.msgResponses[0].value,
+  );
+  return postId;
 }
