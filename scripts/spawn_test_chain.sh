@@ -5,6 +5,7 @@ DESMOS_HOME="$SCRIPT_DIR/.desmos"
 KEYRING_PASS=pass1234
 # User 1 informations
 USER1=user1
+USER11=user11
 USER1_ADDRESS=desmos1nm6kh6jwqmsezwtnmgdd4w4tzyk9f8gvqu5en0
 USER1_MNEMONIC="hour harbor fame unaware bunker junk garment decrease federal vicious island smile warrior fame right suit portion skate analyst multiply magnet medal fresh sweet"
 # User 2 informations
@@ -47,8 +48,10 @@ mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 sed -i -e 's/timeout_commit = "5s"/timeout_commit = "500ms"/g' "$DESMOS_HOME/config/config.toml"
 
 (echo "$USER1_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER1" --recover --keyring-backend=test
+(echo "$USER1_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER11" --recover --keyring-backend=test --account 1
 (echo "$USER2_MNEMONIC"; echo $KEYRING_PASS; echo $KEYRING_PASS) | desmos keys add "$USER2" --recover --keyring-backend=test
 echo $KEYRING_PASS | desmos add-genesis-account $USER1 200000000000000stake --keyring-backend=test
+echo $KEYRING_PASS | desmos add-genesis-account $USER11 200000000000000stake --keyring-backend=test
 echo $KEYRING_PASS | desmos add-genesis-account $USER2 200000000000000stake --keyring-backend=test
 echo $KEYRING_PASS | desmos gentx $USER1 100000000000stake --amount 100000000000stake --chain-id=testchain --keyring-backend=test
 desmos collect-gentxs
