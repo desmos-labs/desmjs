@@ -52,7 +52,7 @@ jobs:
       - name: Run core integration tests 🧪
         if: env.GIT_DIFF
         run: |
-          scripts/get_desmos_bin.sh 5.0.0
+          scripts/get_desmos_bin.sh 6.0.0
           scripts/spawn_test_chain.sh -b
           sleep 10
           scripts/setup_chain.sh

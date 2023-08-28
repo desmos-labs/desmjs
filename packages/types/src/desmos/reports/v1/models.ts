@@ -140,7 +140,7 @@ export interface ParamsAmino {
   standard_reasons: StandardReasonAmino[];
 }
 export interface ParamsAminoMsg {
-  type: "/desmos.reports.v1.Params";
+  type: "desmos/x/reports/Params";
   value: ParamsAmino;
 }
 /**
@@ -717,6 +717,12 @@ export const Params = {
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "desmos/x/reports/Params",
+      value: Params.toAmino(message),
+    };
   },
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);

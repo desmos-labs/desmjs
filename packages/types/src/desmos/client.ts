@@ -8,12 +8,14 @@ import * as desmosReactionsV1MsgsRegistry from "./reactions/v1/msgs.registry";
 import * as desmosRelationshipsV1MsgsRegistry from "./relationships/v1/msgs.registry";
 import * as desmosReportsV1MsgsRegistry from "./reports/v1/msgs.registry";
 import * as desmosSubspacesV3MsgsRegistry from "./subspaces/v3/msgs.registry";
+import * as desmosTokenfactoryV1MsgsRegistry from "./tokenfactory/v1/msgs.registry";
 import * as desmosPostsV3MsgsAmino from "./posts/v3/msgs.amino";
 import * as desmosProfilesV3MsgServerAmino from "./profiles/v3/msg_server.amino";
 import * as desmosReactionsV1MsgsAmino from "./reactions/v1/msgs.amino";
 import * as desmosRelationshipsV1MsgsAmino from "./relationships/v1/msgs.amino";
 import * as desmosReportsV1MsgsAmino from "./reports/v1/msgs.amino";
 import * as desmosSubspacesV3MsgsAmino from "./subspaces/v3/msgs.amino";
+import * as desmosTokenfactoryV1MsgsAmino from "./tokenfactory/v1/msgs.amino";
 export const desmosAminoConverters = {
   ...desmosPostsV3MsgsAmino.AminoConverter,
   ...desmosProfilesV3MsgServerAmino.AminoConverter,
@@ -21,6 +23,7 @@ export const desmosAminoConverters = {
   ...desmosRelationshipsV1MsgsAmino.AminoConverter,
   ...desmosReportsV1MsgsAmino.AminoConverter,
   ...desmosSubspacesV3MsgsAmino.AminoConverter,
+  ...desmosTokenfactoryV1MsgsAmino.AminoConverter,
 };
 export const desmosProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [
   ...desmosPostsV3MsgsRegistry.registry,
@@ -29,6 +32,7 @@ export const desmosProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [
   ...desmosRelationshipsV1MsgsRegistry.registry,
   ...desmosReportsV1MsgsRegistry.registry,
   ...desmosSubspacesV3MsgsRegistry.registry,
+  ...desmosTokenfactoryV1MsgsRegistry.registry,
 ];
 export const getSigningDesmosClientOptions = (): {
   registry: Registry;

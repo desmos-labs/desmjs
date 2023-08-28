@@ -11,7 +11,7 @@ TMP_DIR="$SCRIPT_DIR/../tmp"
 PROTO_DIR="$SCRIPT_DIR/../proto-files"
 
 # Desmos config
-DESMOS_VERSION="5.2.0"
+DESMOS_VERSION="6.0.0"
 DESMOS_SRC_URL="https://github.com/desmos-labs/desmos/archive/refs/tags/v$DESMOS_VERSION.zip"
 DESMOS_ZIP_FILE="$SCRIPT_DIR/../desmos-source.zip"
 

@@ -2,6 +2,7 @@ import { PageRequest } from "cosmjs-types/cosmos/base/query/v1beta1/pagination";
 import { Long } from "long";
 import {
   QueryClientImpl,
+  QueryIncomingPostOwnerTransferRequestsResponse,
   QueryPollAnswersResponse,
   QueryPostAttachmentsResponse,
   QuerySectionPostsResponse,
@@ -60,6 +61,15 @@ export interface PostsExtension {
      * Queries the module params.
      */
     readonly params: () => Promise<Params>;
+
+    /**
+     * Queries incoming post owner transfer requests.
+     */
+    readonly incomingPostOwnerTransfer: (
+      subspaceId: Long,
+      receiver: string,
+      pagination?: PageRequest,
+    ) => Promise<QueryIncomingPostOwnerTransferRequestsResponse>;
   };
 }
 
@@ -126,6 +136,17 @@ export function setupPostsExtension(base: QueryClient): PostsExtension {
         assertDefinedAndNotNull(res.params);
         return res.params;
       },
+
+      incomingPostOwnerTransfer: async (
+        subspaceId: Long,
+        receiver: string,
+        pagination?: PageRequest,
+      ) =>
+        queryService.IncomingPostOwnerTransferRequests({
+          subspaceId,
+          receiver,
+          pagination,
+        }),
     },
   };
 }

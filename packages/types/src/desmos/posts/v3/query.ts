@@ -14,6 +14,8 @@ import {
   UserAnswerAmino,
   Params,
   ParamsAmino,
+  PostOwnerTransferRequest,
+  PostOwnerTransferRequestAmino,
 } from "./models";
 import { Long, isSet, DeepPartial, Exact, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
@@ -150,7 +152,6 @@ export interface QueryPostRequestAminoMsg {
 }
 /** QueryPostResponse is the response type for the Query/Post RPC method */
 export interface QueryPostResponse {
-  /** QueryPostResponse is the response type for the Query/Post RPC method */
   post?: Post;
 }
 export interface QueryPostResponseProtoMsg {
@@ -159,7 +160,6 @@ export interface QueryPostResponseProtoMsg {
 }
 /** QueryPostResponse is the response type for the Query/Post RPC method */
 export interface QueryPostResponseAmino {
-  /** QueryPostResponse is the response type for the Query/Post RPC method */
   post?: PostAmino;
 }
 export interface QueryPostResponseAminoMsg {
@@ -313,6 +313,78 @@ export interface QueryParamsResponseAmino {
 export interface QueryParamsResponseAminoMsg {
   type: "/desmos.posts.v3.QueryParamsResponse";
   value: QueryParamsResponseAmino;
+}
+/**
+ * QueryIncomingPostOwnerTransferRequestsRequest is the request type for the
+ * Query/IncomingPostOwnerTransferRequests RPC endpoint
+ */
+export interface QueryIncomingPostOwnerTransferRequestsRequest {
+  /** Id of the subspace where the requests are stored */
+  subspaceId: Long;
+  /**
+   * (optional) Receiver represents the address of the user to which query the
+   * incoming requests for
+   */
+  receiver: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequest;
+}
+export interface QueryIncomingPostOwnerTransferRequestsRequestProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryIncomingPostOwnerTransferRequestsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryIncomingPostOwnerTransferRequestsRequest is the request type for the
+ * Query/IncomingPostOwnerTransferRequests RPC endpoint
+ */
+export interface QueryIncomingPostOwnerTransferRequestsRequestAmino {
+  /** Id of the subspace where the requests are stored */
+  subspace_id: string;
+  /**
+   * (optional) Receiver represents the address of the user to which query the
+   * incoming requests for
+   */
+  receiver: string;
+  /** Pagination defines an optional pagination for the request */
+  pagination?: PageRequestAmino;
+}
+export interface QueryIncomingPostOwnerTransferRequestsRequestAminoMsg {
+  type: "/desmos.posts.v3.QueryIncomingPostOwnerTransferRequestsRequest";
+  value: QueryIncomingPostOwnerTransferRequestsRequestAmino;
+}
+/**
+ * QueryIncomingPostOwnerTransferRequestsResponse is the response type for the
+ * Query/IncomingPostOwnerTransferRequests RPC method.
+ */
+export interface QueryIncomingPostOwnerTransferRequestsResponse {
+  /**
+   * Requests represent the list of all the post owner transfer requests made
+   * towards the receiver
+   */
+  requests: PostOwnerTransferRequest[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponse;
+}
+export interface QueryIncomingPostOwnerTransferRequestsResponseProtoMsg {
+  typeUrl: "/desmos.posts.v3.QueryIncomingPostOwnerTransferRequestsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryIncomingPostOwnerTransferRequestsResponse is the response type for the
+ * Query/IncomingPostOwnerTransferRequests RPC method.
+ */
+export interface QueryIncomingPostOwnerTransferRequestsResponseAmino {
+  /**
+   * Requests represent the list of all the post owner transfer requests made
+   * towards the receiver
+   */
+  requests: PostOwnerTransferRequestAmino[];
+  /** Pagination defines the pagination response */
+  pagination?: PageResponseAmino;
+}
+export interface QueryIncomingPostOwnerTransferRequestsResponseAminoMsg {
+  type: "/desmos.posts.v3.QueryIncomingPostOwnerTransferRequestsResponse";
+  value: QueryIncomingPostOwnerTransferRequestsResponseAmino;
 }
 function createBaseQuerySubspacePostsRequest(): QuerySubspacePostsRequest {
   return {
@@ -1678,6 +1750,290 @@ export const QueryParamsResponse = {
     };
   },
 };
+function createBaseQueryIncomingPostOwnerTransferRequestsRequest(): QueryIncomingPostOwnerTransferRequestsRequest {
+  return {
+    subspaceId: Long.UZERO,
+    receiver: "",
+    pagination: undefined,
+  };
+}
+export const QueryIncomingPostOwnerTransferRequestsRequest = {
+  encode(
+    message: QueryIncomingPostOwnerTransferRequestsRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.subspaceId.isZero()) {
+      writer.uint32(8).uint64(message.subspaceId);
+    }
+    if (message.receiver !== "") {
+      writer.uint32(18).string(message.receiver);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryIncomingPostOwnerTransferRequestsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryIncomingPostOwnerTransferRequestsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.subspaceId = reader.uint64() as Long;
+          break;
+        case 2:
+          message.receiver = reader.string();
+          break;
+        case 3:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): QueryIncomingPostOwnerTransferRequestsRequest {
+    return {
+      subspaceId: isSet(object.subspaceId)
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO,
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+  toJSON(message: QueryIncomingPostOwnerTransferRequestsRequest): unknown {
+    const obj: any = {};
+    message.subspaceId !== undefined &&
+      (obj.subspaceId = (message.subspaceId || Long.UZERO).toString());
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<
+      DeepPartial<QueryIncomingPostOwnerTransferRequestsRequest>,
+      I
+    >,
+  >(object: I): QueryIncomingPostOwnerTransferRequestsRequest {
+    const message = createBaseQueryIncomingPostOwnerTransferRequestsRequest();
+    message.subspaceId =
+      object.subspaceId !== undefined && object.subspaceId !== null
+        ? Long.fromValue(object.subspaceId)
+        : Long.UZERO;
+    message.receiver = object.receiver ?? "";
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+  fromAmino(
+    object: QueryIncomingPostOwnerTransferRequestsRequestAmino,
+  ): QueryIncomingPostOwnerTransferRequestsRequest {
+    return {
+      subspaceId: Long.fromString(object.subspace_id),
+      receiver: object.receiver,
+      pagination: object?.pagination
+        ? PageRequest.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryIncomingPostOwnerTransferRequestsRequest,
+  ): QueryIncomingPostOwnerTransferRequestsRequestAmino {
+    const obj: any = {};
+    obj.subspace_id = message.subspaceId
+      ? message.subspaceId.toString()
+      : undefined;
+    obj.receiver = message.receiver;
+    obj.pagination = message.pagination
+      ? PageRequest.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryIncomingPostOwnerTransferRequestsRequestAminoMsg,
+  ): QueryIncomingPostOwnerTransferRequestsRequest {
+    return QueryIncomingPostOwnerTransferRequestsRequest.fromAmino(
+      object.value,
+    );
+  },
+  fromProtoMsg(
+    message: QueryIncomingPostOwnerTransferRequestsRequestProtoMsg,
+  ): QueryIncomingPostOwnerTransferRequestsRequest {
+    return QueryIncomingPostOwnerTransferRequestsRequest.decode(message.value);
+  },
+  toProto(message: QueryIncomingPostOwnerTransferRequestsRequest): Uint8Array {
+    return QueryIncomingPostOwnerTransferRequestsRequest.encode(
+      message,
+    ).finish();
+  },
+  toProtoMsg(
+    message: QueryIncomingPostOwnerTransferRequestsRequest,
+  ): QueryIncomingPostOwnerTransferRequestsRequestProtoMsg {
+    return {
+      typeUrl: "/desmos.posts.v3.QueryIncomingPostOwnerTransferRequestsRequest",
+      value:
+        QueryIncomingPostOwnerTransferRequestsRequest.encode(message).finish(),
+    };
+  },
+};
+function createBaseQueryIncomingPostOwnerTransferRequestsResponse(): QueryIncomingPostOwnerTransferRequestsResponse {
+  return {
+    requests: [],
+    pagination: undefined,
+  };
+}
+export const QueryIncomingPostOwnerTransferRequestsResponse = {
+  encode(
+    message: QueryIncomingPostOwnerTransferRequestsResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.requests) {
+      PostOwnerTransferRequest.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryIncomingPostOwnerTransferRequestsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryIncomingPostOwnerTransferRequestsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.requests.push(
+            PostOwnerTransferRequest.decode(reader, reader.uint32()),
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): QueryIncomingPostOwnerTransferRequestsResponse {
+    return {
+      requests: Array.isArray(object?.requests)
+        ? object.requests.map((e: any) => PostOwnerTransferRequest.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+  toJSON(message: QueryIncomingPostOwnerTransferRequestsResponse): unknown {
+    const obj: any = {};
+    if (message.requests) {
+      obj.requests = message.requests.map((e) =>
+        e ? PostOwnerTransferRequest.toJSON(e) : undefined,
+      );
+    } else {
+      obj.requests = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+  fromPartial<
+    I extends Exact<
+      DeepPartial<QueryIncomingPostOwnerTransferRequestsResponse>,
+      I
+    >,
+  >(object: I): QueryIncomingPostOwnerTransferRequestsResponse {
+    const message = createBaseQueryIncomingPostOwnerTransferRequestsResponse();
+    message.requests =
+      object.requests?.map((e) => PostOwnerTransferRequest.fromPartial(e)) ||
+      [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+  fromAmino(
+    object: QueryIncomingPostOwnerTransferRequestsResponseAmino,
+  ): QueryIncomingPostOwnerTransferRequestsResponse {
+    return {
+      requests: Array.isArray(object?.requests)
+        ? object.requests.map((e: any) => PostOwnerTransferRequest.fromAmino(e))
+        : [],
+      pagination: object?.pagination
+        ? PageResponse.fromAmino(object.pagination)
+        : undefined,
+    };
+  },
+  toAmino(
+    message: QueryIncomingPostOwnerTransferRequestsResponse,
+  ): QueryIncomingPostOwnerTransferRequestsResponseAmino {
+    const obj: any = {};
+    if (message.requests) {
+      obj.requests = message.requests.map((e) =>
+        e ? PostOwnerTransferRequest.toAmino(e) : undefined,
+      );
+    } else {
+      obj.requests = [];
+    }
+    obj.pagination = message.pagination
+      ? PageResponse.toAmino(message.pagination)
+      : undefined;
+    return obj;
+  },
+  fromAminoMsg(
+    object: QueryIncomingPostOwnerTransferRequestsResponseAminoMsg,
+  ): QueryIncomingPostOwnerTransferRequestsResponse {
+    return QueryIncomingPostOwnerTransferRequestsResponse.fromAmino(
+      object.value,
+    );
+  },
+  fromProtoMsg(
+    message: QueryIncomingPostOwnerTransferRequestsResponseProtoMsg,
+  ): QueryIncomingPostOwnerTransferRequestsResponse {
+    return QueryIncomingPostOwnerTransferRequestsResponse.decode(message.value);
+  },
+  toProto(message: QueryIncomingPostOwnerTransferRequestsResponse): Uint8Array {
+    return QueryIncomingPostOwnerTransferRequestsResponse.encode(
+      message,
+    ).finish();
+  },
+  toProtoMsg(
+    message: QueryIncomingPostOwnerTransferRequestsResponse,
+  ): QueryIncomingPostOwnerTransferRequestsResponseProtoMsg {
+    return {
+      typeUrl:
+        "/desmos.posts.v3.QueryIncomingPostOwnerTransferRequestsResponse",
+      value:
+        QueryIncomingPostOwnerTransferRequestsResponse.encode(message).finish(),
+    };
+  },
+};
 /** Query defines the gRPC querier service */
 export interface Query {
   /** SubspacePosts queries all the posts inside a given subspace */
@@ -1700,6 +2056,13 @@ export interface Query {
   ): Promise<QueryPollAnswersResponse>;
   /** Params queries the module parameters */
   Params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
+  /**
+   * IncomingPostOwnerTransferRequests queries all the post owner transfers
+   * requests that have been made towards the receiver with the given address
+   */
+  IncomingPostOwnerTransferRequests(
+    request: QueryIncomingPostOwnerTransferRequestsRequest,
+  ): Promise<QueryIncomingPostOwnerTransferRequestsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -1711,6 +2074,8 @@ export class QueryClientImpl implements Query {
     this.PostAttachments = this.PostAttachments.bind(this);
     this.PollAnswers = this.PollAnswers.bind(this);
     this.Params = this.Params.bind(this);
+    this.IncomingPostOwnerTransferRequests =
+      this.IncomingPostOwnerTransferRequests.bind(this);
   }
   SubspacePosts(
     request: QuerySubspacePostsRequest,
@@ -1776,6 +2141,22 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("desmos.posts.v3.Query", "Params", data);
     return promise.then((data) =>
       QueryParamsResponse.decode(new _m0.Reader(data)),
+    );
+  }
+  IncomingPostOwnerTransferRequests(
+    request: QueryIncomingPostOwnerTransferRequestsRequest,
+  ): Promise<QueryIncomingPostOwnerTransferRequestsResponse> {
+    const data =
+      QueryIncomingPostOwnerTransferRequestsRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "desmos.posts.v3.Query",
+      "IncomingPostOwnerTransferRequests",
+      data,
+    );
+    return promise.then((data) =>
+      QueryIncomingPostOwnerTransferRequestsResponse.decode(
+        new _m0.Reader(data),
+      ),
     );
   }
 }

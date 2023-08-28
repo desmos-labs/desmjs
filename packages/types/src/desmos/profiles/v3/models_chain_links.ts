@@ -213,7 +213,7 @@ export interface Bech32AddressAmino {
   prefix: string;
 }
 export interface Bech32AddressAminoMsg {
-  type: "/desmos.profiles.v3.Bech32Address";
+  type: "desmos/Bech32Address";
   value: Bech32AddressAmino;
 }
 /** Base58Address represents a Base58-encoded address */
@@ -231,7 +231,7 @@ export interface Base58AddressAmino {
   value: string;
 }
 export interface Base58AddressAminoMsg {
-  type: "/desmos.profiles.v3.Base58Address";
+  type: "desmos/Base58Address";
   value: Base58AddressAmino;
 }
 /**
@@ -265,7 +265,7 @@ export interface HexAddressAmino {
   prefix: string;
 }
 export interface HexAddressAminoMsg {
-  type: "/desmos.profiles.v3.HexAddress";
+  type: "desmos/HexAddress";
   value: HexAddressAmino;
 }
 /** SingleSignature is the signature data for a single signer */
@@ -287,7 +287,7 @@ export interface SingleSignatureAmino {
   signature: Uint8Array;
 }
 export interface SingleSignatureAminoMsg {
-  type: "/desmos.profiles.v3.SingleSignature";
+  type: "desmos/SingleSignature";
   value: SingleSignatureAmino;
 }
 /** CosmosMultiSignature is the signature data for a multisig public key */
@@ -309,7 +309,7 @@ export interface CosmosMultiSignatureAmino {
   signatures: AnyAmino[];
 }
 export interface CosmosMultiSignatureAminoMsg {
-  type: "/desmos.profiles.v3.CosmosMultiSignature";
+  type: "desmos/CosmosMultiSignature";
   value: CosmosMultiSignatureAmino;
 }
 function createBaseChainLink(): ChainLink {
@@ -727,6 +727,12 @@ export const Bech32Address = {
   fromAminoMsg(object: Bech32AddressAminoMsg): Bech32Address {
     return Bech32Address.fromAmino(object.value);
   },
+  toAminoMsg(message: Bech32Address): Bech32AddressAminoMsg {
+    return {
+      type: "desmos/Bech32Address",
+      value: Bech32Address.toAmino(message),
+    };
+  },
   fromProtoMsg(message: Bech32AddressProtoMsg): Bech32Address {
     return Bech32Address.decode(message.value);
   },
@@ -801,6 +807,12 @@ export const Base58Address = {
   },
   fromAminoMsg(object: Base58AddressAminoMsg): Base58Address {
     return Base58Address.fromAmino(object.value);
+  },
+  toAminoMsg(message: Base58Address): Base58AddressAminoMsg {
+    return {
+      type: "desmos/Base58Address",
+      value: Base58Address.toAmino(message),
+    };
   },
   fromProtoMsg(message: Base58AddressProtoMsg): Base58Address {
     return Base58Address.decode(message.value);
@@ -888,6 +900,12 @@ export const HexAddress = {
   },
   fromAminoMsg(object: HexAddressAminoMsg): HexAddress {
     return HexAddress.fromAmino(object.value);
+  },
+  toAminoMsg(message: HexAddress): HexAddressAminoMsg {
+    return {
+      type: "desmos/HexAddress",
+      value: HexAddress.toAmino(message),
+    };
   },
   fromProtoMsg(message: HexAddressProtoMsg): HexAddress {
     return HexAddress.decode(message.value);
@@ -985,6 +1003,12 @@ export const SingleSignature = {
   },
   fromAminoMsg(object: SingleSignatureAminoMsg): SingleSignature {
     return SingleSignature.fromAmino(object.value);
+  },
+  toAminoMsg(message: SingleSignature): SingleSignatureAminoMsg {
+    return {
+      type: "desmos/SingleSignature",
+      value: SingleSignature.toAmino(message),
+    };
   },
   fromProtoMsg(message: SingleSignatureProtoMsg): SingleSignature {
     return SingleSignature.decode(message.value);
@@ -1107,6 +1131,12 @@ export const CosmosMultiSignature = {
   },
   fromAminoMsg(object: CosmosMultiSignatureAminoMsg): CosmosMultiSignature {
     return CosmosMultiSignature.fromAmino(object.value);
+  },
+  toAminoMsg(message: CosmosMultiSignature): CosmosMultiSignatureAminoMsg {
+    return {
+      type: "desmos/CosmosMultiSignature",
+      value: CosmosMultiSignature.toAmino(message),
+    };
   },
   fromProtoMsg(message: CosmosMultiSignatureProtoMsg): CosmosMultiSignature {
     return CosmosMultiSignature.decode(message.value);

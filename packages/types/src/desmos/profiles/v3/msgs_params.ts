@@ -44,7 +44,7 @@ export interface MsgUpdateParamsAmino {
   params?: ParamsAmino;
 }
 export interface MsgUpdateParamsAminoMsg {
-  type: "/desmos.profiles.v3.MsgUpdateParams";
+  type: "desmos/x/profiles/MsgUpdateParams";
   value: MsgUpdateParamsAmino;
 }
 /**
@@ -146,6 +146,12 @@ export const MsgUpdateParams = {
   },
   fromAminoMsg(object: MsgUpdateParamsAminoMsg): MsgUpdateParams {
     return MsgUpdateParams.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUpdateParams): MsgUpdateParamsAminoMsg {
+    return {
+      type: "desmos/x/profiles/MsgUpdateParams",
+      value: MsgUpdateParams.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgUpdateParamsProtoMsg): MsgUpdateParams {
     return MsgUpdateParams.decode(message.value);

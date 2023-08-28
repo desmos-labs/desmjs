@@ -8,6 +8,8 @@ import {
   UserAnswerAmino,
   Params,
   ParamsAmino,
+  PostOwnerTransferRequest,
+  PostOwnerTransferRequestAmino,
 } from "./models";
 import { Timestamp, TimestampAmino } from "../../../google/protobuf/timestamp";
 import {
@@ -29,6 +31,7 @@ export interface GenesisState {
   activePolls: ActivePollData[];
   userAnswers: UserAnswer[];
   params?: Params;
+  postOwnerTransferRequests: PostOwnerTransferRequest[];
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/desmos.posts.v3.GenesisState";
@@ -43,6 +46,7 @@ export interface GenesisStateAmino {
   active_polls: ActivePollDataAmino[];
   user_answers: UserAnswerAmino[];
   params?: ParamsAmino;
+  post_owner_transfer_requests: PostOwnerTransferRequestAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/desmos.posts.v3.GenesisState";
@@ -117,6 +121,7 @@ function createBaseGenesisState(): GenesisState {
     activePolls: [],
     userAnswers: [],
     params: undefined,
+    postOwnerTransferRequests: [],
   };
 }
 export const GenesisState = {
@@ -144,6 +149,9 @@ export const GenesisState = {
     }
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(58).fork()).ldelim();
+    }
+    for (const v of message.postOwnerTransferRequests) {
+      PostOwnerTransferRequest.encode(v!, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -179,6 +187,11 @@ export const GenesisState = {
         case 7:
           message.params = Params.decode(reader, reader.uint32());
           break;
+        case 8:
+          message.postOwnerTransferRequests.push(
+            PostOwnerTransferRequest.decode(reader, reader.uint32()),
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -207,6 +220,13 @@ export const GenesisState = {
         ? object.userAnswers.map((e: any) => UserAnswer.fromJSON(e))
         : [],
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      postOwnerTransferRequests: Array.isArray(
+        object?.postOwnerTransferRequests,
+      )
+        ? object.postOwnerTransferRequests.map((e: any) =>
+            PostOwnerTransferRequest.fromJSON(e),
+          )
+        : [],
     };
   },
   toJSON(message: GenesisState): unknown {
@@ -253,6 +273,13 @@ export const GenesisState = {
     }
     message.params !== undefined &&
       (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.postOwnerTransferRequests) {
+      obj.postOwnerTransferRequests = message.postOwnerTransferRequests.map(
+        (e) => (e ? PostOwnerTransferRequest.toJSON(e) : undefined),
+      );
+    } else {
+      obj.postOwnerTransferRequests = [];
+    }
     return obj;
   },
   fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
@@ -274,6 +301,10 @@ export const GenesisState = {
       object.params !== undefined && object.params !== null
         ? Params.fromPartial(object.params)
         : undefined;
+    message.postOwnerTransferRequests =
+      object.postOwnerTransferRequests?.map((e) =>
+        PostOwnerTransferRequest.fromPartial(e),
+      ) || [];
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
@@ -297,6 +328,13 @@ export const GenesisState = {
         ? object.user_answers.map((e: any) => UserAnswer.fromAmino(e))
         : [],
       params: object?.params ? Params.fromAmino(object.params) : undefined,
+      postOwnerTransferRequests: Array.isArray(
+        object?.post_owner_transfer_requests,
+      )
+        ? object.post_owner_transfer_requests.map((e: any) =>
+            PostOwnerTransferRequest.fromAmino(e),
+          )
+        : [],
     };
   },
   toAmino(message: GenesisState): GenesisStateAmino {
@@ -342,6 +380,13 @@ export const GenesisState = {
       obj.user_answers = [];
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    if (message.postOwnerTransferRequests) {
+      obj.post_owner_transfer_requests = message.postOwnerTransferRequests.map(
+        (e) => (e ? PostOwnerTransferRequest.toAmino(e) : undefined),
+      );
+    } else {
+      obj.post_owner_transfer_requests = [];
+    }
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

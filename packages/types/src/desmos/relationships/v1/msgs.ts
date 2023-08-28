@@ -31,7 +31,7 @@ export interface MsgCreateRelationshipAmino {
   subspace_id: string;
 }
 export interface MsgCreateRelationshipAminoMsg {
-  type: "/desmos.relationships.v1.MsgCreateRelationship";
+  type: "desmos/MsgCreateRelationship";
   value: MsgCreateRelationshipAmino;
 }
 /**
@@ -81,7 +81,7 @@ export interface MsgDeleteRelationshipAmino {
   subspace_id: string;
 }
 export interface MsgDeleteRelationshipAminoMsg {
-  type: "/desmos.relationships.v1.MsgDeleteRelationship";
+  type: "desmos/MsgDeleteRelationship";
   value: MsgDeleteRelationshipAmino;
 }
 /**
@@ -135,7 +135,7 @@ export interface MsgBlockUserAmino {
   subspace_id: string;
 }
 export interface MsgBlockUserAminoMsg {
-  type: "/desmos.relationships.v1.MsgBlockUser";
+  type: "desmos/MsgBlockUser";
   value: MsgBlockUserAmino;
 }
 /** MsgBlockUserResponse defines the Msg/BlockUser response type. */
@@ -173,7 +173,7 @@ export interface MsgUnblockUserAmino {
   subspace_id: string;
 }
 export interface MsgUnblockUserAminoMsg {
-  type: "/desmos.relationships.v1.MsgUnblockUser";
+  type: "desmos/MsgUnblockUser";
   value: MsgUnblockUserAmino;
 }
 /** MsgUnblockUserResponse defines the Msg/UnblockUser response type. */
@@ -287,6 +287,12 @@ export const MsgCreateRelationship = {
   },
   fromAminoMsg(object: MsgCreateRelationshipAminoMsg): MsgCreateRelationship {
     return MsgCreateRelationship.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateRelationship): MsgCreateRelationshipAminoMsg {
+    return {
+      type: "desmos/MsgCreateRelationship",
+      value: MsgCreateRelationship.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgCreateRelationshipProtoMsg): MsgCreateRelationship {
     return MsgCreateRelationship.decode(message.value);
@@ -473,6 +479,12 @@ export const MsgDeleteRelationship = {
   },
   fromAminoMsg(object: MsgDeleteRelationshipAminoMsg): MsgDeleteRelationship {
     return MsgDeleteRelationship.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgDeleteRelationship): MsgDeleteRelationshipAminoMsg {
+    return {
+      type: "desmos/MsgDeleteRelationship",
+      value: MsgDeleteRelationship.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgDeleteRelationshipProtoMsg): MsgDeleteRelationship {
     return MsgDeleteRelationship.decode(message.value);
@@ -666,6 +678,12 @@ export const MsgBlockUser = {
   fromAminoMsg(object: MsgBlockUserAminoMsg): MsgBlockUser {
     return MsgBlockUser.fromAmino(object.value);
   },
+  toAminoMsg(message: MsgBlockUser): MsgBlockUserAminoMsg {
+    return {
+      type: "desmos/MsgBlockUser",
+      value: MsgBlockUser.toAmino(message),
+    };
+  },
   fromProtoMsg(message: MsgBlockUserProtoMsg): MsgBlockUser {
     return MsgBlockUser.decode(message.value);
   },
@@ -835,6 +853,12 @@ export const MsgUnblockUser = {
   },
   fromAminoMsg(object: MsgUnblockUserAminoMsg): MsgUnblockUser {
     return MsgUnblockUser.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgUnblockUser): MsgUnblockUserAminoMsg {
+    return {
+      type: "desmos/MsgUnblockUser",
+      value: MsgUnblockUser.toAmino(message),
+    };
   },
   fromProtoMsg(message: MsgUnblockUserProtoMsg): MsgUnblockUser {
     return MsgUnblockUser.decode(message.value);

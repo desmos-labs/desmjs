@@ -22,5 +22,28 @@ export const MsgRemovePostAttachmentTypeUrl =
 export const MsgRemovePostAttachmentAminoType =
   "desmos/MsgRemovePostAttachment";
 
-export const MsgAnswerPollTypeUrl = "/desmos.posts.v2.MsgAnswerPoll";
+export const MsgAnswerPollTypeUrl = "/desmos.posts.v3.MsgAnswerPoll";
 export const MsgAnswerPollAminoType = "desmos/MsgAnswerPoll";
+
+export const MsgMovePostTypeUrl = "/desmos.posts.v3.MsgMovePost";
+export const MsgMovePostAminoType = "desmos/MsgMovePost";
+
+export const MsgRequestPostOwnerTransferTypeUrl =
+  "/desmos.posts.v3.MsgRequestPostOwnerTransfer";
+export const MsgRequestPostOwnerTransferAminoType =
+  "desmos/MsgRequestPostOwnerTransfer";
+
+export const MsgCancelPostOwnerTransferRequestTypeUrl =
+  "/desmos.posts.v3.MsgCancelPostOwnerTransferRequest";
+export const MsgCancelPostOwnerTransferRequestAminoType =
+  "desmos/MsgCancelPostOwnerTransfer";
+
+export const MsgAcceptPostOwnerTransferRequestTypeUrl =
+  "/desmos.posts.v3.MsgAcceptPostOwnerTransferRequest";
+export const MsgAcceptPostOwnerTransferRequestAminoType =
+  "desmos/MsgAcceptPostOwnerTransfer";
+
+export const MsgRefusePostOwnerTransferRequestTypeUrl =
+  "/desmos.posts.v3.MsgRefusePostOwnerTransferRequest";
+export const MsgRefusePostOwnerTransferRequestAminoType =
+  "desmos/MsgRefusePostOwnerTransfer";
