@@ -221,7 +221,7 @@ export function broadcastTest(
   testCase: (
     signer: Signer,
     client: DesmosClient,
-    address: string[],
+    addresses: string[],
   ) => Promise<void>,
 ) {
   it(`${name} Direct`, async () => {
