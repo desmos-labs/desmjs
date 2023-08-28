@@ -17,3 +17,4 @@ export * as Reports from "./reports";
 export * as Staking from "./staking";
 export * as Subspaces from "./subspaces";
 export * as Supply from "./supply";
+export * as TokenFactory from "./tokenfactory";

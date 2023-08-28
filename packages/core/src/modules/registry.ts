@@ -14,6 +14,7 @@ import { registry as RelationshipsV1Registry } from "./relationships/v1";
 import { registry as ReportsV1Registry } from "./reports/v1";
 import { registry as StakingV1Beta1Registry } from "./staking/v1beta1";
 import { registry as SubspacesV3Registry } from "./subspaces/v3";
+import { registry as TokenFactoryV1Registry } from "./tokenfactory/v1";
 
 export const DesmosRegistry: ReadonlyArray<[string, GeneratedType]> = [
   ...defaultRegistryTypes,
@@ -32,6 +33,7 @@ export const DesmosRegistry: ReadonlyArray<[string, GeneratedType]> = [
   ...ReportsV1Registry,
   ...StakingV1Beta1Registry,
   ...SubspacesV3Registry,
+  ...TokenFactoryV1Registry,
 ];
 
 export default DesmosRegistry;

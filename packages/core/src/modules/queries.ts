@@ -35,6 +35,10 @@ import {
   SubspacesV3Extension,
 } from "./subspaces/v3";
 import { setupSupplyV1Extension, SupplyV1Extension } from "./supply/v1";
+import {
+  setupTokenFactoryV1Extension,
+  TokenFactoryV1Extension,
+} from "./tokenfactory/v1";
 
 export type DesmosQueryClient = QueryClient &
   AuthzV1Beta1Extension &
@@ -50,6 +54,7 @@ export type DesmosQueryClient = QueryClient &
   ReactionsExtension &
   ReportsV1Extension &
   SupplyV1Extension &
+  TokenFactoryV1Extension &
   WasmExtension &
   IbcExtension;
 
@@ -74,6 +79,7 @@ export function buildDesmosQueryClient(
         setupSupplyV1Extension,
         setupWasmExtension,
         setupIbcExtension,
+        setupTokenFactoryV1Extension,
       )
     : undefined;
 }
