@@ -15,6 +15,7 @@ import {
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
+  MsgUpdateSubspaceFeeTokens,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import {
   MsgAddUserToUserGroupTypeUrl,
@@ -32,6 +33,7 @@ import {
   MsgRemoveUserFromUserGroupTypeUrl,
   MsgSetUserGroupPermissionsTypeUrl,
   MsgSetUserPermissionsTypeUrl,
+  MsgUpdateSubspaceFeeTokensTypeUrl,
 } from "./consts";
 
 export interface MsgCreateSubspaceEncodeObject extends EncodeObject {
@@ -241,5 +243,19 @@ export function isMsgSetUserPermissionsEncodeObject(
   return (
     (encodeObject as MsgSetUserPermissionsEncodeObject).typeUrl ===
     MsgSetUserPermissionsTypeUrl
+  );
+}
+
+export interface MsgUpdateSubspaceFeeTokensEncodeObject extends EncodeObject {
+  readonly typeUrl: typeof MsgUpdateSubspaceFeeTokensTypeUrl;
+  readonly value: MsgUpdateSubspaceFeeTokens;
+}
+
+export function isMsgUpdateSubspaceFeeTokensEncodeObject(
+  encodeObject: EncodeObject,
+): encodeObject is MsgUpdateSubspaceFeeTokensEncodeObject {
+  return (
+    (encodeObject as MsgUpdateSubspaceFeeTokensEncodeObject).typeUrl ===
+    MsgUpdateSubspaceFeeTokensTypeUrl
   );
 }

@@ -15,6 +15,7 @@ import {
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
+  MsgUpdateSubspaceFeeTokens,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/authz/authz";
 import Long from "long";
@@ -69,6 +70,8 @@ import {
   MsgSetUserGroupPermissionsTypeUrl,
   MsgSetUserPermissionsAminoType,
   MsgSetUserPermissionsTypeUrl,
+  MsgUpdateSubspaceFeeTokensAminoType,
+  MsgUpdateSubspaceFeeTokensTypeUrl,
 } from "./consts";
 import {
   fromOmitEmptyArray,
@@ -356,5 +359,10 @@ export const AminoConverter: AminoConverters = {
       permissions: fromOmitEmptyArray(msg.permissions),
       signer: fromOmitEmptyString(msg.signer),
     }),
+  },
+  [MsgUpdateSubspaceFeeTokensTypeUrl]: {
+    aminoType: MsgUpdateSubspaceFeeTokensAminoType,
+    toAmino: MsgUpdateSubspaceFeeTokens.toAmino,
+    fromAmino: MsgUpdateSubspaceFeeTokens.fromAmino,
   },
 };
