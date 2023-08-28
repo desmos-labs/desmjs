@@ -43,7 +43,11 @@ jobs:
 
       - name: Build 🔨
         if: env.GIT_DIFF
-        run: yarn build
+        run: |
+          yarn workspace @desmoslabs/desmjs-types download-proto
+          yarn workspace @desmoslabs/desmjs-types codegen
+          yarn workspace @desmoslabs/desmjs-types compile-codegen
+          yarn build
 
       - name: Run core unit tests 🧪
         if: env.GIT_DIFF
