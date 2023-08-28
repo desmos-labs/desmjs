@@ -44,6 +44,10 @@ mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 jq '.app_state.gov.starting_proposal_id = "2"' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
 mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
 
+# Update tokenfactory module
+jq '.app_state.tokenfactory.params = { "denom_creation_fee": [{"denom": "stake", "amount": "1"}] }' "$DESMOS_HOME/config/genesis.json" > "$DESMOS_HOME/config/genesis-patched.json"
+mv "$DESMOS_HOME/config/genesis-patched.json" "$DESMOS_HOME/config/genesis.json"
+
 # Set block time to 500 milliseconds
 sed -i -e 's/timeout_commit = "5s"/timeout_commit = "500ms"/g' "$DESMOS_HOME/config/config.toml"
 
