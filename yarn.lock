@@ -4565,7 +4565,7 @@ __metadata:
     "@types/readable-stream": ^4.0.2
     "@web3auth/base": ^6.1.7
     "@web3auth/modal": ^6.1.8
-    "@web3auth/ui": ^6.1.7
+    "@web3auth/ui": ^6.1.8
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -8560,31 +8560,6 @@ __metadata:
     "@babel/runtime": ^7.x
     "@solana/web3.js": ^1.x
   checksum: 11ac1ae8f60a4c05585cabb33bf2479b39e6fc6e29633c49e10e9c2b2f6c0d0f8ec3c3dd7c0932e6e2eb0aae0e223e58ab9745ca5ec5d1d7de2ed6034909c9c7
-  languageName: node
-  linkType: hard
-
-"@web3auth/ui@npm:^6.1.7":
-  version: 6.1.7
-  resolution: "@web3auth/ui@npm:6.1.7"
-  dependencies:
-    "@toruslabs/http-helpers": ^4.0.0
-    "@toruslabs/openlogin": ^4.7.2
-    "@toruslabs/openlogin-jrpc": ^4.7.2
-    "@toruslabs/openlogin-utils": ^4.7.0
-    "@web3auth/base": ^6.1.7
-    bowser: ^2.11.0
-    classnames: ^2.3.2
-    copy-to-clipboard: ^3.3.3
-    i18next: ^23.3.0
-    lodash.clonedeep: ^4.5.0
-    lodash.merge: ^4.6.2
-    react-i18next: ^13.0.2
-    react-qrcode-logo: ^2.9.0
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    react: ^18.x
-    react-dom: ^18.x
-  checksum: 5f29f8826e5ca4d64059ddd271dd1729ff0e9c69f386e2b2b26baeedb745e61038f0ec03cd642f5837e3008e6ad6da7677cad3dbaad32c72fb14a6f4a5eb262b
   languageName: node
   linkType: hard
 
@@ -14101,15 +14076,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^23.3.0":
-  version: 23.4.1
-  resolution: "i18next@npm:23.4.1"
-  dependencies:
-    "@babel/runtime": ^7.22.5
-  checksum: d9283d3de5e4ea2e55f61bd8ada98b5aef1b7db35a69c8ccf193367c5cbee6f795a67c5cd8a7af511e56c12b021b91d97253863b6c2336726925d20518fb02cc
-  languageName: node
-  linkType: hard
-
 "i18next@npm:^23.4.2":
   version: 23.4.5
   resolution: "i18next@npm:23.4.5"
@@ -18665,24 +18631,6 @@ __metadata:
     react: ^16.6.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
   checksum: 7ca7e47f8af14ea186688b512a87ab912bf6041312b297f92516341b140b3f0f8aedf5a44d226d99e69ed067b0cc106e38aeb9c9b738ffcc63d10721c844db90
-  languageName: node
-  linkType: hard
-
-"react-i18next@npm:^13.0.2":
-  version: 13.0.2
-  resolution: "react-i18next@npm:13.0.2"
-  dependencies:
-    "@babel/runtime": ^7.22.5
-    html-parse-stringify: ^3.0.1
-  peerDependencies:
-    i18next: ">= 23.2.3"
-    react: ">= 16.8.0"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: ab8226939f3681efb5a8628f938d90b3311336e69ca9aaf1ea54aad6fac3395516736971a3484234455f3831ecae8555f68c32fa1cd4d38b94ff69769da2b677
   languageName: node
   linkType: hard
 
