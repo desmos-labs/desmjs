@@ -28,9 +28,8 @@ describe("Broadcast desmos.tokenfactory.v1 messages", () => {
       const subspaceId = await createTestSubspace(client, address);
 
       // Send some coins to the subspace treasury
-      const { subspace } = await client.querier.subspacesV3.subspace(
-        subspaceId,
-      );
+      const { subspace } =
+        await client.querier.subspacesV3.subspace(subspaceId);
       await client.signAndBroadcast(
         address,
         [
@@ -64,9 +63,8 @@ describe("Broadcast desmos.tokenfactory.v1 messages", () => {
       const subspaceId = await createTestSubspace(client, address);
 
       // Send some coins to the subspace treasury
-      const { subspace } = await client.querier.subspacesV3.subspace(
-        subspaceId,
-      );
+      const { subspace } =
+        await client.querier.subspacesV3.subspace(subspaceId);
       await client.signAndBroadcast(
         address,
         [
@@ -128,9 +126,8 @@ describe("Broadcast desmos.tokenfactory.v1 messages", () => {
       const subspaceId = await createTestSubspace(client, address);
 
       // Send some coins to the subspace treasury
-      const { subspace } = await client.querier.subspacesV3.subspace(
-        subspaceId,
-      );
+      const { subspace } =
+        await client.querier.subspacesV3.subspace(subspaceId);
       await client.signAndBroadcast(
         address,
         [

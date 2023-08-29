@@ -238,9 +238,8 @@ export class DesmosClient extends SigningCosmWasmClient {
    * This function has been overridden to correctly parse a Desmos profile.
    */
   override async getAccount(searchAddress: string): Promise<Account | null> {
-    const account = await this.forceGetQueryClient().auth.account(
-      searchAddress,
-    );
+    const account =
+      await this.forceGetQueryClient().auth.account(searchAddress);
     if (!account) {
       return null;
     }
