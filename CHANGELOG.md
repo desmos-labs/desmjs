@@ -1,3 +1,9 @@
+## Version 6.0.0
+### New Features
+- Added support for the `x/tokenfactory` module.
+- Included support for new message types in the `x/posts` module: `MsgMovePost`, `MsgRequestPostOwnerTransfer`, `MsgCancelPostOwnerTransferRequest`, `MsgRefusePostOwnerTransferRequest`, and `MsgAcceptPostOwnerTransferRequest`.
+- Implemented support for the new message type `MsgUpdateSubspaceFeeTokens` in the `x/subspaces` module.
+
 ## Version 5.1.3
 ### Chore
 - Set `react-native` as peer dependency in `@desmoslabs/desmjs-web3auth-web`.
