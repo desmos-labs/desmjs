@@ -19,6 +19,7 @@ import { AminoConverter as RelationshipsV1AminoConverter } from "./relationships
 import { AminoConverter as ReportsV1AminoConverter } from "./reports/v1";
 import { AminoConverter as StakingV1Beta1AminoConverter } from "./staking/v1beta1";
 import { AminoConverter as SubspacesV3AminoConverter } from "./subspaces/v3";
+import { AminoConverter as TokenFactoryV1AminoConverter } from "./tokenfactory/v1";
 
 export const DesmosAminoConverter = {
   ...createBankAminoConverters(),
@@ -41,6 +42,7 @@ export const DesmosAminoConverter = {
   ...ReportsV1AminoConverter,
   ...StakingV1Beta1AminoConverter,
   ...SubspacesV3AminoConverter,
+  ...TokenFactoryV1AminoConverter,
 };
 
 export default DesmosAminoConverter;

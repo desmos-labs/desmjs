@@ -1,4 +1,5 @@
 import { patchModule as patchGovV1 } from "./cosmos/gov/v1";
+import { patchModule as patchBankV1Beta1 } from "./cosmos/bank/v1beta1";
 import { patchModule as patchProfilesV3 } from "./desmos/profiles/v3";
 import { patchModule as patchSubspacesV3 } from "./desmos/subspaces/v3";
 import { patchModule as patchPostsV3 } from "./desmos/posts/v3";
@@ -7,6 +8,7 @@ import * as fs from "fs";
 
 export async function patchModules(outputPath: string): Promise<void> {
   await patchGovV1(outputPath);
+  await patchBankV1Beta1(outputPath);
   patchProfilesV3(outputPath);
   patchSubspacesV3(outputPath);
   await patchPostsV3(outputPath);
