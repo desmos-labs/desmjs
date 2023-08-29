@@ -28,11 +28,11 @@
     "lint": "eslint src --ignore-path ../../.gitignore --max-warnings 0 --ext .js,.ts"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.31.0",
+    "@cosmjs/amino": "^0.31.1",
     "@cosmjs/encoding": "^0.31.1",
-    "@cosmjs/proto-signing": "^0.31.0",
-    "@cosmjs/stargate": "^0.31.0",
-    "@cosmjs/utils": "^0.31.0",
+    "@cosmjs/proto-signing": "^0.31.1",
+    "@cosmjs/stargate": "^0.31.1",
+    "@cosmjs/utils": "^0.31.1",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@walletconnect/qrcode-modal": "^1.8.0",
