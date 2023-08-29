@@ -1,4 +1,4 @@
-import { calculateFee, GasPrice } from "@cosmjs/stargate";
+import { calculateFee, GasPrice, MsgSendEncodeObject } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet, OfflineSigner } from "@cosmjs/proto-signing";
 import { stringToPath } from "@cosmjs/crypto";
 import { OfflineAminoSigner, Secp256k1HdWallet } from "@cosmjs/amino";
@@ -10,6 +10,7 @@ import {
   MsgCreatePostResponse,
 } from "@desmoslabs/desmjs-types/desmos/posts/v3/msgs";
 import { ReplySetting } from "@desmoslabs/desmjs-types/desmos/posts/v3/models";
+import { MsgCreateDenomResponse } from "@desmoslabs/desmjs-types/desmos/tokenfactory/v1/msgs";
 import { OfflineSignerAdapter, Signer, SigningMode } from "./signers";
 import { DesmosClient } from "./desmosclient";
 import { BlockBroadcastResponse } from "./types/responses";
@@ -25,6 +26,11 @@ import {
   MsgCreatePostEncodeObject,
   MsgCreatePostTypeUrl,
 } from "./modules/posts/v3";
+import {
+  MsgCreateDenomEncodeObject,
+  MsgCreateDenomTypeUrl,
+} from "./modules/tokenfactory/v1";
+import { MsgSendTypeUrl } from "./modules/bank/v1beta1";
 
 export type HdPath = {
   coinType: number;
@@ -221,7 +227,7 @@ export function broadcastTest(
   testCase: (
     signer: Signer,
     client: DesmosClient,
-    address: string[],
+    addresses: string[],
   ) => Promise<void>,
 ) {
   it(`${name} Direct`, async () => {
@@ -306,4 +312,49 @@ export async function createTestPost(
     createPostResponse.msgResponses[0].value,
   );
   return postId;
+}
+
+/**
+ * Function to create a new denom in the subsbace having the provided
+ * id.
+ */
+export async function createSubspaceToken(
+  client: DesmosClient,
+  subspaceId: Long,
+  address: string,
+): Promise<string> {
+  // Send some coins to the subspace treasury
+  const { subspace } = await client.querier.subspacesV3.subspace(subspaceId);
+  await client.signAndBroadcast(
+    address,
+    [
+      {
+        typeUrl: MsgSendTypeUrl,
+        value: {
+          amount: [{ amount: "1", denom: "stake" }],
+          toAddress: subspace!.treasury,
+          fromAddress: address,
+        },
+      } as MsgSendEncodeObject,
+    ],
+    "auto",
+  );
+
+  const msgCreateSubspace: MsgCreateDenomEncodeObject = {
+    typeUrl: MsgCreateDenomTypeUrl,
+    value: {
+      subspaceId,
+      sender: address,
+      subdenom: "test",
+    },
+  };
+  const response = await client.signAndBroadcast(
+    address,
+    [msgCreateSubspace],
+    "auto",
+  );
+  const { newTokenDenom } = MsgCreateDenomResponse.decode(
+    response.msgResponses[0].value,
+  );
+  return newTokenDenom;
 }

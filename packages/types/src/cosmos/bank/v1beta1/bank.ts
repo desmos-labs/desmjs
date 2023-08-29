@@ -152,14 +152,7 @@ export interface DenomUnitProtoMsg {
 export interface DenomUnitAmino {
   /** denom represents the string name of the given denom unit (e.g uatom). */
   denom: string;
-  /**
-   * exponent represents power of 10 exponent that one must
-   * raise the base_denom to in order to equal the given DenomUnit's denom
-   * 1 denom = 10^exponent base_denom
-   * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
-   * exponent = 6, thus: 1 atom = 10^6 uatom).
-   */
-  exponent: number;
+  exponent?: number;
   /** aliases is a list of string aliases for the given denom */
   aliases: string[];
 }
@@ -241,19 +234,8 @@ export interface MetadataAmino {
    * Since: cosmos-sdk 0.43
    */
   symbol: string;
-  /**
-   * URI to a document (on or off-chain) that contains additional information. Optional.
-   *
-   * Since: cosmos-sdk 0.46
-   */
-  uri: string;
-  /**
-   * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-   * the document didn't change. Optional.
-   *
-   * Since: cosmos-sdk 0.46
-   */
-  uri_hash: string;
+  uri?: string;
+  uri_hash?: string;
 }
 export interface MetadataAminoMsg {
   type: "cosmos-sdk/Metadata";
@@ -836,7 +818,7 @@ export const DenomUnit = {
   fromAmino(object: DenomUnitAmino): DenomUnit {
     return {
       denom: object.denom,
-      exponent: object.exponent,
+      exponent: object.exponent ?? 0,
       aliases: Array.isArray(object?.aliases)
         ? object.aliases.map((e: any) => e)
         : [],
@@ -845,7 +827,7 @@ export const DenomUnit = {
   toAmino(message: DenomUnit): DenomUnitAmino {
     const obj: any = {};
     obj.denom = message.denom;
-    obj.exponent = message.exponent;
+    obj.exponent = message.exponent > 0 ? message.exponent : undefined;
     if (message.aliases) {
       obj.aliases = message.aliases.map((e) => e);
     } else {
@@ -1012,8 +994,8 @@ export const Metadata = {
       display: object.display,
       name: object.name,
       symbol: object.symbol,
-      uri: object.uri,
-      uriHash: object.uri_hash,
+      uri: object.uri ?? "",
+      uriHash: object.uri_hash ?? "",
     };
   },
   toAmino(message: Metadata): MetadataAmino {
@@ -1030,8 +1012,8 @@ export const Metadata = {
     obj.display = message.display;
     obj.name = message.name;
     obj.symbol = message.symbol;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
+    obj.uri = message.uri !== "" ? message.uri : undefined;
+    obj.uri_hash = message.uriHash !== "" ? message.uriHash : undefined;
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

@@ -31,11 +31,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install Protobuf compiler 👷
-        if: env.GIT_DIFF
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install protobuf-compiler
+      - name: Setup Protoc 👷
+        uses: arduino/setup-protoc@v2
+        with:
+          version: "23.4"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install 🔨
         if: env.GIT_DIFF

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Force stop the execution at the first error
-set -e
+# set -e
 
 # Absolute path of this script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -32,16 +32,16 @@ ICS_ZIP_FILE="$SCRIPT_DIR/../ics-source.zip"
 
 
 # Download Desmos proto files
-wget -q  --show-progress $DESMOS_SRC_URL -O "$DESMOS_ZIP_FILE"
+wget $DESMOS_SRC_URL -O "$DESMOS_ZIP_FILE"
 # Download Cosmos proto files
 # We download the source to be sure to have the correct version instead of what provides telescope.
-wget -q  --show-progress $COSMOS_SRC_URL -O "$COSMOS_ZIP_FILE"
+wget $COSMOS_SRC_URL -O "$COSMOS_ZIP_FILE"
 # Download IBC proto files
 # We download the source to be sure to have the correct version instead of what provides telescope.
-wget -q  --show-progress $IBC_SRC_URL -O "$IBC_ZIP_FILE"
+wget $IBC_SRC_URL -O "$IBC_ZIP_FILE"
 # Download ICS proto files
 # We download the source to be sure to have the correct version instead of what provides telescope.
-wget -q  --show-progress $ICS_URL -O "$ICS_ZIP_FILE"
+wget $ICS_URL -O "$ICS_ZIP_FILE"
 
 
 # Create a temp dir where will be extracted the proto files

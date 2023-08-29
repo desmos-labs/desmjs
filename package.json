@@ -39,11 +39,11 @@
     "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec yarn npm publish"
   },
   "devDependencies": {
-    "@cosmjs/cosmwasm-stargate": "^0.31.0",
-    "@cosmjs/crypto": "^0.31.0",
+    "@cosmjs/cosmwasm-stargate": "^0.31.1",
+    "@cosmjs/crypto": "^0.31.1",
     "@cosmjs/encoding": "^0.31.1",
-    "@cosmjs/proto-signing": "^0.31.0",
-    "@cosmjs/utils": "^0.31.0",
+    "@cosmjs/proto-signing": "^0.31.1",
+    "@cosmjs/utils": "^0.31.1",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@types/long": "^4.0.1",

@@ -43,3 +43,7 @@ export const MsgRemoveUserFromUserGroupAminoType =
 export const MsgSetUserPermissionsTypeUrl =
   "/desmos.subspaces.v3.MsgSetUserPermissions";
 export const MsgSetUserPermissionsAminoType = "desmos/MsgSetUserPermissions";
+export const MsgUpdateSubspaceFeeTokensTypeUrl =
+  "/desmos.subspaces.v3.MsgUpdateSubspaceFeeTokens";
+export const MsgUpdateSubspaceFeeTokensAminoType =
+  "desmos/MsgUpdateSubspaceFeeTokens";
