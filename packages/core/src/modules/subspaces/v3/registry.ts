@@ -15,6 +15,7 @@ import {
   MsgRemoveUserFromUserGroup,
   MsgSetUserGroupPermissions,
   MsgSetUserPermissions,
+  MsgUpdateSubspaceFeeTokens,
 } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/msgs";
 import { GenericSubspaceAuthorization } from "@desmoslabs/desmjs-types/desmos/subspaces/v3/authz/authz";
 import {
@@ -34,6 +35,7 @@ import {
   MsgRemoveUserFromUserGroupTypeUrl,
   MsgSetUserGroupPermissionsTypeUrl,
   MsgSetUserPermissionsTypeUrl,
+  MsgUpdateSubspaceFeeTokensTypeUrl,
 } from "./consts";
 
 // eslint-disable-next-line import/prefer-default-export
@@ -55,4 +57,5 @@ export const registry: ReadonlyArray<[string, GeneratedType]> = [
   [MsgAddUserToUserGroupTypeUrl, MsgAddUserToUserGroup],
   [MsgRemoveUserFromUserGroupTypeUrl, MsgRemoveUserFromUserGroup],
   [MsgSetUserPermissionsTypeUrl, MsgSetUserPermissions],
+  [MsgUpdateSubspaceFeeTokensTypeUrl, MsgUpdateSubspaceFeeTokens],
 ];
