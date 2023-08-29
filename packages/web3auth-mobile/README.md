@@ -9,7 +9,9 @@ See the [Web3Auth docs](https://web3auth.io/docs/sdk/react-native/initialize) fo
 
 ## Compatibility table
 
-| Package version |        Desmos version         | 
-|:---------------:|:-----------------------------:|
-|     `4.7.x`     |      `v4.7.x`, `v4.8.1`       |
-|     `5.0.x`     |           `v5.0.x`            |
+| Package version |   Desmos version   | 
+|:---------------:|:------------------:|
+|     `4.7.x`     | `v4.7.x`, `v4.8.1` |
+|     `5.0.x`     |      `v5.0.x`      |
+|     `5.1.x`     | `v5.1.x`, `v5.2.x` |
+|     `6.0.x`     |      `v6.0.x`      |
