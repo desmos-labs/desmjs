@@ -4462,11 +4462,11 @@ __metadata:
     "@cosmjs/proto-signing": ^0.31.1
     "@cosmjs/utils": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.12.21
+    "@keplr-wallet/types": 0.12.22
     "@types/jest": ^29.5.3
     "@types/node": ^20.5.4
     "@types/pino": ^7.0.5
-    babel-jest: ^29.6.3
+    babel-jest: ^29.6.4
     cosmjs-types: ^0.8.0
     jest: ^29.6.3
     ts-jest: ^29.1.1
@@ -4517,7 +4517,7 @@ __metadata:
     "@walletconnect/sign-client": ^2.10.0
     "@walletconnect/types": ^2.4.0
     "@walletconnect/utils": ^2.10.0
-    babel-jest: ^29.6.3
+    babel-jest: ^29.6.4
     cosmjs-types: ^0.8.0
     dotenv: ^16.3.1
     jest: ^29.6.3
@@ -4593,7 +4593,7 @@ __metadata:
     "@types/long": ^4.0.1
     "@types/node": ^20.5.4
     "@types/pino": ^7.0.5
-    babel-jest: ^29.6.3
+    babel-jest: ^29.6.4
     cosmjs-types: ^0.8.0
     cosmos-wallet: ^1.2.0
     jest: ^29.6.3
@@ -5628,6 +5628,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jest/transform@npm:^29.6.4":
+  version: 29.6.4
+  resolution: "@jest/transform@npm:29.6.4"
+  dependencies:
+    "@babel/core": ^7.11.6
+    "@jest/types": ^29.6.3
+    "@jridgewell/trace-mapping": ^0.3.18
+    babel-plugin-istanbul: ^6.1.1
+    chalk: ^4.0.0
+    convert-source-map: ^2.0.0
+    fast-json-stable-stringify: ^2.1.0
+    graceful-fs: ^4.2.9
+    jest-haste-map: ^29.6.4
+    jest-regex-util: ^29.6.3
+    jest-util: ^29.6.3
+    micromatch: ^4.0.4
+    pirates: ^4.0.4
+    slash: ^3.0.0
+    write-file-atomic: ^4.0.2
+  checksum: 0341a200a0bb926fc67ab9aede91c7b4009458206495e92057e72a115c55da5fed117457e68c6ea821e24c58b55da75c6a7b0f272ed63c2693db583d689a3383
+  languageName: node
+  linkType: hard
+
 "@jest/types@npm:^28.1.3":
   version: 28.1.3
   resolution: "@jest/types@npm:28.1.3"
@@ -5759,12 +5782,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.12.21":
-  version: 0.12.21
-  resolution: "@keplr-wallet/types@npm:0.12.21"
+"@keplr-wallet/types@npm:0.12.22":
+  version: 0.12.22
+  resolution: "@keplr-wallet/types@npm:0.12.22"
   dependencies:
     long: ^4.0.0
-  checksum: 13112c70b10fca1daf0f7c818e34386b3497ef1b92f83abc5a2643d9b6c4010e1a2a6253c25928a9c4ec9b12004bc5a004bfd4ef061191e8e74383503cd4f912
+  checksum: 8ade5d37239d2d358fa15c733615e477f50fb4919fd5cbfe11ae592960a48df15982bd92c1617f7a461fa5c3b67e554cc21f0c0a021ef7b738cb8f1a8a688409
   languageName: node
   linkType: hard
 
@@ -9396,6 +9419,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-jest@npm:^29.6.4":
+  version: 29.6.4
+  resolution: "babel-jest@npm:29.6.4"
+  dependencies:
+    "@jest/transform": ^29.6.4
+    "@types/babel__core": ^7.1.14
+    babel-plugin-istanbul: ^6.1.1
+    babel-preset-jest: ^29.6.3
+    chalk: ^4.0.0
+    graceful-fs: ^4.2.9
+    slash: ^3.0.0
+  peerDependencies:
+    "@babel/core": ^7.8.0
+  checksum: c574f1805ab6b51a7d0f5a028aad19eec4634be81e66e6f4631b79b34d8ea05dfb53629f3686c77345163872730aa0408c9e5937ed85f846984228f7ab5e5d96
+  languageName: node
+  linkType: hard
+
 "babel-loader@npm:^8.2.5":
   version: 8.3.0
   resolution: "babel-loader@npm:8.3.0"
@@ -11440,7 +11480,7 @@ __metadata:
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
     typedoc: ^0.24.8
-    typedoc-plugin-markdown: ^3.15.4
+    typedoc-plugin-markdown: ^3.16.0
     typescript: ^5.1.6
   languageName: unknown
   linkType: soft
@@ -15208,6 +15248,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-haste-map@npm:^29.6.4":
+  version: 29.6.4
+  resolution: "jest-haste-map@npm:29.6.4"
+  dependencies:
+    "@jest/types": ^29.6.3
+    "@types/graceful-fs": ^4.1.3
+    "@types/node": "*"
+    anymatch: ^3.0.3
+    fb-watchman: ^2.0.0
+    fsevents: ^2.3.2
+    graceful-fs: ^4.2.9
+    jest-regex-util: ^29.6.3
+    jest-util: ^29.6.3
+    jest-worker: ^29.6.4
+    micromatch: ^4.0.4
+    walker: ^1.0.8
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 4f720fd3813bb38400b7a9a094e55664cbddd907ba1769457ed746f6c870c615167647a5b697a788183d832b1dcb1b66143e52990a6f4403283f6686077fa868
+  languageName: node
+  linkType: hard
+
 "jest-leak-detector@npm:^29.6.3":
   version: 29.6.3
   resolution: "jest-leak-detector@npm:29.6.3"
@@ -15542,6 +15605,18 @@ __metadata:
     merge-stream: ^2.0.0
     supports-color: ^8.0.0
   checksum: 8ffb24a2d4c70ed3032034a2601defccc19353d854d89459f58793c6c8f170f88038c6722073c8047c5734c8ec8d4902ebc955f4f7acb433c2499adf616388fc
+  languageName: node
+  linkType: hard
+
+"jest-worker@npm:^29.6.4":
+  version: 29.6.4
+  resolution: "jest-worker@npm:29.6.4"
+  dependencies:
+    "@types/node": "*"
+    jest-util: ^29.6.3
+    merge-stream: ^2.0.0
+    supports-color: ^8.0.0
+  checksum: 05d19a5759ebfeb964036065be55ad8d8e8ddffa85d9b3a4c0b95765695efb1d8226ec824a4d8e660c38cda3389bfeb98d819f47232acf9fb0e79f553b7c0a76
   languageName: node
   linkType: hard
 
@@ -21016,14 +21091,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^3.15.4":
-  version: 3.15.4
-  resolution: "typedoc-plugin-markdown@npm:3.15.4"
+"typedoc-plugin-markdown@npm:^3.16.0":
+  version: 3.16.0
+  resolution: "typedoc-plugin-markdown@npm:3.16.0"
   dependencies:
     handlebars: ^4.7.7
   peerDependencies:
     typedoc: ">=0.24.0"
-  checksum: 0ba19732713a0e0da12ae4eb3ec634e6e7ffb7237451780ae1e8c072276fc682603502086104728477ce03e1168853346046648443a718f7393d1eab0bb23e84
+  checksum: e6ddcd36cf28c15bfa84072323e44b34ea10e6ee8f712518805e8a066a70fd2f9a6672fe6eade806ef377ab622b7e36743f0b338b531a494ec920b7f9b853ce6
   languageName: node
   linkType: hard
 
