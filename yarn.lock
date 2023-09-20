@@ -4701,7 +4701,7 @@ __metadata:
     "@cosmjs/encoding": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.4
-    "@types/keccak": ^3.0.1
+    "@types/keccak": ^3.0.2
     "@types/react-native": ^0.72.2
     "@types/readable-stream": ^4.0.2
     "@web3auth/react-native-sdk": ^4.0.0
@@ -4724,7 +4724,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.4
-    "@types/keccak": ^3.0.1
+    "@types/keccak": ^3.0.2
     "@types/readable-stream": ^4.0.2
     "@web3auth/base": ^7.0.1
     "@web3auth/modal": ^7.0.2
@@ -7371,10 +7371,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/docusaurus@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@tsconfig/docusaurus@npm:2.0.0"
-  checksum: 39adca336d9d8d6838c982212e6661c3d211d02244be17861cae4e16b9b5ee9aa0f2d48099649417794b0c2b7661e53905615f94ffb4b5608a326f5b55194e2f
+"@tsconfig/docusaurus@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@tsconfig/docusaurus@npm:2.0.1"
+  checksum: 63bebda70d83c56f95a90176d2e188e1ea9c08c23b499e5e7b292ebfae0ce7117f712809828ed21ae3b8440daf22191d6bf71bf2575f9bd474a51b1770ca30cc
   languageName: node
   linkType: hard
 
@@ -7658,12 +7658,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/keccak@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@types/keccak@npm:3.0.1"
+"@types/keccak@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/keccak@npm:3.0.2"
   dependencies:
     "@types/node": "*"
-  checksum: 55551902b31edafda6b9a65252a09669d654b1afd31770129955198ac79c815b7fdf59e6fc586d824414a8d11ede846a8beee4bb308bd21e2c4289c47db09535
+  checksum: a4f9486fae14c4d8d7fe2649e8f104e57d4a72afa920ba2beff4637ddcd8243c3dd2326c666f8dacb0ee34cbd8c97e038eedd3ad09432e302b85503a1bc513f2
   languageName: node
   linkType: hard
 
@@ -11656,7 +11656,7 @@ __metadata:
     "@docusaurus/module-type-aliases": ^2.4.1
     "@docusaurus/preset-classic": ^2.4.1
     "@swc/core": ^1.3.83
-    "@tsconfig/docusaurus": ^2.0.0
+    "@tsconfig/docusaurus": ^2.0.1
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^2.0.0
     docusaurus-plugin-typedoc: ^0.19.2
