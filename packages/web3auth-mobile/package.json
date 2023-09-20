@@ -30,7 +30,7 @@
   "dependencies": {
     "@cosmjs/encoding": "^0.31.1",
     "@desmoslabs/desmjs": "workspace:packages/core",
-    "@web3auth/react-native-sdk": "^4.0.0"
+    "@web3auth/react-native-sdk": "^5.0.0"
   },
   "peerDependencies": {
     "react-native": "*"
