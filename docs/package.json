@@ -27,7 +27,7 @@
     "swc-loader": "^0.2.3"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.4.1",
+    "@docusaurus/module-type-aliases": "^2.4.3",
     "@tsconfig/docusaurus": "^2.0.1",
     "docusaurus-plugin-typedoc": "^0.19.2",
     "typedoc": "^0.24.8",
