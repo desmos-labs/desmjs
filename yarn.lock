@@ -4704,7 +4704,7 @@ __metadata:
     "@types/keccak": ^3.0.2
     "@types/react-native": ^0.72.2
     "@types/readable-stream": ^4.0.2
-    "@web3auth/react-native-sdk": ^4.0.0
+    "@web3auth/react-native-sdk": ^5.0.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
   peerDependencies:
@@ -7156,17 +7156,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/base-session-manager@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@toruslabs/base-session-manager@npm:1.1.0"
-  dependencies:
-    "@toruslabs/http-helpers": ^4.0.0
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: fb6169b6c3e31c98e5c556a1c23d0f55ca4ce9de74ac199588193364c2f5aee410edade1cb2682d9a0cd833da61583535e2253c7520ff3da59fb11e4e31af466
-  languageName: node
-  linkType: hard
-
 "@toruslabs/base-session-manager@npm:^3.0.0":
   version: 3.0.0
   resolution: "@toruslabs/base-session-manager@npm:3.0.0"
@@ -7203,37 +7192,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/eccrypto@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@toruslabs/eccrypto@npm:3.0.0"
-  dependencies:
-    elliptic: ^6.5.4
-  checksum: ea1146f8582903e997e6ae6af02e7a8015423f417c08f0e49757a0eac05c8cb802c29012b68809232bf2f93a73400f4fac508f441310a7e5c49bbad10a596f3f
-  languageName: node
-  linkType: hard
-
 "@toruslabs/eccrypto@npm:^4.0.0":
   version: 4.0.0
   resolution: "@toruslabs/eccrypto@npm:4.0.0"
   dependencies:
     elliptic: ^6.5.4
   checksum: 760e498ad08c6b06e9d9da4d528d8ac877562378e908d9ea120814a9bbb1151c63269d54c191718c06a4d607a57f7643cb40e8f1bb4b8c0438cafab23a4ad531
-  languageName: node
-  linkType: hard
-
-"@toruslabs/http-helpers@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@toruslabs/http-helpers@npm:4.0.0"
-  dependencies:
-    lodash.merge: ^4.6.2
-    loglevel: ^1.8.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-    "@sentry/types": ^7.x
-  peerDependenciesMeta:
-    "@sentry/types":
-      optional: true
-  checksum: dab9ffb559e053e599723d85454bf087b3a9c7f8f063983103e5061a6958d2838fc70937f058953013c7db0643b0c78ca092c55ac7b69f1bca08e51232c185bd
   languageName: node
   linkType: hard
 
@@ -7250,21 +7214,6 @@ __metadata:
     "@sentry/types":
       optional: true
   checksum: 2402fb85e380f8dd1502f7a32639894e3a0ce440e9b4417d45c47986bc44d873b9ff341132e8a8dc6de014a2d793fee3fb6969c24d9ce097d43605e376a8c298
-  languageName: node
-  linkType: hard
-
-"@toruslabs/metadata-helpers@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@toruslabs/metadata-helpers@npm:4.0.0"
-  dependencies:
-    "@toruslabs/eccrypto": ^3.0.0
-    "@toruslabs/http-helpers": ^4.0.0
-    elliptic: ^6.5.4
-    ethereum-cryptography: ^2.0.0
-    json-stable-stringify: ^1.0.2
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: 1e67738a3235152b11a87ee399379a72a184e16be3fc05d9d362ebd4e7d402c690b89e3fca9ac0b7dd92efa5034375894ccb8f479efffe7cd0026c8c6b4041ae
   languageName: node
   linkType: hard
 
@@ -7309,19 +7258,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: 0af8d485c1fbfb1d0280f58b44c2b228dc1e7a7e3dd142e780d88189516c885f378a572c60e45cc659aa38fa897d12327bf79ab3ca3aa16d1e169a72b412fdb7
-  languageName: node
-  linkType: hard
-
-"@toruslabs/openlogin-session-manager@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@toruslabs/openlogin-session-manager@npm:1.1.0"
-  dependencies:
-    "@toruslabs/base-session-manager": ^1.1.0
-    "@toruslabs/eccrypto": ^3.0.0
-    "@toruslabs/metadata-helpers": 4.0.0
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: d4a9630fa232817959ff595e98411980af9ba13942d1ae2054b098751ead7b222b736a591b1b094cbacaf6980748b71f26a328faf46d41bdbeff1b11cf7436c3
   languageName: node
   linkType: hard
 
@@ -8786,19 +8722,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/react-native-sdk@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@web3auth/react-native-sdk@npm:4.0.0"
+"@web3auth/react-native-sdk@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@web3auth/react-native-sdk@npm:5.0.0"
   dependencies:
-    "@toruslabs/openlogin-session-manager": ^1.1.0
-    base64url: ^3.0.1
+    "@toruslabs/openlogin-session-manager": ^3.0.0
+    "@toruslabs/openlogin-utils": ^5.0.2
     buffer: ^6.0.3
     loglevel: ^1.8.1
-    react-native-url-polyfill: ^1.3.0
+    react-native-url-polyfill: ^2.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
     react-native: "*"
-  checksum: 2fc03f6fd6ee4e71cc6d4ec6297a3bd4cbdfe1d7be16cfe88d607f66499f9cbc26c61adac32abef42321d03cd9d1d90b1385eadbf5bede5f41b7270064ea56bf
+  checksum: 259ec3063a5b8841343a3cccf85038e33ea0215d3d0307c7cc84767bc793d67348ba319cc703aaabf10c5845ad26df5cf8ec94749d03655e3aed36973bc42999
   languageName: node
   linkType: hard
 
@@ -19086,14 +19022,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-url-polyfill@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "react-native-url-polyfill@npm:1.3.0"
+"react-native-url-polyfill@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "react-native-url-polyfill@npm:2.0.0"
   dependencies:
     whatwg-url-without-unicode: 8.0.0-3
   peerDependencies:
     react-native: "*"
-  checksum: 24ef81493a642b9359c1e8048de4da84fb554ffcf35677f9d8b11956d700faa4b9ac9d74f56aee67dd8d8b4ef6d9879e7431848785880ada657f8bec0211b00a
+  checksum: 1a2e1030a62fd093764b5330ce0ff34d72246e581dd2892cddc347d8621931aeb2c9ea3e054960484a1259230e8461e569e1890f1ff452d3c5c0adef70190fc3
   languageName: node
   linkType: hard
 
