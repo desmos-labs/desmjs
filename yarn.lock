@@ -4750,7 +4750,7 @@ __metadata:
     "@types/keccak": ^3.0.2
     "@types/readable-stream": ^4.0.2
     "@web3auth/base": ^7.0.1
-    "@web3auth/modal": ^7.0.2
+    "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.0.2
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
@@ -8576,9 +8576,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^7.0.2":
-  version: 7.0.2
-  resolution: "@web3auth/modal@npm:7.0.2"
+"@web3auth/modal@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@web3auth/modal@npm:7.0.3"
   dependencies:
     "@web3auth/base": ^7.0.1
     "@web3auth/base-provider": ^7.0.1
@@ -8588,14 +8588,14 @@ __metadata:
     "@web3auth/openlogin-adapter": ^7.0.1
     "@web3auth/phantom-adapter": ^7.0.2
     "@web3auth/solana-provider": ^7.0.2
-    "@web3auth/torus-evm-adapter": ^7.0.1
+    "@web3auth/torus-evm-adapter": ^7.0.3
     "@web3auth/torus-solana-adapter": ^7.0.2
     "@web3auth/ui": ^7.0.2
     "@web3auth/wallet-connect-v2-adapter": ^7.0.2
   peerDependencies:
     "@babel/runtime": 7.x
     "@solana/web3.js": ^1.x
-  checksum: 9233ce02cc493d00e36256697e7769152282c38a1a9e1f4a6ce0477091faf7d657c528171a1cd7600d9aab0a8a449a9f4e1dcd206f3f708d117452b1114589b5
+  checksum: a2096f7bab22cd709b73af9a16c91b46eeff3ca770e78cabf8f4d862cd20974e2b25eaafc8cc03f2d3f6fbed43dc1161986da5d28eb4987e470a8d5bc6673bc1
   languageName: node
   linkType: hard
 
@@ -8684,16 +8684,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/torus-evm-adapter@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@web3auth/torus-evm-adapter@npm:7.0.1"
+"@web3auth/torus-evm-adapter@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@web3auth/torus-evm-adapter@npm:7.0.3"
   dependencies:
     "@toruslabs/torus-embed": ^3.0.0
     "@web3auth/base": ^7.0.1
     "@web3auth/base-evm-adapter": ^7.0.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 4f6f48394e90e14837af640667901c9e0a6d9c193c3b544d21fed99af670d8840e9d529289789867fdd85109d669dd80aac72b4b3e79547be0e34bbb22b68af4
+  checksum: 92b0a10c44dfa256cc7ccd4277cf13183a25eab2ba64a54550c81768416edb8f0e7be499dbd219e858575e7ccf221565a37cc5e76785e03002d971475e5c8d39
   languageName: node
   linkType: hard
 
