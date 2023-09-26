@@ -4648,9 +4648,9 @@ __metadata:
     "@cosmjs/proto-signing": ^0.31.1
     "@cosmjs/utils": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.12.27
+    "@keplr-wallet/types": 0.12.28
     "@types/jest": ^29.5.5
-    "@types/node": ^20.6.5
+    "@types/node": ^20.7.0
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -4671,7 +4671,7 @@ __metadata:
     "@protobufs/gogoproto": ^0.0.10
     "@protobufs/google": ^0.0.10
     "@types/long": ^4.0.1
-    "@types/node": ^20.6.5
+    "@types/node": ^20.7.0
     long: ^4.0.0
     prettier: ^3.0.3
     protobufjs: ^7.2.5
@@ -4697,7 +4697,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.6.5
+    "@types/node": ^20.7.0
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.10.1
@@ -4750,7 +4750,7 @@ __metadata:
     "@types/keccak": ^3.0.2
     "@types/readable-stream": ^4.0.2
     "@web3auth/base": ^7.0.1
-    "@web3auth/modal": ^7.0.2
+    "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.0.2
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
@@ -4777,7 +4777,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.6.5
+    "@types/node": ^20.7.0
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -5974,12 +5974,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.12.27":
-  version: 0.12.27
-  resolution: "@keplr-wallet/types@npm:0.12.27"
+"@keplr-wallet/types@npm:0.12.28":
+  version: 0.12.28
+  resolution: "@keplr-wallet/types@npm:0.12.28"
   dependencies:
     long: ^4.0.0
-  checksum: 9f3812def3f63cf11af33690526d0773b2ebb5939dab3fce35c9f83cfd4adbe6d52971e3cfbffb8bbbf224a9b79d37f926820a7408f747d11fa1994ce75869d7
+  checksum: 2b763b03ccddf7d3b7e47487ab530a1249f7a8ad97d7bb4bff8344ea4a8ab5e8eaf7361bf12ca4056a820251f700f4422b04275b3dc428fa3c771f98de9a5f44
   languageName: node
   linkType: hard
 
@@ -7729,10 +7729,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.6.5":
-  version: 20.6.5
-  resolution: "@types/node@npm:20.6.5"
-  checksum: b849e849cf7631458a65c5019c81962028e306d8c4455a48422277b240f5a7eb8a1f1dafa60306bd4c773b77263bb8b05c074b1026e868bd137bb2022cf63ea2
+"@types/node@npm:^20.7.0":
+  version: 20.7.0
+  resolution: "@types/node@npm:20.7.0"
+  checksum: 1b2919925c213f4d2039ada7a8354c998e144f7291db8d719ef58ea9924ab636c113690073b0ec3b82ba62907385f7e0f51e9d1583c1a818776daa5156d3a590
   languageName: node
   linkType: hard
 
@@ -8576,9 +8576,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/modal@npm:^7.0.2":
-  version: 7.0.2
-  resolution: "@web3auth/modal@npm:7.0.2"
+"@web3auth/modal@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@web3auth/modal@npm:7.0.3"
   dependencies:
     "@web3auth/base": ^7.0.1
     "@web3auth/base-provider": ^7.0.1
@@ -8588,14 +8588,14 @@ __metadata:
     "@web3auth/openlogin-adapter": ^7.0.1
     "@web3auth/phantom-adapter": ^7.0.2
     "@web3auth/solana-provider": ^7.0.2
-    "@web3auth/torus-evm-adapter": ^7.0.1
+    "@web3auth/torus-evm-adapter": ^7.0.3
     "@web3auth/torus-solana-adapter": ^7.0.2
     "@web3auth/ui": ^7.0.2
     "@web3auth/wallet-connect-v2-adapter": ^7.0.2
   peerDependencies:
     "@babel/runtime": 7.x
     "@solana/web3.js": ^1.x
-  checksum: 9233ce02cc493d00e36256697e7769152282c38a1a9e1f4a6ce0477091faf7d657c528171a1cd7600d9aab0a8a449a9f4e1dcd206f3f708d117452b1114589b5
+  checksum: a2096f7bab22cd709b73af9a16c91b46eeff3ca770e78cabf8f4d862cd20974e2b25eaafc8cc03f2d3f6fbed43dc1161986da5d28eb4987e470a8d5bc6673bc1
   languageName: node
   linkType: hard
 
@@ -8684,16 +8684,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/torus-evm-adapter@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@web3auth/torus-evm-adapter@npm:7.0.1"
+"@web3auth/torus-evm-adapter@npm:^7.0.3":
+  version: 7.0.3
+  resolution: "@web3auth/torus-evm-adapter@npm:7.0.3"
   dependencies:
     "@toruslabs/torus-embed": ^3.0.0
     "@web3auth/base": ^7.0.1
     "@web3auth/base-evm-adapter": ^7.0.1
   peerDependencies:
     "@babel/runtime": ^7.x
-  checksum: 4f6f48394e90e14837af640667901c9e0a6d9c193c3b544d21fed99af670d8840e9d529289789867fdd85109d669dd80aac72b4b3e79547be0e34bbb22b68af4
+  checksum: 92b0a10c44dfa256cc7ccd4277cf13183a25eab2ba64a54550c81768416edb8f0e7be499dbd219e858575e7ccf221565a37cc5e76785e03002d971475e5c8d39
   languageName: node
   linkType: hard
 
