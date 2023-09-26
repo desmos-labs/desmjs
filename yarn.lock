@@ -11643,7 +11643,7 @@ __metadata:
     "@tsconfig/docusaurus": ^2.0.1
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^2.0.0
-    docusaurus-plugin-typedoc: ^0.19.2
+    docusaurus-plugin-typedoc: ^0.20.1
     prism-react-renderer: ^2.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -11834,13 +11834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc@npm:^0.19.2":
-  version: 0.19.2
-  resolution: "docusaurus-plugin-typedoc@npm:0.19.2"
+"docusaurus-plugin-typedoc@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "docusaurus-plugin-typedoc@npm:0.20.1"
   peerDependencies:
     typedoc: ">=0.24.0"
     typedoc-plugin-markdown: ">=3.15.0"
-  checksum: 347c1b6b509e14dabbb8b4d1224682ea2281995a60b4cf48e456dbbdbcecb4b73cf4fe3e031f1e01ae72dfb3bec935c6eaac7e4ddf3f63587fad2ac8ea028cec
+  checksum: dfc0fa1b33e5142ebc939969944f68488c303ab5083e369052c9f40d5a70fe84237c23fa47012ee410bb23d20980ffe5675eb37f3a2ee0dfabdc5a1ff66f38d1
   languageName: node
   linkType: hard
 
