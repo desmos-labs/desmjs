@@ -43,7 +43,7 @@
     "@babel/preset-typescript": "^7.23.0",
     "@types/jest": "^29.5.5",
     "@types/keccak": "^3.0.2",
-    "@types/readable-stream": "^4.0.2",
+    "@types/readable-stream": "^4.0.3",
     "readable-stream": "^4.4.2",
     "typescript": "^4.9.5"
   }
