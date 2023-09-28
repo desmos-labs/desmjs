@@ -4650,7 +4650,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.28
     "@types/jest": ^29.5.5
-    "@types/node": ^20.7.0
+    "@types/node": ^20.7.1
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -4671,7 +4671,7 @@ __metadata:
     "@protobufs/gogoproto": ^0.0.10
     "@protobufs/google": ^0.0.10
     "@types/long": ^4.0.1
-    "@types/node": ^20.7.0
+    "@types/node": ^20.7.1
     long: ^4.0.0
     prettier: ^3.0.3
     protobufjs: ^7.2.5
@@ -4697,7 +4697,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.7.0
+    "@types/node": ^20.7.1
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.10.1
@@ -4777,7 +4777,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.7.0
+    "@types/node": ^20.7.1
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -7729,10 +7729,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.7.0":
-  version: 20.7.0
-  resolution: "@types/node@npm:20.7.0"
-  checksum: 1b2919925c213f4d2039ada7a8354c998e144f7291db8d719ef58ea9924ab636c113690073b0ec3b82ba62907385f7e0f51e9d1583c1a818776daa5156d3a590
+"@types/node@npm:^20.7.1":
+  version: 20.7.1
+  resolution: "@types/node@npm:20.7.1"
+  checksum: 3140bd6c9130f1ed73a78ce7a1765ee43e155c1eea50eea45e18faeb31d11d97a84fffdc5e3a97582101d2f57d2652a50f510ede6c702780267bad74c822d56c
   languageName: node
   linkType: hard
 
