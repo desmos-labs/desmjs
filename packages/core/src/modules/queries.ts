@@ -9,9 +9,7 @@ import {
   setupGovExtension,
   setupIbcExtension,
   setupStakingExtension,
-  setupTxExtension,
   StakingExtension,
-  TxExtension,
 } from "@cosmjs/stargate";
 import { setupWasmExtension, WasmExtension } from "@cosmjs/cosmwasm-stargate";
 import { TendermintClient } from "@cosmjs/tendermint-rpc";
@@ -39,6 +37,7 @@ import {
   setupTokenFactoryV1Extension,
   TokenFactoryV1Extension,
 } from "./tokenfactory/v1";
+import { setupTxExtension, TxExtension } from "./tx/queries";
 
 export type DesmosQueryClient = QueryClient &
   AuthzV1Beta1Extension &

@@ -164,12 +164,12 @@ export async function getAminoSignerAndClient(): Promise<
  * Builds a Signer and DesmosClient instance based on a test mnemonic.
  * The returned signer will sign transactions using the DIRECT signing mode.
  */
-export async function getDirectSignerAndClient(): Promise<
-  [Signer, DesmosClient]
-> {
+export async function getDirectSignerAndClient(
+  mnemonic?: string,
+): Promise<[Signer, DesmosClient]> {
   const signer = await OfflineSignerAdapter.fromMnemonic(
     SigningMode.DIRECT,
-    testUser1.mnemonic,
+    mnemonic || testUser1.mnemonic,
     {
       hdPath: [
         stringToPath("m/44'/852'/0'/0/0"),
