@@ -21,3 +21,4 @@ The version is bumped when a new Desmos version is released.
 |     `4.6.x`     |           `v4.6.x`            |
 |     `4.7.x`     |      `v4.7.x`, `v4.8.1`       |
 |     `5.0.x`     |           `v5.0.x`            |
+|     `6.0.x`     |           `v6.0.x`            |

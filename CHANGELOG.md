@@ -1,3 +1,7 @@
+## Version 6.0.1
+### Features
+- Add a new `feeGranter` parameter to the `SimulateOptions` in order to properly simulate transactions using a fee grant
+
 ## Version 6.0.0
 ### New Features
 - Added support for the `x/tokenfactory` module.
