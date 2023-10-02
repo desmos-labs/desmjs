@@ -53,6 +53,7 @@ import { profileFromAny } from "./modules/profiles/v3";
 export interface SimulateOptions {
   publicKey?: PublicKey;
   memo?: string;
+  feeGranter?: string;
 }
 
 export interface SignTxOptions {
@@ -371,6 +372,7 @@ export class DesmosClient extends SigningCosmWasmClient {
         ? fee
         : await this.estimateTxFee(signerAddress, messages, {
             memo: options?.memo,
+            feeGranter: options?.feeGranter,
           });
 
     // Build the signer data
@@ -429,6 +431,7 @@ export class DesmosClient extends SigningCosmWasmClient {
       options?.memo,
       pubKey,
       sequence,
+      options?.feeGranter,
     );
     assertDefined(gasInfo);
     return Uint53.fromString(gasInfo.gasUsed.toString()).toNumber();
