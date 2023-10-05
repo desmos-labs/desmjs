@@ -4648,9 +4648,9 @@ __metadata:
     "@cosmjs/proto-signing": ^0.31.1
     "@cosmjs/utils": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.12.28
+    "@keplr-wallet/types": 0.12.30
     "@types/jest": ^29.5.5
-    "@types/node": ^20.7.2
+    "@types/node": ^20.8.2
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -4671,7 +4671,7 @@ __metadata:
     "@protobufs/gogoproto": ^0.0.10
     "@protobufs/google": ^0.0.10
     "@types/long": ^4.0.1
-    "@types/node": ^20.7.2
+    "@types/node": ^20.8.2
     long: ^4.0.0
     prettier: ^3.0.3
     protobufjs: ^7.2.5
@@ -4697,7 +4697,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.7.2
+    "@types/node": ^20.8.2
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.10.1
@@ -4777,7 +4777,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.7.2
+    "@types/node": ^20.8.2
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -5974,12 +5974,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.12.28":
-  version: 0.12.28
-  resolution: "@keplr-wallet/types@npm:0.12.28"
+"@keplr-wallet/types@npm:0.12.30":
+  version: 0.12.30
+  resolution: "@keplr-wallet/types@npm:0.12.30"
   dependencies:
     long: ^4.0.0
-  checksum: 2b763b03ccddf7d3b7e47487ab530a1249f7a8ad97d7bb4bff8344ea4a8ab5e8eaf7361bf12ca4056a820251f700f4422b04275b3dc428fa3c771f98de9a5f44
+  checksum: c29a51679475008c2c48035780d1bfaa1a5a5bb2318416e61c87ad4881ff3449286242a582da04395b74cacb67f69948b5b1ee0037b3954225f994e6d19263be
   languageName: node
   linkType: hard
 
@@ -6960,90 +6960,90 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-arm64@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-darwin-arm64@npm:1.3.90"
+"@swc/core-darwin-arm64@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-darwin-arm64@npm:1.3.92"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-darwin-x64@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-darwin-x64@npm:1.3.90"
+"@swc/core-darwin-x64@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-darwin-x64@npm:1.3.92"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm-gnueabihf@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.90"
+"@swc/core-linux-arm-gnueabihf@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.3.92"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-gnu@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.90"
+"@swc/core-linux-arm64-gnu@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.3.92"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-arm64-musl@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-linux-arm64-musl@npm:1.3.90"
+"@swc/core-linux-arm64-musl@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-linux-arm64-musl@npm:1.3.92"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-gnu@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-linux-x64-gnu@npm:1.3.90"
+"@swc/core-linux-x64-gnu@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-linux-x64-gnu@npm:1.3.92"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@swc/core-linux-x64-musl@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-linux-x64-musl@npm:1.3.90"
+"@swc/core-linux-x64-musl@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-linux-x64-musl@npm:1.3.92"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@swc/core-win32-arm64-msvc@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.90"
+"@swc/core-win32-arm64-msvc@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.3.92"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@swc/core-win32-ia32-msvc@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.90"
+"@swc/core-win32-ia32-msvc@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.3.92"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@swc/core-win32-x64-msvc@npm:1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core-win32-x64-msvc@npm:1.3.90"
+"@swc/core-win32-x64-msvc@npm:1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core-win32-x64-msvc@npm:1.3.92"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.3.90":
-  version: 1.3.90
-  resolution: "@swc/core@npm:1.3.90"
+"@swc/core@npm:^1.3.92":
+  version: 1.3.92
+  resolution: "@swc/core@npm:1.3.92"
   dependencies:
-    "@swc/core-darwin-arm64": 1.3.90
-    "@swc/core-darwin-x64": 1.3.90
-    "@swc/core-linux-arm-gnueabihf": 1.3.90
-    "@swc/core-linux-arm64-gnu": 1.3.90
-    "@swc/core-linux-arm64-musl": 1.3.90
-    "@swc/core-linux-x64-gnu": 1.3.90
-    "@swc/core-linux-x64-musl": 1.3.90
-    "@swc/core-win32-arm64-msvc": 1.3.90
-    "@swc/core-win32-ia32-msvc": 1.3.90
-    "@swc/core-win32-x64-msvc": 1.3.90
+    "@swc/core-darwin-arm64": 1.3.92
+    "@swc/core-darwin-x64": 1.3.92
+    "@swc/core-linux-arm-gnueabihf": 1.3.92
+    "@swc/core-linux-arm64-gnu": 1.3.92
+    "@swc/core-linux-arm64-musl": 1.3.92
+    "@swc/core-linux-x64-gnu": 1.3.92
+    "@swc/core-linux-x64-musl": 1.3.92
+    "@swc/core-win32-arm64-msvc": 1.3.92
+    "@swc/core-win32-ia32-msvc": 1.3.92
+    "@swc/core-win32-x64-msvc": 1.3.92
     "@swc/counter": ^0.1.1
     "@swc/types": ^0.1.5
   peerDependencies:
@@ -7072,7 +7072,7 @@ __metadata:
   peerDependenciesMeta:
     "@swc/helpers":
       optional: true
-  checksum: f8ced5187068dc73445c135065c6492f0ac559d0f7720c2482aa9663c87bd015f3d2abef6ee7b2f817280a5e8dd0946c59cce7e1499180644fbc948a9e3823ab
+  checksum: 88c0c62ff790e896180862c341be8bae98baf0a5c5e87f2f04f49e14b8c4fba460d6b352618b4dda066c8ae6bf152cd843eab25837f38128175208b8c0635721
   languageName: node
   linkType: hard
 
@@ -7729,10 +7729,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.7.2":
-  version: 20.7.2
-  resolution: "@types/node@npm:20.7.2"
-  checksum: 5baa09368c8daa50ad1eaa2499b988b2f4c06cacf8b251d1e63f68ad32df97b21d8104f1ac06889481f1d3e84056842732bb848dd1136164d823c1d4a6baf435
+"@types/node@npm:^20.8.2":
+  version: 20.8.2
+  resolution: "@types/node@npm:20.8.2"
+  checksum: 3da73e25d821bfcdb7de98589027e08bb4848e55408671c4a83ec0341e124b5313a0b20e1e4b4eff1168ea17a86f622ad73fcb04b761abd77496b9a27cbd5de5
   languageName: node
   linkType: hard
 
@@ -11684,7 +11684,7 @@ __metadata:
     "@docusaurus/core": ^2.4.3
     "@docusaurus/module-type-aliases": ^2.4.3
     "@docusaurus/preset-classic": ^2.4.3
-    "@swc/core": ^1.3.90
+    "@swc/core": ^1.3.92
     "@tsconfig/docusaurus": ^2.0.1
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^2.0.0
