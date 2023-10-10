@@ -4650,7 +4650,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.30
     "@types/jest": ^29.5.5
-    "@types/node": ^20.8.2
+    "@types/node": ^20.8.4
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -4671,7 +4671,7 @@ __metadata:
     "@protobufs/gogoproto": ^0.0.10
     "@protobufs/google": ^0.0.10
     "@types/long": ^4.0.1
-    "@types/node": ^20.8.2
+    "@types/node": ^20.8.4
     long: ^4.0.0
     prettier: ^3.0.3
     protobufjs: ^7.2.5
@@ -4697,7 +4697,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.8.2
+    "@types/node": ^20.8.4
     "@types/pino": ^7.0.5
     "@walletconnect/qrcode-modal": ^1.8.0
     "@walletconnect/sign-client": ^2.10.1
@@ -4751,7 +4751,7 @@ __metadata:
     "@types/readable-stream": ^4.0.3
     "@web3auth/base": ^7.0.1
     "@web3auth/modal": ^7.0.3
-    "@web3auth/ui": ^7.0.2
+    "@web3auth/ui": ^7.0.4
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -4777,7 +4777,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.5
     "@types/long": ^4.0.1
-    "@types/node": ^20.8.2
+    "@types/node": ^20.8.4
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
     cosmjs-types: ^0.8.0
@@ -7231,6 +7231,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-jrpc@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@toruslabs/openlogin-jrpc@npm:5.2.0"
+  dependencies:
+    "@metamask/rpc-errors": ^6.0.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    end-of-stream: ^1.4.4
+    events: ^3.3.0
+    fast-safe-stringify: ^2.1.1
+    once: ^1.4.0
+    pump: ^3.0.0
+    readable-stream: ^4.4.2
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 0fd1c79521d782150fac3d5cb25cf3bbb3df45bb7e25a4769313e0d3ea82497cf53b37d0821cd2a12aee0a8d9b9345161575c354d549c3c8121088f3222a9c4d
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin-session-manager@npm:^3.0.0":
   version: 3.0.0
   resolution: "@toruslabs/openlogin-session-manager@npm:3.0.0"
@@ -7256,6 +7274,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-utils@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@toruslabs/openlogin-utils@npm:5.2.0"
+  dependencies:
+    "@toruslabs/constants": ^13.0.1
+    base64url: ^3.0.1
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: dd6646b9e8920c187aa303bfd1a5fabdd866d962f046ddbf381d45951c14ecc7f5cb18654178418505e4a01e2c0ae7b4d185c2ebb24e96eb878bff2d9577d2f5
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin@npm:^5.0.3":
   version: 5.0.3
   resolution: "@toruslabs/openlogin@npm:5.0.3"
@@ -7272,6 +7302,25 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: d9c73eaf43d1375ef62adda1c3d9ee0cd5d32dc552052c6ff16203debf64c2ec3b97d23b7e61e9e30649796918516e02cc74c9294c38f38c424f0b7def8690ef
+  languageName: node
+  linkType: hard
+
+"@toruslabs/openlogin@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@toruslabs/openlogin@npm:5.2.0"
+  dependencies:
+    "@toruslabs/broadcast-channel": ^8.0.0
+    "@toruslabs/eccrypto": ^4.0.0
+    "@toruslabs/metadata-helpers": ^5.0.0
+    "@toruslabs/openlogin-session-manager": ^3.0.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    bowser: ^2.11.0
+    events: ^3.3.0
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 4c0074ff8b930406cb24559ec28844763a9c2fd1714dff6b614456905b781e2187429f6d6a5dd9d2592fbe4084b3968774e04de9888e2ca85bdc0eaf8245cd07
   languageName: node
   linkType: hard
 
@@ -7729,10 +7778,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.8.2":
-  version: 20.8.2
-  resolution: "@types/node@npm:20.8.2"
-  checksum: 3da73e25d821bfcdb7de98589027e08bb4848e55408671c4a83ec0341e124b5313a0b20e1e4b4eff1168ea17a86f622ad73fcb04b761abd77496b9a27cbd5de5
+"@types/node@npm:^20.8.4":
+  version: 20.8.4
+  resolution: "@types/node@npm:20.8.4"
+  dependencies:
+    undici-types: ~5.25.1
+  checksum: 2106b9ef9750297cac68249428d7067c4d22c26908854165b70a164e34e900f4c34bb9bf3887c9391206b500d3e87171d03b1846e25788925236a0354390d278
   languageName: node
   linkType: hard
 
@@ -7979,15 +8030,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^6.7.4":
-  version: 6.7.4
-  resolution: "@typescript-eslint/eslint-plugin@npm:6.7.4"
+"@typescript-eslint/eslint-plugin@npm:^6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/eslint-plugin@npm:6.7.5"
   dependencies:
     "@eslint-community/regexpp": ^4.5.1
-    "@typescript-eslint/scope-manager": 6.7.4
-    "@typescript-eslint/type-utils": 6.7.4
-    "@typescript-eslint/utils": 6.7.4
-    "@typescript-eslint/visitor-keys": 6.7.4
+    "@typescript-eslint/scope-manager": 6.7.5
+    "@typescript-eslint/type-utils": 6.7.5
+    "@typescript-eslint/utils": 6.7.5
+    "@typescript-eslint/visitor-keys": 6.7.5
     debug: ^4.3.4
     graphemer: ^1.4.0
     ignore: ^5.2.4
@@ -8000,7 +8051,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 91d5051ae935d8bb61091665ee1e5c456992a0c29b58c86c1bb2b72c935dd831c0d3c7726a8d609455ae4a8b4ba8786ebeeef4bc7eff388b5f77475e7a634dc0
+  checksum: c37edf5a703db4ff9227d67c2d2cf817e65c9afc94cc0e650fa3d2b05ac55201ef887ce9dadb9ca13779f4025bf4367e132b013e3559e777006a2332079bb180
   languageName: node
   linkType: hard
 
@@ -8032,12 +8083,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:6.7.4":
-  version: 6.7.4
-  resolution: "@typescript-eslint/type-utils@npm:6.7.4"
+"@typescript-eslint/scope-manager@npm:6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/scope-manager@npm:6.7.5"
   dependencies:
-    "@typescript-eslint/typescript-estree": 6.7.4
-    "@typescript-eslint/utils": 6.7.4
+    "@typescript-eslint/types": 6.7.5
+    "@typescript-eslint/visitor-keys": 6.7.5
+  checksum: f21858ed78f81ab2d9879139f69657fda2a7b901078f79df64d1262d80f84ef66c56525ed0bb5e393fa5ca5474ad97f2225b7f713977c2d0f79cda31b2744af9
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/type-utils@npm:6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/type-utils@npm:6.7.5"
+  dependencies:
+    "@typescript-eslint/typescript-estree": 6.7.5
+    "@typescript-eslint/utils": 6.7.5
     debug: ^4.3.4
     ts-api-utils: ^1.0.1
   peerDependencies:
@@ -8045,7 +8106,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 231240a1aa1008a1b1facdd40b931433606947254f6e04705d154791a8b2c15d5ce3355b7d8a29cf7bb53c2e2eca1340c7860dd395389858d442af06c586d1fd
+  checksum: 8023d8ddcfbf4a0411b192016711068e9e6787c5811aee3a25ac40025ade0d063a1a3d7b38469e1a534bb31fa9dbeec08ab53b7a6d7b3128358294ac5b219d9a
   languageName: node
   linkType: hard
 
@@ -8053,6 +8114,13 @@ __metadata:
   version: 6.7.4
   resolution: "@typescript-eslint/types@npm:6.7.4"
   checksum: 287ae48a2bb722b866460bcb2ba4ff908348145b3fc0af4ea75679d474e9ba3632bf64689044f181fe8ca3cb5f41238bb31ea428d5e78f1c3982f6dac6b7b149
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/types@npm:6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/types@npm:6.7.5"
+  checksum: f21e5726b60f13feb3a920c92515fbc1205ba0e9bba9959b2e42c02c282a0ab4fb0e5ae84f3807b9b1cf95036027e9033d92a911fa88e6c243a87621d8dd7a01
   languageName: node
   linkType: hard
 
@@ -8074,20 +8142,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:6.7.4":
-  version: 6.7.4
-  resolution: "@typescript-eslint/utils@npm:6.7.4"
+"@typescript-eslint/typescript-estree@npm:6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/typescript-estree@npm:6.7.5"
+  dependencies:
+    "@typescript-eslint/types": 6.7.5
+    "@typescript-eslint/visitor-keys": 6.7.5
+    debug: ^4.3.4
+    globby: ^11.1.0
+    is-glob: ^4.0.3
+    semver: ^7.5.4
+    ts-api-utils: ^1.0.1
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 17685e8321edce1d1ec4278d84e63c0f41ccb19e9308f21c37450943ad0c33328755ac52b966e7855af17e01d22bc83d1fcda79c279fabe7d3460c8f315a7265
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/utils@npm:6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/utils@npm:6.7.5"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
     "@types/json-schema": ^7.0.12
     "@types/semver": ^7.5.0
-    "@typescript-eslint/scope-manager": 6.7.4
-    "@typescript-eslint/types": 6.7.4
-    "@typescript-eslint/typescript-estree": 6.7.4
+    "@typescript-eslint/scope-manager": 6.7.5
+    "@typescript-eslint/types": 6.7.5
+    "@typescript-eslint/typescript-estree": 6.7.5
     semver: ^7.5.4
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 75e197dd58b230436ceb51f2050bb3af8796b05a197eaf741251f8e9c4d9ba1a99d654d090da0c49d31b20da79d9cc3746cbb663ffd5ea614d7a960d64676d65
+  checksum: f365c654241f927e7784640079627d60a296aa3d575552b07594a69cfc419832eb5fa4adc87acb1988bea9741ae9cc4a5277dab168990310caef5de125255752
   languageName: node
   linkType: hard
 
@@ -8098,6 +8184,16 @@ __metadata:
     "@typescript-eslint/types": 6.7.4
     eslint-visitor-keys: ^3.4.1
   checksum: 34d09798b6c48dc059e88c6cb3df5f96e859bd65d1dd05d907b8a3c7a5708a737d50607081fb14a4b974b90cfe4169a93db974bf53af8b282420187f73b0afac
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:6.7.5":
+  version: 6.7.5
+  resolution: "@typescript-eslint/visitor-keys@npm:6.7.5"
+  dependencies:
+    "@typescript-eslint/types": 6.7.5
+    eslint-visitor-keys: ^3.4.1
+  checksum: 2df996742f63d89fa339b0e8ff3a3a289d36b3f584f7538a7626bed3869e9ae27f8f56ab31748519d25a63de2ae22a43dd8413610b00436ff342b0a17eb85289
   languageName: node
   linkType: hard
 
@@ -8537,6 +8633,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@web3auth/base@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@web3auth/base@npm:7.0.4"
+  dependencies:
+    "@toruslabs/http-helpers": ^5.0.0
+    "@toruslabs/openlogin": ^5.2.0
+    "@toruslabs/openlogin-jrpc": ^5.2.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    jwt-decode: ^3.1.2
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: b2021a570f007f04b2a0d86287e6d6d1a9b9e15fbb2e366b98fe4568186d45487039636c059aaab33f8739efcc4de1060d13d95a7b862bc516c3559bb8139936
+  languageName: node
+  linkType: hard
+
 "@web3auth/ethereum-provider@npm:^7.0.2":
   version: 7.0.2
   resolution: "@web3auth/ethereum-provider@npm:7.0.2"
@@ -8735,6 +8848,31 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: 3d80c21c1396945c685ca2f98988d3287baad2cdb1b5eb5e55f8ff19eae226823c972fec77a173787ebbe46f6fa1786754990b0f3eeea144cd245618960acd52
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@web3auth/ui@npm:7.0.4"
+  dependencies:
+    "@toruslabs/http-helpers": ^5.0.0
+    "@toruslabs/openlogin": ^5.2.0
+    "@toruslabs/openlogin-jrpc": ^5.2.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    "@web3auth/base": ^7.0.4
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^23.5.1
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^13.2.2
+    react-qrcode-logo: ^2.9.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: 11846808c1db586b4235279b8577ded0a9d96039b2735eeca89a8a15c03344ce8e82f80b9d146bc777327021a92ae513f589f8961d1b113f8a53aa33b512731e
   languageName: node
   linkType: hard
 
@@ -11648,7 +11786,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
-    typedoc: ^0.25.1
+    typedoc: ^0.25.2
     typedoc-plugin-markdown: ^3.16.0
     typescript: ^5.1.6
   languageName: unknown
@@ -11667,7 +11805,7 @@ __metadata:
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/long": ^4.0.1
     "@types/pino": ^7.0.5
-    "@typescript-eslint/eslint-plugin": ^6.7.4
+    "@typescript-eslint/eslint-plugin": ^6.7.5
     "@typescript-eslint/parser": ^6.7.4
     "@walletconnect/jsonrpc-types": ^1.0.3
     eslint: ^8.51.0
@@ -21205,9 +21343,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.1":
-  version: 0.25.1
-  resolution: "typedoc@npm:0.25.1"
+"typedoc@npm:^0.25.2":
+  version: 0.25.2
+  resolution: "typedoc@npm:0.25.2"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.3.0
@@ -21217,7 +21355,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x
   bin:
     typedoc: bin/typedoc
-  checksum: 6c1c28cbf51b6ab1741429f58f540c5c12d6119ce30054866b879ef2a3a2120a6adbaf59919f7411d3bb51b9113fc926522c40934a3d8ef601785abdf0134eed
+  checksum: 5b6e24bae7498bb542aaba495378ed5a3e13c76eb04a1ae95b506f76bda4d517847101fb05a7eab3f6b79357d1e2ac6f4747d39792395329b72e463f7effda65
   languageName: node
   linkType: hard
 
@@ -21295,6 +21433,13 @@ __metadata:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.25.1":
+  version: 5.25.3
+  resolution: "undici-types@npm:5.25.3"
+  checksum: ec9d2cc36520cbd9fbe3b3b6c682a87fe5be214699e1f57d1e3d9a2cb5be422e62735f06e0067dc325fd3dd7404c697e4d479f9147dc8a804e049e29f357f2ff
   languageName: node
   linkType: hard
 
