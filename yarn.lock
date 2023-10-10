@@ -4751,7 +4751,7 @@ __metadata:
     "@types/readable-stream": ^4.0.3
     "@web3auth/base": ^7.0.1
     "@web3auth/modal": ^7.0.3
-    "@web3auth/ui": ^7.0.2
+    "@web3auth/ui": ^7.0.4
     cosmjs-types: ^0.8.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -7231,6 +7231,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-jrpc@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@toruslabs/openlogin-jrpc@npm:5.2.0"
+  dependencies:
+    "@metamask/rpc-errors": ^6.0.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    end-of-stream: ^1.4.4
+    events: ^3.3.0
+    fast-safe-stringify: ^2.1.1
+    once: ^1.4.0
+    pump: ^3.0.0
+    readable-stream: ^4.4.2
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 0fd1c79521d782150fac3d5cb25cf3bbb3df45bb7e25a4769313e0d3ea82497cf53b37d0821cd2a12aee0a8d9b9345161575c354d549c3c8121088f3222a9c4d
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin-session-manager@npm:^3.0.0":
   version: 3.0.0
   resolution: "@toruslabs/openlogin-session-manager@npm:3.0.0"
@@ -7256,6 +7274,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-utils@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@toruslabs/openlogin-utils@npm:5.2.0"
+  dependencies:
+    "@toruslabs/constants": ^13.0.1
+    base64url: ^3.0.1
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: dd6646b9e8920c187aa303bfd1a5fabdd866d962f046ddbf381d45951c14ecc7f5cb18654178418505e4a01e2c0ae7b4d185c2ebb24e96eb878bff2d9577d2f5
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin@npm:^5.0.3":
   version: 5.0.3
   resolution: "@toruslabs/openlogin@npm:5.0.3"
@@ -7272,6 +7302,25 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: d9c73eaf43d1375ef62adda1c3d9ee0cd5d32dc552052c6ff16203debf64c2ec3b97d23b7e61e9e30649796918516e02cc74c9294c38f38c424f0b7def8690ef
+  languageName: node
+  linkType: hard
+
+"@toruslabs/openlogin@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@toruslabs/openlogin@npm:5.2.0"
+  dependencies:
+    "@toruslabs/broadcast-channel": ^8.0.0
+    "@toruslabs/eccrypto": ^4.0.0
+    "@toruslabs/metadata-helpers": ^5.0.0
+    "@toruslabs/openlogin-session-manager": ^3.0.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    bowser: ^2.11.0
+    events: ^3.3.0
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 4c0074ff8b930406cb24559ec28844763a9c2fd1714dff6b614456905b781e2187429f6d6a5dd9d2592fbe4084b3968774e04de9888e2ca85bdc0eaf8245cd07
   languageName: node
   linkType: hard
 
@@ -8539,6 +8588,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@web3auth/base@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@web3auth/base@npm:7.0.4"
+  dependencies:
+    "@toruslabs/http-helpers": ^5.0.0
+    "@toruslabs/openlogin": ^5.2.0
+    "@toruslabs/openlogin-jrpc": ^5.2.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    jwt-decode: ^3.1.2
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: b2021a570f007f04b2a0d86287e6d6d1a9b9e15fbb2e366b98fe4568186d45487039636c059aaab33f8739efcc4de1060d13d95a7b862bc516c3559bb8139936
+  languageName: node
+  linkType: hard
+
 "@web3auth/ethereum-provider@npm:^7.0.2":
   version: 7.0.2
   resolution: "@web3auth/ethereum-provider@npm:7.0.2"
@@ -8737,6 +8803,31 @@ __metadata:
     react: ^18.x
     react-dom: ^18.x
   checksum: 3d80c21c1396945c685ca2f98988d3287baad2cdb1b5eb5e55f8ff19eae226823c972fec77a173787ebbe46f6fa1786754990b0f3eeea144cd245618960acd52
+  languageName: node
+  linkType: hard
+
+"@web3auth/ui@npm:^7.0.4":
+  version: 7.0.4
+  resolution: "@web3auth/ui@npm:7.0.4"
+  dependencies:
+    "@toruslabs/http-helpers": ^5.0.0
+    "@toruslabs/openlogin": ^5.2.0
+    "@toruslabs/openlogin-jrpc": ^5.2.0
+    "@toruslabs/openlogin-utils": ^5.2.0
+    "@web3auth/base": ^7.0.4
+    bowser: ^2.11.0
+    classnames: ^2.3.2
+    copy-to-clipboard: ^3.3.3
+    i18next: ^23.5.1
+    lodash.clonedeep: ^4.5.0
+    lodash.merge: ^4.6.2
+    react-i18next: ^13.2.2
+    react-qrcode-logo: ^2.9.0
+  peerDependencies:
+    "@babel/runtime": ^7.x
+    react: ^18.x
+    react-dom: ^18.x
+  checksum: 11846808c1db586b4235279b8577ded0a9d96039b2735eeca89a8a15c03344ce8e82f80b9d146bc777327021a92ae513f589f8961d1b113f8a53aa33b512731e
   languageName: node
   linkType: hard
 
@@ -11650,7 +11741,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
-    typedoc: ^0.25.1
+    typedoc: ^0.25.2
     typedoc-plugin-markdown: ^3.16.0
     typescript: ^5.1.6
   languageName: unknown
@@ -21207,9 +21298,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.1":
-  version: 0.25.1
-  resolution: "typedoc@npm:0.25.1"
+"typedoc@npm:^0.25.2":
+  version: 0.25.2
+  resolution: "typedoc@npm:0.25.2"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.3.0
@@ -21219,7 +21310,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x
   bin:
     typedoc: bin/typedoc
-  checksum: 6c1c28cbf51b6ab1741429f58f540c5c12d6119ce30054866b879ef2a3a2120a6adbaf59919f7411d3bb51b9113fc926522c40934a3d8ef601785abdf0134eed
+  checksum: 5b6e24bae7498bb542aaba495378ed5a3e13c76eb04a1ae95b506f76bda4d517847101fb05a7eab3f6b79357d1e2ac6f4747d39792395329b72e463f7effda65
   languageName: node
   linkType: hard
 
