@@ -4749,7 +4749,7 @@ __metadata:
     "@types/jest": ^29.5.5
     "@types/keccak": ^3.0.2
     "@types/readable-stream": ^4.0.3
-    "@web3auth/base": ^7.0.1
+    "@web3auth/base": ^7.0.4
     "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.0.4
     cosmjs-types: ^0.8.0
