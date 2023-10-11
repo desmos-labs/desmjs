@@ -32,12 +32,12 @@
     "@cosmjs/proto-signing": "^0.31.1",
     "@cosmjs/utils": "^0.31.1",
     "@desmoslabs/desmjs": "workspace:packages/core",
-    "@keplr-wallet/types": "0.12.31",
+    "@keplr-wallet/types": "0.12.32",
     "cosmjs-types": "^0.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-env": "^7.23.2",
     "@babel/preset-typescript": "^7.23.0",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.8.4",
