@@ -4683,7 +4683,7 @@ __metadata:
     "@cosmjs/encoding": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.6
-    "@types/keccak": ^3.0.2
+    "@types/keccak": ^3.0.3
     "@types/react-native": ^0.72.5
     "@types/readable-stream": ^4.0.3
     "@web3auth/react-native-sdk": ^5.0.0
@@ -4706,7 +4706,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.31.1
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.6
-    "@types/keccak": ^3.0.2
+    "@types/keccak": ^3.0.3
     "@types/readable-stream": ^4.0.3
     "@web3auth/base": ^7.0.4
     "@web3auth/modal": ^7.0.3
@@ -7633,12 +7633,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/keccak@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@types/keccak@npm:3.0.2"
+"@types/keccak@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@types/keccak@npm:3.0.3"
   dependencies:
     "@types/node": "*"
-  checksum: a4f9486fae14c4d8d7fe2649e8f104e57d4a72afa920ba2beff4637ddcd8243c3dd2326c666f8dacb0ee34cbd8c97e038eedd3ad09432e302b85503a1bc513f2
+  checksum: 3629dedb6273c10303c8b96b2e592937adfcd59fc7b4c3c79aeb45f5e1a89c2bc959f0ea3196e6791d9a73e10d3785fa2de548c1c6dee8fbe2fb587086e344d6
   languageName: node
   linkType: hard
 
