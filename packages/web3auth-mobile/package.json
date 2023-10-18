@@ -41,7 +41,7 @@
     "@babel/preset-typescript": "^7.23.2",
     "@types/jest": "^29.5.5",
     "@types/keccak": "^3.0.2",
-    "@types/react-native": "^0.72.3",
+    "@types/react-native": "^0.72.5",
     "@types/readable-stream": "^4.0.3",
     "readable-stream": "^4.4.2",
     "typescript": "^4.9.5"

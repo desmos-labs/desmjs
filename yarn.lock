@@ -4684,7 +4684,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.5
     "@types/keccak": ^3.0.2
-    "@types/react-native": ^0.72.3
+    "@types/react-native": ^0.72.5
     "@types/readable-stream": ^4.0.3
     "@web3auth/react-native-sdk": ^5.0.0
     readable-stream: ^4.4.2
@@ -7811,13 +7811,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:^0.72.3":
-  version: 0.72.3
-  resolution: "@types/react-native@npm:0.72.3"
+"@types/react-native@npm:^0.72.5":
+  version: 0.72.5
+  resolution: "@types/react-native@npm:0.72.5"
   dependencies:
     "@react-native/virtualized-lists": ^0.72.4
     "@types/react": "*"
-  checksum: f801ab3945dc4400f5ae6db6080d848748458929cc0085f5dc2f1252eccfe2fa38935a7e3b0f560da7bed11508e405442c6808f82e5fcdcaf55f707c18b7b11c
+  checksum: b6d93762c20001488a529f2f5c1e9c4874ed854ea96dd923929cdb4c8b5854332a9d44755c454a63e315c8bab69beb86173d4490e364b82a382f695b7de35aa2
   languageName: node
   linkType: hard
 
