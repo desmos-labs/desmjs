@@ -28,9 +28,9 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.31.1",
-    "@cosmjs/proto-signing": "^0.31.1",
-    "@cosmjs/utils": "^0.31.1",
+    "@cosmjs/amino": "^0.31.2",
+    "@cosmjs/proto-signing": "^0.31.2",
+    "@cosmjs/utils": "^0.31.2",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@keplr-wallet/types": "0.12.36",
     "cosmjs-types": "^0.8.0"
