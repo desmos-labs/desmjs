@@ -38,7 +38,7 @@
     "build": "yarn generate-code"
   },
   "dependencies": {
-    "@cosmjs/proto-signing": "^0.31.1",
+    "@cosmjs/proto-signing": "^0.31.2",
     "long": "^4.0.0",
     "protobufjs": "^7.2.5"
   },
@@ -49,7 +49,7 @@
     "@protobufs/gogoproto": "^0.0.10",
     "@protobufs/google": "^0.0.10",
     "@types/long": "^4.0.1",
-    "@types/node": "^20.8.7",
+    "@types/node": "^20.8.8",
     "prettier": "^3.0.3",
     "ts-morph": "^20.0.0",
     "ts-node": "^10.9.1",
