@@ -39,7 +39,7 @@
     "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec yarn npm publish"
   },
   "devDependencies": {
-    "@cosmjs/cosmwasm-stargate": "^0.31.2",
+    "@cosmjs/cosmwasm-stargate": "^0.31.3",
     "@cosmjs/crypto": "^0.31.2",
     "@cosmjs/encoding": "^0.31.2",
     "@cosmjs/proto-signing": "^0.31.2",
