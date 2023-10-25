@@ -28,7 +28,7 @@
     "lint": "eslint src --ignore-path ../../.gitignore --max-warnings 0 --ext .js,.ts"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.31.2",
+    "@cosmjs/amino": "^0.31.3",
     "@cosmjs/encoding": "^0.31.2",
     "@cosmjs/proto-signing": "^0.31.2",
     "@cosmjs/stargate": "^0.31.2",

@@ -28,7 +28,7 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.31.2",
+    "@cosmjs/amino": "^0.31.3",
     "@cosmjs/proto-signing": "^0.31.2",
     "@cosmjs/utils": "^0.31.2",
     "@desmoslabs/desmjs": "workspace:packages/core",
