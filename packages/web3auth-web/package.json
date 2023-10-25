@@ -30,7 +30,7 @@
   "dependencies": {
     "@cosmjs/amino": "^0.31.2",
     "@cosmjs/encoding": "^0.31.2",
-    "@cosmjs/proto-signing": "^0.31.2",
+    "@cosmjs/proto-signing": "^0.31.3",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@web3auth/base": "^7.0.4",
     "@web3auth/modal": "^7.0.3",
