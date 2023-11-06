@@ -4708,7 +4708,7 @@ __metadata:
     "@types/jest": ^29.5.7
     "@types/keccak": ^3.0.3
     "@types/readable-stream": ^4.0.4
-    "@web3auth/base": ^7.0.4
+    "@web3auth/base": ^7.1.0
     "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.0.5
     cosmjs-types: ^0.8.0
@@ -6082,6 +6082,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/rpc-errors@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@metamask/rpc-errors@npm:6.1.0"
+  dependencies:
+    "@metamask/utils": ^8.1.0
+    fast-safe-stringify: ^2.0.6
+  checksum: 9f4821d804e2fcaa8987b0958d02c6d829b7c7db49740c811cb593f381d0c4b00dabb7f1802907f1b2f6126f7c0d83ec34219183d29650f5d24df014ac72906a
+  languageName: node
+  linkType: hard
+
 "@metamask/utils@npm:^8.0.0, @metamask/utils@npm:^8.1.0":
   version: 8.1.0
   resolution: "@metamask/utils@npm:8.1.0"
@@ -7176,6 +7186,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/constants@npm:^13.0.3":
+  version: 13.0.3
+  resolution: "@toruslabs/constants@npm:13.0.3"
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 78f438e39f61c1f28dcb07d66a3a85729a0cf68139f3ee71f77e41ca68df652c363886fc9ff8e0736b5bfa9426acfa05ea99d1bb37775d15fba3de45ecfa142e
+  languageName: node
+  linkType: hard
+
 "@toruslabs/eccrypto@npm:^4.0.0":
   version: 4.0.0
   resolution: "@toruslabs/eccrypto@npm:4.0.0"
@@ -7263,6 +7282,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@toruslabs/openlogin-jrpc@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@toruslabs/openlogin-jrpc@npm:6.0.0"
+  dependencies:
+    "@metamask/rpc-errors": ^6.1.0
+    "@toruslabs/openlogin-utils": ^6.0.0
+    end-of-stream: ^1.4.4
+    events: ^3.3.0
+    fast-safe-stringify: ^2.1.1
+    once: ^1.4.0
+    pump: ^3.0.0
+    readable-stream: ^4.4.2
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 4475250ebfa4b77772d9e8bafc74e517b646e03b0a3239940b4628409be8ac949f8831a2b8e47115af936cd35b7f192998a94aee66844a3d58f9b54547bc7e86
+  languageName: node
+  linkType: hard
+
 "@toruslabs/openlogin-session-manager@npm:^3.0.0":
   version: 3.0.0
   resolution: "@toruslabs/openlogin-session-manager@npm:3.0.0"
@@ -7297,6 +7334,18 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: dd6646b9e8920c187aa303bfd1a5fabdd866d962f046ddbf381d45951c14ecc7f5cb18654178418505e4a01e2c0ae7b4d185c2ebb24e96eb878bff2d9577d2f5
+  languageName: node
+  linkType: hard
+
+"@toruslabs/openlogin-utils@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@toruslabs/openlogin-utils@npm:6.0.0"
+  dependencies:
+    "@toruslabs/constants": ^13.0.3
+    base64url: ^3.0.1
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 3b1da1b449c6625b950775eb2f7067dc3ccb8d71004144baf14f7beceed7600bf01b5ab0542d11e184965f52da67b628cdcdd1a0192ff63a594ce9fcf683172e
   languageName: node
   linkType: hard
 
@@ -7335,6 +7384,40 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: 4c0074ff8b930406cb24559ec28844763a9c2fd1714dff6b614456905b781e2187429f6d6a5dd9d2592fbe4084b3968774e04de9888e2ca85bdc0eaf8245cd07
+  languageName: node
+  linkType: hard
+
+"@toruslabs/openlogin@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@toruslabs/openlogin@npm:6.0.0"
+  dependencies:
+    "@toruslabs/eccrypto": ^4.0.0
+    "@toruslabs/metadata-helpers": ^5.0.0
+    "@toruslabs/openlogin-session-manager": ^3.0.0
+    "@toruslabs/openlogin-utils": ^6.0.0
+    "@toruslabs/secure-pub-sub": ^0.0.1
+    bowser: ^2.11.0
+    events: ^3.3.0
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 0f4c07304935b103aaf50bec28247c3bd846cbdf2e4c957b10fef1fa9dfc8c5da5731b35147b57bc92fafc1e82e2a04321d5e3de15916a18b944bbc05020e60e
+  languageName: node
+  linkType: hard
+
+"@toruslabs/secure-pub-sub@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@toruslabs/secure-pub-sub@npm:0.0.1"
+  dependencies:
+    "@toruslabs/eccrypto": ^4.0.0
+    "@toruslabs/http-helpers": ^5.0.0
+    "@toruslabs/metadata-helpers": ^5.0.0
+    loglevel: ^1.8.1
+    socket.io-client: ^4.7.2
+  peerDependencies:
+    "@babel/runtime": 7.x
+  checksum: 726cf979a377b8e45cd36ca22ea46a6125c90a2703a6fae6c3458c79f7a1ebda7a5870a233d755522ca096423b1af41528bf36a6ebbc40bece84e319fca5e7ab
   languageName: node
   linkType: hard
 
@@ -8666,6 +8749,23 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: b2021a570f007f04b2a0d86287e6d6d1a9b9e15fbb2e366b98fe4568186d45487039636c059aaab33f8739efcc4de1060d13d95a7b862bc516c3559bb8139936
+  languageName: node
+  linkType: hard
+
+"@web3auth/base@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "@web3auth/base@npm:7.1.0"
+  dependencies:
+    "@toruslabs/http-helpers": ^5.0.0
+    "@toruslabs/openlogin": ^6.0.0
+    "@toruslabs/openlogin-jrpc": ^6.0.0
+    "@toruslabs/openlogin-utils": ^6.0.0
+    jwt-decode: ^4.0.0
+    loglevel: ^1.8.1
+    ts-custom-error: ^3.3.1
+  peerDependencies:
+    "@babel/runtime": ^7.x
+  checksum: 6fe3f96cc661f1ef359acdd87ec372f3188c3463a1a091155a5fe931c0a8b414671e86b0f41985af07f979996ef3776c38ca91ab2b404b7cd70159c1ee23f047
   languageName: node
   linkType: hard
 
@@ -16350,6 +16450,13 @@ __metadata:
   version: 3.1.2
   resolution: "jwt-decode@npm:3.1.2"
   checksum: 20a4b072d44ce3479f42d0d2c8d3dabeb353081ba4982e40b83a779f2459a70be26441be6c160bfc8c3c6eadf9f6380a036fbb06ac5406b5674e35d8c4205eeb
+  languageName: node
+  linkType: hard
+
+"jwt-decode@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "jwt-decode@npm:4.0.0"
+  checksum: 390e2edcb31a92e86c8cbdd1edeea4c0d62acd371f8a8f0a8878e499390c0ecf4c658b365c4e941e4ef37d0170e4ca650aaa49f99a45c0b9695a235b210154b0
   languageName: node
   linkType: hard
 
