@@ -4686,7 +4686,7 @@ __metadata:
     "@types/keccak": ^3.0.4
     "@types/react-native": ^0.72.6
     "@types/readable-stream": ^4.0.5
-    "@web3auth/react-native-sdk": ^5.0.0
+    "@web3auth/react-native-sdk": ^5.1.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
   peerDependencies:
@@ -8813,19 +8813,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/react-native-sdk@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@web3auth/react-native-sdk@npm:5.0.0"
+"@web3auth/react-native-sdk@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@web3auth/react-native-sdk@npm:5.1.0"
   dependencies:
     "@toruslabs/openlogin-session-manager": ^3.0.0
-    "@toruslabs/openlogin-utils": ^5.0.2
+    "@toruslabs/openlogin-utils": ^6.0.0
     buffer: ^6.0.3
     loglevel: ^1.8.1
     react-native-url-polyfill: ^2.0.0
   peerDependencies:
     "@babel/runtime": ^7.x
     react-native: "*"
-  checksum: 259ec3063a5b8841343a3cccf85038e33ea0215d3d0307c7cc84767bc793d67348ba319cc703aaabf10c5845ad26df5cf8ec94749d03655e3aed36973bc42999
+  checksum: 2c05d205260483ebd7832deef72aa04f6a5a2890a5483ff1c0f14901f0f57b7087f6eb407edc4c44ad0e221823af7423505e08bb06b25fec7c7f21378002e9c9
   languageName: node
   linkType: hard
 
