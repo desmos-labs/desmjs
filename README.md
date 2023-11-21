@@ -1,6 +1,10 @@
-# DesmJS
+<div style="display: flex; align-items: center">
+    <img style="display: inline" src=".github/logo.png" alt="DesmJS Logo" width="50">
+    <h1 style="display: inline; margin-top: auto; padding-left: 15px">DesmJS</h1>
+</div>
 
-This repository contains a set of packages to develop DApps on Desmos.
+DesmJS is a library containing a set of various packages that make it easy to develop an application on top of the
+Desmos blockchain.
 
 ## Packages
 
@@ -15,19 +19,19 @@ DesmJS consists of multiple smaller npm packages each one with a specific functi
 | `@desmoslabs/desmjs-web3auth-mobile`  | Contains the Web3Auth Web signer implementation for React Native projects | [![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-web3auth-mobile.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-web3auth-mobile)   |
 | `@desmoslabs/desmjs-web3auth-web`     | Contains the Web3Auth Web signer implementation                           | [![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-web3auth-web.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-web3auth-web)         |
 
-
 ## Troubleshooting
 
 ### Address Generation Issue On React Native
 
-If you encounter address generation issues while using the `@desmoslabs/desmjs` or `@desmoslabs/desmjs-web3auth-mobile` package,
-particularly on Android devices, you may be experiencing a problem related to the `@noble/hashes` library.  
-The root cause lies in the absence of the `setBigUint64` method in the `DataView` object. 
-This method is crucial for proper SHA2 calculations, but it may not be available on certain Android devices, 
+If you encounter address generation issues while using the `@desmoslabs/desmjs` or `@desmoslabs/desmjs-web3auth-mobile`
+package, particularly on Android devices, you may be experiencing a problem related to the `@noble/hashes` library.  
+The root cause lies in the absence of the `setBigUint64` method in the `DataView` object.
+This method is crucial for proper SHA2 calculations, but it may not be available on certain Android devices,
 leading to incorrect address generation when importing an account using mnemonic or private key.
 By polyfilling the setBigUint64 method, you can overcome this issue without the need for multiple patches.
 
 To implement the polyfill you can copy the following js code into your `shim.js` file.
+
 ```js
 if (global.DataView.prototype.setBigUint64 === undefined) {
   global.DataView.prototype.setBigUint64 = function (byteOffset, value, isLE) {
