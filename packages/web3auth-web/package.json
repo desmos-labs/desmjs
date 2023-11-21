@@ -41,7 +41,7 @@
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@types/jest": "^29.5.8",
+    "@types/jest": "^29.5.9",
     "@types/keccak": "^3.0.4",
     "@types/readable-stream": "^4.0.6",
     "readable-stream": "^4.4.2",

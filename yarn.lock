@@ -4519,7 +4519,7 @@ __metadata:
     "@cosmjs/utils": ^0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.44
-    "@types/jest": ^29.5.8
+    "@types/jest": ^29.5.9
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
@@ -4565,7 +4565,7 @@ __metadata:
     "@cosmjs/utils": ^0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
-    "@types/jest": ^29.5.8
+    "@types/jest": ^29.5.9
     "@types/long": ^4.0.1
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
@@ -4593,7 +4593,7 @@ __metadata:
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/encoding": ^0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.5.8
+    "@types/jest": ^29.5.9
     "@types/keccak": ^3.0.4
     "@types/react-native": ^0.72.6
     "@types/readable-stream": ^4.0.6
@@ -4616,7 +4616,7 @@ __metadata:
     "@cosmjs/encoding": ^0.31.3
     "@cosmjs/proto-signing": ^0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.5.8
+    "@types/jest": ^29.5.9
     "@types/keccak": ^3.0.4
     "@types/readable-stream": ^4.0.6
     "@web3auth/base": ^7.1.0
@@ -4645,7 +4645,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": ^0.31.3
     "@cosmjs/utils": ^0.31.3
     "@desmoslabs/desmjs-types": "workspace:packages/types"
-    "@types/jest": ^29.5.8
+    "@types/jest": ^29.5.9
     "@types/long": ^4.0.1
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
@@ -7761,13 +7761,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.5.8":
-  version: 29.5.8
-  resolution: "@types/jest@npm:29.5.8"
+"@types/jest@npm:^29.5.9":
+  version: 29.5.9
+  resolution: "@types/jest@npm:29.5.9"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: ca8438a5b4c098c8c023e9d5b279ea306494a1d0b5291cfb498100fa780377145f068b2a021d545b0398bbe0328dcc37044dd3aaf3c6c0fe9b0bef7b46a63453
+  checksum: 02245cff5f5b5ef46cc8c28acc516674aa167f2398bc4042752db7c763555928c5d62d56b3510eb8a2e5e25eea921f34866ef1c5515edfe16699b4a1e99ed4e1
   languageName: node
   linkType: hard
 
