@@ -4596,7 +4596,7 @@ __metadata:
     "@types/jest": ^29.5.8
     "@types/keccak": ^3.0.4
     "@types/react-native": ^0.72.6
-    "@types/readable-stream": ^4.0.6
+    "@types/readable-stream": ^4.0.8
     "@web3auth/react-native-sdk": ^5.1.0
     readable-stream: ^4.4.2
     typescript: ^4.9.5
@@ -4618,7 +4618,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.8
     "@types/keccak": ^3.0.4
-    "@types/readable-stream": ^4.0.6
+    "@types/readable-stream": ^4.0.8
     "@web3auth/base": ^7.1.0
     "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.1.0
@@ -8023,13 +8023,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/readable-stream@npm:^4.0.6":
-  version: 4.0.6
-  resolution: "@types/readable-stream@npm:4.0.6"
+"@types/readable-stream@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "@types/readable-stream@npm:4.0.8"
   dependencies:
     "@types/node": "*"
     safe-buffer: ~5.1.1
-  checksum: 0184592f6b1ef90f252741e0e3b29d23c13b27bded4add8bc49fd015539360ca51324ebda96eb131e737ed00f73417508e84f7f815e14952ff3aaf2b3bdc030a
+  checksum: 7fc44751212b41a6902922b93af849e354a3582eb5fc53a221a80e9fa5fe6b7316dce60c002d59338ebfcf4a9a51ee4bbaf16313cdbd028c8557e85d14301cfb
   languageName: node
   linkType: hard
 
