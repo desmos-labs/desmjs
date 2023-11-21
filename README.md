@@ -1,7 +1,4 @@
-<div style="display: flex; align-items: center">
-    <img style="display: inline" src=".github/logo.png" alt="DesmJS Logo" width="50">
-    <h1 style="display: inline; margin-top: auto; padding-left: 15px">DesmJS</h1>
-</div>
+# DesmJS
 
 DesmJS is a library containing a set of various packages that make it easy to develop an application on top of the
 Desmos blockchain.
