@@ -4334,6 +4334,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/encoding@npm:^0.32.0":
+  version: 0.32.0
+  resolution: "@cosmjs/encoding@npm:0.32.0"
+  dependencies:
+    base64-js: ^1.3.0
+    bech32: ^1.1.4
+    readonly-date: ^1.0.0
+  checksum: a8bccbbbebea534025bb3952c8aa4a63f8f3881518b31ac836ef4a7e6b4a3b7498b2143c2e785d5cad29cc68ff6f8dcef2c51b2f02519906b7f28a954ab24e6c
+  languageName: node
+  linkType: hard
+
 "@cosmjs/json-rpc@npm:^0.31.3":
   version: 0.31.3
   resolution: "@cosmjs/json-rpc@npm:0.31.3"
@@ -4559,7 +4570,7 @@ __metadata:
     "@babel/preset-env": ^7.23.3
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/amino": ^0.31.3
-    "@cosmjs/encoding": ^0.31.3
+    "@cosmjs/encoding": ^0.32.0
     "@cosmjs/proto-signing": ^0.31.3
     "@cosmjs/stargate": ^0.31.3
     "@cosmjs/utils": ^0.31.3
@@ -4591,7 +4602,7 @@ __metadata:
     "@babel/core": ^7.23.3
     "@babel/preset-env": ^7.23.3
     "@babel/preset-typescript": ^7.23.3
-    "@cosmjs/encoding": ^0.31.3
+    "@cosmjs/encoding": ^0.32.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.10
     "@types/keccak": ^3.0.4
@@ -4613,7 +4624,7 @@ __metadata:
     "@babel/preset-env": ^7.23.3
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/amino": ^0.31.3
-    "@cosmjs/encoding": ^0.31.3
+    "@cosmjs/encoding": ^0.32.0
     "@cosmjs/proto-signing": ^0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.10
@@ -4638,7 +4649,7 @@ __metadata:
     "@cosmjs/amino": ^0.31.3
     "@cosmjs/cosmwasm-stargate": ^0.31.3
     "@cosmjs/crypto": ^0.31.3
-    "@cosmjs/encoding": ^0.31.3
+    "@cosmjs/encoding": ^0.32.0
     "@cosmjs/math": ^0.31.3
     "@cosmjs/proto-signing": ^0.31.3
     "@cosmjs/stargate": ^0.31.3
@@ -12180,7 +12191,7 @@ __metadata:
   dependencies:
     "@cosmjs/cosmwasm-stargate": ^0.31.3
     "@cosmjs/crypto": ^0.31.3
-    "@cosmjs/encoding": ^0.31.3
+    "@cosmjs/encoding": ^0.32.0
     "@cosmjs/proto-signing": ^0.31.3
     "@cosmjs/utils": ^0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
