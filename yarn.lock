@@ -4373,6 +4373,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/math@npm:^0.32.0":
+  version: 0.32.0
+  resolution: "@cosmjs/math@npm:0.32.0"
+  dependencies:
+    bn.js: ^5.2.0
+  checksum: 1e21b92eed0b9681f285fcd01d184a6375cdc121ea3dceb21ac3713f17b948f348b7e35dd900921022db5365f97704d4a9e28175bae3ff9e558b6ef658799381
+  languageName: node
+  linkType: hard
+
 "@cosmjs/proto-signing@npm:^0.25.4":
   version: 0.25.6
   resolution: "@cosmjs/proto-signing@npm:0.25.6"
@@ -4650,7 +4659,7 @@ __metadata:
     "@cosmjs/cosmwasm-stargate": ^0.31.3
     "@cosmjs/crypto": ^0.31.3
     "@cosmjs/encoding": ^0.32.0
-    "@cosmjs/math": ^0.31.3
+    "@cosmjs/math": ^0.32.0
     "@cosmjs/proto-signing": ^0.31.3
     "@cosmjs/stargate": ^0.31.3
     "@cosmjs/tendermint-rpc": ^0.31.3
