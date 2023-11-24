@@ -4472,6 +4472,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cosmjs/utils@npm:^0.32.0":
+  version: 0.32.0
+  resolution: "@cosmjs/utils@npm:0.32.0"
+  checksum: eb9bdd6363d4dfd3eaf1ea93e748509b3d34a6d9867ea350bdae782b109ed947ebc2b56c869c6baceeb5ac8fcced1268c21574b6e4c7a6461d2e134a11daea63
+  languageName: node
+  linkType: hard
+
 "@cosmwasm/ts-codegen@npm:0.30.1":
   version: 0.30.1
   resolution: "@cosmwasm/ts-codegen@npm:0.30.1"
@@ -4527,7 +4534,7 @@ __metadata:
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/amino": ^0.31.3
     "@cosmjs/proto-signing": ^0.31.3
-    "@cosmjs/utils": ^0.31.3
+    "@cosmjs/utils": ^0.32.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.44
     "@types/jest": ^29.5.10
@@ -4573,7 +4580,7 @@ __metadata:
     "@cosmjs/encoding": ^0.32.0
     "@cosmjs/proto-signing": ^0.31.3
     "@cosmjs/stargate": ^0.31.3
-    "@cosmjs/utils": ^0.31.3
+    "@cosmjs/utils": ^0.32.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.10
@@ -4654,7 +4661,7 @@ __metadata:
     "@cosmjs/proto-signing": ^0.31.3
     "@cosmjs/stargate": ^0.31.3
     "@cosmjs/tendermint-rpc": ^0.31.3
-    "@cosmjs/utils": ^0.31.3
+    "@cosmjs/utils": ^0.32.0
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.10
     "@types/long": ^4.0.1
@@ -12193,7 +12200,7 @@ __metadata:
     "@cosmjs/crypto": ^0.31.3
     "@cosmjs/encoding": ^0.32.0
     "@cosmjs/proto-signing": ^0.31.3
-    "@cosmjs/utils": ^0.31.3
+    "@cosmjs/utils": ^0.32.0
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/long": ^4.0.1
