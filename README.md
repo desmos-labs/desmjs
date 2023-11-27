@@ -1,5 +1,13 @@
 # DesmJS
 
+<p align="center" width="100%">
+    <img height="90" src="./.github/logo.svg" />
+</p>
+
+<p align="center" width="100%">
+  <img height="20" src="https://img.shields.io/github/license/desmos-labs/desmjs.svg" />
+</p>
+
 DesmJS is a library containing a set of various packages that make it easy to develop an application on top of the
 Desmos blockchain.
 
