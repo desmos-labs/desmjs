@@ -28,10 +28,10 @@
     "lint": "eslint src --ignore-path ../../.gitignore --max-warnings 0 --ext .js,.ts"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.31.3",
+    "@cosmjs/amino": "^0.32.0",
     "@cosmjs/encoding": "^0.32.0",
-    "@cosmjs/proto-signing": "^0.31.3",
-    "@cosmjs/stargate": "^0.31.3",
+    "@cosmjs/proto-signing": "^0.32.0",
+    "@cosmjs/stargate": "^0.32.0",
     "@cosmjs/utils": "^0.32.0",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
