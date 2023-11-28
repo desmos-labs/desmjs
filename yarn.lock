@@ -4249,14 +4249,14 @@ __metadata:
   linkType: hard
 
 "@cosmjs/amino@npm:^0.32.0":
-  version: 0.31.3
-  resolution: "@cosmjs/amino@npm:0.31.3"
+  version: 0.32.0
+  resolution: "@cosmjs/amino@npm:0.32.0"
   dependencies:
     "@cosmjs/crypto": ^0.32.0
     "@cosmjs/encoding": ^0.32.0
     "@cosmjs/math": ^0.32.0
     "@cosmjs/utils": ^0.32.0
-  checksum: 30e55ed256e1ba8a84b8a92062fd48aed43b1d638b8917af8b28ae007a1eff3ffc9ffb743400db23c583dc2fefae12c3dd8b315451a09f6da9c10a07ce714dfa
+  checksum: 1cb03f381a0285bdf33a9b90ac3f09f6eebb06ecbe2b829b7ed82c0cd5af85d3b4af52d9604eb8c4a23af4a29bf5629b719f23ccf3d0873fcd68141b8a2de288
   languageName: node
   linkType: hard
 
