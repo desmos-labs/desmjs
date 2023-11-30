@@ -4390,17 +4390,16 @@ __metadata:
   linkType: hard
 
 "@cosmjs/proto-signing@npm:^0.32.0":
-  version: 0.31.3
-  resolution: "@cosmjs/proto-signing@npm:0.31.3"
+  version: 0.32.0
+  resolution: "@cosmjs/proto-signing@npm:0.32.0"
   dependencies:
     "@cosmjs/amino": ^0.32.0
     "@cosmjs/crypto": ^0.32.0
     "@cosmjs/encoding": ^0.32.0
     "@cosmjs/math": ^0.32.0
     "@cosmjs/utils": ^0.32.0
-    cosmjs-types: ^0.8.0
-    long: ^4.0.0
-  checksum: c27c4d921c99f5c06ac92ebba59e78c53b7c115334932dd1365263b98c1a67c7323e3a69ae933babf5a36682c019bbc7da3c9597ca1bf1a4858546bdd681453a
+    cosmjs-types: ^0.9.0
+  checksum: a8fd6571c353136531c4e5fd3e36489eb33e25164eb2b5a2de7db2aa8ad22888e43f67d648aa8a620764bf14c72625feb96b785383bd09ed3b48dcd7bb64d38f
   languageName: node
   linkType: hard
 
@@ -11674,6 +11673,13 @@ __metadata:
     long: ^4.0.0
     protobufjs: ~6.11.2
   checksum: 99714ec956d2cb2e521d39896c9c9a24cf9df0d370265c203646ea015b51e86472efc0cb11f67a80f0649d178b0bcff77ac659e67fdfc8b2437cd7a42018577f
+  languageName: node
+  linkType: hard
+
+"cosmjs-types@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "cosmjs-types@npm:0.9.0"
+  checksum: 9b00d169eca334f27418bb80b39e0cff0196af40b0079e1f85536246059279207b853bdb6ec224ead0a02d15d4b7f6bf16bc096d41c436426aa5f8976ed2b430
   languageName: node
   linkType: hard
 
