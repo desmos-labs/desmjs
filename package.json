@@ -42,7 +42,7 @@
     "@cosmjs/cosmwasm-stargate": "^0.32.0",
     "@cosmjs/crypto": "^0.32.0",
     "@cosmjs/encoding": "^0.32.0",
-    "@cosmjs/proto-signing": "^0.32.0",
+    "@cosmjs/proto-signing": "^0.32.2",
     "@cosmjs/utils": "^0.32.0",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
