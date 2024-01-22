@@ -4595,6 +4595,7 @@ __metadata:
     jest: ^29.7.0
     lokijs: ^1.5.12
     long: ^4.0.0
+    node-localstorage: ^3.0.5
     ts-jest: ^29.1.1
     typescript: ^4.9.5
   languageName: unknown
@@ -17938,6 +17939,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-localstorage@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "node-localstorage@npm:3.0.5"
+  dependencies:
+    write-file-atomic: ^5.0.1
+  checksum: 222b70df7965f31d6ec687aeecd653d8a94c4faeb77eaaa16970faae63a03ddb12a5787bbf1ac6de6cd5f513e5c3a24f19f84fd892f141922f006bc6754e7be9
+  languageName: node
+  linkType: hard
+
 "node-releases@npm:^2.0.12, node-releases@npm:^2.0.13":
   version: 2.0.13
   resolution: "node-releases@npm:2.0.13"
@@ -20998,6 +21008,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"signal-exit@npm:^4.0.1":
+  version: 4.1.0
+  resolution: "signal-exit@npm:4.1.0"
+  checksum: 64c757b498cb8629ffa5f75485340594d2f8189e9b08700e69199069c8e3070fb3e255f7ab873c05dc0b3cec412aea7402e10a5990cb6a050bd33ba062a6c549
+  languageName: node
+  linkType: hard
+
 "sirv@npm:^1.0.7":
   version: 1.0.19
   resolution: "sirv@npm:1.0.19"
@@ -23419,6 +23436,16 @@ __metadata:
     imurmurhash: ^0.1.4
     signal-exit: ^3.0.7
   checksum: 5da60bd4eeeb935eec97ead3df6e28e5917a6bd317478e4a85a5285e8480b8ed96032bbcc6ecd07b236142a24f3ca871c924ec4a6575e623ec1b11bf8c1c253c
+  languageName: node
+  linkType: hard
+
+"write-file-atomic@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "write-file-atomic@npm:5.0.1"
+  dependencies:
+    imurmurhash: ^0.1.4
+    signal-exit: ^4.0.1
+  checksum: 8dbb0e2512c2f72ccc20ccedab9986c7d02d04039ed6e8780c987dc4940b793339c50172a1008eed7747001bfacc0ca47562668a069a7506c46c77d7ba3926a9
   languageName: node
   linkType: hard
 
