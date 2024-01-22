@@ -1,3 +1,7 @@
+## Version 6.0.2
+### Bug fixes
+- Fixed a bug that cause the `WalletConnectSigner` to not reconnect to a previously established connection if the remote signer is not online.
+
 ## Version 6.0.1
 ### Features
 - Add a new `feeGranter` parameter to the `SimulateOptions` in order to properly simulate transactions using a fee grant
