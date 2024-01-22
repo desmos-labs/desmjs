@@ -22,6 +22,13 @@ import {
 import { QrCodeModalController, WalletConnectSigner } from "./signer";
 import { CosmosRPCMethods } from "./types";
 
+// Polyfill LocalStorage required from the WalletConnect session cache.
+if (typeof localStorage === "undefined" || localStorage === null) {
+  // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+  const { LocalStorage } = require("node-localstorage");
+  global.localStorage = new LocalStorage("./scratch");
+}
+
 class MockQrCodeModalController implements QrCodeModalController {
   private _closed: boolean;
 
