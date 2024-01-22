@@ -1,14 +1,19 @@
 "pkg/core":
-  - packages/core/**/*
+  - changed-files:
+    - any-glob-to-any-file: packages/core/**/*
 "pkg/types":
-  - packages/types/**/*
+  - changed-files:
+    - any-glob-to-any-file: packages/types/**/*
 "pkg/walletconnect":
-  - packages/walletconnect/**/*
+  - changed-files:
+    - any-glob-to-any-file: packages/walletconnect/**/*
 "kind/build":
-  - .editorconfig
-  - .eslintrc.json
-  - .yarnrc.yaml
-  - tsconfig.json
+  - changed-files:
+    - any-glob-to-any-file: .editorconfig
+    - any-glob-to-any-file: .eslintrc.json
+    - any-glob-to-any-file: .yarnrc.yaml
+    - any-glob-to-any-file: tsconfig.json
 "kind/ci":
-  - .github/**/*.yml
-  - .mergify.yml
+  - changed-files:
+    - any-glob-to-any-file: .github/**/*.yml
+    - any-glob-to-any-file: .mergify.yml
