@@ -14,6 +14,7 @@ import {
   rpcCosmosSignAmino,
   rpcCosmosSignDirect,
 } from "./rpcrequests";
+import WalletConnectSessionCache from "./sessioncache";
 
 export interface QrCodeModalController {
   open(uri: string, onCloseCb: () => void): void;
@@ -45,12 +46,14 @@ export class WalletConnectSigner extends Signer {
 
   private readonly qrCodeModalController: QrCodeModalController;
 
+  private readonly sessionsCache = new WalletConnectSessionCache();
+
   private readonly sessionDeleteListener = (
-    _: SignClientTypes.EventArguments["session_delete"],
+    event: SignClientTypes.EventArguments["session_delete"],
   ) => {
     this.updateStatus(SignerStatus.Disconnecting);
     this.unsubscribeEvents();
-    this.clearSessionDependentResources();
+    this.clearSessionDependentResources(event.topic);
     this.updateStatus(SignerStatus.NotConnected);
   };
 
@@ -79,17 +82,18 @@ export class WalletConnectSigner extends Signer {
    * @private
    */
   private unsubscribeEvents() {
-    this.client.off("session_update", this.sessionDeleteListener);
     this.client.off("session_delete", this.sessionDeleteListener);
   }
 
   /**
    * Release all the resources related to the current session.
+   * @param sessionTopic - Topic of the WalletConnect session.
    * @private
    */
-  private clearSessionDependentResources() {
+  private clearSessionDependentResources(sessionTopic: string) {
     this.walletConnectSession = undefined;
     this.accountData = undefined;
+    this.sessionsCache.removeAccountData(sessionTopic);
   }
 
   /**
@@ -142,18 +146,27 @@ export class WalletConnectSigner extends Signer {
       throw new Error("Can't find the chain in the desmos required namespaces");
     }
 
-    // Fetch the current account
-    this.accountData = await rpcCosmosGetAccounts(
-      this.client,
-      session,
-      chain,
-    ).then((accounts) => {
-      if (accounts.length > 0) {
-        return accounts[0];
-      }
-      this.updateStatus(SignerStatus.NotConnected);
-      throw new Error("Can't get accounts from the remote wallet");
-    });
+    // Try to get the account data from the cache.
+    const cachedAccountData = this.sessionsCache.getAccountData(session.topic);
+
+    if (cachedAccountData !== undefined && cachedAccountData.length > 0) {
+      [this.accountData] = cachedAccountData;
+    } else {
+      // We don't have the account data in the cache. Get it from the remote wallet.
+      this.accountData = await rpcCosmosGetAccounts(
+        this.client,
+        session,
+        chain,
+      ).then((accounts) => {
+        if (accounts.length > 0) {
+          // Cache the account data associated to the session.
+          this.sessionsCache.addAccountData(session.topic, accounts);
+          return accounts[0];
+        }
+        this.updateStatus(SignerStatus.NotConnected);
+        throw new Error("Can't get accounts from the remote wallet");
+      });
+    }
 
     this.walletConnectSession = session;
     this.subscribeToEvents();
@@ -216,6 +229,7 @@ export class WalletConnectSigner extends Signer {
 
     try {
       this.walletConnectSession = await approval();
+      const sessionTopic = this.walletConnectSession.topic;
       // Now it's connected, ask the client the information about the current account.
       this.accountData = await rpcCosmosGetAccounts(
         this.client,
@@ -223,6 +237,7 @@ export class WalletConnectSigner extends Signer {
         this.chain,
       ).then((accounts) => {
         if (accounts.length > 0) {
+          this.sessionsCache.addAccountData(sessionTopic, accounts);
           return accounts[0];
         }
         throw new Error("can't get accounts from the remote wallet");
@@ -256,6 +271,7 @@ export class WalletConnectSigner extends Signer {
     this.updateStatus(SignerStatus.Disconnecting);
     this.unsubscribeEvents();
 
+    const sessionTopic = this.walletConnectSession!.topic;
     try {
       await this.client.disconnect({
         topic: this.walletConnectSession!.topic,
@@ -266,7 +282,7 @@ export class WalletConnectSigner extends Signer {
       console.error("WalletConnectSigner.disconnect", e);
       throw e;
     } finally {
-      this.clearSessionDependentResources();
+      this.clearSessionDependentResources(sessionTopic);
       this.updateStatus(SignerStatus.NotConnected);
     }
   }
@@ -291,10 +307,8 @@ export class WalletConnectSigner extends Signer {
   async getAccounts(): Promise<readonly AccountData[]> {
     this.assertConnected();
 
-    return rpcCosmosGetAccounts(
-      this.client,
-      this.walletConnectSession!,
-      this.chain,
+    return (
+      this.sessionsCache.getAccountData(this.walletConnectSession!.topic) ?? []
     );
   }
 
