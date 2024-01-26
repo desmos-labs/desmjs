@@ -12,10 +12,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import {
-  QRCodeModal,
-  WalletConnectSigner,
-} from "@desmoslabs/desmjs-walletconnect-v2";
+import { WalletConnectSigner } from "@desmoslabs/desmjs-walletconnect-v2";
 import { SessionTypes } from "@walletconnect/types";
 import { useWalletConnectContext } from "./walletconnect";
 
@@ -68,7 +65,6 @@ export const DesmosContextProvider: React.FC<Props> = ({
         const newSigner = new WalletConnectSigner(signClient, {
           chain: "desmos:desmos-mainnet",
           signingMode: SigningMode.AMINO,
-          qrCodeModalController: QRCodeModal,
         });
 
         setSigner((oldSigner) => {

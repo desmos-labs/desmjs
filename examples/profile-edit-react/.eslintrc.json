@@ -9,7 +9,7 @@
   },
   "extends": [
     "airbnb-base",
-    "airbnb-typescript/base",
+    "airbnb-typescript",
     "plugin:import/errors",
     "plugin:import/warnings",
     "eslint:recommended",
