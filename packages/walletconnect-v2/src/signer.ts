@@ -5,9 +5,9 @@ import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
 import { assert } from "@cosmjs/utils";
 import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
-import QRCodeModal from "@walletconnect/qrcode-modal";
 import { SignClientTypes } from "@walletconnect/types/dist/types/sign-client/client";
 import { getSdkError } from "@walletconnect/utils";
+import WalletConnectModal from "@desmoslabs/desmjs-walletconnect-qrcode-modal";
 import { CosmosRPCMethods } from "./types";
 import {
   rpcCosmosGetAccounts,
@@ -65,7 +65,11 @@ export class WalletConnectSigner extends Signer {
     this.signingMode = options.signingMode;
     this.client = client;
     this.chain = options.chain;
-    this.qrCodeModalController = options.qrCodeModalController ?? QRCodeModal;
+    if (options.qrCodeModalController) {
+      this.qrCodeModalController = options.qrCodeModalController;
+    } else {
+      this.qrCodeModalController = new WalletConnectModal();
+    }
   }
 
   /**
@@ -220,7 +224,9 @@ export class WalletConnectSigner extends Signer {
     }
 
     if (uri) {
-      this.qrCodeModalController.open(uri, () => {});
+      this.qrCodeModalController.open(uri, () => {
+        this.updateStatus(SignerStatus.NotConnected);
+      });
     } else {
       this.qrCodeModalController.close();
       this.updateStatus(SignerStatus.NotConnected);
