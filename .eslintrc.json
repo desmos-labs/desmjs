@@ -29,7 +29,8 @@
       "ignorePackages",
       {
         "js": "never",
-        "ts": "never"
+        "ts": "never",
+        "tsx": "never"
       }
     ],
     // Avoid to raise errors when performing lint if one of the @desmoslabs packages has not been compiled.
