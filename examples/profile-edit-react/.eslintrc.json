@@ -1,0 +1,72 @@
+{
+  "env": {
+    "es6": true,
+    "jest": true
+  },
+  "globals":{
+    // Used to disable warning about __DEV__ not being defined inside the code
+    "__DEV__": true
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "eslint:recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "rules": {
+    "class-methods-use-this": [
+      "off"
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "prettier/prettier": "error",
+    // Avoiding refactoring every image request, is fine to use (written also in the react-native doc)
+    "global-require": 0,
+    // Disable no-cycle imports to avoid navigator errors
+    "import/no-cycle": 0,
+    // Strange behavior with default imports
+    "import/no-named-as-default": 0,
+    // Typescript related warnings
+    "@typescript-eslint/no-use-before-define": 0,
+    // Disable warning when exportin just one object and is not exported as default
+    "import/prefer-default-export": 0,
+    // React hooks deps lints
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json"
+        ]
+      },
+      "typescript": {}
+    }
+  }
+}

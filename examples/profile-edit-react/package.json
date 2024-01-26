@@ -1,0 +1,72 @@
+{
+  "name": "desmos-profile-edit-example",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "PORT=3000 react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --max-warnings 0 --ext .js,.ts,.tsx"
+  },
+  "dependencies": {
+    "@desmoslabs/desmjs": "workspace:packages/core",
+    "@desmoslabs/desmjs-types": "workspace:packages/types",
+    "@desmoslabs/desmjs-walletconnect-v2": "workspace:packages/walletconnect-v2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.16",
+    "@mui/lab": "^5.0.0-alpha.111",
+    "@mui/material": "^5.10.17",
+    "@walletconnect/qrcode-modal": "^1.8.0",
+    "@walletconnect/sign-client": "^2.10.6",
+    "@walletconnect/types": "^2.9.0",
+    "@walletconnect/utils": "^2.9.0",
+    "glob": "^8.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-native": "^4.1.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "prettier": "^3.2.4",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "typescript": "^4.9.5",
+    "url": "^0.11.0",
+    "webpack": "^5.75.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

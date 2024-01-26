@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "baseUrl": ".",
+    "outDir": "build",
+    "experimentalDecorators": true,
+    "rootDir": "src",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "module": "esnext",
+    "target": "es2020",
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

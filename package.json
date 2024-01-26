@@ -24,19 +24,16 @@
   },
   "workspaces": [
     "docs",
-    "packages/core",
-    "packages/types",
-    "packages/walletconnect-v2",
-    "packages/web3auth-mobile",
-    "packages/web3auth-web",
-    "packages/keplr"
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run build",
+    "build": "yarn workspaces foreach --no-private --topological-dev --parallel --verbose run build",
+    "build:examples": "yarn workspaces foreach --include '*example*' --topological-dev --parallel --verbose run build",
     "build-docs": "DOCS_DOMAIN=desmjs.desmos.network yarn workspace desmjs-documentation build",
-    "lint": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint",
-    "lint-fix": "yarn workspaces foreach --exclude desmjs-documentation --topological-dev --parallel --verbose run lint-fix",
-    "publish-latest": "yarn workspaces foreach --exclude desmjs-documentation --no-private exec yarn npm publish"
+    "lint": "yarn workspaces foreach --no-private --topological-dev --parallel --verbose run lint",
+    "lint-fix": "yarn workspaces foreach --no-private --topological-dev --parallel --verbose run lint-fix",
+    "publish-latest": "yarn workspaces foreach --no-private exec yarn npm publish"
   },
   "devDependencies": {
     "@cosmjs/cosmwasm-stargate": "^0.32.0",
@@ -48,10 +45,10 @@
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@types/long": "^4.0.1",
     "@types/pino": "^7.0.5",
-    "@typescript-eslint/eslint-plugin": "^6.9.0",
-    "@typescript-eslint/parser": "^6.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "@walletconnect/jsonrpc-types": "^1.0.3",
-    "eslint": "^8.54.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.1.0",
