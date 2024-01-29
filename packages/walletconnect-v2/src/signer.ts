@@ -8,7 +8,11 @@ import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
 import { SignClientTypes } from "@walletconnect/types/dist/types/sign-client/client";
 import { getSdkError } from "@walletconnect/utils";
 import DPMWalletConnectModal from "@desmoslabs/desmjs-walletconnect-qrcode-modal";
-import { CosmosRPCMethods, QrCodeModalController } from "./types";
+import {
+  CosmosRPCMethods,
+  LocalStorageI,
+  QrCodeModalController,
+} from "./types";
 import {
   rpcCosmosGetAccounts,
   rpcCosmosSignAmino,

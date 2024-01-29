@@ -19,8 +19,8 @@ import {
   encodeDirectSignRpcResponse,
   encodeGetAccountsRpcResponse,
 } from "./encode";
-import { QrCodeModalController, WalletConnectSigner } from "./signer";
-import { CosmosRPCMethods } from "./types";
+import { WalletConnectSigner } from "./signer";
+import { CosmosRPCMethods, QrCodeModalController } from "./types";
 
 // Polyfill LocalStorage required from the WalletConnect session cache.
 if (typeof localStorage === "undefined" || localStorage === null) {
