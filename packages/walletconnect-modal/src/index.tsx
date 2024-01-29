@@ -3,7 +3,14 @@ import ReactDom from "react-dom";
 import Modal from "./modal";
 
 export default class WalletConnectModal {
-  open(uri: string, cb: () => void) {
+  /**
+   *  Function to open the modal and display the QR code
+   *  that the user need to scan in order to start the
+   *  WalletConnect session.
+   *  @param uri - The URI to start the WalletConnect session.
+   *  @param onClose - The callback that will be called if the user closes the modal.
+   */
+  open(uri: string, onClose: () => void) {
     const wrapper = document.createElement("div");
     wrapper.setAttribute("id", "desmjs-walletconnect-qrcode-modal");
     document.body.appendChild(wrapper);
@@ -13,7 +20,7 @@ export default class WalletConnectModal {
         uri={uri}
         onClose={() => {
           this.close();
-          cb();
+          onClose();
         }}
       />,
       wrapper,

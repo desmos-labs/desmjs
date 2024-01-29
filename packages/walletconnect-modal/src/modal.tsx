@@ -2,12 +2,11 @@
 import React, {
   CSSProperties,
   FunctionComponent,
-  useEffect,
   useMemo,
   useState,
 } from "react";
 import QRCode from "qrcode.react";
-import { isAndroid, isMobile } from "./utils";
+import { isAndroid, isMobile, mergeStyles } from "./utils";
 
 export type ModalUIOptions = {
   backdrop?: {
@@ -34,11 +33,13 @@ export type ModalUIOptions = {
   appButtonContainer?: {
     className?: string;
     style?: CSSProperties;
+    disableDefaultStyle?: boolean;
   };
   appButton?: {
     className?: string;
     style?: CSSProperties;
     text?: string;
+    disableDefaultStyle?: boolean;
   };
 };
 
@@ -86,21 +87,15 @@ const Modal: FunctionComponent<ModalProps> = ({
     return undefined;
   }, [checkAndroid, checkMobile, uri]);
 
-  useEffect(() => {
-    // Try opening the app without interaction.
-    if (navigateToAppURL) {
-      window.location.href = navigateToAppURL;
-    }
-  }, [navigateToAppURL]);
-
   return (
     <React.Fragment>
       <div
         className={uiOptions?.backdrop?.className}
-        style={{
-          ...(uiOptions?.backdrop?.disableDefaultStyle ? {} : styles.backdrop),
-          ...uiOptions?.backdrop?.style,
-        }}
+        style={mergeStyles(
+          styles.backdrop,
+          uiOptions?.backdrop?.style,
+          uiOptions?.backdrop?.disableDefaultStyle,
+        )}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -110,62 +105,73 @@ const Modal: FunctionComponent<ModalProps> = ({
       >
         <div
           className={uiOptions?.modalContainer?.className}
-          style={{
-            ...(uiOptions?.modalContainer?.disableDefaultStyle
-              ? {}
-              : styles.modalContainer),
-            ...uiOptions?.modalContainer?.style,
-          }}
+          style={mergeStyles(
+            styles.modalContainer,
+            uiOptions?.modalContainer?.style,
+            uiOptions?.modalContainer?.disableDefaultStyle,
+          )}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
           }}
         >
           {!checkMobile ? (
+            /* Content displayed when the user is on desktop. */
             <React.Fragment>
               <h3
                 className={uiOptions?.modalHeader?.className}
-                style={{
-                  ...(uiOptions?.modalHeader?.disableDefaultStyle ? {} : {}),
-                  ...uiOptions?.modalHeader?.style,
-                }}
+                style={mergeStyles(
+                  styles.modalHeader,
+                  uiOptions?.modalHeader?.style,
+                  uiOptions?.modalHeader?.disableDefaultStyle,
+                )}
               >
-                {uiOptions?.modalHeader?.text || "Scan QR Code"}
+                {uiOptions?.modalHeader?.text || "Scan with DPM"}
               </h3>
               <div
                 className={uiOptions?.qrCodeContainer?.className}
-                style={uiOptions?.qrCodeContainer?.style}
+                style={
+                  uiOptions?.qrCodeContainer?.style ?? styles.buttonContainer
+                }
               >
                 <QRCode size={uiOptions?.qrCodeSize || 500} value={uri} />
               </div>
             </React.Fragment>
           ) : (
+            /* Content displayed when the user is on mobile. */
             <React.Fragment>
               <h3
                 className={uiOptions?.modalHeader?.className}
-                style={{
-                  ...(uiOptions?.modalHeader?.disableDefaultStyle
-                    ? {}
-                    : styles.modalHeader),
-                  ...uiOptions?.modalHeader?.style,
-                }}
+                style={mergeStyles(
+                  styles.modalHeader,
+                  uiOptions?.modalHeader?.style,
+                  uiOptions?.modalHeader?.disableDefaultStyle,
+                )}
               >
-                {uiOptions?.modalHeader?.text ?? "Open App"}
+                {uiOptions?.modalHeader?.text ?? "Login with DPM"}
               </h3>
               <div
                 className={uiOptions?.appButtonContainer?.className}
-                style={uiOptions?.appButtonContainer?.style}
+                style={mergeStyles(
+                  styles.appButtonContainer,
+                  uiOptions?.appButtonContainer?.style,
+                  uiOptions?.appButtonContainer?.disableDefaultStyle,
+                )}
               >
                 <button
                   className={uiOptions?.appButton?.className}
-                  style={uiOptions?.appButton?.style}
+                  style={mergeStyles(
+                    styles.appButton,
+                    uiOptions?.appButton?.style,
+                    uiOptions?.appButton?.disableDefaultStyle,
+                  )}
                   onClick={() => {
                     if (navigateToAppURL) {
                       window.location.href = navigateToAppURL;
                     }
                   }}
                 >
-                  {uiOptions?.appButton?.text ?? "Open App"}
+                  {uiOptions?.appButton?.text ?? "Open DPM"}
                 </button>
               </div>
             </React.Fragment>
@@ -191,12 +197,31 @@ const styles: Record<string, CSSProperties> = {
   modalContainer: {
     padding: 20,
     borderRadius: 10,
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#fdfdfe",
   },
   modalHeader: {
     fontSize: 20,
     margin: 0,
     marginBottom: 10,
+    color: "#ff6c3e",
+  },
+  appButtonContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  appButton: {
+    margin: 0,
+    padding: 0,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
+    backgroundColor: "#ff6c3e",
+    color: "#fdfdfe",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderStyle: "solid",
+    borderColor: "#ff6c3e",
   },
 };
 
