@@ -29,6 +29,14 @@ export interface WalletConnectSignerOptions {
    * the `@desmjs/desmjs-walletconnect-qrcode-modal` package.
    */
   qrCodeModalController?: QrCodeModalController;
+  /**
+   * Optional object that will be used to cache the sessions
+   * in a non-volatile storage. If not provided,
+   * the global `localStorage` instance will be used.
+   * NOTE: This is intended to be used in environments where the `localStorage`
+   * instance is undefined, like in Node or React Native applications.
+   */
+  sessionsCacheStorage?: LocalStorageI;
 }
 
 /**
@@ -47,7 +55,7 @@ export class WalletConnectSigner extends Signer {
 
   private readonly qrCodeModalController: QrCodeModalController;
 
-  private readonly sessionsCache = new WalletConnectSessionCache();
+  private readonly sessionsCache;
 
   private readonly sessionDeleteListener = (
     event: SignClientTypes.EventArguments["session_delete"],
@@ -66,6 +74,9 @@ export class WalletConnectSigner extends Signer {
     this.signingMode = options.signingMode;
     this.client = client;
     this.chain = options.chain;
+    this.sessionsCache = new WalletConnectSessionCache(
+      options.sessionsCacheStorage ?? localStorage,
+    );
     if (options.qrCodeModalController) {
       this.qrCodeModalController = options.qrCodeModalController;
     } else {

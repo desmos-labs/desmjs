@@ -1,6 +1,7 @@
 import { AccountData } from "@cosmjs/amino";
 import { fromHex, toHex } from "@cosmjs/encoding";
 import { Algo } from "@cosmjs/proto-signing";
+import { LocalStorageI } from "./types";
 
 const SESSION_CACHE_KEY = "desmos-walletconnect-sessions";
 
@@ -19,7 +20,19 @@ class WalletConnectSessionCache {
    */
   private cachedSessions: Record<string, AccountData[]>;
 
-  constructor() {
+  /**
+   * Object that will be used to store the sessions in a
+   * non volatile storage.
+   */
+  private readonly storage: LocalStorageI;
+
+  /**
+   * Constructor of the class.
+   * @param storage - Object that will be used to store the sessions in a
+   * non volatile storage. If undefined will default to `localStorage`.
+   */
+  constructor(storage: LocalStorageI) {
+    this.storage = storage;
     this.cachedSessions = this.loadCache();
   }
 
@@ -36,7 +49,7 @@ class WalletConnectSessionCache {
       }));
     });
 
-    localStorage.setItem(SESSION_CACHE_KEY, JSON.stringify(serializedData));
+    this.storage.setItem(SESSION_CACHE_KEY, JSON.stringify(serializedData));
   }
 
   /**
@@ -44,7 +57,7 @@ class WalletConnectSessionCache {
    */
   private loadCache(): Record<string, AccountData[]> {
     try {
-      const cachedSessions = localStorage.getItem(SESSION_CACHE_KEY);
+      const cachedSessions = this.storage.getItem(SESSION_CACHE_KEY);
       if (!cachedSessions) {
         return {};
       }
