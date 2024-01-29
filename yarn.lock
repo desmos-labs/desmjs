@@ -5170,9 +5170,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@desmoslabs/desmjs-walletconnect-qrcode-modal@workspace:packages/walletconnect-modal":
+"@desmoslabs/desmjs-walletconnect-modal@workspace:packages/walletconnect-modal":
   version: 0.0.0-use.local
-  resolution: "@desmoslabs/desmjs-walletconnect-qrcode-modal@workspace:packages/walletconnect-modal"
+  resolution: "@desmoslabs/desmjs-walletconnect-modal@workspace:packages/walletconnect-modal"
   dependencies:
     detect-browser: ^5.3.0
     eslint: ^8.56.0
@@ -5200,7 +5200,7 @@ __metadata:
     "@cosmjs/utils": ^0.32.2
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
-    "@desmoslabs/desmjs-walletconnect-qrcode-modal": "workspace:packages/walletconnect-modal"
+    "@desmoslabs/desmjs-walletconnect-modal": "workspace:packages/walletconnect-modal"
     "@types/jest": ^29.5.10
     "@types/long": ^4.0.1
     "@types/node": ^20.8.8

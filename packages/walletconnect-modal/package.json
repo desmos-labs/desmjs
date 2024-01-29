@@ -1,5 +1,5 @@
 {
-  "name": "@desmoslabs/desmjs-walletconnect-qrcode-modal",
+  "name": "@desmoslabs/desmjs-walletconnect-modal",
   "version": "6.0.2",
   "description": "QR code modal that can be used to display the WalletConnect QR code",
   "contributors": [

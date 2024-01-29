@@ -1,6 +1,6 @@
-# @desmoslabs/desmjs-walletconnect-qrcode-modal
+# @desmoslabs/desmjs-walletconnect-modal
 
-[![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-walletconnect-qrcode-modal.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-walletconnect-qrcode-modal)
+[![npm version](https://img.shields.io/npm/v/@desmoslabs/desmjs-walletconnect-modal.svg)](https://www.npmjs.com/package/@desmoslabs/desmjs-walletconnect-modal)
 
 This package contains the `DPMWalletConnectModal` that is used inside 
 [@desmoslabs/desmjs-walletconnect-v2](https://www.npmjs.com/package/@desmoslabs/desmjs-walletconnect-v2) 
