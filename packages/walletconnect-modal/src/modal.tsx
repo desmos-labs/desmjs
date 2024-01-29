@@ -9,43 +9,130 @@ import QRCode from "qrcode.react";
 import { isAndroid, isMobile, mergeStyles } from "./utils";
 
 export type ModalUIOptions = {
+  /**
+   * Options to customize the modal backdrop.
+   */
   backdrop?: {
+    /**
+     * Class that will be set to the backdrop.
+     */
     className?: string;
+    /**
+     * Style to apply to the backdrop.
+     */
     style?: CSSProperties;
+    /**
+     * If `true` disables the default backdrop style.
+     */
     disableDefaultStyle?: boolean;
   };
+  /**
+   * Options to customize the popup container.
+   */
   modalContainer?: {
+    /**
+     * Class that will be set to the modal container.
+     */
     className?: string;
+    /**
+     * Style to apply to the modal container.
+     */
     style?: CSSProperties;
+    /**
+     * If `true` disables the default modal container style.
+     */
     disableDefaultStyle?: boolean;
   };
+  /**
+   * Options to customize the modal header.
+   */
   modalHeader?: {
+    /**
+     * Class that will be set to the modal header.
+     */
     className?: string;
+    /**
+     * Style to apply to the modal header.
+     */
     style?: CSSProperties;
+    /**
+     * If `true` disables the default modal header style.
+     */
     disableDefaultStyle?: boolean;
+    /**
+     * Text that will be displayed in the modal header.
+     */
     text?: string;
   };
+  /**
+   * Options to customize the QR code container
+   * that is displayed to desktop users.
+   */
   qrCodeContainer?: {
+    /**
+     * Class that will be set to the QR code container.
+     */
     className?: string;
+    /**
+     * Style to apply to the QR code container together with the default style.
+     */
     style?: CSSProperties;
-  };
-  qrCodeSize?: number;
-  appButtonContainer?: {
-    className?: string;
-    style?: CSSProperties;
+    /**
+     * If `true` disables the default QR code container style.
+     */
     disableDefaultStyle?: boolean;
   };
-  appButton?: {
+  /**
+   * Options to customize the size of the QR code that is
+   * displayed to desktop users.
+   */
+  qrCodeSize?: number;
+  /**
+   * Options to customize the container of the button to redirect the
+   * user to the mobile app.
+   * This container is only displayed to mobile users.
+   */
+  appButtonContainer?: {
+    /**
+     * CSS class that will be set to the app button container.
+     */
     className?: string;
+    /**
+     * Style to apply to the app button container.
+     */
     style?: CSSProperties;
+    /**
+     * If `true` disables the default app button container style.
+     */
+    disableDefaultStyle?: boolean;
+  };
+  /**
+   * Options to customize the button to redirect the user to the mobile app.
+   * This button is only displayed to mobile users.
+   */
+  appButton?: {
+    /**
+     * CSS class that will be set to the app button.
+     */
+    className?: string;
+    /**
+     * Style to apply to the app button.
+     */
+    style?: CSSProperties;
+    /**
+     * Text to display in the app button.
+     */
     text?: string;
+    /**
+     * If `true` disables the default app button style.
+     */
     disableDefaultStyle?: boolean;
   };
 };
 
 interface ModalProps {
   /**
-   * Uri that will be displayed.
+   * Uri to start the WalletConnect session.
    */
   uri: string;
   /**
@@ -63,6 +150,13 @@ interface ModalProps {
   appUrlGenerator?: (uri: string, isAndroid: boolean) => string;
 }
 
+/**
+ * Modal that allows a user to initiate a WalletConnect session through
+ * DPM.
+ * This modal will show a QR code that can be scanned from the DPM mobile app
+ * by desktop users; otherwise, it will show a popup with a button to perform the login
+ * through the DPM mobile app.
+ */
 const Modal: FunctionComponent<ModalProps> = ({
   uiOptions,
   uri,
@@ -130,9 +224,11 @@ const Modal: FunctionComponent<ModalProps> = ({
               </h3>
               <div
                 className={uiOptions?.qrCodeContainer?.className}
-                style={
-                  uiOptions?.qrCodeContainer?.style ?? styles.buttonContainer
-                }
+                style={mergeStyles(
+                  styles.qrCodeContainer,
+                  uiOptions?.qrCodeContainer?.style,
+                  uiOptions?.qrCodeContainer?.disableDefaultStyle,
+                )}
               >
                 <QRCode size={uiOptions?.qrCodeSize || 500} value={uri} />
               </div>
@@ -205,6 +301,7 @@ const styles: Record<string, CSSProperties> = {
     marginBottom: 10,
     color: "#ff6c3e",
   },
+  qrCodeContainer: {},
   appButtonContainer: {
     display: "flex",
     justifyContent: "center",
