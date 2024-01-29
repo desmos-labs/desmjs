@@ -7,8 +7,8 @@ import { assert } from "@cosmjs/utils";
 import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
 import { SignClientTypes } from "@walletconnect/types/dist/types/sign-client/client";
 import { getSdkError } from "@walletconnect/utils";
-import WalletConnectModal from "@desmoslabs/desmjs-walletconnect-qrcode-modal";
-import { CosmosRPCMethods } from "./types";
+import DPMWalletConnectModal from "@desmoslabs/desmjs-walletconnect-qrcode-modal";
+import { CosmosRPCMethods, QrCodeModalController } from "./types";
 import {
   rpcCosmosGetAccounts,
   rpcCosmosSignAmino,
@@ -16,17 +16,18 @@ import {
 } from "./rpcrequests";
 import WalletConnectSessionCache from "./sessioncache";
 
-export interface QrCodeModalController {
-  open(uri: string, onCloseCb: () => void): void;
-
-  close(): void;
-}
-
 export interface WalletConnectSignerOptions {
   signingMode: SigningMode;
   // The chains to which the client can connect.
   // Can be: desmos:desmos-mainnet or desmos:morpheus-apollo-4.
   chain: string;
+  /**
+   * Optional modal controller that will be used to
+   * display a QR that once scanned will
+   * initiate the WalletConnect session.
+   * If not provided, will be used the one provided from
+   * the `@desmjs/desmjs-walletconnect-qrcode-modal` package.
+   */
   qrCodeModalController?: QrCodeModalController;
 }
 
@@ -68,7 +69,7 @@ export class WalletConnectSigner extends Signer {
     if (options.qrCodeModalController) {
       this.qrCodeModalController = options.qrCodeModalController;
     } else {
-      this.qrCodeModalController = new WalletConnectModal();
+      this.qrCodeModalController = new DPMWalletConnectModal();
     }
   }
 
