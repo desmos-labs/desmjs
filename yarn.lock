@@ -4637,9 +4637,9 @@ __metadata:
     "@types/jest": ^29.5.10
     "@types/keccak": ^3.0.4
     "@types/react-native": ^0.72.7
-    "@types/readable-stream": ^4.0.9
+    "@types/readable-stream": ^4.0.10
     "@web3auth/react-native-sdk": ^5.1.0
-    readable-stream: ^4.4.2
+    readable-stream: ^4.5.2
     typescript: ^4.9.5
   peerDependencies:
     react-native: "*"
@@ -4659,12 +4659,12 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.10
     "@types/keccak": ^3.0.4
-    "@types/readable-stream": ^4.0.9
+    "@types/readable-stream": ^4.0.10
     "@web3auth/base": ^7.2.0
     "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.1.2
     cosmjs-types: ^0.8.0
-    readable-stream: ^4.4.2
+    readable-stream: ^4.5.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -8105,13 +8105,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/readable-stream@npm:^4.0.9":
-  version: 4.0.9
-  resolution: "@types/readable-stream@npm:4.0.9"
+"@types/readable-stream@npm:^4.0.10":
+  version: 4.0.10
+  resolution: "@types/readable-stream@npm:4.0.10"
   dependencies:
     "@types/node": "*"
     safe-buffer: ~5.1.1
-  checksum: 63a1c44b19660ef3f7d1dda07a73814bbd8e7caf2af6acf2ef3ff37c6fbd9be8d9366397f15b11966ce0ee0238cfad5cb78c21cb34c6dc891501e884aee869c7
+  checksum: dc7cb95be737d442770fcaf1fbe3860c011f5f024c6f09c8b032f95b7ef9cce0031302715afe13e18d264b3a162e5838ce78873ec8d63eb238db49bc70906a21
   languageName: node
   linkType: hard
 
@@ -19988,6 +19988,19 @@ __metadata:
     process: ^0.11.10
     string_decoder: ^1.3.0
   checksum: 6f4063763dbdb52658d22d3f49ca976420e1fbe16bbd241f744383715845350b196a2f08b8d6330f8e219153dff34b140aeefd6296da828e1041a7eab1f20d5e
+  languageName: node
+  linkType: hard
+
+"readable-stream@npm:^4.5.2":
+  version: 4.5.2
+  resolution: "readable-stream@npm:4.5.2"
+  dependencies:
+    abort-controller: ^3.0.0
+    buffer: ^6.0.3
+    events: ^3.3.0
+    process: ^0.11.10
+    string_decoder: ^1.3.0
+  checksum: c4030ccff010b83e4f33289c535f7830190773e274b3fcb6e2541475070bdfd69c98001c3b0cb78763fc00c8b62f514d96c2b10a8bd35d5ce45203a25fa1d33a
   languageName: node
   linkType: hard
 
