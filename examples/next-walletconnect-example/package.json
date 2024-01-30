@@ -1,0 +1,39 @@
+{
+  "name": "next-walletconnect-example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@desmoslabs/desmjs": "workspace:packages/core",
+    "@desmoslabs/desmjs-types": "workspace:packages/types",
+    "@desmoslabs/desmjs-walletconnect-v2": "workspace:packages/walletconnect-v2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.16",
+    "@mui/lab": "^5.0.0-alpha.111",
+    "@mui/material": "^5.10.17",
+    "@walletconnect/sign-client": "^2.10.6",
+    "@walletconnect/types": "^2.9.0",
+    "@walletconnect/utils": "^2.9.0",
+    "next": "14.1.0",
+    "pino-pretty": "^10.3.1",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
