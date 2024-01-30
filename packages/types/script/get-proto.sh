@@ -101,7 +101,7 @@ mv "$TMP_DIR/ics23-go-v$ICS_VERSION/proto/cosmos/ics23" "$PROTO_DIR/cosmos"
 yarn telescope install @protobufs/cosmos_proto @protobufs/confio @protobufs/google @protobufs/gogoproto
 
 # Mv the proto files downloaded by telescope into the proto dir
-find "proto" -mindepth 1 -maxdepth 1 -type d ! -name "desmjs" -exec mv -t "$PROTO_DIR" {} +
+find "proto" -mindepth 1 -maxdepth 1 -type d ! -name "desmjs" -exec mv {} "$PROTO_DIR" \;
 
 rm -Rf "$TMP_DIR"
 echo "Proto files obtained successfully!"
