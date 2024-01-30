@@ -171,11 +171,11 @@ const Modal: FunctionComponent<ModalProps> = ({
       if (checkAndroid) {
         return appUrlGenerator
           ? appUrlGenerator(uri, true)
-          : `intent://wcV2?uri=${encodeURIComponent(uri)}&isMobile=true#Intent;package=network.desmos.dpm.debug;scheme=dpm;end;`;
+          : `intent://wcV2?uri=${encodeURIComponent(uri)}&returnToApp=true#Intent;package=network.desmos.dpm.debug;scheme=dpm;end;`;
       }
       return appUrlGenerator
         ? appUrlGenerator(uri, false)
-        : `dpm://wcV2?uri=${encodeURIComponent(uri)}&isMobile=true`;
+        : `dpm://wcV2?uri=${encodeURIComponent(uri)}&returnToApp=true`;
     }
 
     return undefined;
