@@ -1,6 +1,6 @@
 "use client"
 
-import { SignClient, WalletConnectSigner, QRCodeModal } from "@desmoslabs/desmjs-walletconnect-v2";
+import { SignClient, WalletConnectSigner } from "@desmoslabs/desmjs-walletconnect-v2";
 import { SigningMode } from "@desmoslabs/desmjs";
 import { useState } from "react";
 
@@ -49,8 +49,6 @@ export default function Home() {
       chain: "desmos:desmos-mainnet",
       // Signer sign mode
       signingMode: SigningMode.DIRECT,
-      // Controller used to display the QR Code that can be scanned from a wallet 
-      qrCodeModalController: QRCodeModal,
     });
 
     if (signer.isConnected) {
