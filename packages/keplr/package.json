@@ -30,7 +30,7 @@
   "dependencies": {
     "@cosmjs/amino": "^0.32.0",
     "@cosmjs/proto-signing": "^0.32.0",
-    "@cosmjs/utils": "^0.32.0",
+    "@cosmjs/utils": "^0.32.2",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@keplr-wallet/types": "0.12.63",
     "cosmjs-types": "^0.8.0"

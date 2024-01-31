@@ -43,7 +43,7 @@
     "@cosmjs/crypto": "^0.32.0",
     "@cosmjs/encoding": "^0.32.0",
     "@cosmjs/proto-signing": "^0.32.0",
-    "@cosmjs/utils": "^0.32.0",
+    "@cosmjs/utils": "^0.32.2",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "@types/long": "^4.0.1",
