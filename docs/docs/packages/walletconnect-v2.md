@@ -116,7 +116,9 @@ to terminate the session.
 
 To customize the UI that present the QR code to the user, you can create an object that implements the
 [`QrCodeModalController`](../api/walletconnect-v2/interfaces/QrCodeModalController.md)
-interface.
+interface.  
+
+**NOTE**: An example of implementation can be found at https://github.com/desmos-labs/desmjs/tree/main/packages/walletconnect-modal.
 
 ```ts
 import { QrCodeModalController } from "@desmoslabs/desmjs-walletconnect-v2";
@@ -125,7 +127,7 @@ const customController: QrCodeModalController = {
   open(uri: string, onCloseCb: () => void) {
     // Show the QR code to the user.
     // uri - Uri to be displayed as QR Code
-    // onCloseCb - callback to be called when the ui is closed.
+    // onCloseCb - callback to be called when the user closes the UI.
   },
   close() {
     // Close the QR code ui.
@@ -144,7 +146,7 @@ const customController: QrCodeModalController = {
   open(uri: string, onCloseCb: () => void) {
     // Show the QR code to the user.
     // uri - Uri to be displayed as QR Code
-    // onCloseCb - callback to be called when the ui is closed.
+    // onCloseCb - callback to be called when the user closes the UI.
   },
   close() {
     // Close the QR code ui.

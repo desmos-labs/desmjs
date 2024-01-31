@@ -1,5 +1,5 @@
 import SignClient from "@walletconnect/sign-client";
-import QRCodeModal from "@walletconnect/qrcode-modal";
+import QRCodeModal from "@desmoslabs/desmjs-walletconnect-modal";
 
 export * from "./decode";
 export * from "./encode";

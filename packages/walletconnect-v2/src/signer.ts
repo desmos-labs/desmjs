@@ -5,10 +5,14 @@ import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { AminoSignResponse, StdSignDoc } from "@cosmjs/amino";
 import { assert } from "@cosmjs/utils";
 import { Signer, SignerStatus, SigningMode } from "@desmoslabs/desmjs";
-import QRCodeModal from "@walletconnect/qrcode-modal";
 import { SignClientTypes } from "@walletconnect/types/dist/types/sign-client/client";
 import { getSdkError } from "@walletconnect/utils";
-import { CosmosRPCMethods } from "./types";
+import DPMWalletConnectModal from "@desmoslabs/desmjs-walletconnect-modal";
+import {
+  CosmosRPCMethods,
+  LocalStorageI,
+  QrCodeModalController,
+} from "./types";
 import {
   rpcCosmosGetAccounts,
   rpcCosmosSignAmino,
@@ -16,18 +20,27 @@ import {
 } from "./rpcrequests";
 import WalletConnectSessionCache from "./sessioncache";
 
-export interface QrCodeModalController {
-  open(uri: string, onCloseCb: () => void): void;
-
-  close(): void;
-}
-
 export interface WalletConnectSignerOptions {
   signingMode: SigningMode;
   // The chains to which the client can connect.
   // Can be: desmos:desmos-mainnet or desmos:morpheus-apollo-4.
   chain: string;
+  /**
+   * Optional modal controller that will be used to
+   * display a QR that once scanned will
+   * initiate the WalletConnect session.
+   * If not provided, will be used the one provided from
+   * the `@desmjs/desmjs-walletconnect-qrcode-modal` package.
+   */
   qrCodeModalController?: QrCodeModalController;
+  /**
+   * Optional object that will be used to cache the sessions
+   * in a non-volatile storage. If not provided,
+   * the global `localStorage` instance will be used.
+   * NOTE: This is intended to be used in environments where the `localStorage`
+   * instance is undefined, like in Node or React Native applications.
+   */
+  sessionsCacheStorage?: LocalStorageI;
 }
 
 /**
@@ -46,7 +59,7 @@ export class WalletConnectSigner extends Signer {
 
   private readonly qrCodeModalController: QrCodeModalController;
 
-  private readonly sessionsCache = new WalletConnectSessionCache();
+  private readonly sessionsCache;
 
   private readonly sessionDeleteListener = (
     event: SignClientTypes.EventArguments["session_delete"],
@@ -65,7 +78,14 @@ export class WalletConnectSigner extends Signer {
     this.signingMode = options.signingMode;
     this.client = client;
     this.chain = options.chain;
-    this.qrCodeModalController = options.qrCodeModalController ?? QRCodeModal;
+    this.sessionsCache = new WalletConnectSessionCache(
+      options.sessionsCacheStorage ?? localStorage,
+    );
+    if (options.qrCodeModalController) {
+      this.qrCodeModalController = options.qrCodeModalController;
+    } else {
+      this.qrCodeModalController = new DPMWalletConnectModal();
+    }
   }
 
   /**
@@ -220,7 +240,9 @@ export class WalletConnectSigner extends Signer {
     }
 
     if (uri) {
-      this.qrCodeModalController.open(uri, () => {});
+      this.qrCodeModalController.open(uri, () => {
+        this.updateStatus(SignerStatus.NotConnected);
+      });
     } else {
       this.qrCodeModalController.close();
       this.updateStatus(SignerStatus.NotConnected);

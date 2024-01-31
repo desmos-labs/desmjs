@@ -132,3 +132,35 @@ export type WalletConnectRequest =
   | WalletConnectGetAccountsRequest
   | WalletConnectSignAminoRequest
   | WalletConnectSignDirectRequest;
+
+/**
+ * Interface that represents an object that can be used to
+ * display a QR code to the user to initiate a new WalletConnect session.
+ */
+export interface QrCodeModalController {
+  /**
+   * Function to open the modal and display the QR code
+   * that the user need to scan in order to start the
+   * WalletConnect session.
+   * @param uri - The URI to start the WalletConnect session.
+   * @param onClose - The callback that will be called if the user closes the modal.
+   */
+  open(uri: string, onCloseCb: () => void): void;
+
+  /**
+   * Function to close the modal.
+   * This function will to trigger the onCloseCb that has been passed
+   * to the open function.
+   */
+  close(): void;
+}
+
+/**
+ * Interface that represents an object that can be used to
+ * store the data in a non volatile storage.
+ */
+export interface LocalStorageI {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem(key: string): void;
+}

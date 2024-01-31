@@ -35,7 +35,7 @@
     "@cosmjs/utils": "^0.32.2",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@desmoslabs/desmjs-types": "workspace:packages/types",
-    "@walletconnect/qrcode-modal": "^1.8.0",
+    "@desmoslabs/desmjs-walletconnect-modal": "workspace:packages/walletconnect-modal",
     "@walletconnect/sign-client": "^2.10.6",
     "@walletconnect/types": "^2.4.0",
     "@walletconnect/utils": "^2.11.0",

@@ -38,3 +38,5 @@ scripts/.desmos
 
 # Ignore .test.env
 **/.test.env
+# Ignore production env
+**/.env
