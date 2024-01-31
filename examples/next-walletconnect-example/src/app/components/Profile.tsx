@@ -66,6 +66,7 @@ export const ProfileViewer: React.FC<Props> = ({ profile, onChange }) => {
       </Grid2>
       <Grid2>
         <TextField
+          style={{ marginTop: 12 }}
           value={localProfile.nickname}
           label="Nickname"
           onChange={onFieldChange("nickname")}
@@ -73,6 +74,7 @@ export const ProfileViewer: React.FC<Props> = ({ profile, onChange }) => {
       </Grid2>
       <Grid2>
         <TextField
+          style={{ marginTop: 12 }}
           value={localProfile.bio}
           label="Bio"
           multiline
