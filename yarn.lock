@@ -4677,7 +4677,7 @@ __metadata:
     "@walletconnect/utils": ^2.11.0
     babel-jest: ^29.7.0
     cosmjs-types: 0.8.0
-    dotenv: ^16.3.1
+    dotenv: ^16.4.1
     jest: ^29.7.0
     lokijs: ^1.5.12
     long: ^4.0.0
