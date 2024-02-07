@@ -28,18 +28,18 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.32.0",
-    "@cosmjs/encoding": "^0.32.0",
-    "@cosmjs/proto-signing": "^0.32.0",
+    "@cosmjs/amino": "0.31.3",
+    "@cosmjs/encoding": "0.31.3",
+    "@cosmjs/proto-signing": "0.31.3",
     "@desmoslabs/desmjs": "workspace:packages/core",
     "@web3auth/base": "^7.2.0",
     "@web3auth/modal": "^7.0.3",
     "@web3auth/ui": "^7.1.2",
-    "cosmjs-types": "^0.8.0"
+    "cosmjs-types": "0.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
-    "@babel/preset-env": "^7.23.5",
+    "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
     "@types/jest": "^29.5.10",
     "@types/keccak": "^3.0.4",

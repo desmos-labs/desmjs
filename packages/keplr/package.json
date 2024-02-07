@@ -28,16 +28,16 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@cosmjs/amino": "^0.32.0",
-    "@cosmjs/proto-signing": "^0.32.0",
-    "@cosmjs/utils": "^0.32.2",
+    "@cosmjs/amino": "0.31.3",
+    "@cosmjs/proto-signing": "0.31.3",
+    "@cosmjs/utils": "0.31.3",
     "@desmoslabs/desmjs": "workspace:packages/core",
-    "@keplr-wallet/types": "0.12.63",
-    "cosmjs-types": "^0.8.0"
+    "@keplr-wallet/types": "0.12.66",
+    "cosmjs-types": "0.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
-    "@babel/preset-env": "^7.23.5",
+    "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
     "@types/jest": "^29.5.10",
     "@types/node": "^20.8.8",
