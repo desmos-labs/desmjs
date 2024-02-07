@@ -4706,10 +4706,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/utils@npm:0.31.3, @cosmjs/utils@npm:^0.31.1, @cosmjs/utils@npm:^0.31.3":
-  version: 0.31.3
-  resolution: "@cosmjs/utils@npm:0.31.3"
-  checksum: 2ff2b270954ab00cc5ae8f23625b562676d0a061c8076905509a5f0701e302e46d24a51a0c3283072e0ce01fbd860baceb25e62303ff17826672fe5f8674b00d
+"@cosmjs/utils@npm:0.32.2":
+  version: 0.32.2
+  resolution: "@cosmjs/utils@npm:0.32.2"
+  checksum: 71d757eb6da243af9b4f7a64bfa1f64e3253d1a012518aa152b43115fb93b8af8ec60cda469dbc1e847a77cec0f126a64fa681b5b407ee396cbd96f30f4ae480
   languageName: node
   linkType: hard
 
@@ -4717,6 +4717,13 @@ __metadata:
   version: 0.25.6
   resolution: "@cosmjs/utils@npm:0.25.6"
   checksum: 4d3504d5e556146568583e454893b6aaf416be20708edb443361c089168b18d57f98d554c6c3c4d2cefa19e642a7e7a6bb190bbb2c2863ea681187fb54e520ab
+  languageName: node
+  linkType: hard
+
+"@cosmjs/utils@npm:^0.31.1, @cosmjs/utils@npm:^0.31.3":
+  version: 0.31.3
+  resolution: "@cosmjs/utils@npm:0.31.3"
+  checksum: 2ff2b270954ab00cc5ae8f23625b562676d0a061c8076905509a5f0701e302e46d24a51a0c3283072e0ce01fbd860baceb25e62303ff17826672fe5f8674b00d
   languageName: node
   linkType: hard
 
@@ -4782,7 +4789,7 @@ __metadata:
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/amino": 0.31.3
     "@cosmjs/proto-signing": 0.31.3
-    "@cosmjs/utils": 0.31.3
+    "@cosmjs/utils": 0.32.2
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.66
     "@types/jest": ^29.5.10
@@ -4844,7 +4851,7 @@ __metadata:
     "@cosmjs/encoding": 0.31.3
     "@cosmjs/proto-signing": 0.31.3
     "@cosmjs/stargate": 0.31.3
-    "@cosmjs/utils": 0.31.3
+    "@cosmjs/utils": 0.32.2
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@desmoslabs/desmjs-walletconnect-modal": "workspace:packages/walletconnect-modal"
@@ -4926,7 +4933,7 @@ __metadata:
     "@cosmjs/proto-signing": 0.31.3
     "@cosmjs/stargate": 0.31.3
     "@cosmjs/tendermint-rpc": 0.31.3
-    "@cosmjs/utils": 0.31.3
+    "@cosmjs/utils": 0.32.2
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/jest": ^29.5.10
     "@types/long": ^4.0.1
