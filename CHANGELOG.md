@@ -1,3 +1,7 @@
+## Version 6.0.3
+### Bug fixes
+- Fix compilation issues caused by incompatible `@cosmjs/*` package versions.
+
 ## Version 6.0.2
 ### Bug fixes
 - Fixed a bug that cause the `WalletConnectSigner` to not reconnect to a previously established connection if the remote signer is not online.
