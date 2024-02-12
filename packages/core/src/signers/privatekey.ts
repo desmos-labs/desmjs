@@ -208,7 +208,8 @@ export class PrivateKeySigner extends Signer {
 
   /**
    * Build the signer with a randomly generated secp256k1 private key.
-   * @param signingMode - Hex encoded private key, or raw private key bytes.
+   * @param signingMode - Signer sign mode, this can be {@link SigningMode.AMINO}
+   * or {@link SigningMode.DIRECT}.
    * @param options - Signer options.
    */
   static generate(signMode: SigningMode, options?: PrivateKeySignerOptions) {
