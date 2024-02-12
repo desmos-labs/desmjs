@@ -499,7 +499,10 @@ export class DesmosClient extends SigningCosmWasmClient {
     const msgs = this.encodeToAmino(messages);
     const signDoc = makeSignDocAmino(
       msgs,
-      fee,
+      {
+        ...fee,
+        granter: feeGranter ?? fee.granter,
+      },
       chainId,
       memo,
       accountNumber,
