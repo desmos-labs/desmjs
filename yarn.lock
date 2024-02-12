@@ -4056,7 +4056,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.8, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.23.8, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.23.9
   resolution: "@babel/runtime@npm:7.23.9"
   dependencies:
@@ -4902,7 +4902,7 @@ __metadata:
     "@types/jest": ^29.5.10
     "@types/keccak": ^3.0.4
     "@types/readable-stream": ^4.0.10
-    "@web3auth/base": ^7.2.0
+    "@web3auth/base": ^7.3.2
     "@web3auth/modal": ^7.0.3
     "@web3auth/ui": ^7.3.2
     cosmjs-types: 0.8.0
@@ -6563,11 +6563,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.10.16":
-  version: 5.15.6
-  resolution: "@mui/icons-material@npm:5.15.6"
+"@mui/icons-material@npm:^5.15.9":
+  version: 5.15.9
+  resolution: "@mui/icons-material@npm:5.15.9"
   dependencies:
-    "@babel/runtime": ^7.23.8
+    "@babel/runtime": ^7.23.9
   peerDependencies:
     "@mui/material": ^5.0.0
     "@types/react": ^17.0.0 || ^18.0.0
@@ -6575,7 +6575,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 9e48abacc7dbcf6461a1451aebd92c6f50826a464bc5f5f8251c6e0868025405d865068089878ecd96a941ddc5ca71789d3534705401fe0db72a1c9ab11df0c1
+  checksum: 4eb416c37fe11de4cd92d11af093bc87e2ef87dacc09ec7b7bcdb5035868ce7d720ef7161dad193087dd8ff14119edf8964e5d707457107a218ddbb752b90647
   languageName: node
   linkType: hard
 
@@ -8431,7 +8431,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/constants@npm:^13.0.4, @toruslabs/constants@npm:^13.1.0":
+"@toruslabs/constants@npm:^13.1.0":
   version: 13.1.0
   resolution: "@toruslabs/constants@npm:13.1.0"
   peerDependencies:
@@ -8525,24 +8525,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/openlogin-jrpc@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "@toruslabs/openlogin-jrpc@npm:6.1.0"
-  dependencies:
-    "@metamask/rpc-errors": ^6.1.0
-    "@toruslabs/openlogin-utils": ^6.1.0
-    end-of-stream: ^1.4.4
-    events: ^3.3.0
-    fast-safe-stringify: ^2.1.1
-    once: ^1.4.0
-    pump: ^3.0.0
-    readable-stream: ^4.4.2
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: b096d505ebbc506a374f46a84d18da2aefe690285f2e99c1e92a7db45923667821f7dd0057943c9a02a54f68c1ae8dbf3f285c44fe6bf11f2d992b6b3e23134b
-  languageName: node
-  linkType: hard
-
 "@toruslabs/openlogin-jrpc@npm:^6.2.11":
   version: 6.2.11
   resolution: "@toruslabs/openlogin-jrpc@npm:6.2.11"
@@ -8598,18 +8580,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toruslabs/openlogin-utils@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "@toruslabs/openlogin-utils@npm:6.1.0"
-  dependencies:
-    "@toruslabs/constants": ^13.0.4
-    base64url: ^3.0.1
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: 410c8795903198d8b0c16f3cd85f51076c1874b26af072bb6462a0062d99d87140358add0acf95ac490e3129f6c2718706f57b83278682ed9dc07bfbf39f4d4a
-  languageName: node
-  linkType: hard
-
 "@toruslabs/openlogin-utils@npm:^6.2.11":
   version: 6.2.11
   resolution: "@toruslabs/openlogin-utils@npm:6.2.11"
@@ -8638,25 +8608,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": 7.x
   checksum: d9c73eaf43d1375ef62adda1c3d9ee0cd5d32dc552052c6ff16203debf64c2ec3b97d23b7e61e9e30649796918516e02cc74c9294c38f38c424f0b7def8690ef
-  languageName: node
-  linkType: hard
-
-"@toruslabs/openlogin@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "@toruslabs/openlogin@npm:6.1.0"
-  dependencies:
-    "@toruslabs/eccrypto": ^4.0.0
-    "@toruslabs/metadata-helpers": ^5.0.0
-    "@toruslabs/openlogin-session-manager": ^3.0.0
-    "@toruslabs/openlogin-utils": ^6.1.0
-    "@toruslabs/secure-pub-sub": ^0.0.1
-    bowser: ^2.11.0
-    events: ^3.3.0
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": 7.x
-  checksum: 56c2290eb4fd3e1cbb248115306cbc743b34fd6de948850bf216c02ca6f0425da787c8f513faeac617106d6e0013a12806bd1e0d37e756d0797caddbda54d9e7
   languageName: node
   linkType: hard
 
@@ -10053,23 +10004,6 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.x
   checksum: 81e1bc4cb9e907393db1743fbd8204ae03010a11a60cccd97817cbe260002b458c94fee779e04b0ea459e3a54b73709950fd3a1497b328b395560d6b4be30ae1
-  languageName: node
-  linkType: hard
-
-"@web3auth/base@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@web3auth/base@npm:7.2.0"
-  dependencies:
-    "@toruslabs/http-helpers": ^5.0.0
-    "@toruslabs/openlogin": ^6.1.0
-    "@toruslabs/openlogin-jrpc": ^6.1.0
-    "@toruslabs/openlogin-utils": ^6.1.0
-    jwt-decode: ^4.0.0
-    loglevel: ^1.8.1
-    ts-custom-error: ^3.3.1
-  peerDependencies:
-    "@babel/runtime": ^7.x
-  checksum: cf9e91834e01cae1a3e057636f907b013e57ce5f9e8e5a0278592e0ad14cf1f2dea7da2b277463d957c65af5633d469563bea590dd9d463f16b23fc76dc98ed1
   languageName: node
   linkType: hard
 
@@ -13900,7 +13834,7 @@ __metadata:
     "@swc/core": ^1.4.0
     "@tsconfig/docusaurus": ^2.0.2
     "@you54f/theme-github-codeblock": ^0.1.1
-    clsx: ^2.0.0
+    clsx: ^2.1.0
     docusaurus-plugin-typedoc: ^0.21.0
     prism-react-renderer: ^2.3.1
     react: ^18.2.0
@@ -20424,7 +20358,7 @@ __metadata:
     "@desmoslabs/desmjs-walletconnect-v2": "workspace:packages/walletconnect-v2"
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@mui/icons-material": ^5.10.16
+    "@mui/icons-material": ^5.15.9
     "@mui/lab": ^5.0.0-alpha.111
     "@mui/material": ^5.10.17
     "@types/node": ^20

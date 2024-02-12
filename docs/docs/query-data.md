@@ -21,7 +21,7 @@ Here you can find the functions exposed from `DesmosQueryClient` divided by modu
 * [Reactions v1](api/desmjs/interfaces/Reactions.v1.ReactionsExtension.md)
 * [Reports v1](api/desmjs/interfaces/Reports.v1.ReportsV1Extension.md)
 
-**NOTE** Fetching data directly from the chain can be to slow for certain use cases. For such
+**NOTE** Fetching data directly from the chain can be too slow for certain use cases. For such
 cases we provide some GraphQL endpoint to query the data from the chain. Here you can find the
 endpoints for the [Mainnet](https://github.com/desmos-labs/mainnet#graphql) and
 [Testnet](https://github.com/desmos-labs/morpheus/tree/main/morpheus-apollo-3#graphql)
@@ -32,7 +32,7 @@ Here are some examples that showcase how to query data from the chain.
 
 ### Fetch a Desmos profile
 
-Here an example that showcase how to query a Desmos profile from the chain:
+Here is an example that showcases how to query a Desmos profile from the chain:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -45,7 +45,7 @@ const profile = await client.querier.profiles.profile("desmos...");
 
 ### Fetch relationships created from a user
 
-Here an example that showcase how to query all the relationships created from a user inside a subspace:
+Here is an example that showcases how to query all the relationships created from a user inside a subspace:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -84,7 +84,7 @@ do {
 
 ### Fetch the details of a subspace
 
-Here an example that showcase how to fetch the details of a subspace:
+Here is an example that showcases how to fetch the details of a subspace:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -103,7 +103,7 @@ if (subspace !== undefined) {
 
 ### Fetch a post from a subspace
 
-Here an example that showcase how to fetch a specific post from a subspace:
+Here is an example that showcases how to fetch a specific post from a subspace:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -124,7 +124,7 @@ if (post !== undefined) {
 
 ### Iterate over the posts of a subspace
 
-Here an example that showcase how to iterate over alle the posts created inside a subspace:
+Here is an example that showcases how to iterate over all the posts created inside a subspace:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -164,7 +164,7 @@ do {
 
 ### Fetch reactions toward a post
 
-Here an example that showcase how to fetch all the reaction toward a post:
+Here is an example that showcases how to fetch all the reaction toward a post:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -205,7 +205,7 @@ do {
 
 ### Fetch reports toward a user
 
-Here an example that showcase how to fetch all the reports toward a user:
+Here is an example that showcases how to fetch all the reports toward a user:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -254,7 +254,7 @@ do {
 
 ### Fetch reports toward a post
 
-Here an example that showcase how to fetch all the reports toward a post:
+Here is an example that showcases how to fetch all the reports toward a post:
 
 ```js
 import { DesmosClient } from "@desmoslabs/desmjs";
@@ -289,7 +289,7 @@ do {
 
   if (pagination !== undefined) {
     // We have another page, use nextKey to fetch the next page.
-    // NOTE: Is more efficent to use the key base pagination instead of offset.
+    // NOTE: Is more efficient to use the key base pagination instead of offset.
     pageRequest = PageRequest.fromPartial({
       key: pagination.nextKey,
       limit: ITEM_PER_PAGE,
