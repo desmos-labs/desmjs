@@ -104,6 +104,11 @@ describe("PrivateKeySigner", () => {
     expect(signer.status).toBe(SignerStatus.NotConnected);
   });
 
+  it("Generate random private key", async () => {
+    const signer = PrivateKeySigner.generate(SigningMode.DIRECT);
+    await signer.connect();
+  });
+
   it("connect successfully", async () => {
     const signer = new PrivateKeySigner(
       mockSecp256k1KeyProvider(),

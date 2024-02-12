@@ -381,4 +381,23 @@ export class WalletConnectSigner extends Signer {
       signature: result.signature,
     } as AminoSignResponse;
   }
+
+  /**
+   * Gets the WalletConnect session that is being used by the
+   * signer to interact with the wallet.
+   *
+   * NOTE: The signer must be connected to get the current
+   * WalletConnect session.
+   */
+  get session() {
+    this.assertConnected();
+
+    if (!this.walletConnectSession) {
+      throw new Error(
+        "The WalletConnect Session is undefined. This should not happen.",
+      );
+    }
+
+    return this.walletConnectSession;
+  }
 }

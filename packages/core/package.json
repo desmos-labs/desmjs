@@ -43,12 +43,14 @@
     "@desmoslabs/desmjs-types": "workspace:packages/types",
     "cosmjs-types": "0.8.0",
     "cosmos-wallet": "^1.2.0",
+    "elliptic": "^6.5.4",
     "long": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-typescript": "^7.23.3",
+    "@types/elliptic": "^6.4.18",
     "@types/jest": "^29.5.10",
     "@types/long": "^4.0.1",
     "@types/node": "^20.8.8",
