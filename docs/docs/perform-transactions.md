@@ -16,13 +16,13 @@ In order to be able to perform transactions you need to do the following steps:
 4. sign and broadcast the messages with the
 [`signAndBroadcast`](api/desmjs/classes/DesmosClient.md#signandbroadcast) method
 
-Here is an example of code that showcase all the steps:
+Here is an example of code that showcases all the steps:
 
 ```js
 import { DesmosClient, OfflineSignerAdapter, SigningMode, GasPrice } from "@desmoslabs/desmjs";
 
 
-// Generate a signer with a random mnmonic. To see the available signer go to the Signers section.
+// Generate a signer with a random mnemonic. To see the available signer go to the Signers section.
 const signer = await OfflineSignerAdapter.generate(SigningMode.DIRECT, 24);
 
 const client = await DesmosClient.connectWithSigner('https://rpc.mainnet.desmos.network', signer, {
@@ -57,13 +57,13 @@ const createPost: MsgCreatePostEncodeObject = {
   })
 };
 
-// Message to be sent to the chain, they will be executed sequentialy from first to last.
+// Message to be sent to the chain, they will be executed sequentially from first to last.
 const messages: EncodeObject[] = [saveProfile, createPost];
 
 // Fee paid to perform the operations.
 const fees: number | StdFee | "auto" = "auto";
 
-// Optional memo that can be attached to the transaction, max lengh 256 characters.
+// Optional memo that can be attached to the transaction, max length 256 characters.
 const memo: string | undefined = undefined;
 
 await client.signandbroadcast(signerAddress, messages, fees, memo);
@@ -238,7 +238,7 @@ Here are some examples that showcase how to interact with the various Desmos mod
 
 ### Create a profile
 
-Here an example that showcase how to create a Desmos profile:
+Here is an example that showcases how to create a Desmos profile:
 
 ```js
 import { DesmosClient, GasPrice, Profiles } from "@desmoslabs/desmjs";
@@ -267,7 +267,7 @@ await client.signAndBroadcast(saveProfile.value.creator, [saveProfile], "auto");
 
 ### Create a relationship
 
-Here an example that showcase how to create a relationships:
+Here is an example that showcases how to create a relationship:
 
 ```js
 import Long from "long";
@@ -294,7 +294,7 @@ await client.signAndBroadcast(createRelationship.value.signer, [createRelationsh
 
 ### Create a subspace
 
-Here an example that showcase how to create a subspace:
+Here is an example that showcases how to create a subspace:
 
 ```js
 import { DesmosClient, GasPrice, Subspaces } from "@desmoslabs/desmjs";
@@ -313,7 +313,7 @@ const createSubspace: Subspaces.v3.MsgCreateSubspaceEncodeObject = {
     name: "Desmos subspace",
     owner: "desmos...",
     treasury: "desmos...",
-    description: "Subspace where to store my app contente"
+    description: "Subspace where to store my app content"
   }
 };
 
@@ -323,7 +323,7 @@ await client.signAndBroadcast(createSubspace.value.creator, [createSubspace], "a
 
 ### Create a post
 
-Here an example that showcase how to create a post:
+Here is an example that showcases how to create a post:
 
 ```js
 import Long from "long";
@@ -352,7 +352,7 @@ await client.signAndBroadcast(createPost.value.author, [createPost], "auto");
 
 ### React to a post with some text
 
-Here an example that showcase how to react to a post:
+Here is an example that showcases how to react to a post:
 
 ```js
 import Long from "long";
@@ -385,7 +385,7 @@ await client.signAndBroadcast(addReaction.value.user, [addReaction], "auto");
 
 ### React to a post with a registered reaction
 
-Here an example that showcase how to react to a post:
+Here is an example that showcases how to react to a post:
 
 ```js
 import Long from "long";
@@ -418,7 +418,7 @@ await client.signAndBroadcast(addReaction.value.user, [addReaction], "auto");
 
 ### Report a user
 
-Here an example that showcase how to report a user inside a subspace:
+Here is an example that showcases how to report a user inside a subspace:
 
 ```js
 import Long from "long";
@@ -452,7 +452,7 @@ await client.signAndBroadcast(reportUser.value.reporter, [reportUser], "auto");
 
 ### Report another user post
 
-Here an example that showcase how to report another user post:
+Here is an example that showcases how to report another user post:
 
 ```js
 import Long from "long";
