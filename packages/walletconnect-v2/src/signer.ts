@@ -391,10 +391,13 @@ export class WalletConnectSigner extends Signer {
    */
   get session() {
     this.assertConnected();
-    if (this.walletConnectSession) {
-      return this.walletConnectSession;
-    } else {
-      throw new Error("Session is undefined. This should not happen.");
+
+    if (!this.walletConnectSession) {
+      throw new Error(
+        "The WalletConnect Session is undefined. This should not happen.",
+      );
     }
+
+    return this.walletConnectSession;
   }
 }
