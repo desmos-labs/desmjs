@@ -4560,14 +4560,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/encoding@npm:0.31.3, @cosmjs/encoding@npm:^0.31.1, @cosmjs/encoding@npm:^0.31.3":
-  version: 0.31.3
-  resolution: "@cosmjs/encoding@npm:0.31.3"
+"@cosmjs/encoding@npm:0.32.2":
+  version: 0.32.2
+  resolution: "@cosmjs/encoding@npm:0.32.2"
   dependencies:
     base64-js: ^1.3.0
     bech32: ^1.1.4
     readonly-date: ^1.0.0
-  checksum: dadef0579828299be20a64edf820ac8770c0cc47a842594bc9b494f160a347b745941d795360755ccbe385b9d0912aa54753479d1a70ff762d2d334693952ff9
+  checksum: a9ee00b730aa7f422cf3946097cb96a0c9d5d7a9f6b3aa31d8e96e4f815220928226ae2133b76e835c781df0231e9691c8ebf1c98f68468e2f936a1d431e4c30
   languageName: node
   linkType: hard
 
@@ -4579,6 +4579,17 @@ __metadata:
     bech32: ^1.1.4
     readonly-date: ^1.0.0
   checksum: ca8f1fba50a5e093d987435b20d8c6cd1b3ab7b1be607079fb6ddff09efc6e5f265ba10a65c8398d4a44e99f1f0cbad6f662a56bb934796dccecb831457eaff0
+  languageName: node
+  linkType: hard
+
+"@cosmjs/encoding@npm:^0.31.1, @cosmjs/encoding@npm:^0.31.3":
+  version: 0.31.3
+  resolution: "@cosmjs/encoding@npm:0.31.3"
+  dependencies:
+    base64-js: ^1.3.0
+    bech32: ^1.1.4
+    readonly-date: ^1.0.0
+  checksum: dadef0579828299be20a64edf820ac8770c0cc47a842594bc9b494f160a347b745941d795360755ccbe385b9d0912aa54753479d1a70ff762d2d334693952ff9
   languageName: node
   linkType: hard
 
@@ -4841,7 +4852,7 @@ __metadata:
     "@babel/preset-env": ^7.23.9
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/amino": 0.31.3
-    "@cosmjs/encoding": 0.31.3
+    "@cosmjs/encoding": 0.32.2
     "@cosmjs/proto-signing": 0.31.3
     "@cosmjs/stargate": 0.31.3
     "@cosmjs/utils": 0.31.3
@@ -4874,7 +4885,7 @@ __metadata:
     "@babel/core": ^7.23.9
     "@babel/preset-env": ^7.23.9
     "@babel/preset-typescript": ^7.23.3
-    "@cosmjs/encoding": 0.31.3
+    "@cosmjs/encoding": 0.32.2
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.10
     "@types/keccak": ^3.0.4
@@ -4896,7 +4907,7 @@ __metadata:
     "@babel/preset-env": ^7.23.9
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/amino": 0.31.3
-    "@cosmjs/encoding": 0.31.3
+    "@cosmjs/encoding": 0.32.2
     "@cosmjs/proto-signing": 0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@types/jest": ^29.5.10
@@ -4921,7 +4932,7 @@ __metadata:
     "@cosmjs/amino": 0.31.3
     "@cosmjs/cosmwasm-stargate": 0.31.1
     "@cosmjs/crypto": 0.31.3
-    "@cosmjs/encoding": 0.31.3
+    "@cosmjs/encoding": 0.32.2
     "@cosmjs/math": 0.31.3
     "@cosmjs/proto-signing": 0.31.3
     "@cosmjs/stargate": 0.31.3
