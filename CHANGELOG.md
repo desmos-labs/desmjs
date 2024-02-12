@@ -1,3 +1,11 @@
+## Version 6.0.4
+### New features
+- Add `generate` method to `PrivateKeySigner` to generate a signer with a random private key.
+- Add `session` getter to `WalletConnectSigner` to get the session used to connect to the wallet.
+
+### Bug fixes
+- Fix a bug that was causing the generation of an invalid signature when signing amino-encoded transactions with a fee granter.
+
 ## Version 6.0.3
 ### Bug fixes
 - Fix compilation issues caused by incompatible `@cosmjs/*` package versions.
