@@ -11,8 +11,12 @@ import {
   DirectSignResponse,
 } from "@cosmjs/proto-signing";
 import { fromHex } from "@cosmjs/encoding";
+import elliptic from "elliptic";
 import { Observer, ObserverManager } from "../utils";
 import { Signer, SignerStatus, SigningMode } from "./signer";
+
+// eslint-disable-next-line new-cap
+const secp256k1 = new elliptic.ec("secp256k1");
 
 /**
  * Enum that represents the connection status of a PrivateKeyProvider.
@@ -200,6 +204,18 @@ export class PrivateKeySigner extends Signer {
       signingMode,
       options,
     );
+  }
+
+  /**
+   * Build the signer with a randomly generated secp256k1 private key.
+   * @param signingMode - Signer sign mode, this can be {@link SigningMode.AMINO}
+   * or {@link SigningMode.DIRECT}.
+   * @param options - Signer options.
+   */
+  static generate(signMode: SigningMode, options?: PrivateKeySignerOptions) {
+    const keyPair = secp256k1.genKeyPair();
+    const privateKey = keyPair.getPrivate("hex");
+    return PrivateKeySigner.fromSecp256k1(privateKey, signMode, options);
   }
 
   constructor(
