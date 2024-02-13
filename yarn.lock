@@ -4614,12 +4614,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/math@npm:0.31.3, @cosmjs/math@npm:^0.31.1, @cosmjs/math@npm:^0.31.3, @cosmjs/math@npm:^0.32.0":
-  version: 0.31.3
-  resolution: "@cosmjs/math@npm:0.31.3"
+"@cosmjs/math@npm:0.32.2":
+  version: 0.32.2
+  resolution: "@cosmjs/math@npm:0.32.2"
   dependencies:
     bn.js: ^5.2.0
-  checksum: 1685ad41ed78e78854649ca933817c56d39f4b36bba59b5dbdb1728048f431da5531265f4d77bfc9280cdea6c368817109b9f4540d5cfc2093f6ea6ff9e9a8d2
+  checksum: 3ea9c811d1b53b61f24c10ae4e3707fb7f926194202e5c57ea5aa1a41996ffc872ce5599967f74cc6f289d30e064d372b7ff30c1128d682847b865ca597aca59
   languageName: node
   linkType: hard
 
@@ -4629,6 +4629,15 @@ __metadata:
   dependencies:
     bn.js: ^4.11.8
   checksum: 4e7247f499055ddf461dc3b982fd6c1bc4be4474bc97dcfd53b485af12e6083cebf28ea6adaa99408131e7eb8122449432a7a1aa11274fcb72861208181d81a5
+  languageName: node
+  linkType: hard
+
+"@cosmjs/math@npm:^0.31.1, @cosmjs/math@npm:^0.31.3, @cosmjs/math@npm:^0.32.0":
+  version: 0.31.3
+  resolution: "@cosmjs/math@npm:0.31.3"
+  dependencies:
+    bn.js: ^5.2.0
+  checksum: 1685ad41ed78e78854649ca933817c56d39f4b36bba59b5dbdb1728048f431da5531265f4d77bfc9280cdea6c368817109b9f4540d5cfc2093f6ea6ff9e9a8d2
   languageName: node
   linkType: hard
 
@@ -4933,7 +4942,7 @@ __metadata:
     "@cosmjs/cosmwasm-stargate": 0.31.1
     "@cosmjs/crypto": 0.31.3
     "@cosmjs/encoding": 0.32.2
-    "@cosmjs/math": 0.31.3
+    "@cosmjs/math": 0.32.2
     "@cosmjs/proto-signing": 0.31.3
     "@cosmjs/stargate": 0.31.3
     "@cosmjs/tendermint-rpc": 0.31.3
