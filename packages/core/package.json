@@ -31,7 +31,7 @@
     "lint-fix": "yarn lint --fix"
   },
   "dependencies": {
-    "@cosmjs/amino": "0.31.3",
+    "@cosmjs/amino": "0.32.2",
     "@cosmjs/cosmwasm-stargate": "0.31.1",
     "@cosmjs/crypto": "0.31.3",
     "@cosmjs/encoding": "0.32.2",
