@@ -4795,7 +4795,7 @@ __metadata:
     "@cosmjs/proto-signing": 0.31.3
     "@cosmjs/utils": 0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@keplr-wallet/types": 0.12.66
+    "@keplr-wallet/types": 0.12.67
     "@types/jest": ^29.5.10
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
@@ -6423,12 +6423,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keplr-wallet/types@npm:0.12.66":
-  version: 0.12.66
-  resolution: "@keplr-wallet/types@npm:0.12.66"
+"@keplr-wallet/types@npm:0.12.67":
+  version: 0.12.67
+  resolution: "@keplr-wallet/types@npm:0.12.67"
   dependencies:
     long: ^4.0.0
-  checksum: 8c1c0059fc5c8e6e87a3cbd3e9634a346efda0e33439930a552384fc57db1eba048c3266f47cf26a9fe68d5a00db6b618f7f437d1bcca337c73f1f335e36dc33
+  checksum: c5b6e0e77138dd39e0f8655b7f639d46f0f3df207233f2c6631fe9e8259efab2a939ee86a1a3aa264dbeb41a17b5ec7cd16f61f36ee4f4437ee259b574700204
   languageName: node
   linkType: hard
 
@@ -6608,9 +6608,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.15.9":
-  version: 5.15.9
-  resolution: "@mui/icons-material@npm:5.15.9"
+"@mui/icons-material@npm:^5.15.10":
+  version: 5.15.10
+  resolution: "@mui/icons-material@npm:5.15.10"
   dependencies:
     "@babel/runtime": ^7.23.9
   peerDependencies:
@@ -6620,7 +6620,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 4eb416c37fe11de4cd92d11af093bc87e2ef87dacc09ec7b7bcdb5035868ce7d720ef7161dad193087dd8ff14119edf8964e5d707457107a218ddbb752b90647
+  checksum: 33be07435d511542516965b428044f6f823d001d9fbdc97d957172c310fe4292815842bd82a73a20b6f3a8f2feaa231c39f73e687b7bb36b63e33b531c134532
   languageName: node
   linkType: hard
 
@@ -14010,7 +14010,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     swc-loader: ^0.2.3
-    typedoc: ^0.25.4
+    typedoc: ^0.25.8
     typedoc-plugin-markdown: ^3.17.1
     typescript: ^5.1.6
   languageName: unknown
@@ -21207,7 +21207,7 @@ __metadata:
     "@desmoslabs/desmjs-walletconnect-v2": "workspace:packages/walletconnect-v2"
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@mui/icons-material": ^5.15.9
+    "@mui/icons-material": ^5.15.10
     "@mui/lab": ^5.0.0-alpha.111
     "@mui/material": ^5.10.17
     "@types/node": ^20
@@ -25177,15 +25177,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^0.14.1":
-  version: 0.14.1
-  resolution: "shiki@npm:0.14.1"
+"shiki@npm:^0.14.7":
+  version: 0.14.7
+  resolution: "shiki@npm:0.14.7"
   dependencies:
     ansi-sequence-parser: ^1.1.0
     jsonc-parser: ^3.2.0
     vscode-oniguruma: ^1.7.0
     vscode-textmate: ^8.0.0
-  checksum: b19ea337cc84da69d99ca39d109f82946e0c56c11cc4c67b3b91cc14a9479203365fd0c9e0dd87e908f493ab409dc6f1849175384b6ca593ce7da884ae1edca2
+  checksum: 2aec3b3519df977c4391df9e1825cb496e9a4d7e11395f05a0da77e4fa2f7c3d9d6e6ee94029ac699533017f2b25637ee68f6d39f05f311535c2704d0329b520
   languageName: node
   linkType: hard
 
@@ -26775,19 +26775,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.25.4":
-  version: 0.25.4
-  resolution: "typedoc@npm:0.25.4"
+"typedoc@npm:^0.25.8":
+  version: 0.25.8
+  resolution: "typedoc@npm:0.25.8"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.3.0
     minimatch: ^9.0.3
-    shiki: ^0.14.1
+    shiki: ^0.14.7
   peerDependencies:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x
   bin:
     typedoc: bin/typedoc
-  checksum: 6d441baa277c0db4d577db2932a7af316d175415841e2faf2e68e3eda6ad60356c54f56374f89c5233d7bd5c057b0337455e5d484d8463e1445e67c37a6d94eb
+  checksum: c81992d791ef267e5f94ce0bf0ee98452ac772f4a12a96ad3b18520e7a1f9ba5f6908e48d5e73330fdedb7bfd0b9e0a74073afa5ef75775f76f1c6f3f3fce3a3
   languageName: node
   linkType: hard
 
