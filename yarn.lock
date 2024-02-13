@@ -6597,9 +6597,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.15.9":
-  version: 5.15.9
-  resolution: "@mui/icons-material@npm:5.15.9"
+"@mui/icons-material@npm:^5.15.10":
+  version: 5.15.10
+  resolution: "@mui/icons-material@npm:5.15.10"
   dependencies:
     "@babel/runtime": ^7.23.9
   peerDependencies:
@@ -6609,7 +6609,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 4eb416c37fe11de4cd92d11af093bc87e2ef87dacc09ec7b7bcdb5035868ce7d720ef7161dad193087dd8ff14119edf8964e5d707457107a218ddbb752b90647
+  checksum: 33be07435d511542516965b428044f6f823d001d9fbdc97d957172c310fe4292815842bd82a73a20b6f3a8f2feaa231c39f73e687b7bb36b63e33b531c134532
   languageName: node
   linkType: hard
 
@@ -21196,7 +21196,7 @@ __metadata:
     "@desmoslabs/desmjs-walletconnect-v2": "workspace:packages/walletconnect-v2"
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@mui/icons-material": ^5.15.9
+    "@mui/icons-material": ^5.15.10
     "@mui/lab": ^5.0.0-alpha.111
     "@mui/material": ^5.10.17
     "@types/node": ^20
