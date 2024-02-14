@@ -10,6 +10,7 @@ import {
   MsgGrantAllowance,
   MsgRevokeAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import { fromDuration, toDuration } from "@desmoslabs/desmjs-types/helpers";
 import {
   AminoAllowedMsgAllowance,
   AminoBasicAllowance,
@@ -60,7 +61,7 @@ function periodicAllowanceToAmino(
     type: PeriodicAllowanceAminoType,
     value: {
       basic: value.basic ? basicAllowanceToAmino(value.basic) : undefined,
-      period: value.period,
+      period: value.period ? fromDuration(value.period) : undefined,
       period_spend_limit: value.periodSpendLimit,
       period_can_spend: value.periodCanSpend,
       period_reset: serializeTimestamp(value.periodReset),
@@ -73,7 +74,7 @@ function periodicAllowanceFromAmino(
 ): PeriodicAllowance {
   return PeriodicAllowance.fromPartial({
     basic: value.basic ? basicAllowanceFromAmino(value.basic.value) : undefined,
-    period: value.period,
+    period: value.period ? toDuration(value.period) : undefined,
     periodSpendLimit: value.period_spend_limit,
     periodCanSpend: value.period_can_spend,
     periodReset: deserializeTimestamp(value.period_reset),

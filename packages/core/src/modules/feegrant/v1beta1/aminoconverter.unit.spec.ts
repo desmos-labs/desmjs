@@ -1,15 +1,17 @@
 import {
   AllowedMsgAllowance,
   BasicAllowance,
+  PeriodicAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/feegrant";
 import { MsgGrantAllowance } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
-import { toTimestamp } from "cosmjs-types/helpers";
+import { toDuration, toTimestamp } from "cosmjs-types/helpers";
 import {
   AllowedMsgAllowanceAminoType,
   AllowedMsgAllowanceTypeUrl,
   BasicAllowanceAminoType,
   BasicAllowanceTypeUrl,
   MsgGrantAllowanceTypeUrl,
+  PeriodicAllowanceTypeUrl,
 } from "./consts";
 import { AminoConverter } from "./aminoconverter";
 import {
@@ -112,5 +114,25 @@ describe("Feegrant.v1beta1.AminoConverter", () => {
     // Amino to direct
     const direct = converter.fromAmino(result);
     expect(direct).toEqual(msg);
+  });
+
+  it("PeriodicAllowance -> AminoPeriodicAllowance", () => {
+    const expiration = new Date();
+    const periodReset = new Date("2021-01-01T00:00:00.000Z");
+    const periodicAllowance = PeriodicAllowance.fromPartial({
+      basic: BasicAllowance.fromPartial({
+        spendLimit: [{ denom: "uatom", amount: "1" }],
+        expiration: toTimestamp(expiration),
+      }),
+      periodSpendLimit: [{ denom: "uatom", amount: "2" }],
+      periodCanSpend: [{ denom: "uatom", amount: "3" }],
+      period: toDuration("1000000000"),
+      periodReset: toTimestamp(periodReset),
+    });
+
+    const converter = AminoConverter[PeriodicAllowanceTypeUrl];
+    const aminoValue = converter.toAmino(periodicAllowance);
+
+    expect(converter.fromAmino(aminoValue)).toEqual(periodicAllowance);
   });
 });
