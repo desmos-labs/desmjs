@@ -29,13 +29,17 @@ import {
   PeriodicAllowanceAminoType,
   PeriodicAllowanceTypeUrl,
 } from "./consts";
+import {
+  serializeTimestamp,
+  deserializeTimestamp,
+} from "../../../utils/aminoutils";
 
 function basicAllowanceToAmino(value: BasicAllowance): AminoBasicAllowance {
   return {
     type: BasicAllowanceAminoType,
     value: {
       spend_limit: value.spendLimit,
-      expiration: value.expiration,
+      expiration: serializeTimestamp(value.expiration),
     },
   };
 }
@@ -45,7 +49,7 @@ function basicAllowanceFromAmino(
 ): BasicAllowance {
   return BasicAllowance.fromPartial({
     spendLimit: value.spend_limit,
-    expiration: value.expiration,
+    expiration: deserializeTimestamp(value.expiration),
   });
 }
 
@@ -59,7 +63,7 @@ function periodicAllowanceToAmino(
       period: value.period,
       period_spend_limit: value.periodSpendLimit,
       period_can_spend: value.periodCanSpend,
-      period_reset: value.periodReset,
+      period_reset: serializeTimestamp(value.periodReset),
     },
   };
 }
@@ -72,7 +76,7 @@ function periodicAllowanceFromAmino(
     period: value.period,
     periodSpendLimit: value.period_spend_limit,
     periodCanSpend: value.period_can_spend,
-    periodReset: value.period_reset,
+    periodReset: deserializeTimestamp(value.period_reset),
   });
 }
 
@@ -136,8 +140,8 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
     case AllowedMsgAllowanceAminoType:
       return Any.fromPartial({
         typeUrl: AllowedMsgAllowanceTypeUrl,
-        value: PeriodicAllowance.encode(
-          periodicAllowanceFromAmino(allowance.value),
+        value: AllowedMsgAllowance.encode(
+          allowedMsgAllowanceFromAmino(allowance.value),
         ).finish(),
       });
 

@@ -1,5 +1,4 @@
 import { AminoMsg, Coin } from "@cosmjs/amino";
-import { Timestamp } from "cosmjs-types/google/protobuf/timestamp";
 import { Duration } from "cosmjs-types/google/protobuf/duration";
 import {
   AllowedMsgAllowanceAminoType,
@@ -13,7 +12,7 @@ export interface AminoBasicAllowance extends AminoMsg {
   readonly type: typeof BasicAllowanceAminoType;
   readonly value: {
     spend_limit: Coin[];
-    expiration?: Timestamp;
+    expiration?: string;
   };
 }
 
@@ -24,7 +23,7 @@ export interface AminoPeriodicAllowance extends AminoMsg {
     period?: Duration;
     period_spend_limit: Coin[];
     period_can_spend: Coin[];
-    period_reset?: Timestamp;
+    period_reset?: string;
   };
 }
 
