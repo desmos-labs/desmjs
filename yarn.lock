@@ -4802,7 +4802,7 @@ __metadata:
     babel-jest: ^29.7.0
     cosmjs-types: 0.8.0
     jest: ^29.7.0
-    ts-jest: ^29.1.1
+    ts-jest: ^29.1.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -4873,7 +4873,7 @@ __metadata:
     lokijs: ^1.5.12
     long: ^4.0.0
     node-localstorage: ^3.0.5
-    ts-jest: ^29.1.1
+    ts-jest: ^29.1.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -4950,7 +4950,7 @@ __metadata:
     elliptic: ^6.5.4
     jest: ^29.7.0
     long: ^4.0.0
-    ts-jest: ^29.1.1
+    ts-jest: ^29.1.2
     typescript: ^4.9.5
   languageName: unknown
   linkType: soft
@@ -9356,25 +9356,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 18.0.26
-  resolution: "@types/react@npm:18.0.26"
+"@types/react@npm:*, @types/react@npm:^18":
+  version: 18.2.55
+  resolution: "@types/react@npm:18.2.55"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: b62f0ea3cdfa68e106391728325057ad36f1bde7ba2dfae029472c47e01e482bc77c6ba4f1dad59f3f04ee81cb597618ff7c30a33c157c0a20462b6dd6aa2d4d
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18":
-  version: 18.2.48
-  resolution: "@types/react@npm:18.2.48"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: c9ca43ed2995389b7e09492c24e6f911a8439bb8276dd17cc66a2fbebbf0b42daf7b2ad177043256533607c2ca644d7d928fdfce37a67af1f8646d2bac988900
+  checksum: a8eb4fa77f73831b9112d4f11a7006217dc0740361649b9b0da3fd441d151a9cd415d5d68b91c0af4e430e063424d301c77489e5edaddc9f711c4e46cf9818a5
   languageName: node
   linkType: hard
 
@@ -13944,7 +13933,7 @@ __metadata:
     "@tsconfig/docusaurus": ^2.0.2
     "@you54f/theme-github-codeblock": ^0.1.1
     clsx: ^2.1.0
-    docusaurus-plugin-typedoc: ^0.21.0
+    docusaurus-plugin-typedoc: ^0.22.0
     prism-react-renderer: ^2.3.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -13975,7 +13964,7 @@ __metadata:
     jest: ^29.7.0
     prettier: ^3.2.5
     pretty-quick: ^4.0.0
-    ts-jest: ^29.1.1
+    ts-jest: ^29.1.2
     tsc: ^2.0.4
     typescript: ^4.9.5
   languageName: unknown
@@ -14154,13 +14143,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "docusaurus-plugin-typedoc@npm:0.21.0"
+"docusaurus-plugin-typedoc@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "docusaurus-plugin-typedoc@npm:0.22.0"
   peerDependencies:
     typedoc: ">=0.24.0"
     typedoc-plugin-markdown: ">=3.15.0"
-  checksum: 7714028b39caab961c7b2ce2373c950efe1212bb2dce68fc9ccfe1d2c80ecd55cd1cf8d8853e29fb359171a77dc6986e20486451f06042fbe0e515cb2edb1bc0
+  checksum: b6c3330cff167b1a908a502460d9b2b2afddd066e1b4e1825b1d069ddce25fd721479afbf0a41b48c4ecaf0bbfa90d00721b6b5c9ed6e0c16c3d72ccd6b02684
   languageName: node
   linkType: hard
 
@@ -26262,9 +26251,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^29.1.1":
-  version: 29.1.1
-  resolution: "ts-jest@npm:29.1.1"
+"ts-jest@npm:^29.1.2":
+  version: 29.1.2
+  resolution: "ts-jest@npm:29.1.2"
   dependencies:
     bs-logger: 0.x
     fast-json-stable-stringify: 2.x
@@ -26291,7 +26280,7 @@ __metadata:
       optional: true
   bin:
     ts-jest: cli.js
-  checksum: a8c9e284ed4f819526749f6e4dc6421ec666f20ab44d31b0f02b4ed979975f7580b18aea4813172d43e39b29464a71899f8893dd29b06b4a351a3af8ba47b402
+  checksum: a0ce0affc1b716c78c9ab55837829c42cb04b753d174a5c796bb1ddf9f0379fc20647b76fbe30edb30d9b23181908138d6b4c51ef2ae5e187b66635c295cefd5
   languageName: node
   linkType: hard
 
