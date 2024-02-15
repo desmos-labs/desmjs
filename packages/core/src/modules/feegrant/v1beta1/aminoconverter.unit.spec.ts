@@ -4,7 +4,8 @@ import {
   PeriodicAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/feegrant";
 import { MsgGrantAllowance } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
-import { toDuration, toTimestamp } from "cosmjs-types/helpers";
+import { toTimestamp } from "cosmjs-types/helpers";
+import { coin } from "@cosmjs/amino";
 import {
   AllowedMsgAllowanceAminoType,
   AllowedMsgAllowanceTypeUrl,
@@ -18,10 +19,29 @@ import {
   AminoAllowedMsgAllowance,
   AminoBasicAllowance,
   AminoMsgGrantAllowance,
+  AminoPeriodicAllowance,
 } from "./aminomessages";
-import { serializeTimestamp } from "../../../utils/aminoutils";
+import { serializeDate, serializeTimestamp } from "../../../utils/aminoutils";
 
 describe("Feegrant.v1beta1.AminoConverter", () => {
+  it("BasicAllowance -> AminoBasicAllowance", () => {
+    const expiration = new Date();
+    const allowance = BasicAllowance.fromPartial({
+      spendLimit: [coin(1000, "stake")],
+      expiration: toTimestamp(expiration),
+    });
+    const converter = AminoConverter[BasicAllowanceTypeUrl];
+    const aminoBasicAllowance = converter.toAmino(
+      allowance,
+    ) as AminoBasicAllowance["value"];
+
+    expect(aminoBasicAllowance.expiration).toBeDefined();
+    expect(aminoBasicAllowance.spend_limit).toBeDefined();
+
+    expect(aminoBasicAllowance.expiration).toBe(serializeDate(expiration));
+    expect(aminoBasicAllowance.spend_limit).toEqual(allowance.spendLimit);
+  });
+
   it("AllowedMsgAllowance -> AminoAllowedMsgAllowance", () => {
     const expiration = new Date();
     const allowance = AllowedMsgAllowance.fromPartial({
@@ -126,12 +146,22 @@ describe("Feegrant.v1beta1.AminoConverter", () => {
       }),
       periodSpendLimit: [{ denom: "uatom", amount: "2" }],
       periodCanSpend: [{ denom: "uatom", amount: "3" }],
-      period: toDuration("1000000000"),
       periodReset: toTimestamp(periodReset),
     });
 
     const converter = AminoConverter[PeriodicAllowanceTypeUrl];
-    const aminoValue = converter.toAmino(periodicAllowance);
+    const aminoValue = converter.toAmino(
+      periodicAllowance,
+    ) as AminoPeriodicAllowance["value"];
+
+    expect(aminoValue.period).toBe("");
+    expect(aminoValue.period_spend_limit).toBe(
+      periodicAllowance.periodSpendLimit,
+    );
+    expect(aminoValue.period_can_spend).toBe(periodicAllowance.periodCanSpend);
+    expect(aminoValue.period_reset).toEqual(
+      serializeTimestamp(periodicAllowance.periodReset),
+    );
 
     expect(converter.fromAmino(aminoValue)).toEqual(periodicAllowance);
   });
