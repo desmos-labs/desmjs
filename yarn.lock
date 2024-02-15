@@ -4796,7 +4796,7 @@ __metadata:
     "@cosmjs/utils": 0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@keplr-wallet/types": 0.12.67
-    "@types/jest": ^29.5.10
+    "@types/jest": ^29.5.12
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
     babel-jest: ^29.7.0
@@ -4859,7 +4859,7 @@ __metadata:
     "@desmoslabs/desmjs": "workspace:packages/core"
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@desmoslabs/desmjs-walletconnect-modal": "workspace:packages/walletconnect-modal"
-    "@types/jest": ^29.5.10
+    "@types/jest": ^29.5.12
     "@types/long": ^4.0.1
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
@@ -4887,7 +4887,7 @@ __metadata:
     "@babel/preset-typescript": ^7.23.3
     "@cosmjs/encoding": 0.32.2
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.5.10
+    "@types/jest": ^29.5.12
     "@types/keccak": ^3.0.4
     "@types/react-native": ^0.73.0
     "@types/readable-stream": ^4.0.10
@@ -4910,7 +4910,7 @@ __metadata:
     "@cosmjs/encoding": 0.32.2
     "@cosmjs/proto-signing": 0.31.3
     "@desmoslabs/desmjs": "workspace:packages/core"
-    "@types/jest": ^29.5.10
+    "@types/jest": ^29.5.12
     "@types/keccak": ^3.0.4
     "@types/readable-stream": ^4.0.10
     "@web3auth/base": ^7.3.2
@@ -4940,7 +4940,7 @@ __metadata:
     "@cosmjs/utils": 0.31.3
     "@desmoslabs/desmjs-types": "workspace:packages/types"
     "@types/elliptic": ^6.4.18
-    "@types/jest": ^29.5.10
+    "@types/jest": ^29.5.12
     "@types/long": ^4.0.1
     "@types/node": ^20.8.8
     "@types/pino": ^7.0.5
@@ -9063,13 +9063,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.5.10":
-  version: 29.5.10
-  resolution: "@types/jest@npm:29.5.10"
+"@types/jest@npm:^29.5.12":
+  version: 29.5.12
+  resolution: "@types/jest@npm:29.5.12"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: ef385905787db528de9b6beb2688865c0bb276e64256ed60b9a1a6ffc0b75737456cb5e27e952a3241c5845b6a1da487470010dd30f3ca59c8581624c564a823
+  checksum: 19b1efdeed9d9a60a81edc8226cdeae5af7479e493eaed273e01243891c9651f7b8b4c08fc633a7d0d1d379b091c4179bbaa0807af62542325fd72f2dd17ce1c
   languageName: node
   linkType: hard
 
