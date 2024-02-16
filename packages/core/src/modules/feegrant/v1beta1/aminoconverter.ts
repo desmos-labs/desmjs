@@ -10,6 +10,8 @@ import {
   MsgGrantAllowance,
   MsgRevokeAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import { fromDuration } from "@desmoslabs/desmjs-types/helpers";
+import { toDuration } from "cosmjs-types/helpers";
 import {
   AminoAllowedMsgAllowance,
   AminoBasicAllowance,
@@ -29,13 +31,18 @@ import {
   PeriodicAllowanceAminoType,
   PeriodicAllowanceTypeUrl,
 } from "./consts";
+import {
+  serializeTimestamp,
+  deserializeTimestamp,
+  omitEmptyArray,
+} from "../../../utils/aminoutils";
 
 function basicAllowanceToAmino(value: BasicAllowance): AminoBasicAllowance {
   return {
     type: BasicAllowanceAminoType,
     value: {
       spend_limit: value.spendLimit,
-      expiration: value.expiration,
+      expiration: serializeTimestamp(value.expiration),
     },
   };
 }
@@ -45,7 +52,7 @@ function basicAllowanceFromAmino(
 ): BasicAllowance {
   return BasicAllowance.fromPartial({
     spendLimit: value.spend_limit,
-    expiration: value.expiration,
+    expiration: deserializeTimestamp(value.expiration),
   });
 }
 
@@ -55,11 +62,11 @@ function periodicAllowanceToAmino(
   return {
     type: PeriodicAllowanceAminoType,
     value: {
-      basic: value.basic ? basicAllowanceToAmino(value.basic) : undefined,
-      period: value.period,
-      period_spend_limit: value.periodSpendLimit,
-      period_can_spend: value.periodCanSpend,
-      period_reset: value.periodReset,
+      basic: value.basic ? basicAllowanceToAmino(value.basic).value : undefined,
+      period: value.period ? fromDuration(value.period) : undefined,
+      period_spend_limit: value.periodSpendLimit ?? [],
+      period_can_spend: value.periodCanSpend ?? [],
+      period_reset: serializeTimestamp(value.periodReset),
     },
   };
 }
@@ -68,11 +75,11 @@ function periodicAllowanceFromAmino(
   value: AminoPeriodicAllowance["value"],
 ): PeriodicAllowance {
   return PeriodicAllowance.fromPartial({
-    basic: value.basic ? basicAllowanceFromAmino(value.basic.value) : undefined,
-    period: value.period,
-    periodSpendLimit: value.period_spend_limit,
-    periodCanSpend: value.period_can_spend,
-    periodReset: value.period_reset,
+    basic: value.basic ? basicAllowanceFromAmino(value.basic) : undefined,
+    period: value.period ? toDuration(value.period) : undefined,
+    periodSpendLimit: omitEmptyArray(value.period_spend_limit),
+    periodCanSpend: omitEmptyArray(value.period_can_spend),
+    periodReset: deserializeTimestamp(value.period_reset),
   });
 }
 
@@ -136,8 +143,8 @@ function allowanceFromAmino(allowance: AminoMsg): Any {
     case AllowedMsgAllowanceAminoType:
       return Any.fromPartial({
         typeUrl: AllowedMsgAllowanceTypeUrl,
-        value: PeriodicAllowance.encode(
-          periodicAllowanceFromAmino(allowance.value),
+        value: AllowedMsgAllowance.encode(
+          allowedMsgAllowanceFromAmino(allowance.value),
         ).finish(),
       });
 
