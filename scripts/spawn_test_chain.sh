@@ -66,11 +66,11 @@ sed -i -e 's/timeout_commit = "5s"/timeout_commit = "500ms"/g' "$DESMOS_HOME/con
 	echo $KEYRING_PASS
 	echo $KEYRING_PASS
 ) | desmos keys add "$USER2" --recover --keyring-backend=test
-echo $KEYRING_PASS | desmos genesis add-genesis-account $USER1 200000000000000stake --keyring-backend=test
-echo $KEYRING_PASS | desmos genesis add-genesis-account $USER11 200000000000000stake --keyring-backend=test
-echo $KEYRING_PASS | desmos genesis add-genesis-account $USER2 200000000000000stake --keyring-backend=test
-echo $KEYRING_PASS | desmos genesis gentx $USER1 100000000000stake --amount 100000000000stake --chain-id=testchain --keyring-backend=test
-desmos genesis collect-gentxs
+echo $KEYRING_PASS | desmos add-genesis-account $USER1 200000000000000stake --keyring-backend=test
+echo $KEYRING_PASS | desmos add-genesis-account $USER11 200000000000000stake --keyring-backend=test
+echo $KEYRING_PASS | desmos add-genesis-account $USER2 200000000000000stake --keyring-backend=test
+echo $KEYRING_PASS | desmos gentx $USER1 100000000000stake --amount 100000000000stake --chain-id=testchain --keyring-backend=test
+desmos collect-gentxs
 
 if [ $BACKGROUND = true ]; then
 	desmos start &>"$SCRIPT_DIR/desmos.log" &
