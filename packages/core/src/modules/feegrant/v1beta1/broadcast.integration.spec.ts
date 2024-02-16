@@ -1,19 +1,38 @@
 import { coin } from "@cosmjs/amino";
-import { assertIsDeliverTxSuccess } from "@cosmjs/stargate";
 import { toTimestamp } from "@desmoslabs/desmjs-types/helpers";
 import {
   AllowedMsgAllowance,
   BasicAllowance,
   PeriodicAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/feegrant";
-import { MsgGrantAllowance } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import {
+  MsgGrantAllowance,
+  MsgRevokeAllowance,
+} from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
 import { getAminoSignerAndClient } from "../../../testutils";
 import {
   AllowedMsgAllowanceTypeUrl,
   BasicAllowanceTypeUrl,
   MsgGrantAllowanceTypeUrl,
+  MsgRevokeAllowanceTypeUrl,
   PeriodicAllowanceTypeUrl,
 } from "./consts";
+import { DesmosClient } from "../../../desmosclient";
+
+async function revokeAllowance(
+  client: DesmosClient,
+  granter: string,
+  grantee: string,
+) {
+  const msg = {
+    typeUrl: MsgRevokeAllowanceTypeUrl,
+    value: MsgRevokeAllowance.fromPartial({
+      granter,
+      grantee,
+    }),
+  };
+  await client.signAndBroadcast(granter, [msg], "auto");
+}
 
 describe("MsgGrantAllowance", () => {
   jest.setTimeout(60 * 1000);
@@ -36,14 +55,16 @@ describe("MsgGrantAllowance", () => {
           typeUrl: BasicAllowanceTypeUrl,
           value: BasicAllowance.encode(
             BasicAllowance.fromPartial({
-              spendLimit: [],
-              expiration: toTimestamp(new Date()),
+              spendLimit: [coin(500, "stake")],
+              expiration: toTimestamp(expiration),
             }),
           ).finish(),
         },
       }),
     };
     await client.signAndBroadcast(addresses[0], [msg], "auto");
+
+    await revokeAllowance(client, addresses[0], addresses[1]);
   });
 
   it("PeriodicAlowance Amino", async () => {
@@ -54,6 +75,8 @@ describe("MsgGrantAllowance", () => {
 
     const reset = new Date();
     reset.setFullYear(reset.getFullYear() + 1);
+    const periodReset = new Date();
+    periodReset.setTime(periodReset.getTime() + 5000 * 1000);
 
     const msg = {
       typeUrl: MsgGrantAllowanceTypeUrl,
@@ -68,22 +91,31 @@ describe("MsgGrantAllowance", () => {
                 spendLimit: [coin(500, "stake")],
                 expiration: toTimestamp(reset),
               }),
+              period: {
+                seconds: 5000,
+                nanos: 0,
+              },
               periodSpendLimit: [coin(100, "stake")],
+              periodCanSpend: [coin(100, "stake")],
+              periodReset: toTimestamp(periodReset),
             }),
           ).finish(),
         },
       }),
     };
     await client.signAndBroadcast(addresses[0], [msg], "auto");
+
+    await revokeAllowance(client, addresses[0], addresses[1]);
   });
 
-  it("MsgAllowance amino", async () => {
+  it("AllowedMsgAllowance amino", async () => {
     const [signer, client] = await getAminoSignerAndClient();
     const addresses = await signer
       .getAccounts()
       .then((accounts) => accounts.map((a) => a.address));
 
     const expiration = new Date();
+    expiration.setFullYear(expiration.getFullYear() + 1);
 
     const msg = {
       typeUrl: MsgGrantAllowanceTypeUrl,
@@ -108,7 +140,8 @@ describe("MsgGrantAllowance", () => {
         },
       }),
     };
-    const result = await client.signAndBroadcast(addresses[0], [msg], "auto");
-    assertIsDeliverTxSuccess(result);
+    await client.signAndBroadcast(addresses[0], [msg], "auto");
+
+    await revokeAllowance(client, addresses[0], addresses[1]);
   });
 });

@@ -18,7 +18,7 @@ export interface AminoBasicAllowance extends AminoMsg {
 export interface AminoPeriodicAllowance extends AminoMsg {
   readonly type: typeof PeriodicAllowanceAminoType;
   readonly value: {
-    basic?: AminoBasicAllowance;
+    basic?: AminoBasicAllowance["value"];
     period?: string;
     period_spend_limit: Coin[];
     period_can_spend: Coin[];

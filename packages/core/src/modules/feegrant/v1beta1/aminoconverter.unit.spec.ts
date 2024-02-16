@@ -3,7 +3,10 @@ import {
   BasicAllowance,
   PeriodicAllowance,
 } from "cosmjs-types/cosmos/feegrant/v1beta1/feegrant";
-import { MsgGrantAllowance } from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
+import {
+  MsgGrantAllowance,
+  MsgRevokeAllowance,
+} from "cosmjs-types/cosmos/feegrant/v1beta1/tx";
 import { toTimestamp } from "cosmjs-types/helpers";
 import { coin } from "@cosmjs/amino";
 import {
@@ -12,6 +15,7 @@ import {
   BasicAllowanceAminoType,
   BasicAllowanceTypeUrl,
   MsgGrantAllowanceTypeUrl,
+  MsgRevokeAllowanceTypeUrl,
   PeriodicAllowanceTypeUrl,
 } from "./consts";
 import { AminoConverter } from "./aminoconverter";
@@ -19,6 +23,7 @@ import {
   AminoAllowedMsgAllowance,
   AminoBasicAllowance,
   AminoMsgGrantAllowance,
+  AminoMsgRevokeAllowance,
   AminoPeriodicAllowance,
 } from "./aminomessages";
 import { serializeDate, serializeTimestamp } from "../../../utils/aminoutils";
@@ -137,8 +142,13 @@ describe("Feegrant.v1beta1.AminoConverter", () => {
   });
 
   it("PeriodicAllowance -> AminoPeriodicAllowance", () => {
-    const expiration = new Date();
-    const periodReset = new Date("2021-01-01T00:00:00.000Z");
+    const expiration = new Date("2025-01-01T12:00:00Z");
+    const period = {
+      seconds: 5000,
+      nanos: 0,
+    };
+    const periodResit = new Date("2025-01-02T12:00:00Z");
+
     const periodicAllowance = PeriodicAllowance.fromPartial({
       basic: BasicAllowance.fromPartial({
         spendLimit: [{ denom: "uatom", amount: "1" }],
@@ -146,7 +156,8 @@ describe("Feegrant.v1beta1.AminoConverter", () => {
       }),
       periodSpendLimit: [{ denom: "uatom", amount: "2" }],
       periodCanSpend: [{ denom: "uatom", amount: "3" }],
-      periodReset: toTimestamp(periodReset),
+      period,
+      periodReset: toTimestamp(periodResit),
     });
 
     const converter = AminoConverter[PeriodicAllowanceTypeUrl];
@@ -154,15 +165,31 @@ describe("Feegrant.v1beta1.AminoConverter", () => {
       periodicAllowance,
     ) as AminoPeriodicAllowance["value"];
 
-    expect(aminoValue.period).toBe("");
+    expect(aminoValue.basic?.spend_limit).toBe(
+      periodicAllowance.basic?.spendLimit,
+    );
+    expect(aminoValue.basic?.expiration).toBe("2025-01-01T12:00:00.000Z");
+
+    expect(aminoValue.period).toBe("5000000000000");
+    expect(aminoValue.period_can_spend).toBe(periodicAllowance.periodCanSpend);
+    expect(aminoValue.period_reset).toBe("2025-01-02T12:00:00.000Z");
     expect(aminoValue.period_spend_limit).toBe(
       periodicAllowance.periodSpendLimit,
     );
-    expect(aminoValue.period_can_spend).toBe(periodicAllowance.periodCanSpend);
-    expect(aminoValue.period_reset).toEqual(
-      serializeTimestamp(periodicAllowance.periodReset),
-    );
 
     expect(converter.fromAmino(aminoValue)).toEqual(periodicAllowance);
+  });
+
+  it("MsgRevokeAllowance -> AminoMsgRevokeAllowance", () => {
+    const converter = AminoConverter[MsgRevokeAllowanceTypeUrl];
+    const result = converter.toAmino(
+      MsgRevokeAllowance.fromPartial({
+        granter: "granter",
+        grantee: "grantee",
+      }),
+    ) as AminoMsgRevokeAllowance["value"];
+
+    expect(result.granter).toEqual("granter");
+    expect(result.grantee).toEqual("grantee");
   });
 });

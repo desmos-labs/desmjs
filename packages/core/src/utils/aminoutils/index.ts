@@ -1,9 +1,5 @@
 import Long from "long";
-import {
-  fromRfc3339WithNanoseconds,
-  toRfc3339WithNanoseconds,
-} from "@cosmjs/tendermint-rpc";
-import { fromBase64, toBase64 } from "@cosmjs/encoding";
+import { fromBase64, fromRfc3339, toBase64, toRfc3339 } from "@cosmjs/encoding";
 import { Timestamp } from "@desmoslabs/desmjs-types/google/protobuf/timestamp";
 import { fromTimestamp, toTimestamp } from "@desmoslabs/desmjs-types/helpers";
 
@@ -65,13 +61,11 @@ export function deserializeTimestamp(
 }
 
 export function serializeDate(date: Date | undefined): string | undefined {
-  return date
-    ? toRfc3339WithNanoseconds(date).replace(".000000000", "")
-    : undefined;
+  return date ? toRfc3339(date) : undefined;
 }
 
 export function deserializeDate(date: string | undefined): Date | undefined {
-  return date ? fromRfc3339WithNanoseconds(date) : undefined;
+  return date ? fromRfc3339(date) : undefined;
 }
 
 export function omitFalse(value: boolean): boolean | undefined {
