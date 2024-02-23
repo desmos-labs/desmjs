@@ -38,7 +38,7 @@
     "@desmoslabs/desmjs-walletconnect-modal": "workspace:packages/walletconnect-modal",
     "@walletconnect/sign-client": "^2.11.1",
     "@walletconnect/types": "^2.4.0",
-    "@walletconnect/utils": "^2.11.1",
+    "@walletconnect/utils": "^2.11.2",
     "cosmjs-types": "0.8.0",
     "long": "^4.0.0"
   },
