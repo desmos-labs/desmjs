@@ -4915,7 +4915,7 @@ __metadata:
     "@types/readable-stream": ^4.0.10
     "@web3auth/base": ^8.0.0
     "@web3auth/modal": ^7.0.3
-    "@web3auth/ui": ^8.0.0
+    "@web3auth/ui": ^8.0.1
     cosmjs-types: 0.8.0
     readable-stream: ^4.5.2
     typescript: ^4.9.5
@@ -10295,9 +10295,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web3auth/ui@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@web3auth/ui@npm:8.0.0"
+"@web3auth/ui@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@web3auth/ui@npm:8.0.1"
   dependencies:
     "@toruslabs/http-helpers": ^6.0.0
     "@toruslabs/openlogin": ^7.0.4
@@ -10316,7 +10316,7 @@ __metadata:
     "@babel/runtime": ^7.x
     react: ^18.x
     react-dom: ^18.x
-  checksum: e9427522ab517667368dcd6022ca05a6ee8f6c53522428a2946bf9ce11b1eebefbef4166a24a5a2a9e968b9e6bfe394042d0a4c90cd286f4cb6f301631b8724c
+  checksum: a3882bfd8d7e3c8c78c84c9b4956664a3ca2d6ced164a58b2629316debefbae0c63654de396e3154f6f60f0d1dd8d109ea84c02cb66b85694aa36109d715d872
   languageName: node
   linkType: hard
 
