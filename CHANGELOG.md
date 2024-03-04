@@ -1,3 +1,10 @@
+## Version 6.0.5
+### Bug fixes
+- Fix `BasicAllowance` amino serialization.
+- Fix `AllowedMsgAllowance` amino serialization.
+- Fix `PeriodAllowance` amino serialization.
+- Fix `Timestamp` amino serialization.
+
 ## Version 6.0.4
 ### New features
 - Add `generate` method to `PrivateKeySigner` to generate a signer with a random private key.

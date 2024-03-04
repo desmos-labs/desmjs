@@ -1,5 +1,6 @@
 import { sortedJsonStringify } from "@cosmjs/amino/build/signdoc";
 import { AminoConverters } from "@cosmjs/stargate";
+import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { AminoTypes } from "../../aminotypes";
 import {
   assertTxSuccess,
@@ -89,10 +90,10 @@ export function runBroadcastTest(test: BroadcastTest) {
         value: test.message,
       },
     ]);
-    const directResult = await directClient.broadcastTxBlock(
-      directSignResult.txRaw,
+    const directResult = await directClient.broadcastTx(
+      TxRaw.encode(directSignResult.txRaw).finish(),
     );
-    assertTxSuccess(directResult);
+    expect(directResult.code).toBe(0);
   });
 
   // Sign and broadcast the transaction in amino mode.
@@ -104,9 +105,9 @@ export function runBroadcastTest(test: BroadcastTest) {
         value: test.message,
       },
     ]);
-    const aminoResult = await aminoClient.broadcastTxBlock(
-      aminoSignResult.txRaw,
+    const aminoResult = await aminoClient.broadcastTx(
+      TxRaw.encode(aminoSignResult.txRaw).finish(),
     );
-    assertTxSuccess(aminoResult);
+    expect(aminoResult.code).toBe(0);
   });
 }
