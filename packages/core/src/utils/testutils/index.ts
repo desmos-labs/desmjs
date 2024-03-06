@@ -3,7 +3,6 @@ import { AminoConverters } from "@cosmjs/stargate";
 import { TxRaw } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 import { AminoTypes } from "../../aminotypes";
 import {
-  assertTxSuccess,
   getAminoSignerAndClient,
   getDirectSignerAndClient,
 } from "../../testutils";
