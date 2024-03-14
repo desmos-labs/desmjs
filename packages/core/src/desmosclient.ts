@@ -547,7 +547,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     return {
       signerData: { accountNumber, sequence, chainId },
       pubKey: pubkey,
-      signDoc,
+      signDoc: signed,
       txRaw: TxRaw.fromPartial({
         bodyBytes: signedTxBodyBytes,
         authInfoBytes: signedAuthInfoBytes,
@@ -609,7 +609,7 @@ export class DesmosClient extends SigningCosmWasmClient {
     return {
       signerData: { accountNumber, sequence, chainId },
       pubKey: pubkey,
-      signDoc,
+      signDoc: signed,
       txRaw: TxRaw.fromPartial({
         bodyBytes: signed.bodyBytes,
         authInfoBytes: signed.authInfoBytes,
